@@ -13,6 +13,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,8 @@ public class ItemSandpaper extends Item implements IHasModel {
             if (playerIn.inventory.getFirstEmptyStack() == -1) return super.onItemRightClick(worldIn, playerIn, handIn);
             ItemStack leftHandStack = playerIn.getHeldItem(EnumHand.OFF_HAND);
             ItemStack rightHandStack = playerIn.getHeldItem(EnumHand.MAIN_HAND);
-            if (leftHandStack.getItemDamage() == 19 && leftHandStack.getItem() == ModItems.INGREDIENT) {
+            if (OreDictionary.getOres("gemRoseQuartz").contains(leftHandStack) //TODO: make it work
+            || leftHandStack.getItemDamage() == 19 && leftHandStack.getItem() == ModItems.INGREDIENT) {
                 leftHandStack.shrink(1);
                 rightHandStack.damageItem(1, playerIn);
                     playerIn.addItemStackToInventory(new ItemStack(ModItems.INGREDIENT, 1, 20));
