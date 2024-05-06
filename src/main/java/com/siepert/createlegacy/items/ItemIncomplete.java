@@ -10,10 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class ItemIncomplete extends Item implements IHasModel, IMetaName {
-    public static final int INGREDIENT_AMOUNT = 4;
+    public static final int INGREDIENT_AMOUNT = 2   ;
     public static final String[] NAME_LOOKUP = new String[] {
-            "integrated_circuit", "precision_mechanism",
-            "train_track", "plate_obsidian"
+            "precision_mechanism", "plate_obsidian"
     };
     public ItemIncomplete() {
         setUnlocalizedName("incomplete_");

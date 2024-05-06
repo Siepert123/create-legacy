@@ -35,6 +35,7 @@ public class OreDictionaryCompat {
 
         OreDictionary.registerOre("gemRoseQuartz", new ItemStack(ModItems.INGREDIENT, 1, 19));
         OreDictionary.registerOre("gemPolishedRoseQuartz", new ItemStack(ModItems.INGREDIENT, 1, 20));
+        OreDictionary.registerOre("electronTube", new ItemStack(ModItems.ADVANCED_INGREDIENT, 1, 2));
 
         OreDictionary.registerOre("crushedIron", new ItemStack(ModItems.INGREDIENT, 1, 12));
         OreDictionary.registerOre("crushedGold", new ItemStack(ModItems.INGREDIENT, 1, 13));
