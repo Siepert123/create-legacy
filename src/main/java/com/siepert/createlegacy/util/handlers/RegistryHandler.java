@@ -12,6 +12,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -40,16 +41,17 @@ public class RegistryHandler {
         }
     }
 
-    public static void otherPreInitRegistries() {
+    public static void otherPreInitRegistries(Logger logger) {
         GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
     }
 
-    public static void otherInitRegistries() {
+    public static void otherInitRegistries(Logger logger) {
         OreDictionaryCompat.registerOres();
         ModSoundHandler.registerSounds();
     }
 
-    public static void otherPostInitRegistries() {
-        RecipeHandler.registerOreSmelting();
+    public static void otherPostInitRegistries(Logger logger) {
+        RecipeHandler.registerOreSmelting(logger);
+        RecipeHandler.registerCrushedOreCompatSmelting(logger);
     }
 }

@@ -28,18 +28,18 @@ public class CreateLegacy {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
-        RegistryHandler.otherPreInitRegistries();
+        RegistryHandler.otherPreInitRegistries(logger);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-        RegistryHandler.otherInitRegistries();
+        RegistryHandler.otherInitRegistries(logger);
     }
 
     @EventHandler
     public void init(FMLPostInitializationEvent event) {
         logger.info("Femboy count: {}", 1);
-        RegistryHandler.otherPostInitRegistries();
+        RegistryHandler.otherPostInitRegistries(logger);
     }
 }
