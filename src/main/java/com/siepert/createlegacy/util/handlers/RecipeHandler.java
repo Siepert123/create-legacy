@@ -27,6 +27,7 @@ public class RecipeHandler {
 
     public static void registerCrushedOreCompatSmelting(Logger logger) { //TODO: Test if this works (using IE)
         int compatSmeltsFound = 0;
+        logger.info("Registering Create's compatible smeltables");
         if (OreDictionary.doesOreNameExist("ingotAluminum")) {
             logger.info("ingotAluminum found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 0),
@@ -81,7 +82,7 @@ public class RecipeHandler {
                     OreDictionary.getOres("ingotUranium").get(0), 0.1f);
             compatSmeltsFound++;
         }
-        logger.info("Found " + compatSmeltsFound + " compatible smelt-ables total");
+        logger.info("Found " + compatSmeltsFound + " compatible smeltables total");
     }
 
 
