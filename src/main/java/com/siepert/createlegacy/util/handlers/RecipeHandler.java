@@ -25,7 +25,7 @@ public class RecipeHandler {
                 new ItemStack(ModItems.INGREDIENT, 1, 6), 0.1f);
     }
 
-    public static void registerCrushedOreCompatSmelting(Logger logger) { //TODO: Test if this works (using IE)
+    public static void registerCrushedOreCompatSmelting(Logger logger) { //Registers smelting crushed ore if the according ingot is real
         int compatSmeltsFound = 0;
         logger.info("Registering Create's compatible smeltables");
         if (OreDictionary.doesOreNameExist("ingotAluminum")) {
