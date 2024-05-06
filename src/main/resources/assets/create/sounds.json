@@ -1,0 +1,23 @@
+{
+  "item.sandpaper.usage": {
+    "category": "players",
+    "subtitle": "subtitle.item.sandpaper.used",
+    "sounds": [
+      {
+        "name": "create:sanding_short"
+      },
+      {
+        "name": "create:sanding_short_1"
+      }
+    ]
+  },
+  "block.cogwheel.ambient": {
+    "category": "blocks",
+    "subtitle": "subtitle.block.cogwheel.ambient",
+    "sounds": [
+      {
+        "name": "create:cogs"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "logWood"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "plateCopper"
+    }
+  ],
+  "result": {
+    "item": "create:casing",
+    "data": 1
+  }
+}

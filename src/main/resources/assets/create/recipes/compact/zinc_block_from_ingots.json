@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#M#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "ingotZinc"
+    },
+    "M": {
+      "item": "create:ingredient",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "create:storage_block",
+    "data": 1
+  }
+}

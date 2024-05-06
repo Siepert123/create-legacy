@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "side": "create:block/casing/casing_train_side",
+    "top": "create:block/casing/casing_train",
+    "bottom": "create:block/casing/casing_train"
+  }
+}

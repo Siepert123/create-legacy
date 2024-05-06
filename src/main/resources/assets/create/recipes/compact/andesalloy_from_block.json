@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "andesite_alloy",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "create:storage_block",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "create:ingredient",
+    "count": 9,
+    "data": 0
+  }
+}

@@ -1,0 +1,24 @@
+package com.siepert.createlegacy.util.handlers;
+
+import com.siepert.createlegacy.util.Reference;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+public class ModSoundHandler {
+
+    public static SoundEvent ITEM_SANDPAPER_USED, BLOCK_COGWHEEL_AMBIENT;
+
+    public static void registerSounds() {
+        ITEM_SANDPAPER_USED = registerSound("item.sandpaper.usage");
+        BLOCK_COGWHEEL_AMBIENT = registerSound("block.cogwheel.ambient");
+    }
+
+    private static SoundEvent registerSound(String name) {
+        ResourceLocation location = new ResourceLocation(Reference.MOD_ID, name);
+        SoundEvent event = new SoundEvent(location);
+        event.setRegistryName(name);
+        ForgeRegistries.SOUND_EVENTS.register(event);
+        return event;
+    }
+}

@@ -1,0 +1,78 @@
+#basic copper items
+item.ingot_copper.name=Copper Ingot
+item.nugget_copper.name=Copper Nugget
+item.plate_copper.name=Copper Sheet
+
+#basic zinc items
+item.ingot_zinc.name=Zinc Ingot
+item.nugget_zinc.name=Zinc Nugget
+item.plate_zinc.name=Zinc Sheet
+
+#basic brass items
+item.ingot_brass.name=Brass Ingot
+item.nugget_brass.name=Brass Nugget
+item.plate_brass.name=Brass Sheet
+
+#other basic items
+item.andesite_alloy.name=Andesite Alloy
+item.plate_gold.name=Gold Sheet
+item.plate_iron.name=Iron Sheet
+item.plate_obsidian.name=Sturdy Sheet
+item.rose_quartz.name=Rose Quartz
+item.rose_quartz_polished.name=Polished Rose Quartz
+
+#dust items
+item.dust_netherrack.name=Cinder Flour
+item.dust_obsidian.name=Powdered Obsidian
+
+#crushed items
+item.crushed_iron.name=Crushed Iron
+item.crushed_gold.name=Crushed Gold
+item.crushed_copper.name=Crushed Copper
+item.crushed_zinc.name=Crushed Zinc
+
+#crushed items (compat)
+item.crushed_aluminium.name=Crushed Aluminium
+item.crushed_lead.name=Crushed Lead
+item.crushed_nickel.name=Crushed Nickel
+item.crushed_osmium.name=Crushed Osmium
+item.crushed_platinum.name=Crushed Platinum
+item.crushed_quicksilver.name=Crushed Quicksilver
+item.crushed_silver.name=Crushed Silver
+item.crushed_tin.name=Crushed Tin
+item.crushed_uranium.name=Crushed Uranium
+
+#material storage blocks & ores
+tile.ore_copper.name=Copper Ore
+tile.ore_zinc.name=Zinc Ore
+tile.storage_block_copper.name=Block of Copper
+tile.storage_block_zinc.name=Block of Zinc
+tile.storage_block_brass.name=Block of Brass
+tile.storage_block_andesite_alloy.name=Block of Andesite Alloy
+
+#Advanced ingredients
+item.whisk.name=Whisk
+item.propeller.name=Propeller
+item.electron_tube.name=Electron Tube
+item.brass_hand.name=Brass Hand
+item.integrated_circuit.name=Integrated Circuit
+item.precision_mechanism.name=Precision Mechanism
+item.shadow_steel.name=Shadow Steel
+item.refined_radiance.name=Refined Radiance
+
+#casings
+tile.casing_andesite.name=Andesite Casing
+tile.casing_copper.name=Copper Casing
+tile.casing_brass.name=Brass Casing
+tile.casing_train.name=Train Casing
+
+tile.cogwheel.name=Cogwheel
+
+#Overige
+itemGroup.tab_create=Create
+item.evil_item.name=Evil Item!
+item.sandpaper.name=Sandpaper
+
+#Sounds
+subtitle.block.cogwheel.ambient=Cogwheels rumble
+subtitle.item.sandpaper.used=Sandpaper polishes

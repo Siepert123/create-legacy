@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "N": {
+      "type": "forge:ore_dict",
+      "ore": "gemPolishedRoseQuartz"
+    }
+  },
+  "result": {
+    "item": "create:advanced_ingredient",
+    "data": 2
+  }
+}
