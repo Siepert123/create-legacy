@@ -38,12 +38,13 @@ public class ItemSandpaper extends Item implements IHasModel {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote) {
+            if (playerIn.inventory.getFirstEmptyStack() == -1) return super.onItemRightClick(worldIn, playerIn, handIn);
             ItemStack leftHandStack = playerIn.getHeldItem(EnumHand.OFF_HAND);
             ItemStack rightHandStack = playerIn.getHeldItem(EnumHand.MAIN_HAND);
             if (leftHandStack.getItemDamage() == 19 && leftHandStack.getItem() == ModItems.INGREDIENT) {
                 leftHandStack.shrink(1);
                 rightHandStack.damageItem(1, playerIn);
-                playerIn.addItemStackToInventory(new ItemStack(ModItems.INGREDIENT, 1, 20));
+                    playerIn.addItemStackToInventory(new ItemStack(ModItems.INGREDIENT, 1, 20));
                 worldIn.playSound(null, playerIn.posX, playerIn.posY + 0.5, playerIn.posZ, ModSoundHandler.ITEM_SANDPAPER_USED,
                         SoundCategory.AMBIENT, 1.0f, 1.0f);
                 return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
