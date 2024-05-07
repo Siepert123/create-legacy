@@ -32,7 +32,7 @@ public class RecipeHandler {
         logger.info("Registering compatible Washing recipes (highly WIP)");
 
         int compatWashFound = 0;
-        if (OreDictionary.doesOreNameExist("ingotAluminum")) {
+        if (OreDictionary.doesOreNameExist("nuggetAluminum")) {
             logger.info("ingotAluminum found, registering washing recipe");
             ItemStack stack0 = OreDictionary.getOres("nuggetAluminum").get(0);
             stack0.setCount(9);
@@ -40,7 +40,7 @@ public class RecipeHandler {
                     stack0);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotLead")) {
+        if (OreDictionary.doesOreNameExist("nuggetLead")) {
             logger.info("ingotLead found, registering washing recipe");;
             ItemStack stack1 = OreDictionary.getOres("nuggetLead").get(0);
             stack1.setCount(9);
@@ -48,7 +48,7 @@ public class RecipeHandler {
                     stack1);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotNickel")) {
+        if (OreDictionary.doesOreNameExist("nuggetNickel")) {
             logger.info("ingotNickel found, registering washing recipe");;
             ItemStack stack2 = OreDictionary.getOres("nuggetNickel").get(0);
             stack2.setCount(9);
@@ -56,7 +56,7 @@ public class RecipeHandler {
                     stack2);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotOsmium")) {
+        if (OreDictionary.doesOreNameExist("nuggetOsmium")) {
             logger.info("ingotOsmium found, registering washing recipe");;
             ItemStack stack3 = OreDictionary.getOres("nuggetOsmium").get(0);
             stack3.setCount(9);
@@ -64,7 +64,7 @@ public class RecipeHandler {
                     stack3);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotPlatinum")) {
+        if (OreDictionary.doesOreNameExist("nuggetPlatinum")) {
             logger.info("ingotPlatinum found, registering washing recipe");;
             ItemStack stack4 = OreDictionary.getOres("nuggetPlatinum").get(0);
             stack4.setCount(9);
@@ -72,7 +72,7 @@ public class RecipeHandler {
                     stack4);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotQuicksilver")) {
+        if (OreDictionary.doesOreNameExist("nuggetQuicksilver")) {
             logger.info("ingotQuicksilver found, registering washing recipe");;
             ItemStack stack5 = OreDictionary.getOres("nuggetQuicksilver").get(0);
             stack5.setCount(9);
@@ -80,7 +80,7 @@ public class RecipeHandler {
                     stack5);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotSilver")) {
+        if (OreDictionary.doesOreNameExist("nuggetSilver")) {
             logger.info("ingotSilver found, registering washing recipe");;
             ItemStack stack6 = OreDictionary.getOres("nuggetSilver").get(0);
             stack6.setCount(9);
@@ -88,7 +88,7 @@ public class RecipeHandler {
                     stack6);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotTin")) {
+        if (OreDictionary.doesOreNameExist("nuggetTin")) {
             logger.info("ingotTin found, registering washing recipe");;
             ItemStack stack7 = OreDictionary.getOres("nuggetTin").get(0);
             stack7.setCount(9);
@@ -96,7 +96,7 @@ public class RecipeHandler {
                     stack7);
             compatWashFound++;
         }
-        if (OreDictionary.doesOreNameExist("ingotUranium")) {
+        if (OreDictionary.doesOreNameExist("nuggetUranium")) {
             logger.info("ingotUranium found, registering washing recipe");;
             ItemStack stack8 = OreDictionary.getOres("nuggetUranium").get(0);
             stack8.setCount(9);

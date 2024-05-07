@@ -53,5 +53,6 @@ public class RegistryHandler {
     public static void otherPostInitRegistries(Logger logger) {
         RecipeHandler.registerOreSmelting(logger);
         RecipeHandler.registerCrushedOreCompatSmelting(logger);
+        RecipeHandler.registerWashing(logger);
     }
 }
