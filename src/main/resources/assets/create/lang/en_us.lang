@@ -74,6 +74,8 @@ item.evil_item.name=Evil Item!
 item.sandpaper.name=Sandpaper
 item.incomplete_precision_mechanism.name=Incomplete Precision Mechanism
 item.incomplete_plate_obsidian.name=Unprocessed Obsidian Sheet
+tile.schedule_wash.name=Schedule Fan Washing
+tile.schedule_cook.name=Schedule Fan Cooking
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
