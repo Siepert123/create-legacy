@@ -1,10 +1,31 @@
 {
   "variants": {
     "variant=copper": {
-      "model": "create:ore_copper"
+      "model": "create:ore/ore_copper"
     },
     "variant=zinc": {
-      "model": "create:ore_zinc"
+      "model": "create:ore/ore_zinc"
+    },
+    "variant=asurine": {
+      "model": "create:ore/asurine"
+    },
+    "variant=crimsite": {
+      "model": "create:ore/crimsite"
+    },
+    "variant=limestone": {
+      "model": "create:ore/limestone"
+    },
+    "variant=ochrum": {
+      "model": "create:ore/ochrum"
+    },
+    "variant=scorchia": {
+      "model": "create:ore/scorchia"
+    },
+    "variant=scoria": {
+      "model": "create:ore/scoria"
+    },
+    "variant=veridium": {
+      "model": "create:ore/veridium"
     }
   }
 }

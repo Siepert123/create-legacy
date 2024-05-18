@@ -4,18 +4,18 @@ import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
     public static enum OreEnumType implements IStringSerializable {
-
+        //actual ores
         COPPER(0, "copper"),
         ZINC(1, "zinc"),
 
+        //Stone types
         ASURINE(2, "asurine"),
         CRIMSITE(3, "crimsite"),
         LIMESTONE(4, "limestone"),
         OCHRUM(5, "ochrum"),
         SCORCHIA(6, "scorchia"),
         SCORIA(7, "scoria"),
-        VERIDIUM(8, "veridium"),
-        ;
+        VERIDIUM(8, "veridium");
 
 
         private static final OreEnumType[] META_LOOKUP = new OreEnumType[values().length];

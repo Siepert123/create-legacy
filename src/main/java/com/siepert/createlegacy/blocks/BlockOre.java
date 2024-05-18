@@ -84,7 +84,7 @@ public class BlockOre extends Block implements IHasModel, IMetaName {
     public void registerModels() {
         for (int i = 0; i < EnumHandler.OreEnumType.values().length; i++) {
             CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                    i, "ore_" + EnumHandler.OreEnumType.values()[i].getName(), "inventory");
+                    i, "ore/ore_" + EnumHandler.OreEnumType.values()[i].getName(), "inventory");
         }
     }
 }
