@@ -6,7 +6,16 @@ public class EnumHandler {
     public static enum OreEnumType implements IStringSerializable {
 
         COPPER(0, "copper"),
-        ZINC(1, "zinc");
+        ZINC(1, "zinc"),
+
+        ASURINE(2, "asurine"),
+        CRIMSITE(3, "crimsite"),
+        LIMESTONE(4, "limestone"),
+        OCHRUM(5, "ochrum"),
+        SCORCHIA(6, "scorchia"),
+        SCORIA(7, "scoria"),
+        VERIDIUM(8, "veridium"),
+        ;
 
 
         private static final OreEnumType[] META_LOOKUP = new OreEnumType[values().length];
