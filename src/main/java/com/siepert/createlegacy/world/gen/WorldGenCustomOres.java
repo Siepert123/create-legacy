@@ -89,6 +89,7 @@ public class WorldGenCustomOres implements IWorldGenerator {
         if (minHeight > maxHeight) throw new IllegalArgumentException("Illegal ore gen parameters: min height may not surpass max height!");
         if (minHeight < 0) throw new IllegalArgumentException("Illegal ore gen parameters: min height is below 0");
         if (maxHeight > 256) throw new IllegalArgumentException("Illegal ore gen parameters: min height is above 256");
+        if (additionalChance < 1) throw new IllegalArgumentException("Illegal additional chance: may not be below 1, currently is: " + additionalChance);
 
         int heightDiff = maxHeight - minHeight + 1;
         for (int i = 0; i < chance; i++) {
