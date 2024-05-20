@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.world.gen;
 
+import com.siepert.createlegacy.blocks.BlockModernStone;
 import com.siepert.createlegacy.blocks.BlockOre;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
@@ -18,12 +19,17 @@ import java.util.Random;
 public class WorldGenCustomOres implements IWorldGenerator {
     private WorldGenerator ore_copper;
     private WorldGenerator ore_zinc;
-
+    private WorldGenerator stone_calcite;
+    private WorldGenerator stone_tuff;
     public WorldGenCustomOres() {
         ore_copper = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.COPPER),
                 10, BlockMatcher.forBlock(Blocks.STONE));
         ore_zinc = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.ZINC),
                 6, BlockMatcher.forBlock(Blocks.STONE));
+        stone_calcite = new WorldGenMinable(ModBlocks.MODERN_STONE.getDefaultState().withProperty(BlockModernStone.VARIANT, EnumHandler.ModernStoneEnumType.CALCITE),
+                40, BlockMatcher.forBlock(Blocks.STONE));
+        stone_tuff = new WorldGenMinable(ModBlocks.MODERN_STONE.getDefaultState().withProperty(BlockModernStone.VARIANT, EnumHandler.ModernStoneEnumType.CALCITE),
+                40, BlockMatcher.forBlock(Blocks.STONE));
     }
 
     @Override
@@ -36,6 +42,8 @@ public class WorldGenCustomOres implements IWorldGenerator {
             case 0:
                 runGenerator(ore_copper, world, random, chunkX, chunkZ, 8, 25, 128);
                 runGenerator(ore_zinc, world, random, chunkX, chunkZ, 7, 5, 40);
+                runGenerator(stone_calcite, world, random, chunkX, chunkZ, 4, 20, 40);
+                runGenerator(stone_tuff, world, random, chunkX, chunkZ, 4, 0, 20);
                 break;
             case 1:
                 break;
