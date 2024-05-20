@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "default": {
+      "model": "create:errorplsleave"
+    }
+  }
+}
