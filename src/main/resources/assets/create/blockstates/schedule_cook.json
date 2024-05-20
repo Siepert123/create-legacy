@@ -1,7 +1,7 @@
 {
   "variants": {
     "default": {
-      "model": "create:errorplsleave"
+      "model": "create:errorpleaseleave"
     }
   }
 }
