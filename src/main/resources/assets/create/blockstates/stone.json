@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "variant=calcite": {
+      "model": "create:modernstone/stone_calcite"
+    },
+    "variant=tuff": {
+      "model": "create:modernstone/stone_tuff"
+    }
+  }
+}

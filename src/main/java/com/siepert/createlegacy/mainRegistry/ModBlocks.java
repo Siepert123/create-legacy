@@ -13,6 +13,7 @@ public class ModBlocks {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
     public static final Block ORE = new BlockOre();
+    public static final Block MODERN_STONE = new BlockModernStone(true);
     public static final Block MATERIAL_STORAGE_BLOCK = new BlockMaterialStorage();
     public static final Block CASING_BLOCK = new BlockCasing();
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");

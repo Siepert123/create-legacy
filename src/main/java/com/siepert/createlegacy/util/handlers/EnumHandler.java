@@ -165,4 +165,54 @@ public class EnumHandler {
             }
         }
     }
+
+    public static enum ModernStoneEnumType implements IStringSerializable {
+
+        CALCITE(0, "calcite"),
+        TUFF(1, "tuff");
+
+
+        private static final ModernStoneEnumType[] META_LOOKUP = new ModernStoneEnumType[values().length];
+        private final int meta;
+        private final String name, unlocalizedName;
+
+
+        private ModernStoneEnumType(int meta, String name) {
+            this(meta, name, name);
+        }
+
+        private ModernStoneEnumType(int meta, String name, String unlocalizedName) {
+            this.meta = meta;
+            this.name = name;
+            this.unlocalizedName = unlocalizedName;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        public int getMeta() {
+            return meta;
+        }
+
+        public String getUnlocalizedName() {
+            return unlocalizedName;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        public static ModernStoneEnumType byMetaData(int meta) {
+            return META_LOOKUP[meta];
+        }
+
+        static {
+            for(ModernStoneEnumType modernStoneEnumType : values()) {
+                META_LOOKUP[modernStoneEnumType.getMeta()] = modernStoneEnumType;
+            }
+        }
+    }
 }

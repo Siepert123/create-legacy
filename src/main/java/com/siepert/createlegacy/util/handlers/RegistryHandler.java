@@ -47,6 +47,7 @@ public class RegistryHandler {
 
     public static void otherInitRegistries(Logger logger) {
         OreDictionaryCompat.registerOres();
+        OreDictionaryCompat.registerStoneTypes();
         ModSoundHandler.registerSounds();
     }
 

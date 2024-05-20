@@ -52,4 +52,14 @@ public class OreDictionaryCompat {
         OreDictionary.registerOre("crushedTin", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 7));
         OreDictionary.registerOre("crushedUranium", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 8));
     }
+
+    public static void registerStoneTypes() {
+        OreDictionary.registerOre("stoneAsurine", new ItemStack(ModBlocks.ORE, 1, 2));
+        OreDictionary.registerOre("stoneCrimsite", new ItemStack(ModBlocks.ORE, 1, 3));
+        OreDictionary.registerOre("stoneLimestone", new ItemStack(ModBlocks.ORE, 1, 4));
+        OreDictionary.registerOre("stoneOchrum", new ItemStack(ModBlocks.ORE, 1, 5));
+        OreDictionary.registerOre("stoneScorchia", new ItemStack(ModBlocks.ORE, 1, 6));
+        OreDictionary.registerOre("stoneScoria", new ItemStack(ModBlocks.ORE, 1, 7));
+        OreDictionary.registerOre("stoneVeridium", new ItemStack(ModBlocks.ORE, 1, 8));
+    }
 }
