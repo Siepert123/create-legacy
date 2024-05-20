@@ -80,3 +80,14 @@ tile.schedule_cook.name=Schedule Fan Cooking
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes
+
+#Custom stones
+tile.stone_calcite.name=Calcite
+tile.stone_tuff.name=Tuff
+tile.stone_asurine.name=Asurine
+tile.stone_crimsite.name=Crimsite
+tile.stone_limestone.name=Limestone
+tile.stone_ochrum.name=Ochrum
+tile.stone_scorchia.name=Scorchia
+tile.stone_scoria.name=Scoria
+tile.stone_veridium.name=Veridium
