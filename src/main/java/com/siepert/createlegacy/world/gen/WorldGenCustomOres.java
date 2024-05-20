@@ -49,9 +49,9 @@ public class WorldGenCustomOres implements IWorldGenerator {
         stone_ochrum = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.OCHRUM),
                 30, BlockMatcher.forBlock(Blocks.STONE));
         stone_scorchia = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.SCORCHIA),
-                30, BlockMatcher.forBlock(Blocks.STONE));
+                30, BlockMatcher.forBlock(Blocks.NETHER_WART));
         stone_scoria = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.SCORIA),
-                30, BlockMatcher.forBlock(Blocks.STONE));
+                30, BlockMatcher.forBlock(Blocks.NETHERRACK));
         stone_veridium = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.VERIDIUM),
                 30, BlockMatcher.forBlock(Blocks.STONE));
     }
