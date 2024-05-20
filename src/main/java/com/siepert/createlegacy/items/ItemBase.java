@@ -4,7 +4,9 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import net.minecraft.item.Item;
-
+/** ItemBase doesn't allow subtypes and doesn't do anything special.
+ * Please make a custom item class instead!*/
+@Deprecated
 public class ItemBase extends Item implements IHasModel {
 
     public ItemBase(String name) {

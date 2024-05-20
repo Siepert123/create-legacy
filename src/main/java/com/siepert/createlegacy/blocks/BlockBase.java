@@ -9,6 +9,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
+/** BlockBase does the unspeakable:
+ * not share registries and have subtypes!
+ * Please don't use this :3c */
+@Deprecated
 public class BlockBase extends Block implements IHasModel {
     public BlockBase(String name, Material material) {
         super(material);
