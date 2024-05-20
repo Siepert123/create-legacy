@@ -54,13 +54,13 @@ public class OreDictionaryCompat {
     }
 
     public static void registerStoneTypes() {
-        OreDictionary.registerOre("stoneAsurine", new ItemStack(ModBlocks.ORE, 1, 2));
-        OreDictionary.registerOre("stoneCrimsite", new ItemStack(ModBlocks.ORE, 1, 3));
-        OreDictionary.registerOre("stoneLimestone", new ItemStack(ModBlocks.ORE, 1, 4));
-        OreDictionary.registerOre("stoneOchrum", new ItemStack(ModBlocks.ORE, 1, 5));
-        OreDictionary.registerOre("stoneScorchia", new ItemStack(ModBlocks.ORE, 1, 6));
-        OreDictionary.registerOre("stoneScoria", new ItemStack(ModBlocks.ORE, 1, 7));
-        OreDictionary.registerOre("stoneVeridium", new ItemStack(ModBlocks.ORE, 1, 8));
+        OreDictionary.registerOre("stoneAsurine", new ItemStack(ModBlocks.STONE, 1, 2));
+        OreDictionary.registerOre("stoneCrimsite", new ItemStack(ModBlocks.STONE, 1, 3));
+        OreDictionary.registerOre("stoneLimestone", new ItemStack(ModBlocks.STONE, 1, 4));
+        OreDictionary.registerOre("stoneOchrum", new ItemStack(ModBlocks.STONE, 1, 5));
+        OreDictionary.registerOre("stoneScorchia", new ItemStack(ModBlocks.STONE, 1, 6));
+        OreDictionary.registerOre("stoneScoria", new ItemStack(ModBlocks.STONE, 1, 7));
+        OreDictionary.registerOre("stoneVeridium", new ItemStack(ModBlocks.STONE, 1, 8));
 
         OreDictionary.registerOre("stoneCalcite", new ItemStack(ModBlocks.STONE, 1, 0));
         OreDictionary.registerOre("stoneTuff", new ItemStack(ModBlocks.STONE, 1, 1));
