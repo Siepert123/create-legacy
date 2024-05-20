@@ -6,16 +6,7 @@ public class EnumHandler {
     public static enum OreEnumType implements IStringSerializable {
         //actual ores
         COPPER(0, "copper"),
-        ZINC(1, "zinc"),
-
-        //Stone types
-        ASURINE(2, "asurine"),
-        CRIMSITE(3, "crimsite"),
-        LIMESTONE(4, "limestone"),
-        OCHRUM(5, "ochrum"),
-        SCORCHIA(6, "scorchia"),
-        SCORIA(7, "scoria"),
-        VERIDIUM(8, "veridium");
+        ZINC(1, "zinc");
 
 
         private static final OreEnumType[] META_LOOKUP = new OreEnumType[values().length];
@@ -166,22 +157,29 @@ public class EnumHandler {
         }
     }
 
-    public static enum ModernStoneEnumType implements IStringSerializable {
+    public static enum StoneEnumType implements IStringSerializable {
 
         CALCITE(0, "calcite"),
-        TUFF(1, "tuff");
+        TUFF(1, "tuff"),
+        ASURINE(2, "asurine"),
+        CRIMSITE(3, "crimsite"),
+        LIMESTONE(4, "limestone"),
+        OCHRUM(5, "ochrum"),
+        SCORCHIA(6, "scorchia"),
+        SCORIA(7, "scoria"),
+        VERIDIUM(8, "veridium");
 
 
-        private static final ModernStoneEnumType[] META_LOOKUP = new ModernStoneEnumType[values().length];
+        private static final StoneEnumType[] META_LOOKUP = new StoneEnumType[values().length];
         private final int meta;
         private final String name, unlocalizedName;
 
 
-        private ModernStoneEnumType(int meta, String name) {
+        private StoneEnumType(int meta, String name) {
             this(meta, name, name);
         }
 
-        private ModernStoneEnumType(int meta, String name, String unlocalizedName) {
+        private StoneEnumType(int meta, String name, String unlocalizedName) {
             this.meta = meta;
             this.name = name;
             this.unlocalizedName = unlocalizedName;
@@ -205,13 +203,13 @@ public class EnumHandler {
             return this.name;
         }
 
-        public static ModernStoneEnumType byMetaData(int meta) {
+        public static StoneEnumType byMetaData(int meta) {
             return META_LOOKUP[meta];
         }
 
         static {
-            for(ModernStoneEnumType modernStoneEnumType : values()) {
-                META_LOOKUP[modernStoneEnumType.getMeta()] = modernStoneEnumType;
+            for(StoneEnumType stoneEnumType : values()) {
+                META_LOOKUP[stoneEnumType.getMeta()] = stoneEnumType;
             }
         }
     }

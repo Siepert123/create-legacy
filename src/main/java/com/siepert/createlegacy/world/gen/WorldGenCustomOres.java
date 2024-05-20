@@ -1,6 +1,6 @@
 package com.siepert.createlegacy.world.gen;
 
-import com.siepert.createlegacy.blocks.BlockModernStone;
+import com.siepert.createlegacy.blocks.BlockStone;
 import com.siepert.createlegacy.blocks.BlockOre;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
@@ -35,24 +35,24 @@ public class WorldGenCustomOres implements IWorldGenerator {
         ore_zinc = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.ZINC),
                 6, BlockMatcher.forBlock(Blocks.STONE));
 
-        stone_calcite = new WorldGenMinable(ModBlocks.MODERN_STONE.getDefaultState().withProperty(BlockModernStone.VARIANT, EnumHandler.ModernStoneEnumType.CALCITE),
+        stone_calcite = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.CALCITE),
                 40, BlockMatcher.forBlock(Blocks.STONE));
-        stone_tuff = new WorldGenMinable(ModBlocks.MODERN_STONE.getDefaultState().withProperty(BlockModernStone.VARIANT, EnumHandler.ModernStoneEnumType.CALCITE),
+        stone_tuff = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.CALCITE),
                 40, BlockMatcher.forBlock(Blocks.STONE));
 
-        stone_asurine = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.ASURINE),
+        stone_asurine = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.ASURINE),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_crimsite = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.CRIMSITE),
+        stone_crimsite = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.CRIMSITE),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_limestone = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.LIMESTONE),
+        stone_limestone = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.LIMESTONE),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_ochrum = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.OCHRUM),
+        stone_ochrum = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.OCHRUM),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_scorchia = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.SCORCHIA),
+        stone_scorchia = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.SCORCHIA),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_scoria = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.SCORIA),
+        stone_scoria = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.SCORIA),
                 30, BlockMatcher.forBlock(Blocks.STONE));
-        stone_veridium = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.VERIDIUM),
+        stone_veridium = new WorldGenMinable(ModBlocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, EnumHandler.StoneEnumType.VERIDIUM),
                 30, BlockMatcher.forBlock(Blocks.STONE));
     }
 

@@ -23,21 +23,21 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class BlockModernStone extends Block implements IHasModel, IMetaName {
-    public static final PropertyEnum<EnumHandler.ModernStoneEnumType> VARIANT = PropertyEnum.<EnumHandler.ModernStoneEnumType>create("variant", EnumHandler.ModernStoneEnumType.class);
+public class BlockStone extends Block implements IHasModel, IMetaName {
+    public static final PropertyEnum<EnumHandler.StoneEnumType> VARIANT = PropertyEnum.<EnumHandler.StoneEnumType>create("variant", EnumHandler.StoneEnumType.class);
 
     private static final String name = "stone";
     private static boolean addToInv;
 
-    public BlockModernStone(boolean addToInv) {
+    public BlockStone(boolean addToInv) {
         super(Material.ROCK);
         this.addToInv = addToInv;
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
-        setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.ModernStoneEnumType.CALCITE));
-        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.ModernStoneEnumType.CALCITE));
-        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.ModernStoneEnumType.TUFF));
+        setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.CALCITE));
+        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.CALCITE));
+        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.TUFF));
         setHardness(1.5f);
         setResistance(3);
 
@@ -47,17 +47,17 @@ public class BlockModernStone extends Block implements IHasModel, IMetaName {
 
     @Override
     public int damageDropped(IBlockState state) {
-        return ((EnumHandler.ModernStoneEnumType) state.getValue(VARIANT)).getMeta();
+        return ((EnumHandler.StoneEnumType) state.getValue(VARIANT)).getMeta();
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return ((EnumHandler.ModernStoneEnumType) state.getValue(VARIANT)).getMeta();
+        return ((EnumHandler.StoneEnumType) state.getValue(VARIANT)).getMeta();
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, EnumHandler.ModernStoneEnumType.byMetaData(meta));
+        return this.getDefaultState().withProperty(VARIANT, EnumHandler.StoneEnumType.byMetaData(meta));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class BlockModernStone extends Block implements IHasModel, IMetaName {
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         if (addToInv) {
-            for (EnumHandler.ModernStoneEnumType variant : EnumHandler.ModernStoneEnumType.values()) {
+            for (EnumHandler.StoneEnumType variant : EnumHandler.StoneEnumType.values()) {
                 items.add(new ItemStack(this, 1, variant.getMeta()));
             }
         }
@@ -81,14 +81,14 @@ public class BlockModernStone extends Block implements IHasModel, IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return EnumHandler.ModernStoneEnumType.values()[stack.getItemDamage()].getName();
+        return EnumHandler.StoneEnumType.values()[stack.getItemDamage()].getName();
     }
 
     @Override
     public void registerModels() {
-        for (int i = 0; i < EnumHandler.ModernStoneEnumType.values().length; i++) {
+        for (int i = 0; i < EnumHandler.StoneEnumType.values().length; i++) {
             CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                    i, "modernstone/stone_" + EnumHandler.ModernStoneEnumType.values()[i].getName(), "inventory");
+                    i, "stone/stone_" + EnumHandler.StoneEnumType.values()[i].getName(), "inventory");
         }
     }
 }
