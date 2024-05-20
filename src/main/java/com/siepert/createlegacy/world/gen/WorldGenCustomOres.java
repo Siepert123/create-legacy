@@ -69,14 +69,14 @@ public class WorldGenCustomOres implements IWorldGenerator {
                 runGenerator(ore_copper, world, random, chunkX, chunkZ, 8, 25, 128);
                 runGenerator(ore_zinc, world, random, chunkX, chunkZ, 7, 5, 40);
 
-                runGenerator(stone_calcite, world, random, chunkX, chunkZ, 4, 20, 40);
+                runGenerator(stone_calcite, world, random, chunkX, chunkZ, 4, 20, 40, 2);
                 runGenerator(stone_tuff, world, random, chunkX, chunkZ, 4, 0, 20);
 
-                runGenerator(stone_asurine, world, random, chunkX, chunkZ, 1, 10, 40);
-                runGenerator(stone_crimsite, world, random, chunkX, chunkZ, 1, 40, 64);
-                runGenerator(stone_limestone, world, random, chunkX, chunkZ, 1, 30, 50);
-                runGenerator(stone_ochrum, world, random, chunkX, chunkZ, 1, 10, 40);
-                runGenerator(stone_veridium, world, random, chunkX, chunkZ, 1, 40, 64);
+                runGenerator(stone_asurine, world, random, chunkX, chunkZ, 1, 10, 40, 5);
+                runGenerator(stone_crimsite, world, random, chunkX, chunkZ, 1, 40, 64, 2);
+                runGenerator(stone_limestone, world, random, chunkX, chunkZ, 1, 30, 50,5);
+                runGenerator(stone_ochrum, world, random, chunkX, chunkZ, 1, 10, 40, 5);
+                runGenerator(stone_veridium, world, random, chunkX, chunkZ, 1, 40, 64, 5);
                 break;
 
             case 1:
@@ -85,19 +85,25 @@ public class WorldGenCustomOres implements IWorldGenerator {
     }
 
     private void runGenerator(WorldGenerator gen, World world, Random random, int chunkX, int chunkZ,
-                              int chance, int minHeight, int maxHeight) {
+                              int chance, int minHeight, int maxHeight, int additionalChance) {
         if (minHeight > maxHeight) throw new IllegalArgumentException("Illegal ore gen parameters: min height may not surpass max height!");
         if (minHeight < 0) throw new IllegalArgumentException("Illegal ore gen parameters: min height is below 0");
         if (maxHeight > 256) throw new IllegalArgumentException("Illegal ore gen parameters: min height is above 256");
 
         int heightDiff = maxHeight - minHeight + 1;
         for (int i = 0; i < chance; i++) {
-            int x = chunkX * 16 + random.nextInt(16);
-            int z = chunkZ * 16 + random.nextInt(16);
+            if (random.nextInt(additionalChance) == 0) {
+                int x = chunkX * 16 + random.nextInt(16);
+                int z = chunkZ * 16 + random.nextInt(16);
 
-            int y = minHeight + random.nextInt(heightDiff);
+                int y = minHeight + random.nextInt(heightDiff);
 
-            gen.generate(world, random, new BlockPos(x, y, z));
+                gen.generate(world, random, new BlockPos(x, y, z));
+            }
         }
+    }
+    private void runGenerator(WorldGenerator gen, World world, Random random, int chunkX, int chunkZ,
+                              int chance, int minHeight, int maxHeight) {
+        runGenerator(gen, world, random, chunkX, chunkZ, chance, minHeight, maxHeight, 1);
     }
 }
