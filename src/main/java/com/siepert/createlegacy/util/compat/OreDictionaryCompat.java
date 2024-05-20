@@ -61,5 +61,8 @@ public class OreDictionaryCompat {
         OreDictionary.registerOre("stoneScorchia", new ItemStack(ModBlocks.ORE, 1, 6));
         OreDictionary.registerOre("stoneScoria", new ItemStack(ModBlocks.ORE, 1, 7));
         OreDictionary.registerOre("stoneVeridium", new ItemStack(ModBlocks.ORE, 1, 8));
+
+        OreDictionary.registerOre("stoneCalcite", new ItemStack(ModBlocks.MODERN_STONE, 1, 0));
+        OreDictionary.registerOre("stoneTuff", new ItemStack(ModBlocks.MODERN_STONE, 1, 1));
     }
 }
