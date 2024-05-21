@@ -34,7 +34,7 @@ public class OreDictionaryCompat {
         OreDictionary.registerOre("dustObsidian", new ItemStack(ModItems.INGREDIENT, 1, 17));
 
         OreDictionary.registerOre("gemRoseQuartz", new ItemStack(ModItems.INGREDIENT, 1, 19));
-        OreDictionary.registerOre("gemPolishedRoseQuartz", new ItemStack(ModItems.INGREDIENT, 1, 20));
+        OreDictionary.registerOre("gemRoseQuartzPolished", new ItemStack(ModItems.INGREDIENT, 1, 20));
         OreDictionary.registerOre("electronTube", new ItemStack(ModItems.ADVANCED_INGREDIENT, 1, 2));
 
         OreDictionary.registerOre("crushedIron", new ItemStack(ModItems.INGREDIENT, 1, 12));
@@ -52,7 +52,8 @@ public class OreDictionaryCompat {
         OreDictionary.registerOre("crushedTin", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 7));
         OreDictionary.registerOre("crushedUranium", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 8));
     }
-
+    /** Saves all stone types to the OreDict.
+     * Useful for compat 'n stuff like that.*/
     public static void registerStoneTypes() {
         OreDictionary.registerOre("stoneAsurine", new ItemStack(ModBlocks.STONE, 1, 2));
         OreDictionary.registerOre("stoneCrimsite", new ItemStack(ModBlocks.STONE, 1, 3));
@@ -64,5 +65,55 @@ public class OreDictionaryCompat {
 
         OreDictionary.registerOre("stoneCalcite", new ItemStack(ModBlocks.STONE, 1, 0));
         OreDictionary.registerOre("stoneTuff", new ItemStack(ModBlocks.STONE, 1, 1));
+
+
+        OreDictionary.registerOre("stoneAsurinePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 0));
+        OreDictionary.registerOre("stoneCalcitePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 1));
+        OreDictionary.registerOre("stoneCrimsitePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 2));
+        OreDictionary.registerOre("stoneDeepslatePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 3));
+        OreDictionary.registerOre("stoneDripstonePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 4));
+        OreDictionary.registerOre("stoneLimestonePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 5));
+        OreDictionary.registerOre("stoneOchrumPolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 6));
+        OreDictionary.registerOre("stoneScorchiaPolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 7));
+        OreDictionary.registerOre("stoneScoriaPolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 8));
+        OreDictionary.registerOre("stoneTuffPolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 9));
+        OreDictionary.registerOre("stoneVeridiumPolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 10));
+        OreDictionary.registerOre("stoneAndesitePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 11));
+        OreDictionary.registerOre("stoneDioritePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 12));
+        OreDictionary.registerOre("stoneGranitePolished", new ItemStack(ModBlocks.STONE_POLISHED, 1, 13));
+
+
+        OreDictionary.registerOre("stoneAsurineCut", new ItemStack(ModBlocks.STONE_CUT, 1, 0));
+        OreDictionary.registerOre("stoneCalciteCut", new ItemStack(ModBlocks.STONE_CUT, 1, 1));
+        OreDictionary.registerOre("stoneCrimsiteCut", new ItemStack(ModBlocks.STONE_CUT, 1, 2));
+        OreDictionary.registerOre("stoneDeepslateCut", new ItemStack(ModBlocks.STONE_CUT, 1, 3));
+        OreDictionary.registerOre("stoneDripstoneCut", new ItemStack(ModBlocks.STONE_CUT, 1, 4));
+        OreDictionary.registerOre("stoneLimestoneCut", new ItemStack(ModBlocks.STONE_CUT, 1, 5));
+        OreDictionary.registerOre("stoneOchrumCut", new ItemStack(ModBlocks.STONE_CUT, 1, 6));
+        OreDictionary.registerOre("stoneScorchiaCut", new ItemStack(ModBlocks.STONE_CUT, 1, 7));
+        OreDictionary.registerOre("stoneScoriaCut", new ItemStack(ModBlocks.STONE_CUT, 1, 8));
+        OreDictionary.registerOre("stoneTuffCut", new ItemStack(ModBlocks.STONE_CUT, 1, 9));
+        OreDictionary.registerOre("stoneVeridiumCut", new ItemStack(ModBlocks.STONE_CUT, 1, 10));
+        OreDictionary.registerOre("stoneAndesiteCut", new ItemStack(ModBlocks.STONE_CUT, 1, 11));
+        OreDictionary.registerOre("stoneDioriteCut", new ItemStack(ModBlocks.STONE_CUT, 1, 12));
+        OreDictionary.registerOre("stoneGraniteCut", new ItemStack(ModBlocks.STONE_CUT, 1, 13));
     }
+
+    //Deco stones OreDict template.
+    /*
+    OreDictionary.registerOre("stoneAsurine", new ItemStack(ModBlocks.STONE, 1, 0));
+    OreDictionary.registerOre("stoneCalcite", new ItemStack(ModBlocks.STONE, 1, 1));
+    OreDictionary.registerOre("stoneCrimsite", new ItemStack(ModBlocks.STONE, 1, 2));
+    OreDictionary.registerOre("stoneDeepslate", new ItemStack(ModBlocks.STONE, 1, 3));
+    OreDictionary.registerOre("stoneDripstone", new ItemStack(ModBlocks.STONE, 1, 4));
+    OreDictionary.registerOre("stoneLimestone", new ItemStack(ModBlocks.STONE, 1, 5));
+    OreDictionary.registerOre("stoneOchrum", new ItemStack(ModBlocks.STONE, 1, 6));
+    OreDictionary.registerOre("stoneScorchia", new ItemStack(ModBlocks.STONE, 1, 7));
+    OreDictionary.registerOre("stoneScoria", new ItemStack(ModBlocks.STONE, 1, 8));
+    OreDictionary.registerOre("stoneTuff", new ItemStack(ModBlocks.STONE, 1, 9));
+    OreDictionary.registerOre("stoneVeridium", new ItemStack(ModBlocks.STONE, 1, 10));
+    OreDictionary.registerOre("stoneAndesite", new ItemStack(ModBlocks.STONE, 1, 11));
+    OreDictionary.registerOre("stoneDiorite", new ItemStack(ModBlocks.STONE, 1, 12));
+    OreDictionary.registerOre("stoneGranite", new ItemStack(ModBlocks.STONE, 1, 13));
+     */
 }

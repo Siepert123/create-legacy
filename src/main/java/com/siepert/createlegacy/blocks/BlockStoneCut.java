@@ -23,12 +23,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class BlockStonePolished extends Block implements IHasModel, IMetaName {
+public class BlockStoneCut extends Block implements IHasModel, IMetaName {
     public static final PropertyEnum<EnumHandler.DecoStoneEnumType> VARIANT = PropertyEnum.<EnumHandler.DecoStoneEnumType>create("variant", EnumHandler.DecoStoneEnumType.class);
 
-    private static final String name = "stone_polished";
+    private static final String name = "stone_cut";
 
-    public BlockStonePolished() {
+    public BlockStoneCut() {
         super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);
@@ -67,10 +67,7 @@ public class BlockStonePolished extends Block implements IHasModel, IMetaName {
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (EnumHandler.DecoStoneEnumType variant : EnumHandler.DecoStoneEnumType.values()) {
-            String s = variant.getName();
-            if (s != "andesite" && s != "diorite" && s != "granite") {
-                items.add(new ItemStack(this, 1, variant.getMeta()));
-            }
+            items.add(new ItemStack(this, 1, variant.getMeta()));
         }
     }
 
@@ -88,10 +85,9 @@ public class BlockStonePolished extends Block implements IHasModel, IMetaName {
     public void registerModels() {
         for (int i = 0; i < EnumHandler.DecoStoneEnumType.values().length; i++) {
             String s = EnumHandler.DecoStoneEnumType.values()[i].getName();
-            if (s != "andesite" && s != "diorite" && s != "granite") {
-                CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                        i, "stone/stone_polished_" + s, "inventory");
-            }
+            CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
+                    i, "stone/stone_cut_" + s, "inventory");
+
         }
     }
 }
