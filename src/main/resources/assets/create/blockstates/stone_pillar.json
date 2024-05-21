@@ -36,6 +36,12 @@
     "connected_bottom=false,connected_top=false,variant=granite": {
       "model": "create:stone/stone_pillar/granite"
     },
+    "connected_bottom=false,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate"
+    },
+    "connected_bottom=false,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone"
+    },
     "connected_bottom=false,connected_top=true,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_bottom"
     },
@@ -71,6 +77,12 @@
     },
     "connected_bottom=false,connected_top=true,variant=granite": {
       "model": "create:stone/stone_pillar/granite_bottom"
+    },
+    "connected_bottom=false,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_bottom"
+    },
+    "connected_bottom=false,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_bottom"
     },
     "connected_bottom=true,connected_top=false,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_top"
@@ -108,6 +120,12 @@
     "connected_bottom=true,connected_top=false,variant=granite": {
       "model": "create:stone/stone_pillar/granite_top"
     },
+    "connected_bottom=true,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_top"
+    },
+    "connected_bottom=true,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_top"
+    },
     "connected_bottom=true,connected_top=true,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_middle"
     },
@@ -143,6 +161,12 @@
     },
     "connected_bottom=true,connected_top=true,variant=granite": {
       "model": "create:stone/stone_pillar/granite_middle"
+    },
+    "connected_bottom=true,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_middle"
+    },
+    "connected_bottom=true,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_middle"
     }
   }
 }
