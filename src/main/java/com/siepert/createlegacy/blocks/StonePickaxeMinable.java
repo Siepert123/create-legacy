@@ -9,6 +9,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
+/**I don't know why I made this, it's useless */
+@Deprecated
 public class StonePickaxeMinable extends Block implements IHasModel {
     public StonePickaxeMinable(String name, Material material) {
         super(material);
