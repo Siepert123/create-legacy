@@ -6,6 +6,9 @@ import net.minecraft.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+/** The main item class.
+ * Gets registered before the blocks.
+ * I think no additional explanation is needed here.*/
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<Item>();
 

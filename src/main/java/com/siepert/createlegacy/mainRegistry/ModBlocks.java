@@ -8,6 +8,9 @@ import net.minecraft.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
+/** The main block registry class.
+ * Pretty self-explanatory.
+ * Apparently registered after the items. */
 public class ModBlocks {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
