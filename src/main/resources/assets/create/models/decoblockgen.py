@@ -13,7 +13,8 @@ stoneBricksPrefix = "stone_bricks_"
 stoneBricksFancyPrefix = "stone_bricks_fancy_"
 
 stoneTypes = ["tuff", "calcite", "asurine", "crimsite", "tuff", "veridium",
-    "deepslate", "dripstone", "limestone", "ochrum", "scorchia", "scoria"]
+    "deepslate", "dripstone", "limestone", "ochrum", "scorchia", "scoria",
+              "andesite", "diorite", "granite"]
 
 for stone in stoneTypes:
     print("Creating cut " + stone + " models")
