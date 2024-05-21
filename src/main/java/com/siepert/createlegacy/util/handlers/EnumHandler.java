@@ -213,4 +213,66 @@ public class EnumHandler {
             }
         }
     }
+
+    public static enum DecoStoneEnumType implements IStringSerializable {
+
+        ASURINE(0, "asurine"),
+        CALCITE(1, "calcite"),
+        CRIMSITE(2, "crimsite"),
+        DEEPSLATE(3, "deepslate"),
+        DRIPSTONE(4, "dripstone"),
+        LIMESTONE(5, "limestone"),
+        OCHRUM(6, "ochrum"),
+        SCORCHIA(7, "scorchia"),
+        SCORIA(8, "scoria"),
+        TUFF(9, "tuff"),
+        VERIDIUM(10, "veridium"),
+        ANDESITE(11, "andesite"),
+        DIORITE(12, "diorite"),
+        GRANITE(13, "granite");
+
+
+        private static final DecoStoneEnumType[] META_LOOKUP = new DecoStoneEnumType[values().length];
+        private final int meta;
+        private final String name, unlocalizedName;
+
+
+        private DecoStoneEnumType(int meta, String name) {
+            this(meta, name, name);
+        }
+
+        private DecoStoneEnumType(int meta, String name, String unlocalizedName) {
+            this.meta = meta;
+            this.name = name;
+            this.unlocalizedName = unlocalizedName;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        public int getMeta() {
+            return meta;
+        }
+
+        public String getUnlocalizedName() {
+            return unlocalizedName;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        public static DecoStoneEnumType byMetaData(int meta) {
+            return META_LOOKUP[meta];
+        }
+
+        static {
+            for(DecoStoneEnumType decoStoneEnumType : values()) {
+                META_LOOKUP[decoStoneEnumType.getMeta()] = decoStoneEnumType;
+            }
+        }
+    }
 }
