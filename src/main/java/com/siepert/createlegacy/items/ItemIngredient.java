@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class ItemIngredient extends Item implements IHasModel, IMetaName {
+public final class ItemIngredient extends Item implements IHasModel, IMetaName {
     public static final int INGREDIENT_AMOUNT = 21;
     public static final String[] NAME_LOOKUP = new String[] {
             "andesite_alloy", "plate_iron", "plate_gold",

@@ -21,6 +21,7 @@ public class ModBlocks {
     public static final Block STONE = new BlockStone(true);
     public static final Block STONE_POLISHED = new BlockStonePolished();
     public static final Block STONE_CUT = new BlockStoneCut();
+    public static final Block STONE_LAYERED = new BlockStoneLayered();
     public static final Block STONE_BRICKS = new BlockStoneBricks();
     public static final Block STONE_BRICKS_FANCY = new BlockStoneBricksFancy();
     public static final Block STONE_PILLAR = new BlockStonePillar();

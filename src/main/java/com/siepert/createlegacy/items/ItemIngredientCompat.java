@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class ItemIngredientCompat extends Item implements IHasModel, IMetaName {
+public final class ItemIngredientCompat extends Item implements IHasModel, IMetaName {
     public static final int COMPAT_INGREDIENT_AMOUNT = 9;
     public static final boolean ADD_TO_TAB = false;
     public static final String[] NAME_LOOKUP = new String[] {

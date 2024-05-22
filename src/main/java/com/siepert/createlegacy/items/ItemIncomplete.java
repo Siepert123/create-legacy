@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class ItemIncomplete extends Item implements IHasModel, IMetaName {
+public final class ItemIncomplete extends Item implements IHasModel, IMetaName {
     public static final int INGREDIENT_AMOUNT = 2   ;
     public static final String[] NAME_LOOKUP = new String[] {
             "precision_mechanism", "plate_obsidian"
