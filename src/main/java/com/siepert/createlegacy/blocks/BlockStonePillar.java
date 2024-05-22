@@ -72,11 +72,11 @@ public class BlockStonePillar extends Block implements IHasModel, IMetaName {
             topCon = worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.STONE_PILLAR;
             belowCon = worldIn.getBlockState(pos.down()).getBlock() == ModBlocks.STONE_PILLAR;
         } else if (state.getValue(AXIS) == EnumFacing.Axis.X) {
-            topCon = false;
-            belowCon = false;
+            topCon = worldIn.getBlockState(pos.east()).getBlock() == ModBlocks.STONE_PILLAR;
+            belowCon = worldIn.getBlockState(pos.west()).getBlock() == ModBlocks.STONE_PILLAR;
         } else if (state.getValue(AXIS) == EnumFacing.Axis.Z) {
-            topCon = false;
-            belowCon = false;
+            topCon = worldIn.getBlockState(pos.north()).getBlock() == ModBlocks.STONE_PILLAR;
+            belowCon = worldIn.getBlockState(pos.south()).getBlock() == ModBlocks.STONE_PILLAR;
         } else {
             topCon = false;
             belowCon = false;
