@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "variant=calcite": {
+      "model": "create:stone/stone_layered_calcite"
+    },
+    "variant=tuff": {
+      "model": "create:stone/stone_layered_tuff"
+    },
+    "variant=asurine": {
+      "model": "create:stone/stone_layered_asurine"
+    },
+    "variant=crimsite": {
+      "model": "create:stone/stone_layered_crimsite"
+    },
+    "variant=limestone": {
+      "model": "create:stone/stone_layered_limestone"
+    },
+    "variant=ochrum": {
+      "model": "create:stone/stone_layered_ochrum"
+    },
+    "variant=scorchia": {
+      "model": "create:stone/stone_layered_scorchia"
+    },
+    "variant=scoria": {
+      "model": "create:stone/stone_layered_scoria"
+    },
+    "variant=veridium": {
+      "model": "create:stone/stone_layered_veridium"
+    },
+    "variant=andesite": {
+      "model": "create:stone/stone_layered_andesite"
+    },
+    "variant=diorite": {
+      "model": "create:stone/stone_layered_diorite"
+    },
+    "variant=granite": {
+      "model": "create:stone/stone_layered_granite"
+    }
+  }
+}
