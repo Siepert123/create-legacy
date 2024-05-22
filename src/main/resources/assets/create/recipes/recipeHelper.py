@@ -10,7 +10,8 @@ def generate2x2CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta,
             },
         "result": {
             "item": resultItem,
-            "data": resultItemMeta
+            "data": resultItemMeta,
+            "count": count
             }
         }, indent=2)
     return thing
@@ -25,7 +26,8 @@ def generate2x1CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta,
             },
         "result": {
             "item": resultItem,
-            "data": resultItemMeta
+            "data": resultItemMeta,
+            "count": count
             }
         }, indent=2)
     return thing
@@ -40,7 +42,8 @@ def generateSingletonJson(inputItem, inputItemMeta, resultItem, resultItemMeta, 
             },
         "result": {
             "item": resultItem,
-            "data": resultItemMeta
+            "data": resultItemMeta,
+            "count": count
             }
         }, indent=2)
     return thing
