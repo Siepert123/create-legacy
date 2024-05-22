@@ -11,7 +11,7 @@ pathBlock = "block/stone/"
 stoneCutPrefix = "stone_cut_"
 stoneBricksPrefix = "stone_bricks_"
 stoneBricksFancyPrefix = "stone_bricks_fancy_"
-
+stoneLayeredPrefix = "stone_layered_"
 stoneTypes = ["tuff", "calcite", "asurine", "crimsite", "tuff", "veridium",
     "deepslate", "dripstone", "limestone", "ochrum", "scorchia", "scoria",
               "andesite", "diorite", "granite"]
@@ -45,6 +45,17 @@ for stone in stoneTypes:
 
     fileBlock.write(getBlockModel("create:block/palettes/stone_types/bricks_fancy/" + stone))
     fileItem.write(getItemModel("create:" + pathBlock + stoneBricksFancyPrefix + stone))
+
+    fileBlock.close()
+    fileItem.close()
+
+for stone in stoneTypes:
+    print("Creating layered " + stone + " models")
+    fileBlock = open(pathBlock + stoneLayeredPrefix + stone + ".json", "w")
+    fileItem = open(pathItem + stoneLayeredPrefix + stone + ".json", "w")
+
+    fileBlock.write(getBlockModel("create:block/palettes/stone_types/layered/" + stone))
+    fileItem.write(getItemModel("create:" + pathBlock + stoneLayeredPrefix + stone))
 
     fileBlock.close()
     fileItem.close()
