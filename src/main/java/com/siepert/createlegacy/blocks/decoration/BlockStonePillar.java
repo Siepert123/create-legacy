@@ -57,7 +57,8 @@ public class BlockStonePillar extends Block implements IHasModel, IMetaName {
 
     @Override
     public int damageDropped(IBlockState state) {
-        return ((EnumHandler.DecoStoneEnumType) state.getValue(VARIANT)).getMeta();
+        int meta = ((EnumHandler.DecoStoneEnumType) state.getValue(VARIANT)).getMeta();
+        return (meta);
     }
 
     @Override
@@ -91,7 +92,8 @@ public class BlockStonePillar extends Block implements IHasModel, IMetaName {
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(world.getBlockState(pos)));
+        int baseMeta = getMetaFromState(world.getBlockState(pos));
+        return new ItemStack(Item.getItemFromBlock(this), 1, baseMeta);
     }
 
     @Override
