@@ -1,6 +1,7 @@
 package com.siepert.createlegacy.mainRegistry;
 
 import com.siepert.createlegacy.blocks.*;
+import com.siepert.createlegacy.blocks.decoration.*;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleCook;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleWash;
 import net.minecraft.block.Block;

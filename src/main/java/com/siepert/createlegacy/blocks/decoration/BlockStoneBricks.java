@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.blocks;
+package com.siepert.createlegacy.blocks.decoration;
 
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
