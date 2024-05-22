@@ -3,7 +3,6 @@ import json
 def generate2x2CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta, count, group):
     thing = json.dumps({
         "type": "minecraft:crafting_shaped",
-        "group": group,
         "pattern": ["##", "##"],
         "key": {
             "#": {"item": inputItem, "data": inputItemMeta},
@@ -19,7 +18,6 @@ def generate2x2CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta,
 def generate2x1CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta, count, group):
     thing = json.dumps({
         "type": "minecraft:crafting_shaped",
-        "group": group,
         "pattern": ["#", "#"],
         "key": {
             "#": {"item": inputItem, "data": inputItemMeta},
@@ -35,7 +33,6 @@ def generate2x1CompactJson(inputItem, inputItemMeta, resultItem, resultItemMeta,
 def generateSingletonJson(inputItem, inputItemMeta, resultItem, resultItemMeta, count, group):
     thing = json.dumps({
         "type": "minecraft:crafting_shaped",
-        "group": group,
         "pattern": ["#"],
         "key": {
             "#": {"item": inputItem, "data": inputItemMeta},
