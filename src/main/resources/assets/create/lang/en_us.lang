@@ -92,6 +92,23 @@ tile.stone_scorchia.name=Scorchia
 tile.stone_scoria.name=Scoria
 tile.stone_veridium.name=Veridium
 
+#Polished
+tile.stone_polished_andesite.name=Polished Andesite
+tile.stone_polished_asurine.name=Polished Asurine
+tile.stone_polished_calcite.name=Polished Calcite
+tile.stone_polished_crimsite.name=Polished Crimsite
+tile.stone_polished_deepslate.name=Polished Deepslate
+tile.stone_polished_diorite.name=Polished Diorite
+tile.stone_polished_dripstone.name=Polished Dripstone
+tile.stone_polished_granite.name=Polished Granite
+tile.stone_polished_limestone.name=Polished Limestone
+tile.stone_polished_ochrum.name=Polished Ochrum
+tile.stone_polished_scorchia.name=Polished Scorchia
+tile.stone_polished_scoria.name=Polished Scoria
+tile.stone_polished_tuff.name=Polished Tuff
+tile.stone_polished_veridium.name=Polished Veridium
+
+#Cut
 tile.stone_cut_andesite.name=Cut Andesite
 tile.stone_cut_asurine.name=Cut Asurine
 tile.stone_cut_calcite.name=Cut Calcite
@@ -106,6 +123,8 @@ tile.stone_cut_scorchia.name=Cut Scorchia
 tile.stone_cut_scoria.name=Cut Scoria
 tile.stone_cut_tuff.name=Cut Tuff
 tile.stone_cut_veridium.name=Cut Veridium
+
+#Bricks
 tile.stone_bricks_andesite.name=Andesite Bricks
 tile.stone_bricks_asurine.name=Asurine Bricks
 tile.stone_bricks_calcite.name=Calcite Bricks
@@ -120,6 +139,8 @@ tile.stone_bricks_scorchia.name=Scorchia Bricks
 tile.stone_bricks_scoria.name=Scoria Bricks
 tile.stone_bricks_tuff.name=Tuff Bricks
 tile.stone_bricks_veridium.name=Veridium Bricks
+
+#Fancy bricks
 tile.stone_bricks_fancy_andesite.name=Fancy Andesite Bricks
 tile.stone_bricks_fancy_asurine.name=Fancy Asurine Bricks
 tile.stone_bricks_fancy_calcite.name=Fancy Calcite Bricks
@@ -134,6 +155,8 @@ tile.stone_bricks_fancy_scorchia.name=Fancy Scorchia Bricks
 tile.stone_bricks_fancy_scoria.name=Fancy Scoria Bricks
 tile.stone_bricks_fancy_tuff.name=Fancy Tuff Bricks
 tile.stone_bricks_fancy_veridium.name=Fancy Veridium Bricks
+
+#Pillars
 tile.stone_pillar_andesite.name=Andesite Pillar
 tile.stone_pillar_asurine.name=Asurine Pillar
 tile.stone_pillar_calcite.name=Calcite Pillar
