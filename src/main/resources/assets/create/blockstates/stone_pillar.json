@@ -1,172 +1,676 @@
 {
   "variants": {
-    "connected_bottom=false,connected_top=false,variant=calcite": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite"
     },
-    "connected_bottom=false,connected_top=false,variant=tuff": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=tuff": {
       "model": "create:stone/stone_pillar/tuff"
     },
-    "connected_bottom=false,connected_top=false,variant=asurine": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=asurine": {
       "model": "create:stone/stone_pillar/asurine"
     },
-    "connected_bottom=false,connected_top=false,variant=crimsite": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=crimsite": {
       "model": "create:stone/stone_pillar/crimsite"
     },
-    "connected_bottom=false,connected_top=false,variant=limestone": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=limestone": {
       "model": "create:stone/stone_pillar/limestone"
     },
-    "connected_bottom=false,connected_top=false,variant=ochrum": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=ochrum": {
       "model": "create:stone/stone_pillar/ochrum"
     },
-    "connected_bottom=false,connected_top=false,variant=scorchia": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=scorchia": {
       "model": "create:stone/stone_pillar/scorchia"
     },
-    "connected_bottom=false,connected_top=false,variant=scoria": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=scoria": {
       "model": "create:stone/stone_pillar/scoria"
     },
-    "connected_bottom=false,connected_top=false,variant=veridium": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=veridium": {
       "model": "create:stone/stone_pillar/veridium"
     },
-    "connected_bottom=false,connected_top=false,variant=andesite": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=andesite": {
       "model": "create:stone/stone_pillar/andesite"
     },
-    "connected_bottom=false,connected_top=false,variant=diorite": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=diorite": {
       "model": "create:stone/stone_pillar/diorite"
     },
-    "connected_bottom=false,connected_top=false,variant=granite": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=granite": {
       "model": "create:stone/stone_pillar/granite"
     },
-    "connected_bottom=false,connected_top=false,variant=deepslate": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=deepslate": {
       "model": "create:stone/stone_pillar/deepslate"
     },
-    "connected_bottom=false,connected_top=false,variant=dripstone": {
+    "axis=y,connected_bottom=false,connected_top=false,variant=dripstone": {
       "model": "create:stone/stone_pillar/dripstone"
     },
-    "connected_bottom=false,connected_top=true,variant=calcite": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=tuff": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=tuff": {
       "model": "create:stone/stone_pillar/tuff_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=asurine": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=asurine": {
       "model": "create:stone/stone_pillar/asurine_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=crimsite": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=crimsite": {
       "model": "create:stone/stone_pillar/crimsite_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=limestone": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=limestone": {
       "model": "create:stone/stone_pillar/limestone_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=ochrum": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=ochrum": {
       "model": "create:stone/stone_pillar/ochrum_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=scorchia": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=scorchia": {
       "model": "create:stone/stone_pillar/scorchia_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=scoria": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=scoria": {
       "model": "create:stone/stone_pillar/scoria_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=veridium": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=veridium": {
       "model": "create:stone/stone_pillar/veridium_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=andesite": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=andesite": {
       "model": "create:stone/stone_pillar/andesite_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=diorite": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=diorite": {
       "model": "create:stone/stone_pillar/diorite_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=granite": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=granite": {
       "model": "create:stone/stone_pillar/granite_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=deepslate": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=deepslate": {
       "model": "create:stone/stone_pillar/deepslate_bottom"
     },
-    "connected_bottom=false,connected_top=true,variant=dripstone": {
+    "axis=y,connected_bottom=false,connected_top=true,variant=dripstone": {
       "model": "create:stone/stone_pillar/dripstone_bottom"
     },
-    "connected_bottom=true,connected_top=false,variant=calcite": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_top"
     },
-    "connected_bottom=true,connected_top=false,variant=tuff": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=tuff": {
       "model": "create:stone/stone_pillar/tuff_top"
     },
-    "connected_bottom=true,connected_top=false,variant=asurine": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=asurine": {
       "model": "create:stone/stone_pillar/asurine_top"
     },
-    "connected_bottom=true,connected_top=false,variant=crimsite": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=crimsite": {
       "model": "create:stone/stone_pillar/crimsite_top"
     },
-    "connected_bottom=true,connected_top=false,variant=limestone": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=limestone": {
       "model": "create:stone/stone_pillar/limestone_top"
     },
-    "connected_bottom=true,connected_top=false,variant=ochrum": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=ochrum": {
       "model": "create:stone/stone_pillar/ochrum_top"
     },
-    "connected_bottom=true,connected_top=false,variant=scorchia": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=scorchia": {
       "model": "create:stone/stone_pillar/scorchia_top"
     },
-    "connected_bottom=true,connected_top=false,variant=scoria": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=scoria": {
       "model": "create:stone/stone_pillar/scoria_top"
     },
-    "connected_bottom=true,connected_top=false,variant=veridium": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=veridium": {
       "model": "create:stone/stone_pillar/veridium_top"
     },
-    "connected_bottom=true,connected_top=false,variant=andesite": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=andesite": {
       "model": "create:stone/stone_pillar/andesite_top"
     },
-    "connected_bottom=true,connected_top=false,variant=diorite": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=diorite": {
       "model": "create:stone/stone_pillar/diorite_top"
     },
-    "connected_bottom=true,connected_top=false,variant=granite": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=granite": {
       "model": "create:stone/stone_pillar/granite_top"
     },
-    "connected_bottom=true,connected_top=false,variant=deepslate": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=deepslate": {
       "model": "create:stone/stone_pillar/deepslate_top"
     },
-    "connected_bottom=true,connected_top=false,variant=dripstone": {
+    "axis=y,connected_bottom=true,connected_top=false,variant=dripstone": {
       "model": "create:stone/stone_pillar/dripstone_top"
     },
-    "connected_bottom=true,connected_top=true,variant=calcite": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=calcite": {
       "model": "create:stone/stone_pillar/calcite_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=tuff": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=tuff": {
       "model": "create:stone/stone_pillar/tuff_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=asurine": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=asurine": {
       "model": "create:stone/stone_pillar/asurine_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=crimsite": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=crimsite": {
       "model": "create:stone/stone_pillar/crimsite_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=limestone": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=limestone": {
       "model": "create:stone/stone_pillar/limestone_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=ochrum": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=ochrum": {
       "model": "create:stone/stone_pillar/ochrum_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=scorchia": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=scorchia": {
       "model": "create:stone/stone_pillar/scorchia_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=scoria": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=scoria": {
       "model": "create:stone/stone_pillar/scoria_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=veridium": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=veridium": {
       "model": "create:stone/stone_pillar/veridium_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=andesite": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=andesite": {
       "model": "create:stone/stone_pillar/andesite_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=diorite": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=diorite": {
       "model": "create:stone/stone_pillar/diorite_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=granite": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=granite": {
       "model": "create:stone/stone_pillar/granite_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=deepslate": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=deepslate": {
       "model": "create:stone/stone_pillar/deepslate_middle"
     },
-    "connected_bottom=true,connected_top=true,variant=dripstone": {
+    "axis=y,connected_bottom=true,connected_top=true,variant=dripstone": {
       "model": "create:stone/stone_pillar/dripstone_middle"
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=granite": {
+      "model": "create:stone/stone_pillar/granite",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=false,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,connected_bottom=true,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_middle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=granite": {
+      "model": "create:stone/stone_pillar/granite",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=false,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_bottom",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=false,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_top",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=calcite": {
+      "model": "create:stone/stone_pillar/calcite_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=tuff": {
+      "model": "create:stone/stone_pillar/tuff_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=asurine": {
+      "model": "create:stone/stone_pillar/asurine_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=crimsite": {
+      "model": "create:stone/stone_pillar/crimsite_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=limestone": {
+      "model": "create:stone/stone_pillar/limestone_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=ochrum": {
+      "model": "create:stone/stone_pillar/ochrum_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=scorchia": {
+      "model": "create:stone/stone_pillar/scorchia_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=scoria": {
+      "model": "create:stone/stone_pillar/scoria_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=veridium": {
+      "model": "create:stone/stone_pillar/veridium_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=andesite": {
+      "model": "create:stone/stone_pillar/andesite_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=diorite": {
+      "model": "create:stone/stone_pillar/diorite_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=granite": {
+      "model": "create:stone/stone_pillar/granite_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=deepslate": {
+      "model": "create:stone/stone_pillar/deepslate_middle",
+      "x": 90
+    },
+    "axis=z,connected_bottom=true,connected_top=true,variant=dripstone": {
+      "model": "create:stone/stone_pillar/dripstone_middle",
+      "x": 90
     }
   }
 }
