@@ -5,6 +5,9 @@ def getItemModel(parent):
 def getBlockModel(texture):
     return '{\n  "parent": "block/cube_all",\n  "textures": {\n    "all": "' + texture + '"\n  }\n}'
 
+def getPillarModel(texture, texture0):
+    return '{\n  "parent": "block/cube_column",\n  "textures": {\n    "end": "' + texture + '",\n    "side": "' + texture0 + '"\n  }\n}'
+
 pathItem = "item/stone/"
 pathBlock = "block/stone/"
 
@@ -54,7 +57,7 @@ for stone in stoneTypes:
     fileBlock = open(pathBlock + stoneLayeredPrefix + stone + ".json", "w")
     fileItem = open(pathItem + stoneLayeredPrefix + stone + ".json", "w")
 
-    fileBlock.write(getBlockModel("create:block/palettes/stone_types/layered/" + stone))
+    fileBlock.write(getPillarModel("create:block/palettes/stone_types/cap/" + stone, "create:block/palettes/stone_types/layered/" + stone))
     fileItem.write(getItemModel("create:" + pathBlock + stoneLayeredPrefix + stone))
 
     fileBlock.close()

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bricks",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "create:stone_polished",
+      "data": 11
+    }
+  },
+  "result": {
+    "item": "create:stone_bricks",
+    "data": 11
+  }
+}
