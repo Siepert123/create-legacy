@@ -171,3 +171,19 @@ tile.stone_pillar_scorchia.name=Scorchia Pillar
 tile.stone_pillar_scoria.name=Scoria Pillar
 tile.stone_pillar_tuff.name=Tuff Pillar
 tile.stone_pillar_veridium.name=Veridium Pillar
+
+#Layered
+tile.stone_layered_andesite.name=Layered Andesite
+tile.stone_layered_asurine.name=Layered Asurine
+tile.stone_layered_calcite.name=Layered Calcite
+tile.stone_layered_crimsite.name=Layered Crimsite
+tile.stone_layered_deepslate.name=Layered Deepslate
+tile.stone_layered_diorite.name=Layered Diorite
+tile.stone_layered_dripstone.name=Layered Dripstone
+tile.stone_layered_granite.name=Layered Granite
+tile.stone_layered_limestone.name=Layered Limestone
+tile.stone_layered_ochrum.name=Layered Ochrum
+tile.stone_layered_scorchia.name=Layered Scorchia
+tile.stone_layered_scoria.name=Layered Scoria
+tile.stone_layered_tuff.name=Layered Tuff
+tile.stone_layered_veridium.name=Layered Veridium
