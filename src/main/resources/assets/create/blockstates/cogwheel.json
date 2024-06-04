@@ -1,7 +1,16 @@
 {
   "variants": {
-    "normal": {
+    "axis=x,rotation=0": {
+      "model": "create:cogwheel",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotation=0": {
       "model": "create:cogwheel"
+    },
+    "axis=z,rotation=0": {
+      "model": "create:cogwheel",
+      "x": 90
     }
   }
 }

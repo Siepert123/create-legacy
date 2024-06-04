@@ -7,12 +7,14 @@ import com.siepert.createlegacy.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockScheduleCook extends Block implements IHasModel {
     public BlockScheduleCook() {
@@ -53,4 +55,9 @@ public class BlockScheduleCook extends Block implements IHasModel {
         return EnumBlockRenderType.INVISIBLE;
     }
 
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+        entityIn.setFire(3);
+    }
 }

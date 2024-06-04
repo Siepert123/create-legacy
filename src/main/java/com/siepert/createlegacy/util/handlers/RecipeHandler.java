@@ -19,13 +19,13 @@ public class RecipeHandler {
         GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE, 1, 1),
                 new ItemStack(ModItems.INGREDIENT, 1, 6), 0.4f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 12),
-                new ItemStack(Items.IRON_INGOT, 1, 0), 0.1f);
+                new ItemStack(Items.IRON_INGOT, 2, 0), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 13),
-                new ItemStack(Items.GOLD_INGOT, 1, 0), 0.1f);
+                new ItemStack(Items.GOLD_INGOT, 2, 0), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 14),
-                new ItemStack(ModItems.INGREDIENT, 1, 3), 0.1f);
+                new ItemStack(ModItems.INGREDIENT, 2, 3), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 15),
-                new ItemStack(ModItems.INGREDIENT, 1, 6), 0.1f);
+                new ItemStack(ModItems.INGREDIENT, 2, 6), 0.1f);
     }
 
     public static void registerWashing(Logger logger) {
