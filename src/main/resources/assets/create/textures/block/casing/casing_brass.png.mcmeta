@@ -4,7 +4,7 @@
     "type":"CTM",
     "layer":"CUTOUT",
     "textures":[
-      "create:blocks/casing/casing_brass_ctm.png"
+      "create:block/casing/casing_brass_ctm"
     ]
   }
 }

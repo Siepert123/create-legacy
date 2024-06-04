@@ -2,9 +2,9 @@
   "ctm":{
     "ctm_version": 1,
     "type":"CTM",
-    "layer":"CUTOUT",
+    "layer":"SOLID",
     "textures":[
-      "create:blocks/casing/casing_copper_ctm.png"
+      "create:block/casing/casing_copper_ctm"
     ]
   }
 }

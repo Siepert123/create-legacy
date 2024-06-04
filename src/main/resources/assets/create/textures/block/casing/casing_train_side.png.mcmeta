@@ -1,10 +1,10 @@
 {
   "ctm":{
     "ctm_version": 1,
-    "type":"CTM",
-    "layer":"CUTOUT",
+    "type":"ctm",
+    "layer":"SOLID",
     "textures":[
-      "create:blocks/casing/casing_train_side_ctm.png"
+      "create:block/casing/casing_train_side_ctm"
     ]
   }
 }
