@@ -11,4 +11,5 @@ public class Reference {
     public static final String COMMON = "com.siepert.createlegacy.proxy.CommonProxy"; //Common proxy class
 
     public static Random random = new Random(System.currentTimeMillis());
+    public static TimedLucky timedLucky = new TimedLucky();
 }

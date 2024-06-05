@@ -32,7 +32,7 @@ public class BlockStoneLayered extends Block implements IHasModel, IMetaName {
         super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
+        setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.ASURINE));
         setHarvestLevel("pickaxe", 1);
         setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.CALCITE));

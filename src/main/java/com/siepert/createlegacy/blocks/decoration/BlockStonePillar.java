@@ -41,7 +41,7 @@ public class BlockStonePillar extends Block implements IHasModel, IMetaName {
         super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
+        setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.ASURINE)
                 .withProperty(CONNECTED_TOP, false).withProperty(CONNECTED_BOTTOM, false)
                 .withProperty(AXIS, EnumFacing.Axis.Y));

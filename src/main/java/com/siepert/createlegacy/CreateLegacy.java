@@ -1,6 +1,7 @@
 package com.siepert.createlegacy;
 
 import com.siepert.createlegacy.proxy.CommonProxy;
+import com.siepert.createlegacy.tabs.CreateModDecoTab;
 import com.siepert.createlegacy.tabs.CreateModTab;
 import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
@@ -25,6 +26,7 @@ public class CreateLegacy {
     public static Logger logger;
 
     public static final CreativeTabs TAB_CREATE = new CreateModTab("tab_create");
+    public static final CreativeTabs TAB_CREATE_DECORATIONS = new CreateModDecoTab("tab_create_decorations");
 
     @SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
     public static CommonProxy proxy;

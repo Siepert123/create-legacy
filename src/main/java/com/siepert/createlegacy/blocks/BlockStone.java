@@ -34,7 +34,7 @@ public class BlockStone extends Block implements IHasModel, IMetaName {
         this.addToInv = addToInv;
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
+        setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.CALCITE));
         setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.CALCITE));
         setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.TUFF));
