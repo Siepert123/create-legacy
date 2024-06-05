@@ -69,6 +69,7 @@ tile.casing_train.name=Train Casing
 #Kinetic Appliances
 tile.cogwheel.name=Cogwheel
 tile.hand_crank.name=Hand Crank
+tile.drill.name=Mechanical Drill
 
 #Overige
 itemGroup.tab_create=Create

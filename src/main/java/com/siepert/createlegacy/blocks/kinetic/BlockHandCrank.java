@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.blocks;
+package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
