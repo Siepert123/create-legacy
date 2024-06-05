@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public class BlockCogwheel extends Block implements IHasModel {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
-    public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 5);
+    public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 3);
 
     public BlockCogwheel(String name) {
         super(Material.WOOD);
@@ -55,10 +55,10 @@ public class BlockCogwheel extends Block implements IHasModel {
         int meta = 0;
         switch (state.getValue(AXIS)) {
             case X:
-                meta += 5;
+                meta += 3;
                 break;
             case Z:
-                meta += 10;
+                meta += 6;
                 break;
             case Y:
                 break;
@@ -69,7 +69,7 @@ public class BlockCogwheel extends Block implements IHasModel {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        IBlockState toReturn = this.getDefaultState().withProperty(ROTATION, meta % 5);
+        IBlockState toReturn = this.getDefaultState().withProperty(ROTATION, meta % 3);
         switch ((meta - meta % 3) / 3) {
             case 0:
                 return toReturn.withProperty(AXIS, EnumFacing.Axis.Y);
