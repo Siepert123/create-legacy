@@ -4,7 +4,11 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
+import com.siepert.createlegacy.util.IHasRotation;
+import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
+import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,13 +22,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class BlockCogwheel extends Block implements IHasModel {
+public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKineticActor {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
-    public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 3);
 
     public BlockCogwheel(String name) {
         super(Material.WOOD);
@@ -69,8 +73,8 @@ public class BlockCogwheel extends Block implements IHasModel {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        IBlockState toReturn = this.getDefaultState().withProperty(ROTATION, meta % 3);
-        switch ((meta - meta % 3) / 3) {
+        IBlockState toReturn = this.getDefaultState().withProperty(ROTATION, meta % 4);
+        switch ((meta - meta % 4) / 4) {
             case 0:
                 return toReturn.withProperty(AXIS, EnumFacing.Axis.Y);
             case 1:
@@ -111,5 +115,43 @@ public class BlockCogwheel extends Block implements IHasModel {
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
+    }
+
+    @Override
+    public void rotate(World worldIn, BlockPos pos, EnumFacing source) {
+        for (EnumFacing facing : EnumFacing.values()) {
+            if (facing != source) {
+                Block blockNow = worldIn.getBlockState(pos.offset(facing)).getBlock();
+                if (blockNow instanceof IKineticActor) {
+                    if (blockNow instanceof BlockCogwheel) {
+                        if (worldIn.getBlockState(pos).getValue(AXIS).equals(worldIn.getBlockState(pos.offset(facing)).getValue(AXIS))) {
+                            ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
+                        }
+                    }
+                    else {
+                        ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void act(World worldIn, BlockPos pos, EnumFacing source) {
+        try {
+            IBlockState state = worldIn.getBlockState(pos);
+            if (state.getValue(ROTATION) < 3)
+                worldIn.setBlockState(pos, state.withProperty(ROTATION, state.getValue(ROTATION) + 1), 0);
+            else worldIn.setBlockState(pos, state.withProperty(ROTATION, 0), 1);
+            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            if (Reference.random.nextInt(25) == 0) {
+                worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ModSoundHandler.BLOCK_COGWHEEL_AMBIENT,
+                        SoundCategory.BLOCKS, 1.0f, 1.0f);
+            }
+            rotate(worldIn, pos, source);
+        } catch (StackOverflowError overflowError) {
+            return;
+        }
     }
 }

@@ -26,6 +26,7 @@ public class ModBlocks {
     public static final Block STONE_BRICKS_FANCY = new BlockStoneBricksFancy();
     public static final Block STONE_PILLAR = new BlockStonePillar();
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");
+    public static final Block HAND_CRANK = new BlockHandCrank("hand_crank");
 
     public static final Block SCHEDULE_WASH = new BlockScheduleWash();
     public static final Block SCHEDULE_COOK = new BlockScheduleCook();

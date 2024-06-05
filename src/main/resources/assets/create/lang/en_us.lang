@@ -66,7 +66,9 @@ tile.casing_copper.name=Copper Casing
 tile.casing_brass.name=Brass Casing
 tile.casing_train.name=Train Casing
 
+#Kinetic Appliances
 tile.cogwheel.name=Cogwheel
+tile.hand_crank.name=Hand Crank
 
 #Overige
 itemGroup.tab_create=Create
