@@ -124,8 +124,12 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
                 Block blockNow = worldIn.getBlockState(pos.offset(facing)).getBlock();
                 if (blockNow instanceof IKineticActor) {
                     if (blockNow instanceof BlockCogwheel) {
-                        if (worldIn.getBlockState(pos).getValue(AXIS).equals(worldIn.getBlockState(pos.offset(facing)).getValue(AXIS))) {
-                            ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
+                        try {
+                            if (worldIn.getBlockState(pos).getValue(AXIS).equals(worldIn.getBlockState(pos.offset(facing)).getValue(AXIS))) {
+                                ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
+                            }
+                        } catch (Exception e) {
+                            return;
                         }
                     }
                     else {
