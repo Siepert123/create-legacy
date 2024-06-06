@@ -22,13 +22,6 @@ public class ModBlocks {
     public static final Block ORE = new BlockOre();
     public static final Block MATERIAL_STORAGE_BLOCK = new BlockMaterialStorage();
     public static final Block CASING_BLOCK = new BlockCasing();
-    public static final Block STONE = new BlockStone(true);
-    public static final Block STONE_POLISHED = new BlockStonePolished();
-    public static final Block STONE_CUT = new BlockStoneCut();
-    public static final Block STONE_LAYERED = new BlockStoneLayered();
-    public static final Block STONE_BRICKS = new BlockStoneBricks();
-    public static final Block STONE_BRICKS_FANCY = new BlockStoneBricksFancy();
-    public static final Block STONE_PILLAR = new BlockStonePillar();
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");
     public static final Block HAND_CRANK = new BlockHandCrank("hand_crank");
     public static final Block DRILL = new BlockDrill("drill");
@@ -36,4 +29,13 @@ public class ModBlocks {
 
     public static final Block SCHEDULE_WASH = new BlockScheduleWash();
     public static final Block SCHEDULE_COOK = new BlockScheduleCook();
+
+
+    public static final Block STONE = new BlockStone(true);
+    public static final Block STONE_POLISHED = new BlockStonePolished();
+    public static final Block STONE_CUT = new BlockStoneCut();
+    public static final Block STONE_LAYERED = new BlockStoneLayered();
+    public static final Block STONE_BRICKS = new BlockStoneBricks();
+    public static final Block STONE_BRICKS_FANCY = new BlockStoneBricksFancy();
+    public static final Block STONE_PILLAR = new BlockStonePillar();
 }

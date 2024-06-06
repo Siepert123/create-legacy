@@ -70,6 +70,7 @@ tile.casing_train.name=Train Casing
 tile.cogwheel.name=Cogwheel
 tile.hand_crank.name=Hand Crank
 tile.drill.name=Mechanical Drill
+tile.chassis.name=Chassis
 
 #Overige
 itemGroup.tab_create=Create
