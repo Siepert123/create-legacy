@@ -4,11 +4,11 @@
 	"textures": {
 		"0": "create:block/axis_top",
 		"1": "create:block/axis",
-		"2": "blocks/anvil",
+		"2": "blocks/anvil_base",
 		"7": "blocks/stone_andesite_polished",
 		"8": "create:block/mechanical_drill_top",
 		"10": "create:block/andesite_casing_very_short",
-		"particle": "blocks/anvil",
+		"particle": "create:block/casing/casing_andesite",
 		"gearbox": "create:block/gearbox"
 	},
 	"elements": [
