@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " I ",
-    "IMI",
+    " M ",
+    "MIM",
     " # "
   ],
   "key": {
@@ -15,7 +15,8 @@
       "data": 0
     },
     "I": {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
   },
   "result": {
