@@ -6,7 +6,7 @@
 		"0": "create:block/cogwheel/cogwheel_axis",
 		"3": "create:block/cogwheel/axis_top",
 		"1_2": "create:block/cogwheel/cogwheel",
-		"particle": "block/planks_spruce"
+		"particle": "blocks/planks_spruce"
 	},
 	"elements": [
 		{
