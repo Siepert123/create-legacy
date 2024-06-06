@@ -145,10 +145,6 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
             else worldIn.setBlockState(pos, state.withProperty(ROTATION, 0), 1);
             worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-            if (Reference.random.nextInt(25) == 0) {
-                worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ModSoundHandler.BLOCK_COGWHEEL_AMBIENT,
-                        SoundCategory.BLOCKS, 1.0f, 1.0f);
-            }
             rotate(worldIn, pos, source);
         } catch (StackOverflowError overflowError) {
             return;
