@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -110,6 +111,16 @@ public class BlockChassis extends Block implements IHasModel {
         return new BlockStateContainer(this, new IProperty[] {AXIS, STICKY_TOP, STICKY_BOTTOM});
     }
 
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(playerIn.getHeldItem(hand).getItem() == Items.SLIME_BALL) {
+            worldIn.setBlockState(pos, state.withProperty(STICKY_BOTTOM, true).withProperty(STICKY_TOP, true), 0);
+            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void registerModels() {
@@ -118,7 +129,8 @@ public class BlockChassis extends Block implements IHasModel {
 
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
+                                            float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing.Axis axis = facing.getAxis();
         if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == this) {
             return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand)

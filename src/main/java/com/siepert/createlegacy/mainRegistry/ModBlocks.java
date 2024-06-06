@@ -3,6 +3,7 @@ package com.siepert.createlegacy.mainRegistry;
 import com.siepert.createlegacy.blocks.*;
 import com.siepert.createlegacy.blocks.decoration.*;
 import com.siepert.createlegacy.blocks.kinetic.BlockChassis;
+import com.siepert.createlegacy.blocks.kinetic.BlockCogwheel;
 import com.siepert.createlegacy.blocks.kinetic.BlockDrill;
 import com.siepert.createlegacy.blocks.kinetic.BlockHandCrank;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleCook;
