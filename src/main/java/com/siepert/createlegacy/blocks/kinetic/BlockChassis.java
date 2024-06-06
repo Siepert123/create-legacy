@@ -18,12 +18,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -113,10 +112,24 @@ public class BlockChassis extends Block implements IHasModel {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (playerIn.getHeldItem(hand).getItem() == Items.AIR) {
+            if (playerIn.isSneaking()) {
+                if (!state.getValue(STICKY_TOP) && !state.getValue(STICKY_BOTTOM)) return false;
+                worldIn.setBlockState(pos, state.withProperty(STICKY_BOTTOM, false).withProperty(STICKY_TOP, false), 0);
+                worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                        pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                        SoundEvents.BLOCK_SLIME_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                return true;
+            }
+        }
         if(playerIn.getHeldItem(hand).getItem() == Items.SLIME_BALL) {
+            if (state.getValue(STICKY_TOP) && state.getValue(STICKY_BOTTOM)) return false;
             worldIn.setBlockState(pos, state.withProperty(STICKY_BOTTOM, true).withProperty(STICKY_TOP, true), 0);
             worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    SoundEvents.BLOCK_SLIME_PLACE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             return true;
         }
         return false;
