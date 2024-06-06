@@ -19,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -97,9 +98,12 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
     @Override
     public void act(World worldIn, BlockPos pos, EnumFacing source) {
         if (source == worldIn.getBlockState(pos).getValue(FACING).getOpposite()) {
-             if (!worldIn.getBlockState(pos.offset(source.getOpposite())).isTranslucent()) {
-                    BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
+            BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
+             if (!worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial().isReplaceable()
+                     && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
                     worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
+                    worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
+                            SoundCategory.BLOCKS, 1.0f, 1.0f);
                     worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
             }
         }
