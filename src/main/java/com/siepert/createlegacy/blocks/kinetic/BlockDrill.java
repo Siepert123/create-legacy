@@ -61,8 +61,11 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing);
+        if (placer.isSneaking()) {
+            return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing.getOpposite());
+        }
+        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING,
+                EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z).getOpposite());
     }
 
     @Override
@@ -92,7 +95,7 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
 
     @Override
     public void act(World worldIn, BlockPos pos, EnumFacing source) {
-        if (source != worldIn.getBlockState(pos).getValue(FACING)) {
+        if (source == worldIn.getBlockState(pos).getValue(FACING).getOpposite()) {
              if (!worldIn.getBlockState(pos.offset(source.getOpposite())).isTranslucent()) {
                     BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
                     worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
