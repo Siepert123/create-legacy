@@ -152,6 +152,9 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
             case CLUTCH:
                 actClutch(worldIn, pos, source);
                 break;
+            case GEARSHIFT:
+                actGearshift(worldIn, pos, source);
+                break;
             default:
                 actEncasedShaft(worldIn, pos, source);
                 break;
@@ -268,6 +271,151 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case DOWN:
                         if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                        }
+                        break;
+                }
+            }
+        }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.DOWN, EnumFacing.SOUTH, EnumFacing.UP)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    return;
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (source.getAxis() == EnumFacing.Axis.X) {
+                switch (source) {
+                    case WEST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.WEST);
+                        }
+                        break;
+                    case EAST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.EAST);
+                        }
+                        break;
+                }
+            }
+            return;
+        }
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.UP, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.WEST)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    return;
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (source.getAxis() == EnumFacing.Axis.Z) {
+                switch (source) {
+                    case NORTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.NORTH);
+                        }
+                        break;
+                    case SOUTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.SOUTH);
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    private void actGearshift(World worldIn, BlockPos pos, EnumFacing source) {
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
+            if (source.getAxis() == EnumFacing.Axis.Y) {
+                for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
+                    if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    } else {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    }
+                }
+
+                switch (source) {
+                    case UP:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
+                        }
+                        break;
+                    case DOWN:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                        }
+                        break;
+                }
+            }
+        }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.DOWN, EnumFacing.SOUTH, EnumFacing.UP)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (source.getAxis() == EnumFacing.Axis.X) {
+                switch (source) {
+                    case WEST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.WEST);
+                        }
+                        break;
+                    case EAST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.EAST);
+                        }
+                        break;
+                }
+            }
+            return;
+        }
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.UP, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.WEST)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (source.getAxis() == EnumFacing.Axis.Z) {
+                switch (source) {
+                    case NORTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.NORTH);
+                        }
+                        break;
+                    case SOUTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.SOUTH);
                         }
                         break;
                 }

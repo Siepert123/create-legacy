@@ -73,6 +73,9 @@ tile.drill.name=Mechanical Drill
 tile.chassis.name=Chassis
 tile.gearbox.name=Gearbox
 tile.clutch.name=Clutch
+tile.gearshift.name=Gearshift
+tile.shaft_encased_andesite.name=Andesite Encased Shaft
+tile.shaft_encased_brass.name=Brass Encased Shaft
 
 #Overige
 itemGroup.tab_create=Create
