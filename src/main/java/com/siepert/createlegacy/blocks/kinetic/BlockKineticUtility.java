@@ -26,6 +26,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @SuppressWarnings("deprecation")
 public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IKineticActor {
     public static final PropertyEnum<EnumHandler.KineticUtilityEnumType> VARIANT
@@ -33,7 +36,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockKineticUtility() {
-        super(Material.IRON);
+        super(Material.WOOD);
         setUnlocalizedName("");
         setRegistryName("kinetic_utility");
         setCreativeTab(CreateLegacy.TAB_CREATE);
@@ -124,6 +127,67 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override
     public void act(World worldIn, BlockPos pos, EnumFacing source) {
+        EnumHandler.KineticUtilityEnumType blockLogicController = worldIn.getBlockState(pos).getValue(VARIANT);
+        switch (blockLogicController) {
+            case GEARBOX:
+                actGearbox(worldIn, pos, source);
+                break;
+            case CLUTCH:
+                actClutch(worldIn, pos, source);
+                break;
+        }
+    }
 
+
+
+
+    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source) {
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
+            if (source.getAxis() != EnumFacing.Axis.Y) {
+                ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
+                AXLES_TO_ACT.add(EnumFacing.NORTH);
+                AXLES_TO_ACT.add(EnumFacing.EAST);
+                AXLES_TO_ACT.add(EnumFacing.SOUTH);
+                AXLES_TO_ACT.add(EnumFacing.WEST);
+                AXLES_TO_ACT.remove(source);
+
+                for (EnumFacing output : AXLES_TO_ACT) {
+                    IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
+                    if (theBlock.getBlock() instanceof IKineticActor) {
+                        if (theBlock.getBlock() instanceof BlockCogwheel) {
+                            if (theBlock.getValue(BlockCogwheel.AXIS) == output.getAxis()) {
+                                ((IKineticActor) theBlock.getBlock()).act(worldIn, pos.offset(output), output.getOpposite());
+                            }
+                        } else {
+                            ((IKineticActor) theBlock.getBlock()).act(worldIn, pos.offset(output), output.getOpposite());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void actClutch(World worldIn, BlockPos pos, EnumFacing source) {
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
+            if (source.getAxis() == EnumFacing.Axis.Y) {
+                for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
+                    if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                        return;
+                    }
+                }
+
+                switch (source) {
+                    case UP:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
+                        }
+                        break;
+                    case DOWN:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                        }
+                        break;
+                }
+            }
+        }
     }
 }

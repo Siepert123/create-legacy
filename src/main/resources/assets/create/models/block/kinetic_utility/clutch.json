@@ -2,6 +2,6 @@
   "parent": "block/cube_column",
   "textures": {
     "end": "create:block/gearbox",
-    "side": "create:block/clutch"
+    "side": "create:block/clutch_off"
   }
 }
