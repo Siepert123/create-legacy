@@ -8,6 +8,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -26,13 +27,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @SuppressWarnings("deprecation")
+@MethodsReturnNonnullByDefault
 public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IKineticActor {
     public static final PropertyEnum<EnumHandler.KineticUtilityEnumType> VARIANT
             = PropertyEnum.<EnumHandler.KineticUtilityEnumType>create("variant", EnumHandler.KineticUtilityEnumType.class);
@@ -46,15 +48,21 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARBOX)
                 .withProperty(AXIS, EnumFacing.Axis.Y).withProperty(_BOOLEAN0, false));
-        setHarvestLevel("pickaxe", 1,
+        setHarvestLevel("axe", 0,
                 this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARBOX));
-        setHarvestLevel("pickaxe", 1,
+        setHarvestLevel("axe", 0,
                 this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.CLUTCH));
-
+        setHarvestLevel("axe", 0,
+                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARSHIFT));
+        setHarvestLevel("axe", 0,
+                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.SHAFT_ENCASED_ANDESITE));
+        setHarvestLevel("axe", 0,
+                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.SHAFT_ENCASED_BRASS));
         setHardness(2);
         setResistance(5);
 
         ModBlocks.BLOCKS.add(this);
+        assert this.getRegistryName() != null;
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
 
@@ -95,18 +103,26 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         switch (state.getValue(VARIANT)) {
             case GEARBOX:
                 return new ItemStack(Item.getItemFromBlock(this), 1, 0);
             case CLUTCH:
                 return new ItemStack(Item.getItemFromBlock(this), 1, 1);
+            case GEARSHIFT:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 2);
+            case SHAFT_ENCASED_ANDESITE:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 3);
+            case SHAFT_ENCASED_BRASS:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 4);
             default:
                 return new ItemStack(Items.AIR);
         }
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (EnumHandler.KineticUtilityEnumType variant : EnumHandler.KineticUtilityEnumType.values()) {
             items.add(new ItemStack(this, 1, variant.getMeta()));

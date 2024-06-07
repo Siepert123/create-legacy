@@ -73,6 +73,7 @@ public class BlockHandCrank extends Block implements IHasModel {
         Block block = worldIn.getBlockState(pos.down()).getBlock();
         if (block instanceof IKineticActor) {
             ((IKineticActor) block).act(worldIn, pos.down(), EnumFacing.UP);
+            playerIn.addExhaustion(0.1f);
         }
         return true;
     }
