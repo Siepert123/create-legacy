@@ -1,7 +1,29 @@
 {
   "variants": {
-    "normal": {
+    "facing=up": {
+      "model": "create:hand_crank",
+      "x": 180
+    },
+    "facing=down": {
       "model": "create:hand_crank"
+    },
+    "facing=north": {
+      "model": "create:hand_crank",
+      "x": 270
+    },
+    "facing=south": {
+      "model": "create:hand_crank",
+      "x": 90
+    },
+    "facing=west": {
+      "model": "create:hand_crank",
+      "y": 90,
+      "x": 90
+    },
+    "facing=east": {
+      "model": "create:hand_crank",
+      "y": 90,
+      "x": 270
     }
   }
 }

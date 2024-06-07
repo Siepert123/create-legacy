@@ -7,5 +7,6 @@ import net.minecraft.world.World;
 
 public interface IHasRotation {
     public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 3);
+    @Deprecated
     public void rotate(World worldIn, BlockPos pos, EnumFacing source);
 }

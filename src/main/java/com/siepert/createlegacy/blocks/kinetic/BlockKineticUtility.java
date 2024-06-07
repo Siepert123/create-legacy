@@ -32,6 +32,7 @@ import net.minecraft.world.World;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
@@ -179,6 +180,11 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 actEncasedShaft(worldIn, pos, source);
                 break;
         }
+    }
+
+    @Override //TODO: add the code
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+
     }
 
     private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source) {

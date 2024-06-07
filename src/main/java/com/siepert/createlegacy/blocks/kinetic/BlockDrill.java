@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
@@ -108,5 +109,10 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
                     worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
             }
         }
+    }
+
+    @Override //TODO: add the code
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+
     }
 }

@@ -21,6 +21,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings("deprecation")
 public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKineticActor {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
@@ -148,5 +151,79 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
         } catch (StackOverflowError overflowError) {
             return;
         }
+    }
+
+    @Override //TODO: add the code
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+        iteratedBlocks.add(pos);
+        IBlockState myState = worldIn.getBlockState(pos);
+
+        if (isCognectionValid(myState, source, srcIsCog, srcCogIsHorizontal)) {
+            IBlockState myNewState;
+            if (myState.getValue(ROTATION) == 3) {
+                myNewState = myState.withProperty(ROTATION, 0);
+            } else {
+                myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
+            }
+            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            for (EnumFacing facing : EnumFacing.values()) {
+                if (facing != source && !iteratedBlocks.contains(pos.offset(facing))) {
+                    Block blockNow = worldIn.getBlockState(pos.offset(facing)).getBlock();
+                    boolean srcCog = facing.getAxis() != myState.getValue(AXIS);
+                    boolean srcCogH = myState.getValue(AXIS) == EnumFacing.Axis.Y;
+                    if (blockNow instanceof IKineticActor) {
+                        ((IKineticActor) blockNow).passRotation(worldIn, pos.offset(facing), facing.getOpposite(), iteratedBlocks, srcCog, srcCogH);
+                    }
+                }
+            }
+            worldIn.setBlockState(pos, myNewState, 0);
+        }
+    }
+
+    private boolean isCognectionValid(IBlockState myState, EnumFacing source, boolean srcIsCog, boolean srcCogHorizontal) {
+        boolean amIHorizontal = myState.getValue(AXIS) == EnumFacing.Axis.Y;
+        EnumFacing.Axis whatsMyAxis = myState.getValue(AXIS);
+        List<EnumFacing> thingies = new ArrayList<EnumFacing>();
+        thingies.add(EnumFacing.NORTH);
+        thingies.add(EnumFacing.EAST);
+        thingies.add(EnumFacing.SOUTH);
+        thingies.add(EnumFacing.WEST);
+
+        if (source.getAxis() == whatsMyAxis && !srcIsCog) {
+            if (EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, whatsMyAxis) == source
+                || EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, whatsMyAxis) == source) {
+                return true;
+            }
+        }
+        if (amIHorizontal && srcCogHorizontal && thingies.contains(source)) {
+            return true;
+        }
+        if (!amIHorizontal && !srcCogHorizontal && srcIsCog) {
+            List<EnumFacing> thingyA = new ArrayList<>();
+            List<EnumFacing> thingyB = new ArrayList<>();
+
+            thingyA.add(EnumFacing.NORTH);
+            thingyA.add(EnumFacing.DOWN);
+            thingyA.add(EnumFacing.UP);
+            thingyA.add(EnumFacing.SOUTH);
+
+            thingyB.add(EnumFacing.WEST);
+            thingyB.add(EnumFacing.DOWN);
+            thingyB.add(EnumFacing.UP);
+            thingyB.add(EnumFacing.EAST);
+            switch (whatsMyAxis) {
+                case X:
+                    if (thingyA.contains(source)) return true;
+                    break;
+                case Z:
+                    if (thingyB.contains(source)) return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        return false;
     }
 }

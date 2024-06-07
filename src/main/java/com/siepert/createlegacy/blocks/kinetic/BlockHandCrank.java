@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,8 +23,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings("deprecation")
 public class BlockHandCrank extends Block implements IHasModel {
+    private static final boolean useOldKineticSystem = false;
+    public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
     public BlockHandCrank(String name) {
         super(Material.WOOD);
         this.translucent = true;
@@ -69,10 +75,37 @@ public class BlockHandCrank extends Block implements IHasModel {
     }
 
     @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] {FACING});
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+                                            int meta, EntityLivingBase placer, EnumHand hand) {
+        return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+    }
+
+
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        Block block = worldIn.getBlockState(pos.down()).getBlock();
+        Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
         if (block instanceof IKineticActor) {
-            ((IKineticActor) block).act(worldIn, pos.down(), EnumFacing.UP);
+            if (Reference.USE_OLD_KINETIC_SUSTEM) {
+                ((IKineticActor) block).act(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite());
+            } else {
+                List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
+                ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(), iteratedBlocks, false, false);
+            }
         }
         return true;
     }
