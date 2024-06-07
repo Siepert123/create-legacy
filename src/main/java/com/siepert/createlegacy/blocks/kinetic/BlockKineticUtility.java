@@ -78,7 +78,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        IBlockState j = this.getDefaultState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.byMetaData(meta / 4));
+        IBlockState j = this.getDefaultState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.byMetaData(meta / 3));
         switch (meta % 3) {
             case 0:
                 return j.withProperty(AXIS, EnumFacing.Axis.Y);
@@ -150,6 +150,12 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 AXLES_TO_ACT.add(EnumFacing.SOUTH);
                 AXLES_TO_ACT.add(EnumFacing.WEST);
                 AXLES_TO_ACT.remove(source);
+
+                IBlockState sourceBlock = worldIn.getBlockState(pos.offset(source));
+                if (sourceBlock.getBlock() instanceof BlockCogwheel) {
+                    if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
+                }
+
 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
