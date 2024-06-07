@@ -84,7 +84,7 @@ public class BlockCasing extends Block implements IHasModel, IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return EnumHandler.CasingMaterialEnumType.values()[stack.getItemDamage()].getName();
+        return "_" + EnumHandler.CasingMaterialEnumType.values()[stack.getItemDamage()].getName();
     }
 
     @Override

@@ -77,7 +77,7 @@ public class BlockOre extends Block implements IHasModel, IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return EnumHandler.OreEnumType.values()[stack.getItemDamage()].getName();
+        return "_" + EnumHandler.OreEnumType.values()[stack.getItemDamage()].getName();
     }
 
     @Override

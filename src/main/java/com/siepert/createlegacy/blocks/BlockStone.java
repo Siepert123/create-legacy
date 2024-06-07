@@ -81,7 +81,7 @@ public class BlockStone extends Block implements IHasModel, IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return EnumHandler.StoneEnumType.values()[stack.getItemDamage()].getName();
+        return "_" + EnumHandler.StoneEnumType.values()[stack.getItemDamage()].getName();
     }
 
     @Override

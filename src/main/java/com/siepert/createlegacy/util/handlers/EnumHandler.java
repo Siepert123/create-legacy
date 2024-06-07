@@ -275,4 +275,54 @@ public class EnumHandler {
             }
         }
     }
+
+    public static enum KineticUtilityEnumType implements IStringSerializable {
+        //actual ores
+        GEARBOX(0, "gearbox"),
+        CLUTCH(1, "clutch");
+
+
+        private static final KineticUtilityEnumType[] META_LOOKUP = new KineticUtilityEnumType[values().length];
+        private final int meta;
+        private final String name, unlocalizedName;
+
+
+        private KineticUtilityEnumType(int meta, String name) {
+            this(meta, name, name);
+        }
+
+        private KineticUtilityEnumType(int meta, String name, String unlocalizedName) {
+            this.meta = meta;
+            this.name = name;
+            this.unlocalizedName = unlocalizedName;
+        }
+
+        @Override
+        public String getName() {
+            return this.name;
+        }
+
+        public int getMeta() {
+            return meta;
+        }
+
+        public String getUnlocalizedName() {
+            return unlocalizedName;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+        public static KineticUtilityEnumType byMetaData(int meta) {
+            return META_LOOKUP[meta];
+        }
+
+        static {
+            for(KineticUtilityEnumType kineticUtilityEnumType : values()) {
+                META_LOOKUP[kineticUtilityEnumType.getMeta()] = kineticUtilityEnumType;
+            }
+        }
+    }
 }

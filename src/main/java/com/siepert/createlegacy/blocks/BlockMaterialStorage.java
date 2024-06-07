@@ -84,7 +84,7 @@ public class BlockMaterialStorage extends Block implements IHasModel, IMetaName 
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return EnumHandler.MaterialStorageEnumType.values()[stack.getItemDamage()].getName();
+        return "_" + EnumHandler.MaterialStorageEnumType.values()[stack.getItemDamage()].getName();
     }
 
     @Override

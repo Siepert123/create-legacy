@@ -71,6 +71,8 @@ tile.cogwheel.name=Cogwheel
 tile.hand_crank.name=Hand Crank
 tile.drill.name=Mechanical Drill
 tile.chassis.name=Chassis
+tile.gearbox.name=Gearbox
+tile.clutch.name=Clutch
 
 #Overige
 itemGroup.tab_create=Create
