@@ -18,6 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -95,7 +96,14 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(world.getBlockState(pos)));
+        switch (state.getValue(VARIANT)) {
+            case GEARBOX:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 0);
+            case CLUTCH:
+                return new ItemStack(Item.getItemFromBlock(this), 1, 1);
+            default:
+                return new ItemStack(Items.AIR);
+        }
     }
 
     @Override
@@ -121,6 +129,12 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 0, "kinetic_utility/gearbox", "inventory");
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
                 1, "kinetic_utility/clutch", "inventory");
+        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
+                2, "kinetic_utility/gearshift", "inventory");
+        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
+                3, "kinetic_utility/shaft_encased_andesite", "inventory");
+        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
+                4, "kinetic_utility/shaft_encased_brass", "inventory");
     }
 
     @Override
@@ -138,9 +152,65 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
             case CLUTCH:
                 actClutch(worldIn, pos, source);
                 break;
+            default:
+                actEncasedShaft(worldIn, pos, source);
+                break;
         }
     }
 
+    private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source) {
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
+            if (source.getAxis() == EnumFacing.Axis.Y) {
+                switch (source) {
+                    case UP:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
+                        }
+                        break;
+                    case DOWN:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                        }
+                        break;
+                }
+            }
+            return;
+        }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
+            if (source.getAxis() == EnumFacing.Axis.X) {
+                switch (source) {
+                    case WEST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.WEST);
+                        }
+                        break;
+                    case EAST:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.EAST);
+                        }
+                        break;
+                }
+            }
+            return;
+        }
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
+            if (source.getAxis() == EnumFacing.Axis.Z) {
+                switch (source) {
+                    case NORTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.NORTH);
+                        }
+                        break;
+                    case SOUTH:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.up(), EnumFacing.SOUTH);
+                        }
+                        break;
+                }
+            }
+        }
+    }
 
     private void actGearbox(World worldIn, BlockPos pos, EnumFacing source) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
@@ -179,9 +249,13 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
                     if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
                         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                         return;
                     } else {
                         worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                     }
                 }
 

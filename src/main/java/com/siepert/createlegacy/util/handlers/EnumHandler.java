@@ -279,7 +279,10 @@ public class EnumHandler {
     public static enum KineticUtilityEnumType implements IStringSerializable {
         //actual ores
         GEARBOX(0, "gearbox"),
-        CLUTCH(1, "clutch");
+        CLUTCH(1, "clutch"),
+        GEARSHIFT(2, "gearshift"),
+        SHAFT_ENCASED_ANDESITE(3, "shaft_encased_andesite"),
+        SHAFT_ENCASED_BRASS(4, "shaft_encased_brass");
 
 
         private static final KineticUtilityEnumType[] META_LOOKUP = new KineticUtilityEnumType[values().length];

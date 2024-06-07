@@ -35,6 +35,42 @@
     "_boolean0=true,axis=z,variant=clutch": {
       "model": "create:kinetic_utility/clutch_powered",
       "x": 90
+    },
+    "_boolean0=false,axis=x,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift",
+      "x": 90,
+      "y": 90
+    },
+    "_boolean0=false,axis=y,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift"
+    },
+    "_boolean0=false,axis=z,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift",
+      "x": 90
+    },
+    "_boolean0=false,axis=x,variant=shaft_encased_andesite": {
+      "model": "create:kinetic_utility/shaft_encased_andesite",
+      "x": 90,
+      "y": 90
+    },
+    "_boolean0=false,axis=y,variant=shaft_encased_andesite": {
+      "model": "create:kinetic_utility/shaft_encased_andesite"
+    },
+    "_boolean0=false,axis=z,variant=shaft_encased_andesite": {
+      "model": "create:kinetic_utility/shaft_encased_andesite",
+      "x": 90
+    },
+    "_boolean0=false,axis=x,variant=shaft_encased_brass": {
+      "model": "create:kinetic_utility/shaft_encased_brass",
+      "x": 90,
+      "y": 90
+    },
+    "_boolean0=false,axis=y,variant=shaft_encased_brass": {
+      "model": "create:kinetic_utility/shaft_encased_brass"
+    },
+    "_boolean0=false,axis=z,variant=shaft_encased_brass": {
+      "model": "create:kinetic_utility/shaft_encased_brass",
+      "x": 90
     }
   }
 }
