@@ -48,6 +48,18 @@
       "model": "create:kinetic_utility/gearshift",
       "x": 90
     },
+    "_boolean0=true,axis=x,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift_powered",
+      "x": 90,
+      "y": 90
+    },
+    "_boolean0=true,axis=y,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift_powered"
+    },
+    "_boolean0=true,axis=z,variant=gearshift": {
+      "model": "create:kinetic_utility/gearshift_powered",
+      "x": 90
+    },
     "_boolean0=false,axis=x,variant=shaft_encased_andesite": {
       "model": "create:kinetic_utility/shaft_encased_andesite",
       "x": 90,
