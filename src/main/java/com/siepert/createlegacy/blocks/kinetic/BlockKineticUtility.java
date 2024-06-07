@@ -11,6 +11,7 @@ import com.siepert.createlegacy.util.handlers.EnumHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,6 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     public static final PropertyEnum<EnumHandler.KineticUtilityEnumType> VARIANT
             = PropertyEnum.<EnumHandler.KineticUtilityEnumType>create("variant", EnumHandler.KineticUtilityEnumType.class);
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+    public static final PropertyBool _BOOLEAN0 = PropertyBool.create("_boolean0");
 
     public BlockKineticUtility() {
         super(Material.WOOD);
@@ -41,7 +44,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         setRegistryName("kinetic_utility");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARBOX)
-                .withProperty(AXIS, EnumFacing.Axis.Y));
+                .withProperty(AXIS, EnumFacing.Axis.Y).withProperty(_BOOLEAN0, false));
         setHarvestLevel("pickaxe", 1,
                 this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARBOX));
         setHarvestLevel("pickaxe", 1,
@@ -104,7 +107,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT, AXIS});
+        return new BlockStateContainer(this, new IProperty[] {VARIANT, AXIS, _BOOLEAN0});
     }
 
     @Override
@@ -137,8 +140,6 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 break;
         }
     }
-
-
 
 
     private void actGearbox(World worldIn, BlockPos pos, EnumFacing source) {
@@ -177,7 +178,10 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
             if (source.getAxis() == EnumFacing.Axis.Y) {
                 for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
                     if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
                         return;
+                    } else {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
                     }
                 }
 

@@ -1,27 +1,39 @@
 {
   "variants": {
-    "axis=x,variant=gearbox": {
+    "_boolean0=false,axis=x,variant=gearbox": {
       "model": "create:kinetic_utility/gearbox",
       "x": 90,
       "y": 90
     },
-    "axis=y,variant=gearbox": {
+    "_boolean0=false,axis=y,variant=gearbox": {
       "model": "create:kinetic_utility/gearbox"
     },
-    "axis=z,variant=gearbox": {
+    "_boolean0=false,axis=z,variant=gearbox": {
       "model": "create:kinetic_utility/gearbox",
       "x": 90
     },
-    "axis=x,variant=clutch": {
+    "_boolean0=false,axis=x,variant=clutch": {
       "model": "create:kinetic_utility/clutch",
       "x": 90,
       "y": 90
     },
-    "axis=y,variant=clutch": {
+    "_boolean0=false,axis=y,variant=clutch": {
       "model": "create:kinetic_utility/clutch"
     },
-    "axis=z,variant=clutch": {
+    "_boolean0=false,axis=z,variant=clutch": {
       "model": "create:kinetic_utility/clutch",
+      "x": 90
+    },
+    "_boolean0=true,axis=x,variant=clutch": {
+      "model": "create:kinetic_utility/clutch_powered",
+      "x": 90,
+      "y": 90
+    },
+    "_boolean0=true,axis=y,variant=clutch": {
+      "model": "create:kinetic_utility/clutch_powered"
+    },
+    "_boolean0=true,axis=z,variant=clutch": {
+      "model": "create:kinetic_utility/clutch_powered",
       "x": 90
     }
   }
