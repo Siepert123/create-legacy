@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#M#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "create:cogwheel"
+    },
+    "M": {
+      "item": "create:casing",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:kinetic_utility",
+    "data": 0
+  }
+}

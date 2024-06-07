@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "create:casing",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "create:kinetic_utility",
+    "data": 3
+  }
+}
