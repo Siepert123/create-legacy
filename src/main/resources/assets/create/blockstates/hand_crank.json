@@ -1,6 +1,6 @@
 {
   "variants": {
-    "default": {
+    "normal": {
       "model": "create:hand_crank"
     }
   }
