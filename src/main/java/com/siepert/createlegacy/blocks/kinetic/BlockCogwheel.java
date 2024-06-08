@@ -151,6 +151,14 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
         }
     }
 
+    /**Checks whether the connection to this cogwheel is valid.
+     * <p>
+     * Get it? <tt>cognection</tt>? Hehe
+     * @param myState The blockstate of the cogwheel.
+     * @param source The direction of the signal.
+     * @param srcIsCog Whether the source is a cogwheel.
+     * @param srcCogHorizontal Whether the source cogwheel is horizontal.
+     * @return True if the connection is  validated.*/
     private boolean isCognectionValid(IBlockState myState, EnumFacing source, boolean srcIsCog, boolean srcCogHorizontal) {
         boolean amIHorizontal = myState.getValue(AXIS) == EnumFacing.Axis.Y;
         EnumFacing.Axis whatsMyAxis = myState.getValue(AXIS);
