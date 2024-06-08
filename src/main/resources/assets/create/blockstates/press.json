@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "create:press/full",
+      "y": 90
+    },
+    "axis=y": {
+      "model": "create:press/full_shifted"
+    },
+    "axis=z": {
+      "model": "create:press/full"
+    }
+  }
+}
