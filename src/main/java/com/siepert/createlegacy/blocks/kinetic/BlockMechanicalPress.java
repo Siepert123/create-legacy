@@ -125,6 +125,13 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
 
         if (source.getAxis() == myState.getValue(AXIS)) {
             iteratedBlocks.add(pos);
+
+            Block aBlock = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
+
+            if (aBlock instanceof IKineticActor) {
+                ((IKineticActor) aBlock).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
+            }
+
             if (!worldIn.getBlockState(pos.down()).getMaterial().blocksMovement() && !worldIn.isRemote) {
                 AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down());
                 List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
