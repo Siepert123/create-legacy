@@ -31,7 +31,7 @@ import java.util.List;
 public class BlockDrill extends Block implements IHasModel, IKineticActor {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockDrill(String name) {
-        super(Material.WOOD);
+        super(Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;
@@ -40,7 +40,7 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("pickaxe", 0);
+        setHarvestLevel("axe", 0);
         setHardness(1);
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
@@ -93,7 +93,7 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
         return false;
     }
 
-    @Override //TODO: add the code
+    @Override
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
 
 

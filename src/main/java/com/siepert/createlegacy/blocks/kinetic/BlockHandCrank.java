@@ -30,7 +30,7 @@ public class BlockHandCrank extends Block implements IHasModel {
     private static final boolean useOldKineticSystem = false;
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
     public BlockHandCrank(String name) {
-        super(Material.WOOD);
+        super(Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;

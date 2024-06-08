@@ -10,6 +10,7 @@ import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -43,7 +44,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     public static final PropertyBool _BOOLEAN0 = PropertyBool.create("_boolean0");
 
     public BlockKineticUtility() {
-        super(Material.WOOD);
+        super(Material.ROCK);
         setUnlocalizedName("");
         setRegistryName("kinetic_utility");
         setCreativeTab(CreateLegacy.TAB_CREATE);
@@ -61,6 +62,8 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.AXLE_ENCASED_BRASS));
         setHardness(2);
         setResistance(5);
+
+        setSoundType(SoundType.WOOD);
 
         ModBlocks.BLOCKS.add(this);
         assert this.getRegistryName() != null;

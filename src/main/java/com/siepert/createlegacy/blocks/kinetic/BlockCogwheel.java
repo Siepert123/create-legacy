@@ -29,7 +29,7 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockCogwheel(String name) {
-        super(Material.WOOD);
+        super(Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;

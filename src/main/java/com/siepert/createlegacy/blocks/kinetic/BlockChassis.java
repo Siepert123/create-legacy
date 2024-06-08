@@ -5,6 +5,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -31,7 +32,7 @@ public class BlockChassis extends Block implements IHasModel {
     public static final PropertyBool STICKY_BOTTOM = PropertyBool.create("sticky_bottom");
 
     public BlockChassis(String name) {
-        super(Material.WOOD);
+        super(Material.ROCK);
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
@@ -41,6 +42,8 @@ public class BlockChassis extends Block implements IHasModel {
         setHarvestLevel("pickaxe", 0);
         setHardness(1);
         setResistance(2);
+
+        setSoundType(SoundType.WOOD);
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

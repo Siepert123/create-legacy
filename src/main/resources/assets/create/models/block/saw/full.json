@@ -1,0 +1,62 @@
+{
+	"credit": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
+	"parent": "create:block/block",
+	"textures": {
+		"5": "create:block/saw/static_saw",
+		"slit": "create:block/saw/top_no_slot",
+		"particle": "create:block/gearbox_top",
+		"encased_belt": "create:block/encased_chain_drive",
+		"gearbox": "create:block/gearbox",
+		"andesite_casing_short": "create:block/andesite_casing_short"
+	},
+	"elements": [
+		{
+			"name": "Bottom",
+			"from": [0, 0, 0],
+			"to": [16, 2, 12],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#andesite_casing_short"},
+				"east": {"uv": [4, 14, 16, 16], "texture": "#andesite_casing_short"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#encased_belt"},
+				"west": {"uv": [0, 14, 12, 16], "texture": "#andesite_casing_short"},
+				"up": {"uv": [0, 4, 16, 16], "texture": "#andesite_casing_short"},
+				"down": {"uv": [0, 4, 16, 16], "texture": "#andesite_casing_short"}
+			}
+		},
+		{
+			"name": "Top",
+			"from": [0, 14, 0],
+			"to": [16, 16, 12],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 6], "texture": "#andesite_casing_short"},
+				"east": {"uv": [4, 4, 16, 6], "texture": "#andesite_casing_short"},
+				"south": {"uv": [0, 0, 16, 2], "texture": "#encased_belt"},
+				"west": {"uv": [0, 4, 12, 6], "texture": "#andesite_casing_short"},
+				"up": {"uv": [0, 4, 16, 16], "texture": "#andesite_casing_short"},
+				"down": {"uv": [0, 4, 16, 16], "texture": "#andesite_casing_short"}
+			}
+		},
+		{
+			"name": "Inner",
+			"from": [0, 2, 0],
+			"to": [16, 14, 11.025],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -2]},
+			"faces": {
+				"north": {"uv": [0, 2, 16, 14], "texture": "#gearbox"},
+				"east": {"uv": [2, 4, 14, 15], "rotation": 90, "texture": "#andesite_casing_short"},
+				"south": {"uv": [0, 2, 16, 14], "texture": "#slit"},
+				"west": {"uv": [2, 4, 14, 15], "rotation": 270, "texture": "#andesite_casing_short"}
+			}
+		},
+		{
+			"name": "Saw",
+			"from": [0, 8, 11],
+			"to": [16, 8, 27],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 11]},
+			"faces": {
+				"up": {"uv": [0, 16, 16, 0], "texture": "#5"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#5"}
+			}
+		}
+	]
+}
