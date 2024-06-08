@@ -16,11 +16,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -93,15 +95,34 @@ public class BlockCreativeMotor extends Block implements IHasModel {
         return this.getDefaultState().withProperty(FACING, facing.getOpposite());
     }
 
-
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(worldIn, pos, state);
+        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+    }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+            CreateLegacy.logger.info("click");
+        }
+        return true;
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, @Nonnull Random rand) {
         Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
         if (block instanceof IKineticActor) {
             List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
             ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
                     iteratedBlocks, false, false);
         }
+        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+    }
+
+    @Override
+    public int tickRate(@Nonnull World worldIn) {
+        return 20;
     }
 }
