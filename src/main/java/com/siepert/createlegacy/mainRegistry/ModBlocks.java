@@ -1,6 +1,9 @@
 package com.siepert.createlegacy.mainRegistry;
 
-import com.siepert.createlegacy.blocks.*;
+import com.siepert.createlegacy.blocks.BlockCasing;
+import com.siepert.createlegacy.blocks.BlockMaterialStorage;
+import com.siepert.createlegacy.blocks.BlockOre;
+import com.siepert.createlegacy.blocks.BlockStone;
 import com.siepert.createlegacy.blocks.decoration.*;
 import com.siepert.createlegacy.blocks.kinetic.*;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleCook;
@@ -19,6 +22,7 @@ public class ModBlocks {
     public static final Block ORE = new BlockOre();
     public static final Block MATERIAL_STORAGE_BLOCK = new BlockMaterialStorage();
     public static final Block CASING_BLOCK = new BlockCasing();
+    public static final Block AXLE = new BlockAxle("axle");
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");
     public static final Block HAND_CRANK = new BlockHandCrank("hand_crank");
     public static final Block DRILL = new BlockDrill("drill");

@@ -1,7 +1,7 @@
 package com.siepert.createlegacy.world.gen;
 
-import com.siepert.createlegacy.blocks.BlockStone;
 import com.siepert.createlegacy.blocks.BlockOre;
+import com.siepert.createlegacy.blocks.BlockStone;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
 import net.minecraft.block.state.pattern.BlockMatcher;

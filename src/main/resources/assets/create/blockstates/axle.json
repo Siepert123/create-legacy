@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "axis=x,rotation=0": {
+      "model": "create:axle",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotation=0": {
+      "model": "create:axle"
+    },
+    "axis=z,rotation=0": {
+      "model": "create:axle",
+      "x": 90
+    },
+    "axis=x,rotation=1": {
+      "model": "create:axle/rot_1",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotation=1": {
+      "model": "create:axle/rot_1"
+    },
+    "axis=z,rotation=1": {
+      "model": "create:axle/rot_1",
+      "x": 90
+    },
+    "axis=x,rotation=2": {
+      "model": "create:axle/rot_2",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotation=2": {
+      "model": "create:axle/rot_2"
+    },
+    "axis=z,rotation=2": {
+      "model": "create:axle/rot_2",
+      "x": 90
+    },
+    "axis=x,rotation=3": {
+      "model": "create:axle/rot_3",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,rotation=3": {
+      "model": "create:axle/rot_3"
+    },
+    "axis=z,rotation=3": {
+      "model": "create:axle/rot_3",
+      "x": 90
+    }
+  }
+}

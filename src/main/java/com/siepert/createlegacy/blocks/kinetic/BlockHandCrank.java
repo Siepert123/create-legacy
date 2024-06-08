@@ -4,7 +4,6 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createlegacy.util.IKineticActor;
 import com.siepert.createlegacy.util.Reference;
 import net.minecraft.block.Block;

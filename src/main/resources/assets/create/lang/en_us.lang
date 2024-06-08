@@ -67,6 +67,7 @@ tile.casing_brass.name=Brass Casing
 tile.casing_train.name=Train Casing
 
 #Kinetic Appliances
+tile.axle.name=Axle
 tile.cogwheel.name=Cogwheel
 tile.hand_crank.name=Hand Crank
 tile.drill.name=Mechanical Drill

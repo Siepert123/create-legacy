@@ -7,15 +7,16 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public interface IKineticActor {
-    /**Passes a rotational current through the block
-     * DEPRECATED - Use passRotation instead!
+    /**Passes a rotational current through the block.
      * @param worldIn   The world where this block is in
      * @param pos       The position of this block
-     * @param source    The direction where the current originated from*/
+     * @param source    The direction where the current originated from
+     * @deprecated */
     @Deprecated
     public void act(World worldIn, BlockPos pos, EnumFacing source);
 
     /**Passes a rotational current through the block.
+     * <p>
      * Should be extremely bug-free. Please code your block correctly
      * @param worldIn               The world of the block
      * @param pos                   The position of the block

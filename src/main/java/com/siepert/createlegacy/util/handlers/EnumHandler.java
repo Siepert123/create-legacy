@@ -2,6 +2,10 @@ package com.siepert.createlegacy.util.handlers;
 
 import net.minecraft.util.IStringSerializable;
 
+/**A main class holding most of the enums used for block variants.
+ * @see ModSoundHandler
+ * @see RecipeHandler
+ * @see RegistryHandler*/
 public class EnumHandler {
     public static enum OreEnumType implements IStringSerializable {
         //actual ores
