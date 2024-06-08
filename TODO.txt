@@ -5,4 +5,3 @@ Known Issues:
  - The recipes for deco blocks are broken
 
 Things to do:
- - Convert all IKineticActors to use passRotation()
