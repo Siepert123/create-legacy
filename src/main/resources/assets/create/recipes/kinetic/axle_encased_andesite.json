@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "create:cogwheel"
+      "item": "create:axle"
     },
     {
       "item": "create:casing",
@@ -10,6 +10,7 @@
     }
   ],
   "result": {
-    "item": "create:axle"
+    "item": "create:kinetic_utility",
+    "data": 3
   }
 }
