@@ -122,7 +122,7 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
 
 
 
-    @Override //TODO: add the code
+    @Override
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
 
         IBlockState myState = worldIn.getBlockState(pos);

@@ -71,6 +71,7 @@ tile.axle.name=Axle
 tile.cogwheel.name=Cogwheel
 tile.hand_crank.name=Hand Crank
 tile.drill.name=Mechanical Drill
+tile.saw.name=Mechanical Saw
 tile.chassis.name=Chassis
 tile.gearbox.name=Gearbox
 tile.clutch.name=Clutch

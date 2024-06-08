@@ -2,28 +2,14 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:block/block",
 	"textures": {
-		"0": "create:block/axis_top",
-		"1": "create:block/axis",
 		"2": "blocks/anvil_base",
 		"7": "blocks/stone_andesite_smooth",
 		"8": "create:block/mechanical_drill_top",
 		"10": "create:block/andesite_casing_very_short",
-		"particle": "create:block/casing/casing_andesite",
-		"gearbox": "create:block/gearbox"
+		"gearbox": "create:block/gearbox",
+		"particle": "create:block/casing/casing_andesite"
 	},
 	"elements": [
-		{
-			"name": "Axle",
-			"from": [6, 6, 0],
-			"to": [10, 10, 4],
-			"faces": {
-				"north": {"uv": [6, 6, 10, 10], "texture": "#0"},
-				"east": {"uv": [6, 12, 10, 16], "rotation": 90, "texture": "#1"},
-				"west": {"uv": [6, 0, 10, 4], "rotation": 270, "texture": "#1"},
-				"up": {"uv": [6, 12, 10, 16], "texture": "#1"},
-				"down": {"uv": [6, 0, 10, 4], "rotation": 180, "texture": "#1"}
-			}
-		},
 		{
 			"name": "Core",
 			"from": [5, 5, 9],
@@ -152,8 +138,9 @@
 		},
 		{
 			"name": "Body",
-			"from": [2, 2, 1],
+			"from": [2, 2, 0],
 			"to": [14, 14, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -1]},
 			"faces": {
 				"north": {"uv": [2, 2, 14, 14], "texture": "#gearbox"},
 				"south": {"uv": [2, 2, 14, 14], "texture": "#8"}
@@ -221,14 +208,14 @@
 			"origin": [8, 8, 8],
 			"color": 0,
 			"nbt": "{}",
-			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 		},
 		{
 			"name": "casing",
 			"origin": [8, 8, 8],
 			"color": 0,
 			"nbt": "{}",
-			"children": [10, 11, 12, 13, 14]
+			"children": [9, 10, 11, 12, 13]
 		}
 	]
 }

@@ -17,14 +17,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
@@ -106,17 +111,50 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor {
         if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
 
         IBlockState myState = worldIn.getBlockState(pos);
+        Logger logger = CreateLegacy.logger;
 
 
         if (source == myState.getValue(FACING).getOpposite()) {
+            logger.info("Saw activated!");
             iteratedBlocks.add(pos);
             BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
-            if (worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial() == Material.WOOD
-                    && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
-                worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
-                worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
+            List<BlockPos> treeMap = new ArrayList<>();
+
+            if (isBlockALog(worldIn.getBlockState(newPos).getBlock())) {
+                logger.info("The tree map is made!");
+                treeMap.add(pos.offset(source.getOpposite()));
+                extendTreeMap(worldIn, pos.offset(source.getOpposite()), treeMap, source.getOpposite());
+            }
+
+            for (BlockPos thePos : treeMap) {
+                logger.info("Cut block at " + thePos.toString());
+                worldIn.getBlockState(thePos).getBlock().dropBlockAsItem(worldIn, thePos, worldIn.getBlockState(thePos), 0);
+                worldIn.playSound(null, thePos, worldIn.getBlockState(thePos).getBlock().getSoundType().getBreakSound(),
                         SoundCategory.BLOCKS, 1.0f, 1.0f);
-                worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
+                worldIn.setBlockState(thePos, Blocks.AIR.getDefaultState(), 0);
+            }
+        }
+    }
+
+    private boolean isBlockALog(Block theBlock) {
+        if (theBlock == Blocks.LOG  || theBlock == Blocks.LOG2) return true;
+        if (OreDictionary.getOres("logWood").contains(new ItemStack(theBlock))) return true;
+        return OreDictionary.getOres("log").contains(new ItemStack(theBlock));
+    }
+
+    private boolean isBlockALeaf(Block theBlock) {
+        if (theBlock == Blocks.LEAVES  || theBlock == Blocks.LEAVES2) return true;
+        return OreDictionary.getOres("treeLeaves").contains(new ItemStack(theBlock));
+    }
+
+    private void extendTreeMap(World worldIn, BlockPos pos, List<BlockPos> treeMap, EnumFacing source) {
+        for (EnumFacing facing : EnumFacing.values()) {
+            if (facing != source && !treeMap.contains(pos.offset(facing))) {
+                Block blockNow = worldIn.getBlockState(pos.offset(facing)).getBlock();
+                if (isBlockALog(blockNow)) {
+                    treeMap.add(pos.offset(facing));
+                    extendTreeMap(worldIn, pos.offset(facing), treeMap, facing.getOpposite());
+                }
             }
         }
     }
