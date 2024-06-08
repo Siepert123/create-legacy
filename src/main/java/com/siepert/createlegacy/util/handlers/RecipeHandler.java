@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.util.handlers;
 
+import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
@@ -12,8 +13,8 @@ import org.apache.logging.log4j.Logger;
 import javax.annotation.Nonnull;
 
 public class RecipeHandler {
-    public static void registerOreSmelting(Logger logger) {
-        logger.info("Registering Create's smelting recipes");
+    public static void registerOreSmelting() {
+        CreateLegacy.logger.info("Registering Create's smelting recipes");
         GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE, 1, 0),
                 new ItemStack(ModItems.INGREDIENT, 1, 3), 0.2f);
         GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE, 1, 1),
@@ -28,12 +29,12 @@ public class RecipeHandler {
                 new ItemStack(ModItems.INGREDIENT, 2, 6), 0.1f);
     }
 
-    public static void registerWashing(Logger logger) {
-        logger.info("Registering compatible Washing recipes (highly WIP)");
+    public static void registerWashing() {
+        CreateLegacy.logger.info("Registering compatible Washing recipes (highly WIP)");
 
         int compatWashFound = 0;
         if (OreDictionary.doesOreNameExist("nuggetAluminum")) {
-            logger.info("ingotAluminum found, registering washing recipe");
+            CreateLegacy.logger.info("ingotAluminum found, registering washing recipe");
             ItemStack stack0 = OreDictionary.getOres("nuggetAluminum").get(0);
             stack0.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 0),
@@ -41,7 +42,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetLead")) {
-            logger.info("ingotLead found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotLead found, registering washing recipe");;
             ItemStack stack1 = OreDictionary.getOres("nuggetLead").get(0);
             stack1.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 1),
@@ -49,7 +50,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetNickel")) {
-            logger.info("ingotNickel found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotNickel found, registering washing recipe");;
             ItemStack stack2 = OreDictionary.getOres("nuggetNickel").get(0);
             stack2.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 2),
@@ -57,7 +58,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetOsmium")) {
-            logger.info("ingotOsmium found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotOsmium found, registering washing recipe");;
             ItemStack stack3 = OreDictionary.getOres("nuggetOsmium").get(0);
             stack3.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 3),
@@ -65,7 +66,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetPlatinum")) {
-            logger.info("ingotPlatinum found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotPlatinum found, registering washing recipe");;
             ItemStack stack4 = OreDictionary.getOres("nuggetPlatinum").get(0);
             stack4.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 4),
@@ -73,7 +74,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetQuicksilver")) {
-            logger.info("ingotQuicksilver found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotQuicksilver found, registering washing recipe");;
             ItemStack stack5 = OreDictionary.getOres("nuggetQuicksilver").get(0);
             stack5.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 5),
@@ -81,7 +82,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetSilver")) {
-            logger.info("ingotSilver found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotSilver found, registering washing recipe");;
             ItemStack stack6 = OreDictionary.getOres("nuggetSilver").get(0);
             stack6.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 6),
@@ -89,7 +90,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetTin")) {
-            logger.info("ingotTin found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotTin found, registering washing recipe");;
             ItemStack stack7 = OreDictionary.getOres("nuggetTin").get(0);
             stack7.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 7),
@@ -97,74 +98,74 @@ public class RecipeHandler {
             compatWashFound++;
         }
         if (OreDictionary.doesOreNameExist("nuggetUranium")) {
-            logger.info("ingotUranium found, registering washing recipe");;
+            CreateLegacy.logger.info("ingotUranium found, registering washing recipe");;
             ItemStack stack8 = OreDictionary.getOres("nuggetUranium").get(0);
             stack8.setCount(9);
             addWashing(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 8),
                     stack8);
             compatWashFound++;
         }
-        logger.info("Found " + compatWashFound + " compatible washables total");
+        CreateLegacy.logger.info("Found " + compatWashFound + " compatible washables total");
     }
 
-    public static void registerCrushedOreCompatSmelting(Logger logger) { //Registers smelting crushed ore if the according ingot is real
+    public static void registerCrushedOreCompatSmelting() { //Registers smelting crushed ore if the according ingot is real
         int compatSmeltsFound = 0;
-        logger.info("Registering Create's compatible smeltables");
+        CreateLegacy.logger.info("Registering Create's compatible smeltables");
         if (OreDictionary.doesOreNameExist("ingotAluminum")) {
-            logger.info("ingotAluminum found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotAluminum found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 0),
                     OreDictionary.getOres("ingotAluminum").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotLead")) {
-            logger.info("ingotLead found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotLead found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 1),
                     OreDictionary.getOres("ingotLead").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotNickel")) {
-            logger.info("ingotNickel found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotNickel found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 2),
                     OreDictionary.getOres("ingotNickel").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotOsmium")) {
-            logger.info("ingotOsmium found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotOsmium found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 3),
                     OreDictionary.getOres("ingotOsmium").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotPlatinum")) {
-            logger.info("ingotPlatinum found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotPlatinum found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 4),
                     OreDictionary.getOres("ingotPlatinum").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotQuicksilver")) {
-            logger.info("ingotQuicksilver found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotQuicksilver found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 5),
                     OreDictionary.getOres("ingotQuicksilver").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotSilver")) {
-            logger.info("ingotSilver found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotSilver found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 6),
                     OreDictionary.getOres("ingotSilver").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotTin")) {
-            logger.info("ingotTin found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotTin found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 7),
                     OreDictionary.getOres("ingotTin").get(0), 0.1f);
             compatSmeltsFound++;
         }
         if (OreDictionary.doesOreNameExist("ingotUranium")) {
-            logger.info("ingotUranium found, registering smelting recipe");
+            CreateLegacy.logger.info("ingotUranium found, registering smelting recipe");
             GameRegistry.addSmelting(new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 8),
                     OreDictionary.getOres("ingotUranium").get(0), 0.1f);
             compatSmeltsFound++;
         }
-        logger.info("Found " + compatSmeltsFound + " compatible smeltables total");
+        CreateLegacy.logger.info("Found " + compatSmeltsFound + " compatible smeltables total");
     }
 
 

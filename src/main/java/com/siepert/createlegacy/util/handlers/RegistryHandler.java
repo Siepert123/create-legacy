@@ -41,19 +41,19 @@ public class RegistryHandler {
         }
     }
 
-    public static void otherPreInitRegistries(Logger logger) {
+    public static void otherPreInitRegistries() {
         GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
     }
 
-    public static void otherInitRegistries(Logger logger) {
+    public static void otherInitRegistries() {
         OreDictionaryCompat.registerOres();
         OreDictionaryCompat.registerStoneTypes();
         ModSoundHandler.registerSounds();
     }
 
-    public static void otherPostInitRegistries(Logger logger) {
-        RecipeHandler.registerOreSmelting(logger);
-        RecipeHandler.registerCrushedOreCompatSmelting(logger);
-        RecipeHandler.registerWashing(logger);
+    public static void otherPostInitRegistries() {
+        RecipeHandler.registerOreSmelting();
+        RecipeHandler.registerCrushedOreCompatSmelting();
+        RecipeHandler.registerWashing();
     }
 }

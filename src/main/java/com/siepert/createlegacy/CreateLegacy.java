@@ -31,18 +31,17 @@ public final class CreateLegacy {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         if (!Loader.isModLoaded("ctm")) logger.error("It's recommended to install CTM");
-        RegistryHandler.otherPreInitRegistries(logger);
+        RegistryHandler.otherPreInitRegistries();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-        RegistryHandler.otherInitRegistries(logger);
+        RegistryHandler.otherInitRegistries();
     }
 
     @EventHandler
     public void init(FMLPostInitializationEvent event) {
-        logger.info("Femboy count: {}", 1);
-        RegistryHandler.otherPostInitRegistries(logger);
+        logger.info("Femboy count: {} (me)", 1);
+        RegistryHandler.otherPostInitRegistries();
     }
 }
