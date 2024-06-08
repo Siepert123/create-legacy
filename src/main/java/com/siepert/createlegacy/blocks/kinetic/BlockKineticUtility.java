@@ -163,46 +163,45 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         return this.getDefaultState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[placer.getHeldItem(hand).getItemDamage()]);
     }
 
-    @Override
-    public void act(World worldIn, BlockPos pos, EnumFacing source) {
+
+    @Override //TODO: add the code
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+
+        if (srcIsCog) return;
+
         EnumHandler.KineticUtilityEnumType blockLogicController = worldIn.getBlockState(pos).getValue(VARIANT);
+
         switch (blockLogicController) {
             case GEARBOX:
-                actGearbox(worldIn, pos, source);
+                actGearbox(worldIn, pos, source, iteratedBlocks);
                 break;
             case CLUTCH:
-                actClutch(worldIn, pos, source);
-                break;
-            case GEARSHIFT:
-                actGearshift(worldIn, pos, source);
+                actClutch(worldIn, pos, source, iteratedBlocks);
                 break;
             default:
-                actEncasedShaft(worldIn, pos, source);
+                actEncasedShaft(worldIn, pos, source, iteratedBlocks);
                 break;
         }
     }
 
-    @Override //TODO: add the code
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
-        iteratedBlocks.add(pos);
-        if (srcIsCog) return;
-    }
-
-    private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source) {
+    private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() == EnumFacing.Axis.Y) {
                 switch (source) {
                     case UP:
                         if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock())
+                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks, false, false);
                         }
                         break;
                     case DOWN:
                         if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock())
+                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks, false, false);
                         }
                         break;
                 }
+                iteratedBlocks.add(pos);
             }
             return;
         }
@@ -212,12 +211,14 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 switch (source) {
                     case WEST:
                         if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock()).act(worldIn, pos.east(), EnumFacing.WEST);
+                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock())
+                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks, false, false);
                         }
                         break;
                     case EAST:
                         if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock()).act(worldIn, pos.west(), EnumFacing.EAST);
+                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock())
+                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks, false, false);
                         }
                         break;
                 }
@@ -229,12 +230,14 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 switch (source) {
                     case NORTH:
                         if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock()).act(worldIn, pos.south(), EnumFacing.NORTH);
+                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock())
+                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks, false, false);
                         }
                         break;
                     case SOUTH:
                         if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock()).act(worldIn, pos.north(), EnumFacing.SOUTH);
+                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock())
+                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks, false, false);
                         }
                         break;
                 }
@@ -242,7 +245,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         }
     }
 
-    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source) {
+    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) { //TODO: make it rotatable
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() != EnumFacing.Axis.Y) {
                 ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
@@ -261,20 +264,69 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
                     if (theBlock.getBlock() instanceof IKineticActor) {
-                        if (theBlock.getBlock() instanceof BlockCogwheel) {
-                            if (theBlock.getValue(BlockCogwheel.AXIS) == output.getAxis()) {
-                                ((IKineticActor) theBlock.getBlock()).act(worldIn, pos.offset(output), output.getOpposite());
-                            }
-                        } else {
-                            ((IKineticActor) theBlock.getBlock()).act(worldIn, pos.offset(output), output.getOpposite());
-                        }
+                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
                     }
                 }
+                iteratedBlocks.add(pos);
             }
+            return;
         }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
+            if (source.getAxis() != EnumFacing.Axis.X) {
+                ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
+                AXLES_TO_ACT.add(EnumFacing.NORTH);
+                AXLES_TO_ACT.add(EnumFacing.UP);
+                AXLES_TO_ACT.add(EnumFacing.SOUTH);
+                AXLES_TO_ACT.add(EnumFacing.DOWN);
+                AXLES_TO_ACT.remove(source);
+
+                IBlockState sourceBlock = worldIn.getBlockState(pos.offset(source));
+                if (sourceBlock.getBlock() instanceof BlockCogwheel) {
+                    if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
+                }
+
+
+                for (EnumFacing output : AXLES_TO_ACT) {
+                    IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
+                    if (theBlock.getBlock() instanceof IKineticActor) {
+                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
+                    }
+                }
+                iteratedBlocks.add(pos);
+            }
+            return;
+        }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
+            if (source.getAxis() != EnumFacing.Axis.Z) {
+                ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
+                AXLES_TO_ACT.add(EnumFacing.UP);
+                AXLES_TO_ACT.add(EnumFacing.EAST);
+                AXLES_TO_ACT.add(EnumFacing.DOWN);
+                AXLES_TO_ACT.add(EnumFacing.WEST);
+                AXLES_TO_ACT.remove(source);
+
+                IBlockState sourceBlock = worldIn.getBlockState(pos.offset(source));
+                if (sourceBlock.getBlock() instanceof BlockCogwheel) {
+                    if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
+                }
+
+
+                for (EnumFacing output : AXLES_TO_ACT) {
+                    IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
+                    if (theBlock.getBlock() instanceof IKineticActor) {
+                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
+                    }
+                }
+                iteratedBlocks.add(pos);
+            }
+            return;
+        }
+
     }
 
-    private void actClutch(World worldIn, BlockPos pos, EnumFacing source) {
+    private void actClutch(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() == EnumFacing.Axis.Y) {
                 for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
@@ -293,16 +345,20 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 switch (source) {
                     case UP:
                         if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock())
+                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks, false, false);
                         }
                         break;
                     case DOWN:
                         if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
+                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock())
+                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks, false, false);
                         }
                         break;
                 }
+                iteratedBlocks.add(pos);
             }
+            return;
         }
 
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
@@ -322,15 +378,18 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 switch (source) {
                     case WEST:
                         if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock()).act(worldIn, pos.east(), EnumFacing.WEST);
+                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock())
+                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks, false, false);
                         }
                         break;
                     case EAST:
                         if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock()).act(worldIn, pos.west(), EnumFacing.EAST);
+                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock())
+                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks, false, false);
                         }
                         break;
                 }
+                iteratedBlocks.add(pos);
             }
             return;
         }
@@ -351,103 +410,23 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 switch (source) {
                     case NORTH:
                         if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock()).act(worldIn, pos.south(), EnumFacing.NORTH);
+                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock())
+                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks, false, false);
                         }
                         break;
                     case SOUTH:
                         if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock()).act(worldIn, pos.north(), EnumFacing.SOUTH);
+                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock())
+                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks, false, false);
                         }
                         break;
                 }
+                iteratedBlocks.add(pos);
             }
         }
     }
 
-    private void actGearshift(World worldIn, BlockPos pos, EnumFacing source) {
-        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
-            if (source.getAxis() == EnumFacing.Axis.Y) {
-                for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
-                    if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
-                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
-                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                    } else {
-                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
-                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                    }
-                }
-
-                switch (source) {
-                    case UP:
-                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock()).act(worldIn, pos.down(), EnumFacing.UP);
-                        }
-                        break;
-                    case DOWN:
-                        if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock()).act(worldIn, pos.up(), EnumFacing.DOWN);
-                        }
-                        break;
-                }
-            }
-        }
-
-        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
-            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.DOWN, EnumFacing.SOUTH, EnumFacing.UP)) {
-                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
-                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
-                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                } else {
-                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
-                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                }
-            }
-            if (source.getAxis() == EnumFacing.Axis.X) {
-                switch (source) {
-                    case WEST:
-                        if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock()).act(worldIn, pos.east(), EnumFacing.WEST);
-                        }
-                        break;
-                    case EAST:
-                        if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock()).act(worldIn, pos.west(), EnumFacing.EAST);
-                        }
-                        break;
-                }
-            }
-            return;
-        }
-        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
-            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.UP, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.WEST)) {
-                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
-                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
-                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                } else {
-                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, false), 0);
-                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                }
-            }
-            if (source.getAxis() == EnumFacing.Axis.Z) {
-                switch (source) {
-                    case NORTH:
-                        if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock()).act(worldIn, pos.south(), EnumFacing.NORTH);
-                        }
-                        break;
-                    case SOUTH:
-                        if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
-                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock()).act(worldIn, pos.north(), EnumFacing.SOUTH);
-                        }
-                        break;
-                }
-            }
-        }
+    private void actGearshift(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
+        actEncasedShaft(worldIn, pos, source, iteratedBlocks);
     }
 }

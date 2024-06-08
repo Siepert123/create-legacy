@@ -36,7 +36,7 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
     public BlockAxle(String name) {
         super(Material.ROCK);
         this.translucent = true;
-        this.blockSoundType = SoundType.WOOD;
+        this.blockSoundType = SoundType.STONE;
         this.fullBlock = false;
         setLightOpacity(0);
 
@@ -134,50 +134,15 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
         return false;
     }
 
-    @Override
-    public void rotate(World worldIn, BlockPos pos, EnumFacing source) {
-        for (EnumFacing facing : EnumFacing.values()) {
-            if (facing != source) {
-                Block blockNow = worldIn.getBlockState(pos.offset(facing)).getBlock();
-                if (blockNow instanceof IKineticActor) {
-                    if (blockNow instanceof BlockAxle) {
-                        try {
-                            if (worldIn.getBlockState(pos).getValue(AXIS).equals(worldIn.getBlockState(pos.offset(facing)).getValue(AXIS))) {
-                                ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
-                            }
-                        } catch (Exception e) {
-                            return;
-                        }
-                    }
-                    else {
-                        ((IKineticActor) blockNow).act(worldIn, pos.offset(facing), facing.getOpposite());
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void act(World worldIn, BlockPos pos, EnumFacing source) {
-        try {
-            IBlockState state = worldIn.getBlockState(pos);
-            if (state.getValue(ROTATION) < 3)
-                worldIn.setBlockState(pos, state.withProperty(ROTATION, state.getValue(ROTATION) + 1), 0);
-            else worldIn.setBlockState(pos, state.withProperty(ROTATION, 0), 1);
-            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-            rotate(worldIn, pos, source);
-        } catch (StackOverflowError overflowError) {
-            return;
-        }
-    }
 
     @Override
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
-        iteratedBlocks.add(pos);
+
         IBlockState myState = worldIn.getBlockState(pos);
 
         if (source.getAxis() == myState.getValue(AXIS) && !srcIsCog) {
+            iteratedBlocks.add(pos);
+
             IBlockState myNewState;
             if (myState.getValue(ROTATION) == 3) {
                 myNewState = myState.withProperty(ROTATION, 0);

@@ -7,13 +7,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public interface IKineticActor {
-    /**Passes a rotational current through the block.
-     * @param worldIn   The world where this block is in
-     * @param pos       The position of this block
-     * @param source    The direction where the current originated from
-     * @deprecated */
-    @Deprecated
-    public void act(World worldIn, BlockPos pos, EnumFacing source);
 
     /**Passes a rotational current through the block.
      * <p>
@@ -21,7 +14,7 @@ public interface IKineticActor {
      * @param worldIn               The world of the block
      * @param pos                   The position of the block
      * @param source                The direction the force came from
-     * @param iteratedBlocks        List of block positions the current has already visited
+     * @param iteratedBlocks        List of block positions the current has already visited. Only add your position to this list once your block has actually confirmed that the kinetic input is valid!
      * @param srcIsCog              Is true when the input force comes from cog teeth.
      * @param srcCogIsHorizontal    If srcIsCog is true, this says whether those teeth were vertical or horizontal.*/
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal);

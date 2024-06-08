@@ -99,12 +99,9 @@ public class BlockHandCrank extends Block implements IHasModel {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
         if (block instanceof IKineticActor) {
-            if (Reference.USE_OLD_KINETIC_SUSTEM) {
-                ((IKineticActor) block).act(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite());
-            } else {
-                List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-                ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(), iteratedBlocks, false, false);
-            }
+            List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
+            ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
+                    iteratedBlocks, false, false);
         }
         return true;
     }

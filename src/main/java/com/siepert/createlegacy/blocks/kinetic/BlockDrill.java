@@ -80,38 +80,38 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
-
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-
     @Override
     public boolean isTranslucent(IBlockState state) {
         return true;
     }
-
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-    @Override
-    public void act(World worldIn, BlockPos pos, EnumFacing source) {
-        if (source == worldIn.getBlockState(pos).getValue(FACING).getOpposite()) {
-            BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
-             if (!worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial().isReplaceable()
-                     && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
-                    worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
-                    worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
-                            SoundCategory.BLOCKS, 1.0f, 1.0f);
-                    worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
-            }
-        }
-    }
-
     @Override //TODO: add the code
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
 
+
+        if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
+
+        IBlockState myState = worldIn.getBlockState(pos);
+
+
+        if (source == myState.getValue(FACING).getOpposite()) {
+            iteratedBlocks.add(pos);
+            BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
+            if (!worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial().isReplaceable()
+                    && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
+                worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
+                worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
+                        SoundCategory.BLOCKS, 1.0f, 1.0f);
+                worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
+            }
+        }
     }
 }
