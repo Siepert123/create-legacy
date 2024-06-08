@@ -167,7 +167,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     }
 
 
-    @Override //TODO: add the code
+    @Override
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
 
         if (srcIsCog) return;
@@ -248,7 +248,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         }
     }
 
-    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) { //TODO: make it rotatable
+    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() != EnumFacing.Axis.Y) {
                 ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
