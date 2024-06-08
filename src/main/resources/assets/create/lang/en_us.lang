@@ -94,6 +94,7 @@ tile.schedule_cook.name=Schedule Fan Cooking
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes
+subtitle.block.press.activation=Press flattens something
 
 #Custom stones
 tile.stone_calcite.name=Calcite

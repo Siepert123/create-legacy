@@ -19,5 +19,14 @@
         "name": "create:cogs"
       }
     ]
+  },
+  "block.press.activation": {
+    "category": "blocks",
+    "subtitle": "subtitle.block.press.activation",
+    "sounds": [
+      {
+        "name": "minecraft:random/anvil_land"
+      }
+    ]
   }
 }
