@@ -11,7 +11,7 @@
     },
     "N": {
       "type": "forge:ore_dict",
-      "ore": "gemPolishedRoseQuartz"
+      "ore": "gemRoseQuartzPolished"
     }
   },
   "result": {
