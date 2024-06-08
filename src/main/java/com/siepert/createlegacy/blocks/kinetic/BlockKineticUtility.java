@@ -184,7 +184,8 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override //TODO: add the code
     public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
-
+        iteratedBlocks.add(pos);
+        if (srcIsCog) return;
     }
 
     private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source) {
