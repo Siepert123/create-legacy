@@ -56,9 +56,9 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         setHarvestLevel("axe", 0,
                 this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARSHIFT));
         setHarvestLevel("axe", 0,
-                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.SHAFT_ENCASED_ANDESITE));
+                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.AXLE_ENCASED_ANDESITE));
         setHarvestLevel("axe", 0,
-                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.SHAFT_ENCASED_BRASS));
+                this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.AXLE_ENCASED_BRASS));
         setHardness(2);
         setResistance(5);
 
@@ -113,9 +113,9 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 return new ItemStack(Item.getItemFromBlock(this), 1, 1);
             case GEARSHIFT:
                 return new ItemStack(Item.getItemFromBlock(this), 1, 2);
-            case SHAFT_ENCASED_ANDESITE:
+            case AXLE_ENCASED_ANDESITE:
                 return new ItemStack(Item.getItemFromBlock(this), 1, 3);
-            case SHAFT_ENCASED_BRASS:
+            case AXLE_ENCASED_BRASS:
                 return new ItemStack(Item.getItemFromBlock(this), 1, 4);
             default:
                 return new ItemStack(Items.AIR);
@@ -149,9 +149,9 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
                 2, "kinetic_utility/gearshift", "inventory");
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                3, "kinetic_utility/shaft_encased_andesite", "inventory");
+                3, "kinetic_utility/axle_encased_andesite", "inventory");
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                4, "kinetic_utility/shaft_encased_brass", "inventory");
+                4, "kinetic_utility/axle_encased_brass", "inventory");
     }
 
     @Override

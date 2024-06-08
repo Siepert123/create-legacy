@@ -75,8 +75,8 @@ tile.chassis.name=Chassis
 tile.gearbox.name=Gearbox
 tile.clutch.name=Clutch
 tile.gearshift.name=Gearshift
-tile.shaft_encased_andesite.name=Andesite Encased Shaft
-tile.shaft_encased_brass.name=Brass Encased Shaft
+tile.axle_encased_andesite.name=Andesite Encased Axle
+tile.axle_encased_brass.name=Brass Encased Axle
 
 #Overige
 itemGroup.tab_create=Create
