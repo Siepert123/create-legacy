@@ -2,14 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "create:cogwheel"
+      "item": "create:axle"
     },
     {
       "item": "create:casing",
       "data": 0
     },
     {
-      "item": "create:axle"
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
     }
   ],
   "result": {
