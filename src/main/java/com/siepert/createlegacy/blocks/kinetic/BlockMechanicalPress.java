@@ -128,8 +128,9 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
 
                 for (EntityItem entityItem : foundItems) {
                     if (apply(entityItem.getItem()).hasRecipe) {
-                        EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY() + 0.2, pos.getZ() + 0.5,
+                        EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
                                 apply(entityItem.getItem()).stack);
+                        resultEntityItem.setVelocity(0, 0, 0);
                         worldIn.spawnEntity(resultEntityItem);
                         entityItem.getItem().shrink(1);
                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
