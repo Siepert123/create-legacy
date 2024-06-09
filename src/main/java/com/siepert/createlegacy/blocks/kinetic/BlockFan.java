@@ -455,8 +455,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                 ItemStack itemstack2 = stackOpt.copy();
                 itemstack2.setCount(stackOpt.getCount());
 
-                if (Reference.random.nextInt(1) == 0) {
-                    CreateLegacy.logger.info("Returned 2 stacks: {} and {}", itemstack1, itemstack2);
+                if (Reference.random.nextInt(5) == 0) {
                     return new WashResultSet(itemstack1, itemstack2, true);
                 }
                 return new WashResultSet(itemstack1, true);
