@@ -35,13 +35,13 @@ public class WashingRecipes {
     }
 
     public void addWashing(Item input, ItemStack stack, ItemStack stackOptional) {
-        this.addWashingRecipe(new ItemStack(input, 1, 32767), stack, stackOptional);
+        this.addWashingRecipe(new ItemStack(input, 1), stack, stackOptional);
     }
 
     public void addWashingRecipe(ItemStack input, ItemStack stack, ItemStack stackOptional) {
         if (getWashingResult(input) != ItemStack.EMPTY) { net.minecraftforge.fml.common.FMLLog.log.info("Ignored smelting recipe with conflicting input: {} = {}", input, stack); return; }
         this.washingList.put(input, stack);
-        this.optionalResultList.put(stack, stackOptional);
+        this.optionalResultList.put(input, stackOptional);
     }
 
     public ItemStack getWashingResult(ItemStack stack) {

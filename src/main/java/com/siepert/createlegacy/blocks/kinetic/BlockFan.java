@@ -6,8 +6,6 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
 import com.siepert.createlegacy.util.Reference;
-import com.siepert.createlegacy.util.handlers.ModSoundHandler;
-import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -32,7 +30,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +150,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
             double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
 
             if (isABlower) {
-                if (!worldIn.getBlockState(posFront).getMaterial().blocksMovement()) {
+                if (!worldIn.getBlockState(posFront).getMaterial().blocksMovement()
+                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite())))) {
                     worldIn.spawnParticle(EnumParticleTypes.CLOUD,
                             posFront.getX() + 0.5,
                             posFront.getY() + 0.5,
@@ -207,7 +205,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                     }
                 } else return;
 
-                if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 2)).getMaterial().blocksMovement()) {
+                if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 2)).getMaterial().blocksMovement()
+                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite(), 2)))) {
                     AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 2));
 
                     List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, searchField);
@@ -243,7 +242,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                     }
                 } else return;
 
-                if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 3)).getMaterial().blocksMovement()) {
+                if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 3)).getMaterial().blocksMovement()
+                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite(), 3)))) {
                     AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 3));
 
                     List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, searchField);
@@ -282,75 +282,192 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
             ProcessingType whatsTheProcess = ProcessingType.getType(worldIn.getBlockState(posFront).getBlock());
 
+            CreateLegacy.logger.info("Processing type: {} (Block {})", whatsTheProcess, worldIn.getBlockState(posFront).getBlock());
+
             if (whatsTheProcess != null) {
-                BlockPos startProcessPos = pos.offset(source.getOpposite(), 2);
-                int processingLength = 0;
+                for (int i = 0; i < 5; i++) {
+                    BlockPos startProcessPos = pos.offset(source.getOpposite(), 2 + i);
 
-                Block blockNow = worldIn.getBlockState(startProcessPos).getBlock();
+                    if (isBlockNotObscure(worldIn.getBlockState(startProcessPos))
+                            || !worldIn.getBlockState(startProcessPos).getMaterial().blocksMovement()) {
 
-                while (processingLength < 6 && !blockNow.getMaterial(worldIn.getBlockState(startProcessPos.offset(source.getOpposite(), processingLength))).blocksMovement()) {
-                    processingLength++;
-                    blockNow = worldIn.getBlockState(startProcessPos.offset(source.getOpposite(), processingLength)).getBlock();
-                }
+                        if (whatsTheProcess == ProcessingType.WASH) {
 
-                BlockPos endPos = startProcessPos.offset(source.getOpposite(), processingLength);
-
-                AxisAlignedBB itemSearchArea = new AxisAlignedBB(startProcessPos, endPos);
-                List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
-
-                for (EntityItem entityItem : foundItems) {
-                    if (apply(entityItem.getItem(), whatsTheProcess).hasRecipe) {
-                        EntityItem resultEntityItem = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                apply(entityItem.getItem(), whatsTheProcess).stack);
-                        resultEntityItem.setVelocity(0, 0, 0);
-                        worldIn.spawnEntity(resultEntityItem);
-                        entityItem.getItem().shrink(1);
-                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
-                            entityItem.setDead();
+                            worldIn.spawnParticle(EnumParticleTypes.CLOUD,
+                                    posFront.getX() + 0.5,
+                                    posFront.getY() + 0.5,
+                                    posFront.getZ() + 0.5,
+                                    particleVX / 3,
+                                    particleVY / 3,
+                                    particleVZ / 3);
+                            for (int j = 0; j < Reference.random.nextInt(4) + 4; j++) {
+                                worldIn.spawnParticle(EnumParticleTypes.CLOUD,
+                                        posFront.getX() + Reference.random.nextFloat(),
+                                        posFront.getY() + Reference.random.nextFloat(),
+                                        posFront.getZ() + Reference.random.nextFloat(),
+                                        particleVX / 3,
+                                        particleVY / 3,
+                                        particleVZ / 3);
+                            }
+                            for (int j = 0; j < Reference.random.nextInt(4); j++) {
+                                worldIn.spawnParticle(EnumParticleTypes.WATER_BUBBLE,
+                                        posFront.getX() + Reference.random.nextFloat(),
+                                        posFront.getY() + Reference.random.nextFloat(),
+                                        posFront.getZ() + Reference.random.nextFloat(),
+                                        particleVX / 3,
+                                        particleVY / 3,
+                                        particleVZ / 3);
+                            }
                         }
-                    }
+                        if (whatsTheProcess == ProcessingType.SMELT) {
+                            worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
+                                    posFront.getX() + 0.5,
+                                    posFront.getY() + 0.5,
+                                    posFront.getZ() + 0.5,
+                                    particleVX / 3,
+                                    particleVY / 3,
+                                    particleVZ / 3);
+                            for (int j = 0; j < Reference.random.nextInt(4) + 4; j++) {
+                                worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
+                                        posFront.getX() + Reference.random.nextFloat(),
+                                        posFront.getY() + Reference.random.nextFloat(),
+                                        posFront.getZ() + Reference.random.nextFloat(),
+                                        particleVX / 3,
+                                        particleVY / 3,
+                                        particleVZ / 3);
+                            }
+
+                        }
+
+                        AxisAlignedBB itemSearchArea = new AxisAlignedBB(startProcessPos.offset(source.getOpposite()));
+                        List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
+                        for (EntityItem entityItem : foundItems) {
+                            if (worldIn.isRemote) {
+                                if (whatsTheProcess == ProcessingType.WASH) {
+                                    for (int k = 0; k < Reference.random.nextInt(10); k++) {
+                                        worldIn.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+                                                entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                                0, Reference.random.nextFloat(), 0);
+                                    }
+                                }
+                                if (whatsTheProcess == ProcessingType.SMELT) {
+                                    worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                            0, 0, 0);
+
+                                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                            0, Reference.random.nextFloat() / 2, 0);
+                                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                            0, Reference.random.nextFloat() / 2, 0);
+                                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                            0, Reference.random.nextFloat() / 2, 0);
+                                }
+
+
+                            }
+                            if (!worldIn.isRemote) {
+                                if (whatsTheProcess == ProcessingType.SMELT) {
+                                    SmeltResultSet resultSet = applicateSmelt(entityItem.getItem(), whatsTheProcess);
+                                    if (resultSet.hasRecipe) {
+                                        EntityItem resultEntityItem = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                resultSet.stack);
+                                        resultEntityItem.setVelocity(0, 0, 0);
+                                        worldIn.spawnEntity(resultEntityItem);
+                                        entityItem.getItem().shrink(1);
+                                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
+                                            entityItem.setDead();
+                                        }
+                                    }
+                                }
+                                if (whatsTheProcess == ProcessingType.WASH) {
+                                    WashResultSet resultSet = applicateWash(entityItem.getItem(), whatsTheProcess);
+                                    assert resultSet != null;
+                                    if (resultSet.hasRecipe) {
+                                        EntityItem resultEntityItem = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                resultSet.stack);
+                                        resultEntityItem.setVelocity(0, 0, 0);
+                                        worldIn.spawnEntity(resultEntityItem);
+
+                                        if (resultSet.hasOptional()) {
+                                            EntityItem resultEntityItemOptional = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                    resultSet.stackOptional);
+                                            resultEntityItemOptional.setVelocity(0, 0, 0);
+                                            worldIn.spawnEntity(resultEntityItemOptional);
+                                        }
+
+                                        entityItem.getItem().shrink(1);
+                                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
+                                            entityItem.setDead();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else return;
                 }
             }
         }
     }
 
-    public @Nullable ResultSet apply(ItemStack stack, ProcessingType type) {
+    private boolean isBlockNotObscure(IBlockState stateOfOhio) {
+        List<Block> predef_allowances = new ArrayList<Block>();
+        predef_allowances.add(Blocks.STANDING_SIGN);
+        predef_allowances.add(Blocks.WALL_SIGN);
+        predef_allowances.add(Blocks.LADDER);
+        predef_allowances.add(Blocks.IRON_BARS);
+
+        if (predef_allowances.contains(stateOfOhio.getBlock()))return true;
+        return false;
+    }
+
+    public @Nullable SmeltResultSet applicateSmelt(ItemStack stack, ProcessingType type) {
         if (stack.isEmpty()) {
-            return new ResultSet(stack, false);
+            return new SmeltResultSet(stack, false);
         }
         else {
-            if (type == ProcessingType.WASH) {
-                ItemStack itemstack = WashingRecipes.instance().getWashingResult(stack);
+            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(stack);
 
-                if (itemstack.isEmpty()) {
-                    CreateLegacy.logger.warn("Couldn't wash {} because there is no washing recipe", (Object) stack);
-                    return new ResultSet(stack, false);
-                } else {
-                    ItemStack itemstack1 = itemstack.copy();
-                    itemstack1.setCount(itemstack.getCount());
-                    return new ResultSet(itemstack1, true);
-                }
+            if (itemstack.isEmpty()) {
+                return new SmeltResultSet(stack, false);
+            } else {
+                ItemStack itemstack1 = itemstack.copy();
+                itemstack1.setCount(itemstack.getCount());
+                return new SmeltResultSet(itemstack1, true);
             }
-            if (type == ProcessingType.SMELT) {
-                ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(stack);
+        }
+    }
+    public @Nullable WashResultSet applicateWash(ItemStack stack, ProcessingType type) {
+        if (stack.isEmpty()) {
+            return new WashResultSet(stack, false);
+        }
+        else {
+            ItemStack itemstack = WashingRecipes.instance().getWashingResult(stack);
+            ItemStack stackOpt = WashingRecipes.instance().getOptionalResult(stack);
 
-                if (itemstack.isEmpty()) {
-                    CreateLegacy.logger.warn("Couldn't wash {} because there is no washing recipe", (Object) stack);
-                    return new ResultSet(stack, false);
-                } else {
-                    ItemStack itemstack1 = itemstack.copy();
-                    itemstack1.setCount(itemstack.getCount());
-                    return new ResultSet(itemstack1, true);
+            if (itemstack.isEmpty()) {
+                return new WashResultSet(stack, false);
+            } else {
+                ItemStack itemstack1 = itemstack.copy();
+                itemstack1.setCount(itemstack.getCount());
+                ItemStack itemstack2 = stackOpt.copy();
+                itemstack2.setCount(stackOpt.getCount());
+
+                if (Reference.random.nextInt(1) == 0) {
+                    CreateLegacy.logger.info("Returned 2 stacks: {} and {}", itemstack1, itemstack2);
+                    return new WashResultSet(itemstack1, itemstack2, true);
                 }
+                return new WashResultSet(itemstack1, true);
             }
-            return null;
         }
     }
 
-    private class ResultSet {
+    private class SmeltResultSet {
         ItemStack stack;
         boolean hasRecipe;
-        private ResultSet(ItemStack stack, boolean hasRecipe) {
+        private SmeltResultSet(ItemStack stack, boolean hasRecipe) {
             this.stack = stack;
             this.hasRecipe = hasRecipe;
         }
@@ -361,6 +478,40 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
         public ItemStack getResult() {
             return stack;
+        }
+    }
+    private class WashResultSet {
+        ItemStack stack, stackOptional;
+        boolean hasRecipe, hasOptional;
+
+        private WashResultSet(ItemStack stack, boolean hasRecipe) {
+            this.stack = stack;
+            this.stackOptional = ItemStack.EMPTY;
+            this.hasOptional = false;
+            this.hasRecipe = hasRecipe;
+        }
+
+        private WashResultSet(ItemStack stack, ItemStack stackOptional, boolean hasRecipe) {
+            this.stack = stack;
+            this.stackOptional = stackOptional;
+            this.hasOptional = true;
+            this.hasRecipe = hasRecipe;
+        }
+
+        public boolean hasRecipe() {
+            return hasRecipe;
+        }
+
+        public ItemStack getResult() {
+            return stack;
+        }
+        public ItemStack getResultOptional() {
+            return stackOptional;
+        }
+
+
+        public boolean hasOptional() {
+            return hasOptional;
         }
     }
 }
