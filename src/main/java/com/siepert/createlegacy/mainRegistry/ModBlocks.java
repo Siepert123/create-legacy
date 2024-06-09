@@ -26,12 +26,13 @@ public class ModBlocks {
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");
     public static final Block HAND_CRANK = new BlockHandCrank("hand_crank");
     public static final Block CREATIVE_MOTOR = new BlockCreativeMotor("creative_motor");
-    public static final Block DRILL = new BlockDrill("drill");
-    public static final Block SAW = new BlockSaw("saw");
     public static final Block CHASSIS = new BlockChassis("chassis");
     public static final Block KINETIC_UTILITY = new BlockKineticUtility();
 
     public static final Block PRESS = new BlockMechanicalPress("press");
+    public static final Block DRILL = new BlockDrill("drill");
+    public static final Block SAW = new BlockSaw("saw");
+    public static final Block FAN = new BlockFan("fan");
 
     public static final Block SCHEDULE_WASH = new BlockScheduleWash();
     public static final Block SCHEDULE_COOK = new BlockScheduleCook();
