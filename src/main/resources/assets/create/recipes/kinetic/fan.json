@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "#",
+    "X"
+  ],
+  "key": {
+    "#": {
+      "item": "create:casing",
+      "data": 0
+    },
+    "I": {
+      "item": "create:axle"
+    },
+    "X": {
+      "item": "create:advanced_ingredient",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "create:fan"
+  }
+}
