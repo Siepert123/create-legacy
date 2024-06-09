@@ -76,6 +76,7 @@ tile.drill.name=Mechanical Drill
 tile.saw.name=Mechanical Saw
 tile.press.name=Mechanical Press
 tile.mixer.name=Mechanical Mixer
+tile.fan.name=Encased Fan
 tile.chassis.name=Chassis
 tile.gearbox.name=Gearbox
 tile.clutch.name=Clutch
