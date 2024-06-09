@@ -19,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -282,8 +283,6 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
             ProcessingType whatsTheProcess = ProcessingType.getType(worldIn.getBlockState(posFront).getBlock());
 
-            CreateLegacy.logger.info("Processing type: {} (Block {})", whatsTheProcess, worldIn.getBlockState(posFront).getBlock());
-
             if (whatsTheProcess != null) {
                 for (int i = 0; i < 5; i++) {
                     BlockPos startProcessPos = pos.offset(source.getOpposite(), 2 + i);
@@ -376,6 +375,10 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                                 resultSet.stack);
                                         resultEntityItem.setVelocity(0, 0, 0);
                                         worldIn.spawnEntity(resultEntityItem);
+
+                                        worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1.0f, 1.0f);
+
                                         entityItem.getItem().shrink(1);
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                             entityItem.setDead();
@@ -397,6 +400,9 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                             resultEntityItemOptional.setVelocity(0, 0, 0);
                                             worldIn.spawnEntity(resultEntityItemOptional);
                                         }
+
+                                        worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 1.0f, 1.0f);
 
                                         entityItem.getItem().shrink(1);
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
@@ -447,7 +453,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
             ItemStack itemstack = WashingRecipes.instance().getWashingResult(stack);
             ItemStack stackOpt = WashingRecipes.instance().getOptionalResult(stack);
 
-            if (itemstack.isEmpty()) {
+            if (itemstack.isEmpty() && stackOpt.isEmpty()) {
                 return new WashResultSet(stack, false);
             } else {
                 ItemStack itemstack1 = itemstack.copy();

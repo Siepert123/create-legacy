@@ -3,6 +3,7 @@ package com.siepert.createlegacy.util.handlers.recipes;
 import com.google.common.collect.Maps;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,13 +29,41 @@ public class WashingRecipes {
                 new ItemStack(ModItems.INGREDIENT, 9, 4), new ItemStack(Items.REDSTONE));
         this.addWashingRecipe(new ItemStack(ModItems.INGREDIENT, 1, 15),
                 new ItemStack(ModItems.INGREDIENT, 9, 7), new ItemStack(Items.GUNPOWDER));
+
+        this.addWashingRecipe(new ItemStack(Blocks.GRAVEL, 1),
+                new ItemStack(Items.FLINT, 1), new ItemStack(Items.IRON_NUGGET, 1));
+        this.addWashingRecipe(new ItemStack(Blocks.SAND, 1, 0),
+                ItemStack.EMPTY, new ItemStack(Items.CLAY_BALL, 1));
+        this.addWashingRecipe(new ItemStack(Blocks.SAND, 1, 1),
+                new ItemStack(Blocks.DEADBUSH, 1), new ItemStack(Items.GOLD_NUGGET, 4));
+        this.addWashingRecipe(new ItemStack(Blocks.SOUL_SAND, 1),
+                ItemStack.EMPTY, new ItemStack(Items.QUARTZ, 2));
+
+        for (int c = 0; c < 16; c++) {
+            this.addWashingRecipe(new ItemStack(Blocks.CONCRETE_POWDER, 1, c),
+                    new ItemStack(Blocks.CONCRETE, 1, c));
+            this.addWashingRecipe(new ItemStack(Blocks.BED, 1, c),
+                    new ItemStack(Blocks.BED, 1, 0)); //TODO: Make the bed wash too
+            this.addWashingRecipe(new ItemStack(Items.BANNER, 1, c),
+                    new ItemStack(Items.BANNER, 1, 15));
+            this.addWashingRecipe(new ItemStack(Blocks.CARPET, 1, c),
+                    new ItemStack(Blocks.CARPET, 1, 0));
+            this.addWashingRecipe(new ItemStack(Blocks.WOOL, 1, c),
+                    new ItemStack(Blocks.WOOL, 1, 0));
+        }
+
+        this.addWashingRecipe(new ItemStack(Blocks.SPONGE, 1, 0),
+                new ItemStack(Blocks.SPONGE, 1, 1));
+    }
+    public void addWashingRecipe(ItemStack input, ItemStack stack) {
+        this.addWashingRecipe(input, stack, ItemStack.EMPTY);
     }
 
-    public void addWashingRecipeForBlock(Block input, ItemStack stack, ItemStack stackOptional) {
-        this.addWashing(Item.getItemFromBlock(input), stack, stackOptional);
+    public void addWashingRecipe(Block input, ItemStack stack, ItemStack stackOptional) {
+        this.addWashingRecipe(Item.getItemFromBlock(input), stack, stackOptional);
     }
 
-    public void addWashing(Item input, ItemStack stack, ItemStack stackOptional) {
+    public void addWashingRecipe(Item input, ItemStack stack, ItemStack stackOptional) {
         this.addWashingRecipe(new ItemStack(input, 1), stack, stackOptional);
     }
 
