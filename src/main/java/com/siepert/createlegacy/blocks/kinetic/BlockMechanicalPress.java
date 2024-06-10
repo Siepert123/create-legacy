@@ -149,10 +149,10 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                         if (apply(entityItem.getItem()).hasRecipe) {
                             EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
                                     apply(entityItem.getItem()).stack);
+                            entityItem.getItem().shrink(1);
                             resultEntityItem.setVelocity(0, 0, 0);
                             resultEntityItem.setNoDespawn();
                             worldIn.spawnEntity(resultEntityItem);
-                            entityItem.getItem().shrink(1);
                             if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                 entityItem.setDead();
                             }
@@ -174,10 +174,10 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                     if (applyCompact(entityItem.getItem(), heatState).hasRecipe) {
                         EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down(2).getY() + 0.2, pos.getZ() + 0.5,
                                 applyCompact(entityItem.getItem(), heatState).getResult());
+                        entityItem.getItem().shrink(applyCompact(entityItem.getItem(), heatState).cost);
                         resultEntityItem.setVelocity(0, 0, 0);
                         resultEntityItem.setNoDespawn();
                         worldIn.spawnEntity(resultEntityItem);
-                        entityItem.getItem().shrink(applyCompact(entityItem.getItem(), heatState).cost);
                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                             entityItem.setDead();
                         }

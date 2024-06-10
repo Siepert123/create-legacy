@@ -384,6 +384,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                 if (whatsTheProcess == ProcessingType.SMELT) {
                                     SmeltResultSet resultSet = applicateSmelt(entityItem.getItem(), whatsTheProcess);
                                     if (resultSet.hasRecipe) {
+                                        entityItem.getItem().shrink(1);
                                         EntityItem resultEntityItem = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                 resultSet.stack);
                                         resultEntityItem.setVelocity(0, 0, 0);
@@ -392,7 +393,6 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                         worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                 SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1.0f, 1.0f);
 
-                                        entityItem.getItem().shrink(1);
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                             entityItem.setDead();
                                         }
@@ -402,6 +402,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                     WashResultSet resultSet = applicateWash(entityItem.getItem(), whatsTheProcess);
                                     assert resultSet != null;
                                     if (resultSet.hasRecipe) {
+                                        entityItem.getItem().shrink(1);
                                         EntityItem resultEntityItem = new EntityItem(worldIn, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                 resultSet.stack);
                                         resultEntityItem.setVelocity(0, 0, 0);
@@ -417,7 +418,6 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                         worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                 SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 1.0f, 1.0f);
 
-                                        entityItem.getItem().shrink(1);
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                             entityItem.setDead();
                                         }

@@ -169,6 +169,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
             if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
                 worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED));
                 worldIn.scheduleUpdate(pos, this, 100);
+                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
                 return true;
             }
             return false;
@@ -181,10 +182,12 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
             if (state.getValue(STATE) == State.COPE_SEETHE_MALD) {
                 worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
                 worldIn.scheduleUpdate(pos, this, 100);
+                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
                 return;
             }
             if (state.getValue(STATE) == State.HEATED) {
                 worldIn.setBlockState(pos, state.withProperty(STATE, State.PASSIVE), 0);
+                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
             }
         }
     }
