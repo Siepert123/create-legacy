@@ -3,6 +3,7 @@ package com.siepert.createlegacy.util.handlers.recipes;
 import com.google.common.collect.Maps;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
+import com.siepert.createlegacy.mainRegistry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -44,6 +45,9 @@ public class CompactingRecipes {
                 new ItemStack(Blocks.SNOW, 1));
         this.addCompacting(new ItemStack(Items.SLIME_BALL, 9),
                 new ItemStack(Blocks.SLIME_BLOCK, 1));
+
+        this.addCompacting(new ItemStack(ModItems.INGREDIENT, 1, 17),
+                new ItemStack(ModItems.INCOMPLETE_ITEM, 1, 1), BlockBlazeBurner.State.HEATED);
     }
 
     public void addCompacting(Block input, ItemStack stack) {

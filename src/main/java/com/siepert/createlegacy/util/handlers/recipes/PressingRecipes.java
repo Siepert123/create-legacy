@@ -25,6 +25,8 @@ public class PressingRecipes {
         //Vanilla pressing
         this.addPressing(Items.REEDS, new ItemStack(Items.PAPER, 1));
         this.addPressing(Blocks.GRASS, new ItemStack(Blocks.GRASS_PATH, 1));
+        this.addPressing(new ItemStack(ModItems.INCOMPLETE_ITEM, 1, 1),
+                new ItemStack(ModItems.INGREDIENT, 1, 18));
     }
 
     public void addPressing(Block input, ItemStack stack) {
