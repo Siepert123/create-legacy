@@ -131,44 +131,42 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        doTheItemThingy(worldIn, pos, state);
+        doTheItemThingy(worldIn, pos, state, true);
         return true;
     }
 
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
         IBlockState myState = worldIn.getBlockState(pos);
-        doTheItemThingy(worldIn, pos, myState);
+        doTheItemThingy(worldIn, pos, myState, false);
     }
 
-    private void doTheItemThingy(World worldIn, BlockPos pos, IBlockState state) {
+    private void doTheItemThingy(World worldIn, BlockPos pos, IBlockState state, boolean pickupDelay) {
         if (!worldIn.isRemote) {
             boolean isBasin = state.getValue(VARIANT) == Variant.BASIN;
             if (isBasin) {
                 AxisAlignedBB searchPlace = new AxisAlignedBB(pos);
                 List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
 
-                CreateLegacy.logger.info("Items to relocate: {} ({} total)", itemsToRelocate, itemsToRelocate.size());
-
                 for (EntityItem entityItem : itemsToRelocate) {
-                    CreateLegacy.logger.info("Doing stuff to {}", entityItem);
-                    entityItem.setVelocity(0, 0, 0);
-                    entityItem.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-                    entityItem.setPickupDelay(50);
-                    entityItem.setNoDespawn();
+                    if (!(entityItem.posX == pos.getX() + 0.5 && entityItem.posZ == pos.getZ() + 0.5)) {
+                        entityItem.setVelocity(0, 0, 0);
+                        entityItem.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                        if (pickupDelay) entityItem.setPickupDelay(50);
+                        entityItem.setNoDespawn();
+                    }
                 }
             } else {
                 AxisAlignedBB searchPlace = new AxisAlignedBB(pos.up());
                 List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
 
-                CreateLegacy.logger.info("Items to relocate: {} ({} total)", itemsToRelocate, itemsToRelocate.size());
-
                 for (EntityItem entityItem : itemsToRelocate) {
-                    CreateLegacy.logger.info("Doing stuff to {}", entityItem);
-                    entityItem.setVelocity(0, 0, 0);
-                    entityItem.setPosition(pos.getX() + 0.5, pos.up().getY(), pos.getZ() + 0.5);
-                    entityItem.setPickupDelay(50);
-                    entityItem.setNoDespawn();
+                    if (!(entityItem.posX == pos.getX() + 0.5 && entityItem.posZ == pos.getZ() + 0.5)) {
+                        entityItem.setVelocity(0, 0, 0);
+                        entityItem.setPosition(pos.getX() + 0.5, pos.up().getY(), pos.getZ() + 0.5);
+                        if (pickupDelay) entityItem.setPickupDelay(50);
+                        entityItem.setNoDespawn();
+                    }
                 }
             }
         }

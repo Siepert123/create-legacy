@@ -20,6 +20,11 @@ public class MetalTypes {
         METAL_NAMES.add("Tin");
         METAL_NAMES.add("Uranium");
         METAL_NAMES.add("Steel");
+
+        METAL_NAMES.add("Iron");
+        METAL_NAMES.add("Gold");
+        METAL_NAMES.add("Copper");
+        METAL_NAMES.add("Zinc");
     }
 
     public static final String INGOT = "ingot";

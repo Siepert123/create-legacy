@@ -165,7 +165,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (state.getValue(STATE) != State.EMPTY) {
+        if (state.getValue(STATE) != State.EMPTY && !worldIn.isRemote) {
             if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
                 worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED));
                 worldIn.scheduleUpdate(pos, this, 100);
@@ -177,13 +177,15 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (state.getValue(STATE) == State.COPE_SEETHE_MALD) {
-            worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
-            worldIn.scheduleUpdate(pos, this, 100);
-            return;
-        }
-        if (state.getValue(STATE) == State.HEATED) {
-            worldIn.setBlockState(pos, state.withProperty(STATE, State.PASSIVE), 0);
+        if (!worldIn.isRemote) {
+            if (state.getValue(STATE) == State.COPE_SEETHE_MALD) {
+                worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
+                worldIn.scheduleUpdate(pos, this, 100);
+                return;
+            }
+            if (state.getValue(STATE) == State.HEATED) {
+                worldIn.setBlockState(pos, state.withProperty(STATE, State.PASSIVE), 0);
+            }
         }
     }
 

@@ -22,11 +22,6 @@ public class CompactingRecipes {
 
     /**Adds the default compacting recipes.*/
     private CompactingRecipes() {
-        //Vanilla ore things compact
-        this.addCompacting(new ItemStack(Items.IRON_INGOT, 9),
-                new ItemStack(Blocks.IRON_BLOCK, 1));
-        this.addCompacting(new ItemStack(Items.GOLD_INGOT, 9),
-                new ItemStack(Blocks.GOLD_BLOCK, 1));
         this.addCompacting(new ItemStack(Items.COAL, 9),
                 new ItemStack(Blocks.COAL_BLOCK, 1));
         this.addCompacting(new ItemStack(Items.REDSTONE, 9),

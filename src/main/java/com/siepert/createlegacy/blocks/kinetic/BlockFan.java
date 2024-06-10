@@ -121,12 +121,16 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
     private enum ProcessingType {
         WASH, SMELT;
 
-        public static @Nullable ProcessingType getType(Block blockIn) {
-            if (blockIn.equals(Blocks.WATER) || blockIn.equals(Blocks.FLOWING_WATER)) {
+        public static @Nullable ProcessingType getType(IBlockState blockstateIn) {
+            if (blockstateIn.getBlock().equals(Blocks.WATER) || blockstateIn.getBlock().equals(Blocks.FLOWING_WATER)) {
                 return WASH;
             }
-            if (blockIn.equals(Blocks.LAVA) || blockIn.equals(Blocks.FLOWING_LAVA)|| blockIn.equals(Blocks.FIRE)) {
+            if (blockstateIn.getBlock().equals(Blocks.LAVA) || blockstateIn.getBlock().equals(Blocks.FLOWING_LAVA)
+                    || blockstateIn.getBlock().equals(Blocks.FIRE)) {
                 return SMELT;
+            }
+            if (blockstateIn.getBlock() instanceof BlockBlazeBurner) {
+                if (blockstateIn.getValue(BlockBlazeBurner.STATE).getMeta() > 1) return SMELT;
             }
             return null;
         }
@@ -142,7 +146,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
         if (source == myState.getValue(FACING).getOpposite()) {
             iteratedBlocks.add(pos);
 
-            boolean isABlower = !PROCESSORS.contains(worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock());
+            boolean isABlower = (!PROCESSORS.contains(worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
 
             BlockPos posFront = pos.offset(source.getOpposite());
 
@@ -281,7 +285,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                 } else return;
             }
 
-            ProcessingType whatsTheProcess = ProcessingType.getType(worldIn.getBlockState(posFront).getBlock());
+            ProcessingType whatsTheProcess = ProcessingType.getType(worldIn.getBlockState(posFront));
 
             if (whatsTheProcess != null) {
                 for (int i = 0; i < 5; i++) {
@@ -340,6 +344,15 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
                         AxisAlignedBB itemSearchArea = new AxisAlignedBB(startProcessPos.offset(source.getOpposite()));
                         List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
+
+                        List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, itemSearchArea);
+
+                        for (Entity entity : foundEntities) {
+                            if (!(entity instanceof EntityItem)) {
+                                entity.setFire(5);
+                            }
+                        }
+
                         for (EntityItem entityItem : foundItems) {
                             if (worldIn.isRemote) {
                                 if (whatsTheProcess == ProcessingType.WASH) {
@@ -424,6 +437,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
         predef_allowances.add(Blocks.WALL_SIGN);
         predef_allowances.add(Blocks.LADDER);
         predef_allowances.add(Blocks.IRON_BARS);
+        predef_allowances.add(ModBlocks.BLAZE_BURNER);
 
         if (predef_allowances.contains(stateOfOhio.getBlock()))return true;
         return false;

@@ -22,13 +22,6 @@ public class PressingRecipes {
 
     /**Adds the default pressing recipes.*/
     private PressingRecipes() {
-        //Plate pressing
-        this.addPressing(new ItemStack(Items.IRON_INGOT, 1), new ItemStack(ModItems.INGREDIENT, 1, 1));
-        this.addPressing(new ItemStack(Items.GOLD_INGOT, 1), new ItemStack(ModItems.INGREDIENT, 1, 2));
-        this.addPressing(new ItemStack(ModItems.INGREDIENT, 1, 3), new ItemStack(ModItems.INGREDIENT, 1, 5));
-        this.addPressing(new ItemStack(ModItems.INGREDIENT, 1, 6), new ItemStack(ModItems.INGREDIENT, 1, 8));
-        this.addPressing(new ItemStack(ModItems.INGREDIENT, 1, 9), new ItemStack(ModItems.INGREDIENT, 1, 11));
-
         //Vanilla pressing
         this.addPressing(Items.REEDS, new ItemStack(Items.PAPER, 1));
         this.addPressing(Blocks.GRASS, new ItemStack(Blocks.GRASS_PATH, 1));
