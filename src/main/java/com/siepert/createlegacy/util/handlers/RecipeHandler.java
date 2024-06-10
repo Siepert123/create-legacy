@@ -34,7 +34,7 @@ public class RecipeHandler {
     }
 
     public static void registerWashing() {
-        CreateLegacy.logger.info("Registering compatible Washing recipes (highly WIP)");
+        CreateLegacy.logger.info("Registering compatible Washing recipes");
 
         int compatWashFound = 0;
         if (OreDictionary.doesOreNameExist("nuggetAluminum")) {
