@@ -179,8 +179,8 @@ public class RecipeHandler {
                 for (int m = 0; m < OreDictionary.getOres(MetalTypes.INGOT + metal).size(); m++) {
                     CreateLegacy.logger.info("Found {} metal set for plate", metal.toLowerCase());
                     compatPlatesFound++;
-                    addPressing(OreDictionary.getOres(MetalTypes.INGOT + metal).get(m),
-                            OreDictionary.getOres(MetalTypes.PLATE + metal).get(0));
+                    addPressing(OreDictionary.getOres(MetalTypes.INGOT + metal).get(m).copy(),
+                            OreDictionary.getOres(MetalTypes.PLATE + metal).get(0).copy());
                 }
             }
         }
@@ -196,7 +196,7 @@ public class RecipeHandler {
                     compatIngotsFound++;
                     ItemStack stack0 = OreDictionary.getOres(MetalTypes.NUGGET + metal).get(m).copy();
                     ItemStack stack1 = OreDictionary.getOres(MetalTypes.INGOT + metal).get(0).copy();
-                    add9Compacting(stack0, stack1); //TODO: Make sure it doesn't produce 9 ingots
+                    add9Compacting(stack0, stack1);
                 }
             }
         }

@@ -40,7 +40,6 @@ public final class CreateLegacy {
 
     @EventHandler
     public void init(FMLPostInitializationEvent event) {
-        logger.info("Femboy count: {} (me)", 1);
         RegistryHandler.otherPostInitRegistries();
     }
 }
