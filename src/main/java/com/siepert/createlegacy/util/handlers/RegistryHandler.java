@@ -54,6 +54,9 @@ public class RegistryHandler {
     public static void otherPostInitRegistries() {
         RecipeHandler.registerOreSmelting();
         RecipeHandler.registerCrushedOreCompatSmelting();
+
         RecipeHandler.registerWashing();
+        RecipeHandler.registerCompatPressRecipes();
+        RecipeHandler.registerCompatCompactingRecipes();
     }
 }
