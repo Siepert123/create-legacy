@@ -173,9 +173,9 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                 List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
 
                 for (EntityItem entityItem : foundItems) {
-                    if (apply(entityItem.getItem()).hasRecipe) {
+                    if (applyCompact(entityItem.getItem(), heatState).hasRecipe) {
                         EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down(2).getY() + 0.2, pos.getZ() + 0.5,
-                                apply(entityItem.getItem()).stack);
+                                applyCompact(entityItem.getItem(), heatState).getResult());
                         resultEntityItem.setVelocity(0, 0, 0);
                         worldIn.spawnEntity(resultEntityItem);
                         entityItem.getItem().shrink(1);
@@ -219,7 +219,23 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
         }
     }
 
-    private class ResultSet {
+    public CompactingResultSet applyCompact(ItemStack stack, BlockBlazeBurner.State heatState) {
+        if (stack.isEmpty()) {
+            return new CompactingResultSet(stack, false);
+        } else {
+            ItemStack itemstack = PressingRecipes.instance().getPressingResult(stack);
+
+            if (itemstack.isEmpty()) {
+                return new CompactingResultSet(stack, false);
+            } else {
+                ItemStack itemstack1 = itemstack.copy();
+                itemstack1.setCount(itemstack.getCount());
+                return new CompactingResultSet(itemstack1, true);
+            }
+        }
+    }
+
+    private static class ResultSet {
         ItemStack stack;
         boolean hasRecipe;
         private ResultSet(ItemStack stack, boolean hasRecipe) {
@@ -233,6 +249,22 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
 
         public ItemStack getResult() {
             return stack;
+        }
+    }
+
+    private static class CompactingResultSet {
+        ItemStack result;
+        boolean hasRecipe;
+        private CompactingResultSet(ItemStack result, boolean hasRecipe) {
+            this.result = result;
+            this.hasRecipe = hasRecipe;
+        }
+
+        public boolean hasRecipe() {
+            return hasRecipe;
+        }
+        public ItemStack getResult() {
+            return result;
         }
     }
 }
