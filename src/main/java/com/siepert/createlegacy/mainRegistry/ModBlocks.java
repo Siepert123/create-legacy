@@ -29,6 +29,7 @@ public class ModBlocks {
     public static final Block CHASSIS = new BlockChassis("chassis");
     public static final Block KINETIC_UTILITY = new BlockKineticUtility();
     public static final Block ITEM_HOLDER = new BlockItemHolder("item_holder");
+    public static final Block BLAZE_BURNER = new BlockBlazeBurner("blaze_burner");
 
     public static final Block PRESS = new BlockMechanicalPress("press");
     public static final Block DRILL = new BlockDrill("drill");

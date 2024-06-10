@@ -132,13 +132,49 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                 ((IKineticActor) aBlock).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
             }
 
+            boolean isCompactor = worldIn.getBlockState(pos.down(2)).getBlock() instanceof BlockItemHolder;
+            if (isCompactor) {
+                isCompactor = worldIn.getBlockState(pos.down(2)).getValue(BlockItemHolder.VARIANT) == BlockItemHolder.Variant.BASIN;
+            }
+
+            BlockBlazeBurner.State heatState;
+            if (isCompactor) {
+                heatState = worldIn.getBlockState(pos.down(3)).getValue(BlockBlazeBurner.STATE);
+            } else heatState = BlockBlazeBurner.State.EMPTY;
+
+
             if (!worldIn.getBlockState(pos.down()).getMaterial().blocksMovement() && !worldIn.isRemote) {
-                AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down());
+                if (!isCompactor) {
+                    AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down());
+                    List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
+
+                    for (EntityItem entityItem : foundItems) {
+                        if (apply(entityItem.getItem()).hasRecipe) {
+                            EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
+                                    apply(entityItem.getItem()).stack);
+                            resultEntityItem.setVelocity(0, 0, 0);
+                            worldIn.spawnEntity(resultEntityItem);
+                            entityItem.getItem().shrink(1);
+                            if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
+                                entityItem.setDead();
+                            }
+
+                            float pitch;
+                            if (Reference.random.nextInt(100) == 0) {
+                                pitch = 0.1f;
+                            } else pitch = 0.8f;
+                            worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);
+                            return;
+                        }
+                    }
+                    return;
+                }
+                AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down(2));
                 List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
 
                 for (EntityItem entityItem : foundItems) {
                     if (apply(entityItem.getItem()).hasRecipe) {
-                        EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
+                        EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down(2).getY() + 0.2, pos.getZ() + 0.5,
                                 apply(entityItem.getItem()).stack);
                         resultEntityItem.setVelocity(0, 0, 0);
                         worldIn.spawnEntity(resultEntityItem);
