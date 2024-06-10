@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "state=empty": {
+      "model": "create:blaze_burner/empty"
+    },
+    "state=passive": {
+      "model": "create:blaze_burner/passive"
+    },
+    "state=heated": {
+      "model": "create:blaze_burner/heated"
+    },
+    "state=superheated": {
+      "model": "create:blaze_burner/superheated"
+    }
+  }
+}
