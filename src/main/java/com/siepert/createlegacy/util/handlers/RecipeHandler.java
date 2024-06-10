@@ -194,8 +194,11 @@ public class RecipeHandler {
                 for (int m = 0; m < OreDictionary.getOres(MetalTypes.NUGGET + metal).size(); m++) {
                     CreateLegacy.logger.info("Found {} metal set for nugget to ingot", metal.toLowerCase());
                     compatIngotsFound++;
-                    add9Compacting(OreDictionary.getOres(MetalTypes.NUGGET + metal).get(m),
-                            OreDictionary.getOres(MetalTypes.INGOT + metal).get(0));
+                    ItemStack stack0 = OreDictionary.getOres(MetalTypes.NUGGET + metal).get(m).copy();
+                    stack0.setCount(9);
+                    ItemStack stack1 = OreDictionary.getOres(MetalTypes.INGOT + metal).get(0).copy();
+                    stack1.setCount(1);
+                    add9Compacting(stack0, stack1); //TODO: Make sure it doesn't produce 9 ingots
                 }
             }
         }
@@ -209,8 +212,11 @@ public class RecipeHandler {
                 for (int m = 0; m < OreDictionary.getOres(MetalTypes.INGOT + metal).size(); m++) {
                     CreateLegacy.logger.info("Found {} metal set for ingot to block", metal.toLowerCase());
                     compatBlocksFound++;
-                    add9Compacting(OreDictionary.getOres(MetalTypes.INGOT + metal).get(m),
-                            OreDictionary.getOres(MetalTypes.BLOCK + metal).get(0));
+                    ItemStack stack0 = OreDictionary.getOres(MetalTypes.INGOT + metal).get(m).copy();
+                    stack0.setCount(9);
+                    ItemStack stack1 = OreDictionary.getOres(MetalTypes.BLOCK + metal).get(0).copy();
+                    stack1.setCount(1);
+                    add9Compacting(stack0, stack1);
                 }
             }
         }

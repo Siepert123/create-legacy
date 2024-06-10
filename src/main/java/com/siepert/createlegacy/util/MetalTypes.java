@@ -25,6 +25,7 @@ public class MetalTypes {
         METAL_NAMES.add("Gold");
         METAL_NAMES.add("Copper");
         METAL_NAMES.add("Zinc");
+        METAL_NAMES.add("Brass");
     }
 
     public static final String INGOT = "ingot";
