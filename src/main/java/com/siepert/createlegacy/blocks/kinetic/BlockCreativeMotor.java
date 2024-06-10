@@ -94,19 +94,11 @@ public class BlockCreativeMotor extends Block implements IHasModel {
         return this.getDefaultState().withProperty(FACING, facing.getOpposite());
     }
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        super.onBlockAdded(worldIn, pos, state);
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
-    }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
-            CreateLegacy.logger.info("click");
-        }
-        return true;
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        worldIn.scheduleUpdate(pos, this, 1);
+        super.onBlockAdded(worldIn, pos, state);
     }
 
     @Override
@@ -116,8 +108,10 @@ public class BlockCreativeMotor extends Block implements IHasModel {
             List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
             ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
                     iteratedBlocks, false, false);
+            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
         }
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        worldIn.scheduleUpdate(pos, this, 1);
     }
 
     @Override
