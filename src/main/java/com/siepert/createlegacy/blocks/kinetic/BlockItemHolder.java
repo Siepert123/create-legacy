@@ -42,7 +42,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 public class BlockItemHolder extends Block implements IHasModel, IMetaName {
-    public static final AxisAlignedBB HITBOX_DEPOT = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 12.0 / 16.0, 1.0);
+    public static final AxisAlignedBB HITBOX_DEPOT = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 13.0 / 16.0, 1.0);
 
     public static final AxisAlignedBB HITBOX_BASIN_DOWN = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 2.0 / 16.0, 1.0);
     public static final AxisAlignedBB HITBOX_BASIN_X_POS = new AxisAlignedBB(0.0, 0.0, 0.0, 2.0 / 16.0, 1.0, 1.0);
@@ -56,6 +56,11 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
             return Variant.DEPOT.unlocalizedName;
         }
         return Variant.BASIN.unlocalizedName;
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 
     public enum Variant implements IStringSerializable {
@@ -133,38 +138,47 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        if (state.getValue(VARIANT) == Variant.BASIN) {
-            worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                    SoundEvents.BLOCK_METAL_BREAK, SoundCategory.BLOCKS, 1.2f, 1.5f);
-        }
-    }
-
-    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        boolean isBasin = state.getValue(VARIANT) == Variant.BASIN;
-        if (isBasin) {
-            AxisAlignedBB searchPlace = new AxisAlignedBB(pos);
-            List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
+        if (!worldIn.isRemote) {
+            boolean isBasin = state.getValue(VARIANT) == Variant.BASIN;
+            if (isBasin) {
+                AxisAlignedBB searchPlace = new AxisAlignedBB(pos);
+                List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
 
-            for (EntityItem entityItem : itemsToRelocate) {
-                entityItem.setVelocity(0, 0, 0);
-                entityItem.posX = pos.getX() + 0.5;
-                entityItem.posY = pos.getY() + 0.5;
-                entityItem.posZ = pos.getZ() + 0.5;
-            }
-        } else {
-            AxisAlignedBB searchPlace = new AxisAlignedBB(pos, pos.up());
-            List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
+                CreateLegacy.logger.info("Items to relocate: {} ({} total)", itemsToRelocate, itemsToRelocate.size());
 
-            for (EntityItem entityItem : itemsToRelocate) {
-                entityItem.setVelocity(0, 0, 0);
-                entityItem.posX = pos.up().getX() + 0.5;
-                entityItem.posY = pos.up().getY();
-                entityItem.posZ = pos.up().getZ() + 0.5;
+                for (EntityItem entityItem : itemsToRelocate) {
+                    CreateLegacy.logger.info("Doing stuff to {}", entityItem);
+                    entityItem.setVelocity(0, 0, 0);
+                    entityItem.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                    entityItem.setPickupDelay(50);
+                }
+            } else {
+                AxisAlignedBB searchPlace = new AxisAlignedBB(pos.up());
+                List<EntityItem> itemsToRelocate = worldIn.getEntitiesWithinAABB(EntityItem.class, searchPlace);
+
+                CreateLegacy.logger.info("Items to relocate: {} ({} total)", itemsToRelocate, itemsToRelocate.size());
+
+                for (EntityItem entityItem : itemsToRelocate) {
+                    CreateLegacy.logger.info("Doing stuff to {}", entityItem);
+                    entityItem.setVelocity(0, 0, 0);
+                    entityItem.setPosition(pos.getX() + 0.5, pos.up().getY(), pos.getZ() + 0.5);
+                    entityItem.setPickupDelay(50);
+                }
             }
         }
         return true;
+    }
+
+    @Override
+    public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
+        switch (state.getValue(VARIANT)) {
+            case BASIN:
+                return SoundType.ANVIL;
+            case DEPOT:
+                return SoundType.WOOD;
+        }
+        return SoundType.WOOD;
     }
 
     @Override
