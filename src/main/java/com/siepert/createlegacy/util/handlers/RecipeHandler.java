@@ -177,10 +177,12 @@ public class RecipeHandler {
         CreateLegacy.logger.info("Attempting to register compat plate pressing");
         for(String metal : MetalTypes.METAL_NAMES) {
             if (OreDictionary.doesOreNameExist(MetalTypes.INGOT + metal) && OreDictionary.doesOreNameExist(MetalTypes.PLATE + metal)) {
-                CreateLegacy.logger.info("Found {} metal set for plate", metal.toLowerCase());
-                compatPlatesFound++;
-                addPressing(OreDictionary.getOres(MetalTypes.INGOT + metal).get(0),
-                        OreDictionary.getOres(MetalTypes.PLATE + metal).get(0));
+                for (int m = 0; m < OreDictionary.getOres(MetalTypes.INGOT + metal).size(); m++) {
+                    CreateLegacy.logger.info("Found {} metal set for plate", metal.toLowerCase());
+                    compatPlatesFound++;
+                    addPressing(OreDictionary.getOres(MetalTypes.INGOT + metal).get(m),
+                            OreDictionary.getOres(MetalTypes.PLATE + metal).get(0));
+                }
             }
         }
         CreateLegacy.logger.info("Compat plate pressing registry complete, {} compat(s) found", compatPlatesFound);
@@ -190,23 +192,27 @@ public class RecipeHandler {
         CreateLegacy.logger.info("Attempting to register compat nugget to ingot compressing");
         for(String metal : MetalTypes.METAL_NAMES) {
             if (OreDictionary.doesOreNameExist(MetalTypes.NUGGET + metal) && OreDictionary.doesOreNameExist(MetalTypes.INGOT + metal)) {
-                CreateLegacy.logger.info("Found {} metal set for nuggets to ingot", metal.toLowerCase());
-                compatIngotsFound++;
-                add9Compacting(OreDictionary.getOres(MetalTypes.NUGGET + metal).get(0),
-                        OreDictionary.getOres(MetalTypes.INGOT + metal).get(0));
+                for (int m = 0; m < OreDictionary.getOres(MetalTypes.NUGGET + metal).size(); m++) {
+                    CreateLegacy.logger.info("Found {} metal set for nugget to ingot", metal.toLowerCase());
+                    compatIngotsFound++;
+                    add9Compacting(OreDictionary.getOres(MetalTypes.NUGGET + metal).get(m),
+                            OreDictionary.getOres(MetalTypes.INGOT + metal).get(0));
+                }
             }
         }
         CreateLegacy.logger.info("Compat nugget to ingot compacting registry complete, {} compat(s) found", compatIngotsFound);
 
 
         int compatBlocksFound = 0;
-        CreateLegacy.logger.info("Attempting to register compat nugget to ingot compressing");
+        CreateLegacy.logger.info("Attempting to register compat ingot to block compressing");
         for(String metal : MetalTypes.METAL_NAMES) {
             if (OreDictionary.doesOreNameExist(MetalTypes.INGOT + metal) && OreDictionary.doesOreNameExist(MetalTypes.BLOCK + metal)) {
-                CreateLegacy.logger.info("Found {} metal set for ingots to block", metal.toLowerCase());
-                compatBlocksFound++;
-                add9Compacting(OreDictionary.getOres(MetalTypes.INGOT + metal).get(0),
-                        OreDictionary.getOres(MetalTypes.BLOCK + metal).get(0));
+                for (int m = 0; m < OreDictionary.getOres(MetalTypes.INGOT + metal).size(); m++) {
+                    CreateLegacy.logger.info("Found {} metal set for ingot to block", metal.toLowerCase());
+                    compatBlocksFound++;
+                    add9Compacting(OreDictionary.getOres(MetalTypes.INGOT + metal).get(m),
+                            OreDictionary.getOres(MetalTypes.BLOCK + metal).get(0));
+                }
             }
         }
         CreateLegacy.logger.info("Compat ingot to block compacting registry complete, {} compat(s) found", compatBlocksFound);
