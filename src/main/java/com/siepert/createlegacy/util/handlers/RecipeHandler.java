@@ -4,6 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.util.MetalTypes;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
@@ -169,6 +170,23 @@ public class RecipeHandler {
             compatSmeltsFound++;
         }
         CreateLegacy.logger.info("Found " + compatSmeltsFound + " compatible smeltables total");
+    }
+
+    public static void registerCompatPressRecipes() {
+        int compatPlatesFound = 0;
+        CreateLegacy.logger.info("Attempting to register compat plate pressing");
+        for(String metal : MetalTypes.METAL_NAMES) {
+            if (OreDictionary.doesOreNameExist(MetalTypes.INGOT + metal) && OreDictionary.doesOreNameExist(MetalTypes.PLATE + metal)) {
+                CreateLegacy.logger.info("Found {} metal set for plate", metal.toLowerCase());
+                compatPlatesFound++;
+                addPressing(OreDictionary.getOres(MetalTypes.INGOT + metal).get(0),
+                        OreDictionary.getOres(MetalTypes.PLATE + metal).get(0));
+            }
+        }
+        CreateLegacy.logger.info("Compat plate pressing registry complete, {} compat(s) found", compatPlatesFound);
+    }
+    public static void registerCompatCompactingRecipes() {
+
     }
 
 
