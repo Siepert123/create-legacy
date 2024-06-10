@@ -24,9 +24,9 @@ public class WashingRecipes {
         this.addWashingRecipe(new ItemStack(ModItems.INGREDIENT, 1, 12),
                 new ItemStack(Items.IRON_NUGGET, 9), new ItemStack(Items.REDSTONE));
         this.addWashingRecipe(new ItemStack(ModItems.INGREDIENT, 1, 13),
-                new ItemStack(Items.GOLD_NUGGET, 9), new ItemStack(Items.REDSTONE));
+                new ItemStack(Items.GOLD_NUGGET, 9), new ItemStack(Items.QUARTZ));
         this.addWashingRecipe(new ItemStack(ModItems.INGREDIENT, 1, 14),
-                new ItemStack(ModItems.INGREDIENT, 9, 4), new ItemStack(Items.REDSTONE));
+                new ItemStack(ModItems.INGREDIENT, 9, 4), new ItemStack(Items.CLAY_BALL));
         this.addWashingRecipe(new ItemStack(ModItems.INGREDIENT, 1, 15),
                 new ItemStack(ModItems.INGREDIENT, 9, 7), new ItemStack(Items.GUNPOWDER));
 
