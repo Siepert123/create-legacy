@@ -139,6 +139,11 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        doTheItemThingy(worldIn, pos, state);
+        return true;
+    }
+
+    private void doTheItemThingy(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
             boolean isBasin = state.getValue(VARIANT) == Variant.BASIN;
             if (isBasin) {
@@ -152,6 +157,7 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
                     entityItem.setVelocity(0, 0, 0);
                     entityItem.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
                     entityItem.setPickupDelay(50);
+                    entityItem.setNoDespawn();
                 }
             } else {
                 AxisAlignedBB searchPlace = new AxisAlignedBB(pos.up());
@@ -164,10 +170,10 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
                     entityItem.setVelocity(0, 0, 0);
                     entityItem.setPosition(pos.getX() + 0.5, pos.up().getY(), pos.getZ() + 0.5);
                     entityItem.setPickupDelay(50);
+                    entityItem.setNoDespawn();
                 }
             }
         }
-        return true;
     }
 
     @Override

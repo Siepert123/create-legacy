@@ -7,6 +7,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
 import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
+import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -138,7 +139,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
             }
 
             BlockBlazeBurner.State heatState;
-            if (isCompactor) {
+            if (isCompactor && worldIn.getBlockState(pos.down(3)).getBlock() instanceof BlockBlazeBurner) {
                 heatState = worldIn.getBlockState(pos.down(3)).getValue(BlockBlazeBurner.STATE);
             } else heatState = BlockBlazeBurner.State.EMPTY;
 
@@ -178,7 +179,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                                 applyCompact(entityItem.getItem(), heatState).getResult());
                         resultEntityItem.setVelocity(0, 0, 0);
                         worldIn.spawnEntity(resultEntityItem);
-                        entityItem.getItem().shrink(1);
+                        entityItem.getItem().shrink(applyCompact(entityItem.getItem(), heatState).cost);
                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                             entityItem.setDead();
                         }
@@ -221,18 +222,23 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
 
     public CompactingResultSet applyCompact(ItemStack stack, BlockBlazeBurner.State heatState) {
         if (stack.isEmpty()) {
-            return new CompactingResultSet(stack, false);
+            return new CompactingResultSet(stack, 0, false);
         } else {
-            ItemStack itemstack = PressingRecipes.instance().getPressingResult(stack);
+            ItemStack itemstack = CompactingRecipes.instance().getCompactingResult(stack);
+            BlockBlazeBurner.State heatMin = CompactingRecipes.instance().getHeatRequirement(stack);
+            int cost = CompactingRecipes.instance().getCompactingCost(stack);
 
             if (itemstack.isEmpty()) {
-                return new CompactingResultSet(stack, false);
+                return new CompactingResultSet(stack, 0, false);
             } else {
-                ItemStack itemstack1 = itemstack.copy();
-                itemstack1.setCount(itemstack.getCount());
-                return new CompactingResultSet(itemstack1, true);
+                if (BlockBlazeBurner.State.compareStates(heatState, heatMin) && stack.getCount() >= cost) {
+                    ItemStack itemstack1 = itemstack.copy();
+                    itemstack1.setCount(itemstack.getCount());
+                    return new CompactingResultSet(itemstack1, cost, true);
+                }
             }
         }
+        return new CompactingResultSet(stack, 0, false);
     }
 
     private static class ResultSet {
@@ -253,11 +259,13 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
     }
 
     private static class CompactingResultSet {
+        int cost;
         ItemStack result;
         boolean hasRecipe;
-        private CompactingResultSet(ItemStack result, boolean hasRecipe) {
+        private CompactingResultSet(ItemStack result, int cost, boolean hasRecipe) {
             this.result = result;
             this.hasRecipe = hasRecipe;
+            this.cost = cost;
         }
 
         public boolean hasRecipe() {

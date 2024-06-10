@@ -70,6 +70,10 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
             }
             return State.EMPTY;
         }
+
+        public static boolean compareStates(State input, State match) {
+            return input.getMeta() >= match.getMeta();
+        }
     }
     public static final PropertyEnum<State> STATE = PropertyEnum.create("state", State.class);
     public BlockBlazeBurner(String name) {

@@ -1,8 +1,11 @@
 package com.siepert.createlegacy.util.handlers;
 
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
+import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -20,13 +23,13 @@ public class RecipeHandler {
         GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE, 1, 1),
                 new ItemStack(ModItems.INGREDIENT, 1, 6), 0.4f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 12),
-                new ItemStack(Items.IRON_INGOT, 2, 0), 0.1f);
+                new ItemStack(Items.IRON_INGOT, 1, 0), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 13),
-                new ItemStack(Items.GOLD_INGOT, 2, 0), 0.1f);
+                new ItemStack(Items.GOLD_INGOT, 1, 0), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 14),
-                new ItemStack(ModItems.INGREDIENT, 2, 3), 0.1f);
+                new ItemStack(ModItems.INGREDIENT, 1, 3), 0.1f);
         GameRegistry.addSmelting(new ItemStack(ModItems.INGREDIENT, 1, 15),
-                new ItemStack(ModItems.INGREDIENT, 2, 6), 0.1f);
+                new ItemStack(ModItems.INGREDIENT, 1, 6), 0.1f);
     }
 
     public static void registerWashing() {
@@ -174,5 +177,16 @@ public class RecipeHandler {
     }
     private static void addWashing(@Nonnull ItemStack input, @Nonnull ItemStack result) {
         WashingRecipes.instance().addWashingRecipe(input, result, ItemStack.EMPTY);
+    }
+
+    private static void addPressing(@Nonnull ItemStack input, @Nonnull ItemStack result) {
+        PressingRecipes.instance().addPressing(input, result);
+    }
+
+    private static void addCompacting(@Nonnull ItemStack input, @Nonnull ItemStack result, BlockBlazeBurner.State heatRequirement) {
+        CompactingRecipes.instance().addCompacting(input, result, heatRequirement);
+    }
+    private static void addCompacting(@Nonnull ItemStack input, @Nonnull ItemStack result) {
+        CompactingRecipes.instance().addCompacting(input, result);
     }
 }
