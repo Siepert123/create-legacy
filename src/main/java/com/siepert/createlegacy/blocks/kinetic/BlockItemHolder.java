@@ -143,6 +143,12 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
         return true;
     }
 
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        IBlockState myState = worldIn.getBlockState(pos);
+        doTheItemThingy(worldIn, pos, myState);
+    }
+
     private void doTheItemThingy(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
             boolean isBasin = state.getValue(VARIANT) == Variant.BASIN;

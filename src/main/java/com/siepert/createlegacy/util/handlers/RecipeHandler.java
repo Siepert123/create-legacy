@@ -239,6 +239,7 @@ public class RecipeHandler {
 
     private static void add9Compacting(@Nonnull ItemStack input, @Nonnull ItemStack result) {
         input.setCount(9);
+        result.setCount(1);
         addCompacting(input, result);
     }
 }
