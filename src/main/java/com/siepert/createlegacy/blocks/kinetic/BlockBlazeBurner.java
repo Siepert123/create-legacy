@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
+import com.siepert.createlegacy.util.Reference;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -16,14 +17,18 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
@@ -155,5 +160,58 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (state.getValue(STATE) != State.EMPTY) {
+            if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
+                worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED));
+                worldIn.scheduleUpdate(pos, this, 100);
+                return true;
+            }
+            return false;
+        } else return false;
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (state.getValue(STATE) == State.COPE_SEETHE_MALD) {
+            worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
+            worldIn.scheduleUpdate(pos, this, 100);
+            return;
+        }
+        if (state.getValue(STATE) == State.HEATED) {
+            worldIn.setBlockState(pos, state.withProperty(STATE, State.PASSIVE), 0);
+        }
+    }
+
+    @Override
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        if (stateIn.getValue(STATE).getMeta() > 1) {
+            for (int i = 0; i < rand.nextInt(25) + 25; i++) {
+                worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                        pos.getX() + rand.nextFloat(),
+                        pos.getY() + rand.nextFloat(),
+                        pos.getZ() + rand.nextFloat(),
+                        0, rand.nextFloat() / 16, 0);
+            }
+            if (stateIn.getValue(STATE).getMeta() > 2) {
+                for (int i = 0; i < rand.nextInt(25) + 25; i++) {
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                            pos.getX() + rand.nextFloat(),
+                            pos.getY() + rand.nextFloat(),
+                            pos.getZ() + rand.nextFloat(),
+                            0, rand.nextFloat() / 16, 0);
+                }
+            }
+        }
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        if (state.getValue(STATE).equals(State.EMPTY)) return new ItemStack(this, 1, 0);
+        return new ItemStack(this, 1, 1);
     }
 }
