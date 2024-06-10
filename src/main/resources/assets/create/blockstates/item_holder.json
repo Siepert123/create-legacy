@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "variant=depot": {
+      "model": "create:item_holder/depot"
+    },
+    "variant=basin": {
+      "model": "create:item_holder/basin"
+    }
+  }
+}
