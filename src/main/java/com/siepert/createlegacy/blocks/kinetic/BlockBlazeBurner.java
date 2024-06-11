@@ -4,11 +4,13 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityBlazeBurner;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createlegacy.util.Reference;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,6 +23,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -28,14 +32,34 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
+public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITileEntityProvider {
     @Override
     public String getSpecialName(ItemStack stack) {
         return State.fromMeta(stack.getItemDamage()).getName();
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        if (meta != 0) {
+            return new TileEntityBlazeBurner();
+        }
+        return null;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(ModBlocks.BLAZE_BURNER);
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(ModBlocks.BLAZE_BURNER, 1, state.getValue(STATE).getMeta() == 0 ? 0 : 1);
     }
 
     public enum State implements IStringSerializable {
@@ -166,31 +190,16 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (state.getValue(STATE) != State.EMPTY && !worldIn.isRemote) {
-            if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
-                worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED));
-                worldIn.scheduleUpdate(pos, this, 100);
-                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
-                return true;
-            }
-            return false;
-        } else return false;
-    }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (!worldIn.isRemote) {
-            if (state.getValue(STATE) == State.COPE_SEETHE_MALD) {
-                worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
-                worldIn.scheduleUpdate(pos, this, 100);
-                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
-                return;
-            }
-            if (state.getValue(STATE) == State.HEATED) {
-                worldIn.setBlockState(pos, state.withProperty(STATE, State.PASSIVE), 0);
-                worldIn.markBlockRangeForRenderUpdate(pos.down().east().north(), pos.up().west().south());
+            if (playerIn.getHeldItem(hand).getItem() == Items.COAL) {
+                if (((TileEntityBlazeBurner) worldIn.getTileEntity(pos)).appendFuel(100)) {
+                    playerIn.getHeldItem(hand).shrink(1);
+                    return true;
+                }
             }
         }
+        return false;
     }
+
 
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {

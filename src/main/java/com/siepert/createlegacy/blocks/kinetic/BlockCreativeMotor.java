@@ -3,9 +3,11 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityCreativeMotor;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,23 +18,25 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockCreativeMotor extends Block implements IHasModel {
+public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityProvider {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
     public BlockCreativeMotor(String name) {
-        super(Material.ROCK);
+        super(Material.IRON);
         this.translucent = true;
-        this.blockSoundType = SoundType.WOOD;
+        this.blockSoundType = SoundType.METAL;
         this.fullBlock = false;
         setLightOpacity(0);
 
@@ -94,28 +98,9 @@ public class BlockCreativeMotor extends Block implements IHasModel {
         return this.getDefaultState().withProperty(FACING, facing.getOpposite());
     }
 
-
+    @Nullable
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        worldIn.scheduleUpdate(pos, this, 1);
-        super.onBlockAdded(worldIn, pos, state);
-    }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, @Nonnull Random rand) {
-        Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
-        if (block instanceof IKineticActor) {
-            List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-            ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
-                    iteratedBlocks, false, false);
-            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-        }
-        worldIn.scheduleUpdate(pos, this, 1);
-    }
-
-    @Override
-    public int tickRate(@Nonnull World worldIn) {
-        return 20;
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityCreativeMotor();
     }
 }
