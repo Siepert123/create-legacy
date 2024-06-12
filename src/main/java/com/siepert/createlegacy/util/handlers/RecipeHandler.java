@@ -38,6 +38,12 @@ public class RecipeHandler {
     }
 
     public static void registerWashing() {
+        for (int i = 0; i < OreDictionary.getOres("wheatFlour").size(); i++) {
+            addWashing(OreDictionary.getOres("wheatFlour").get(i),
+                    new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 1));
+        }
+
+
         CreateLegacy.logger.info("Registering compatible Washing recipes");
 
         int compatWashFound = 0;

@@ -58,5 +58,7 @@ public class RegistryHandler {
         RecipeHandler.registerWashing();
         RecipeHandler.registerCompatPressRecipes();
         RecipeHandler.registerCompatCompactingRecipes();
+
+        RecipeHandler.registerOther();
     }
 }

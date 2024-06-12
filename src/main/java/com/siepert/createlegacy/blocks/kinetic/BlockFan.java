@@ -347,9 +347,11 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
                         List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, itemSearchArea);
 
-                        for (Entity entity : foundEntities) {
-                            if (!(entity instanceof EntityItem)) {
-                                entity.setFire(5);
+                        if (whatsTheProcess == ProcessingType.SMELT) {
+                            for (Entity entity : foundEntities) {
+                                if (!(entity instanceof EntityItem)) {
+                                    entity.setFire(5);
+                                }
                             }
                         }
 

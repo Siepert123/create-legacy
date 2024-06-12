@@ -51,6 +51,9 @@ public class OreDictionaryCompat {
         OreDictionary.registerOre("crushedSilver", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 6));
         OreDictionary.registerOre("crushedTin", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 7));
         OreDictionary.registerOre("crushedUranium", new ItemStack(ModItems.COMPAT_INGREDIENT, 1, 8));
+
+        OreDictionary.registerOre("wheatFlour", new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 0));
+        OreDictionary.registerOre("dough", new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 1));
     }
     /** Saves all stone types to the OreDict.
      * Useful for compat 'n stuff like that.*/
