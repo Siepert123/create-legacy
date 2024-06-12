@@ -1,6 +1,7 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.blocks.item.ItemBlockBlazeBurner;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -105,7 +106,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName/*, I
         setHardness(1);
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
+        ModItems.ITEMS.add(new ItemBlockBlazeBurner(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#M#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_bars"
+    },
+    "M": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "create:blaze_burner",
+    "data": 0
+  }
+}
