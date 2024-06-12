@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "create:casing",
+      "data": 0
+    },
+    "M": {
+      "item": "create:ingredient",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:item_holder",
+    "data": 0
+  }
+}
