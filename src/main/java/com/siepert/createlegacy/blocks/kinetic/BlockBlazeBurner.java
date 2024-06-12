@@ -38,7 +38,7 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockBlazeBurner extends Block implements IHasModel, IMetaName/*, ITileEntityProvider*/ {
+public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITileEntityProvider {
     @Override
     public String getSpecialName(ItemStack stack) {
         return State.fromMeta(stack.getItemDamage()).getName();
@@ -196,6 +196,16 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName/*, I
                     }
                 }
                 return true;
+            }if (playerIn.getHeldItem(hand).getItem() == ModItems.SCRUMPTIOUS_FOOD && playerIn.getHeldItem(hand).getItemDamage() == 7) {
+                if (state.getValue(STATE) == State.PASSIVE || state.getValue(STATE) == State.HEATED) {
+                    if (!worldIn.isRemote) {
+                        worldIn.setBlockState(pos, state.withProperty(STATE, State.COPE_SEETHE_MALD), 0);
+                        if (!playerIn.isCreative()) {
+                            playerIn.getHeldItem(hand).shrink(1);
+                        }
+                    }
+                    return true;
+                }
             }
         }
         return false;
@@ -230,11 +240,9 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName/*, I
         return new ItemStack(this, 1, 1);
     }
 
-    /*
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityBlazeBurner();
     }
-    */
 }

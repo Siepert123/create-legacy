@@ -14,7 +14,7 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound = super.writeToNBT(compound);
+        super.writeToNBT(compound);
         compound.setInteger("burnTime", remainingBurnTime);
         return compound;
     }
