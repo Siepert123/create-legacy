@@ -42,6 +42,17 @@ item.crushed_silver.name=Crushed Silver
 item.crushed_tin.name=Crushed Tin
 item.crushed_uranium.name=Crushed Uranium
 
+#Food n stuff
+item.wheat_flour.name=Wheat Flour
+item.dough.name=Dough
+item.chocolate_ingot.name=Bar of Chocolate
+item.apple_honey.name=Honey Apple
+item.sweet_roll.name=Sweet Roll
+item.chocolate_berries.name=Chocolate Berries
+item.blazecake_base.name=Empty Blazecake
+item.blazecake.name=Blazecake
+item.blazecake_creative.name=Blazecake (Creative)
+
 #material storage blocks & ores
 tile.ore_copper.name=Copper Ore
 tile.ore_zinc.name=Zinc Ore
