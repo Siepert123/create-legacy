@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustWheat"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "create:scrumptious_item",
+    "data": 1
+  }
+}

@@ -32,6 +32,11 @@ public class RecipeHandler {
                 new ItemStack(ModItems.INGREDIENT, 1, 6), 0.1f);
     }
 
+    public static void registerOther() {
+        GameRegistry.addSmelting(new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 1),
+                new ItemStack(Items.BREAD), 0.1f);
+    }
+
     public static void registerWashing() {
         CreateLegacy.logger.info("Registering compatible Washing recipes");
 

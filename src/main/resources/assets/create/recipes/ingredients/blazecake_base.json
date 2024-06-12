@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustNetherrack"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "create:scrumptious_item",
+    "data": 6
+  }
+}
