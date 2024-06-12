@@ -37,19 +37,10 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITileEntityProvider {
+public class BlockBlazeBurner extends Block implements IHasModel, IMetaName/*, ITileEntityProvider*/ {
     @Override
     public String getSpecialName(ItemStack stack) {
         return State.fromMeta(stack.getItemDamage()).getName();
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        if (meta != 0) {
-            return new TileEntityBlazeBurner();
-        }
-        return null;
     }
 
     @Override
@@ -128,6 +119,12 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        if (state.getValue(STATE).getMeta() == 0) return 0;
+        return 1;
+    }
+
+    @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] {STATE});
     }
@@ -189,12 +186,15 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (state.getValue(STATE) != State.EMPTY && !worldIn.isRemote) {
-            if (playerIn.getHeldItem(hand).getItem() == Items.COAL) {
-                if (((TileEntityBlazeBurner) worldIn.getTileEntity(pos)).appendFuel(100)) {
-                    playerIn.getHeldItem(hand).shrink(1);
-                    return true;
+        if (state.getValue(STATE) != State.EMPTY) {
+            if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
+                if (!worldIn.isRemote) {
+                    worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
+                    if (!playerIn.isCreative()) {
+                        playerIn.getHeldItem(hand).shrink(1);
+                    }
                 }
+                return true;
             }
         }
         return false;
@@ -228,4 +228,12 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
         if (state.getValue(STATE).equals(State.EMPTY)) return new ItemStack(this, 1, 0);
         return new ItemStack(this, 1, 1);
     }
+
+    /*
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityBlazeBurner();
+    }
+    */
 }

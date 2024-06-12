@@ -1,6 +1,5 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createlegacy.blocks.kinetic.BlockCreativeMotor;
 import com.siepert.createlegacy.util.IKineticActor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -27,4 +26,6 @@ public class TileEntityCreativeMotor extends TileEntity implements ITickable {
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
         }
     }
+
+
 }

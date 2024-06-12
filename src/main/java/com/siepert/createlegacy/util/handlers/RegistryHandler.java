@@ -6,15 +6,12 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.world.gen.WorldGenCustomOres;
 import net.minecraft.block.Block;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler {
@@ -22,6 +19,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
+        TileEntityHandler.registerTileEntities();
     }
 
     @SubscribeEvent
