@@ -27,6 +27,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -35,6 +36,12 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 public class BlockMechanicalPress extends Block implements IHasModel, IKineticActor {
+    private static final AxisAlignedBB BB = new AxisAlignedBB(0.0, 2.0 / 16.0, 0.0, 1.0, 1.0, 1.0);
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BB;
+    }
+
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public BlockMechanicalPress(String name) {
         super(Material.ROCK);

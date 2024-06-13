@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -242,5 +243,13 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
         } else list.add(HITBOX_DEPOT);
 
         return list;
+    }
+
+    private static final AxisAlignedBB BB_DEPOT = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 13.0 / 16.0, 1.0);
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        if (state.getValue(VARIANT) == Variant.DEPOT) return BB_DEPOT;
+        return Block.FULL_BLOCK_AABB;
     }
 }
