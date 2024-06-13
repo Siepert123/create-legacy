@@ -16,7 +16,7 @@ import net.minecraft.world.IInteractionObject;
 public class TileEntityBlazeBurner extends TileEntity implements ITickable {
     private int remainingBurnTime;
 
-    private enum CookLevel {
+    public enum CookLevel {
         PASSIVE, HEATED, SEETHING
     }
 
@@ -35,19 +35,23 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        NBTTagCompound myData = serializeNBT();
-        readFromNBT(myData);
         IBlockState myState = world.getBlockState(this.getPos());
         if (myState.getValue(BlockBlazeBurner.STATE).getMeta() != 0) {
             if (myState.getValue(BlockBlazeBurner.SCHEDULE) == 1) {
-                remainingBurnTime = 800;
-                world.setBlockState(pos, myState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED));
+                remainingBurnTime = 1200;
             } else if (myState.getValue(BlockBlazeBurner.SCHEDULE) == 2) {
-                remainingBurnTime = 1500;
-                world.setBlockState(pos, myState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD));
+                remainingBurnTime = 3600;
+            }
+            IBlockState myNewState = world.getBlockState(pos).withProperty(BlockBlazeBurner.SCHEDULE, 0);
+            if (remainingBurnTime > 2400) {
+                remainingBurnTime--;
+                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD), world, pos);
+            } else if (remainingBurnTime > 0) {
+                remainingBurnTime--;
+                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED), world, pos);
+            } else {
+                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.PASSIVE), world, pos);
             }
         }
-
-        deserializeNBT(writeToNBT(myData));
     }
 }

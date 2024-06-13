@@ -23,6 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -87,6 +88,18 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
 
         public static boolean compareStates(State input, State match) {
             return input.getMeta() >= match.getMeta();
+        }
+
+        public static State fromCookLevel(TileEntityBlazeBurner.CookLevel cookLevel) {
+            switch (cookLevel) {
+                case PASSIVE:
+                    return State.PASSIVE;
+                case HEATED:
+                    return State.HEATED;
+                case SEETHING:
+                    return State.COPE_SEETHE_MALD;
+            }
+            return State.PASSIVE;
         }
     }
     public static final PropertyEnum<State> STATE = PropertyEnum.create("state", State.class);
@@ -197,6 +210,8 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
                         playerIn.getHeldItem(hand).shrink(1);
                     }
                 }
+                worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                        SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.0f);
                 return true;
             }
             if (playerIn.getHeldItem(hand).getItem() == ModItems.SCRUMPTIOUS_FOOD && playerIn.getHeldItem(hand).getItemDamage() == 7) {
@@ -207,6 +222,8 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
                             playerIn.getHeldItem(hand).shrink(1);
                         }
                     }
+                    worldIn.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.BLOCKS, 1.0f, 1.0f);
                     return true;
                 }
             }
@@ -247,5 +264,14 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityBlazeBurner();
+    }
+
+    public static void setState(IBlockState state, World worldIn, BlockPos pos) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        worldIn.setBlockState(pos, state, 3);
+        if (tileEntity != null) {
+            tileEntity.validate();
+            worldIn.setTileEntity(pos, tileEntity);
+        }
     }
 }

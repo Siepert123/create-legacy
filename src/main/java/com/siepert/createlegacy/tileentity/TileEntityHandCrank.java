@@ -25,6 +25,7 @@ public class TileEntityHandCrank extends TileEntity implements ITickable {
                     iteratedBlocks, false, false);
             world.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            world.setBlockState(pos, myState.withProperty(ACTIVATED, false), 0);
         }
     }
 
