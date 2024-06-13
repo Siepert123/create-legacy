@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "create:item/rose_quartz"
+    "layer0": "create:item/rose_quartz_new"
   }
 }
