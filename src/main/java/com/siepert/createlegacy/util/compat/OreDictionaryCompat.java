@@ -8,6 +8,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictionaryCompat {
     public static void registerOres() {
+        OreDictionary.registerOre("ingotChocolate", new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 2));
+
         OreDictionary.registerOre("oreCopper", new ItemStack(Item.getItemFromBlock(ModBlocks.ORE), 1, 0));
         OreDictionary.registerOre("oreZinc", new ItemStack(Item.getItemFromBlock(ModBlocks.ORE), 1, 1));
 

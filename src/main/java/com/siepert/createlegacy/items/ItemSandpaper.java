@@ -37,6 +37,8 @@ public class ItemSandpaper extends Item implements IHasModel {
             if (playerIn.inventory.getFirstEmptyStack() == -1) return super.onItemRightClick(worldIn, playerIn, handIn);
             ItemStack leftHandStack = playerIn.getHeldItem(EnumHand.OFF_HAND);
             ItemStack rightHandStack = playerIn.getHeldItem(EnumHand.MAIN_HAND);
+            ItemStack leftHandStackCopy = leftHandStack.copy();
+            leftHandStackCopy.setCount(1);
             if (leftHandStack.getItemDamage() == 19 && leftHandStack.getItem() == ModItems.INGREDIENT) {
                 leftHandStack.shrink(1);
                 rightHandStack.damageItem(1, playerIn);
