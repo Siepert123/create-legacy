@@ -41,6 +41,8 @@ public class CompactingRecipes {
                 new ItemStack(Blocks.CLAY, 1));
         this.addCompacting(new ItemStack(Items.BRICK, 4),
                 new ItemStack(Blocks.BRICK_BLOCK, 1));
+        this.addCompacting(new ItemStack(Items.NETHERBRICK, 4),
+                new ItemStack(Blocks.NETHER_BRICK, 1));
         this.addCompacting(new ItemStack(Items.SNOWBALL, 4),
                 new ItemStack(Blocks.SNOW, 1));
         this.addCompacting(new ItemStack(Items.SLIME_BALL, 9),

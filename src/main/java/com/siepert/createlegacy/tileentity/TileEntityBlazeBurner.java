@@ -2,16 +2,9 @@ package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IInteractionObject;
 
 public class TileEntityBlazeBurner extends TileEntity implements ITickable {
     private int remainingBurnTime;
@@ -42,16 +35,19 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
             } else if (myState.getValue(BlockBlazeBurner.SCHEDULE) == 2) {
                 remainingBurnTime = 3600;
             }
-            IBlockState myNewState = world.getBlockState(pos).withProperty(BlockBlazeBurner.SCHEDULE, 0);
-            if (remainingBurnTime > 2400) {
-                remainingBurnTime--;
-                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD), world, pos);
-            } else if (remainingBurnTime > 0) {
-                remainingBurnTime--;
-                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED), world, pos);
-            } else {
-                BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.PASSIVE), world, pos);
+            if (!world.isRemote) {
+                IBlockState myNewState = world.getBlockState(pos).withProperty(BlockBlazeBurner.SCHEDULE, 0);
+                if (remainingBurnTime > 2400) {
+                    remainingBurnTime--;
+                    BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD), world, pos);
+                } else if (remainingBurnTime > 0) {
+                    remainingBurnTime--;
+                    BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED), world, pos);
+                } else {
+                    BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.PASSIVE), world, pos);
+                }
             }
+            world.markBlockRangeForRenderUpdate(pos.east().north().down(), pos.west().south().up());
         }
     }
 }
