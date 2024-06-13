@@ -73,7 +73,7 @@ public final class ItemScrumptiousFood extends ItemFood implements IHasModel, IM
 
     public ItemScrumptiousFood() {
         super(4, 4, false);
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName("scrumptious_item");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHasSubtypes(true);

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class ItemSandpaper extends Item implements IHasModel {
 
     public ItemSandpaper() {
-        setUnlocalizedName("sandpaper");
+        setUnlocalizedName("create:sandpaper");
         setRegistryName("sandpaper");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setMaxDamage(15);

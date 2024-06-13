@@ -19,7 +19,7 @@ public class BlockScheduleWash extends Block implements IHasModel {
         super(Material.AIR);
         setLightOpacity(0);
 
-        setUnlocalizedName("schedule_wash");
+        setUnlocalizedName("create:" + "schedule_wash");
         setRegistryName("schedule_wash");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHardness(1);

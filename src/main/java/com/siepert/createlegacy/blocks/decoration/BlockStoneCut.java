@@ -30,7 +30,7 @@ public class BlockStoneCut extends Block implements IHasModel, IMetaName {
 
     public BlockStoneCut() {
         super(Material.ROCK);
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.ASURINE));

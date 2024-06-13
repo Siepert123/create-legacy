@@ -30,7 +30,7 @@ public class BlockCasing extends Block implements IHasModel, IMetaName {
 
     public BlockCasing() {
         super(Material.IRON);
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.CasingMaterialEnumType.ANDESITE));

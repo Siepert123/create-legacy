@@ -40,7 +40,7 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("pickaxe", 0);

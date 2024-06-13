@@ -45,7 +45,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     public BlockKineticUtility() {
         super(Material.ROCK);
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName("kinetic_utility");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.GEARBOX)

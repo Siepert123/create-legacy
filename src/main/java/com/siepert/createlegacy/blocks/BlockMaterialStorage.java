@@ -30,7 +30,7 @@ public class BlockMaterialStorage extends Block implements IHasModel, IMetaName 
 
     public BlockMaterialStorage() {
         super(Material.IRON);
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.MaterialStorageEnumType.COPPER));

@@ -92,7 +92,7 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
 

@@ -21,7 +21,7 @@ public class BlockScheduleCook extends Block implements IHasModel {
         super(Material.AIR);
         setLightOpacity(0);
 
-        setUnlocalizedName("schedule_cook");
+        setUnlocalizedName("create:" + "schedule_cook");
         setRegistryName("schedule_cook");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHardness(1);

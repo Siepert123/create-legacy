@@ -40,7 +40,7 @@ public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityP
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);

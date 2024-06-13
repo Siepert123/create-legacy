@@ -21,7 +21,7 @@ public final class ItemIngredient extends Item implements IHasModel, IMetaName {
             "plate_obsidian", "rose_quartz", "rose_quartz_polished"
     };
     public ItemIngredient() {
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName("ingredient");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHasSubtypes(true);

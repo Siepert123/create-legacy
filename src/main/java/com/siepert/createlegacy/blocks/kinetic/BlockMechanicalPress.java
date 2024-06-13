@@ -43,7 +43,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);

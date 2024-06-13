@@ -16,6 +16,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -89,6 +90,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
         }
     }
     public static final PropertyEnum<State> STATE = PropertyEnum.create("state", State.class);
+    public static final PropertyInteger SCHEDULE = PropertyInteger.create("schedule", 0, 2);
     public BlockBlazeBurner(String name) {
         super(Material.IRON);
         this.translucent = true;
@@ -96,7 +98,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name + "_");
+        setUnlocalizedName("create:" + name + "_");
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("pickaxe", 0);
@@ -111,12 +113,12 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(STATE).getMeta();
+        return state.getValue(STATE).getMeta() * 3 + state.getValue(SCHEDULE);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(STATE, State.fromMeta(meta));
+        return this.getDefaultState().withProperty(STATE, State.fromMeta(meta / 3)).withProperty(SCHEDULE, meta % 3);
     }
 
     @Override
@@ -127,7 +129,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {STATE});
+        return new BlockStateContainer(this, new IProperty[] {STATE, SCHEDULE});
     }
 
     @Override
@@ -190,16 +192,17 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
         if (state.getValue(STATE) != State.EMPTY) {
             if (playerIn.getHeldItem(hand).getItem() == Items.COAL && state.getValue(STATE) == State.PASSIVE) {
                 if (!worldIn.isRemote) {
-                    worldIn.setBlockState(pos, state.withProperty(STATE, State.HEATED), 0);
+                    worldIn.setBlockState(pos, state.withProperty(SCHEDULE, 1), 0);;
                     if (!playerIn.isCreative()) {
                         playerIn.getHeldItem(hand).shrink(1);
                     }
                 }
                 return true;
-            }if (playerIn.getHeldItem(hand).getItem() == ModItems.SCRUMPTIOUS_FOOD && playerIn.getHeldItem(hand).getItemDamage() == 7) {
+            }
+            if (playerIn.getHeldItem(hand).getItem() == ModItems.SCRUMPTIOUS_FOOD && playerIn.getHeldItem(hand).getItemDamage() == 7) {
                 if (state.getValue(STATE) == State.PASSIVE || state.getValue(STATE) == State.HEATED) {
                     if (!worldIn.isRemote) {
-                        worldIn.setBlockState(pos, state.withProperty(STATE, State.COPE_SEETHE_MALD), 0);
+                        worldIn.setBlockState(pos, state.withProperty(SCHEDULE, 2), 0);
                         if (!playerIn.isCreative()) {
                             playerIn.getHeldItem(hand).shrink(1);
                         }

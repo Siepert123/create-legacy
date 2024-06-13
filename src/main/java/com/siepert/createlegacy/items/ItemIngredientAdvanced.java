@@ -17,7 +17,7 @@ public final class ItemIngredientAdvanced extends Item implements IHasModel, IMe
             "shadow_steel", "refined_radiance"
     };
     public ItemIngredientAdvanced() {
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName("advanced_ingredient");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHasSubtypes(true);

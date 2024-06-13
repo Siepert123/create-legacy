@@ -42,7 +42,7 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor {
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);

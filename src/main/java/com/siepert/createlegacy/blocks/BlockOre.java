@@ -30,7 +30,7 @@ public class BlockOre extends Block implements IHasModel, IMetaName {
 
     public BlockOre() {
         super(Material.ROCK);
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.OreEnumType.COPPER));

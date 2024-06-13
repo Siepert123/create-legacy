@@ -18,7 +18,7 @@ public final class ItemIngredientCompat extends Item implements IHasModel, IMeta
             "crushed_silver", "crushed_tin", "crushed_uranium"
     };
     public ItemIngredientCompat() {
-        setUnlocalizedName("");
+        setUnlocalizedName("create:");
         setRegistryName("compat_ingredient");
         setHasSubtypes(true);
         setMaxDamage(0);

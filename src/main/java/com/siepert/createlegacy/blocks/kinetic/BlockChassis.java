@@ -33,7 +33,7 @@ public class BlockChassis extends Block implements IHasModel {
 
     public BlockChassis(String name) {
         super(Material.ROCK);
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setDefaultState(this.blockState.getBaseState()

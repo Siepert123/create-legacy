@@ -32,7 +32,7 @@ public class BlockStone extends Block implements IHasModel, IMetaName {
     public BlockStone(boolean addToInv) {
         super(Material.ROCK);
         this.addToInv = addToInv;
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.StoneEnumType.CALCITE));

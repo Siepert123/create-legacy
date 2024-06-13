@@ -65,7 +65,7 @@ public class BlockFlywheel extends Block implements IHasModel, IHasRotation, ITi
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName("furnace_");
+        setUnlocalizedName("create:" + "furnace_");
         setRegistryName("furnace_engine");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("pickaxe", 0);

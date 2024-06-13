@@ -35,7 +35,7 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName(name);
+        setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);

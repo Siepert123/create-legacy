@@ -15,7 +15,7 @@ public final class ItemIncomplete extends Item implements IHasModel, IMetaName {
             "precision_mechanism", "plate_obsidian"
     };
     public ItemIncomplete() {
-        setUnlocalizedName("incomplete_");
+        setUnlocalizedName("create:incomplete_");
         setRegistryName("incomplete_item");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHasSubtypes(true);

@@ -1,224 +1,224 @@
 #basic copper items
-item.ingot_copper.name=Copper Ingot
-item.nugget_copper.name=Copper Nugget
-item.plate_copper.name=Copper Sheet
+item.create:ingot_copper.name=Copper Ingot
+item.create:nugget_copper.name=Copper Nugget
+item.create:plate_copper.name=Copper Sheet
 
 #basic zinc items
-item.ingot_zinc.name=Zinc Ingot
-item.nugget_zinc.name=Zinc Nugget
-item.plate_zinc.name=Zinc Sheet
+item.create:ingot_zinc.name=Zinc Ingot
+item.create:nugget_zinc.name=Zinc Nugget
+item.create:plate_zinc.name=Zinc Sheet
 
 #basic brass items
-item.ingot_brass.name=Brass Ingot
-item.nugget_brass.name=Brass Nugget
-item.plate_brass.name=Brass Sheet
+item.create:ingot_brass.name=Brass Ingot
+item.create:nugget_brass.name=Brass Nugget
+item.create:plate_brass.name=Brass Sheet
 
 #other basic items
-item.andesite_alloy.name=Andesite Alloy
-item.plate_gold.name=Gold Sheet
-item.plate_iron.name=Iron Sheet
-item.plate_obsidian.name=Sturdy Sheet
-item.rose_quartz.name=Rose Quartz
-item.rose_quartz_polished.name=Polished Rose Quartz
+item.create:andesite_alloy.name=Andesite Alloy
+item.create:plate_gold.name=Gold Sheet
+item.create:plate_iron.name=Iron Sheet
+item.create:plate_obsidian.name=Sturdy Sheet
+item.create:rose_quartz.name=Rose Quartz
+item.create:rose_quartz_polished.name=Polished Rose Quartz
 
 #dust items
-item.dust_netherrack.name=Cinder Flour
-item.dust_obsidian.name=Powdered Obsidian
+item.create:dust_netherrack.name=Cinder Flour
+item.create:dust_obsidian.name=Powdered Obsidian
 
 #crushed items
-item.crushed_iron.name=Crushed Iron
-item.crushed_gold.name=Crushed Gold
-item.crushed_copper.name=Crushed Copper
-item.crushed_zinc.name=Crushed Zinc
+item.create:crushed_iron.name=Crushed Iron
+item.create:crushed_gold.name=Crushed Gold
+item.create:crushed_copper.name=Crushed Copper
+item.create:crushed_zinc.name=Crushed Zinc
 
 #crushed items (compat)
-item.crushed_aluminium.name=Crushed Aluminium
-item.crushed_lead.name=Crushed Lead
-item.crushed_nickel.name=Crushed Nickel
-item.crushed_osmium.name=Crushed Osmium
-item.crushed_platinum.name=Crushed Platinum
-item.crushed_quicksilver.name=Crushed Quicksilver
-item.crushed_silver.name=Crushed Silver
-item.crushed_tin.name=Crushed Tin
-item.crushed_uranium.name=Crushed Uranium
+item.create:crushed_aluminium.name=Crushed Aluminium
+item.create:crushed_lead.name=Crushed Lead
+item.create:crushed_nickel.name=Crushed Nickel
+item.create:crushed_osmium.name=Crushed Osmium
+item.create:crushed_platinum.name=Crushed Platinum
+item.create:crushed_quicksilver.name=Crushed Quicksilver
+item.create:crushed_silver.name=Crushed Silver
+item.create:crushed_tin.name=Crushed Tin
+item.create:crushed_uranium.name=Crushed Uranium
 
 #Food n stuff
-item.wheat_flour.name=Wheat Flour
-item.dough.name=Dough
-item.chocolate_ingot.name=Bar of Chocolate
-item.apple_honey.name=Honey Apple
-item.sweet_roll.name=Sweet Roll
-item.chocolate_berries.name=Chocolate Berries
-item.blazecake_base.name=Empty Blazecake
-item.blazecake.name=Blazecake
-item.blazecake_creative.name=Blazecake (Creative)
+item.create:wheat_flour.name=Wheat Flour
+item.create:dough.name=Dough
+item.create:chocolate_ingot.name=Bar of Chocolate
+item.create:apple_honey.name=Honey Apple
+item.create:sweet_roll.name=Sweet Roll
+item.create:chocolate_berries.name=Chocolate Berries
+item.create:blazecake_base.name=Empty Blazecake
+item.create:blazecake.name=Blazecake
+item.create:blazecake_creative.name=Blazecake (Creative)
 
 #material storage blocks & ores
-tile.ore_copper.name=Copper Ore
-tile.ore_zinc.name=Zinc Ore
-tile.storage_block_copper.name=Block of Copper
-tile.storage_block_zinc.name=Block of Zinc
-tile.storage_block_brass.name=Block of Brass
-tile.storage_block_andesite_alloy.name=Block of Andesite Alloy
+tile.create:ore_copper.name=Copper Ore
+tile.create:ore_zinc.name=Zinc Ore
+tile.create:storage_block_copper.name=Block of Copper
+tile.create:storage_block_zinc.name=Block of Zinc
+tile.create:storage_block_brass.name=Block of Brass
+tile.create:storage_block_andesite_alloy.name=Block of Andesite Alloy
 
 #Advanced ingredients
-item.whisk.name=Whisk
-item.propeller.name=Propeller
-item.electron_tube.name=Electron Tube
-item.brass_hand.name=Brass Hand
-item.integrated_circuit.name=Integrated Circuit
-item.precision_mechanism.name=Precision Mechanism
-item.shadow_steel.name=Shadow Steel
-item.refined_radiance.name=Refined Radiance
+item.create:whisk.name=Whisk
+item.create:propeller.name=Propeller
+item.create:electron_tube.name=Electron Tube
+item.create:brass_hand.name=Brass Hand
+item.create:integrated_circuit.name=Integrated Circuit
+item.create:precision_mechanism.name=Precision Mechanism
+item.create:shadow_steel.name=Shadow Steel
+item.create:refined_radiance.name=Refined Radiance
 
 #casings
-tile.casing_andesite.name=Andesite Casing
-tile.casing_copper.name=Copper Casing
-tile.casing_brass.name=Brass Casing
-tile.casing_train.name=Train Casing
+tile.create:casing_andesite.name=Andesite Casing
+tile.create:casing_copper.name=Copper Casing
+tile.create:casing_brass.name=Brass Casing
+tile.create:casing_train.name=Train Casing
 
 #Kinetic Appliances
-tile.axle.name=Axle
-tile.cogwheel.name=Cogwheel
-tile.hand_crank.name=Hand Crank
-tile.depot.name=Depot
-tile.basin.name=Basin
-tile.blaze_burner_empty.name=Empty Blaze Burner
-tile.blaze_burner_passive.name=Blaze Burner
-tile.blaze_burner_heated.name=Heated Blaze Burner
-tile.blaze_burner_superheated.name=Superheated Blaze Burner
-tile.creative_motor.name=(WIP) Creative Motor
-tile.water_wheel.name=(WIP) Water Wheel
-tile.drill.name=Mechanical Drill
-tile.saw.name=Mechanical Saw
-tile.press.name=Mechanical Press
-tile.mixer.name=Mechanical Mixer
-tile.fan.name=Encased Fan
-tile.chassis.name=Chassis
-tile.gearbox.name=Gearbox
-tile.clutch.name=Clutch
-tile.gearshift.name=Gearshift
-tile.axle_encased_andesite.name=Andesite Encased Axle
-tile.axle_encased_brass.name=Brass Encased Axle
+tile.create:axle.name=Axle
+tile.create:cogwheel.name=Cogwheel
+tile.create:hand_crank.name=Hand Crank
+tile.create:depot.name=Depot
+tile.create:basin.name=Basin
+tile.create:blaze_burner_empty.name=Empty Blaze Burner
+tile.create:blaze_burner_passive.name=Blaze Burner
+tile.create:blaze_burner_heated.name=Heated Blaze Burner
+tile.create:blaze_burner_superheated.name=Superheated Blaze Burner
+tile.create:creative_motor.name=(WIP) Creative Motor
+tile.create:water_wheel.name=(WIP) Water Wheel
+tile.create:drill.name=Mechanical Drill
+tile.create:saw.name=Mechanical Saw
+tile.create:press.name=Mechanical Press
+tile.create:mixer.name=Mechanical Mixer
+tile.create:fan.name=Encased Fan
+tile.create:chassis.name=Chassis
+tile.create:gearbox.name=Gearbox
+tile.create:clutch.name=Clutch
+tile.create:gearshift.name=Gearshift
+tile.create:axle_encased_andesite.name=Andesite Encased Axle
+tile.create:axle_encased_brass.name=Brass Encased Axle
 
 #Overige
 itemGroup.tab_create=Create
 itemGroup.tab_create_decorations=Create's Decorations
-item.evil_item.name=Evil Item!
-item.sandpaper.name=Sandpaper
-item.incomplete_precision_mechanism.name=Incomplete Precision Mechanism
-item.incomplete_plate_obsidian.name=Unprocessed Obsidian Sheet
-tile.schedule_wash.name=Schedule Fan Washing
-tile.schedule_cook.name=Schedule Fan Cooking
+item.create:evil_item.create:name=Evil Item!
+item.create:sandpaper.name=Sandpaper
+item.create:incomplete_precision_mechanism.name=Incomplete Precision Mechanism
+item.create:incomplete_plate_obsidian.name=Unprocessed Obsidian Sheet
+tile.create:schedule_wash.name=Schedule Fan Washing
+tile.create:schedule_cook.name=Schedule Fan Cooking
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
-subtitle.item.sandpaper.used=Sandpaper polishes
+subtitle.item.create:sandpaper.used=Sandpaper polishes
 subtitle.block.press.activation=Press flattens something
 
 #Custom stones
-tile.stone_calcite.name=Calcite
-tile.stone_tuff.name=Tuff
-tile.stone_asurine.name=Asurine
-tile.stone_crimsite.name=Crimsite
-tile.stone_limestone.name=Limestone
-tile.stone_ochrum.name=Ochrum
-tile.stone_scorchia.name=Scorchia
-tile.stone_scoria.name=Scoria
-tile.stone_veridium.name=Veridium
+tile.create:stone_calcite.name=Calcite
+tile.create:stone_tuff.name=Tuff
+tile.create:stone_asurine.name=Asurine
+tile.create:stone_crimsite.name=Crimsite
+tile.create:stone_limestone.name=Limestone
+tile.create:stone_ochrum.name=Ochrum
+tile.create:stone_scorchia.name=Scorchia
+tile.create:stone_scoria.name=Scoria
+tile.create:stone_veridium.name=Veridium
 
 #Polished
-tile.stone_polished_andesite.name=Polished Andesite
-tile.stone_polished_asurine.name=Polished Asurine
-tile.stone_polished_calcite.name=Polished Calcite
-tile.stone_polished_crimsite.name=Polished Crimsite
-tile.stone_polished_deepslate.name=Polished Deepslate
-tile.stone_polished_diorite.name=Polished Diorite
-tile.stone_polished_dripstone.name=Polished Dripstone
-tile.stone_polished_granite.name=Polished Granite
-tile.stone_polished_limestone.name=Polished Limestone
-tile.stone_polished_ochrum.name=Polished Ochrum
-tile.stone_polished_scorchia.name=Polished Scorchia
-tile.stone_polished_scoria.name=Polished Scoria
-tile.stone_polished_tuff.name=Polished Tuff
-tile.stone_polished_veridium.name=Polished Veridium
+tile.create:stone_polished_andesite.name=Polished Andesite
+tile.create:stone_polished_asurine.name=Polished Asurine
+tile.create:stone_polished_calcite.name=Polished Calcite
+tile.create:stone_polished_crimsite.name=Polished Crimsite
+tile.create:stone_polished_deepslate.name=Polished Deepslate
+tile.create:stone_polished_diorite.name=Polished Diorite
+tile.create:stone_polished_dripstone.name=Polished Dripstone
+tile.create:stone_polished_granite.name=Polished Granite
+tile.create:stone_polished_limestone.name=Polished Limestone
+tile.create:stone_polished_ochrum.name=Polished Ochrum
+tile.create:stone_polished_scorchia.name=Polished Scorchia
+tile.create:stone_polished_scoria.name=Polished Scoria
+tile.create:stone_polished_tuff.name=Polished Tuff
+tile.create:stone_polished_veridium.name=Polished Veridium
 
 #Cut
-tile.stone_cut_andesite.name=Cut Andesite
-tile.stone_cut_asurine.name=Cut Asurine
-tile.stone_cut_calcite.name=Cut Calcite
-tile.stone_cut_crimsite.name=Cut Crimsite
-tile.stone_cut_deepslate.name=Cut Deepslate
-tile.stone_cut_diorite.name=Cut Diorite
-tile.stone_cut_dripstone.name=Cut Dripstone
-tile.stone_cut_granite.name=Cut Granite
-tile.stone_cut_limestone.name=Cut Limestone
-tile.stone_cut_ochrum.name=Cut Ochrum
-tile.stone_cut_scorchia.name=Cut Scorchia
-tile.stone_cut_scoria.name=Cut Scoria
-tile.stone_cut_tuff.name=Cut Tuff
-tile.stone_cut_veridium.name=Cut Veridium
+tile.create:stone_cut_andesite.name=Cut Andesite
+tile.create:stone_cut_asurine.name=Cut Asurine
+tile.create:stone_cut_calcite.name=Cut Calcite
+tile.create:stone_cut_crimsite.name=Cut Crimsite
+tile.create:stone_cut_deepslate.name=Cut Deepslate
+tile.create:stone_cut_diorite.name=Cut Diorite
+tile.create:stone_cut_dripstone.name=Cut Dripstone
+tile.create:stone_cut_granite.name=Cut Granite
+tile.create:stone_cut_limestone.name=Cut Limestone
+tile.create:stone_cut_ochrum.name=Cut Ochrum
+tile.create:stone_cut_scorchia.name=Cut Scorchia
+tile.create:stone_cut_scoria.name=Cut Scoria
+tile.create:stone_cut_tuff.name=Cut Tuff
+tile.create:stone_cut_veridium.name=Cut Veridium
 
 #Bricks
-tile.stone_bricks_andesite.name=Andesite Bricks
-tile.stone_bricks_asurine.name=Asurine Bricks
-tile.stone_bricks_calcite.name=Calcite Bricks
-tile.stone_bricks_crimsite.name=Crimsite Bricks
-tile.stone_bricks_deepslate.name=Deepslate Bricks
-tile.stone_bricks_diorite.name=Diorite Bricks
-tile.stone_bricks_dripstone.name=Dripstone Bricks
-tile.stone_bricks_granite.name=Granite Bricks
-tile.stone_bricks_limestone.name=Limestone Bricks
-tile.stone_bricks_ochrum.name=Ochrum Bricks
-tile.stone_bricks_scorchia.name=Scorchia Bricks
-tile.stone_bricks_scoria.name=Scoria Bricks
-tile.stone_bricks_tuff.name=Tuff Bricks
-tile.stone_bricks_veridium.name=Veridium Bricks
+tile.create:stone_bricks_andesite.name=Andesite Bricks
+tile.create:stone_bricks_asurine.name=Asurine Bricks
+tile.create:stone_bricks_calcite.name=Calcite Bricks
+tile.create:stone_bricks_crimsite.name=Crimsite Bricks
+tile.create:stone_bricks_deepslate.name=Deepslate Bricks
+tile.create:stone_bricks_diorite.name=Diorite Bricks
+tile.create:stone_bricks_dripstone.name=Dripstone Bricks
+tile.create:stone_bricks_granite.name=Granite Bricks
+tile.create:stone_bricks_limestone.name=Limestone Bricks
+tile.create:stone_bricks_ochrum.name=Ochrum Bricks
+tile.create:stone_bricks_scorchia.name=Scorchia Bricks
+tile.create:stone_bricks_scoria.name=Scoria Bricks
+tile.create:stone_bricks_tuff.name=Tuff Bricks
+tile.create:stone_bricks_veridium.name=Veridium Bricks
 
 #Fancy bricks
-tile.stone_bricks_fancy_andesite.name=Fancy Andesite Bricks
-tile.stone_bricks_fancy_asurine.name=Fancy Asurine Bricks
-tile.stone_bricks_fancy_calcite.name=Fancy Calcite Bricks
-tile.stone_bricks_fancy_crimsite.name=Fancy Crimsite Bricks
-tile.stone_bricks_fancy_deepslate.name=Fancy Deepslate Bricks
-tile.stone_bricks_fancy_diorite.name=Fancy Diorite Bricks
-tile.stone_bricks_fancy_dripstone.name=Fancy Dripstone Bricks
-tile.stone_bricks_fancy_granite.name=Fancy Granite Bricks
-tile.stone_bricks_fancy_limestone.name=Fancy Limestone Bricks
-tile.stone_bricks_fancy_ochrum.name=Fancy Ochrum Bricks
-tile.stone_bricks_fancy_scorchia.name=Fancy Scorchia Bricks
-tile.stone_bricks_fancy_scoria.name=Fancy Scoria Bricks
-tile.stone_bricks_fancy_tuff.name=Fancy Tuff Bricks
-tile.stone_bricks_fancy_veridium.name=Fancy Veridium Bricks
+tile.create:stone_bricks_fancy_andesite.name=Fancy Andesite Bricks
+tile.create:stone_bricks_fancy_asurine.name=Fancy Asurine Bricks
+tile.create:stone_bricks_fancy_calcite.name=Fancy Calcite Bricks
+tile.create:stone_bricks_fancy_crimsite.name=Fancy Crimsite Bricks
+tile.create:stone_bricks_fancy_deepslate.name=Fancy Deepslate Bricks
+tile.create:stone_bricks_fancy_diorite.name=Fancy Diorite Bricks
+tile.create:stone_bricks_fancy_dripstone.name=Fancy Dripstone Bricks
+tile.create:stone_bricks_fancy_granite.name=Fancy Granite Bricks
+tile.create:stone_bricks_fancy_limestone.name=Fancy Limestone Bricks
+tile.create:stone_bricks_fancy_ochrum.name=Fancy Ochrum Bricks
+tile.create:stone_bricks_fancy_scorchia.name=Fancy Scorchia Bricks
+tile.create:stone_bricks_fancy_scoria.name=Fancy Scoria Bricks
+tile.create:stone_bricks_fancy_tuff.name=Fancy Tuff Bricks
+tile.create:stone_bricks_fancy_veridium.name=Fancy Veridium Bricks
 
 #Pillars
-tile.stone_pillar_andesite.name=Andesite Pillar
-tile.stone_pillar_asurine.name=Asurine Pillar
-tile.stone_pillar_calcite.name=Calcite Pillar
-tile.stone_pillar_crimsite.name=Crimsite Pillar
-tile.stone_pillar_deepslate.name=Deepslate Pillar
-tile.stone_pillar_diorite.name=Diorite Pillar
-tile.stone_pillar_dripstone.name=Dripstone Pillar
-tile.stone_pillar_granite.name=Granite Pillar
-tile.stone_pillar_limestone.name=Limestone Pillar
-tile.stone_pillar_ochrum.name=Ochrum Pillar
-tile.stone_pillar_scorchia.name=Scorchia Pillar
-tile.stone_pillar_scoria.name=Scoria Pillar
-tile.stone_pillar_tuff.name=Tuff Pillar
-tile.stone_pillar_veridium.name=Veridium Pillar
+tile.create:stone_pillar_andesite.name=Andesite Pillar
+tile.create:stone_pillar_asurine.name=Asurine Pillar
+tile.create:stone_pillar_calcite.name=Calcite Pillar
+tile.create:stone_pillar_crimsite.name=Crimsite Pillar
+tile.create:stone_pillar_deepslate.name=Deepslate Pillar
+tile.create:stone_pillar_diorite.name=Diorite Pillar
+tile.create:stone_pillar_dripstone.name=Dripstone Pillar
+tile.create:stone_pillar_granite.name=Granite Pillar
+tile.create:stone_pillar_limestone.name=Limestone Pillar
+tile.create:stone_pillar_ochrum.name=Ochrum Pillar
+tile.create:stone_pillar_scorchia.name=Scorchia Pillar
+tile.create:stone_pillar_scoria.name=Scoria Pillar
+tile.create:stone_pillar_tuff.name=Tuff Pillar
+tile.create:stone_pillar_veridium.name=Veridium Pillar
 
 #Layered
-tile.stone_layered_andesite.name=Layered Andesite
-tile.stone_layered_asurine.name=Layered Asurine
-tile.stone_layered_calcite.name=Layered Calcite
-tile.stone_layered_crimsite.name=Layered Crimsite
-tile.stone_layered_deepslate.name=Layered Deepslate
-tile.stone_layered_diorite.name=Layered Diorite
-tile.stone_layered_dripstone.name=Layered Dripstone
-tile.stone_layered_granite.name=Layered Granite
-tile.stone_layered_limestone.name=Layered Limestone
-tile.stone_layered_ochrum.name=Layered Ochrum
-tile.stone_layered_scorchia.name=Layered Scorchia
-tile.stone_layered_scoria.name=Layered Scoria
-tile.stone_layered_tuff.name=Layered Tuff
-tile.stone_layered_veridium.name=Layered Veridium
+tile.create:stone_layered_andesite.name=Layered Andesite
+tile.create:stone_layered_asurine.name=Layered Asurine
+tile.create:stone_layered_calcite.name=Layered Calcite
+tile.create:stone_layered_crimsite.name=Layered Crimsite
+tile.create:stone_layered_deepslate.name=Layered Deepslate
+tile.create:stone_layered_diorite.name=Layered Diorite
+tile.create:stone_layered_dripstone.name=Layered Dripstone
+tile.create:stone_layered_granite.name=Layered Granite
+tile.create:stone_layered_limestone.name=Layered Limestone
+tile.create:stone_layered_ochrum.name=Layered Ochrum
+tile.create:stone_layered_scorchia.name=Layered Scorchia
+tile.create:stone_layered_scoria.name=Layered Scoria
+tile.create:stone_layered_tuff.name=Layered Tuff
+tile.create:stone_layered_veridium.name=Layered Veridium
