@@ -4,14 +4,17 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityFurnaceFlywheel;
+import com.siepert.createlegacy.util.EnumHorizontalFacing;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
+import com.siepert.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +22,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -33,7 +35,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockFlywheel extends Block implements IHasModel, IHasRotation, ITileEntityProvider {
+public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IMetaName {
+    @Override
+    public String getSpecialName(ItemStack stack) {
+        return Variant.fromMeta(stack.getItemDamage()).getName();
+    }
+
     public enum Variant implements IStringSerializable {
         ENGINE(0, "engine"), FLYWHEEL(1, "flywheel");
         public final int meta;
@@ -58,7 +65,8 @@ public class BlockFlywheel extends Block implements IHasModel, IHasRotation, ITi
         }
     }
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
-    public BlockFlywheel() {
+
+    public BlockFurnaceEngine() {
         super(Material.IRON);
         this.translucent = true;
         this.blockSoundType = SoundType.METAL;
@@ -69,36 +77,42 @@ public class BlockFlywheel extends Block implements IHasModel, IHasRotation, ITi
         setRegistryName("furnace_engine");
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("pickaxe", 0);
+        setDefaultState(this.blockState.getBaseState()
+                .withProperty(VARIANT, Variant.ENGINE)
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH));
         setHardness(2);
         setResistance(3);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
+    public static final PropertyEnum<EnumHorizontalFacing> HORIZONTAL_FACING = PropertyEnum.create("facing", EnumHorizontalFacing.class);
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(VARIANT).meta;
+        return state.getValue(VARIANT).meta * 4 + state.getValue(HORIZONTAL_FACING).index();
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta));
+        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta((meta - meta % 4) / 4))
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromIndex(meta % 4));
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return new BlockStateContainer(this, new IProperty[] {VARIANT, HORIZONTAL_FACING});
     }
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(placer.getHeldItem(hand).getItemDamage()));
+        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(placer.getHeldItem(hand).getItemDamage()))
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
     }
 
     @Override
     public void registerModels() {
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "furnace_engine", "inventory");
-        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "flywheel", "inventory");
+        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "furnace_flywheel", "inventory");
     }
 
     @Override
@@ -117,6 +131,28 @@ public class BlockFlywheel extends Block implements IHasModel, IHasRotation, ITi
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null;
+        if (getStateFromMeta(meta).getValue(VARIANT) == Variant.ENGINE) return null;
+        return new TileEntityFurnaceFlywheel();
+    }
+
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 }

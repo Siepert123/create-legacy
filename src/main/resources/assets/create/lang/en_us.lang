@@ -87,8 +87,10 @@ tile.create:blaze_burner_empty.name=Empty Blaze Burner
 tile.create:blaze_burner_passive.name=Blaze Burner
 tile.create:blaze_burner_heated.name=Heated Blaze Burner
 tile.create:blaze_burner_superheated.name=Superheated Blaze Burner
-tile.create:creative_motor.name=(WIP) Creative Motor
-tile.create:water_wheel.name=(WIP) Water Wheel
+tile.create:creative_motor.name=Creative Motor
+tile.create:water_wheel.name=Water Wheel
+tile.create:furnace_engine.name=Furnace Engine
+tile.create:furnace_flywheel.name=Furnace Flywheel
 tile.create:drill.name=Mechanical Drill
 tile.create:saw.name=Mechanical Saw
 tile.create:press.name=Mechanical Press
@@ -113,7 +115,7 @@ tile.create:schedule_cook.name=Schedule Fan Cooking
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
-subtitle.item.create:sandpaper.used=Sandpaper polishes
+subtitle.item.sandpaper.used=Sandpaper polishes
 subtitle.block.press.activation=Press flattens something
 
 #Custom stones

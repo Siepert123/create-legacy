@@ -1,0 +1,34 @@
+{
+    "variants": {
+        "facing=north,variant=engine": {
+            "model": "create:furnace_engine"
+        },
+        "facing=south,variant=engine": {
+            "model": "create:furnace_engine",
+            "y": 180
+        },
+        "facing=west,variant=engine": {
+            "model": "create:furnace_engine",
+            "y": 270
+        },
+        "facing=east,variant=engine": {
+            "model": "create:furnace_engine",
+            "y": 90
+        },
+        "facing=north,variant=flywheel": {
+            "model": "create:furnace_flywheel"
+        },
+        "facing=south,variant=flywheel": {
+            "model": "create:furnace_flywheel",
+            "y": 180
+        },
+        "facing=west,variant=flywheel": {
+            "model": "create:furnace_flywheel",
+            "y": 270
+        },
+        "facing=east,variant=flywheel": {
+            "model": "create:furnace_flywheel",
+            "y": 90
+        }
+    }
+}
