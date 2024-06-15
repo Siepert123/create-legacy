@@ -35,7 +35,7 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
                             pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                 }
             }
-            if (world.getTotalWorldTime() % 100 == 0) {
+            if (world.getTotalWorldTime() % 70 == 0) {
                 world.playSound(null,
                         pos.getX() + 0.5,
                         pos.getY() + 0.5,

@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"5": "create:block/casing/casing_brass",
-		"1_1": "create:block/furnace_engine_map"
+		"1_1": "create:block/furnace_engine_map",
+		"particle": "create:block/furnace_engine_map"
 	},
 	"elements": [
 		{
