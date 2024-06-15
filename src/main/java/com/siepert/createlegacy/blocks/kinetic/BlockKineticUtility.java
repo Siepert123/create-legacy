@@ -159,11 +159,20 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        if (placer.isSneaking()) {
-            return this.getDefaultState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[placer.getHeldItem(hand).getItemDamage()])
-                    .withProperty(AXIS, facing.getAxis());
+        IBlockState variantState = this.getDefaultState()
+                .withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[placer.getHeldItem(hand).getItemDamage()]);
+        if (variantState.getValue(VARIANT) == EnumHandler.KineticUtilityEnumType.GEARBOX) {
+            if (placer.isSneaking()) {
+                return variantState.withProperty(AXIS, facing.getAxis());
+            }
+            return variantState;
         }
-        return this.getDefaultState().withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[placer.getHeldItem(hand).getItemDamage()]);
+        if (placer.isSneaking()) {
+            return variantState.withProperty(AXIS, facing.getAxis());
+        }
+        return variantState.withProperty(AXIS, EnumFacing.getFacingFromVector(
+                (float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
+                .getAxis());
     }
 
 

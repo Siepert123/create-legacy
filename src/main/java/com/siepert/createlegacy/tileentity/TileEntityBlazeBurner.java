@@ -35,8 +35,20 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
         if (myState.getValue(BlockBlazeBurner.STATE).getMeta() != 0) {
             if (myState.getValue(BlockBlazeBurner.SCHEDULE) == 1) {
                 remainingBurnTime = 1200;
+                world.playSound(null,
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        SoundEvents.ITEM_FIRECHARGE_USE,
+                        SoundCategory.BLOCKS, 0.8f, 1.0f);
             } else if (myState.getValue(BlockBlazeBurner.SCHEDULE) == 2) {
                 remainingBurnTime = 3600;
+                world.playSound(null,
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        SoundEvents.ITEM_FIRECHARGE_USE,
+                        SoundCategory.BLOCKS, 1.3f, 0.7f);
             }
             if (!world.isRemote) {
                 IBlockState myNewState = world.getBlockState(pos).withProperty(BlockBlazeBurner.SCHEDULE, 0);

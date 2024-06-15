@@ -289,7 +289,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
 
             if (whatsTheProcess != null) {
                 for (int i = 0; i < 5; i++) {
-                    BlockPos startProcessPos = pos.offset(source.getOpposite(), 2 + i);
+                    BlockPos startProcessPos = pos.offset(source.getOpposite(), 1 + i);
 
                     if (isBlockNotObscure(worldIn.getBlockState(startProcessPos))
                             || !worldIn.getBlockState(startProcessPos).getMaterial().blocksMovement()) {
@@ -393,7 +393,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                         worldIn.spawnEntity(resultEntityItem);
 
                                         worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1.0f, 1.0f);
+                                                SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.25f, 1.0f);
 
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                             entityItem.setDead();
@@ -418,7 +418,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
                                         }
 
                                         worldIn.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 1.0f, 1.0f);
+                                                SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.25f, 1.0f);
 
                                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                                             entityItem.setDead();
