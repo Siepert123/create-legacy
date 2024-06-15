@@ -1,33 +1,48 @@
 {
     "variants": {
-        "facing=north,variant=engine": {
-            "model": "create:furnace_engine"
-        },
-        "facing=south,variant=engine": {
+        "facing=north,has_shaft=false,variant=engine": {
             "model": "create:furnace_engine",
             "y": 180
         },
-        "facing=west,variant=engine": {
-            "model": "create:furnace_engine",
-            "y": 270
+        "facing=south,has_shaft=false,variant=engine": {
+            "model": "create:furnace_engine"
         },
-        "facing=east,variant=engine": {
+        "facing=west,has_shaft=false,variant=engine": {
             "model": "create:furnace_engine",
             "y": 90
         },
-        "facing=north,variant=flywheel": {
+        "facing=east,has_shaft=false,variant=engine": {
+            "model": "create:furnace_engine",
+            "y": 270
+        },
+        "facing=north,has_shaft=true,variant=flywheel": {
             "model": "create:furnace_flywheel"
         },
-        "facing=south,variant=flywheel": {
+        "facing=south,has_shaft=true,variant=flywheel": {
             "model": "create:furnace_flywheel",
             "y": 180
         },
-        "facing=west,variant=flywheel": {
+        "facing=west,has_shaft=true,variant=flywheel": {
             "model": "create:furnace_flywheel",
             "y": 270
         },
-        "facing=east,variant=flywheel": {
+        "facing=east,has_shaft=true,variant=flywheel": {
             "model": "create:furnace_flywheel",
+            "y": 90
+        },
+        "facing=north,has_shaft=false,variant=flywheel": {
+            "model": "create:furnace_flywheel_shaftless"
+        },
+        "facing=south,has_shaft=false,variant=flywheel": {
+            "model": "create:furnace_flywheel_shaftless",
+            "y": 180
+        },
+        "facing=west,has_shaft=false,variant=flywheel": {
+            "model": "create:furnace_flywheel_shaftless",
+            "y": 270
+        },
+        "facing=east,has_shaft=false,variant=flywheel": {
+            "model": "create:furnace_flywheel_shaftless",
             "y": 90
         }
     }

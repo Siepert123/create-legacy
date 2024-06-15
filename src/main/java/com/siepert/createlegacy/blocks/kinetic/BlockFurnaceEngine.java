@@ -79,14 +79,15 @@ public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation
         setHarvestLevel("pickaxe", 0);
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(VARIANT, Variant.ENGINE)
-                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH));
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH)
+                .withProperty(HAS_SHAFT, false));
         setHardness(2);
         setResistance(3);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
     public static final PropertyEnum<EnumHorizontalFacing> HORIZONTAL_FACING = PropertyEnum.create("facing", EnumHorizontalFacing.class);
-
+    public static final PropertyBool HAS_SHAFT = PropertyBool.create("has_shaft");
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(VARIANT).meta * 4 + state.getValue(HORIZONTAL_FACING).index();
@@ -100,7 +101,7 @@ public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT, HORIZONTAL_FACING});
+        return new BlockStateContainer(this, new IProperty[] {VARIANT, HORIZONTAL_FACING, HAS_SHAFT});
     }
 
     @Override
@@ -133,6 +134,22 @@ public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         if (getStateFromMeta(meta).getValue(VARIANT) == Variant.ENGINE) return null;
         return new TileEntityFurnaceFlywheel();
+    }
+
+    public static void setState(boolean withShaft, World worldIn, BlockPos pos) {
+        IBlockState state = worldIn.getBlockState(pos);
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        if (withShaft) {
+            worldIn.setBlockState(pos, state.withProperty(HAS_SHAFT, true), 3);
+        } else {
+            worldIn.setBlockState(pos, state.withProperty(HAS_SHAFT, false), 3);
+        }
+
+        if (tileEntity != null) {
+            tileEntity.validate();
+            worldIn.setTileEntity(pos, tileEntity);
+        }
     }
 
 
