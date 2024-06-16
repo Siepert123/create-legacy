@@ -4,7 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.util.MetalTypes;
+import com.siepert.createlegacy.util.compat.MetalTypes;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;

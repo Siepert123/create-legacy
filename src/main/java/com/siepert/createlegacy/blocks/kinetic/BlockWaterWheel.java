@@ -3,6 +3,7 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityWaterWheel;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createlegacy.util.IKineticActor;
@@ -114,13 +115,13 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
         Block block = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
         if (block instanceof IKineticActor) {
-            ((IKineticActor) block).passRotation(worldIn, pos, source, iteratedBlocks, false, false);
+            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
         }
     }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null;
+        return new TileEntityWaterWheel();
     }
 }

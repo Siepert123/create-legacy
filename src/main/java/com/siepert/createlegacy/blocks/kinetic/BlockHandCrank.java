@@ -105,7 +105,7 @@ public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvi
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (useTE) {
-            worldIn.setBlockState(pos, state.withProperty(ACTIVATED, true), 0);
+            setState(true, worldIn, pos);
         } else {
             Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
             if (block instanceof IKineticActor) {
@@ -121,5 +121,17 @@ public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvi
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityHandCrank();
+    }
+
+    public static void setState(boolean activated, World worldIn, BlockPos pos) {
+        IBlockState state = worldIn.getBlockState(pos);
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        worldIn.setBlockState(pos, state.withProperty(ACTIVATED, activated), 3);
+
+        if (tileEntity != null) {
+            tileEntity.validate();
+            worldIn.setTileEntity(pos, tileEntity);
+        }
     }
 }

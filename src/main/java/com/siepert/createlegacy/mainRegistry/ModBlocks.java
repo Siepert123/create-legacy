@@ -25,6 +25,7 @@ public class ModBlocks {
     public static final Block AXLE = new BlockAxle("axle");
     public static final Block COGWHEEL = new BlockCogwheel("cogwheel");
     public static final Block HAND_CRANK = new BlockHandCrank("hand_crank");
+    public static final Block WATER_WHEEL = new BlockWaterWheel("water_wheel");
     public static final Block FURNACE_ENGINE = new BlockFurnaceEngine();
     public static final Block CREATIVE_MOTOR = new BlockCreativeMotor("creative_motor");
     public static final Block CHASSIS = new BlockChassis("chassis");
