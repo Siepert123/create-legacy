@@ -47,6 +47,8 @@ public class CompactingRecipes {
                 new ItemStack(Blocks.SNOW, 1));
         this.addCompacting(new ItemStack(Items.SLIME_BALL, 9),
                 new ItemStack(Blocks.SLIME_BLOCK, 1));
+        this.addCompacting(new ItemStack(Items.GLOWSTONE_DUST, 4),
+                new ItemStack(Blocks.GLOWSTONE, 1));
 
         this.addCompacting(new ItemStack(ModItems.INGREDIENT, 1, 17),
                 new ItemStack(ModItems.INCOMPLETE_ITEM, 1, 1), BlockBlazeBurner.State.HEATED);

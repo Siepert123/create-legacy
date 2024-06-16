@@ -1,7 +1,7 @@
 {
 	"parent": "create:block/block",
 	"textures": {
-		"0": "create:block/flywheel_map",
+		"0": "create:block/water_wheel_map",
 		"3": "create:block/gearbox",
 		"4": "create:block/water_wheel_inner",
 		"particle": "create:block/casing/casing_andesite"
