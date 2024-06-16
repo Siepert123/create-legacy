@@ -4,6 +4,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
+import com.siepert.createlegacy.util.compat.TinkersCompat;
 import com.siepert.createlegacy.world.gen.WorldGenCustomOres;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -60,5 +61,7 @@ public class RegistryHandler {
         RecipeHandler.registerCompatCompactingRecipes();
 
         RecipeHandler.registerOther();
+
+        TinkersCompat.registerCompact();
     }
 }

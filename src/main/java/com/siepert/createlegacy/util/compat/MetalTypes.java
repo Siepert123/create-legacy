@@ -11,6 +11,7 @@ public class MetalTypes {
     public static final List<String> METAL_NAMES = new ArrayList<String>();
 
     static {
+        //Common metals
         METAL_NAMES.add("Aluminum");
         METAL_NAMES.add("Lead");
         METAL_NAMES.add("Nickel");
@@ -21,6 +22,7 @@ public class MetalTypes {
         METAL_NAMES.add("Uranium");
         METAL_NAMES.add("Steel");
 
+        //Base metals
         METAL_NAMES.add("Iron");
         METAL_NAMES.add("Gold");
         METAL_NAMES.add("Copper");
@@ -35,6 +37,13 @@ public class MetalTypes {
         METAL_NAMES.add("Beryllium");
         METAL_NAMES.add("Schrabidium");
         METAL_NAMES.add("Saturnite");
+
+        //Other
+        METAL_NAMES.add("Cobalt");
+        METAL_NAMES.add("Pigiron");
+        METAL_NAMES.add("Alubrass");
+        METAL_NAMES.add("Manyullyn");
+        METAL_NAMES.add("Knightslime");
     }
 
     public static final String INGOT = "ingot";
