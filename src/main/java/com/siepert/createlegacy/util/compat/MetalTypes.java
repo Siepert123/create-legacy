@@ -38,12 +38,17 @@ public class MetalTypes {
         METAL_NAMES.add("Schrabidium");
         METAL_NAMES.add("Saturnite");
 
-        //Other
+        //TC metals
         METAL_NAMES.add("Cobalt");
         METAL_NAMES.add("Pigiron");
         METAL_NAMES.add("Alubrass");
         METAL_NAMES.add("Manyullyn");
         METAL_NAMES.add("Knightslime");
+        METAL_NAMES.add("Ardite");
+
+        //Odd IE metals
+        METAL_NAMES.add("Constantan");
+        METAL_NAMES.add("Electrum");
     }
 
     public static final String INGOT = "ingot";
