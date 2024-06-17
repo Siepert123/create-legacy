@@ -119,7 +119,8 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
     }
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
 
         if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
@@ -133,7 +134,8 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
             Block aBlock = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
 
             if (aBlock instanceof IKineticActor) {
-                ((IKineticActor) aBlock).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
+                ((IKineticActor) aBlock).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
+                        false, false, inverseRotation);
             }
 
             boolean isCompactor = worldIn.getBlockState(pos.down(2)).getBlock() instanceof BlockItemHolder;

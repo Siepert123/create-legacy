@@ -21,7 +21,7 @@ public class TileEntityCreativeMotor extends TileEntity implements ITickable {
         if (block instanceof IKineticActor) {
             List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
             ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(FACING)), myState.getValue(FACING).getOpposite(),
-                    iteratedBlocks, false, false);
+                    iteratedBlocks, false, false, false);
             world.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
         }

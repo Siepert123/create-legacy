@@ -136,7 +136,8 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
 
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
         IBlockState myState = worldIn.getBlockState(pos);
 
@@ -144,17 +145,25 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
             iteratedBlocks.add(pos);
 
             IBlockState myNewState;
-            if (myState.getValue(ROTATION) == 3) {
-                myNewState = myState.withProperty(ROTATION, 0);
+            if (!inverseRotation) {
+                if (myState.getValue(ROTATION) == 3) {
+                    myNewState = myState.withProperty(ROTATION, 0);
+                } else {
+                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
+                }
             } else {
-                myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
+                if (myState.getValue(ROTATION) == 0) {
+                    myNewState = myState.withProperty(ROTATION, 3);
+                } else {
+                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) - 1);
+                }
             }
             worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
 
             if (worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof IKineticActor) {
                 ((IKineticActor) worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock()).passRotation(worldIn,
-                        pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
+                        pos.offset(source.getOpposite()), source, iteratedBlocks, false, false, inverseRotation);
             }
 
             worldIn.setBlockState(pos, myNewState, 0);

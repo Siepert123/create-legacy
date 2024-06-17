@@ -104,7 +104,8 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor {
     }
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
 
         if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
@@ -114,19 +115,16 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor {
 
 
         if (source == myState.getValue(FACING).getOpposite()) {
-            logger.info("Saw activated!");
             iteratedBlocks.add(pos);
             BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
             List<BlockPos> treeMap = new ArrayList<>();
 
             if (isBlockALog(worldIn.getBlockState(newPos).getBlock())) {
-                logger.info("The tree map is made!");
                 treeMap.add(pos.offset(source.getOpposite()));
                 extendTreeMap(worldIn, pos.offset(source.getOpposite()), treeMap, source.getOpposite());
             }
 
             for (BlockPos thePos : treeMap) {
-                logger.info("Cut block at " + thePos.toString());
                 worldIn.getBlockState(thePos).getBlock().dropBlockAsItem(worldIn, thePos, worldIn.getBlockState(thePos), 0);
                 worldIn.playSound(null, thePos, worldIn.getBlockState(thePos).getBlock().getSoundType().getBreakSound(),
                         SoundCategory.BLOCKS, 1.0f, 1.0f);

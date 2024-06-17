@@ -38,7 +38,7 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
                     List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
                     ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite()),
                             myState.getValue(HORIZONTAL_FACING).toVanillaFacing(),
-                            iteratedBlocks, false, false);
+                            iteratedBlocks, false, false, false);
                     world.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                             pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                 }

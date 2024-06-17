@@ -123,17 +123,26 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
 
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
         IBlockState myState = worldIn.getBlockState(pos);
 
         if (isCognectionValid(myState, source, srcIsCog, srcCogIsHorizontal)) {
             iteratedBlocks.add(pos);
             IBlockState myNewState;
-            if (myState.getValue(ROTATION) == 3) {
-                myNewState = myState.withProperty(ROTATION, 0);
+            if (!inverseRotation) {
+                if (myState.getValue(ROTATION) == 3) {
+                    myNewState = myState.withProperty(ROTATION, 0);
+                } else {
+                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
+                }
             } else {
-                myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
+                if (myState.getValue(ROTATION) == 0) {
+                    myNewState = myState.withProperty(ROTATION, 3);
+                } else {
+                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) - 1);
+                }
             }
             worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
@@ -143,7 +152,13 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
                     boolean srcCog = facing.getAxis() != myState.getValue(AXIS);
                     boolean srcCogH = myState.getValue(AXIS) == EnumFacing.Axis.Y;
                     if (blockNow instanceof IKineticActor) {
-                        ((IKineticActor) blockNow).passRotation(worldIn, pos.offset(facing), facing.getOpposite(), iteratedBlocks, srcCog, srcCogH);
+                        if (!srcCog) {
+                            ((IKineticActor) blockNow).passRotation(worldIn, pos.offset(facing), facing.getOpposite(), iteratedBlocks,
+                                    false, false, inverseRotation);
+                        } else {
+                            ((IKineticActor) blockNow).passRotation(worldIn, pos.offset(facing), facing.getOpposite(), iteratedBlocks,
+                                    true, srcCogH, !inverseRotation);
+                        }
                     }
                 }
             }

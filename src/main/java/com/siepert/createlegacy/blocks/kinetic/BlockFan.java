@@ -137,7 +137,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
     }
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
         if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
 
         IBlockState myState = worldIn.getBlockState(pos);

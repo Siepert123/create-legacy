@@ -41,7 +41,7 @@ public class TileEntityHandCrank extends TileEntity implements ITickable {
             world.setBlockState(pos, myState.withProperty(ACTIVATED, false), 0);
             List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
             ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(FACING)), myState.getValue(FACING).getOpposite(),
-                    iteratedBlocks, false, false);
+                    iteratedBlocks, false, false, false);
         }
 
     }

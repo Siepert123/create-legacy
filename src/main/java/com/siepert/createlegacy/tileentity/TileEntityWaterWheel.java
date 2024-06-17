@@ -37,12 +37,12 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable {
                 if (axPos instanceof IKineticActor) {
                     ((IKineticActor) axPos).passRotation(world, pos.offset(facing1),
                             facing1.getOpposite(),
-                            iteratedBlocks, false, false);
+                            iteratedBlocks, false, false, false);
                 }
                 if (axNeg instanceof IKineticActor) {
                     ((IKineticActor) axNeg).passRotation(world, pos.offset(facing2),
                             facing2.getOpposite(),
-                            iteratedBlocks, false, false);
+                            iteratedBlocks, false, false, false);
                 }
             }
         }

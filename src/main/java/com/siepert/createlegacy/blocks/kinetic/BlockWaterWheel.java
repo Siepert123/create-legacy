@@ -103,7 +103,8 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
         if (srcIsCog) return;
 
@@ -115,7 +116,8 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
         Block block = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
         if (block instanceof IKineticActor) {
-            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks, false, false);
+            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
+                    false, false, inverseRotation);
         }
     }
 

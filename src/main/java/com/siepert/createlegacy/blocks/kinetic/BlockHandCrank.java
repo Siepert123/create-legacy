@@ -111,7 +111,7 @@ public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvi
             if (block instanceof IKineticActor) {
                 List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
                 ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
-                        iteratedBlocks, false, false);
+                        iteratedBlocks, false, false, false);
             }
         }
         return true;

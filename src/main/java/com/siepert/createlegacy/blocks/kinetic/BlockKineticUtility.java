@@ -177,7 +177,8 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
 
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean srcIsCog, boolean srcCogIsHorizontal) {
+    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
         if (srcIsCog) return;
 
@@ -185,31 +186,36 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
         switch (blockLogicController) {
             case GEARBOX:
-                actGearbox(worldIn, pos, source, iteratedBlocks);
+                actGearbox(worldIn, pos, source, iteratedBlocks, inverseRotation);
                 break;
             case CLUTCH:
-                actClutch(worldIn, pos, source, iteratedBlocks);
+                actClutch(worldIn, pos, source, iteratedBlocks, inverseRotation);
+                break;
+            case GEARSHIFT:
+                actGearshift(worldIn, pos, source, iteratedBlocks, inverseRotation);
                 break;
             default:
-                actEncasedShaft(worldIn, pos, source, iteratedBlocks);
+                actEncasedShaft(worldIn, pos, source, iteratedBlocks, inverseRotation);
                 break;
         }
     }
 
-    private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
+    private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() == EnumFacing.Axis.Y) {
                 switch (source) {
                     case UP:
                         if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock())
-                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case DOWN:
                         if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock())
-                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -224,13 +230,15 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case WEST:
                         if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock())
-                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case EAST:
                         if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock())
-                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -243,13 +251,15 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case NORTH:
                         if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock())
-                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case SOUTH:
                         if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock())
-                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -257,7 +267,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         }
     }
 
-    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
+    private void actGearbox(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() != EnumFacing.Axis.Y) {
                 ArrayList<EnumFacing> AXLES_TO_ACT = new ArrayList<>();
@@ -276,7 +286,14 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
                     if (theBlock.getBlock() instanceof IKineticActor) {
-                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
+                        boolean shouldInv = output.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE;
+                        if (shouldInv) {
+                            ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks,
+                                    false, false, inverseRotation);
+                        } else {
+                            ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks,
+                                    false, false, !inverseRotation);
+                        }
                     }
                 }
                 iteratedBlocks.add(pos);
@@ -302,7 +319,8 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
                     if (theBlock.getBlock() instanceof IKineticActor) {
-                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
+                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks,
+                                false, false, inverseRotation);
                     }
                 }
                 iteratedBlocks.add(pos);
@@ -328,7 +346,8 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
                     if (theBlock.getBlock() instanceof IKineticActor) {
-                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks, false, false);
+                        ((IKineticActor) theBlock.getBlock()).passRotation(worldIn, pos.offset(output), output.getOpposite(), iteratedBlocks,
+                                false, false, inverseRotation);
                     }
                 }
                 iteratedBlocks.add(pos);
@@ -338,7 +357,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
     }
 
-    private void actClutch(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
+    private void actClutch(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {
         if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
             if (source.getAxis() == EnumFacing.Axis.Y) {
                 for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
@@ -358,13 +377,15 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case UP:
                         if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock())
-                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case DOWN:
                         if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock())
-                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -391,13 +412,15 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case WEST:
                         if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock())
-                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case EAST:
                         if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock())
-                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -423,13 +446,15 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     case NORTH:
                         if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock())
-                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                     case SOUTH:
                         if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
                             ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock())
-                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks, false, false);
+                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks,
+                                            false, false, inverseRotation);
                         }
                         break;
                 }
@@ -438,7 +463,131 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         }
     }
 
-    private void actGearshift(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks) {
-        actEncasedShaft(worldIn, pos, source, iteratedBlocks);
+    private void actGearshift(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Y) {
+            if (source.getAxis() == EnumFacing.Axis.Y) {
+                boolean outputIsInverted;
+                boolean foundTheStuff = false;
+                for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST)) {
+                    if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                        foundTheStuff = true;
+                    } else {
+                        worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, foundTheStuff), 0);
+                        worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    }
+                }
+
+                if (foundTheStuff) {
+                    outputIsInverted = !inverseRotation;
+                } else {
+                    outputIsInverted = inverseRotation;
+                }
+
+                switch (source) {
+                    case UP:
+                        if (worldIn.getBlockState(pos.down()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.down()).getBlock())
+                                    .passRotation(worldIn, pos.down(), EnumFacing.UP, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                    case DOWN:
+                        if (worldIn.getBlockState(pos.up()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.up()).getBlock())
+                                    .passRotation(worldIn, pos.up(), EnumFacing.DOWN, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                }
+                iteratedBlocks.add(pos);
+            }
+            return;
+        }
+
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.X) {
+            boolean outputIsInverted;
+            boolean foundTheStuff = false;
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.NORTH, EnumFacing.DOWN, EnumFacing.SOUTH, EnumFacing.UP)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    foundTheStuff = true;
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, foundTheStuff), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (foundTheStuff) {
+                outputIsInverted = !inverseRotation;
+            } else {
+                outputIsInverted = inverseRotation;
+            }
+            if (source.getAxis() == EnumFacing.Axis.X) {
+                switch (source) {
+                    case WEST:
+                        if (worldIn.getBlockState(pos.east()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.east()).getBlock())
+                                    .passRotation(worldIn, pos.east(), EnumFacing.WEST, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                    case EAST:
+                        if (worldIn.getBlockState(pos.west()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.west()).getBlock())
+                                    .passRotation(worldIn, pos.west(), EnumFacing.EAST, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                }
+                iteratedBlocks.add(pos);
+            }
+            return;
+        }
+        if (worldIn.getBlockState(pos).getValue(AXIS) == EnumFacing.Axis.Z) {
+            boolean outputIsInverted;
+            boolean foundTheStuff = false;
+            for (EnumFacing enumFacing : Arrays.asList(EnumFacing.UP, EnumFacing.EAST, EnumFacing.DOWN, EnumFacing.WEST)) {
+                if (worldIn.getRedstonePower(pos, enumFacing) > 0) {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, true), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                    foundTheStuff = true;
+                } else {
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(_BOOLEAN0, foundTheStuff), 0);
+                    worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
+                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                }
+            }
+            if (foundTheStuff) {
+                outputIsInverted = !inverseRotation;
+            } else {
+                outputIsInverted = inverseRotation;
+            }
+            if (source.getAxis() == EnumFacing.Axis.Z) {
+                switch (source) {
+                    case NORTH:
+                        if (worldIn.getBlockState(pos.south()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.south()).getBlock())
+                                    .passRotation(worldIn, pos.south(), EnumFacing.NORTH, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                    case SOUTH:
+                        if (worldIn.getBlockState(pos.north()).getBlock() instanceof IKineticActor) {
+                            ((IKineticActor) worldIn.getBlockState(pos.north()).getBlock())
+                                    .passRotation(worldIn, pos.north(), EnumFacing.SOUTH, iteratedBlocks,
+                                            false, false, outputIsInverted);
+                        }
+                        break;
+                }
+                iteratedBlocks.add(pos);
+            }
+        }
     }
 }
