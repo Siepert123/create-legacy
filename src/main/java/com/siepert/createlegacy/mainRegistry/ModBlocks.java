@@ -33,6 +33,7 @@ public class ModBlocks {
     public static final Block ITEM_HOLDER = new BlockItemHolder("item_holder");
     public static final Block BLAZE_BURNER = new BlockBlazeBurner("blaze_burner");
 
+    public static final Block BELT = new BlockBelt("belt");
     public static final Block PRESS = new BlockMechanicalPress("press");
     public static final Block DRILL = new BlockDrill("drill");
     public static final Block SAW = new BlockSaw("saw");

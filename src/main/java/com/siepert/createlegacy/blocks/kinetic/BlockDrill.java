@@ -13,13 +13,17 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -112,6 +116,30 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
                 worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
                         SoundCategory.BLOCKS, 1.0f, 1.0f);
                 worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
+            }
+
+            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(newPos);
+
+            List<EntityLivingBase> entities = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
+
+            for (EntityLivingBase entity : entities) {
+                if (entity instanceof EntityPlayer) {
+                    if (!((EntityPlayer) entity).isCreative()) {
+                        entity.setHealth(entity.getHealth() - 4);
+                        entity.performHurtAnimation();
+                        worldIn.playSound(null,
+                                entity.posX, entity.posY, entity.posZ,
+                                SoundEvents.ENTITY_PLAYER_HURT,
+                                entity.getSoundCategory(), 1.0f, 1.0f);
+                    }
+                } else {
+                    entity.setHealth(entity.getHealth() - 4);
+                    entity.performHurtAnimation();
+                    worldIn.playSound(null,
+                            entity.posX, entity.posY, entity.posZ,
+                            SoundEvents.ENTITY_GENERIC_HURT,
+                            entity.getSoundCategory(), 1.0f, 1.0f);
+                }
             }
         }
     }
