@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -148,7 +149,8 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
             }
             worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                     pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-            worldIn.playSound(null, pos.getX() + 0.5,
+            if (Reference.random.nextInt(100) == 0)
+                worldIn.playSound(null, pos.getX() + 0.5,
                     pos.getY() + 0.5, pos.getZ() + 0.5,
                     ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
                     0.1f, 1.0f);
