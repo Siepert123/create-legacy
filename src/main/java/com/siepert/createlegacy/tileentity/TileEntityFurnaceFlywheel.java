@@ -101,7 +101,7 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
             }
         }
 
-        return hasValidEngine;
+        return hasValidEngine && !isRightSided;
     }
 
     /**

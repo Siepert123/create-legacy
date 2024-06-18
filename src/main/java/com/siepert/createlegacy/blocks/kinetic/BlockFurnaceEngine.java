@@ -5,10 +5,7 @@ import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityFurnaceFlywheel;
-import com.siepert.createlegacy.util.EnumHorizontalFacing;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createlegacy.util.IHasRotation;
-import com.siepert.createlegacy.util.IMetaName;
+import com.siepert.createlegacy.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -33,11 +30,31 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IMetaName {
+public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IMetaName, IWrenchable {
     @Override
     public String getSpecialName(ItemStack stack) {
         return Variant.fromMeta(stack.getItemDamage()).getName();
     }
+
+    /**
+     * Do something when the block is right-clicked with a Wrench.
+     *
+     * @param worldIn  The world.
+     * @param pos      The position.
+     * @param state    Your state.
+     * @param side     The side that this block is clicked on.
+     * @param playerIn The player who clicked.
+     * @return True if the wrench actually did something (will trigger hand movement).
+     */
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        if (state.getValue(VARIANT) == Variant.ENGINE) return false;
+
+        rotateBlock(worldIn, pos, side);
+
+        return true;
+    }
+
 
     public enum Variant implements IStringSerializable {
         ENGINE(0, "engine"), FLYWHEEL(1, "flywheel");
@@ -155,6 +172,22 @@ public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation
         }
     }
 
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+        IBlockState state = world.getBlockState(pos);
+        TileEntity tileEntity = world.getTileEntity(pos);
+
+        EnumHorizontalFacing newFacing = state.getValue(HORIZONTAL_FACING).cycle();
+
+        world.setBlockState(pos, state.withProperty(HORIZONTAL_FACING, newFacing), 3);
+
+        if (tileEntity != null) {
+            tileEntity.validate();
+            world.setTileEntity(pos, tileEntity);
+        }
+
+        return true;
+    }
 
     @Override
     public boolean isFullBlock(IBlockState state) {

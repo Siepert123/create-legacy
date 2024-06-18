@@ -23,6 +23,21 @@ public enum EnumHorizontalFacing implements IStringSerializable {
         }
         return fromIndex(0);
     }
+
+    public EnumHorizontalFacing cycle() {
+        switch (this) {
+            case NORTH:
+                return EAST;
+            case EAST:
+                return SOUTH;
+            case SOUTH:
+                return WEST;
+            case WEST:
+                return NORTH;
+        }
+        return NORTH;
+    }
+
     public EnumFacing.Axis axis() {
         return this.connectedVanillaAxis;
     }

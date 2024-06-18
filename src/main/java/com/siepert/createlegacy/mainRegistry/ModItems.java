@@ -12,6 +12,7 @@ import java.util.List;
 public class ModItems {
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
+    public static final Item WRENCH = new ItemWrench();
     public static final Item INGREDIENT = new ItemIngredient();
     public static final Item ADVANCED_INGREDIENT = new ItemIngredientAdvanced();
     public static final Item COMPAT_INGREDIENT = new ItemIngredientCompat();

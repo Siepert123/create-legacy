@@ -114,6 +114,8 @@ item.create:incomplete_plate_obsidian.name=Unprocessed Obsidian Sheet
 tile.create:schedule_wash.name=Schedule Fan Washing
 tile.create:schedule_cook.name=Schedule Fan Cooking
 
+item.create:wrench.name=Wrench
+
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes

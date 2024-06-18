@@ -4,9 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityWaterWheel;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createlegacy.util.IHasRotation;
-import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -16,6 +14,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, ITileEntityProvider {
+public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, ITileEntityProvider, IWrenchable {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockWaterWheel(String name) {
@@ -121,9 +120,36 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         }
     }
 
+
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityWaterWheel();
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+        IBlockState state = world.getBlockState(pos);
+        TileEntity tileEntity = world.getTileEntity(pos);
+
+        if (state.getValue(AXIS) == EnumFacing.Axis.X) {
+            world.setBlockState(pos, state.withProperty(AXIS, EnumFacing.Axis.Z), 3);
+        } else {
+            world.setBlockState(pos, state.withProperty(AXIS, EnumFacing.Axis.X), 3);
+        }
+
+        if (tileEntity != null) {
+            tileEntity.validate();
+            world.setTileEntity(pos, tileEntity);
+        }
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        rotateBlock(worldIn, pos, side);
+
+        return true;
     }
 }
