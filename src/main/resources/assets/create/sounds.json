@@ -20,6 +20,18 @@
       }
     ]
   },
+  "block.cogwheel.ambient2": {
+    "category": "blocks",
+    "subtitle": "subtitle.block.cogwheel.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:dig/wood1"
+      },
+      {
+        "name": "minecraft:dig/wood3"
+      }
+    ]
+  },
   "block.press.activation": {
     "category": "blocks",
     "subtitle": "subtitle.block.press.activation",

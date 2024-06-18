@@ -109,6 +109,11 @@ public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).meta;
+    }
+
+    @Override
     public void registerModels() {
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "furnace_engine", "inventory");
         CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "furnace_flywheel", "inventory");

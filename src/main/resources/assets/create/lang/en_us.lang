@@ -102,6 +102,7 @@ tile.create:clutch.name=Clutch
 tile.create:gearshift.name=Gearshift
 tile.create:axle_encased_andesite.name=Andesite Encased Axle
 tile.create:axle_encased_brass.name=Brass Encased Axle
+tile.create:belt.name=Mechanical Belt
 
 #Overige
 itemGroup.tab_create=Create

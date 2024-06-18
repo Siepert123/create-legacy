@@ -19,6 +19,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -170,7 +171,8 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                             if (Reference.random.nextInt(100) == 0) {
                                 pitch = 0.1f;
                             } else pitch = 0.8f;
-                            worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);
+                            worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
+                                    ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);
                             return;
                         }
                     }
@@ -203,11 +205,10 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
         }
     }
 
-    public ResultSet apply(ItemStack stack)
-    {
+    public PressingResultSet apply(ItemStack stack) {
         if (stack.isEmpty())
         {
-            return new ResultSet(stack, false);
+            return new PressingResultSet(stack, false);
         }
         else
         {
@@ -216,13 +217,13 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
             if (itemstack.isEmpty())
             {
                 CreateLegacy.logger.warn("Couldn't press {} because there is no pressing recipe", (Object)stack);
-                return new ResultSet(stack, false);
+                return new PressingResultSet(stack, false);
             }
             else
             {
                 ItemStack itemstack1 = itemstack.copy();
                 itemstack1.setCount(itemstack.getCount());
-                return new ResultSet(itemstack1, true);
+                return new PressingResultSet(itemstack1, true);
             }
         }
     }
@@ -248,10 +249,10 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
         return new CompactingResultSet(stack, 0, false);
     }
 
-    private static class ResultSet {
+    public static class PressingResultSet {
         ItemStack stack;
         boolean hasRecipe;
-        private ResultSet(ItemStack stack, boolean hasRecipe) {
+        private PressingResultSet(ItemStack stack, boolean hasRecipe) {
             this.stack = stack;
             this.hasRecipe = hasRecipe;
         }

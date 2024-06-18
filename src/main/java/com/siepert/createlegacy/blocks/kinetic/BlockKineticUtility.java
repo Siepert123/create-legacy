@@ -8,6 +8,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
+import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -26,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -282,6 +284,10 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
 
+                worldIn.playSound(null, pos.getX() + 0.5,
+                        pos.getY() + 0.5, pos.getZ() + 0.5,
+                        ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
+                        0.1f, 1.0f);
 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
@@ -315,6 +321,11 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
 
+                worldIn.playSound(null, pos.getX() + 0.5,
+                        pos.getY() + 0.5, pos.getZ() + 0.5,
+                        ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
+                        0.1f, 1.0f);
+
 
                 for (EnumFacing output : AXLES_TO_ACT) {
                     IBlockState theBlock = worldIn.getBlockState(pos.offset(output));
@@ -341,6 +352,11 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 if (sourceBlock.getBlock() instanceof BlockCogwheel) {
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
+
+                worldIn.playSound(null, pos.getX() + 0.5,
+                        pos.getY() + 0.5, pos.getZ() + 0.5,
+                        ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
+                        0.1f, 1.0f);
 
 
                 for (EnumFacing output : AXLES_TO_ACT) {

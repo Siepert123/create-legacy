@@ -16,9 +16,11 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -129,8 +131,8 @@ public class BlockBelt extends Block implements IHasModel, IKineticActor {
         List<Entity> entities = worldIn.getEntitiesWithinAABB(Entity.class, bb);
 
         for (Entity entity : entities) {
-            entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
-                    movement.getFrontOffsetY() / 5.0f,
+            entity.setVelocity(movement.getFrontOffsetX() / 5.0f,
+                    entity.motionY,
                     movement.getFrontOffsetZ() / 5.0f);
         }
 
@@ -160,6 +162,42 @@ public class BlockBelt extends Block implements IHasModel, IKineticActor {
             List<Entity> entities = worldIn.getEntitiesWithinAABB(Entity.class, bb);
 
             for (Entity entity : entities) {
+                if (!(entity instanceof EntityItem)) {
+                    entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                            0,
+                            movement.getFrontOffsetZ() / 5.0f);
+                } else {
+                    ItemStack stack = ((EntityItem) entity).getItem();
+                    Block processor = worldIn.getBlockState(pos.up(2)).getBlock();
+
+                    ((EntityItem) entity).setNoDespawn();
+                    ((EntityItem) entity).setDefaultPickupDelay();
+
+                    if (processor instanceof BlockMechanicalPress) {
+                        if (!((BlockMechanicalPress) processor).apply(stack).hasRecipe()) {
+                            entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                                    0,
+                                    movement.getFrontOffsetZ() / 5.0f);
+                        } else {
+                            entity.setPosition(pos.getX() + 0.5,
+                                    pos.getY() + 1.0,
+                                    pos.getZ() + 0.5);
+                        }
+                    } else {
+                        entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                                0,
+                                movement.getFrontOffsetZ() / 5.0f);
+                    }
+                }
+            }
+        }
+
+        if (worldIn.isRemote) {
+            AxisAlignedBB bb = new AxisAlignedBB(pos.up());
+
+            List<EntityPlayer> entities = worldIn.getEntitiesWithinAABB(EntityPlayer.class, bb);
+
+            for (EntityPlayer entity : entities) {
                 entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
                         movement.getFrontOffsetY() / 5.0f,
                         movement.getFrontOffsetZ() / 5.0f);
@@ -208,5 +246,25 @@ public class BlockBelt extends Block implements IHasModel, IKineticActor {
     public EnumFacing fromAx(EnumFacing.Axis axis, boolean b) {
         if (b) return EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, axis);
         return EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, axis);
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 }

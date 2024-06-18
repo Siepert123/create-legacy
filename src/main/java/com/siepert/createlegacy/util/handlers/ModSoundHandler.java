@@ -7,11 +7,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ModSoundHandler {
 
-    public static SoundEvent ITEM_SANDPAPER_USED, BLOCK_COGWHEEL_AMBIENT, BLOCK_PRESS_ACTIVATION;
+    public static SoundEvent ITEM_SANDPAPER_USED, BLOCK_COGWHEEL_AMBIENT, BLOCK_COGWHEEL_AMBIENT_2, BLOCK_PRESS_ACTIVATION;
 
     public static void registerSounds() {
         ITEM_SANDPAPER_USED = registerSound("item.sandpaper.usage");
         BLOCK_COGWHEEL_AMBIENT = registerSound("block.cogwheel.ambient");
+        BLOCK_COGWHEEL_AMBIENT_2 = registerSound("block.cogwheel.ambient2");
         BLOCK_PRESS_ACTIVATION = registerSound("block.press.activation");
     }
 
