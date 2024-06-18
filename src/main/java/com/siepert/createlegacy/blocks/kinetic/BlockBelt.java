@@ -131,9 +131,33 @@ public class BlockBelt extends Block implements IHasModel, IKineticActor {
         List<Entity> entities = worldIn.getEntitiesWithinAABB(Entity.class, bb);
 
         for (Entity entity : entities) {
-            entity.setVelocity(movement.getFrontOffsetX() / 5.0f,
-                    entity.motionY,
-                    movement.getFrontOffsetZ() / 5.0f);
+            if (!(entity instanceof EntityItem)) {
+                entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                        0,
+                        movement.getFrontOffsetZ() / 5.0f);
+            } else {
+                ItemStack stack = ((EntityItem) entity).getItem();
+                Block processor = worldIn.getBlockState(pos.up(2)).getBlock();
+
+                ((EntityItem) entity).setNoDespawn();
+                ((EntityItem) entity).setDefaultPickupDelay();
+
+                if (processor instanceof BlockMechanicalPress) {
+                    if (!((BlockMechanicalPress) processor).apply(stack).hasRecipe()) {
+                        entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                                0,
+                                movement.getFrontOffsetZ() / 5.0f);
+                    } else {
+                        entity.setPosition(pos.getX() + 0.5,
+                                pos.getY() + 1.0,
+                                pos.getZ() + 0.5);
+                    }
+                } else {
+                    entity.addVelocity(movement.getFrontOffsetX() / 5.0f,
+                            0,
+                            movement.getFrontOffsetZ() / 5.0f);
+                }
+            }
         }
 
         List<BlockPos> iteratedBelts = new ArrayList<>();
