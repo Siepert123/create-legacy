@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,8 +15,10 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,7 +29,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineticActor {
+public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineticActor, IWrenchable {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     private static final AxisAlignedBB HITBOX_X = new AxisAlignedBB(0.0, 6.0 / 16.0, 6.0 / 16.0, 1.0, 10.0 / 16.0, 10.0 / 16.0);
@@ -170,5 +173,20 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
         }
     }
 
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
 
+        if (side.getAxis() == state.getValue(AXIS)) return false;
+
+        EnumFacing f = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, state.getValue(AXIS)).rotateAround(side.getAxis());
+
+        world.setBlockState(pos, state.withProperty(AXIS, f.getAxis()), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
+    }
 }

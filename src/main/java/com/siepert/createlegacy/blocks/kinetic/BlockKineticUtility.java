@@ -4,10 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createlegacy.util.IKineticActor;
-import com.siepert.createlegacy.util.IMetaName;
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.util.*;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import mcp.MethodsReturnNonnullByDefault;
@@ -40,7 +37,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IKineticActor {
+public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IKineticActor, IWrenchable {
     public static final PropertyEnum<EnumHandler.KineticUtilityEnumType> VARIANT
             = PropertyEnum.<EnumHandler.KineticUtilityEnumType>create("variant", EnumHandler.KineticUtilityEnumType.class);
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
@@ -609,5 +606,22 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                 iteratedBlocks.add(pos);
             }
         }
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (side.getAxis() == state.getValue(AXIS)) return false;
+
+        EnumFacing f = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, state.getValue(AXIS)).rotateAround(side.getAxis());
+
+        world.setBlockState(pos, state.withProperty(AXIS, f.getAxis()), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
     }
 }

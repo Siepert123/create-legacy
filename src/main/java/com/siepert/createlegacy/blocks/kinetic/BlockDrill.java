@@ -5,6 +5,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.IWrenchable;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -32,7 +33,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockDrill extends Block implements IHasModel, IKineticActor {
+public class BlockDrill extends Block implements IHasModel, IKineticActor, IWrenchable {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockDrill(String name) {
         super(Material.ROCK);
@@ -142,5 +143,20 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (side.getAxis() == state.getValue(FACING).getAxis()) return false;
+
+        world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateAround(side.getAxis())), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
     }
 }

@@ -239,18 +239,20 @@ public class BlockBelt extends Block implements IHasModel, IKineticActor, IWrenc
         }
 
         if (worldIn.getBlockState(pos).getBlock() instanceof BlockBelt) {
-            Block blockAtP = worldIn.getBlockState(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true))).getBlock();
-            Block blockAtN = worldIn.getBlockState(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false))).getBlock();
+            if (myState.getValue(HAS_AXLE)) {
+                Block blockAtP = worldIn.getBlockState(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true))).getBlock();
+                Block blockAtN = worldIn.getBlockState(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false))).getBlock();
 
-            if (blockAtP instanceof IKineticActor && !iteratedBlocks.contains(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true)))) {
-                ((IKineticActor) blockAtP).passRotation(worldIn, pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true)),
-                        fromAx(myState.getValue(AXIS), false), iteratedBlocks,
-                        false, false, inv);
-            }
-            if (blockAtN instanceof IKineticActor && !iteratedBlocks.contains(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false)))) {
-                ((IKineticActor) blockAtN).passRotation(worldIn, pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false)),
-                        fromAx(rotateAxis(myState.getValue(AXIS)), true), iteratedBlocks,
-                        false, false, inv);
+                if (blockAtP instanceof IKineticActor && !iteratedBlocks.contains(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true)))) {
+                    ((IKineticActor) blockAtP).passRotation(worldIn, pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), true)),
+                            fromAx(myState.getValue(AXIS), false), iteratedBlocks,
+                            false, false, inv);
+                }
+                if (blockAtN instanceof IKineticActor && !iteratedBlocks.contains(pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false)))) {
+                    ((IKineticActor) blockAtN).passRotation(worldIn, pos.offset(fromAx(rotateAxis(myState.getValue(AXIS)), false)),
+                            fromAx(rotateAxis(myState.getValue(AXIS)), true), iteratedBlocks,
+                            false, false, inv);
+                }
             }
         } else CreateLegacy.logger.error("Why am I not a belt?? {}", pos);
     }

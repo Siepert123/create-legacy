@@ -5,6 +5,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.IWrenchable;
 import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
 import mcp.MethodsReturnNonnullByDefault;
@@ -18,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -36,7 +38,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockFan extends Block implements IHasModel, IKineticActor {
+public class BlockFan extends Block implements IHasModel, IKineticActor, IWrenchable {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockFan(String name) {
         super(Material.ROCK);
@@ -535,5 +537,20 @@ public class BlockFan extends Block implements IHasModel, IKineticActor {
         public boolean hasOptional() {
             return hasOptional;
         }
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (side.getAxis() == state.getValue(FACING).getAxis()) return false;
+
+        world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateAround(side.getAxis())), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
     }
 }

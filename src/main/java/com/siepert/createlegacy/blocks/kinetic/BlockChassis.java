@@ -4,6 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
+import com.siepert.createlegacy.util.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,7 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class BlockChassis extends Block implements IHasModel {
+public class BlockChassis extends Block implements IHasModel, IWrenchable {
    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class);
 
     public static final PropertyBool STICKY_TOP = PropertyBool.create("sticky_top");
@@ -148,5 +149,22 @@ public class BlockChassis extends Block implements IHasModel {
                     .withProperty(AXIS, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS));
         }
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS, axis);
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (side.getAxis() == state.getValue(AXIS)) return false;
+
+        EnumFacing f = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, state.getValue(AXIS)).rotateAround(side.getAxis());
+
+        world.setBlockState(pos, state.withProperty(AXIS, f.getAxis()), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
     }
 }

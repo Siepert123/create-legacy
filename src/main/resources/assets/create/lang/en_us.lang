@@ -120,6 +120,7 @@ item.create:wrench.name=Wrench
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes
 subtitle.block.press.activation=Press flattens something
+subtitle.item.wrench.used=Wrench used
 
 #Custom stones
 tile.create:stone_calcite.name=Calcite

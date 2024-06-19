@@ -5,17 +5,16 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IWrenchable;
 import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -39,15 +38,33 @@ public class ItemWrench extends Item implements IHasModel {
         if (!player.isSneaking()) {
             if (lookingAt instanceof IWrenchable) {
                 if (((IWrenchable) lookingAt).onWrenched(worldIn, pos, worldIn.getBlockState(pos), facing, player)) {
+                    worldIn.playSound(null, pos.getX() + 0.5,
+                            pos.getY() + 0.5, pos.getZ() + 0.5,
+                            ModSoundHandler.ITEM_WRENCH_ROTATE, SoundCategory.BLOCKS,
+                            1.0f, 1.0f);
                     return EnumActionResult.SUCCESS;
                 }
             }
             return EnumActionResult.PASS;
         } else if (player.isSneaking()) {
             if (Reference.WRENCHABLES.contains(lookingAt)) {
-                if (!player.isCreative())
+                if (!player.isCreative()) {
                     lookingAt.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
+                    worldIn.playSound(null, pos.getX() + 0.5,
+                            pos.getY() + 0.5, pos.getZ() + 0.5,
+                            ModSoundHandler.ITEM_WRENCH_DISMANTLE, SoundCategory.BLOCKS,
+                            1.0f, 1.0f);
+                }
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+                worldIn.playSound(null, pos.getX() + 0.5,
+                        pos.getY() + 0.5, pos.getZ() + 0.5,
+                        ModSoundHandler.ITEM_WRENCH_ROTATE, SoundCategory.BLOCKS,
+                        1.0f, 1.0f);
+                worldIn.playSound(null, pos.getX() + 0.5,
+                        pos.getY() + 0.5, pos.getZ() + 0.5,
+                        worldIn.getBlockState(pos).getBlock().getSoundType().getBreakSound(), SoundCategory.BLOCKS,
+                        1.0f, 1.0f);
+
                 return EnumActionResult.SUCCESS;
             }
         }

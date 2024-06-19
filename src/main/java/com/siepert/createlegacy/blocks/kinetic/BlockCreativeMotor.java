@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityCreativeMotor;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createlegacy.util.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityProvider {
+public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityProvider, IWrenchable {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
     public BlockCreativeMotor(String name) {
         super(Material.IRON);
@@ -105,5 +106,20 @@ public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityP
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityCreativeMotor();
+    }
+
+    @Override
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (side.getAxis() == state.getValue(FACING).getAxis()) return false;
+
+        world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateAround(side.getAxis())), 3);
+
+        return true;
+    }
+    @Override
+    public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
+        return rotateBlock(worldIn, pos, side);
     }
 }

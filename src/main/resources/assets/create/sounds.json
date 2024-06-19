@@ -40,5 +40,34 @@
         "name": "minecraft:random/anvil_land"
       }
     ]
+  },
+  "item.wrench.usage.rotate": {
+    "category": "blocks",
+    "subtitle": "subtitle.item.wrench.used",
+    "sounds": [
+      {
+        "name": "minecraft:block/wooden_trapdoor/open1"
+      },
+      {
+        "name": "minecraft:block/wooden_trapdoor/open2"
+      },
+      {
+        "name": "minecraft:block/wooden_trapdoor/open3"
+      },
+      {
+        "name": "minecraft:block/wooden_trapdoor/open4"
+      },
+      {
+        "name": "minecraft:block/wooden_trapdoor/open5"
+      }
+    ]
+  },
+  "item.wrench.usage.dismantle": {
+    "category": "blocks",
+    "sounds": [
+      {
+        "name": "minecraft:random/pop"
+      }
+    ]
   }
 }
