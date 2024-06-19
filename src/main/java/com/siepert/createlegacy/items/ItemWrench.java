@@ -9,6 +9,7 @@ import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -49,7 +50,20 @@ public class ItemWrench extends Item implements IHasModel {
         } else if (player.isSneaking()) {
             if (Reference.WRENCHABLES.contains(lookingAt)) {
                 if (!player.isCreative()) {
-                    lookingAt.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
+                    NonNullList<ItemStack> stacks = NonNullList.create();
+                    lookingAt.getDrops(stacks, worldIn, pos, worldIn.getBlockState(pos), 0);
+                    //lookingAt.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
+                    for (ItemStack stack : stacks) {
+                        if (player.inventory.getFirstEmptyStack() != -1) {
+                            player.addItemStackToInventory(stack);
+                        } else {
+                            EntityItem item = new EntityItem(worldIn, player.posX,
+                                    player.posY, player.posZ);
+                            item.setItem(stack);
+                            item.setPickupDelay(0);
+                            worldIn.spawnEntity(item);
+                        }
+                    }
                     worldIn.playSound(null, pos.getX() + 0.5,
                             pos.getY() + 0.5, pos.getZ() + 0.5,
                             ModSoundHandler.ITEM_WRENCH_DISMANTLE, SoundCategory.BLOCKS,
