@@ -6,6 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.compat.MetalTypes;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
+import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
 import net.minecraft.init.Items;
@@ -230,7 +231,21 @@ public class RecipeHandler {
         CreateLegacy.logger.info("Compat ingot to block compacting registry complete, {} compat(s) found", compatBlocksFound);
     }
 
-
+    public static void registerCompatCrushingRecipes() {
+        int compatOresFound = 0;
+        CreateLegacy.logger.info("Attempting to register compat ore to crushed ore crushing");
+        for(String metal : MetalTypes.METAL_NAMES) {
+            if (OreDictionary.doesOreNameExist(MetalTypes.ORE + metal) && OreDictionary.doesOreNameExist(MetalTypes.CRUSHED + metal)) {
+                for (int m = 0; m < OreDictionary.getOres(MetalTypes.ORE + metal).size(); m++) {
+                    CreateLegacy.logger.info("Found {} metal set for ore to crushed", metal.toLowerCase());
+                    compatOresFound++;
+                    ItemStack stack0 = OreDictionary.getOres(MetalTypes.ORE + metal).get(m).copy();
+                    ItemStack stack1 = OreDictionary.getOres(MetalTypes.CRUSHED + metal).get(0).copy();
+                    addOreCrushing(stack0, stack1);
+                }
+            }
+        }
+    }
     private static void addWashing(@Nonnull ItemStack input, @Nonnull ItemStack result, ItemStack resultOptional) {
         WashingRecipes.instance().addWashingRecipe(input, result, resultOptional);
     }
@@ -253,5 +268,9 @@ public class RecipeHandler {
         input.setCount(9);
         result.setCount(1);
         addCompacting(input, result);
+    }
+
+    private static void addOreCrushing(ItemStack input, ItemStack result) {
+        MillingRecipes.instance().addMillingRecipe(input, result, result, MillingRecipes.MILLING_TIME_DEFAULT, 50);
     }
 }

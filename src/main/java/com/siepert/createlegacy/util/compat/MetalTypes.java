@@ -56,4 +56,6 @@ public class MetalTypes {
     public static final String NUGGET = "nugget";
     public static final String PLATE = "plate";
     public static final String ROD = "rod";
+    public static final String ORE = "ore";
+    public static final String CRUSHED = "crushed";
 }

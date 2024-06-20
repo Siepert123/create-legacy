@@ -103,6 +103,7 @@ tile.create:gearshift.name=Gearshift
 tile.create:axle_encased_andesite.name=Andesite Encased Axle
 tile.create:axle_encased_brass.name=Brass Encased Axle
 tile.create:belt.name=Mechanical Belt
+tile.create:millstone.name=Millstone
 
 #Overige
 itemGroup.tab_create=Create
@@ -120,6 +121,7 @@ item.create:wrench.name=Wrench
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes
 subtitle.block.press.activation=Press flattens something
+subtitle.block.millstone.ambient=Milling
 subtitle.item.wrench.used=Wrench used
 
 #Custom stones

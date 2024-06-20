@@ -69,5 +69,20 @@
         "name": "minecraft:random/pop"
       }
     ]
+  },
+  "block.millstone.ambient": {
+    "category": "blocks",
+    "subtitle": "subtitle.block.millstone.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:dig/stone3"
+      },
+      {
+        "name": "minecraft:dig/gravel3"
+      },
+      {
+        "name": "minecraft:step/stone6"
+      }
+    ]
   }
 }

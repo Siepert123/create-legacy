@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModSoundHandler {
 
     public static SoundEvent ITEM_SANDPAPER_USED, BLOCK_COGWHEEL_AMBIENT, BLOCK_COGWHEEL_AMBIENT_2, BLOCK_PRESS_ACTIVATION,
-        ITEM_WRENCH_ROTATE, ITEM_WRENCH_DISMANTLE;
+        ITEM_WRENCH_ROTATE, ITEM_WRENCH_DISMANTLE, BLOCK_MILLSTONE_AMBIENT;
 
     public static void registerSounds() {
         ITEM_SANDPAPER_USED = registerSound("item.sandpaper.usage");
@@ -17,6 +17,7 @@ public class ModSoundHandler {
         BLOCK_PRESS_ACTIVATION = registerSound("block.press.activation");
         ITEM_WRENCH_DISMANTLE = registerSound("item.wrench.usage.dismantle");
         ITEM_WRENCH_ROTATE = registerSound("item.wrench.usage.rotate");
+        BLOCK_MILLSTONE_AMBIENT = registerSound("block.millstone.ambient");
     }
 
     private static SoundEvent registerSound(String name) {

@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockHandCrank;
 import com.siepert.createlegacy.util.IKineticActor;
 import net.minecraft.block.Block;
