@@ -92,6 +92,11 @@ public class WashingRecipes {
         return this.washingList;
     }
 
+    public Map<ItemStack, ItemStack> getWashingListOptional()
+    {
+        return this.optionalResultList;
+    }
+
     public ItemStack getOptionalResult(ItemStack stack) {
         for (Map.Entry<ItemStack, ItemStack> entry : this.optionalResultList.entrySet()) {
             if (this.compareItemStacks(stack, entry.getKey())) {

@@ -37,7 +37,7 @@ public class MillingRecipes {
                 new ItemStack(Items.WHEAT_SEEDS), MILLING_TIME_DEFAULT / 4);
         this.addMillingRecipe(new ItemStack(Blocks.GLOWSTONE),
                 new ItemStack(Items.GLOWSTONE_DUST, 3),
-                new ItemStack(Items.GLOWSTONE_DUST), MILLING_TIME_DEFAULT / 2, 50);
+                new ItemStack(Items.GLOWSTONE_DUST), MILLING_TIME_DEFAULT, 50);
 
         this.addMillingRecipe(new ItemStack(Blocks.COBBLESTONE),
                 new ItemStack(Blocks.GRAVEL));
@@ -45,6 +45,13 @@ public class MillingRecipes {
                 new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Items.FLINT));
         this.addMillingRecipe(new ItemStack(Blocks.HARDENED_CLAY),
                 new ItemStack(Blocks.SAND, 1, 1));
+
+        for (int meta = 0; meta < 16; meta++) {
+            this.addMillingRecipe(new ItemStack(Blocks.WOOL, 1, meta),
+                    new ItemStack(Items.STRING, 2),
+                    new ItemStack(Items.STRING, 2),
+                    MILLING_TIME_DEFAULT / 4, 50);
+        }
     }
 
     public void addMillingRecipe(ItemStack input, ItemStack stack, ItemStack stackOptional) {
@@ -89,11 +96,6 @@ public class MillingRecipes {
 
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
-    }
-
-    public Map<ItemStack, ItemStack> getResultList()
-    {
-        return this.resultList;
     }
 
     public ItemStack getOptionalResult(ItemStack stack) {

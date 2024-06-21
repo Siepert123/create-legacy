@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.0_pre-11'
+version = '1.0.0_pre-12'
 group = 'com.siepert.createlegacy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'create'
 
@@ -59,6 +59,10 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
+    // at runtime, use the full JEI jar
+    //runtimeOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
