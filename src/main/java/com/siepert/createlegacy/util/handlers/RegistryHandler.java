@@ -7,6 +7,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.util.compat.TinkersCompat;
 import com.siepert.createlegacy.world.gen.WorldGenCustomOres;
+import com.siepert.createlegacy.world.gen.WorldGenCustomStructures;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;

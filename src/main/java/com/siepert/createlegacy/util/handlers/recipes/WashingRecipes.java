@@ -43,7 +43,7 @@ public class WashingRecipes {
             this.addWashingRecipe(new ItemStack(Blocks.CONCRETE_POWDER, 1, c),
                     new ItemStack(Blocks.CONCRETE, 1, c));
             if (c != 0) this.addWashingRecipe(new ItemStack(Items.BED, 1, c),
-                    new ItemStack(Items.BED, 1, 0)); //TODO: Make the bed wash too
+                    new ItemStack(Items.BED, 1, 0));
             if (c != 15) this.addWashingRecipe(new ItemStack(Items.BANNER, 1, c),
                     new ItemStack(Items.BANNER, 1, 15));
             if (c != 0) this.addWashingRecipe(new ItemStack(Blocks.CARPET, 1, c),
