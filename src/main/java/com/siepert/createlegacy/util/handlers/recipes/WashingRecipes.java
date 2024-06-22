@@ -42,13 +42,13 @@ public class WashingRecipes {
         for (int c = 0; c < 16; c++) {
             this.addWashingRecipe(new ItemStack(Blocks.CONCRETE_POWDER, 1, c),
                     new ItemStack(Blocks.CONCRETE, 1, c));
-            this.addWashingRecipe(new ItemStack(Items.BED, 1, c),
+            if (c != 0) this.addWashingRecipe(new ItemStack(Items.BED, 1, c),
                     new ItemStack(Items.BED, 1, 0)); //TODO: Make the bed wash too
-            this.addWashingRecipe(new ItemStack(Items.BANNER, 1, c),
+            if (c != 15) this.addWashingRecipe(new ItemStack(Items.BANNER, 1, c),
                     new ItemStack(Items.BANNER, 1, 15));
-            this.addWashingRecipe(new ItemStack(Blocks.CARPET, 1, c),
+            if (c != 0) this.addWashingRecipe(new ItemStack(Blocks.CARPET, 1, c),
                     new ItemStack(Blocks.CARPET, 1, 0));
-            this.addWashingRecipe(new ItemStack(Blocks.WOOL, 1, c),
+            if (c != 0) this.addWashingRecipe(new ItemStack(Blocks.WOOL, 1, c),
                     new ItemStack(Blocks.WOOL, 1, 0));
         }
 
