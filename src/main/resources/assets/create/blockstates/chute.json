@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "window=false": {
+      "model": "create:chute"
+    },
+    "window=true": {
+      "model": "create:chute_window"
+    }
+  }
+}
