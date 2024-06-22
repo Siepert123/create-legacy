@@ -17,6 +17,7 @@ public class MetalTypes {
         METAL_NAMES.add("Nickel");
         METAL_NAMES.add("Osmium");
         METAL_NAMES.add("Platinum");
+        METAL_NAMES.add("Silver");
         METAL_NAMES.add("Quicksilver");
         METAL_NAMES.add("Tin");
         METAL_NAMES.add("Uranium");

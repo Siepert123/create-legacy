@@ -22,6 +22,22 @@ public class MillingRecipes {
     private final Map<ItemStack, Integer> percentageList = Maps.<ItemStack, Integer>newHashMap();
     public static final int MILLING_TIME_DEFAULT = 100;
 
+    public Map<ItemStack, ItemStack> getResultList() {
+        return resultList;
+    }
+
+    public Map<ItemStack, ItemStack> getOptionalResultList() {
+        return optionalResultList;
+    }
+
+    public Map<ItemStack, Integer> getTimingsList() {
+        return timingsList;
+    }
+
+    public Map<ItemStack, Integer> getPercentageList() {
+        return percentageList;
+    }
+
     public static MillingRecipes instance() {
         return MILLING_BASE;
     }

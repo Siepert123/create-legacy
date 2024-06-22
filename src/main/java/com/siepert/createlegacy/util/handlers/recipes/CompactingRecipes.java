@@ -17,6 +17,7 @@ public class CompactingRecipes {
     private final Map<ItemStack, ItemStack> compactingList = Maps.<ItemStack, ItemStack>newHashMap();
     private final Map<ItemStack, BlockBlazeBurner.State> heatRequirements = Maps.<ItemStack, BlockBlazeBurner.State>newHashMap();
 
+
     public static CompactingRecipes instance() {
         return COMPACTING_BASE;
     }

@@ -7,14 +7,15 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class AbstractWashingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
-    protected static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/singleton_with_optional.png");
+public abstract class AbstractMillingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
+    protected static final ResourceLocation TEXTURES =
+            new ResourceLocation(Reference.MOD_ID + ":textures/gui/singleton_with_optional.png");
 
     protected static final int input = 0;
     protected static final int output = 1;
     protected static final int outputOptional = 2;
 
-    public AbstractWashingRecipeCategory(IGuiHelper helper) {
+    public AbstractMillingRecipeCategory(IGuiHelper helper) {
 
     }
 }

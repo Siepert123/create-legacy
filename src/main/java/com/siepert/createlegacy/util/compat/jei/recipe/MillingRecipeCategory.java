@@ -7,19 +7,18 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 
 import javax.annotation.Nonnull;
 
-public class WashingRecipeCategory extends AbstractWashingRecipeCategory<WashingRecipe> {
+public class MillingRecipeCategory extends AbstractMillingRecipeCategory<MillingRecipe> {
     private final IDrawable background;
     private final String name;
 
 
     @Override
     public String getUid() {
-        return RecipeCategories.WASHING_BY_FAN;
+        return RecipeCategories.MILLING;
     }
 
     @Override
@@ -38,7 +37,7 @@ public class WashingRecipeCategory extends AbstractWashingRecipeCategory<Washing
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, WashingRecipe recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, MillingRecipe recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
         stacks.init(input, true, 2, 8);
         stacks.init(output, false, 27, 8);
@@ -46,9 +45,9 @@ public class WashingRecipeCategory extends AbstractWashingRecipeCategory<Washing
         stacks.set(ingredients);
     }
 
-    public WashingRecipeCategory(IGuiHelper helper) {
+    public MillingRecipeCategory(IGuiHelper helper) {
         super(helper);
         background = helper.createDrawable(TEXTURES, 0, 0, 64, 32);
-        name = "Washing by Fan";
+        name = "Milling";
     }
 }
