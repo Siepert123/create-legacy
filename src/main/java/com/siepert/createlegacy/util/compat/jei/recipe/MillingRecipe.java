@@ -19,13 +19,15 @@ public class MillingRecipe implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        if (!(mouseX > recipeWidth) && !(mouseY > recipeHeight)) {
-            String s = "Milltime: " + millTime;
-            if (optionalChance < 100) {
-                s = s + ", 2nd stack: " + optionalChance + "%";
-            }
+        if (/*!(mouseX > recipeWidth) && mouseX >= 0 &&*/ !(mouseY > recipeHeight + 5) && mouseY >= -5) {
+            String s = millTime + "t";
             minecraft.fontRenderer.drawStringWithShadow(
-                    s, mouseX, mouseY, 0);
+                    s, -2, -2, 16777215);
+
+            if (!outputs.get(1).isEmpty()) {
+                minecraft.fontRenderer.drawStringWithShadow(
+                        optionalChance + "%", 45, -2, 16777215);
+            }
         }
     }
 
