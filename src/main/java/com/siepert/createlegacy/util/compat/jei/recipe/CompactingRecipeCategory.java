@@ -36,11 +36,13 @@ public class CompactingRecipeCategory extends AbstractCompactingRecipeCategory<C
         return background;
     }
 
+
+
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, CompactingRecipe recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-        stacks.init(input, true, 2, 8);
-        stacks.init(output, false, 46, 8);
+        stacks.init(input, true, 1, 7);
+        stacks.init(output, false, 45, 7);
         stacks.set(ingredients);
     }
 

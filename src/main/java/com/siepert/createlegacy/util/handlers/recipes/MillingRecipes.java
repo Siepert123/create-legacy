@@ -75,10 +75,10 @@ public class MillingRecipes {
     }
 
     public void addMillingRecipe(ItemStack input, ItemStack stack) {
-        this.addMillingRecipe(input, stack, ItemStack.EMPTY, MILLING_TIME_DEFAULT);
+        this.addMillingRecipe(input, stack, ItemStack.EMPTY, MILLING_TIME_DEFAULT, 100);
     }
     public void addMillingRecipe(ItemStack input, ItemStack stack, int millingTime) {
-        this.addMillingRecipe(input, stack, ItemStack.EMPTY, millingTime);
+        this.addMillingRecipe(input, stack, ItemStack.EMPTY, millingTime, 100);
     }
 
     public void addMillingRecipe(Block input, ItemStack stack, ItemStack stackOptional, int millingTime) {

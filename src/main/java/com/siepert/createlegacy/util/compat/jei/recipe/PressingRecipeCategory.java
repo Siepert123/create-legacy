@@ -39,8 +39,8 @@ public class PressingRecipeCategory extends AbstractPressingRecipeCategory<Press
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, PressingRecipe recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-        stacks.init(input, true, 2, 8);
-        stacks.init(output, false, 46, 8);
+        stacks.init(input, true, 1, 7);
+        stacks.init(output, false, 45, 7);
         stacks.set(ingredients);
     }
 

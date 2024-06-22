@@ -40,9 +40,9 @@ public class WashingRecipeCategory extends AbstractWashingRecipeCategory<Washing
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, WashingRecipe recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-        stacks.init(input, true, 2, 8);
-        stacks.init(output, false, 27, 8);
-        stacks.init(outputOptional, false, 46, 8);
+        stacks.init(input, true, 1, 7);
+        stacks.init(output, false, 26, 7);
+        stacks.init(outputOptional, false, 45, 7);
         stacks.set(ingredients);
     }
 

@@ -43,6 +43,8 @@ public class RecipeMaker {
 
         Map<ItemStack, ItemStack> recipeList = instance.getResultList();
         Map<ItemStack, ItemStack> recipeListOptional = instance.getOptionalResultList();
+        Map<ItemStack, Integer> timingsList = instance.getTimingsList();
+        Map<ItemStack, Integer> chancesList = instance.getPercentageList();
 
         List<MillingRecipe> jeiRecipes = Lists.newArrayList();
 
@@ -54,7 +56,7 @@ public class RecipeMaker {
 
             List<ItemStack> outputs = Lists.newArrayList(output, outputOptional);
 
-            MillingRecipe recipe = new MillingRecipe(input, outputs);
+            MillingRecipe recipe = new MillingRecipe(input, outputs, timingsList.get(input), chancesList.get(input));
             jeiRecipes.add(recipe);
         }
 
