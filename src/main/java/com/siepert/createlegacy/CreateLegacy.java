@@ -23,7 +23,7 @@ public final class CreateLegacy {
     public static final CreativeTabs TAB_CREATE = new CreateModTab("tab_create");
     public static final CreativeTabs TAB_CREATE_DECORATIONS = new CreateModDecoTab("tab_create_decorations");
 
-    @SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.COMMON_PROXY)
     public static CommonProxy proxy;
 
     @EventHandler
