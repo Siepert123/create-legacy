@@ -1,5 +1,7 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.IKineticActor;
+import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;

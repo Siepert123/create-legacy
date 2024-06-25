@@ -1,9 +1,7 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createapi.IKineticActor;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -16,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockWaterWheel.AXIS;
-import static net.minecraft.block.BlockLiquid.LEVEL;
 
 public class TileEntityWaterWheel extends TileEntity implements ITickable {
     @Override

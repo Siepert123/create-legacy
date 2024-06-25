@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.util;
+package com.siepert.createapi;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

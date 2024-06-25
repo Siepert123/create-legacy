@@ -1,6 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createapi.IKineticActor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

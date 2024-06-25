@@ -1,0 +1,104 @@
+{
+  "variants": {
+    "extended=false,facing=up,sticky=false": {
+      "model": "create:piston/unsticky"
+    },
+    "extended=false,facing=down,sticky=false": {
+      "model": "create:piston/unsticky",
+      "x": 180
+    },
+    "extended=false,facing=north,sticky=false": {
+      "model": "create:piston/unsticky",
+      "x": 90
+    },
+    "extended=false,facing=south,sticky=false": {
+      "model": "create:piston/unsticky",
+      "x": 270
+    },
+    "extended=false,facing=west,sticky=false": {
+      "model": "create:piston/unsticky",
+      "y": 90,
+      "x": 270
+    },
+    "extended=false,facing=east,sticky=false": {
+      "model": "create:piston/unsticky",
+      "y": 90,
+      "x": 90
+    },
+    "extended=false,facing=up,sticky=true": {
+      "model": "create:piston/sticky"
+    },
+    "extended=false,facing=down,sticky=true": {
+      "model": "create:piston/sticky",
+      "x": 180
+    },
+    "extended=false,facing=north,sticky=true": {
+      "model": "create:piston/sticky",
+      "x": 90
+    },
+    "extended=false,facing=south,sticky=true": {
+      "model": "create:piston/sticky",
+      "x": 270
+    },
+    "extended=false,facing=west,sticky=true": {
+      "model": "create:piston/sticky",
+      "y": 90,
+      "x": 270
+    },
+    "extended=false,facing=east,sticky=true": {
+      "model": "create:piston/sticky",
+      "y": 90,
+      "x": 90
+    },
+    "extended=true,facing=up,sticky=false": {
+      "model": "create:piston/extended"
+    },
+    "extended=true,facing=down,sticky=false": {
+      "model": "create:piston/extended",
+      "x": 180
+    },
+    "extended=true,facing=north,sticky=false": {
+      "model": "create:piston/extended",
+      "x": 90
+    },
+    "extended=true,facing=south,sticky=false": {
+      "model": "create:piston/extended",
+      "x": 270
+    },
+    "extended=true,facing=west,sticky=false": {
+      "model": "create:piston/extended",
+      "y": 90,
+      "x": 270
+    },
+    "extended=true,facing=east,sticky=false": {
+      "model": "create:piston/extended",
+      "y": 90,
+      "x": 90
+    },
+    "extended=true,facing=up,sticky=true": {
+      "model": "create:piston/extended"
+    },
+    "extended=true,facing=down,sticky=true": {
+      "model": "create:piston/extended",
+      "x": 180
+    },
+    "extended=true,facing=north,sticky=true": {
+      "model": "create:piston/extended",
+      "x": 90
+    },
+    "extended=true,facing=south,sticky=true": {
+      "model": "create:piston/extended",
+      "x": 270
+    },
+    "extended=true,facing=west,sticky=true": {
+      "model": "create:piston/extended",
+      "y": 90,
+      "x": 270
+    },
+    "extended=true,facing=east,sticky=true": {
+      "model": "create:piston/extended",
+      "y": 90,
+      "x": 90
+    }
+  }
+}

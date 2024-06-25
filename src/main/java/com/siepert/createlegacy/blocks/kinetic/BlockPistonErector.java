@@ -5,10 +5,9 @@ import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.tileentity.TileEntityWaterWheel;
-import com.siepert.createlegacy.util.*;
+import com.siepert.createlegacy.util.IHasModel;
+import com.siepert.createlegacy.util.IHasRotation;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -19,20 +18,24 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, ITileEntityProvider, IWrenchable {
+public class BlockPistonErector extends Block implements IHasModel, IWrenchable {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
-    public BlockWaterWheel(String name) {
+    private static final AxisAlignedBB HITBOX_X = new AxisAlignedBB(0.0, 6.0 / 16.0, 6.0 / 16.0, 1.0, 10.0 / 16.0, 10.0 / 16.0);
+    private static final AxisAlignedBB HITBOX_Y = new AxisAlignedBB(6.0 / 16.0, 0.0, 6.0 / 16.0, 10.0 / 16.0, 1.0, 10.0 / 16.0);
+    private static final AxisAlignedBB HITBOX_Z = new AxisAlignedBB(6.0 / 16.0, 6.0 / 16.0, 0.0, 10.0 / 16.0, 10.0 / 16.0, 1.0);
+
+    public BlockPistonErector(String name) {
         super(Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
@@ -58,16 +61,15 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        if (state.getValue(AXIS) == EnumFacing.Axis.Z) return 1;
-        return 0;
+        return state.getValue(AXIS).ordinal();
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        if (meta == 0) return this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X);
-        if (meta == 1) return this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Z);
-        CreateLegacy.logger.error("Illegal meta for block Water Wheel: {}", meta);
-        return this.getStateFromMeta(0);
+        for (EnumFacing.Axis axis : EnumFacing.Axis.values()) {
+            if (meta == axis.ordinal()) return this.getDefaultState().withProperty(AXIS, axis);
+        }
+        return getStateFromMeta(0);
     }
 
     @Override
@@ -76,9 +78,23 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
-                                            float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        EnumFacing.Axis axis = facing.getAxis();
+        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS, axis);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        switch (state.getValue(AXIS)) {
+            case X:
+                return HITBOX_X;
+            case Y:
+                return HITBOX_Y;
+            case Z:
+                return HITBOX_Z;
+            default:
+                return super.getBoundingBox(state, source, pos);
+        }
     }
 
     @Override
@@ -101,56 +117,20 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         return false;
     }
 
-
     @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-        if (srcIsCog) return;
-
-        IBlockState myState = worldIn.getBlockState(pos);
-
-        if (source.getAxis() != myState.getValue(AXIS)) return;
-
-        iteratedBlocks.add(pos);
-
-        Block block = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
-        if (block instanceof IKineticActor) {
-            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
-                    false, false, inverseRotation);
-        }
-    }
-
-
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityWaterWheel();
-    }
-
-    @Override
-    public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+    public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        TileEntity tileEntity = world.getTileEntity(pos);
 
-        if (state.getValue(AXIS) == EnumFacing.Axis.X) {
-            world.setBlockState(pos, state.withProperty(AXIS, EnumFacing.Axis.Z), 3);
-        } else {
-            world.setBlockState(pos, state.withProperty(AXIS, EnumFacing.Axis.X), 3);
-        }
+        if (side.getAxis() == state.getValue(AXIS)) return false;
 
-        if (tileEntity != null) {
-            tileEntity.validate();
-            world.setTileEntity(pos, tileEntity);
-        }
+        EnumFacing f = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, state.getValue(AXIS)).rotateAround(side.getAxis());
+
+        world.setBlockState(pos, state.withProperty(AXIS, f.getAxis()), 3);
 
         return true;
     }
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
-        rotateBlock(worldIn, pos, side);
-
-        return true;
+        return rotateBlock(worldIn, pos, side);
     }
 }

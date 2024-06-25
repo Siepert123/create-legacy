@@ -2,7 +2,7 @@ package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.util.IKineticActor;
+import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.util;
+package com.siepert.createapi;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
