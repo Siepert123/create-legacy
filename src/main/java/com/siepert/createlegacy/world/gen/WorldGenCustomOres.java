@@ -17,18 +17,18 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public class WorldGenCustomOres implements IWorldGenerator {
-    private WorldGenerator ore_copper;
-    private WorldGenerator ore_zinc;
-    private WorldGenerator stone_calcite;
-    private WorldGenerator stone_tuff;
+    private final WorldGenerator ore_copper;
+    private final WorldGenerator ore_zinc;
+    private final WorldGenerator stone_calcite;
+    private final WorldGenerator stone_tuff;
 
-    private WorldGenerator stone_asurine;
-    private WorldGenerator stone_crimsite;
-    private WorldGenerator stone_limestone;
-    private WorldGenerator stone_ochrum;
-    private WorldGenerator stone_scorchia;
-    private WorldGenerator stone_scoria;
-    private WorldGenerator stone_veridium;
+    private final WorldGenerator stone_asurine;
+    private final WorldGenerator stone_crimsite;
+    private final WorldGenerator stone_limestone;
+    private final WorldGenerator stone_ochrum;
+    private final WorldGenerator stone_scorchia;
+    private final WorldGenerator stone_scoria;
+    private final WorldGenerator stone_veridium;
     public WorldGenCustomOres() {
         ore_copper = new WorldGenMinable(ModBlocks.ORE.getDefaultState().withProperty(BlockOre.VARIANT, EnumHandler.OreEnumType.COPPER),
                 10, BlockMatcher.forBlock(Blocks.STONE));

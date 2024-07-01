@@ -11,6 +11,7 @@ import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createapi.IWrenchable;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -141,20 +142,6 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
         IBlockState myState = worldIn.getBlockState(pos);
 
         if (source.getAxis() == myState.getValue(FACING).getAxis()) return;
-
-        iteratedBlocks.add(pos);
-
-        if (worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof IKineticActor) {
-            ((IKineticActor) worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock())
-                    .passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
-                            false, false, inverseRotation);
-        }
-
-        if (move(worldIn, pos, myState.getValue(FACING))) {
-            worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(),
-                    SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS,
-                    1.0f, 1.0f);
-        }
     }
 
     @Override
@@ -180,46 +167,12 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
 
 
     /**
+     * I hate this with every cell of my body
      * @param world World.
      * @param pos Position of the piston.
      * @param direction Direction of the movement.
-     * @return True if the piston moved; sound!
      */
-    private boolean move(World world, BlockPos pos, EnumFacing direction) {
-        BlockPos whereBlock;
+    private void move(World world, BlockPos pos, EnumFacing direction) {
 
-        if (world.getBlockState(pos.offset(direction.getOpposite())).getBlock() != ModBlocks.PISTON_ERECTOR) {
-            return false;
-        }
-
-        if (world.getBlockState(pos.offset(direction)).getBlock() != ModBlocks.PISTON_ERECTOR) {
-            if (!(world.getBlockState(pos.offset(direction)).getBlock()
-                    .getMaterial(world.getBlockState(pos.offset(direction))).blocksMovement())
-                    && world.getBlockState(pos.offset(direction, 2)).getMaterial().isReplaceable()) {
-                BlockPos.MutableBlockPos lastPole = (BlockPos.MutableBlockPos) pos.offset(direction.getOpposite());
-                boolean flag = world.getBlockState(lastPole).getBlock() == ModBlocks.PISTON_ERECTOR;
-                while (flag) {
-                    if (world.getBlockState(lastPole).getValue(BlockPistonErector.AXIS) != direction.getAxis()) {
-                        flag = false;
-                        break;
-                    }
-
-                    lastPole.move(direction.getOpposite());
-
-                    flag = world.getBlockState(lastPole).getBlock() == ModBlocks.PISTON_ERECTOR;
-                }
-
-                lastPole.move(direction);
-
-                world.setBlockState(lastPole, Blocks.AIR.getDefaultState(), 3);
-
-                IBlockState stateOfYes = world.getBlockState(pos.offset(direction));
-
-                world.setBlockState(pos.offset(direction, 2), stateOfYes, 3);
-                world.setBlockState(pos.offset(direction), ModBlocks.PISTON_ERECTOR.getDefaultState().withProperty(BlockPistonErector.AXIS, direction.getAxis()), 3);
-                return true;
-            }
-        }
-        return false;
     }
 }
