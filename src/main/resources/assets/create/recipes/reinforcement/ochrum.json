@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "SBS",
+    "BSB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stoneOchrum"
+    }
+  },
+  "result": {
+    "item": "create:stone_reinforced",
+    "data": 6,
+    "count": 8
+  }
+}

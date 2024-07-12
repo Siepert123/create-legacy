@@ -9,6 +9,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createlegacy.util.Reference;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
@@ -19,6 +20,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,6 +35,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
@@ -67,6 +70,11 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
         int flag = 0;
         if (state.getValue(STICKY)) flag = 6;
         return state.getValue(FACING).getIndex() + flag;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(Reference.WIP_TT);
     }
 
     @Override

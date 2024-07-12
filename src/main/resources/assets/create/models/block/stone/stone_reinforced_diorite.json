@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/block_reinforced_base",
+  "textures": {
+    "block": "blocks/stone_diorite",
+    "particle": "blocks/stone_diorite"
+  }
+}

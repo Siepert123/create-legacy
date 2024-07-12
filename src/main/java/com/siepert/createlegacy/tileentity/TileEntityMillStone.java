@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.siepert.createapi.IKineticTE;
 import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
@@ -16,17 +17,18 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TileEntityMillStone extends TileEntity implements ITickable {
+public class TileEntityMillStone extends TileEntity implements ITickable, IKineticTE {
     private int currentMillProgress;
     private int maxMillProgress;
     private ItemStack currentlyMilling;
     private ItemStack output;
     private ItemStack outputOptional;
     private boolean hasRecipe;
+    private int speed;
     @Override
     public void update() {
         MillingRecipes.ResultSet set = MillingRecipes.apply(currentlyMilling);
-
+        speed = 64;
         hasRecipe = set.hasRecipe();
         if (hasRecipe) {
             maxMillProgress = set.getMillTime();
@@ -225,5 +227,15 @@ public class TileEntityMillStone extends TileEntity implements ITickable {
                 world.spawnEntity(item);
             }
         }
+    }
+
+    @Override
+    public int getConsumedSU() {
+        return speed * 4;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/block_reinforced_base",
+  "textures": {
+    "block": "create:block/palettes/stone_types/veridium",
+    "particle": "create:block/palettes/stone_types/veridium"
+  }
+}

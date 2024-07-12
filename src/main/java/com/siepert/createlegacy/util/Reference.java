@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -12,9 +13,11 @@ import java.util.Random;
 public class Reference {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
-    public static final String VERSION = "24w27a"; //The version, changes each update in this fashion: rework.major.minor.patch
+    public static final String VERSION = "24w28a"; //The version, changes each update in this fashion: rework.major.minor.patch
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class
     public static final String COMMON_PROXY = "com.siepert.createlegacy.proxy.CommonProxy"; //Common proxy class
+
+    public static String WIP_TT = "[WIP - DO NOT USE]";
 
     public static Random random = new Random(System.currentTimeMillis());
     public static TimedLucky timedLucky = new TimedLucky();

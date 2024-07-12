@@ -37,8 +37,8 @@ public class BlockStoneCut extends Block implements IHasModel, IMetaName {
         setHarvestLevel("pickaxe", 1);
         setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.CALCITE));
         setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.TUFF));
-        setHardness(1.5f);
-        setResistance(3);
+        setHardness(5f);
+        setResistance(20f);
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));

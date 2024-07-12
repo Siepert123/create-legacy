@@ -105,10 +105,14 @@ tile.create:axle_encased_brass.name=Brass Encased Axle
 tile.create:belt.name=Mechanical Belt
 tile.create:chute.name=Chute
 tile.create:millstone.name=Millstone
+tile.create:piston.name=Mechanical Piston
+tile.create:piston_sticky.name=Sticky Mechanical Piston
+tile.create:piston_pole.name=Piston Extension Pole
 
 #Overige
 itemGroup.tab_create=Create
 itemGroup.tab_create_decorations=Create's Decorations
+itemGroup.tab_create_other=Create's Other Blocks
 item.create:evil_item.create:name=Evil Item!
 item.create:sandpaper.name=Sandpaper
 item.create:incomplete_precision_mechanism.name=Incomplete Precision Mechanism
@@ -231,3 +235,19 @@ tile.create:stone_layered_scorchia.name=Layered Scorchia
 tile.create:stone_layered_scoria.name=Layered Scoria
 tile.create:stone_layered_tuff.name=Layered Tuff
 tile.create:stone_layered_veridium.name=Layered Veridium
+
+#Reinforced
+tile.create:stone_reinforced_andesite.name=Reinforced Andesite
+tile.create:stone_reinforced_asurine.name=Reinforced Asurine
+tile.create:stone_reinforced_calcite.name=Reinforced Calcite
+tile.create:stone_reinforced_crimsite.name=Reinforced Crimsite
+tile.create:stone_reinforced_deepslate.name=Reinforced Deepslate
+tile.create:stone_reinforced_diorite.name=Reinforced Diorite
+tile.create:stone_reinforced_dripstone.name=Reinforced Dripstone
+tile.create:stone_reinforced_granite.name=Reinforced Granite
+tile.create:stone_reinforced_limestone.name=Reinforced Limestone
+tile.create:stone_reinforced_ochrum.name=Reinforced Ochrum
+tile.create:stone_reinforced_scorchia.name=Reinforced Scorchia
+tile.create:stone_reinforced_scoria.name=Reinforced Scoria
+tile.create:stone_reinforced_tuff.name=Reinforced Tuff
+tile.create:stone_reinforced_veridium.name=Reinforced Veridium

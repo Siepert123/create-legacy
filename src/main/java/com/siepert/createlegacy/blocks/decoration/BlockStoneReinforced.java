@@ -17,31 +17,38 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 @SuppressWarnings("deprecation")
-public class BlockStoneBricks extends Block implements IHasModel, IMetaName {
+public class BlockStoneReinforced extends Block implements IHasModel, IMetaName {
     public static final PropertyEnum<EnumHandler.DecoStoneEnumType> VARIANT = PropertyEnum.<EnumHandler.DecoStoneEnumType>create("variant", EnumHandler.DecoStoneEnumType.class);
 
-    private static final String name = "stone_bricks";
+    private static final String name = "stone_reinforced";
 
-    public BlockStoneBricks() {
+    public BlockStoneReinforced() {
         super(Material.ROCK);
         setUnlocalizedName("create:" + name);
         setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE_DECORATIONS);
+        setCreativeTab(CreateLegacy.TAB_CREATE_OTHER);
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.ASURINE));
-        setHarvestLevel("pickaxe", 1);
-        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.CALCITE));
-        setHarvestLevel("pickaxe", 0, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.TUFF));
-        setHardness(5f);
-        setResistance(20f);
+        setHarvestLevel("pickaxe", 2);
+        setHarvestLevel("pickaxe", 1, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.CALCITE));
+        setHarvestLevel("pickaxe", 1, this.blockState.getBaseState().withProperty(VARIANT, EnumHandler.DecoStoneEnumType.TUFF));
+        setHardness(10.0f);
+        setResistance(40.0f);
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     @Override
@@ -67,7 +74,8 @@ public class BlockStoneBricks extends Block implements IHasModel, IMetaName {
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         for (EnumHandler.DecoStoneEnumType variant : EnumHandler.DecoStoneEnumType.values()) {
-            items.add(new ItemStack(this, 1, variant.getMeta()));
+            if (variant.getMeta() != 4 && variant.getMeta() != 3)
+                items.add(new ItemStack(this, 1, variant.getMeta()));
         }
     }
 
@@ -86,7 +94,7 @@ public class BlockStoneBricks extends Block implements IHasModel, IMetaName {
         for (int i = 0; i < EnumHandler.DecoStoneEnumType.values().length; i++) {
             String s = EnumHandler.DecoStoneEnumType.values()[i].getName();
             CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this),
-                    i, "stone/stone_bricks_" + s, "inventory");
+                    i, "stone/stone_reinforced_" + s, "inventory");
 
         }
     }

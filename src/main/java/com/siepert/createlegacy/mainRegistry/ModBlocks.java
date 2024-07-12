@@ -54,4 +54,5 @@ public class ModBlocks {
     public static final Block STONE_BRICKS = new BlockStoneBricks();
     public static final Block STONE_BRICKS_FANCY = new BlockStoneBricksFancy();
     public static final Block STONE_PILLAR = new BlockStonePillar();
+    public static final Block STONE_REINFORCED = new BlockStoneReinforced();
 }

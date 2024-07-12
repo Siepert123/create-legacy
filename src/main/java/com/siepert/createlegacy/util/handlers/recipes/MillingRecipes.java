@@ -20,7 +20,7 @@ public class MillingRecipes {
     private final Map<ItemStack, ItemStack> optionalResultList = Maps.<ItemStack, ItemStack>newHashMap();
     private final Map<ItemStack, Integer> timingsList = Maps.<ItemStack, Integer>newHashMap();
     private final Map<ItemStack, Integer> percentageList = Maps.<ItemStack, Integer>newHashMap();
-    public static final int MILLING_TIME_DEFAULT = 100;
+    public static final int MILLING_TIME_DEFAULT = 100; //Milling time at 64 RPM
 
     public Map<ItemStack, ItemStack> getResultList() {
         return resultList;
