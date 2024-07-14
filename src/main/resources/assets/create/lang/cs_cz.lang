@@ -1,3 +1,5 @@
+#Translation by Basil
+
 #basic copper items
 item.create:ingot_copper.name=Měděni Ingot
 item.create:nugget_copper.name= Měděni Nugget

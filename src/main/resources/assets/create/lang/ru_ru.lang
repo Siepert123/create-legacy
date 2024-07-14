@@ -1,0 +1,256 @@
+#Переводил Магистр Djo
+
+#basic copper items
+item.create:ingot_copper.name=Медный слиток
+item.create:nugget_copper.name=Медный кусочек
+item.create:plate_copper.name=Медная пластина
+
+#basic zinc items
+item.create:ingot_zinc.name=Цинковый слиток
+item.create:nugget_zinc.name=Цинковый кусочек
+item.create:plate_zinc.name=Цинковая пластина
+
+#basic brass items
+item.create:ingot_brass.name=Латунный слиток
+item.create:nugget_brass.name=Латунный кусочек
+item.create:plate_brass.name=Латунная пластина
+
+#other basic items
+item.create:andesite_alloy.name=Андезитовый сплав
+item.create:plate_gold.name=Зодотая пластина
+item.create:plate_iron.name=Железная пластина
+item.create:plate_obsidian.name=Обсидиановая пластина
+item.create:rose_quartz.name=Розовый кварц
+item.create:rose_quartz_polished.name=Полированый розовый кварц
+
+#dust items
+item.create:dust_netherrack.name=Незеракавая пыль
+item.create:dust_obsidian.name=Обсидиановая пыль
+
+#crushed items
+item.create:crushed_iron.name=Измельченное железо
+item.create:crushed_gold.name=Измельченное золото
+item.create:crushed_copper.name=Измельченное медь
+item.create:crushed_zinc.name=Измельченное цинк
+
+#crushed items (compat)
+item.create:crushed_aluminium.name=Измельченное Алюминий
+item.create:crushed_lead.name=Измельченное Свинец
+item.create:crushed_nickel.name=Измельченное Никель
+item.create:crushed_osmium.name=Измельченное Осмий
+item.create:crushed_platinum.name=Измельченное Платина
+item.create:crushed_quicksilver.name=Измельченное Ртуть
+item.create:crushed_silver.name=Измельченное Серебро
+item.create:crushed_tin.name=Измельченное Олово
+item.create:crushed_uranium.name=Измельченное Уран
+
+#Food n stuff
+item.create:wheat_flour.name=Пшеничная мука
+item.create:dough.name=Тесто
+item.create:chocolate_ingot.name=Пллитка шоколада
+item.create:apple_honey.name=Медовое яблоко
+item.create:sweet_roll.name=Сладкий рулет
+item.create:chocolate_berries.name=Шоколадные ягоды
+item.create:blazecake_base.name=Пустой пирог
+item.create:blazecake.name=Пирог с начинкой
+item.create:blazecake_creative.name=Пирог с начинкой (Творческий)
+
+#material storage blocks & ores
+tile.create:ore_copper.name=Медная руда
+tile.create:ore_zinc.name=Цинковая руда
+tile.create:storage_block_copper.name=Медный блок
+tile.create:storage_block_zinc.name=Цинковый блок
+tile.create:storage_block_brass.name=Латунный блок
+tile.create:storage_block_andesite_alloy.name=Блок андезитового сплава
+
+#Advanced ingredients
+item.create:whisk.name=Метелка
+item.create:propeller.name=Пропеллер
+item.create:electron_tube.name=Электронная трубка
+item.create:brass_hand.name=Латунная рука
+item.create:integrated_circuit.name=Интегральная схема
+item.create:precision_mechanism.name=Точный механизм
+item.create:shadow_steel.name=Теневая сталь
+item.create:refined_radiance.name=Очищенное сияние
+
+#casings
+tile.create:casing_andesite.name=Андезитовая корпус
+tile.create:casing_copper.name=Медный корпус
+tile.create:casing_brass.name=Латунный корпус
+tile.create:casing_train.name=Корпус поезда
+
+#Kinetic Appliances
+tile.create:axle.name=Вал
+tile.create:cogwheel.name=Зубчатое колесо
+tile.create:hand_crank.name=Ручная рукоятка
+tile.create:depot.name=Депо
+tile.create:basin.name=Котёл
+tile.create:blaze_burner_empty.name=Пустая пылающая горелка
+tile.create:blaze_burner_passive.name=Пылающая горелка
+tile.create:blaze_burner_heated.name=Раскалянная пылающая горелка
+tile.create:blaze_burner_superheated.name=Перегретая пылающая горелка
+tile.create:creative_motor.name=Творческий двигатель
+tile.create:water_wheel.name=Водяное колесо
+tile.create:furnace_engine.name=Печной двигатель
+tile.create:furnace_flywheel.name=Маховик печи
+tile.create:drill.name=Механический бур
+tile.create:saw.name=Механическая пила
+tile.create:press.name=Механический пресс
+tile.create:mixer.name=Механический миксер
+tile.create:fan.name=Вентилятор в корпусе
+tile.create:chassis.name=Шасси
+tile.create:gearbox.name=Коробка передач
+tile.create:clutch.name=Сцепление
+tile.create:gearshift.name=Переключатель передач
+tile.create:axle_encased_andesite.name=Вал в андезитовая корпусе
+tile.create:axle_encased_brass.name=Вал в латунный корпусе
+tile.create:belt.name=Механический Ремень
+tile.create:chute.name=Желоб
+tile.create:millstone.name=Мельничный жерновжелоб
+tile.create:piston.name=Механический поршень
+tile.create:piston_sticky.name=Липкий механический поршень
+tile.create:piston_pole.name=Удлинетель поршня
+
+#Overige
+itemGroup.tab_create=Create
+itemGroup.tab_create_decorations=Create's Декорации
+itemGroup.tab_create_other=Create's другие блоки
+
+item.create:evil_item.create:name=Злой Предмет!
+item.create:sandpaper.name=Наждачка
+item.create:incomplete_precision_mechanism.name=Необработанный точный механизм
+item.create:incomplete_plate_obsidian.name=Необработанная обсидиановая пластина
+tile.create:schedule_wash.name=Расписание вентилятора  Мойка
+tile.create:schedule_cook.name=Расписание вентилятора  Готовка
+
+item.create:wrench.name=Гаечный ключ
+
+#Sounds
+subtitle.block.cogwheel.ambient=Грохочут зубчатые колеса
+subtitle.item.sandpaper.used=Полировка наждачной бумагой
+subtitle.block.press.activation=Пресс что-то расплющивает
+subtitle.block.millstone.ambient=Измельчение
+subtitle.item.wrench.used=Используется гаечный ключ
+
+#Custom stones
+tile.create:stone_calcite.name=Кальцит
+tile.create:stone_tuff.name=Туф
+tile.create:stone_asurine.name=Азурин
+tile.create:stone_crimsite.name=Кримзит
+tile.create:stone_limestone.name=Известняк
+tile.create:stone_ochrum.name=Охра
+tile.create:stone_scorchia.name=Скорчия
+tile.create:stone_scoria.name=Скория
+tile.create:stone_veridium.name=Веридиум
+
+#Полированый
+tile.create:stone_polished_andesite.name=Полированый Андезит
+tile.create:stone_polished_asurine.name=Полированый Азурин
+tile.create:stone_polished_calcite.name=Полированый Кальцит
+tile.create:stone_polished_crimsite.name=Полированый Кримзит
+tile.create:stone_polished_deepslate.name=Полированый Сланец
+tile.create:stone_polished_diorite.name=Полированый Диорит
+tile.create:stone_polished_dripstone.name=Полированый Капельник
+tile.create:stone_polished_granite.name=Полированый Гранит
+tile.create:stone_polished_limestone.name=Полированый Известняк
+tile.create:stone_polished_ochrum.name=Полированый Охра
+tile.create:stone_polished_scorchia.name=Полированый Скорчия
+tile.create:stone_polished_scoria.name=Полированый Скория
+tile.create:stone_polished_tuff.name=Полированый Туф
+tile.create:stone_polished_veridium.name=Полированый Веридиум
+
+#Ограненный 
+tile.create:stone_cut_andesite.name=Ограненный Андезит
+tile.create:stone_cut_asurine.name=Ограненный Азурин
+tile.create:stone_cut_calcite.name=Ограненный Кальцит
+tile.create:stone_cut_crimsite.name=Ограненный Кримзит
+tile.create:stone_cut_deepslate.name=Ограненный Сланец
+tile.create:stone_cut_diorite.name=Ограненный Диорит
+tile.create:stone_cut_dripstone.name=Ограненный Капельник
+tile.create:stone_cut_granite.name=Ограненный Гранит
+tile.create:stone_cut_limestone.name=Ограненный Известняк
+tile.create:stone_cut_ochrum.name=Ограненный Охра
+tile.create:stone_cut_scorchia.name=Ограненный Скорчия
+tile.create:stone_cut_scoria.name=Ограненный Скория
+tile.create:stone_cut_tuff.name=Ограненный Туф
+tile.create:stone_cut_veridium.name=Ограненный Веридиум
+
+#кирпичи
+tile.create:stone_bricks_andesite.name=Андезитовые кирпичи
+tile.create:stone_bricks_asurine.name=Азуриновые кирпичи
+tile.create:stone_bricks_calcite.name=Кальцитовые кирпичи
+tile.create:stone_bricks_crimsite.name=Кримзитовые кирпичи
+tile.create:stone_bricks_deepslate.name=Сланецовые кирпичи
+tile.create:stone_bricks_diorite.name=Диоритовые кирпичи
+tile.create:stone_bricks_dripstone.name=Капельниковые кирпичи
+tile.create:stone_bricks_granite.name=Гранитовые кирпичи
+tile.create:stone_bricks_limestone.name=Известняковые кирпичи
+tile.create:stone_bricks_ochrum.name=Охровые кирпичи
+tile.create:stone_bricks_scorchia.name=Скорчивые кирпичи
+tile.create:stone_bricks_scoria.name=Скоривые кирпичи
+tile.create:stone_bricks_tuff.name=Туфовые кирпичи
+tile.create:stone_bricks_veridium.name=Веридиумовые кирпичи
+
+#Причудливые кирпичи
+tile.create:stone_bricks_fancy_andesite.name=Причудливые Андезитовые кирпичи
+tile.create:stone_bricks_fancy_asurine.name=Причудливые Азуриновые кирпичи
+tile.create:stone_bricks_fancy_calcite.name=Причудливые Кальцитовые кирпичи
+tile.create:stone_bricks_fancy_crimsite.name=Причудливые Кримзитовые кирпичи
+tile.create:stone_bricks_fancy_deepslate.name=Причудливые Сланецовые кирпичи
+tile.create:stone_bricks_fancy_diorite.name=Причудливые Диоритовые кирпичи
+tile.create:stone_bricks_fancy_dripstone.name=Причудливые Капельниковые кирпичи
+tile.create:stone_bricks_fancy_granite.name=Причудливые Гранитовые кирпичи
+tile.create:stone_bricks_fancy_limestone.name=Причудливые Известняковые кирпичи
+tile.create:stone_bricks_fancy_ochrum.name=Причудливые Охровые кирпичи
+tile.create:stone_bricks_fancy_scorchia.name=Причудливые Скорчивые кирпичи
+tile.create:stone_bricks_fancy_scoria.name=Причудливые Скоривые кирпичи
+tile.create:stone_bricks_fancy_tuff.name=Причудливые Туфовые кирпичи
+tile.create:stone_bricks_fancy_veridium.name=Причудливые Веридиумовые кирпичи
+
+#Pillars
+tile.create:stone_pillar_andesite.name=Андезитовая ограда
+tile.create:stone_pillar_asurine.name=Азуриновая ограда
+tile.create:stone_pillar_calcite.name=Кальцитовая ограда
+tile.create:stone_pillar_crimsite.name=Кримзитовая ограда
+tile.create:stone_pillar_deepslate.name=Сланецовая ограда
+tile.create:stone_pillar_diorite.name=Диоритовая ограда
+tile.create:stone_pillar_dripstone.name=Капельниковая ограда
+tile.create:stone_pillar_granite.name=Гранитовая ограда
+tile.create:stone_pillar_limestone.name=Известняковая ограда
+tile.create:stone_pillar_ochrum.name=Охровая ограда
+tile.create:stone_pillar_scorchia.name=Скорчивая ограда
+tile.create:stone_pillar_scoria.name=Скоривая ограда
+tile.create:stone_pillar_tuff.name=Туфовая ограда
+tile.create:stone_pillar_veridium.name=Веридиумовая ограда
+
+#Слоёный
+tile.create:stone_layered_andesite.name=Слоёный Андезит
+tile.create:stone_layered_asurine.name=Слоёный Азурин
+tile.create:stone_layered_calcite.name=Слоёный Кальцит
+tile.create:stone_layered_crimsite.name=Слоёный Кримзит
+tile.create:stone_layered_deepslate.name=Слоёный Сланец
+tile.create:stone_layered_diorite.name=Слоёный Диорит
+tile.create:stone_layered_dripstone.name=Слоёный Капельник
+tile.create:stone_layered_granite.name=Слоёный Гранит
+tile.create:stone_layered_limestone.name=Слоёный Известняк
+tile.create:stone_layered_ochrum.name=Слоёный Охра
+tile.create:stone_layered_scorchia.name=Слоёный Скорчия
+tile.create:stone_layered_scoria.name=Слоёный Скория
+tile.create:stone_layered_tuff.name=Слоёный Туф
+tile.create:stone_layered_veridium.name=Слоёный Веридиум
+
+#Усиленный
+tile.create:stone_reinforced_andesite.name=Усиленный Андезит
+tile.create:stone_reinforced_asurine.name=Усиленный Азурин
+tile.create:stone_reinforced_calcite.name=Усиленный Кальцит
+tile.create:stone_reinforced_crimsite.name=Усиленный Кримзит
+tile.create:stone_reinforced_deepslate.name=Усиленный Сланец
+tile.create:stone_reinforced_diorite.name=Усиленный Диорит
+tile.create:stone_reinforced_dripstone.name=Усиленный Капельник
+tile.create:stone_reinforced_granite.name=Усиленный Гранит
+tile.create:stone_reinforced_limestone.name=Усиленный Известняк
+tile.create:stone_reinforced_ochrum.name=Усиленный Охра
+tile.create:stone_reinforced_scorchia.name=Усиленный Скорчия
+tile.create:stone_reinforced_scoria.name=Усиленный Скория
+tile.create:stone_reinforced_tuff.name=Усиленный Туф
+tile.create:stone_reinforced_veridium.name=Усиленный Веридиум
