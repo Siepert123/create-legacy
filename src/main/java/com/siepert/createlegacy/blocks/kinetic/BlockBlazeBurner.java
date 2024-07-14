@@ -228,6 +228,27 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
                 }
             }
         }
+        if (playerIn.getHeldItem(hand).isItemEqual(TileEntityBlazeBurner.CREATIVE_BLAZECAKE)) {
+            if (state.getValue(STATE) != State.EMPTY) {
+                TileEntityBlazeBurner tileEntityBlazeBurner = (TileEntityBlazeBurner) worldIn.getTileEntity(pos);
+                if (tileEntityBlazeBurner != null) {
+                    switch (state.getValue(STATE)) {
+                        case PASSIVE:
+                            if (!worldIn.isRemote)
+                                tileEntityBlazeBurner.setBurnTime(-1);
+                            return true;
+                        case HEATED:
+                            if (!worldIn.isRemote)
+                                tileEntityBlazeBurner.setBurnTime(-2);
+                            return true;
+                        case COPE_SEETHE_MALD:
+                            if (!worldIn.isRemote)
+                                tileEntityBlazeBurner.setBurnTime(0);
+                            return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 

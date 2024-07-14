@@ -1,15 +1,20 @@
 package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
+import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.Reference;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 
 public class TileEntityBlazeBurner extends TileEntity implements ITickable {
+    public static final ItemStack CREATIVE_BLAZECAKE = new ItemStack(ModItems.SCRUMPTIOUS_FOOD, 1, 8);
+
+
     private int remainingBurnTime;
 
     public enum CookLevel {
@@ -91,10 +96,21 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
                     remainingBurnTime--;
                     BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED), world, pos);
                 } else {
-                    BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.PASSIVE), world, pos);
+                    if (remainingBurnTime == 0) {
+                        BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.PASSIVE), world, pos);
+                    } else if (remainingBurnTime == -1) {
+                        BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.HEATED), world, pos);
+                    } else if (remainingBurnTime == -2) {
+                        BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD), world, pos);
+                    }
                 }
             }
             world.markBlockRangeForRenderUpdate(pos.east().north().down(), pos.west().south().up());
         }
+    }
+
+    public void setBurnTime(int time) {
+        remainingBurnTime = time;
+        markDirty();
     }
 }

@@ -14,13 +14,22 @@ import java.util.List;
 public class TileEntityChute extends TileEntity implements ITickable {
     private ItemStack currentStack;
 
+    private void deNullify() {
+        if (currentStack == null) {
+            currentStack = ItemStack.EMPTY;
+        }
+    }
+
     public ItemStack getCurrentStack() {
+        deNullify();
         return currentStack;
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
+
+        deNullify();
 
         if (!currentStack.isEmpty()) {
             NBTTagCompound stackNBT = new NBTTagCompound();
@@ -44,13 +53,17 @@ public class TileEntityChute extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        if (world.getTotalWorldTime() % 10 == 0) {
+
+        deNullify();
+
+        if (!world.isRemote && world.getTotalWorldTime() % 5 == 0) {
             boolean mustCheckForEntityItem = !world.getBlockState(pos.up()).getMaterial().blocksMovement();
             boolean drop = !world.getBlockState(pos.down()).getMaterial().blocksMovement();
 
             if (drop) {
                 if (currentStack != ItemStack.EMPTY) {
-                    EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, currentStack.copy());
+                    EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() - 0.25, pos.getZ() + 0.5, currentStack.copy());
+                    item.setVelocity(0.0, -0.5, 0.0);
                     world.spawnEntity(item);
                     currentStack = ItemStack.EMPTY;
                     markDirty();
@@ -71,6 +84,7 @@ public class TileEntityChute extends TileEntity implements ITickable {
 
                 if (!items.isEmpty() && currentStack == ItemStack.EMPTY) {
                     currentStack = items.get(0).getItem();
+                    items.get(0).setDead();
                 }
             }
         }
