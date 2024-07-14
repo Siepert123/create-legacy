@@ -121,4 +121,11 @@ public class OreDictionaryCompat {
     OreDictionary.registerOre("stoneDiorite", new ItemStack(ModBlocks.STONE, 1, 12));
     OreDictionary.registerOre("stoneGranite", new ItemStack(ModBlocks.STONE, 1, 13));
      */
+
+    public static boolean doesOreDictReallyExist(String name) {
+        if (OreDictionary.doesOreNameExist(name)) {
+            return !OreDictionary.getOres(name).isEmpty();
+        }
+        return false;
+    }
 }
