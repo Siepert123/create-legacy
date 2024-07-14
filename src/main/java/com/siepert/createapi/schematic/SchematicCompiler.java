@@ -18,11 +18,20 @@ public class SchematicCompiler {
         File dir = new File(mcPath.toFile(), "schematics");
         dir.mkdir();
 
+        File file = new File(mcPath.toString(), filename + ".sch");
+
         List<Byte> toSave = new ArrayList<>();
 
         toSave.add((byte) structure.length);
         toSave.add((byte) structure[0].length);
-        toSave.add((byte) structure[0][0 ].length);
+        toSave.add((byte) structure[0][0].length);
+
+        for (Block[][] x : structure) {
+            for (Block[] y : x) {
+                for (Block z : y) {
+                }
+            }
+        }
     }
 
 }
