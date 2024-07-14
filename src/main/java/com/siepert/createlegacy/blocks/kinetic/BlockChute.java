@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityChute;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IWrenchable;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -16,9 +18,11 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -31,12 +35,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockChute extends Block implements IHasModel, IWrenchable {
+public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
     public static final PropertyBool WINDOW = PropertyBool.create("window");
     private static final double thing0 = 1.0 / 16.0;
     private static final double thing1 = 15.0 / 16.0;
     public static final AxisAlignedBB BB_X_POS = new AxisAlignedBB(thing0, 0.0, thing0, 2.0 / 16.0, 1.0, thing1);
-    public static final AxisAlignedBB BB_X_NEG = new AxisAlignedBB(thing1, 0.0, 0.0, thing1, 1.0, thing1);
+    public static final AxisAlignedBB BB_X_NEG = new AxisAlignedBB(thing1, 0.0, thing0, thing1, 1.0, thing1);
     public static final AxisAlignedBB BB_Z_POS = new AxisAlignedBB(thing0, 0.0, thing0, thing1, 1.0, 2.0 / 16.0);
     public static final AxisAlignedBB BB_Z_NEG = new AxisAlignedBB(thing0, 0.0, 14.0 / 16.0, thing1, 1.0, thing1);
     public BlockChute(String name) {
@@ -122,11 +126,12 @@ public class BlockChute extends Block implements IHasModel, IWrenchable {
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
-
-
-        for (AxisAlignedBB axisalignedbb : getCollisionBoxList())
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, axisalignedbb);
+        if (entityIn instanceof EntityItem) {
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, bb);
+        } else {
+            for (AxisAlignedBB axisalignedbb : getCollisionBoxList()) {
+                addCollisionBoxToList(pos, entityBox, collidingBoxes, axisalignedbb);
+            }
         }
     }
 
@@ -140,5 +145,20 @@ public class BlockChute extends Block implements IHasModel, IWrenchable {
         list.add(BB_Z_NEG);
 
         return list;
+    }
+
+    public boolean containsItem(World world, BlockPos pos) {
+        TileEntityChute tileEntityChute = (TileEntityChute) world.getTileEntity(pos);
+
+        if (tileEntityChute != null) {
+            return !tileEntityChute.getCurrentStack().isEmpty();
+        }
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityChute();
     }
 }
