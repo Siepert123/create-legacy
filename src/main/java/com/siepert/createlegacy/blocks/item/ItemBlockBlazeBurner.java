@@ -3,12 +3,17 @@ package com.siepert.createlegacy.blocks.item;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**Useful class for having blocks with subtypes having items. */
 public class ItemBlockBlazeBurner extends ItemBlock {
@@ -39,5 +44,12 @@ public class ItemBlockBlazeBurner extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         return super.getUnlocalizedName() + ((IMetaName)this.block).getSpecialName(stack);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (stack.getMetadata() != 0) {
+            tooltip.add("Likes coal");
+        }
     }
 }
