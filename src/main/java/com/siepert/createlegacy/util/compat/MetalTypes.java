@@ -50,6 +50,15 @@ public class MetalTypes {
         //Odd IE metals
         METAL_NAMES.add("Constantan");
         METAL_NAMES.add("Electrum");
+
+        //Hm yes
+        METAL_NAMES.add("Astolfite");
+        METAL_NAMES.add("Doxxium");
+        METAL_NAMES.add("Chinesium989");
+        METAL_NAMES.add("Stalinium");
+        METAL_NAMES.add("Nikonium");
+        METAL_NAMES.add("Creativesteel");
+        METAL_NAMES.add("Amirite");
     }
 
     public static final String INGOT = "ingot";
