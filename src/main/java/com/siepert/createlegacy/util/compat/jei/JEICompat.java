@@ -23,6 +23,7 @@ public class JEICompat implements IModPlugin {
         registry.addRecipeCategories(new MillingRecipeCategory(gui));
         registry.addRecipeCategories(new PressingRecipeCategory(gui));
         registry.addRecipeCategories(new CompactingRecipeCategory(gui));
+        registry.addRecipeCategories(new MysteriousConversionRecipeCategory(gui));
     }
 
     @Override
@@ -46,6 +47,7 @@ public class JEICompat implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.PRESS), RecipeCategories.COMPACTING);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.ITEM_HOLDER, 1, 1), RecipeCategories.COMPACTING);
 
+        registry.addRecipes(RecipeMaker.getCompactingRecipes(jeiHelpers));
 
     }
 

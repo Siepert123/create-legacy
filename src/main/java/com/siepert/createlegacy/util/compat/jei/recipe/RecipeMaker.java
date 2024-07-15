@@ -2,6 +2,8 @@ package com.siepert.createlegacy.util.compat.jei.recipe;
 
 import com.google.common.collect.Lists;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
+import com.siepert.createlegacy.mainRegistry.ModBlocks;
+import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
@@ -10,6 +12,7 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -103,5 +106,22 @@ public class RecipeMaker {
         }
 
         return jeiRecipes;
+    }
+
+    public static List<MysteriousConversionRecipe> getMysteryRecipes(IJeiHelpers helpers) {
+
+        List<MysteriousConversionRecipe> recipes = Lists.newArrayList();
+
+        recipes.add(new MysteriousConversionRecipe(
+                new ItemStack(ModItems.INGREDIENT, 1, 19),
+                new ItemStack(ModItems.INGREDIENT, 1, 20)
+        ));
+
+        recipes.add(new MysteriousConversionRecipe(
+                new ItemStack(ModBlocks.BLAZE_BURNER, 1, 0),
+                new ItemStack(ModBlocks.BLAZE_BURNER, 1, 1)
+        ));
+
+        return recipes;
     }
 }

@@ -7,4 +7,5 @@ public class RecipeCategories {
     public static final String PRESSING = Reference.MOD_ID + ".pressing";
     public static final String COMPACTING = Reference.MOD_ID + ".compacting";
     public static final String MILLING = Reference.MOD_ID + ".milling";
+    public static final String MYSTERY = Reference.MOD_ID + ".mystery";
 }
