@@ -81,7 +81,7 @@ public class TileEntityChute extends TileEntity implements ITickable {
 
         deNullify();
 
-        visualizeStack();
+        //visualizeStack(); TODO: Implement the item renderer because having an actual item there causes issues
 
         if (!world.isRemote && world.getTotalWorldTime() % 5 == 0) {
             boolean mustCheckForEntityItem = !world.getBlockState(pos.up()).getMaterial().blocksMovement();
