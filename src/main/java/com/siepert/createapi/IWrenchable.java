@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IWrenchable {
-
     /**
      * Do something when the block is right-clicked with a Wrench.
      * @param worldIn The world.

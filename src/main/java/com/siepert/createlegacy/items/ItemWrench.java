@@ -66,6 +66,7 @@ public class ItemWrench extends Item implements IHasModel {
                             ModSoundHandler.ITEM_WRENCH_DISMANTLE, SoundCategory.BLOCKS,
                             1.0f, 1.0f);
                 }
+                lookingAt.onBlockHarvested(worldIn, pos, worldIn.getBlockState(pos), player);
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
                 worldIn.playSound(null, pos.getX() + 0.5,
                         pos.getY() + 0.5, pos.getZ() + 0.5,

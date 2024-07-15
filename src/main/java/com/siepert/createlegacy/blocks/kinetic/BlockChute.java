@@ -28,6 +28,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -120,7 +121,7 @@ public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEn
     }
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
-        worldIn.setBlockState(pos, state.cycleProperty(WINDOW));
+        setState(worldIn, pos, !state.getValue(WINDOW));
         return true;
     }
 
@@ -160,5 +161,40 @@ public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEn
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityChute();
+    }
+
+    @Override
+    public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        TileEntity entity = world.getTileEntity(pos);
+
+        if (entity != null) {
+            if (entity instanceof TileEntityChute) {
+                ((TileEntityChute) entity).handleRemoval();
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn) {
+        TileEntity entity = world.getTileEntity(pos);
+
+        if (entity != null) {
+            if (entity instanceof TileEntityChute) {
+                ((TileEntityChute) entity).handleRemoval();
+            }
+        }
+    }
+
+    public static void setState(World world, BlockPos pos, boolean window) {
+        TileEntity entity = world.getTileEntity(pos);
+
+        IBlockState state = ModBlocks.CHUTE.getDefaultState().withProperty(WINDOW, window);
+
+        world.setBlockState(pos, state, 3);
+
+        if (entity != null) {
+            entity.validate();
+            world.setTileEntity(pos, entity);
+        }
     }
 }

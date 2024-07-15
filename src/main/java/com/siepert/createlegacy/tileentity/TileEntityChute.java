@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -33,6 +32,22 @@ public class TileEntityChute extends TileEntity implements ITickable {
     public ItemStack getCurrentStack() {
         deNullify();
         return currentStack;
+    }
+
+    public void handleRemoval() {
+        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
+
+        for (EntityItem item : items) {
+            if (item.getTags().contains("chuteVisualizerStack")) {
+                item.setDead();
+            }
+        }
+
+        if (!currentStack.isEmpty()) {
+            EntityItem drop = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
+                    currentStack);
+            world.spawnEntity(drop);
+        }
     }
 
     @Override
@@ -65,6 +80,8 @@ public class TileEntityChute extends TileEntity implements ITickable {
     public void update() {
 
         deNullify();
+
+        visualizeStack();
 
         if (!world.isRemote && world.getTotalWorldTime() % 5 == 0) {
             boolean mustCheckForEntityItem = !world.getBlockState(pos.up()).getMaterial().blocksMovement();
@@ -171,5 +188,32 @@ public class TileEntityChute extends TileEntity implements ITickable {
     public void setCurrentStack(ItemStack stack) {
         currentStack = stack;
         markDirty();
+    }
+
+    private void visualizeStack() {
+        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos));
+
+        boolean alreadyVisualized = false;
+
+        for (EntityItem item : items) {
+            if (item.getTags().contains("chuteVisualizerStack")) {
+                alreadyVisualized = true;
+                if (currentStack.isEmpty()) {
+                    item.setDead();
+                }
+            }
+        }
+
+        if (!currentStack.isEmpty() && !alreadyVisualized) {
+            EntityItem item = new EntityItem(world, pos.getX() + 0.5,
+                    pos.getY(), pos.getZ() + 0.5, currentStack);
+            item.setInfinitePickupDelay();
+            item.setVelocity(0, 0, 0);
+            item.noClip = true;
+            item.setNoDespawn();
+            item.setNoGravity(true);
+            item.addTag("chuteVisualizerStack");
+            world.spawnEntity(item);
+        }
     }
 }
