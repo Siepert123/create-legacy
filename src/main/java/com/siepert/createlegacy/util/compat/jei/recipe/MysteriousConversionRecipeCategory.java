@@ -8,7 +8,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 
-public class MysteriousConversionRecipeCategory extends AbstractPressingRecipeCategory<MysteriousConversionRecipe> {
+public class MysteriousConversionRecipeCategory extends AbstractMysteriousConversionRecipeCategory<MysteriousConversionRecipe> {
     private final IDrawable background;
     private final String name;
 
