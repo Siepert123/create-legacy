@@ -357,6 +357,13 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                                 }
                             }
                         }
+                        if (whatsTheProcess == ProcessingType.WASH) {
+                            for (Entity entity : foundEntities) {
+                                if (!(entity instanceof EntityItem)) {
+                                    entity.extinguish();
+                                }
+                            }
+                        }
 
                         for (EntityItem entityItem : foundItems) {
                             if (worldIn.isRemote) {
