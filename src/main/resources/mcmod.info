@@ -8,7 +8,7 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["Siepert"],
-  "credits": "Mojang, for allowing us to play 1.12.2\nOkamiz, for the logo\nAnd finally, Simibubi for Create",
+  "credits": "Okamiz, for the logo\nSimibubi, for Create\n\nTranslation credits: ru_ru - Магистр Djo; cs_cz - Basil",
   "logoFile": "logo_saturated.png",
   "screenshots": [],
   "dependencies": []
