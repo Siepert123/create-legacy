@@ -1,6 +1,7 @@
 package com.siepert.createlegacy.util.compat.jei.recipe;
 
 import com.google.common.collect.Lists;
+import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
@@ -88,6 +89,7 @@ public class RecipeMaker {
         CompactingRecipes instance = CompactingRecipes.instance();
 
         Map<ItemStack, ItemStack> recipeList = instance.getCompactingList();
+        Map<ItemStack, BlockBlazeBurner.State> heatingList = instance.getHeatRequirementsList();
 
         List<CompactingRecipe> jeiRecipes = Lists.newArrayList();
 
@@ -96,7 +98,7 @@ public class RecipeMaker {
 
             ItemStack output = entry.getValue();
 
-            CompactingRecipe recipe = new CompactingRecipe(input, output);
+            CompactingRecipe recipe = new CompactingRecipe(input, output, heatingList.get(entry.getKey()));
             jeiRecipes.add(recipe);
         }
 

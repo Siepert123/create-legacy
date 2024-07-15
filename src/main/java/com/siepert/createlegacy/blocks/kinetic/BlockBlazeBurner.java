@@ -101,6 +101,20 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
             }
             return State.PASSIVE;
         }
+
+        public String getVisualizer() {
+            switch (this) {
+                case EMPTY:
+                     return "none";
+                case PASSIVE:
+                    return "passive";
+                case HEATED:
+                    return "heated";
+                case COPE_SEETHE_MALD:
+                    return "superheated";
+            }
+            return "null";
+        }
     }
     public static final PropertyEnum<State> STATE = PropertyEnum.create("state", State.class);
     public static final PropertyInteger SCHEDULE = PropertyInteger.create("schedule", 0, 2);

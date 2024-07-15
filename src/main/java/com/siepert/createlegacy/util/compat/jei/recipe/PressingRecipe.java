@@ -1,7 +1,9 @@
 package com.siepert.createlegacy.util.compat.jei.recipe;
 
+import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
