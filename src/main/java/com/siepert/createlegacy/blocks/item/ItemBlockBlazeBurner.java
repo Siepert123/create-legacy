@@ -7,9 +7,11 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -24,14 +26,13 @@ public class ItemBlockBlazeBurner extends ItemBlock {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        if (attacker instanceof EntityPlayer) {
-            if (target instanceof EntityBlaze) {
-                stack.shrink(1);
-                target.setDead();
-                ((EntityPlayer) attacker).addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.BLAZE_BURNER), 1, 1));
-                return true;
-            }
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
+        if (target instanceof EntityBlaze) {
+            stack.shrink(1);
+            target.setDead();
+            playerIn.addItemStackToInventory(new ItemStack(Item.getItemFromBlock(ModBlocks.BLAZE_BURNER), 1, 1));
+            playerIn.playSound(SoundEvents.ENTITY_BLAZE_AMBIENT, 0.5f, 1.0f);
+            return true;
         }
         return false;
     }
