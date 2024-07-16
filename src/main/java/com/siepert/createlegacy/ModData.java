@@ -1,20 +1,20 @@
-package com.siepert.createlegacy.util;
+package com.siepert.createlegacy;
 
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
+import com.siepert.createlegacy.util.TimedLucky;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 /**Some basic variables. */
-public class Reference {
+public class ModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
-    public static final String VERSION = "24w29b"; //The version, changes each update in this fashion: rework.major.minor.patch
-    public static final int VERSION_NUMBER = 3;
+    public static final String VERSION = "24w29c"; //The version, changes each update in this fashion: rework.major.minor.patch
+    public static final int VERSION_NUMBER = 4;
     public static final int KINETIC_VERSION = 2;
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class
     public static final String COMMON_PROXY = "com.siepert.createlegacy.proxy.CommonProxy"; //Common proxy class

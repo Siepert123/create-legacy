@@ -6,7 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
@@ -170,7 +170,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                             }
 
                             float pitch;
-                            if (Reference.random.nextInt(100) == 0) {
+                            if (ModData.random.nextInt(100) == 0) {
                                 pitch = 0.1f;
                             } else pitch = 0.8f;
                             worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
@@ -196,7 +196,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IKineticAc
                         }
 
                         float pitch;
-                        if (Reference.random.nextInt(100) == 0) {
+                        if (ModData.random.nextInt(100) == 0) {
                             pitch = 0.1f;
                         } else pitch = 0.8f;
                         worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);

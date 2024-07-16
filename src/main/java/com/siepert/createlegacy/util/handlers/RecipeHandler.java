@@ -4,18 +4,14 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.util.Reference;
 import com.siepert.createlegacy.util.compat.MetalTypes;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 

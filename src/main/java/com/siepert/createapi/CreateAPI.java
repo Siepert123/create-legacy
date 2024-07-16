@@ -1,6 +1,6 @@
 package com.siepert.createapi;
 
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,11 +11,11 @@ public class CreateAPI {
     }
 
     public static int getVersion() {
-        return Reference.VERSION_NUMBER;
+        return ModData.VERSION_NUMBER;
     }
 
     public static int getKineticVersion() {
-        return Reference.KINETIC_VERSION;
+        return ModData.KINETIC_VERSION;
     }
 
     public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis) {

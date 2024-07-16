@@ -1,11 +1,11 @@
 package com.siepert.createlegacy.util.compat.jei;
 
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 
 public class RecipeCategories {
-    public static final String WASHING_BY_FAN = Reference.MOD_ID + ".washing_by_fan";
-    public static final String PRESSING = Reference.MOD_ID + ".pressing";
-    public static final String COMPACTING = Reference.MOD_ID + ".compacting";
-    public static final String MILLING = Reference.MOD_ID + ".milling";
-    public static final String MYSTERY = Reference.MOD_ID + ".mystery";
+    public static final String WASHING_BY_FAN = ModData.MOD_ID + ".washing_by_fan";
+    public static final String PRESSING = ModData.MOD_ID + ".pressing";
+    public static final String COMPACTING = ModData.MOD_ID + ".compacting";
+    public static final String MILLING = ModData.MOD_ID + ".milling";
+    public static final String MYSTERY = ModData.MOD_ID + ".mystery";
 }

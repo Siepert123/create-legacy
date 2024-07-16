@@ -1,17 +1,13 @@
 package com.siepert.createlegacy.util.handlers.recipes;
 
 import com.google.common.collect.Maps;
-import com.siepert.createlegacy.blocks.kinetic.BlockFan;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Config;
 
-import javax.annotation.Nullable;
 import java.util.Map;
 
 public class MillingRecipes {

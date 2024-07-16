@@ -4,7 +4,7 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IWrenchable;
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -45,7 +45,7 @@ public class ItemWrench extends Item implements IHasModel {
             }
             return EnumActionResult.PASS;
         } else if (player.isSneaking()) {
-            if (Reference.WRENCHABLES.contains(lookingAt)) {
+            if (ModData.WRENCHABLES.contains(lookingAt)) {
                 if (!player.isCreative()) {
                     NonNullList<ItemStack> stacks = NonNullList.create();
                     lookingAt.getDrops(stacks, worldIn, pos, worldIn.getBlockState(pos), 0);

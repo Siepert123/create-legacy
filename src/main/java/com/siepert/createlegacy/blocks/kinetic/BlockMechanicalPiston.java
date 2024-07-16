@@ -1,6 +1,5 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createapi.Spaghetti;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
@@ -9,10 +8,9 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createapi.IWrenchable;
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -24,10 +22,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -74,7 +69,7 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(Reference.WIP_TT);
+        tooltip.add(ModData.WIP_TT);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
 import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -59,14 +59,14 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
                 IBlockState myNewState = world.getBlockState(pos).withProperty(BlockBlazeBurner.SCHEDULE, 0);
                 if (remainingBurnTime > 2400) {
                     if (world.getTotalWorldTime() % 15 == 0) {
-                        if (Reference.random.nextInt(3) == 0) world.playSound(null,
+                        if (ModData.random.nextInt(3) == 0) world.playSound(null,
                                 pos.getX() + 0.5,
                                 pos.getY() + 0.5,
                                 pos.getZ() + 0.5,
                                 SoundEvents.ENTITY_BLAZE_BURN,
                                 SoundCategory.BLOCKS,
                                 0.7f, 1.24f);
-                        if (Reference.random.nextInt(7) == 0) world.playSound(null,
+                        if (ModData.random.nextInt(7) == 0) world.playSound(null,
                                 pos.getX() + 0.5,
                                 pos.getY() + 0.5,
                                 pos.getZ() + 0.5,
@@ -78,14 +78,14 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
                     BlockBlazeBurner.setState(myNewState.withProperty(BlockBlazeBurner.STATE, BlockBlazeBurner.State.COPE_SEETHE_MALD), world, pos);
                 } else if (remainingBurnTime > 0) {
                     if (world.getTotalWorldTime() % 35 == 0) {
-                        if (Reference.random.nextInt(3) == 0) world.playSound(null,
+                        if (ModData.random.nextInt(3) == 0) world.playSound(null,
                                 pos.getX() + 0.5,
                                 pos.getY() + 0.5,
                                 pos.getZ() + 0.5,
                                 SoundEvents.ENTITY_BLAZE_BURN,
                                 SoundCategory.BLOCKS,
                                 0.7f, 1.24f);
-                        if (Reference.random.nextInt(7) == 0) world.playSound(null,
+                        if (ModData.random.nextInt(7) == 0) world.playSound(null,
                                 pos.getX() + 0.5,
                                 pos.getY() + 0.5,
                                 pos.getZ() + 0.5,

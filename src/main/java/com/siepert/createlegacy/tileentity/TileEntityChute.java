@@ -110,10 +110,19 @@ public class TileEntityChute extends TileEntity implements ITickable, IInventory
                         if (entity instanceof ISidedInventory) {
                             for (int i = 0; i < ((ISidedInventory)entity).getSizeInventory(); i++) {
                                 if (currentStack != ItemStack.EMPTY) {
-                                    if (((ISidedInventory) entity).canInsertItem(i, currentStack, EnumFacing.UP)
-                                            && ((ISidedInventory)entity).getStackInSlot(i).isEmpty()) {
-                                        ((ISidedInventory) entity).setInventorySlotContents(i, currentStack.copy());
-                                        currentStack = ItemStack.EMPTY;
+                                    if (((ISidedInventory) entity).canInsertItem(i, currentStack, EnumFacing.UP)) {
+                                        if (((ISidedInventory)entity).getStackInSlot(i).isEmpty()) {
+                                            ((ISidedInventory) entity).setInventorySlotContents(i, currentStack.copy());
+                                            currentStack = ItemStack.EMPTY;
+                                        } else {
+                                            if (((ISidedInventory)entity).getStackInSlot(i).getCount()
+                                                    < ((ISidedInventory)entity).getInventoryStackLimit() - currentStack.getCount()) {
+                                                ItemStack toInsert = currentStack.copy();
+                                                toInsert.setCount(currentStack.getCount() + ((ISidedInventory) entity).getStackInSlot(i).getCount());
+                                                ((ISidedInventory) entity).setInventorySlotContents(i, toInsert);
+                                                currentStack = ItemStack.EMPTY;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -121,10 +130,19 @@ public class TileEntityChute extends TileEntity implements ITickable, IInventory
                         if (entity instanceof IInventory) {
                             for (int i = 0; i < ((IInventory)entity).getSizeInventory(); i++) {
                                 if (currentStack != ItemStack.EMPTY) {
-                                    if (((IInventory)entity).isItemValidForSlot(i, currentStack)
-                                            && ((IInventory)entity).getStackInSlot(i).isEmpty()) {
-                                        ((IInventory)entity).setInventorySlotContents(i, currentStack.copy());
-                                        currentStack = ItemStack.EMPTY;
+                                    if (((IInventory)entity).isItemValidForSlot(i, currentStack)) {
+                                        if (((IInventory)entity).getStackInSlot(i).isEmpty()) {
+                                            ((IInventory) entity).setInventorySlotContents(i, currentStack.copy());
+                                            currentStack = ItemStack.EMPTY;
+                                        } else {
+                                            if (((IInventory)entity).getStackInSlot(i).getCount()
+                                                    < ((IInventory)entity).getInventoryStackLimit() - currentStack.getCount()) {
+                                                ItemStack toInsert = currentStack.copy();
+                                                toInsert.setCount(currentStack.getCount() + ((IInventory) entity).getStackInSlot(i).getCount());
+                                                ((IInventory) entity).setInventorySlotContents(i, toInsert);
+                                                currentStack = ItemStack.EMPTY;
+                                            }
+                                        }
                                     }
                                 }
                             }

@@ -1,6 +1,6 @@
 package com.siepert.createlegacy.proxy;
 
-import com.siepert.createlegacy.util.Reference;
+import com.siepert.createlegacy.ModData;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +15,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerVariantRenderer(Item item, int meta, String filename, String id) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, filename), id));
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(ModData.MOD_ID, filename), id));
     }
 }

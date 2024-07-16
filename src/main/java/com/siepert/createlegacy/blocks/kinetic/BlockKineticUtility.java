@@ -3,6 +3,7 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.ModData;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -284,7 +285,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
 
-                if (Reference.random.nextInt(25) == 0)
+                if (ModData.random.nextInt(25) == 0)
                     worldIn.playSound(null, pos.getX() + 0.5,
                             pos.getY() + 0.5, pos.getZ() + 0.5,
                             ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
@@ -322,7 +323,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
 
-                if (Reference.random.nextInt(25) == 0)
+                if (ModData.random.nextInt(25) == 0)
                     worldIn.playSound(null, pos.getX() + 0.5,
                             pos.getY() + 0.5, pos.getZ() + 0.5,
                             ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
@@ -355,7 +356,7 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
                     if (sourceBlock.getValue(BlockCogwheel.AXIS) != source.getAxis()) return;
                 }
 
-                if (Reference.random.nextInt(25) == 0)
+                if (ModData.random.nextInt(25) == 0)
                     worldIn.playSound(null, pos.getX() + 0.5,
                             pos.getY() + 0.5, pos.getZ() + 0.5,
                             ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
