@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -20,7 +21,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
 
-public class TileEntityChute extends TileEntity implements ITickable {
+public class TileEntityChute extends TileEntity implements ITickable, IInventory {
     private ItemStack currentStack;
 
     private void deNullify() {
@@ -103,32 +104,27 @@ public class TileEntityChute extends TileEntity implements ITickable {
                         currentStack = ItemStack.EMPTY;
                         markDirty();
                     }
-                } else if (blockDown instanceof BlockContainer) {
-                    //TODO: make this not suck ;-;
+                } else {
                     TileEntity entity = world.getTileEntity(pos.down());
                     if (entity != null) {
+                        if (entity instanceof ISidedInventory) {
+                            for (int i = 0; i < ((ISidedInventory)entity).getSizeInventory(); i++) {
+                                if (currentStack != ItemStack.EMPTY) {
+                                    if (((ISidedInventory) entity).canInsertItem(i, currentStack, EnumFacing.UP)
+                                            && ((ISidedInventory)entity).getStackInSlot(i).isEmpty()) {
+                                        ((ISidedInventory) entity).setInventorySlotContents(i, currentStack.copy());
+                                        currentStack = ItemStack.EMPTY;
+                                    }
+                                }
+                            }
+                        } else
                         if (entity instanceof IInventory) {
-                            boolean consumed = false;
-                            for (int slot = 0; slot < ((IInventory) entity).getSizeInventory(); slot++) {
-                                if (!consumed) {
-                                    if (((IInventory) entity).getStackInSlot(slot) == ItemStack.EMPTY
-                                            || ((IInventory) entity).getStackInSlot(slot).isItemEqual(currentStack)) {
-                                        int h = ((IInventory) entity).getStackInSlot(slot).getCount();
-                                        int remain = 64 - h;
-                                        if (remain > currentStack.getCount()) {
-                                            ItemStack stackToDo = currentStack.copy();
-                                            stackToDo.setCount(stackToDo.getCount() + h);
-                                            ((IInventory) entity).setInventorySlotContents(slot, stackToDo);
-                                            currentStack = ItemStack.EMPTY;
-                                            consumed = true;
-                                        } else {
-                                            if (h < 64) {
-                                                ItemStack stackToDo = currentStack.copy();
-                                                stackToDo.setCount(64);
-                                                currentStack.setCount(currentStack.getCount() - remain);
-                                                ((IInventory) entity).setInventorySlotContents(slot, stackToDo);
-                                            }
-                                        }
+                            for (int i = 0; i < ((IInventory)entity).getSizeInventory(); i++) {
+                                if (currentStack != ItemStack.EMPTY) {
+                                    if (((IInventory)entity).isItemValidForSlot(i, currentStack)
+                                            && ((IInventory)entity).getStackInSlot(i).isEmpty()) {
+                                        ((IInventory)entity).setInventorySlotContents(i, currentStack.copy());
+                                        currentStack = ItemStack.EMPTY;
                                     }
                                 }
                             }
@@ -215,5 +211,96 @@ public class TileEntityChute extends TileEntity implements ITickable {
             item.addTag("chuteVisualizerStack");
             world.spawnEntity(item);
         }
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return 1;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        deNullify();
+        return currentStack.isEmpty();
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int index) {
+        deNullify();
+        return currentStack;
+    }
+
+    @Override
+    public ItemStack decrStackSize(int index, int count) {
+        deNullify();
+        return currentStack.splitStack(count);
+    }
+
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        deNullify();
+        ItemStack stack = currentStack.copy();
+        currentStack = ItemStack.EMPTY;
+        return stack;
+    }
+
+    @Override
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        currentStack = stack;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
+
+    @Override
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return false;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        currentStack = ItemStack.EMPTY;
+    }
+
+    @Override
+    public String getName() {
+        return "Chute";
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
     }
 }
