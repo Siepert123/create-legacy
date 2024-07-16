@@ -8,7 +8,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.util.IMetaName;
 import com.siepert.createapi.IWrenchable;
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -69,7 +69,7 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(ModData.WIP_TT);
+        tooltip.add(CreateLegacyModData.WIP_TT);
     }
 
     @Override

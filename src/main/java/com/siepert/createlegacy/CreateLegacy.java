@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ModData.MOD_ID, name = ModData.NAME, version = ModData.VERSION)
+@Mod(modid = CreateLegacyModData.MOD_ID, name = CreateLegacyModData.NAME, version = CreateLegacyModData.VERSION)
 public final class CreateLegacy {
 
     public static Logger logger;
@@ -24,7 +24,7 @@ public final class CreateLegacy {
     public static final CreativeTabs TAB_CREATE_DECORATIONS = new CreateModDecoTab("tab_create_decorations");
     public static final CreativeTabs TAB_CREATE_OTHER = new CreateModOtherTab();
 
-    @SidedProxy(clientSide = ModData.CLIENT_PROXY, serverSide = ModData.COMMON_PROXY)
+    @SidedProxy(clientSide = CreateLegacyModData.CLIENT_PROXY, serverSide = CreateLegacyModData.COMMON_PROXY)
     public static CommonProxy proxy;
 
     @EventHandler

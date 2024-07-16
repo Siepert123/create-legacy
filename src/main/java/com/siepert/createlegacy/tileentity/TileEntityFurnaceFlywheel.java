@@ -3,7 +3,7 @@ package com.siepert.createlegacy.tileentity;
 import com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createapi.IKineticActor;
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -42,11 +42,11 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
                     world.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
                             pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                 }
-                for (int i = 0; i < SMOKE_MIN + ModData.timedLucky.nextInt(SMOKE_DIFF); i++) {
+                for (int i = 0; i < SMOKE_MIN + CreateLegacyModData.timedLucky.nextInt(SMOKE_DIFF); i++) {
                     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                            enginePos.getX() + ModData.random.nextFloat(),
-                            enginePos.getY() + ModData.random.nextFloat(),
-                            enginePos.getZ() + ModData.random.nextFloat(),
+                            enginePos.getX() + CreateLegacyModData.random.nextFloat(),
+                            enginePos.getY() + CreateLegacyModData.random.nextFloat(),
+                            enginePos.getZ() + CreateLegacyModData.random.nextFloat(),
                             0, 0, 0);
                 }
             }

@@ -3,7 +3,7 @@ package com.siepert.createlegacy.tileentity;
 import com.siepert.createapi.IKineticTE;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockMillStone;
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
 import net.minecraft.entity.item.EntityItem;
@@ -33,9 +33,9 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
 
     private void visualize() {
         world.spawnParticle(EnumParticleTypes.CRIT,
-                pos.getX() + ModData.random.nextFloat(),
-                pos.getY() + ModData.random.nextFloat(),
-                pos.getZ() + ModData.random.nextFloat(),
+                pos.getX() + CreateLegacyModData.random.nextFloat(),
+                pos.getY() + CreateLegacyModData.random.nextFloat(),
+                pos.getZ() + CreateLegacyModData.random.nextFloat(),
                 0, 0, 0);
     }
 
@@ -209,7 +209,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
                 output = set.getResult().copy();
             }
 
-            if (set.hasOptional() && ModData.random.nextInt(100) < set.getPercentage()) {
+            if (set.hasOptional() && CreateLegacyModData.random.nextInt(100) < set.getPercentage()) {
                 if (!outputOptional.isEmpty()) {
                     outputOptional.setCount(outputOptional.getCount() + set.getResultOptional().getCount());
                 } else {

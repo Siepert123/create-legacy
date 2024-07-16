@@ -1,6 +1,6 @@
 package com.siepert.createlegacy.util.compat.jei.recipe;
 
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.compat.jei.RecipeCategories;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -25,7 +25,7 @@ public class MillingRecipeCategory extends AbstractMillingRecipeCategory<Milling
 
     @Override
     public String getModName() {
-        return ModData.NAME;
+        return CreateLegacyModData.NAME;
     }
 
     @Override

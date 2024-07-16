@@ -1,6 +1,6 @@
 package com.siepert.createlegacy.util.handlers;
 
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -21,7 +21,7 @@ public class ModSoundHandler {
     }
 
     private static SoundEvent registerSound(String name) {
-        ResourceLocation location = new ResourceLocation(ModData.MOD_ID, name);
+        ResourceLocation location = new ResourceLocation(CreateLegacyModData.MOD_ID, name);
         SoundEvent event = new SoundEvent(location);
         event.setRegistryName(name);
         ForgeRegistries.SOUND_EVENTS.register(event);

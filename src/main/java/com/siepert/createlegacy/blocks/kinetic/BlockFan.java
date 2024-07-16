@@ -6,7 +6,7 @@ import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -167,11 +167,11 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                             particleVX,
                             particleVY,
                             particleVZ);
-                    for (int i = 0; i < ModData.random.nextInt(4) + 4; i++) {
+                    for (int i = 0; i < CreateLegacyModData.random.nextInt(4) + 4; i++) {
                         worldIn.spawnParticle(EnumParticleTypes.CLOUD,
-                                posFront.getX() + ModData.random.nextFloat(),
-                                posFront.getY() + ModData.random.nextFloat(),
-                                posFront.getZ() + ModData.random.nextFloat(),
+                                posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                posFront.getZ() + CreateLegacyModData.random.nextFloat(),
                                 particleVX,
                                 particleVY,
                                 particleVZ);
@@ -306,20 +306,20 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                                     particleVX / 3,
                                     particleVY / 3,
                                     particleVZ / 3);
-                            for (int j = 0; j < ModData.random.nextInt(4) + 4; j++) {
+                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
                                 worldIn.spawnParticle(EnumParticleTypes.CLOUD,
-                                        posFront.getX() + ModData.random.nextFloat(),
-                                        posFront.getY() + ModData.random.nextFloat(),
-                                        posFront.getZ() + ModData.random.nextFloat(),
+                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
                                         particleVX / 3,
                                         particleVY / 3,
                                         particleVZ / 3);
                             }
-                            for (int j = 0; j < ModData.random.nextInt(4); j++) {
+                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4); j++) {
                                 worldIn.spawnParticle(EnumParticleTypes.WATER_BUBBLE,
-                                        posFront.getX() + ModData.random.nextFloat(),
-                                        posFront.getY() + ModData.random.nextFloat(),
-                                        posFront.getZ() + ModData.random.nextFloat(),
+                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
                                         particleVX / 3,
                                         particleVY / 3,
                                         particleVZ / 3);
@@ -333,11 +333,11 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                                     particleVX / 3,
                                     particleVY / 3,
                                     particleVZ / 3);
-                            for (int j = 0; j < ModData.random.nextInt(4) + 4; j++) {
+                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
                                 worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
-                                        posFront.getX() + ModData.random.nextFloat(),
-                                        posFront.getY() + ModData.random.nextFloat(),
-                                        posFront.getZ() + ModData.random.nextFloat(),
+                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
                                         particleVX / 3,
                                         particleVY / 3,
                                         particleVZ / 3);
@@ -368,10 +368,10 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                         for (EntityItem entityItem : foundItems) {
                             if (worldIn.isRemote) {
                                 if (whatsTheProcess == ProcessingType.WASH) {
-                                    for (int k = 0; k < ModData.random.nextInt(10); k++) {
+                                    for (int k = 0; k < CreateLegacyModData.random.nextInt(10); k++) {
                                         worldIn.spawnParticle(EnumParticleTypes.WATER_SPLASH,
                                                 entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                                0, ModData.random.nextFloat(), 0);
+                                                0, CreateLegacyModData.random.nextFloat(), 0);
                                     }
                                 }
                                 if (whatsTheProcess == ProcessingType.SMELT) {
@@ -381,13 +381,13 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
 
                                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                                             entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, ModData.random.nextFloat() / 2, 0);
+                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
                                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                                             entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, ModData.random.nextFloat() / 2, 0);
+                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
                                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                                             entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, ModData.random.nextFloat() / 2, 0);
+                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
                                 }
 
 
@@ -487,7 +487,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                 ItemStack itemstack2 = stackOpt.copy();
                 itemstack2.setCount(stackOpt.getCount());
 
-                if (ModData.random.nextInt(5) == 0) {
+                if (CreateLegacyModData.random.nextInt(5) == 0) {
                     return new WashResultSet(itemstack1, itemstack2, true);
                 }
                 return new WashResultSet(itemstack1, true);

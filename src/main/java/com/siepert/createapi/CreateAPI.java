@@ -1,6 +1,7 @@
 package com.siepert.createapi;
 
-import com.siepert.createlegacy.ModData;
+import com.siepert.createlegacy.CreateLegacyModData;
+import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,11 +12,11 @@ public class CreateAPI {
     }
 
     public static int getVersion() {
-        return ModData.VERSION_NUMBER;
+        return CreateLegacyModData.VERSION_NUMBER;
     }
 
     public static int getKineticVersion() {
-        return ModData.KINETIC_VERSION;
+        return CreateLegacyModData.KINETIC_VERSION;
     }
 
     public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis) {
@@ -40,5 +41,12 @@ public class CreateAPI {
                 }
         }
         return 0;
+    }
+
+    public static void addBlockToWrenchables(Block block) {
+        if (CreateLegacyModData.WRENCHABLES.contains(block)) {
+            return;
+        }
+        CreateLegacyModData.WRENCHABLES.add(block);
     }
 }
