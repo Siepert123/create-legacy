@@ -12,6 +12,6 @@ public class CreateModOtherTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(Item.getItemFromBlock(ModBlocks.STONE_REINFORCED), 2, 10);
+        return new ItemStack(Item.getItemFromBlock(ModBlocks.STONE_REINFORCED), 69, 10);
     }
 }
