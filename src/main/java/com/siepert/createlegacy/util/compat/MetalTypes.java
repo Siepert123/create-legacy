@@ -59,6 +59,7 @@ public class MetalTypes {
         METAL_NAMES.add("Nikonium");
         METAL_NAMES.add("Creativesteel");
         METAL_NAMES.add("Amirite");
+        METAL_NAMES.add("Aluminion");
     }
 
     public static final String INGOT = "ingot";
