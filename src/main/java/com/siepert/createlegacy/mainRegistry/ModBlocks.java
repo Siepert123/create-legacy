@@ -35,6 +35,7 @@ public class ModBlocks {
 
     public static final Block BELT = new BlockBelt("belt");
     public static final Block CHUTE = new BlockChute("chute");
+    public static final Block FUNNEL = new BlockFunnel();
     public static final Block PRESS = new BlockMechanicalPress("press");
     public static final Block DRILL = new BlockDrill("drill");
     public static final Block SAW = new BlockSaw("saw");
