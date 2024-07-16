@@ -11,6 +11,9 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +28,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class BlockMillStone extends Block implements ITileEntityProvider, IHasModel, IHasRotation {
+    public static final PropertyBool ACTIVE = PropertyBool.create("active");
+
+
+
     public BlockMillStone() {
         super(Material.ROCK);
         this.translucent = true;
@@ -34,16 +41,14 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
         setUnlocalizedName("create:millstone");
         setRegistryName("millstone");
         setCreativeTab(CreateLegacy.TAB_CREATE);
+
+        setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false));
         setHarvestLevel("pickaxe", 0);
         setHardness(1);
         setResistance(2);
 
-        setDefaultState(this.blockState.getBaseState());
-
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-
-
+        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName("millstone"));
     }
 
     @Override
@@ -92,5 +97,29 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
         TileEntityMillStone tileEntity = (TileEntityMillStone) worldIn.getTileEntity(pos);
 
         if (tileEntity != null) tileEntity.dropItems();
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, ACTIVE);
+    }
+
+    public static void setState(World world, BlockPos pos, IBlockState state) {
+        TileEntity tileEntity = world.getTileEntity(pos);
+        world.setBlockState(pos, state, 3);
+        if (tileEntity != null) {
+            tileEntity.validate();
+            world.setTileEntity(pos, tileEntity);
+        }
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState();
     }
 }

@@ -1,6 +1,9 @@
 {
   "variants": {
-    "normal": {
+    "active=true": {
+      "model": "create:millstone"
+    },
+    "active=false": {
       "model": "create:millstone"
     }
   }
