@@ -18,6 +18,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -86,9 +87,8 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
                 return toReturn.withProperty(AXIS, EnumFacing.Axis.X);
             case 2:
                 return toReturn.withProperty(AXIS, EnumFacing.Axis.Z);
-            default:
-                return toReturn.withProperty(AXIS, EnumFacing.Axis.Y);
         }
+        return toReturn.withProperty(AXIS, EnumFacing.Axis.Y);
     }
 
     @Override
