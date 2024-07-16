@@ -44,6 +44,7 @@ public class CreateLegacyModData {
         WRENCHABLES.add(ModBlocks.ITEM_HOLDER);
         WRENCHABLES.add(ModBlocks.FAN);
         WRENCHABLES.add(ModBlocks.MILLSTONE);
+        WRENCHABLES.add(ModBlocks.FUNNEL);
         WRENCHABLES.add(Blocks.LEVER);
         WRENCHABLES.add(Blocks.PISTON);
         WRENCHABLES.add(Blocks.STICKY_PISTON);

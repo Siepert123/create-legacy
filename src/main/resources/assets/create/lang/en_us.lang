@@ -104,6 +104,8 @@ tile.create:axle_encased_andesite.name=Andesite Encased Axle
 tile.create:axle_encased_brass.name=Brass Encased Axle
 tile.create:belt.name=Mechanical Belt
 tile.create:chute.name=Chute
+tile.create:funnel.name=Andesite Funnel
+tile.create:funnel_advanced.name=Brass Funnel
 tile.create:millstone.name=Millstone
 tile.create:piston.name=Mechanical Piston
 tile.create:piston_sticky.name=Sticky Mechanical Piston
@@ -121,6 +123,9 @@ tile.create:schedule_wash.name=Schedule Fan Washing
 tile.create:schedule_cook.name=Schedule Fan Cooking
 
 item.create:wrench.name=Wrench
+
+message.create:filter.set=Filter set
+message.create:filter.cleared=Filter cleared
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble

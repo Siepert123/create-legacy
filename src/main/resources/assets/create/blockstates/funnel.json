@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "advanced=false,extracting=false,facing=north": {
+      "model": "create:funnel/basic_pull"
+    },
+    "advanced=false,extracting=true,facing=north": {
+      "model": "create:funnel/basic_push"
+    },
+    "advanced=false,extracting=false,facing=east": {
+      "model": "create:funnel/basic_pull",
+      "y": 90
+    },
+    "advanced=false,extracting=true,facing=east": {
+      "model": "create:funnel/basic_push",
+      "y": 90
+    },
+    "advanced=false,extracting=false,facing=south": {
+      "model": "create:funnel/basic_pull",
+      "y": 180
+    },
+    "advanced=false,extracting=true,facing=south": {
+      "model": "create:funnel/basic_push",
+      "y": 180
+    },
+    "advanced=false,extracting=false,facing=west": {
+      "model": "create:funnel/basic_pull",
+      "y": 270
+    },
+    "advanced=false,extracting=true,facing=west": {
+      "model": "create:funnel/basic_push",
+      "y": 270
+    },
+    "advanced=true,extracting=false,facing=north": {
+      "model": "create:funnel/advanced_pull"
+    },
+    "advanced=true,extracting=true,facing=north": {
+      "model": "create:funnel/advanced_push"
+    },
+    "advanced=true,extracting=false,facing=east": {
+      "model": "create:funnel/advanced_pull",
+      "y": 90
+    },
+    "advanced=true,extracting=true,facing=east": {
+      "model": "create:funnel/advanced_push",
+      "y": 90
+    },
+    "advanced=true,extracting=false,facing=south": {
+      "model": "create:funnel/advanced_pull",
+      "y": 180
+    },
+    "advanced=true,extracting=true,facing=south": {
+      "model": "create:funnel/advanced_push",
+      "y": 180
+    },
+    "advanced=true,extracting=false,facing=west": {
+      "model": "create:funnel/advanced_pull",
+      "y": 270
+    },
+    "advanced=true,extracting=true,facing=west": {
+      "model": "create:funnel/advanced_push",
+      "y": 270
+    }
+  }
+}

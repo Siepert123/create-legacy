@@ -1,7 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createlegacy.blocks.kinetic.BlockFunnel;
-import com.siepert.createlegacy.util.EnumHorizontalFacing;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -14,8 +13,20 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityFunnel extends TileEntity implements ITickable {
+public class TileEntityFunnelAdvanced extends TileEntity implements ITickable {
     int pickupDelay;
+    ItemStack filter;
+
+    public TileEntityFunnelAdvanced() {
+        filter = ItemStack.EMPTY;
+    }
+
+    public void clearFilter() {
+        filter = ItemStack.EMPTY;
+    }
+    public void setFilter(ItemStack newFilter) {
+        filter = newFilter;
+    }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -23,12 +34,24 @@ public class TileEntityFunnel extends TileEntity implements ITickable {
 
         compound.setInteger("pickupDelay", pickupDelay);
 
+        if (!filter.isEmpty()) {
+            NBTTagCompound filterTag = new NBTTagCompound();
+            filter.writeToNBT(filterTag);
+            compound.setTag("Filter", filterTag);
+        }
+
         return compound;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+
+        if (compound.hasKey("Filter")) {
+            filter = new ItemStack(compound.getCompoundTag("Filter"));
+        } else {
+            filter = ItemStack.EMPTY;
+        }
 
         pickupDelay = compound.getInteger("pickupDelay");
     }
@@ -48,33 +71,39 @@ public class TileEntityFunnel extends TileEntity implements ITickable {
                 if (targetEntity != null) {
                     if (targetEntity instanceof TileEntityFurnace) {
                         if (!((ISidedInventory) targetEntity).getStackInSlot(2).isEmpty()) {
-                            ItemStack stack = ((ISidedInventory) targetEntity).removeStackFromSlot(2);
-                            EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
-                            entityItem.setVelocity(0, 0, 0);
-                            world.spawnEntity(entityItem);
-                            pickupDelay = 20;
+                            if (filter.isEmpty() || filter.isItemEqual(((ISidedInventory)targetEntity).getStackInSlot(2))) {
+                                ItemStack stack = ((ISidedInventory) targetEntity).removeStackFromSlot(2);
+                                EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
+                                entityItem.setVelocity(0, 0, 0);
+                                world.spawnEntity(entityItem);
+                                pickupDelay = 5;
+                            }
                         }
                     } else if (targetEntity instanceof ISidedInventory) {
                         for (int i = 0; i < ((ISidedInventory) targetEntity).getSizeInventory(); i++) {
                             if (((ISidedInventory) targetEntity).canExtractItem(i, ((ISidedInventory) targetEntity).getStackInSlot(i), facing)
                                     && !((ISidedInventory) targetEntity).getStackInSlot(i).isEmpty()) {
-                                ItemStack stack = ((ISidedInventory) targetEntity).removeStackFromSlot(i);
-                                EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
-                                entityItem.setVelocity(0, 0, 0);
-                                world.spawnEntity(entityItem);
-                                pickupDelay = 20;
-                                break;
+                                if (filter.isEmpty() || filter.isItemEqual(((ISidedInventory)targetEntity).getStackInSlot(i))) {
+                                    ItemStack stack = ((ISidedInventory) targetEntity).removeStackFromSlot(i);
+                                    EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
+                                    entityItem.setVelocity(0, 0, 0);
+                                    world.spawnEntity(entityItem);
+                                    pickupDelay = 5;
+                                    break;
+                                }
                             }
                         }
                     } else if (targetEntity instanceof IInventory) {
                         for (int i = 0; i < ((IInventory) targetEntity).getSizeInventory(); i++) {
                             if (!((IInventory) targetEntity).getStackInSlot(i).isEmpty()) {
-                                ItemStack stack = ((IInventory) targetEntity).removeStackFromSlot(i);
-                                EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
-                                entityItem.setVelocity(0, 0, 0);
-                                world.spawnEntity(entityItem);
-                                pickupDelay = 20;
-                                break;
+                                if (filter.isEmpty() || filter.isItemEqual(((IInventory)targetEntity).getStackInSlot(i))) {
+                                    ItemStack stack = ((IInventory) targetEntity).removeStackFromSlot(i);
+                                    EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
+                                    entityItem.setVelocity(0, 0, 0);
+                                    world.spawnEntity(entityItem);
+                                    pickupDelay = 5;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -88,10 +117,12 @@ public class TileEntityFunnel extends TileEntity implements ITickable {
                         for (int i = 0; i < ((ISidedInventory)targetEntity).getSizeInventory(); i++) {
                             if (((ISidedInventory) targetEntity).canInsertItem(i, currentStack, EnumFacing.UP)) {
                                 if (((ISidedInventory)targetEntity).getStackInSlot(i).isEmpty()) {
-                                    ((ISidedInventory) targetEntity).setInventorySlotContents(i, currentStack.copy());
-                                    entityItem.setDead();
-                                    pickupDelay = 20;
-                                    break;
+                                    if (filter.isEmpty() || filter.isItemEqual(((ISidedInventory)targetEntity).getStackInSlot(i))) {
+                                        ((ISidedInventory) targetEntity).setInventorySlotContents(i, currentStack.copy());
+                                        entityItem.setDead();
+                                        pickupDelay = 5;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -100,10 +131,12 @@ public class TileEntityFunnel extends TileEntity implements ITickable {
                         for (int i = 0; i < ((IInventory)targetEntity).getSizeInventory(); i++) {
                             if (((IInventory)targetEntity).isItemValidForSlot(i, currentStack)) {
                                 if (((IInventory)targetEntity).getStackInSlot(i).isEmpty()) {
-                                    ((IInventory) targetEntity).setInventorySlotContents(i, currentStack);
-                                    entityItem.setDead();
-                                    pickupDelay = 20;
-                                    break;
+                                    if (filter.isEmpty() || filter.isItemEqual(((IInventory)targetEntity).getStackInSlot(i))) {
+                                        ((IInventory) targetEntity).setInventorySlotContents(i, currentStack);
+                                        entityItem.setDead();
+                                        pickupDelay = 5;
+                                        break;
+                                    }
                                 }
                             }
                         }

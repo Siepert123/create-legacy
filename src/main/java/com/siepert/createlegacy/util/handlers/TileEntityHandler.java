@@ -12,5 +12,7 @@ public class TileEntityHandler {
         GameRegistry.registerTileEntity(TileEntityWaterWheel.class, "water_wheel");
         GameRegistry.registerTileEntity(TileEntityMillStone.class, "millstone");
         GameRegistry.registerTileEntity(TileEntityChute.class, "chute");
+        GameRegistry.registerTileEntity(TileEntityFunnel.class, "funnel");
+        GameRegistry.registerTileEntity(TileEntityFunnelAdvanced.class, "funnel_advanced");
     }
 }

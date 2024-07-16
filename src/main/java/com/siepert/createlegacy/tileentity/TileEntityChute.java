@@ -115,16 +115,7 @@ public class TileEntityChute extends TileEntity implements ITickable, IInventory
                                             ((ISidedInventory) entity).setInventorySlotContents(i, currentStack.copy());
                                             currentStack = ItemStack.EMPTY;
                                             break;
-                                        } /* else {
-                                            if (((ISidedInventory)entity).getStackInSlot(i).getCount()
-                                                    <= ((ISidedInventory)entity).getInventoryStackLimit() - currentStack.getCount()) {
-                                                ItemStack toInsert = currentStack.copy();
-                                                toInsert.setCount(currentStack.getCount() + ((ISidedInventory) entity).getStackInSlot(i).getCount());
-                                                ((ISidedInventory) entity).setInventorySlotContents(i, toInsert);
-                                                currentStack = ItemStack.EMPTY;
-                                                break;
-                                            }
-                                        } */
+                                        }
                                     }
                                 }
                             }
@@ -137,16 +128,7 @@ public class TileEntityChute extends TileEntity implements ITickable, IInventory
                                             ((IInventory) entity).setInventorySlotContents(i, currentStack.copy());
                                             currentStack = ItemStack.EMPTY;
                                             break;
-                                        } /* else {
-                                            if (((IInventory)entity).getStackInSlot(i).getCount()
-                                                    <= ((IInventory)entity).getInventoryStackLimit() - currentStack.getCount()) {
-                                                ItemStack toInsert = currentStack.copy();
-                                                toInsert.setCount(currentStack.getCount() + ((IInventory) entity).getStackInSlot(i).getCount());
-                                                ((IInventory) entity).setInventorySlotContents(i, toInsert);
-                                                currentStack = ItemStack.EMPTY;
-                                                break;
-                                            }
-                                        } */
+                                        }
                                     }
                                 }
                             }
