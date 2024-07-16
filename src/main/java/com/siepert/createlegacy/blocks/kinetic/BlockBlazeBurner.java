@@ -105,13 +105,13 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
         public String getVisualizer() {
             switch (this) {
                 case EMPTY:
-                     return "none";
+                     return "No heating";
                 case PASSIVE:
-                    return "passive";
+                    return "Passive heating";
                 case HEATED:
-                    return "heated";
+                    return "Heated";
                 case COPE_SEETHE_MALD:
-                    return "superheated";
+                    return "Superheated";
             }
             return "null";
         }

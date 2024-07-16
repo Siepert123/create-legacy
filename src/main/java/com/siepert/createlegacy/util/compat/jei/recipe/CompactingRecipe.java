@@ -14,9 +14,8 @@ public class CompactingRecipe implements IRecipeWrapper {
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         if (!(mouseY > recipeHeight + 5) && mouseY >= -5) {
-            String s = "Heating: " + heat.getVisualizer();
             minecraft.fontRenderer.drawStringWithShadow(
-                    s, -2, -2, 16777215);
+                    heat.getVisualizer(), -2, -2, 16777215);
         }
     }
 
