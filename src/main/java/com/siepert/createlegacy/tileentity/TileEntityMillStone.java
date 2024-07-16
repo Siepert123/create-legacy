@@ -63,6 +63,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
             }
         } else {
             resetAll();
+            BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, false));
         }
 
         if (currentlyMilling.isEmpty()) {
