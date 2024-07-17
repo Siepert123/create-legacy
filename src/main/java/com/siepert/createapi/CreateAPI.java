@@ -6,15 +6,50 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class CreateAPI {
+public final class CreateAPI {
+
+
+    private static final List<CreateAddon> ADDONS = new ArrayList<>();
+    public static void registerAddon(CreateAddon addon) {
+        ADDONS.add(addon);
+    }
+
+    private static final List<CreateAddon> ADDONS_IN_PRIORITY = new ArrayList<>();
+    public static List<CreateAddon> getAddons() {
+        return ADDONS_IN_PRIORITY;
+    }
+
+
+    public static void consumeAddons() {
+        int lowestInt = 0;
+        int highestInt = 0;
+        for (CreateAddon addon : ADDONS) {
+            if (addon.getLoadPriority() < lowestInt) lowestInt = addon.getLoadPriority();
+            if (addon.getLoadPriority() > highestInt) highestInt = addon.getLoadPriority();
+        }
+
+        for (int i = lowestInt; i <= highestInt; i++) {
+            for (CreateAddon addon : ADDONS) {
+                if (addon.getLoadPriority() == i) ADDONS_IN_PRIORITY.add(addon);
+            }
+        }
+    }
+
+
     public static boolean compareCreateVersions(int versionOther) {
         return versionOther == getVersion();
     }
 
     public static int getVersion() {
         return CreateLegacyModData.VERSION_NUMBER;
+    }
+
+    public static boolean compareKineticVersions(int versionOther) {
+        return versionOther == getKineticVersion();
     }
 
     public static int getKineticVersion() {

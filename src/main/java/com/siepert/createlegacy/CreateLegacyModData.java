@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Random;
 
 /**Some basic variables. */
-public class CreateLegacyModData {
+public final class CreateLegacyModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
-    public static final String VERSION = "24w29d"; //The version, changes each update in this fashion: rework.major.minor.patch
+    public static final String VERSION = "24w29d"; //The version, based on snapshot naming scheme
     public static final int VERSION_NUMBER = 5;
     public static final int KINETIC_VERSION = 2;
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class

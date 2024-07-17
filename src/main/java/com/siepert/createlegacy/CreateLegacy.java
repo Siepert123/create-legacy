@@ -1,5 +1,8 @@
 package com.siepert.createlegacy;
 
+import com.siepert.createapi.AddonLoadException;
+import com.siepert.createapi.CreateAPI;
+import com.siepert.createapi.CreateAddon;
 import com.siepert.createlegacy.proxy.CommonProxy;
 import com.siepert.createlegacy.tabs.CreateModDecoTab;
 import com.siepert.createlegacy.tabs.CreateModOtherTab;
@@ -35,12 +38,39 @@ public final class CreateLegacy {
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws AddonLoadException {
+        //Create addon loading
+        logger.info("Consuming all registered addons");
+        CreateAPI.consumeAddons();
+        logger.info("Found {} addons to load", CreateAPI.getAddons().size());
+        int totalErrors = 0;
+        int totalAddons = 0;
+        for (CreateAddon addon : CreateAPI.getAddons()) {
+            int errors = 0;
+            logger.info("Begun loading addon {} (priority index {})",
+                    addon.getModId(), addon.getLoadPriority());
+            if (addon.getCreateVersion() < CreateAPI.getVersion()) {
+                logger.warn("Addon {} was made for Create version {}, current version is {}",
+                        addon.getModId(), addon.getCreateVersion(), CreateAPI.getVersion());
+                errors++;
+            }
+            if (addon.getKineticVersion() != CreateAPI.getKineticVersion()) {
+                logger.error("Addon {} was made for kinetic version {}, current version is {}!",
+                        addon.getModId(), addon.getKineticVersion(), CreateAPI.getKineticVersion());
+                AddonLoadException.kineticVersionMismatch(addon.getModId(), addon.getKineticVersion());
+            }
+            addon.onLoad(event);
+            logger.info("Successfully loaded addon {} with {} error(s)", addon.getModId(), errors);
+            totalErrors += errors;
+            totalAddons++;
+        }
+        logger.info("Loaded {} addons, {} error(s) total");
+
         RegistryHandler.otherInitRegistries();
     }
 
     @EventHandler
-    public void init(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
         RegistryHandler.otherPostInitRegistries();
     }
 }
