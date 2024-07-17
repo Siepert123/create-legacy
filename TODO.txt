@@ -1,7 +1,2 @@
 
-
-Known Issues:
- - Hand crank model is lacking
- - The recipes for deco blocks are broken
-
-Things to do:
+The insertion system must be improved
