@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,8 +15,22 @@ public final class CreateAPI {
 
 
     private static final List<CreateAddon> ADDONS = new ArrayList<>();
+
+    /**
+     * Registers a Create addon.
+     * @param addon Your addon.
+     */
     public static void registerAddon(CreateAddon addon) {
-        ADDONS.add(addon);
+        if (!isModAlreadyRegistered(addon.getModId())) {
+            ADDONS.add(addon);
+        }
+    }
+
+    private static boolean isModAlreadyRegistered(@Nonnull String id) {
+        for (CreateAddon addon : ADDONS) {
+            if (addon.getModId().equals(id)) return true;
+        }
+        return false;
     }
 
     private static final List<CreateAddon> ADDONS_IN_PRIORITY = new ArrayList<>();
