@@ -34,6 +34,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentBase;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -41,6 +42,7 @@ import javax.annotation.Nullable;
 
 public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEntityProvider, IWrenchable {
     public static final PropertyBool ADVANCED = PropertyBool.create("advanced");
+    public static final PropertyBool DISABLED = PropertyBool.create("disabled");
     public static final PropertyBool EXTRACTING = PropertyBool.create("extracting");
     public static final PropertyEnum<EnumHorizontalFacing> FACING = PropertyEnum.create("facing", EnumHorizontalFacing.class);
 
@@ -57,7 +59,8 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
         setResistance(2);
 
         setDefaultState(this.blockState.getBaseState().withProperty(ADVANCED, false)
-                .withProperty(EXTRACTING, true).withProperty(FACING, EnumHorizontalFacing.NORTH));
+                .withProperty(EXTRACTING, true).withProperty(FACING, EnumHorizontalFacing.NORTH)
+                .withProperty(DISABLED, false));
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
@@ -65,7 +68,7 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, ADVANCED, EXTRACTING, FACING);
+        return new BlockStateContainer(this, ADVANCED, DISABLED, EXTRACTING, FACING);
     }
 
     @Override
@@ -111,17 +114,25 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
 
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
-        setState(worldIn, pos, !state.getValue(EXTRACTING));
+        setState(worldIn, pos, !state.getValue(EXTRACTING), state.getValue(DISABLED));
         return true;
     }
 
-    public void setState(World world, BlockPos pos, boolean extracting) {
+    public static void setState(World world, BlockPos pos, boolean extracting, boolean disabled) {
         TileEntity tileEntity = world.getTileEntity(pos);
-
-        world.setBlockState(pos, world.getBlockState(pos).withProperty(EXTRACTING, extracting), 3);
+        ItemStack filter;
+        if (tileEntity != null) {
+            if (tileEntity instanceof TileEntityFunnelAdvanced) {
+                filter = ((TileEntityFunnelAdvanced) tileEntity).getFilter().copy();
+            } else filter = ItemStack.EMPTY;
+        } else filter = ItemStack.EMPTY;
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(EXTRACTING, extracting).withProperty(DISABLED, disabled), 3);
 
         if (tileEntity != null) {
             tileEntity.validate();
+            if (tileEntity instanceof TileEntityFunnelAdvanced) {
+                ((TileEntityFunnelAdvanced) tileEntity).setFilter(filter.copy());
+            }
             world.setTileEntity(pos, tileEntity);
         }
     }
@@ -135,34 +146,16 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
                     if (playerIn.getHeldItem(hand).isEmpty()) {
                         tileEntityFunnelAdvanced.clearFilter();
                         if (!worldIn.isRemote) {
-                            playerIn.sendMessage(new TextComponentBase() {
-                                @Override
-                                public String getUnformattedComponentText() {
-                                    return "message.create:filter.cleared";
-                                }
-
-                                @Override
-                                public ITextComponent createCopy() {
-                                    return null;
-                                }
-                            });
+                            playerIn.sendStatusMessage(new TextComponentString("Filter cleared"), true);
                         }
                     } else {
-                        tileEntityFunnelAdvanced.setFilter(playerIn.getHeldItem(hand));
+                        tileEntityFunnelAdvanced.setFilter(playerIn.getHeldItem(hand).copy());
                         if (!worldIn.isRemote) {
-                            playerIn.sendMessage(new TextComponentBase() {
-                                @Override
-                                public String getUnformattedComponentText() {
-                                    return "message.create:filter.set";
-                                }
-
-                                @Override
-                                public ITextComponent createCopy() {
-                                    return null;
-                                }
-                            });
+                            playerIn.sendStatusMessage(new TextComponentString("Filter set to "
+                                + playerIn.getHeldItem(hand).getDisplayName()), true);
                         }
                     }
+                    return true;
                 }
             }
         }

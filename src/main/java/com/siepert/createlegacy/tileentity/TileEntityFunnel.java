@@ -33,17 +33,38 @@ public class TileEntityFunnel extends TileEntity implements ITickable {
         pickupDelay = compound.getInteger("pickupDelay");
     }
 
+    private void checkForRedstone(boolean original) {
+        boolean redstone = false;
+
+        for (EnumFacing check : EnumFacing.VALUES) {
+            if (world.getRedstonePower(pos.offset(check), check.getOpposite()) > 0) {
+                redstone = true;
+            }
+        }
+        if (world.getRedstonePower(pos,
+                world.getBlockState(pos).getValue(BlockFunnel.FACING)
+                        .toVanillaFacing().getOpposite()) > 0) redstone = true;
+
+        if (redstone != original) {
+            BlockFunnel.setState(world, pos, world.getBlockState(pos).getValue(BlockFunnel.EXTRACTING), redstone);
+        }
+    }
+
     @Override
     public void update() {
         EnumFacing facing = world.getBlockState(pos).getValue(BlockFunnel.FACING).toVanillaFacing();
         boolean extracting = world.getBlockState(pos).getValue(BlockFunnel.EXTRACTING);
+
+        checkForRedstone(world.getBlockState(pos).getValue(BlockFunnel.DISABLED));
+
+        boolean disabled = world.getBlockState(pos).getValue(BlockFunnel.DISABLED);
 
         BlockPos target = pos.offset(facing.getOpposite());
 
         TileEntity targetEntity = world.getTileEntity(target);
 
         boolean alreadyItem = !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos)).isEmpty();
-        if (!world.isRemote) {
+        if (!world.isRemote && !disabled) {
             if (extracting && !alreadyItem && pickupDelay == 0) {
                 if (targetEntity != null) {
                     if (targetEntity instanceof TileEntityFurnace) {
