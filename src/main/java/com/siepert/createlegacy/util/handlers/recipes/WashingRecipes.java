@@ -31,7 +31,7 @@ public class WashingRecipes {
                 new ItemStack(ModItems.INGREDIENT, 9, 7), new ItemStack(Items.GUNPOWDER));
 
         this.addWashingRecipe(new ItemStack(Blocks.GRAVEL, 1),
-                new ItemStack(Items.FLINT, 1), new ItemStack(Items.IRON_NUGGET, 1));
+                new ItemStack(Items.FLINT, 1), new ItemStack(Items.IRON_NUGGET, 3));
         this.addWashingRecipe(new ItemStack(Blocks.SAND, 1, 0),
                 ItemStack.EMPTY, new ItemStack(Items.CLAY_BALL, 1));
         this.addWashingRecipe(new ItemStack(Blocks.SAND, 1, 1),

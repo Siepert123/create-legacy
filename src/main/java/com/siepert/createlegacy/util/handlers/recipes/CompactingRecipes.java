@@ -51,8 +51,34 @@ public class CompactingRecipes {
         this.addCompacting(new ItemStack(Items.GLOWSTONE_DUST, 4),
                 new ItemStack(Blocks.GLOWSTONE, 1));
 
+        this.addCompacting(new ItemStack(Items.MELON, 9),
+                new ItemStack(Blocks.MELON_BLOCK, 1));
+
+        this.addCompacting(new ItemStack(Items.PRISMARINE_SHARD, 9),
+                new ItemStack(Blocks.PRISMARINE, 1, 1));
+        this.addCompacting(new ItemStack(Items.PRISMARINE_SHARD, 4),
+                new ItemStack(Blocks.PRISMARINE, 1, 0));
+
+        this.addCompacting(new ItemStack(Blocks.STONE, 4, 0),
+                new ItemStack(Blocks.STONEBRICK, 4, 0));
+
+        this.addCompacting(new ItemStack(Blocks.STONE, 4, 1),
+                new ItemStack(Blocks.STONE, 4, 2));
+        this.addCompacting(new ItemStack(Blocks.STONE, 4, 3),
+                new ItemStack(Blocks.STONE, 4, 4));
+        this.addCompacting(new ItemStack(Blocks.STONE, 4, 5),
+                new ItemStack(Blocks.STONE, 4, 6));
+        this.addCompacting(new ItemStack(Blocks.SAND, 4, 0),
+                new ItemStack(Blocks.SANDSTONE, 1, 0));
+
+        this.addCompacting(new ItemStack(Blocks.SAND, 4, 1),
+                new ItemStack(Blocks.RED_SANDSTONE, 1, 0));
+        this.addCompacting(new ItemStack(Items.STRING, 4),
+                new ItemStack(Blocks.WOOL, 1, 0));
         this.addCompacting(new ItemStack(ModItems.INGREDIENT, 1, 17),
                 new ItemStack(ModItems.INCOMPLETE_ITEM, 1, 1), BlockBlazeBurner.State.HEATED);
+
+
     }
 
     public void addCompacting(Block input, ItemStack stack) {
