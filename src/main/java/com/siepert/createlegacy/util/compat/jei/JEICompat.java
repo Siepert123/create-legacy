@@ -47,7 +47,7 @@ public class JEICompat implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.PRESS), RecipeCategories.COMPACTING);
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.ITEM_HOLDER, 1, 1), RecipeCategories.COMPACTING);
 
-        registry.addRecipes(RecipeMaker.getCompactingRecipes(jeiHelpers));
+        registry.addRecipes(RecipeMaker.getMysteryRecipes(jeiHelpers));
 
     }
 
