@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "item": "create:ingredient",
+      "data": 9
+    },
+    "I": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "wool"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "kelpDried"
+      }
+    ]
+  },
+  "result": {
+    "item": "create:funnel",
+    "data": 1,
+    "count": 4
+  }
+}
