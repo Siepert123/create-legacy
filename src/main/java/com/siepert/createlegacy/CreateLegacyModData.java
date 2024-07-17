@@ -13,8 +13,8 @@ import java.util.Random;
 public class CreateLegacyModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
-    public static final String VERSION = "24w29c"; //The version, changes each update in this fashion: rework.major.minor.patch
-    public static final int VERSION_NUMBER = 4;
+    public static final String VERSION = "24w29d"; //The version, changes each update in this fashion: rework.major.minor.patch
+    public static final int VERSION_NUMBER = 5;
     public static final int KINETIC_VERSION = 2;
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class
     public static final String COMMON_PROXY = "com.siepert.createlegacy.proxy.CommonProxy"; //Common proxy class
