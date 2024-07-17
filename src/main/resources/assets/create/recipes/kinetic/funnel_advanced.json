@@ -1,10 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "b",
     "#",
     "I"
   ],
   "key": {
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "electronTube"
+    },
     "#": {
       "item": "create:ingredient",
       "data": 9
