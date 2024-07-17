@@ -113,8 +113,7 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor, IWren
             if (!worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial().isReplaceable()
                     && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
                 worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
-                worldIn.playSound(null, newPos, worldIn.getBlockState(newPos).getBlock().getSoundType().getBreakSound(),
-                        SoundCategory.BLOCKS, 1.0f, 1.0f);
+                worldIn.playEvent(2001, newPos, Block.getStateId(worldIn.getBlockState(newPos)));
                 worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
             }
 
