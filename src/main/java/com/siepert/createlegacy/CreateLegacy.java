@@ -64,7 +64,9 @@ public final class CreateLegacy {
             totalErrors += errors;
             totalAddons++;
         }
-        logger.info("Loaded {} addons, {} error(s) total");
+        if (totalAddons > 0) {
+            logger.info("Loaded {} addons, {} error(s) total", totalAddons, totalErrors);
+        }
 
         RegistryHandler.otherInitRegistries();
     }

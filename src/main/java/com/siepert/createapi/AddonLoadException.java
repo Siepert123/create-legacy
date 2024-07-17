@@ -1,8 +1,6 @@
 package com.siepert.createapi;
 
-import javafx.fxml.LoadException;
-
-public class AddonLoadException extends LoadException {
+public class AddonLoadException extends RuntimeException {
     public AddonLoadException(String message) {
         super(message);
     }
