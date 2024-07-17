@@ -29,6 +29,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -159,7 +160,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
 
             if (isABlower) {
                 if (!worldIn.getBlockState(posFront).getMaterial().blocksMovement()
-                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite())))) {
+                        || isBlockNotObscure(worldIn, pos.offset(source.getOpposite()),
+                        worldIn.getBlockState(pos.offset(source.getOpposite())))) {
                     worldIn.spawnParticle(EnumParticleTypes.CLOUD,
                             posFront.getX() + 0.5,
                             posFront.getY() + 0.5,
@@ -214,7 +216,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                 } else return;
 
                 if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 2)).getMaterial().blocksMovement()
-                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite(), 2)))) {
+                        || isBlockNotObscure(worldIn, pos.offset(source.getOpposite(), 2),
+                        worldIn.getBlockState(pos.offset(source.getOpposite(), 2)))) {
                     AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 2));
 
                     List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, searchField);
@@ -251,7 +254,8 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                 } else return;
 
                 if (!worldIn.getBlockState(pos.offset(source.getOpposite(), 3)).getMaterial().blocksMovement()
-                        || isBlockNotObscure(worldIn.getBlockState(pos.offset(source.getOpposite(), 3)))) {
+                        || isBlockNotObscure(worldIn, pos.offset(source.getOpposite(), 3),
+                        worldIn.getBlockState(pos.offset(source.getOpposite(), 3)))) {
                     AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 3));
 
                     List<Entity> foundEntities = worldIn.getEntitiesWithinAABB(Entity.class, searchField);
@@ -294,7 +298,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
                 for (int i = 0; i < 5; i++) {
                     BlockPos startProcessPos = pos.offset(source.getOpposite(), 1 + i);
 
-                    if (isBlockNotObscure(worldIn.getBlockState(startProcessPos))
+                    if (isBlockNotObscure(worldIn, startProcessPos, worldIn.getBlockState(startProcessPos))
                             || !worldIn.getBlockState(startProcessPos).getMaterial().blocksMovement()) {
 
                         if (whatsTheProcess == ProcessingType.WASH) {
@@ -443,7 +447,7 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
         }
     }
 
-    private boolean isBlockNotObscure(IBlockState stateOfOhio) {
+    private boolean isBlockNotObscure(IBlockAccess access, BlockPos pos, IBlockState stateOfOhio) {
         List<Block> predef_allowances = new ArrayList<Block>();
         predef_allowances.add(Blocks.STANDING_SIGN);
         predef_allowances.add(Blocks.WALL_SIGN);
@@ -452,6 +456,10 @@ public class BlockFan extends Block implements IHasModel, IKineticActor, IWrench
         predef_allowances.add(ModBlocks.BLAZE_BURNER);
 
         if (predef_allowances.contains(stateOfOhio.getBlock()))return true;
+
+        if (!stateOfOhio.getMaterial().blocksMovement()) return true;
+        if (stateOfOhio.getCollisionBoundingBox(access, pos) == Block.NULL_AABB) return true;
+
         return false;
     }
 
