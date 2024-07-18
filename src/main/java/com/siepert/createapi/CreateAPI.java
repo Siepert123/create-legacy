@@ -96,6 +96,30 @@ public final class CreateAPI {
         return 0;
     }
 
+    public static int discoverRotationForPlacement(World world, BlockPos pos, EnumFacing.Axis axis) {
+        switch (axis) {
+            case X:
+                if (pos.getY() % 2 == pos.getZ() % 2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case Y:
+                if (pos.getX() % 2 == pos.getZ() % 2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case Z:
+                if (pos.getY() % 2 == pos.getX() % 2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+        }
+        return 0;
+    }
+
     public static void addBlockToWrenchables(Block block) {
         if (CreateLegacyModData.WRENCHABLES.contains(block)) {
             return;

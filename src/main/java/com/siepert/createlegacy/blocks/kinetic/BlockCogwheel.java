@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
@@ -98,9 +99,12 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing.Axis axis = facing.getAxis();
         if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockCogwheel && !placer.isSneaking()) {
-            return this.getDefaultState().withProperty(AXIS, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS));
+            return this.getDefaultState().withProperty(AXIS, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS))
+                    .withProperty(ROTATION,
+                            CreateAPI.discoverRotationForPlacement(world, pos, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS)));
         }
-        return this.getDefaultState().withProperty(AXIS, axis);
+        return this.getDefaultState().withProperty(AXIS, axis)
+                .withProperty(ROTATION, CreateAPI.discoverRotationForPlacement(world, pos, axis));
     }
 
     @Override
