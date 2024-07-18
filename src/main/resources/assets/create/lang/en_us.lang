@@ -124,8 +124,8 @@ tile.create:schedule_cook.name=Schedule Fan Cooking
 
 item.create:wrench.name=Wrench
 
-message.create:filter.set=Filter set
-message.create:filter.cleared=Filter cleared
+message.create:filter.set=Filter set to
+message.create:filter.clear=Filter cleared
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble

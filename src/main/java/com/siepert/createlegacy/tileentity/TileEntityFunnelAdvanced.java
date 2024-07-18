@@ -143,7 +143,7 @@ public class TileEntityFunnelAdvanced extends TileEntity implements ITickable {
                         for (int i = 0; i < ((ISidedInventory)targetEntity).getSizeInventory(); i++) {
                             if (((ISidedInventory) targetEntity).canInsertItem(i, currentStack, EnumFacing.UP)) {
                                 if (((ISidedInventory)targetEntity).getStackInSlot(i).isEmpty()) {
-                                    if (filter.isEmpty() || filter.isItemEqual(((ISidedInventory)targetEntity).getStackInSlot(i))) {
+                                    if (filter.isEmpty() || filter.isItemEqual(currentStack)) {
                                         ((ISidedInventory) targetEntity).setInventorySlotContents(i, currentStack.copy());
                                         entityItem.setDead();
                                         pickupDelay = 5;
@@ -157,7 +157,7 @@ public class TileEntityFunnelAdvanced extends TileEntity implements ITickable {
                         for (int i = 0; i < ((IInventory)targetEntity).getSizeInventory(); i++) {
                             if (((IInventory)targetEntity).isItemValidForSlot(i, currentStack)) {
                                 if (((IInventory)targetEntity).getStackInSlot(i).isEmpty()) {
-                                    if (filter.isEmpty() || filter.isItemEqual(((IInventory)targetEntity).getStackInSlot(i))) {
+                                    if (filter.isEmpty() || filter.isItemEqual(currentStack)) {
                                         ((IInventory) targetEntity).setInventorySlotContents(i, currentStack);
                                         entityItem.setDead();
                                         pickupDelay = 5;

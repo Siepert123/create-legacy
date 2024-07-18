@@ -111,13 +111,17 @@ public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvi
                 ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
                 0.1f, 1.0f);
         if (useTE) {
-            setState(true, worldIn, pos);
+            if (!worldIn.isRemote) {
+                setState(true, worldIn, pos);
+            }
         } else {
-            Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
-            if (block instanceof IKineticActor) {
-                List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-                ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
-                        iteratedBlocks, false, false, false);
+            if (!worldIn.isRemote) {
+                Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
+                if (block instanceof IKineticActor) {
+                    List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
+                    ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
+                            iteratedBlocks, false, false, false);
+                }
             }
         }
         return true;

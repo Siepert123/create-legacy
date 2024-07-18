@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
@@ -10,6 +11,7 @@ import com.siepert.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.siepert.createlegacy.util.EnumHorizontalFacing;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
+import com.siepert.createlegacy.util.compat.jei.JEICompat;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
@@ -146,13 +148,13 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
                     if (playerIn.getHeldItem(hand).isEmpty()) {
                         tileEntityFunnelAdvanced.clearFilter();
                         if (!worldIn.isRemote) {
-                            playerIn.sendStatusMessage(new TextComponentString("Filter cleared"), true);
+                            playerIn.sendStatusMessage(new TextComponentString(CreateAPI.translateToLocal("message.create:filter.clear")), true);
                         }
                     } else {
                         tileEntityFunnelAdvanced.setFilter(playerIn.getHeldItem(hand).copy());
                         if (!worldIn.isRemote) {
-                            playerIn.sendStatusMessage(new TextComponentString("Filter set to "
-                                + playerIn.getHeldItem(hand).getDisplayName()), true);
+                            playerIn.sendStatusMessage(new TextComponentString(CreateAPI.translateToLocal("message.create:filter.set")
+                                + ' ' + playerIn.getHeldItem(hand).getDisplayName()), true);
                         }
                     }
                     return true;

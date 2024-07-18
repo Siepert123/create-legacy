@@ -22,7 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -113,6 +112,12 @@ public class BlockDrill extends Block implements IHasModel, IKineticActor, IWren
             if (!worldIn.getBlockState(pos.offset(source.getOpposite())).getMaterial().isReplaceable()
                     && worldIn.getBlockState(pos.offset(source.getOpposite())).getBlockHardness(worldIn, newPos) != -1.0f) {
                 worldIn.getBlockState(newPos).getBlock().dropBlockAsItem(worldIn, newPos, worldIn.getBlockState(newPos), 0);
+                try {
+                    worldIn.getBlockState(newPos).getBlock().onBlockHarvested(worldIn, newPos, worldIn.getBlockState(newPos),
+                            worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 128, false));
+                } catch (NullPointerException ignored) {
+
+                }
                 worldIn.playEvent(2001, newPos, Block.getStateId(worldIn.getBlockState(newPos)));
                 worldIn.setBlockState(newPos, Blocks.AIR.getDefaultState());
             }

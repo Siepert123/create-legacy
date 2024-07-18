@@ -104,6 +104,8 @@ tile.create:axle_encased_andesite.name=Andesiet omhuslde drijfas
 tile.create:axle_encased_brass.name=Messing omhulsde drijfas
 tile.create:belt.name=Lopende band
 tile.create:chute.name=Stortkoker
+tile.create:funnel.name=Andesieten koker
+tile.create:funnel_advanced.name=Messing koker
 tile.create:millstone.name=Molensteen
 tile.create:piston.name=Mechanische zuiger
 tile.create:piston_sticky.name=Mechanische kleefzuiger
@@ -121,6 +123,9 @@ tile.create:schedule_wash.name=Zet 'ventilatorwassen' op de kalender
 tile.create:schedule_cook.name=Zet 'ventilatorsmelten' op de kalender
 
 item.create:wrench.name=Waterpomptang
+
+message.create:filter.set=Filter veranderd naar
+message.create:filter.clear=Filter verwijderd
 
 #Sounds
 subtitle.block.cogwheel.ambient=Tandwielen bewegen
@@ -250,4 +255,4 @@ tile.create:stone_reinforced_ochrum.name=Verstevigd ochrum
 tile.create:stone_reinforced_scorchia.name=Verstevigd verschroeisteen
 tile.create:stone_reinforced_scoria.name=Verstevigd schroeisteen
 tile.create:stone_reinforced_tuff.name=Verstevigd tufsteen
-tile.create:stone_reinforced_veridium.name=Verstevigd veridium
+

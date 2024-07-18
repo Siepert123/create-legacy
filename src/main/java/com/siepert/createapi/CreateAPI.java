@@ -4,11 +4,13 @@ import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 public final class CreateAPI {
@@ -99,19 +101,19 @@ public final class CreateAPI {
     public static int discoverRotationForPlacement(World world, BlockPos pos, EnumFacing.Axis axis) {
         switch (axis) {
             case X:
-                if (pos.getY() % 2 == pos.getZ() % 2) {
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getZ()) % 2) {
                     return 1;
                 } else {
                     return 0;
                 }
             case Y:
-                if (pos.getX() % 2 == pos.getZ() % 2) {
+                if (Math.abs(pos.getX()) % 2 == Math.abs(pos.getZ()) % 2) {
                     return 1;
                 } else {
                     return 0;
                 }
             case Z:
-                if (pos.getY() % 2 == pos.getX() % 2) {
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getX()) % 2) {
                     return 1;
                 } else {
                     return 0;
@@ -134,5 +136,19 @@ public final class CreateAPI {
         stringList.add("Basil: for the Czech translation");
         stringList.add("Magistr Djo: for the Russian translation");
         stringList.add("And all the members of the Discord server, for supporting me");
+    }
+
+    public static String translateToLocal(String key) {
+        if (I18n.canTranslate(key)) return I18n.translateToLocal(key);
+        else return I18n.translateToFallback(key);
+    }
+
+    public static String translateToLocalFormatted(String key, Object... format) {
+        String s = translateToLocal(key);
+        try {
+            return String.format(s, format);
+        } catch (IllegalFormatException e) {
+            return "Format Error: " + s;
+        }
     }
 }
