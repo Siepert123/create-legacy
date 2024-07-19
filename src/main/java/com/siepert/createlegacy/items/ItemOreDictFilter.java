@@ -3,6 +3,7 @@ package com.siepert.createlegacy.items;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.IHasModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemOreDictFilter extends Item implements IHasModel {
     public ItemOreDictFilter() {
@@ -83,5 +87,17 @@ public class ItemOreDictFilter extends Item implements IHasModel {
         }
 
         return false;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        deNullify(stack);
+        String currentFilterTag = stack.getTagCompound().getString("Filter");
+
+        if (currentFilterTag == "") {
+            tooltip.add("No filter set");
+        } else {
+            tooltip.add("Filter: " + currentFilterTag);
+        }
     }
 }
