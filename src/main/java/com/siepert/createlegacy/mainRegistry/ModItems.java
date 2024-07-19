@@ -18,5 +18,6 @@ public class ModItems {
     public static final Item COMPAT_INGREDIENT = new ItemIngredientCompat();
     public static final Item INCOMPLETE_ITEM = new ItemIncomplete();
     public static final Item SANDPAPER = new ItemSandpaper();
+    public static final Item FILTER_ORE_DICT = new ItemOreDictFilter();
     public static final Item SCRUMPTIOUS_FOOD = new ItemScrumptiousFood();
 }

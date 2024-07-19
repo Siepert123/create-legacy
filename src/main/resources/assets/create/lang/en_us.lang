@@ -124,6 +124,7 @@ tile.create:schedule_cook.name=Schedule Fan Cooking
 
 item.create:wrench.name=Wrench
 
+item.create:filter_ore_dict.name=OreDict Filter
 message.create:filter.set=Filter set to
 message.create:filter.clear=Filter cleared
 
