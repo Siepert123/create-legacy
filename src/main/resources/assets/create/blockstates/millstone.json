@@ -1,10 +1,28 @@
 {
   "variants": {
-    "active=true": {
+    "active=true,rotation=0": {
       "model": "create:millstone"
     },
-    "active=false": {
+    "active=false,rotation=0": {
       "model": "create:millstone"
+    },
+    "active=true,rotation=1": {
+      "model": "create:millstone/rot_1"
+    },
+    "active=false,rotation=1": {
+      "model": "create:millstone/rot_1"
+    },
+    "active=true,rotation=2": {
+      "model": "create:millstone/rot_2"
+    },
+    "active=false,rotation=2": {
+      "model": "create:millstone/rot_2"
+    },
+    "active=true,rotation=3": {
+      "model": "create:millstone/rot_3"
+    },
+    "active=false,rotation=3": {
+      "model": "create:millstone/rot_3"
     }
   }
 }

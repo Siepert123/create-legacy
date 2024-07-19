@@ -30,6 +30,11 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
     private ItemStack outputOptional;
     private boolean hasRecipe;
     private int speed;
+    private int lastKineticUpdate;
+
+    public void setLastKineticUpdate(int ticks) {
+        lastKineticUpdate = Math.max(lastKineticUpdate, ticks);
+    }
 
     private void visualize() {
         world.spawnParticle(EnumParticleTypes.CRIT,
@@ -44,7 +49,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         MillingRecipes.ResultSet set = MillingRecipes.apply(currentlyMilling);
         speed = 64;
         hasRecipe = set.hasRecipe();
-        if (hasRecipe) {
+        if (hasRecipe  && lastKineticUpdate > 0) {
             maxMillProgress = set.getMillTime();
             if (areTheConditionsOK(set)) {
                 handleTheRecipeStuff(set);
@@ -85,6 +90,9 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
             visualize();
         }
 
+
+        if (lastKineticUpdate > 0) lastKineticUpdate--;
+
         markDirty();
     }
 
@@ -93,7 +101,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         super.writeToNBT(compound);
         compound.setInteger("CurrentMillProgress", currentMillProgress);
         compound.setInteger("MaximumMillProgress", maxMillProgress);
-
+        compound.setInteger("LastKineticUpdate", lastKineticUpdate);
         if (!currentlyMilling.isEmpty()) {
             NBTTagCompound inputStackNBT = new NBTTagCompound();
             currentlyMilling.writeToNBT(inputStackNBT);
@@ -117,6 +125,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         super.readFromNBT(compound);
         currentMillProgress = compound.getInteger("CurrentMillProgress");
         maxMillProgress = compound.getInteger("MaximumMillProgress");
+        lastKineticUpdate = compound.getInteger("LastKineticUpdate");
         if (compound.hasKey("CurrentlyMilling")) {
             currentlyMilling = new ItemStack(compound.getCompoundTag("CurrentlyMilling"));
         } else {
@@ -224,6 +233,7 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         this.currentlyMilling = ItemStack.EMPTY;
         this.output = ItemStack.EMPTY;
         this.outputOptional = ItemStack.EMPTY;
+        this.lastKineticUpdate = 0;
     }
 
     public void dropItems() {
