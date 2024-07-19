@@ -18,7 +18,7 @@ public class TileEntityCreativeMotor extends TileEntity implements ITickable {
         IBlockState myState = world.getBlockState(pos);
 
         Block block = world.getBlockState(pos.offset(myState.getValue(FACING))).getBlock();
-        if (block instanceof IKineticActor) {
+        if (block instanceof IKineticActor && world.getTotalWorldTime() % 2 == 0) {
             List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
             ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(FACING)), myState.getValue(FACING).getOpposite(),
                     iteratedBlocks, false, false, false);
