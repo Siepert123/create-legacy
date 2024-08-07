@@ -11,7 +11,7 @@ public class AddonLoadException extends RuntimeException {
     }
     /**
      * @throws AddonLoadException Throws a new AddonLoadException reporting the kinetic version mismatch;
-     * modid, addon kinetic version and create kinetic version are also reported.
+     * addon modid, addon kinetic version and create kinetic version are also reported.
      * */
 
     public static void kineticVersionMismatch(String modId, int wrongVersion) throws AddonLoadException {
