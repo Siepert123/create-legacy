@@ -13,6 +13,12 @@ import java.util.Comparator;
 import java.util.IllegalFormatException;
 import java.util.List;
 
+/**
+ * The Create Legacy API
+ * Addons can be registered through <code>registerAddon(ICreateAddon addon)</code>.
+ *
+ * @author Siepert123
+ * */
 public final class CreateAPI {
 
 

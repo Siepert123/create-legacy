@@ -6,6 +6,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * @author Siepert123
+ * */
 public interface IKineticActor {
 
     /**
