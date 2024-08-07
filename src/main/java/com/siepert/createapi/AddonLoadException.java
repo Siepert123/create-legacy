@@ -6,12 +6,13 @@ package com.siepert.createapi;
  * @author Siepert123
  * */
 public class AddonLoadException extends RuntimeException {
-    /**
-     * @param message The detail message
-     * */
     public AddonLoadException(String message) {
         super(message);
     }
+    /**
+     * @throws AddonLoadException Throws a new AddonLoadException reporting the kinetic version mismatch;
+     * modid, addon kinetic version and create kinetic version are also reported.
+     * */
 
     public static void kineticVersionMismatch(String modId, int wrongVersion) throws AddonLoadException {
         throw new AddonLoadException("Kinetic version mismatch: Addon "
