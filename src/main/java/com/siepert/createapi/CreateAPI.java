@@ -16,27 +16,27 @@ import java.util.List;
 public final class CreateAPI {
 
 
-    private static final List<CreateAddon> ADDONS = new ArrayList<>();
+    private static final List<ICreateAddon> ADDONS = new ArrayList<>();
 
     /**
      * Registers a Create addon.
      * @param addon Your addon.
      */
-    public static void registerAddon(CreateAddon addon) {
+    public static void registerAddon(ICreateAddon addon) {
         if (!isModAlreadyRegistered(addon.getModId())) {
             ADDONS.add(addon);
         }
     }
 
     private static boolean isModAlreadyRegistered(@Nonnull String id) {
-        for (CreateAddon addon : ADDONS) {
+        for (ICreateAddon addon : ADDONS) {
             if (addon.getModId().equals(id)) return true;
         }
         return false;
     }
 
-    private static final List<CreateAddon> ADDONS_IN_PRIORITY = new ArrayList<>();
-    public static List<CreateAddon> getAddons() {
+    private static final List<ICreateAddon> ADDONS_IN_PRIORITY = new ArrayList<>();
+    public static List<ICreateAddon> getAddons() {
         return ADDONS_IN_PRIORITY;
     }
 
@@ -44,13 +44,13 @@ public final class CreateAPI {
     public static void consumeAddons() {
         int lowestInt = 0;
         int highestInt = 0;
-        for (CreateAddon addon : ADDONS) {
+        for (ICreateAddon addon : ADDONS) {
             if (addon.getLoadPriority() < lowestInt) lowestInt = addon.getLoadPriority();
             if (addon.getLoadPriority() > highestInt) highestInt = addon.getLoadPriority();
         }
 
         for (int i = lowestInt; i <= highestInt; i++) {
-            for (CreateAddon addon : ADDONS) {
+            for (ICreateAddon addon : ADDONS) {
                 if (addon.getLoadPriority() == i) ADDONS_IN_PRIORITY.add(addon);
             }
         }
