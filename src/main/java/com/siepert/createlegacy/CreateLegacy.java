@@ -3,6 +3,7 @@ package com.siepert.createlegacy;
 import com.siepert.createapi.AddonLoadException;
 import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.CreateAddon;
+import com.siepert.createapi.ICreateAddon;
 import com.siepert.createlegacy.proxy.CommonProxy;
 import com.siepert.createlegacy.tabs.CreateModDecoTab;
 import com.siepert.createlegacy.tabs.CreateModOtherTab;
@@ -45,7 +46,7 @@ public final class CreateLegacy {
         logger.info("Found {} addons to load", CreateAPI.getAddons().size());
         int totalErrors = 0;
         int totalAddons = 0;
-        for (CreateAddon addon : CreateAPI.getAddons()) {
+        for (ICreateAddon addon : CreateAPI.getAddons()) {
             int errors = 0;
             logger.info("Begun loading addon {} (priority index {})",
                     addon.getModId(), addon.getLoadPriority());
