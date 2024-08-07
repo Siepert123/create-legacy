@@ -6,7 +6,7 @@ import net.minecraftforge.common.config.Config;
 public class ConfigHolder {
     @Config.Comment("Config options for Create Legacy World Generation")
     @Config.Name("Worldgen Options")
-    @Config.RequiresMcRestart
+    @Config.RequiresMcRestart // I'm not 100% sure if it requires an MC restart, but you should probably make a new world
     public static WorldgenOptions worldgen = new WorldgenOptions();
     public static class WorldgenOptions {
         @Config.Comment({ "Whether to generate ores from Create Legacy (for example copper ore)",
