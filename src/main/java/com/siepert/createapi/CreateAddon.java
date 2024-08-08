@@ -1,19 +1,17 @@
 package com.siepert.createapi;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-
-public abstract class CreateAddon {
+/**
+ * Example implementation of ICreateAddon
+ * Extending this class also yields a valid CreateAddon class
+ *
+ * @author Siepert123, moddingforreal
+ * @see com.siepert.createapi.ICreateAddon
+ * */
+public abstract class CreateAddon implements ICreateAddon {
     private final int loadPriority;
     private final String modId;
     private final int madeForCreateVersion;
     private final int madeForKineticVersion;
-
-    public int getCreateVersion() {
-        return madeForCreateVersion;
-    }
-    public int getKineticVersion() {
-        return madeForKineticVersion;
-    }
 
     public CreateAddon(String modId, int c, int k) {
         this.modId = modId;
@@ -28,12 +26,20 @@ public abstract class CreateAddon {
         madeForKineticVersion = k;
     }
 
+    @Override
+    public int getCreateVersion() {
+        return madeForCreateVersion;
+    }
+    @Override
+    public int getKineticVersion() {
+        return madeForKineticVersion;
+    }
+    @Override
     public int getLoadPriority() {
         return loadPriority;
     }
+    @Override
     public String getModId() {
         return modId;
     }
-
-    public abstract void onLoad(FMLInitializationEvent initializationEvent);
 }

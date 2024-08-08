@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**Some basic variables. */
+/**
+ * Some basic variables.
+ *
+ * @author Siepert123
+ * */
 public final class CreateLegacyModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
