@@ -80,7 +80,7 @@ public final class CreateAPI {
     }
 
     @TestCode(explanation = "Small test for later, when the cool kinetic stuff is here")
-    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis) {
+    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis, boolean inverted) {
         switch (axis) {
             case X:
                 if (pos.getY() % 2 == pos.getZ() % 2) {

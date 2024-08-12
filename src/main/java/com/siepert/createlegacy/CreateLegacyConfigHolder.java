@@ -3,7 +3,7 @@ package com.siepert.createlegacy;
 import net.minecraftforge.common.config.Config;
 
 @Config(modid = CreateLegacyModData.MOD_ID, name = CreateLegacyModData.MOD_ID + '/' + CreateLegacyModData.MOD_ID)
-public class ConfigHolder {
+public class CreateLegacyConfigHolder {
     @Config.Comment("Config options for Create Legacy World Generation")
     @Config.Name("Worldgen Options")
     @Config.RequiresMcRestart // I'm not 100% sure if it requires an MC restart, but you should probably make a new world
