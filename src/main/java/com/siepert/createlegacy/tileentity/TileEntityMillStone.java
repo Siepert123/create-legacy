@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TileEntityMillStone extends TileEntity implements ITickable, IKineticTE, ISidedInventory {
+public class TileEntityMillStone extends TileEntity implements ITickable, ISidedInventory {
     private int currentMillProgress;
     private int maxMillProgress;
     private ItemStack currentlyMilling;
@@ -254,16 +254,6 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
                 world.spawnEntity(item);
             }
         }
-    }
-
-    @Override
-    public int getConsumedSU() {
-        return speed * 4;
-    }
-
-    @Override
-    public int getSpeed() {
-        return speed;
     }
 
     private static final int SLOT_INPUT = 0;
