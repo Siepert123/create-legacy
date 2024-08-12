@@ -1,5 +1,7 @@
 package com.siepert.createapi;
 
+import net.minecraft.util.EnumFacing;
+
 import java.util.List;
 
 /**
@@ -29,5 +31,5 @@ public interface IKineticTE {
 
     void setUpdated();
 
-    void passNetwork(NetworkContext context);
+    void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted);
 }

@@ -7,11 +7,11 @@ import java.util.List;
 
 public class NetworkContext {
 
-    boolean infiniteSU = CreateLegacyConfigHolder.otherConfig.disableSU;
+    public boolean infiniteSU = CreateLegacyConfigHolder.otherConfig.disableSU;
 
-    private final List<KineticBlockInstance> blocksToActivate = new ArrayList<>();
-    int networkSpeed = 0;
-    int totalSU = 0;
-    int scheduledConsumedSU = 0;
+    public final List<KineticBlockInstance> blocksToActivate = new ArrayList<>();
+    public int networkSpeed = 0;
+    public int totalSU = 0;
+    public int scheduledConsumedSU = 0;
 
 }
