@@ -62,19 +62,19 @@ public class WorldGenCustomOres implements IWorldGenerator {
                          IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimension()) {
             case -1:
-                if (CreateLegacyConfigHolder.worldgen.generateCreateStoneTypes) {
+                if (CreateLegacyConfigHolder.worldGen.generateCreateStoneTypes) {
                     runGenerator(stone_scoria, world, random, chunkX, chunkZ, 3, 10, 70);
                     runGenerator(stone_scorchia, world, random, chunkX, chunkZ, 3, 60, 110);
                 }
                 break;
 
             case 0:
-                if (CreateLegacyConfigHolder.worldgen.generateCreateOres) {
+                if (CreateLegacyConfigHolder.worldGen.generateCreateOres) {
                     runGenerator(ore_copper, world, random, chunkX, chunkZ, 8, 25, 128);
                     runGenerator(ore_zinc, world, random, chunkX, chunkZ, 7, 5, 40);
                 }
 
-                if (CreateLegacyConfigHolder.worldgen.generateCreateStoneTypes) {
+                if (CreateLegacyConfigHolder.worldGen.generateCreateStoneTypes) {
                     runGenerator(stone_calcite, world, random, chunkX, chunkZ, 4, 20, 40, 2);
                     runGenerator(stone_tuff, world, random, chunkX, chunkZ, 4, 0, 20);
                     runGenerator(stone_asurine, world, random, chunkX, chunkZ, 1, 10, 40, 5);
