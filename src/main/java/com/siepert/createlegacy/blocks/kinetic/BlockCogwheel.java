@@ -7,9 +7,11 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityCogwheel;
 import com.siepert.createlegacy.util.*;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,17 +22,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKineticActor, IWrenchable {
+public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IWrenchable, ITileEntityProvider {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockCogwheel(String name) {
@@ -130,8 +134,8 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
 
 
 
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
+
+    private void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
                              boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
 
         IBlockState myState = worldIn.getBlockState(pos);
@@ -187,7 +191,7 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
      * @param srcIsCog Whether the source is a cogwheel.
      * @param srcCogHorizontal Whether the source cogwheel is horizontal.
      * @return True if the connection is  validated.*/
-    private boolean isCognectionValid(IBlockState myState, EnumFacing source, boolean srcIsCog, boolean srcCogHorizontal) {
+    public static boolean isCognectionValid(IBlockState myState, EnumFacing source, boolean srcIsCog, boolean srcCogHorizontal) {
         boolean amIHorizontal = myState.getValue(AXIS) == EnumFacing.Axis.Y;
         EnumFacing.Axis whatsMyAxis = myState.getValue(AXIS);
         List<EnumFacing> thingies = new ArrayList<EnumFacing>();
@@ -248,5 +252,16 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IKi
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
         return rotateBlock(worldIn, pos, side);
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityCogwheel();
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(AXIS);
     }
 }

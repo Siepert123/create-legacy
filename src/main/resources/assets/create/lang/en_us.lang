@@ -121,6 +121,8 @@ item.create:incomplete_precision_mechanism.name=Incomplete Precision Mechanism
 item.create:incomplete_plate_obsidian.name=Unprocessed Obsidian Sheet
 tile.create:schedule_wash.name=Schedule Fan Washing
 tile.create:schedule_cook.name=Schedule Fan Cooking
+tile.create:network_inspector_speed.name=Speedometer
+tile.create:network_inspector_stress.name=Stressometer
 
 item.create:wrench.name=Wrench
 

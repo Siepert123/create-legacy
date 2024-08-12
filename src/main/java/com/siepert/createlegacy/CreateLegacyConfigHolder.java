@@ -39,9 +39,13 @@ public class CreateLegacyConfigHolder {
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the furnace engine",
-                "Default: 64.0"})
-        public double furnaceEngineStressCapacity = 64.0;
+                "Default: 16.0"})
+        public double furnaceEngineStressCapacity = 16.0;
 
+        @Config.RangeDouble(min = 0)
+        @Config.Comment({"Stress capacity for the creative motor",
+                "Default: 256.0"})
+        public double creativeMotorStressCapacity = 256.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress impact of the mechanical press",
@@ -107,6 +111,16 @@ public class CreateLegacyConfigHolder {
         @Config.Comment({"Stress impact of the gearshift",
                 "Default: 0.0"})
         public double gearshiftStressImpact = 0.0;
+
+        @Config.RangeDouble(min = 0)
+        @Config.Comment({"Stress impact of the speedometer",
+                "Default: 0.0"})
+        public double speedometerStressImpact = 0.0;
+
+        @Config.RangeDouble(min = 0)
+        @Config.Comment({"Stress impact of the stressometer",
+                "Default: 0.0"})
+        public double stressometerStressImpact = 0.0;
     }
 
     @Config.Comment("Other miscellaneous configurations")

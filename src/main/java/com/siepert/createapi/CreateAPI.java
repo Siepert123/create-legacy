@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * The Create Legacy API
  * Addons can be registered through <code>registerAddon(ICreateAddon addon)</code>.
+ * oh btw there are also some random functions here that have no other place ig
  *
  * @author Siepert123
  * */
@@ -80,26 +81,53 @@ public final class CreateAPI {
     }
 
     @TestCode(explanation = "Small test for later, when the cool kinetic stuff is here")
-    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis, boolean inverted) {
+    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis, int speed, boolean inverted) {
         switch (axis) {
             case X:
-                if (pos.getY() % 2 == pos.getZ() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getZ()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
             case Y:
-                if (pos.getX() % 2 == pos.getZ() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getX()) % 2 == Math.abs(pos.getZ()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
             case Z:
-                if (pos.getY() % 2 == pos.getX() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getX()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
+        }
+        return 0;
+    }
+
+    private static int findRotationModifier(long time, int speed, boolean inverted) {
+        if (speed == 0) return 0;
+
+        double oneToTheSpeed = 1.0 / speed;
+
+        long guh = (long) (time * oneToTheSpeed);
+
+        int notInv = longToIntSafe(guh % 4);
+        int inv = invertRotationInteger(notInv);
+
+        if (inverted) return inv;
+        return notInv;
+    }
+    private static int invertRotationInteger(int rot) {
+        switch (rot) {
+            case 0:
+                return 0;
+            case 1:
+                return 3;
+            case 2:
+                return 2;
+            case 3:
+                return 1;
         }
         return 0;
     }
@@ -156,5 +184,10 @@ public final class CreateAPI {
         } catch (IllegalFormatException e) {
             return "Format Error: " + s;
         }
+    }
+
+    public static int longToIntSafe(long j) {
+        if (j > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        return (int) j;
     }
 }

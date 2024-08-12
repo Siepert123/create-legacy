@@ -1,6 +1,10 @@
 package com.siepert.createlegacy.tileentity;
 
 import com.siepert.createapi.IKineticActor;
+import com.siepert.createapi.IKineticTE;
+import com.siepert.createapi.KineticBlockInstance;
+import com.siepert.createapi.NetworkContext;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -15,35 +19,83 @@ import java.util.List;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockWaterWheel.AXIS;
 
-public class TileEntityWaterWheel extends TileEntity implements ITickable {
+public class TileEntityWaterWheel extends TileEntity implements ITickable, IKineticTE {
+    boolean updated = true;
+
     @Override
     public void update() {
-        if (world.getTotalWorldTime() % 100 == 0) {
-            IBlockState myState = world.getBlockState(pos);
+        IBlockState myState = world.getBlockState(pos);
 
-            Block water = world.getBlockState(pos.down()).getBlock();
+        boolean liquid = world.getBlockState(pos.down()).getMaterial().isLiquid();
 
-            if (water == Blocks.WATER || (water instanceof BlockLiquid && world.getTotalWorldTime() % 200 == 0)) {
-                EnumFacing facing1 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, myState.getValue(AXIS));
-                EnumFacing facing2 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, myState.getValue(AXIS));
+        if (liquid) {
+            EnumFacing facing1 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, myState.getValue(AXIS));
+            EnumFacing facing2 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, myState.getValue(AXIS));
 
-                Block axPos = world.getBlockState(pos.offset(facing1)).getBlock();
-                Block axNeg = world.getBlockState(pos.offset(facing2)).getBlock();
+            TileEntity axPos = world.getTileEntity(pos.offset(facing1));
+            TileEntity axNeg = world.getTileEntity(pos.offset(facing2));
 
-                List<BlockPos> iteratedBlocks = new ArrayList<>();
-                if (axPos instanceof IKineticActor) {
-                    ((IKineticActor) axPos).passRotation(world, pos.offset(facing1),
-                            facing1.getOpposite(),
-                            iteratedBlocks, false, false, false);
-                }
-                if (axNeg instanceof IKineticActor) {
-                    ((IKineticActor) axNeg).passRotation(world, pos.offset(facing2),
-                            facing2.getOpposite(),
-                            iteratedBlocks, false, false, false);
-                }
+            NetworkContext context = new NetworkContext();
+
+            if (axPos instanceof IKineticTE) {
+                ((IKineticTE) axPos).passNetwork(context, facing1.getOpposite(),
+                        false, false, false);
             }
+            if (axNeg instanceof IKineticTE) {
+                ((IKineticTE) axNeg).passNetwork(context, facing2.getOpposite(),
+                        false, false, false);
+            }
+
+            context.runThroughPhases(world);
         }
     }
 
 
+    @Override
+    public double getStressImpact() {
+        return 0;
+    }
+
+    @Override
+    public double getStressCapacity() {
+        return CreateLegacyConfigHolder.kineticConfig.waterWheelStressCapacity;
+    }
+
+    @Override
+    public int getProducedSpeed() {
+        if (world.getBlockState(pos.down()).getMaterial().isLiquid()) return 8;
+        return 0;
+    }
+
+    @Override
+    public boolean isGenerator() {
+        return true;
+    }
+
+    @Override
+    public void kineticTick(NetworkContext context) {
+
+    }
+
+    @Override
+    public void setUpdated() {
+
+    }
+
+    @Override
+    public void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted) {
+        IBlockState state = world.getBlockState(pos);
+
+        if (srcIsCog) return;
+
+        if (source.getAxis() == state.getValue(AXIS)) {
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
+
+            TileEntity entity = world.getTileEntity(pos.offset(source.getOpposite()));
+
+            if (entity instanceof IKineticTE) {
+                ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
+            }
+        }
+    }
 }

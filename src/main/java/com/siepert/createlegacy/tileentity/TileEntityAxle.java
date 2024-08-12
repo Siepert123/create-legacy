@@ -9,10 +9,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-public class TileEntityShaft extends TileEntity implements IKineticTE {
+public class TileEntityAxle extends TileEntity implements IKineticTE {
     @Override
     public double getStressImpact() {
-        return 0;
+        return CreateLegacyConfigHolder.kineticConfig.shaftStressImpact;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TileEntityShaft extends TileEntity implements IKineticTE {
 
     @Override
     public double getStressCapacity() {
-        return CreateLegacyConfigHolder.kineticConfig.shaftStressImpact;
+        return 0;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TileEntityShaft extends TileEntity implements IKineticTE {
     }
 
     @Override
-    public void updateTick(NetworkContext context) {
+    public void kineticTick(NetworkContext context) {
 
     }
 
@@ -55,7 +55,9 @@ public class TileEntityShaft extends TileEntity implements IKineticTE {
 
             TileEntity entity = world.getTileEntity(pos.offset(source.getOpposite()));
             if (entity instanceof IKineticTE) {
-                ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
+                if (context.getInstanceAtPos(pos.offset(source.getOpposite())) == null) {
+                    ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
+                }
             }
         }
     }

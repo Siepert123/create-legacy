@@ -28,6 +28,7 @@ public class ModBlocks {
     public static final Block WATER_WHEEL = new BlockWaterWheel("water_wheel");
     public static final Block FURNACE_ENGINE = new BlockFurnaceEngine();
     public static final Block CREATIVE_MOTOR = new BlockCreativeMotor("creative_motor");
+    public static final Block NETWORK_INSPECTOR = new BlockNetworkMeter("network_inspector");
     public static final Block CHASSIS = new BlockChassis("chassis");
     public static final Block KINETIC_UTILITY = new BlockKineticUtility();
     public static final Block ITEM_HOLDER = new BlockItemHolder("item_holder");

@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockFurnaceEngine extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IMetaName, IWrenchable {
+public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable {
     @Override
     public String getSpecialName(ItemStack stack) {
         return Variant.fromMeta(stack.getItemDamage()).getName();

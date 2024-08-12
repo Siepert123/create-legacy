@@ -5,11 +5,13 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityAxle;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IHasRotation;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,10 +31,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineticActor, IWrenchable {
+public class BlockAxle extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IWrenchable {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     private static final AxisAlignedBB HITBOX_X = new AxisAlignedBB(0.0, 6.0 / 16.0, 6.0 / 16.0, 1.0, 10.0 / 16.0, 10.0 / 16.0);
@@ -140,40 +144,6 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
     }
 
 
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-        IBlockState myState = worldIn.getBlockState(pos);
-
-        if (source.getAxis() == myState.getValue(AXIS) && !srcIsCog) {
-            iteratedBlocks.add(pos);
-
-            IBlockState myNewState;
-            if (!inverseRotation) {
-                if (myState.getValue(ROTATION) == 3) {
-                    myNewState = myState.withProperty(ROTATION, 0);
-                } else {
-                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) + 1);
-                }
-            } else {
-                if (myState.getValue(ROTATION) == 0) {
-                    myNewState = myState.withProperty(ROTATION, 3);
-                } else {
-                    myNewState = myState.withProperty(ROTATION, myState.getValue(ROTATION) - 1);
-                }
-            }
-            worldIn.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                    pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-
-            if (worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof IKineticActor) {
-                ((IKineticActor) worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock()).passRotation(worldIn,
-                        pos.offset(source.getOpposite()), source, iteratedBlocks, false, false, inverseRotation);
-            }
-
-            worldIn.setBlockState(pos, myNewState, 0);
-        }
-    }
 
     @Override
     public boolean rotateBlock(World world, BlockPos pos, EnumFacing side) {
@@ -190,5 +160,16 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, IKineti
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
         return rotateBlock(worldIn, pos, side);
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntityAxle();
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(AXIS);
     }
 }

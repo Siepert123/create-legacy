@@ -2,9 +2,10 @@ package com.siepert.createapi;
 
 import net.minecraft.util.EnumFacing;
 
-import java.util.List;
-
 /**
+ * The IKineticTE is an interface for TileEntities.
+ * If you want to add a kinetic block (eg. a centrifuge or something idk) it is REQUIRED that this interface is implemented.
+ *
  * @author Siepert123
  * */
 public interface IKineticTE {
@@ -27,7 +28,11 @@ public interface IKineticTE {
         return getStressCapacity() != 0;
     }
 
-    void updateTick(NetworkContext context);
+    default boolean ignoreOverstress() {
+        return false;
+    }
+
+    void kineticTick(NetworkContext context);
 
     void setUpdated();
 

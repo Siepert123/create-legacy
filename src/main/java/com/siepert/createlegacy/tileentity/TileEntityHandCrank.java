@@ -1,22 +1,21 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createlegacy.blocks.kinetic.BlockHandCrank;
-import com.siepert.createapi.IKineticActor;
-import net.minecraft.block.Block;
+import com.siepert.createapi.IKineticTE;
+import com.siepert.createapi.KineticBlockInstance;
+import com.siepert.createapi.NetworkContext;
+import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockHandCrank.FACING;
-import static com.siepert.createlegacy.blocks.kinetic.BlockHandCrank.ACTIVATED;
 
-public class TileEntityHandCrank extends TileEntity implements ITickable {
-    private int cooldownTicks;
+public class TileEntityHandCrank extends TileEntity implements ITickable, IKineticTE {
+    public int cooldownTicks;
+    public boolean updated;
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -33,18 +32,57 @@ public class TileEntityHandCrank extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        IBlockState myState = world.getBlockState(pos);
-        Block block = world.getBlockState(pos.offset(myState.getValue(FACING))).getBlock();
-        if (block instanceof IKineticActor && myState.getValue(ACTIVATED)) {
-            BlockHandCrank.setState(false, world, pos);
+        IBlockState state = world.getBlockState(pos);
+        if (cooldownTicks > 0 && !updated) {
+            NetworkContext context = new NetworkContext();
 
-            world.setBlockState(pos, myState.withProperty(ACTIVATED, false), 0);
-            List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-            ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(FACING)), myState.getValue(FACING).getOpposite(),
-                    iteratedBlocks, false, false, false);
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, false));
+
+            TileEntity entity = world.getTileEntity(pos.offset(state.getValue(FACING)));
+
+            if (entity instanceof IKineticTE) {
+                ((IKineticTE) entity).passNetwork(context, state.getValue(FACING).getOpposite(),
+                        false, false, false);
+            }
+
+            cooldownTicks--;
+
+            context.runThroughPhases(world);
         }
-
+        updated = false;
     }
 
 
+    @Override
+    public double getStressImpact() {
+        return 0;
+    }
+
+    @Override
+    public double getStressCapacity() {
+        return CreateLegacyConfigHolder.kineticConfig.handCrankStressCapacity;
+    }
+
+    @Override
+    public int getProducedSpeed() {
+        return cooldownTicks > 0 ? 16 : 0;
+    }
+
+    @Override
+    public void kineticTick(NetworkContext context) {
+
+    }
+
+    @Override
+    public void setUpdated() {
+        updated = true;
+    }
+
+    @Override
+    public void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted) {
+        IBlockState state = world.getBlockState(pos);
+        if (srcIsCog || source != state.getValue(FACING)) return;
+
+        context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
+    }
 }

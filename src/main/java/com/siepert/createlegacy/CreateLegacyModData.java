@@ -18,8 +18,8 @@ public final class CreateLegacyModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
     public static final String VERSION = "24w29e"; //The version, based on snapshot naming scheme
-    public static final int VERSION_NUMBER = 6;
-    public static final int KINETIC_VERSION = 2;
+    public static final int VERSION_NUMBER = 7;
+    public static final int KINETIC_VERSION = 3;
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class
     public static final String COMMON_PROXY = "com.siepert.createlegacy.proxy.CommonProxy"; //Common proxy class
 
