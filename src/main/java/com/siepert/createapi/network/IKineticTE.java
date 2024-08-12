@@ -1,4 +1,4 @@
-package com.siepert.createapi;
+package com.siepert.createapi.network;
 
 import net.minecraft.util.EnumFacing;
 
@@ -20,7 +20,7 @@ public interface IKineticTE {
     }
 
     default boolean isConsumer() {
-        return getStressImpact() != 0;
+        return false;
     }
 
     /**
@@ -31,7 +31,7 @@ public interface IKineticTE {
     int getProducedSpeed();
 
     default boolean isGenerator() {
-        return getStressCapacity() != 0;
+        return false;
     }
 
     /**

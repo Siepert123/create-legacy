@@ -1,17 +1,14 @@
 package com.siepert.createlegacy;
 
-import com.siepert.createapi.AddonLoadException;
+import com.siepert.createapi.addons.AddonLoadException;
 import com.siepert.createapi.CreateAPI;
-import com.siepert.createapi.CreateAddon;
-import com.siepert.createapi.ICreateAddon;
+import com.siepert.createapi.addons.ICreateAddon;
 import com.siepert.createlegacy.proxy.CommonProxy;
 import com.siepert.createlegacy.tabs.CreateModDecoTab;
 import com.siepert.createlegacy.tabs.CreateModOtherTab;
 import com.siepert.createlegacy.tabs.CreateModTab;
 import com.siepert.createlegacy.util.handlers.RegistryHandler;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -36,6 +33,9 @@ public final class CreateLegacy {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
+
+        if (CreateLegacyConfigHolder.otherConfig.sillyStuff) logger.warn("Warning! The silly config option is enabled! I forgot what it does!");
+
         if (!Loader.isModLoaded("ctm")) logger.error("It's recommended to install CTM");
         RegistryHandler.otherPreInitRegistries();
     }

@@ -2,6 +2,7 @@ package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -23,13 +24,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
@@ -100,13 +101,18 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         boolean j = placer.getHeldItem(hand).getMetadata() == 1;
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis()).withProperty(ALT, j);
+        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().rotateAround(EnumFacing.Axis.Y).getAxis()).withProperty(ALT, j);
     }
 
     @Override
     public void registerModels() {
-        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "speedometer", "inventory");
-        CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "stressometer", "inventory");
+        if (CreateLegacyConfigHolder.otherConfig.sillyStuff) {
+            CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "speedometer", "inventory");
+            CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "stressometer", "inventory");
+        } else {
+            CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 0, "speedometer_hd", "inventory");
+            CreateLegacy.proxy.registerVariantRenderer(Item.getItemFromBlock(this), 1, "stressometer_hd", "inventory");
+        }
     }
 
     @Override
@@ -184,5 +190,17 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
     public String getSpecialName(ItemStack stack) {
         if (stack.getMetadata() == 0) return "_speed";
         return "_stress";
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        if (state.getValue(ALT)) return 1;
+        return 0;
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        if (state.getValue(ALT)) return new ItemStack(this, 1, 1);
+        return new ItemStack(this, 1, 0);
     }
 }

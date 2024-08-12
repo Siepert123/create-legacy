@@ -1,9 +1,9 @@
-package com.siepert.createapi;
+package com.siepert.createapi.network;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.CreateLegacyModData;
-import com.siepert.createlegacy.blocks.kinetic.BlockAxle;
 import com.siepert.createlegacy.util.IHasRotation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -84,7 +84,7 @@ public class NetworkContext {
             IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.pos);
 
             if (kineticTE.isConsumer() && kineticTE.getMinimalSpeed() < networkSpeed) {
-                scheduledConsumedSU += CreateAPI.longToIntSafe(Math.round(kineticTE.getStressCapacity() * networkSpeed));
+                scheduledConsumedSU += (int) Math.round(kineticTE.getStressImpact() * networkSpeed);
             }
         }
     }
@@ -112,7 +112,10 @@ public class NetworkContext {
             } else {
                 if (world.getBlockState(instance.pos).getBlock() instanceof IHasRotation) {
 
-                    int rot = CreateAPI.discoverRotation(world, instance.pos, EnumFacing.Axis.Y, 0, instance.inverted);
+                    int rot = CreateAPI.discoverRotation(world, instance.pos,
+                            ((IHasRotation) world.getBlockState(instance.pos).getBlock())
+                            .rotateAround(world.getBlockState(instance.pos)),
+                            0, instance.inverted);
 
                     setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
                 }

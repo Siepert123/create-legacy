@@ -1,8 +1,8 @@
 package com.siepert.createlegacy.util.handlers;
 
-import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.register.TileEntityRegistry;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.util.compat.TinkersCompat;
@@ -21,7 +21,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
-        TileEntityHandler.registerTileEntities();
+        TileEntityRegistry.registerTileEntities();
     }
 
     @SubscribeEvent

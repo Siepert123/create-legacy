@@ -1,14 +1,12 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticActor;
-import com.siepert.createapi.IKineticTE;
-import com.siepert.createapi.KineticBlockInstance;
-import com.siepert.createapi.NetworkContext;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.NeverTouchThisCodeAgain;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

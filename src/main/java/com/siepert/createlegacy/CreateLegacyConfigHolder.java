@@ -73,6 +73,11 @@ public class CreateLegacyConfigHolder {
         public double mechanicalSawStressImpact = 6.0;
 
         @Config.RangeDouble(min = 0)
+        @Config.Comment({"Stress impact of the deployer",
+                "Default: 6.0"})
+        public double deployerStressImpact = 6.0;
+
+        @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress impact of the mechanical piston",
                 "Default: 4.0"})
         public double mechanicalPistonStressImpact = 4.0;
@@ -128,6 +133,7 @@ public class CreateLegacyConfigHolder {
     public static OtherConfig otherConfig = new OtherConfig();
     public static class OtherConfig {
         @Config.RangeInt(min = 4, max = 16)
+        @Config.SlidingOption
         @Config.Comment({"How many items large the basin inventory should be.",
                 "Default: 4"})
         public int maxBasinItems = 4;
@@ -137,6 +143,7 @@ public class CreateLegacyConfigHolder {
         public boolean disableSU = false;
 
         @Config.Comment("i forgor :skull:")
+        @Config.RequiresMcRestart
         public boolean sillyStuff = false;
     }
 }

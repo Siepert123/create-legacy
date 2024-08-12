@@ -1,12 +1,11 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticTE;
-import com.siepert.createapi.KineticBlockInstance;
-import com.siepert.createapi.NetworkContext;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -19,11 +18,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine.*;
-import static com.siepert.createlegacy.blocks.kinetic.BlockHandCrank.FACING;
 
 public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, IKineticTE {
     private static final int SMOKE_MIN = 5;

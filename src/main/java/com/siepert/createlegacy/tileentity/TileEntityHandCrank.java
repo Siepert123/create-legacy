@@ -1,9 +1,8 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticTE;
-import com.siepert.createapi.KineticBlockInstance;
-import com.siepert.createapi.NetworkContext;
-import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

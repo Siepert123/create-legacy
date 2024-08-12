@@ -1,8 +1,8 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticTE;
-import com.siepert.createapi.KineticBlockInstance;
-import com.siepert.createapi.NetworkContext;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

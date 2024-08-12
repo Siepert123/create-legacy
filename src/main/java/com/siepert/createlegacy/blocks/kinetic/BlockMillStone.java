@@ -56,6 +56,16 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
     }
 
     @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState();
+    }
+
+    @Override
     public void registerModels() {
         CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }

@@ -1,8 +1,8 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticTE;
-import com.siepert.createapi.KineticBlockInstance;
-import com.siepert.createapi.NetworkContext;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.kinetic.BlockMillStone;
@@ -18,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -405,7 +404,7 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
             maxMillProgress = set.getMillTime();
             if (areTheConditionsOK(set)) {
                 handleTheRecipeStuff(set);
-                currentMillProgress += context.networkSpeed / 16;
+                currentMillProgress += Math.max(context.networkSpeed / 16, 1);
                 if (world.getTotalWorldTime() % 5 == 0) {
                     world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                             ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.5f, 1.0f);

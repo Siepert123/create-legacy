@@ -1,4 +1,4 @@
-package com.siepert.createapi;
+package com.siepert.createapi.network;
 
 import net.minecraft.util.math.BlockPos;
 

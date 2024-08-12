@@ -1,15 +1,15 @@
-package com.siepert.createapi;
+package com.siepert.createapi.addons;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 /**
- * Implementing this interface or extending {@link com.siepert.createapi.CreateAddon } in a class makes it a valid addon class.
+ * Implementing this interface or extending {@link CreateAddon } in a class makes it a valid addon class.
  * Registering the addon is done through calling <code>registerAddon(ICreateAddon addon)</code> in {@link com.siepert.createapi.CreateAPI }
  * <code>getCreateVersion()</code> and <code>getKineticVersion()</code>
  * should return the values found in the {@link com.siepert.createlegacy.CreateLegacyModData } of the create version the addon is intended for
  *
  * @author moddingforreal
- * @see com.siepert.createapi.CreateAddon
+ * @see CreateAddon
  * @see com.siepert.createlegacy.CreateLegacyModData
  * */
 public interface ICreateAddon {

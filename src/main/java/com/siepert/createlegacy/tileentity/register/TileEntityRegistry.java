@@ -1,9 +1,9 @@
-package com.siepert.createlegacy.util.handlers;
+package com.siepert.createlegacy.tileentity.register;
 
 import com.siepert.createlegacy.tileentity.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class TileEntityHandler {
+public class TileEntityRegistry {
     public static void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityBlazeBurner.class, "blaze_burner");
         GameRegistry.registerTileEntity(TileEntityChute.class, "chute");
@@ -17,6 +17,10 @@ public class TileEntityHandler {
         GameRegistry.registerTileEntity(TileEntityWaterWheel.class, "water_wheel");
         GameRegistry.registerTileEntity(TileEntityCreativeMotor.class, "creative_motor");
         GameRegistry.registerTileEntity(TileEntityMillStone.class, "millstone");
+        GameRegistry.registerTileEntity(TileEntityPress.class, "press");
+        GameRegistry.registerTileEntity(TileEntityDrill.class, "drill");
+        GameRegistry.registerTileEntity(TileEntitySaw.class, "saw");
+        GameRegistry.registerTileEntity(TileEntityDeployer.class, "deployer");
 
         GameRegistry.registerTileEntity(TileEntitySpeedometer.class, "speedometer");
         GameRegistry.registerTileEntity(TileEntityStressometer.class, "stressometer");
