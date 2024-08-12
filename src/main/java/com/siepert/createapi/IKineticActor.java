@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * @author Siepert123
+ * @deprecated
  * */
+@Deprecated
 public interface IKineticActor {
 
     /**

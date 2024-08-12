@@ -1,7 +1,10 @@
 package com.siepert.createlegacy.tileentity;
 
-import com.siepert.createapi.IKineticTE;
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.kinetic.BlockMillStone;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
@@ -15,26 +18,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class TileEntityMillStone extends TileEntity implements ITickable, IKineticTE, ISidedInventory {
+public class TileEntityMillStone extends TileEntity implements ISidedInventory, IKineticTE {
     private int currentMillProgress;
     private int maxMillProgress;
     private ItemStack currentlyMilling;
     private ItemStack output;
     private ItemStack outputOptional;
     private boolean hasRecipe;
-    private int speed;
-    private int lastKineticUpdate;
-
-    public void setLastKineticUpdate(int ticks) {
-        lastKineticUpdate = Math.max(lastKineticUpdate, ticks);
-    }
 
     private void visualize() {
         world.spawnParticle(EnumParticleTypes.CRIT,
@@ -45,63 +41,10 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
     }
 
     @Override
-    public void update() {
-        MillingRecipes.ResultSet set = MillingRecipes.apply(currentlyMilling);
-        speed = 64;
-        hasRecipe = set.hasRecipe();
-        if (hasRecipe  && lastKineticUpdate > 0) {
-            maxMillProgress = set.getMillTime();
-            if (areTheConditionsOK(set)) {
-                handleTheRecipeStuff(set);
-                currentMillProgress++;
-                if (world.getTotalWorldTime() % 5 == 0) {
-                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.5f, 1.0f);
-                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 1.0f);
-                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 1.0f);
-                }
-                BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, true));
-            } else {
-                BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, false));
-            }
-        } else {
-            resetAll();
-            BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, false));
-        }
-
-        if (currentlyMilling.isEmpty()) {
-            AxisAlignedBB bb = new AxisAlignedBB(pos.up());
-
-            List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, bb);
-
-            for (EntityItem item : items) {
-                if (currentlyMilling.isEmpty()) {
-                    if (MillingRecipes.apply(item.getItem()).hasRecipe()) {
-                        setCurrentlyMilling(item.getItem());
-                        item.setDead();
-                    }
-                }
-            }
-        }
-
-        if (world.getBlockState(pos).getValue(BlockMillStone.ACTIVE) && world.isRemote) {
-            visualize();
-        }
-
-
-        if (lastKineticUpdate > 0) lastKineticUpdate--;
-
-        markDirty();
-    }
-
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setInteger("CurrentMillProgress", currentMillProgress);
         compound.setInteger("MaximumMillProgress", maxMillProgress);
-        compound.setInteger("LastKineticUpdate", lastKineticUpdate);
         if (!currentlyMilling.isEmpty()) {
             NBTTagCompound inputStackNBT = new NBTTagCompound();
             currentlyMilling.writeToNBT(inputStackNBT);
@@ -125,7 +68,6 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         super.readFromNBT(compound);
         currentMillProgress = compound.getInteger("CurrentMillProgress");
         maxMillProgress = compound.getInteger("MaximumMillProgress");
-        lastKineticUpdate = compound.getInteger("LastKineticUpdate");
         if (compound.hasKey("CurrentlyMilling")) {
             currentlyMilling = new ItemStack(compound.getCompoundTag("CurrentlyMilling"));
         } else {
@@ -233,7 +175,6 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
         this.currentlyMilling = ItemStack.EMPTY;
         this.output = ItemStack.EMPTY;
         this.outputOptional = ItemStack.EMPTY;
-        this.lastKineticUpdate = 0;
     }
 
     public void dropItems() {
@@ -254,16 +195,6 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
                 world.spawnEntity(item);
             }
         }
-    }
-
-    @Override
-    public int getConsumedSU() {
-        return speed * 4;
-    }
-
-    @Override
-    public int getSpeed() {
-        return speed;
     }
 
     private static final int SLOT_INPUT = 0;
@@ -442,5 +373,99 @@ public class TileEntityMillStone extends TileEntity implements ITickable, IKinet
     @Override
     public boolean hasCustomName() {
         return false;
+    }
+
+    @Override
+    public double getStressImpact() {
+        return CreateLegacyConfigHolder.kineticConfig.millstoneStressImpact;
+    }
+
+    @Override
+    public boolean isConsumer() {
+        return true;
+    }
+
+    @Override
+    public double getStressCapacity() {
+        return 0;
+    }
+
+    @Override
+    public int getProducedSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void kineticTick(NetworkContext context) {
+
+        MillingRecipes.ResultSet set = MillingRecipes.apply(currentlyMilling);
+        hasRecipe = set.hasRecipe();
+        if (hasRecipe) {
+            maxMillProgress = set.getMillTime();
+            if (areTheConditionsOK(set)) {
+                handleTheRecipeStuff(set);
+                currentMillProgress += Math.max(context.networkSpeed / 16, 1);
+                if (world.getTotalWorldTime() % 5 == 0) {
+                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.5f, 1.0f);
+                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 1.0f);
+                    world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                            ModSoundHandler.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS, 0.4f, 1.0f);
+                }
+                BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, true));
+            } else {
+                BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, false));
+            }
+        } else {
+            resetAll();
+            BlockMillStone.setState(world, pos, world.getBlockState(pos).withProperty(BlockMillStone.ACTIVE, false));
+        }
+
+        if (currentlyMilling.isEmpty()) {
+            AxisAlignedBB bb = new AxisAlignedBB(pos.up());
+
+            List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, bb);
+
+            for (EntityItem item : items) {
+                if (currentlyMilling.isEmpty()) {
+                    if (MillingRecipes.apply(item.getItem()).hasRecipe()) {
+                        setCurrentlyMilling(item.getItem());
+                        item.setDead();
+                    }
+                }
+            }
+        }
+
+        if (world.getBlockState(pos).getValue(BlockMillStone.ACTIVE) && world.isRemote) {
+            visualize();
+        }
+
+        markDirty();
+    }
+
+    @Override
+    public void setUpdated() {
+
+    }
+
+    @Override
+    public void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted) {
+        if (!srcIsCog) return;
+        if (!srcCogIsHorizontal) return;
+
+        if (source.getAxis() == EnumFacing.Axis.Y) return;
+
+        context.blocksToActivate.add(new KineticBlockInstance(pos, !inverted));
+
+        for (EnumFacing dir : EnumFacing.HORIZONTALS) {
+            if (dir != source) {
+                TileEntity entity = world.getTileEntity(pos.offset(dir));
+
+                if (entity instanceof IKineticTE) {
+                    ((IKineticTE) entity).passNetwork(context, dir.getOpposite(), true, true, inverted);
+                }
+            }
+        }
     }
 }

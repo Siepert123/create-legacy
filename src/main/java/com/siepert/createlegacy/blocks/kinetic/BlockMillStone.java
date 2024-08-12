@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockMillStone extends Block implements ITileEntityProvider, IHasModel, IHasRotation, IKineticActor {
+public class BlockMillStone extends Block implements ITileEntityProvider, IHasModel {
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
 
@@ -46,14 +46,23 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
         setRegistryName("millstone");
         setCreativeTab(CreateLegacy.TAB_CREATE);
 
-        setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false)
-                .withProperty(ROTATION, 0));
+        setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false));
         setHarvestLevel("pickaxe", 0);
         setHardness(1);
         setResistance(2);
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName("millstone"));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState();
     }
 
     @Override
@@ -106,12 +115,12 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(ROTATION, CreateAPI.discoverRotationForPlacement(world, pos, EnumFacing.Axis.Y));
+        return getDefaultState();
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, ACTIVE, ROTATION);
+        return new BlockStateContainer(this, ACTIVE);
     }
 
     public static void setState(World world, BlockPos pos, IBlockState state) {
@@ -120,62 +129,6 @@ public class BlockMillStone extends Block implements ITileEntityProvider, IHasMo
         if (tileEntity != null) {
             tileEntity.validate();
             world.setTileEntity(pos, tileEntity);
-        }
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(ROTATION);
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(ROTATION, meta % 4);
-    }
-
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-        if (source == EnumFacing.UP) return;
-
-        if (source.getAxis() == EnumFacing.Axis.Y) {
-            if (srcIsCog) return;
-        } else {
-            if (!srcIsCog) return;
-            if (!srcCogIsHorizontal) return;
-        }
-
-        iteratedBlocks.add(pos);
-
-        IBlockState state = worldIn.getBlockState(pos);
-        int rot = state.getValue(ROTATION);
-        if (inverseRotation) {
-            if (rot == 3) {
-                rot = 0;
-            } else rot++;
-            setState(worldIn, pos, state.withProperty(ROTATION, rot).withProperty(ACTIVE, true));
-        } else {
-            if (rot == 0) {
-                rot = 3;
-            } else rot--;
-            setState(worldIn, pos, state.withProperty(ROTATION, rot).withProperty(ACTIVE, true));
-        }
-
-        TileEntityMillStone tileentity = (TileEntityMillStone) worldIn.getTileEntity(pos);
-
-        if (tileentity != null) {
-            tileentity.setLastKineticUpdate(10);
-            tileentity.markDirty();
-        }
-
-        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-            if (facing != source) {
-                if (worldIn.getBlockState(pos.offset(facing)).getBlock() instanceof IKineticActor) {
-                    ((IKineticActor) worldIn.getBlockState(pos.offset(facing)).getBlock())
-                            .passRotation(worldIn, pos.offset(facing), facing.getOpposite(), iteratedBlocks,
-                                    true, true, inverseRotation);
-                }
-            }
         }
     }
 }

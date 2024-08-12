@@ -1,8 +1,11 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.siepert.createapi.network.IKineticTE;
+import com.siepert.createapi.network.KineticBlockInstance;
+import com.siepert.createapi.network.NetworkContext;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -15,33 +18,35 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.siepert.createlegacy.blocks.kinetic.BlockFurnaceEngine.*;
 
-public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
+public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, IKineticTE {
     private static final int SMOKE_MIN = 5;
     private static final int SMOKE_MAX = 15;
     private static final int SMOKE_DIFF = SMOKE_MAX - SMOKE_MIN;
+
+    boolean updated = false;
+
     @Override
     public void update() {
-        IBlockState myState = world.getBlockState(pos);
+        IBlockState state = world.getBlockState(pos);
 
-        if (shouldPower(myState)) {
+        if (shouldPower(state) && !updated) {
+            NetworkContext context = new NetworkContext();
+
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, false));
+
+            TileEntity entity = world.getTileEntity(pos.offset(state.getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite()));
+
+            if (entity instanceof IKineticTE) {
+                ((IKineticTE) entity).passNetwork(context, state.getValue(HORIZONTAL_FACING).toVanillaFacing(),
+                        false, false, false);
+            }
+
+            context.runThroughPhases(world);
             if (world.getTotalWorldTime() % 10 == 0) {
-                BlockPos enginePos = pos.offset(myState.getValue(HORIZONTAL_FACING).toVanillaFacing().rotateY(), 2);
+                BlockPos enginePos = pos.offset(state.getValue(HORIZONTAL_FACING).toVanillaFacing().rotateY(), 2);
 
-                Block block = world.getBlockState(pos.offset(myState.getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite())).getBlock();
-
-                if (block instanceof IKineticActor) {
-                    List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-                    ((IKineticActor) block).passRotation(world, pos.offset(myState.getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite()),
-                            myState.getValue(HORIZONTAL_FACING).toVanillaFacing(),
-                            iteratedBlocks, false, false, false);
-                    world.markBlockRangeForRenderUpdate(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1,
-                            pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                }
                 for (int i = 0; i < SMOKE_MIN + CreateLegacyModData.timedLucky.nextInt(SMOKE_DIFF); i++) {
                     world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                             enginePos.getX() + CreateLegacyModData.random.nextFloat(),
@@ -61,7 +66,9 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
             }
         }
 
-        if (shouldIUpdate(hasShaft(myState), myState)) setState(hasShaft(myState), world, pos);
+        updated = false;
+
+        if (shouldIUpdate(hasShaft(state), state)) setState(hasShaft(state), world, pos);
     }
 
     /**
@@ -146,5 +153,43 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable {
         } else return false;
 
         return hasFurnacePowered && !isRightSided;
+    }
+
+    @Override
+    public double getStressImpact() {
+        return 0;
+    }
+
+    @Override
+    public double getStressCapacity() {
+        return CreateLegacyConfigHolder.kineticConfig.furnaceEngineStressCapacity;
+    }
+
+    @Override
+    public int getProducedSpeed() {
+        return shouldPower(world.getBlockState(pos)) ? 64 : 0;
+    }
+
+    @Override
+    public boolean isGenerator() {
+        return true;
+    }
+
+    @Override
+    public void kineticTick(NetworkContext context) {
+
+    }
+
+    @Override
+    public void setUpdated() {
+        updated = true;
+    }
+
+    @Override
+    public void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted) {
+        if (srcIsCog) return;
+
+        if (world.getBlockState(pos).getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite() == source)
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
     }
 }

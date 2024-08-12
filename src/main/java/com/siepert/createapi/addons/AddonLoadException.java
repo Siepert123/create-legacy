@@ -1,4 +1,6 @@
-package com.siepert.createapi;
+package com.siepert.createapi.addons;
+
+import com.siepert.createapi.CreateAPI;
 
 /**
  * AddonLoadException is thrown whenever an addon cannot be loaded

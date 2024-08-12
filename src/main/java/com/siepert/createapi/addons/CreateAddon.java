@@ -1,11 +1,11 @@
-package com.siepert.createapi;
+package com.siepert.createapi.addons;
 
 /**
- * Example implementation of ICreateAddon
+ * Example implementation of ICreateAddon.
  * Extending this class also yields a valid CreateAddon class
  *
  * @author Siepert123, moddingforreal
- * @see com.siepert.createapi.ICreateAddon
+ * @see ICreateAddon
  * */
 public abstract class CreateAddon implements ICreateAddon {
     private final int loadPriority;

@@ -1,9 +1,8 @@
 package com.siepert.createlegacy;
 
-import com.siepert.createapi.AddonLoadException;
+import com.siepert.createapi.addons.AddonLoadException;
 import com.siepert.createapi.CreateAPI;
-import com.siepert.createapi.CreateAddon;
-import com.siepert.createapi.ICreateAddon;
+import com.siepert.createapi.addons.ICreateAddon;
 import com.siepert.createlegacy.proxy.CommonProxy;
 import com.siepert.createlegacy.tabs.CreateModDecoTab;
 import com.siepert.createlegacy.tabs.CreateModOtherTab;
@@ -34,6 +33,9 @@ public final class CreateLegacy {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
+
+        if (CreateLegacyConfigHolder.otherConfig.sillyStuff) logger.warn("Warning! The silly config option is enabled! I forgot what it does!");
+
         if (!Loader.isModLoaded("ctm")) logger.error("It's recommended to install CTM");
         RegistryHandler.otherPreInitRegistries();
     }

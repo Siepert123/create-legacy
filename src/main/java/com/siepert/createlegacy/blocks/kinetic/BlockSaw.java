@@ -3,11 +3,13 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntitySaw;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,6 +23,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -32,12 +35,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockSaw extends Block implements IHasModel, IKineticActor, IWrenchable {
+public class BlockSaw extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockSaw(String name) {
         super(Material.ROCK);
@@ -107,60 +111,6 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor, IWrench
         return false;
     }
 
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-
-        if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
-
-        IBlockState myState = worldIn.getBlockState(pos);
-        Logger logger = CreateLegacy.logger;
-
-
-        if (source == myState.getValue(FACING).getOpposite()) {
-            iteratedBlocks.add(pos);
-            BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
-            List<BlockPos> treeMap = new ArrayList<>();
-
-            if (isBlockALog(worldIn.getBlockState(newPos).getBlock())) {
-                treeMap.add(pos.offset(source.getOpposite()));
-                extendTreeMap(worldIn, pos.offset(source.getOpposite()), treeMap, source.getOpposite());
-            }
-
-            for (BlockPos thePos : treeMap) {
-                worldIn.getBlockState(thePos).getBlock().dropBlockAsItem(worldIn, thePos, worldIn.getBlockState(thePos), 0);
-                worldIn.playSound(null, thePos, worldIn.getBlockState(thePos).getBlock().getSoundType().getBreakSound(),
-                        SoundCategory.BLOCKS, 1.0f, 1.0f);
-                worldIn.setBlockState(thePos, Blocks.AIR.getDefaultState(), 0);
-            }
-
-            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(newPos);
-
-            List<EntityLivingBase> entities = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
-
-            for (EntityLivingBase entity : entities) {
-                if (entity instanceof EntityPlayer) {
-                    if (!((EntityPlayer) entity).isCreative()) {
-                        entity.setHealth(entity.getHealth() - 4);
-                        entity.performHurtAnimation();
-                        worldIn.playSound(null,
-                                entity.posX, entity.posY, entity.posZ,
-                                SoundEvents.ENTITY_PLAYER_HURT,
-                                entity.getSoundCategory(), 1.0f, 1.0f);
-                    }
-                } else {
-                    entity.setHealth(entity.getHealth() - 4);
-                    entity.performHurtAnimation();
-                    worldIn.playSound(null,
-                            entity.posX, entity.posY, entity.posZ,
-                            SoundEvents.ENTITY_GENERIC_HURT,
-                            entity.getSoundCategory(), 1.0f, 1.0f);
-                }
-            }
-        }
-    }
-
     private boolean isBlockALog(Block theBlock) {
         if (theBlock == Blocks.LOG  || theBlock == Blocks.LOG2) return true;
         if (OreDictionary.getOres("logWood").contains(new ItemStack(theBlock))) return true;
@@ -197,5 +147,11 @@ public class BlockSaw extends Block implements IHasModel, IKineticActor, IWrench
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
         return rotateBlock(worldIn, pos, side);
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return new TileEntitySaw();
     }
 }

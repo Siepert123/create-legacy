@@ -1,5 +1,6 @@
 package com.siepert.createapi;
 
+import com.siepert.createapi.addons.ICreateAddon;
 import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
@@ -9,13 +10,13 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
  * The Create Legacy API
  * Addons can be registered through <code>registerAddon(ICreateAddon addon)</code>.
+ * oh btw there are also some random functions here that have no other place ig
  *
  * @author Siepert123
  * */
@@ -79,27 +80,63 @@ public final class CreateAPI {
         return CreateLegacyModData.KINETIC_VERSION;
     }
 
-    @TestCode(explanation = "Small test for later, when the cool kinetic stuff is here")
-    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis) {
+    /**
+     * Find rotation based on time, network speed & position.
+     *
+     * @param world The world. Mainly used for {@link World#getTotalWorldTime()}
+     * @param pos The position.
+     * @param axis The axis where the rotations happen around.
+     * @param speed Speed of the network.
+     * @param inverted Is the rotation inverted?
+     * @return Integer (0-3, sometimes 4 for some reason) which represents the rotation state.
+     */
+    public static int discoverRotation(World world, BlockPos pos, EnumFacing.Axis axis, int speed, boolean inverted) {
         switch (axis) {
             case X:
-                if (pos.getY() % 2 == pos.getZ() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getZ()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
             case Y:
-                if (pos.getX() % 2 == pos.getZ() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getX()) % 2 == Math.abs(pos.getZ()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
             case Z:
-                if (pos.getY() % 2 == pos.getX() % 2) {
-                    return (int) world.getTotalWorldTime() % 4 + 1;
+                if (Math.abs(pos.getY()) % 2 == Math.abs(pos.getX()) % 2) {
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted) + 1;
                 } else {
-                    return (int) world.getTotalWorldTime() % 4;
+                    return findRotationModifier(world.getTotalWorldTime(), speed, inverted);
                 }
+        }
+        return 0;
+    }
+
+    private static int findRotationModifier(long time, int speed, boolean inverted) {
+        if (speed == 0) return 0;
+
+        double oneToTheSpeed = 1.0 / speed;
+
+        long guh = (long) (time * oneToTheSpeed);
+
+        int notInv = longToIntSafe(guh % 4);
+        int inv = invertRotationInteger(notInv);
+
+        if (inverted) return inv;
+        return notInv;
+    }
+    private static int invertRotationInteger(int rot) {
+        switch (rot) {
+            case 0:
+                return 0;
+            case 1:
+                return 3;
+            case 2:
+                return 2;
+            case 3:
+                return 1;
         }
         return 0;
     }
@@ -156,5 +193,10 @@ public final class CreateAPI {
         } catch (IllegalFormatException e) {
             return "Format Error: " + s;
         }
+    }
+
+    public static int longToIntSafe(long j) {
+        if (j > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        return (int) j;
     }
 }

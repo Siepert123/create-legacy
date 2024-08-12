@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "alt=false,axis=x": {
+      "model": "create:network_inspector_speed"
+    },
+    "alt=false,axis=y": {
+      "model": "create:block_reinforced_base"
+    },
+    "alt=false,axis=z": {
+      "model": "create:network_inspector_speed",
+      "y": 90
+    },
+    "alt=true,axis=x": {
+      "model": "create:network_inspector_stress"
+    },
+    "alt=true,axis=y": {
+      "model": "create:block_reinforced_base"
+    },
+    "alt=true,axis=z": {
+      "model": "create:network_inspector_stress",
+      "y": 90
+    }
+  }
+}

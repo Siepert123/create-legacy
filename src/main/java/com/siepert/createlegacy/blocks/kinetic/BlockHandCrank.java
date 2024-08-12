@@ -110,20 +110,13 @@ public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvi
                 pos.getY() + 0.5, pos.getZ() + 0.5,
                 ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
                 0.1f, 1.0f);
-        if (useTE) {
-            if (!worldIn.isRemote) {
-                setState(true, worldIn, pos);
-            }
-        } else {
-            if (!worldIn.isRemote) {
-                Block block = worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock();
-                if (block instanceof IKineticActor) {
-                    List<BlockPos> iteratedBlocks = new ArrayList<>(); //Generate the iteratedBlocks list for using
-                    ((IKineticActor) block).passRotation(worldIn, pos.offset(state.getValue(FACING)), state.getValue(FACING).getOpposite(),
-                            iteratedBlocks, false, false, false);
-                }
-            }
+
+        TileEntityHandCrank entity = (TileEntityHandCrank) worldIn.getTileEntity(pos);
+
+        if (entity != null) {
+            entity.cooldownTicks = 10;
         }
+
         return true;
     }
 
