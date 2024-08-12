@@ -2,7 +2,7 @@ package com.siepert.createlegacy;
 
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = CreateLegacyModData.MOD_ID, name = CreateLegacyModData.MOD_ID + '/' + CreateLegacyModData.MOD_ID)
+@Config(modid = CreateLegacyModData.MOD_ID, name = CreateLegacyModData.MOD_ID)
 public class CreateLegacyConfigHolder {
     @Config.Comment("Config options for Create Legacy World Generation")
     @Config.Name("Worldgen Options")
