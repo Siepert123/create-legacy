@@ -52,7 +52,6 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
-        System.out.println("called kineticTick!");
         EnumFacing source = world.getBlockState(pos).getValue(BlockDrill.FACING).getOpposite();
         boolean isABlower = (!PROCESSORS.contains(world.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(world.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
 
