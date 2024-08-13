@@ -6,6 +6,7 @@ import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
+import com.siepert.createlegacy.blocks.kinetic.BlockDrill;
 import com.siepert.createlegacy.blocks.kinetic.BlockFan;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.util.handlers.recipes.WashingRecipes;
@@ -51,7 +52,8 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
-        EnumFacing source = world.getBlockState(pos).getValue(FACING).toVanillaFacing();
+        System.out.println("called kineticTick!");
+        EnumFacing source = world.getBlockState(pos).getValue(BlockDrill.FACING).getOpposite();
         boolean isABlower = (!PROCESSORS.contains(world.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(world.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
 
         BlockPos posFront = pos.offset(source.getOpposite());
@@ -351,6 +353,11 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
     @Override
     public void setUpdated() {
 
+    }
+
+    @Override
+    public boolean isConsumer() {
+        return true;
     }
 
     private enum ProcessingType {
