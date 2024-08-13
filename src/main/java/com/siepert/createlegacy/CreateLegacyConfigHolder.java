@@ -145,5 +145,8 @@ public class CreateLegacyConfigHolder {
         @Config.Comment("i forgor :skull:")
         @Config.RequiresMcRestart
         public boolean sillyStuff = false;
+
+        @Config.Comment("Default: true (recommended to not turn off)")
+        public boolean enableBlockstatePerformance = true;
     }
 }

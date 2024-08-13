@@ -107,7 +107,10 @@ public class NetworkContext {
                             networkSpeed, instance.inverted);
 
                     if (rot == 4) rot = 0;
-                    setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+
+                    if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
+                        setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                    }
                 }
             } else {
                 if (world.getBlockState(instance.pos).getBlock() instanceof IHasRotation) {
@@ -117,12 +120,14 @@ public class NetworkContext {
                             .rotateAround(world.getBlockState(instance.pos)),
                             0, instance.inverted);
 
-                    setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                    if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
+                        setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                    }
                 }
             }
 
             if (!isNetworkOverstressed() || kineticTE.ignoreOverstress())
-                kineticTE.kineticTick(this);
+                if (kineticTE != null) kineticTE.kineticTick(this);
             else {
                 if (CreateLegacyModData.random.nextInt(200) == 0) {
                     world.spawnParticle(EnumParticleTypes.CLOUD,
