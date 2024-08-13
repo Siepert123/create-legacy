@@ -141,7 +141,22 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
                         world.playEvent(2001, actPos, Block.getStateId(place));
                         useStack.shrink(1);
                     } else {
-                        useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(), 0.5f, 0.5f, 0.5f);
+                        boolean pass = false;
+                        try {
+                            if (!world.getBlockState(actPos).getBlock().onBlockActivated(
+                                    world, actPos, world.getBlockState(actPos), player, EnumHand.MAIN_HAND,
+                                    facing.getOpposite(), 0.5f, 0.5f, 0.5f
+                            )) {
+                                pass = true;
+                                useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(),
+                                        0.5f, 0.5f, 0.5f);
+                            }
+                        } catch (NullPointerException e) {
+                            if (!pass) {
+                                useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(),
+                                        0.5f, 0.5f, 0.5f);
+                            }
+                        }
                     }
                 } catch (NullPointerException ignored) {
 
