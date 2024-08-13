@@ -31,6 +31,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.siepert.createlegacy.blocks.kinetic.BlockDeployer.FACING;
+
 public class TileEntityFan extends TileEntity implements IKineticTE {
     @Override
     public double getStressImpact() {
@@ -49,7 +51,301 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        EnumFacing source = world.getBlockState(pos).getValue(FACING).toVanillaFacing();
+        boolean isABlower = (!PROCESSORS.contains(world.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(world.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
 
+        BlockPos posFront = pos.offset(source.getOpposite());
+
+        double particleVX = source.getOpposite().getFrontOffsetX() * 2;
+        double particleVY = source.getOpposite().getFrontOffsetY() * 2;
+        double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
+
+        if (isABlower) {
+            if (!world.getBlockState(posFront).getMaterial().blocksMovement()
+                    || isBlockNotObscure(world, pos.offset(source.getOpposite()),
+                    world.getBlockState(pos.offset(source.getOpposite())))) {
+                world.spawnParticle(EnumParticleTypes.CLOUD,
+                        posFront.getX() + 0.5,
+                        posFront.getY() + 0.5,
+                        posFront.getZ() + 0.5,
+                        particleVX,
+                        particleVY,
+                        particleVZ);
+                for (int i = 0; i < CreateLegacyModData.random.nextInt(4) + 4; i++) {
+                    world.spawnParticle(EnumParticleTypes.CLOUD,
+                            posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                            posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                            posFront.getZ() + CreateLegacyModData.random.nextFloat(),
+                            particleVX,
+                            particleVY,
+                            particleVZ);
+                }
+
+
+                AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite()));
+
+                List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
+
+                for (Entity entity : foundEntities) {
+                    double baseVX = entity.motionX;
+                    double baseVY = entity.motionY;
+                    double baseVZ = entity.motionZ;
+
+                    switch (source.getOpposite()) {
+                        case UP:
+                            baseVY += 1.5;
+                            entity.fallDistance = 0.0f;
+                            break;
+                        case DOWN:
+                            baseVY -= 1.5;
+                            break;
+                        case NORTH:
+                            baseVZ -= 1.5;
+                            break;
+                        case EAST:
+                            baseVX += 1.5;
+                            break;
+                        case SOUTH:
+                            baseVZ += 1.5;
+                            break;
+                        case WEST:
+                            baseVX -= 1.5;
+                            break;
+                    }
+
+                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                }
+            } else return;
+
+            if (!world.getBlockState(pos.offset(source.getOpposite(), 2)).getMaterial().blocksMovement()
+                    || isBlockNotObscure(world, pos.offset(source.getOpposite(), 2),
+                    world.getBlockState(pos.offset(source.getOpposite(), 2)))) {
+                AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 2));
+
+                List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
+
+                for (Entity entity : foundEntities) {
+                    double baseVX = entity.motionX;
+                    double baseVY = entity.motionY;
+                    double baseVZ = entity.motionZ;
+
+                    switch (source.getOpposite()) {
+                        case UP:
+                            baseVY += 1;
+                            entity.fallDistance = 0.0f;
+                            break;
+                        case DOWN:
+                            baseVY -= 1;
+                            break;
+                        case NORTH:
+                            baseVZ -= 1;
+                            break;
+                        case EAST:
+                            baseVX += 1;
+                            break;
+                        case SOUTH:
+                            baseVZ += 1;
+                            break;
+                        case WEST:
+                            baseVX -= 1;
+                            break;
+                    }
+
+                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                }
+            } else return;
+
+            if (!world.getBlockState(pos.offset(source.getOpposite(), 3)).getMaterial().blocksMovement()
+                    || isBlockNotObscure(world, pos.offset(source.getOpposite(), 3),
+                    world.getBlockState(pos.offset(source.getOpposite(), 3)))) {
+                AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 3));
+
+                List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
+
+                for (Entity entity : foundEntities) {
+                    double baseVX = entity.motionX;
+                    double baseVY = entity.motionY;
+                    double baseVZ = entity.motionZ;
+
+                    switch (source.getOpposite()) {
+                        case UP:
+                            baseVY += 0.5;
+                            entity.fallDistance = 0.0f;
+                            break;
+                        case DOWN:
+                            baseVY -= 0.5;
+                            break;
+                        case NORTH:
+                            baseVZ -= 0.5;
+                            break;
+                        case EAST:
+                            baseVX += 0.5;
+                            break;
+                        case SOUTH:
+                            baseVZ += 0.5;
+                            break;
+                        case WEST:
+                            baseVX -= 0.5;
+                            break;
+                    }
+
+                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                }
+            } else return;
+        }
+
+        ProcessingType whatsTheProcess = ProcessingType.getType(world.getBlockState(posFront));
+
+        if (whatsTheProcess != null) {
+            for (int i = 0; i < 5; i++) {
+                BlockPos startProcessPos = pos.offset(source.getOpposite(), 1 + i);
+
+                if (isBlockNotObscure(world, startProcessPos, world.getBlockState(startProcessPos))
+                        || !world.getBlockState(startProcessPos).getMaterial().blocksMovement()) {
+
+                    if (whatsTheProcess == ProcessingType.WASH) {
+
+                        world.spawnParticle(EnumParticleTypes.CLOUD,
+                                posFront.getX() + 0.5,
+                                posFront.getY() + 0.5,
+                                posFront.getZ() + 0.5,
+                                particleVX / 3,
+                                particleVY / 3,
+                                particleVZ / 3);
+                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
+                            world.spawnParticle(EnumParticleTypes.CLOUD,
+                                    posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getZ() + CreateLegacyModData.random.nextFloat(),
+                                    particleVX / 3,
+                                    particleVY / 3,
+                                    particleVZ / 3);
+                        }
+                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4); j++) {
+                            world.spawnParticle(EnumParticleTypes.WATER_BUBBLE,
+                                    posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getZ() + CreateLegacyModData.random.nextFloat(),
+                                    particleVX / 3,
+                                    particleVY / 3,
+                                    particleVZ / 3);
+                        }
+                    }
+                    if (whatsTheProcess == ProcessingType.SMELT) {
+                        world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
+                                posFront.getX() + 0.5,
+                                posFront.getY() + 0.5,
+                                posFront.getZ() + 0.5,
+                                particleVX / 3,
+                                particleVY / 3,
+                                particleVZ / 3);
+                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
+                            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
+                                    posFront.getX() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getY() + CreateLegacyModData.random.nextFloat(),
+                                    posFront.getZ() + CreateLegacyModData.random.nextFloat(),
+                                    particleVX / 3,
+                                    particleVY / 3,
+                                    particleVZ / 3);
+                        }
+
+                    }
+
+                    AxisAlignedBB itemSearchArea = new AxisAlignedBB(startProcessPos.offset(source.getOpposite()));
+                    List<EntityItem> foundItems = world.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
+
+                    List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, itemSearchArea);
+
+                    if (whatsTheProcess == ProcessingType.SMELT) {
+                        for (Entity entity : foundEntities) {
+                            if (!(entity instanceof EntityItem)) {
+                                entity.setFire(5);
+                            }
+                        }
+                    }
+                    if (whatsTheProcess == ProcessingType.WASH) {
+                        for (Entity entity : foundEntities) {
+                            if (!(entity instanceof EntityItem)) {
+                                entity.extinguish();
+                            }
+                        }
+                    }
+
+                    for (EntityItem entityItem : foundItems) {
+                        if (world.isRemote) {
+                            if (whatsTheProcess == ProcessingType.WASH) {
+                                for (int k = 0; k < CreateLegacyModData.random.nextInt(10); k++) {
+                                    world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                            0, CreateLegacyModData.random.nextFloat(), 0);
+                                }
+                            }
+                            if (whatsTheProcess == ProcessingType.SMELT) {
+                                world.spawnParticle(EnumParticleTypes.FLAME,
+                                        entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                        0, 0, 0);
+
+                                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                        entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                        0, CreateLegacyModData.random.nextFloat() / 2, 0);
+                                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                        entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                        0, CreateLegacyModData.random.nextFloat() / 2, 0);
+                                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                        entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
+                                        0, CreateLegacyModData.random.nextFloat() / 2, 0);
+                            }
+
+
+                        }
+                        if (!world.isRemote) {
+                            if (whatsTheProcess == ProcessingType.SMELT) {
+                                SmeltResultSet resultSet = applicateSmelt(entityItem.getItem(), whatsTheProcess);
+                                if (resultSet.hasRecipe) {
+                                    entityItem.getItem().shrink(1);
+                                    EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                            resultSet.stack);
+                                    resultEntityItem.setVelocity(0, 0, 0);
+                                    world.spawnEntity(resultEntityItem);
+
+                                    world.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                            SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.25f, 1.0f);
+
+                                    if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
+                                        entityItem.setDead();
+                                    }
+                                }
+                            }
+                            if (whatsTheProcess == ProcessingType.WASH) {
+                                WashResultSet resultSet = applicateWash(entityItem.getItem(), whatsTheProcess);
+                                assert resultSet != null;
+                                if (resultSet.hasRecipe) {
+                                    entityItem.getItem().shrink(1);
+                                    EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                            resultSet.stack);
+                                    resultEntityItem.setVelocity(0, 0, 0);
+                                    world.spawnEntity(resultEntityItem);
+
+                                    if (resultSet.hasOptional()) {
+                                        EntityItem resultEntityItemOptional = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                                resultSet.stackOptional);
+                                        resultEntityItemOptional.setVelocity(0, 0, 0);
+                                        world.spawnEntity(resultEntityItemOptional);
+                                    }
+
+                                    world.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
+                                            SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.25f, 1.0f);
+
+                                    if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
+                                        entityItem.setDead();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else return;
+            }
+        }
     }
 
     @Override
@@ -202,301 +498,6 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
         if (source == myState.getValue(BlockFan.FACING).getOpposite()) {
             //iteratedBlocks.add(pos);
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
-
-            boolean isABlower = (!PROCESSORS.contains(world.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(world.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
-
-            BlockPos posFront = pos.offset(source.getOpposite());
-
-            double particleVX = source.getOpposite().getFrontOffsetX() * 2;
-            double particleVY = source.getOpposite().getFrontOffsetY() * 2;
-            double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
-
-            if (isABlower) {
-                if (!world.getBlockState(posFront).getMaterial().blocksMovement()
-                        || isBlockNotObscure(world, pos.offset(source.getOpposite()),
-                        world.getBlockState(pos.offset(source.getOpposite())))) {
-                    world.spawnParticle(EnumParticleTypes.CLOUD,
-                            posFront.getX() + 0.5,
-                            posFront.getY() + 0.5,
-                            posFront.getZ() + 0.5,
-                            particleVX,
-                            particleVY,
-                            particleVZ);
-                    for (int i = 0; i < CreateLegacyModData.random.nextInt(4) + 4; i++) {
-                        world.spawnParticle(EnumParticleTypes.CLOUD,
-                                posFront.getX() + CreateLegacyModData.random.nextFloat(),
-                                posFront.getY() + CreateLegacyModData.random.nextFloat(),
-                                posFront.getZ() + CreateLegacyModData.random.nextFloat(),
-                                particleVX,
-                                particleVY,
-                                particleVZ);
-                    }
-
-
-                    AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite()));
-
-                    List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
-
-                    for (Entity entity : foundEntities) {
-                        double baseVX = entity.motionX;
-                        double baseVY = entity.motionY;
-                        double baseVZ = entity.motionZ;
-
-                        switch (source.getOpposite()) {
-                            case UP:
-                                baseVY += 1.5;
-                                entity.fallDistance = 0.0f;
-                                break;
-                            case DOWN:
-                                baseVY -= 1.5;
-                                break;
-                            case NORTH:
-                                baseVZ -= 1.5;
-                                break;
-                            case EAST:
-                                baseVX += 1.5;
-                                break;
-                            case SOUTH:
-                                baseVZ += 1.5;
-                                break;
-                            case WEST:
-                                baseVX -= 1.5;
-                                break;
-                        }
-
-                        entity.setVelocity(baseVX, baseVY, baseVZ);
-                    }
-                } else return;
-
-                if (!world.getBlockState(pos.offset(source.getOpposite(), 2)).getMaterial().blocksMovement()
-                        || isBlockNotObscure(world, pos.offset(source.getOpposite(), 2),
-                        world.getBlockState(pos.offset(source.getOpposite(), 2)))) {
-                    AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 2));
-
-                    List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
-
-                    for (Entity entity : foundEntities) {
-                        double baseVX = entity.motionX;
-                        double baseVY = entity.motionY;
-                        double baseVZ = entity.motionZ;
-
-                        switch (source.getOpposite()) {
-                            case UP:
-                                baseVY += 1;
-                                entity.fallDistance = 0.0f;
-                                break;
-                            case DOWN:
-                                baseVY -= 1;
-                                break;
-                            case NORTH:
-                                baseVZ -= 1;
-                                break;
-                            case EAST:
-                                baseVX += 1;
-                                break;
-                            case SOUTH:
-                                baseVZ += 1;
-                                break;
-                            case WEST:
-                                baseVX -= 1;
-                                break;
-                        }
-
-                        entity.setVelocity(baseVX, baseVY, baseVZ);
-                    }
-                } else return;
-
-                if (!world.getBlockState(pos.offset(source.getOpposite(), 3)).getMaterial().blocksMovement()
-                        || isBlockNotObscure(world, pos.offset(source.getOpposite(), 3),
-                        world.getBlockState(pos.offset(source.getOpposite(), 3)))) {
-                    AxisAlignedBB searchField = new AxisAlignedBB(pos.offset(source.getOpposite(), 3));
-
-                    List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, searchField);
-
-                    for (Entity entity : foundEntities) {
-                        double baseVX = entity.motionX;
-                        double baseVY = entity.motionY;
-                        double baseVZ = entity.motionZ;
-
-                        switch (source.getOpposite()) {
-                            case UP:
-                                baseVY += 0.5;
-                                entity.fallDistance = 0.0f;
-                                break;
-                            case DOWN:
-                                baseVY -= 0.5;
-                                break;
-                            case NORTH:
-                                baseVZ -= 0.5;
-                                break;
-                            case EAST:
-                                baseVX += 0.5;
-                                break;
-                            case SOUTH:
-                                baseVZ += 0.5;
-                                break;
-                            case WEST:
-                                baseVX -= 0.5;
-                                break;
-                        }
-
-                        entity.setVelocity(baseVX, baseVY, baseVZ);
-                    }
-                } else return;
-            }
-
-            ProcessingType whatsTheProcess = ProcessingType.getType(world.getBlockState(posFront));
-
-            if (whatsTheProcess != null) {
-                for (int i = 0; i < 5; i++) {
-                    BlockPos startProcessPos = pos.offset(source.getOpposite(), 1 + i);
-
-                    if (isBlockNotObscure(world, startProcessPos, world.getBlockState(startProcessPos))
-                            || !world.getBlockState(startProcessPos).getMaterial().blocksMovement()) {
-
-                        if (whatsTheProcess == ProcessingType.WASH) {
-
-                            world.spawnParticle(EnumParticleTypes.CLOUD,
-                                    posFront.getX() + 0.5,
-                                    posFront.getY() + 0.5,
-                                    posFront.getZ() + 0.5,
-                                    particleVX / 3,
-                                    particleVY / 3,
-                                    particleVZ / 3);
-                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
-                                world.spawnParticle(EnumParticleTypes.CLOUD,
-                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
-                                        particleVX / 3,
-                                        particleVY / 3,
-                                        particleVZ / 3);
-                            }
-                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4); j++) {
-                                world.spawnParticle(EnumParticleTypes.WATER_BUBBLE,
-                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
-                                        particleVX / 3,
-                                        particleVY / 3,
-                                        particleVZ / 3);
-                            }
-                        }
-                        if (whatsTheProcess == ProcessingType.SMELT) {
-                            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
-                                    posFront.getX() + 0.5,
-                                    posFront.getY() + 0.5,
-                                    posFront.getZ() + 0.5,
-                                    particleVX / 3,
-                                    particleVY / 3,
-                                    particleVZ / 3);
-                            for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
-                                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
-                                        posFront.getX() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getY() + CreateLegacyModData.random.nextFloat(),
-                                        posFront.getZ() + CreateLegacyModData.random.nextFloat(),
-                                        particleVX / 3,
-                                        particleVY / 3,
-                                        particleVZ / 3);
-                            }
-
-                        }
-
-                        AxisAlignedBB itemSearchArea = new AxisAlignedBB(startProcessPos.offset(source.getOpposite()));
-                        List<EntityItem> foundItems = world.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
-
-                        List<Entity> foundEntities = world.getEntitiesWithinAABB(Entity.class, itemSearchArea);
-
-                        if (whatsTheProcess == ProcessingType.SMELT) {
-                            for (Entity entity : foundEntities) {
-                                if (!(entity instanceof EntityItem)) {
-                                    entity.setFire(5);
-                                }
-                            }
-                        }
-                        if (whatsTheProcess == ProcessingType.WASH) {
-                            for (Entity entity : foundEntities) {
-                                if (!(entity instanceof EntityItem)) {
-                                    entity.extinguish();
-                                }
-                            }
-                        }
-
-                        for (EntityItem entityItem : foundItems) {
-                            if (world.isRemote) {
-                                if (whatsTheProcess == ProcessingType.WASH) {
-                                    for (int k = 0; k < CreateLegacyModData.random.nextInt(10); k++) {
-                                        world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
-                                                entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                                0, CreateLegacyModData.random.nextFloat(), 0);
-                                    }
-                                }
-                                if (whatsTheProcess == ProcessingType.SMELT) {
-                                    world.spawnParticle(EnumParticleTypes.FLAME,
-                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, 0, 0);
-
-                                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
-                                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
-                                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                                            entityItem.posX, entityItem.posY + 0.2, entityItem.posZ,
-                                            0, CreateLegacyModData.random.nextFloat() / 2, 0);
-                                }
-
-
-                            }
-                            if (!world.isRemote) {
-                                if (whatsTheProcess == ProcessingType.SMELT) {
-                                    SmeltResultSet resultSet = applicateSmelt(entityItem.getItem(), whatsTheProcess);
-                                    if (resultSet.hasRecipe) {
-                                        entityItem.getItem().shrink(1);
-                                        EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                resultSet.stack);
-                                        resultEntityItem.setVelocity(0, 0, 0);
-                                        world.spawnEntity(resultEntityItem);
-
-                                        world.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.25f, 1.0f);
-
-                                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
-                                            entityItem.setDead();
-                                        }
-                                    }
-                                }
-                                if (whatsTheProcess == ProcessingType.WASH) {
-                                    WashResultSet resultSet = applicateWash(entityItem.getItem(), whatsTheProcess);
-                                    assert resultSet != null;
-                                    if (resultSet.hasRecipe) {
-                                        entityItem.getItem().shrink(1);
-                                        EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                resultSet.stack);
-                                        resultEntityItem.setVelocity(0, 0, 0);
-                                        world.spawnEntity(resultEntityItem);
-
-                                        if (resultSet.hasOptional()) {
-                                            EntityItem resultEntityItemOptional = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                    resultSet.stackOptional);
-                                            resultEntityItemOptional.setVelocity(0, 0, 0);
-                                            world.spawnEntity(resultEntityItemOptional);
-                                        }
-
-                                        world.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
-                                                SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.25f, 1.0f);
-
-                                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
-                                            entityItem.setDead();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else return;
-                }
-            }
         }
     }
 
