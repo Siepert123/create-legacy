@@ -21,6 +21,7 @@ public class TileEntityRegistry {
         GameRegistry.registerTileEntity(TileEntityDrill.class, "drill");
         GameRegistry.registerTileEntity(TileEntitySaw.class, "saw");
         GameRegistry.registerTileEntity(TileEntityDeployer.class, "deployer");
+        GameRegistry.registerTileEntity(TileEntityFan.class, "fan");
 
         GameRegistry.registerTileEntity(TileEntitySpeedometer.class, "speedometer");
         GameRegistry.registerTileEntity(TileEntityStressometer.class, "stressometer");
