@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.mojang.authlib.GameProfile;
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
@@ -16,6 +17,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+
+import java.util.UUID;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockDeployer.FACING;
 
@@ -42,6 +45,21 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
 
         compound.setInteger("Cooldown", cooldown);
 
+        if (player != null) {
+            compound.setString("PlacerUUID", player.getGameProfile().getId().toString());
+        }
+
+        if (!useStack.isEmpty()) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            useStack.writeToNBT(nbt);
+            compound.setTag("UseStack", nbt);
+        }
+        if (!trashStack.isEmpty()) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            trashStack.writeToNBT(nbt);
+            compound.setTag("TrashStack", nbt);
+        }
+
         return compound;
     }
 
@@ -50,6 +68,32 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
         super.readFromNBT(compound);
 
         cooldown = compound.getInteger("Cooldown");
+
+        if (compound.hasKey("PlacerUUID")) {
+            try {
+                player = new EntityPlayer(world, new GameProfile(UUID.fromString(compound.getString("PlacerUUID")), "placer")) {
+                    @Override
+                    public boolean isSpectator() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean isCreative() {
+                        return false;
+                    }
+                };
+            } catch (NullPointerException nullpointer) {
+                CreateLegacy.logger.error("Could not load placer in deployer at {} {} {}", pos.getX(), pos.getY(), pos.getZ());
+            }
+        }
+
+        if (compound.hasKey("UseStack")) {
+            useStack = new ItemStack(compound.getCompoundTag("UseStack"));
+        } else trashStack = ItemStack.EMPTY;
+
+        if (compound.hasKey("TrashStack")) {
+            trashStack = new ItemStack(compound.getCompoundTag("TrashStack"));
+        } else trashStack = ItemStack.EMPTY;
     }
 
     @Override
