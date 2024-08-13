@@ -110,6 +110,10 @@ public class NetworkContext {
 
                     if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
                         setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                    } else {
+                        if (world.getBlockState(instance.pos).getValue(IHasRotation.ROTATION) != rot) {
+                            setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        }
                     }
                 }
             } else {
@@ -122,6 +126,10 @@ public class NetworkContext {
 
                     if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
                         setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                    } else {
+                        if (world.getBlockState(instance.pos).getValue(IHasRotation.ROTATION) != rot) {
+                            setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        }
                     }
                 }
             }

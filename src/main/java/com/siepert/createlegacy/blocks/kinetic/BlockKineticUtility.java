@@ -7,11 +7,16 @@ import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityAxle;
+import com.siepert.createlegacy.tileentity.TileEntityClutch;
+import com.siepert.createlegacy.tileentity.TileEntityGearbox;
+import com.siepert.createlegacy.tileentity.TileEntityGearshift;
 import com.siepert.createlegacy.util.*;
 import com.siepert.createlegacy.util.handlers.EnumHandler;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -25,6 +30,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -33,6 +39,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +47,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IKineticActor, IWrenchable {
+public class BlockKineticUtility extends Block implements IHasModel, IMetaName, IWrenchable, ITileEntityProvider {
     public static final PropertyEnum<EnumHandler.KineticUtilityEnumType> VARIANT
             = PropertyEnum.<EnumHandler.KineticUtilityEnumType>create("variant", EnumHandler.KineticUtilityEnumType.class);
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
@@ -176,31 +183,6 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
         return variantState.withProperty(AXIS, EnumFacing.getFacingFromVector(
                 (float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
                 .getAxis());
-    }
-
-
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-        if (srcIsCog) return;
-
-        EnumHandler.KineticUtilityEnumType blockLogicController = worldIn.getBlockState(pos).getValue(VARIANT);
-
-        switch (blockLogicController) {
-            case GEARBOX:
-                actGearbox(worldIn, pos, source, iteratedBlocks, inverseRotation);
-                break;
-            case CLUTCH:
-                actClutch(worldIn, pos, source, iteratedBlocks, inverseRotation);
-                break;
-            case GEARSHIFT:
-                actGearshift(worldIn, pos, source, iteratedBlocks, inverseRotation);
-                break;
-            default:
-                actEncasedShaft(worldIn, pos, source, iteratedBlocks, inverseRotation);
-                break;
-        }
     }
 
     private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {
@@ -619,12 +601,36 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
 
         EnumFacing f = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, state.getValue(AXIS)).rotateAround(side.getAxis());
 
+        TileEntity entity = world.getTileEntity(pos);
+
         world.setBlockState(pos, state.withProperty(AXIS, f.getAxis()), 3);
 
+        if (entity != null) {
+            entity.validate();
+            world.setTileEntity(pos, entity);
+        }
         return true;
     }
     @Override
     public boolean onWrenched(World worldIn, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer playerIn) {
         return rotateBlock(worldIn, pos, side);
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        switch (EnumHandler.KineticUtilityEnumType.byMetaData(meta / 3)) {
+            case GEARBOX:
+                return new TileEntityGearbox();
+            case CLUTCH:
+                return new TileEntityClutch();
+            case GEARSHIFT:
+                return new TileEntityGearshift();
+            case AXLE_ENCASED_ANDESITE:
+                return new TileEntityAxle();
+            case AXLE_ENCASED_BRASS:
+                return new TileEntityAxle();
+        }
+        return null;
     }
 }

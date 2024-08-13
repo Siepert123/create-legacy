@@ -23,6 +23,10 @@ public class TileEntityRegistry {
         GameRegistry.registerTileEntity(TileEntityDeployer.class, "deployer");
         GameRegistry.registerTileEntity(TileEntityFan.class, "fan");
 
+        GameRegistry.registerTileEntity(TileEntityGearbox.class, "gearbox");
+        GameRegistry.registerTileEntity(TileEntityClutch.class, "clutch");
+        GameRegistry.registerTileEntity(TileEntityGearshift.class, "gearshift");
+
         GameRegistry.registerTileEntity(TileEntitySpeedometer.class, "speedometer");
         GameRegistry.registerTileEntity(TileEntityStressometer.class, "stressometer");
     }

@@ -6,6 +6,7 @@ import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
+import com.siepert.createlegacy.tabs.DeployerPlayerSim;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.UUID;
 
+import static com.siepert.createlegacy.blocks.kinetic.BlockDeployer.EXTENDED;
 import static com.siepert.createlegacy.blocks.kinetic.BlockDeployer.FACING;
 
 public class TileEntityDeployer extends TileEntity implements IKineticTE, ISidedInventory {
@@ -71,7 +73,7 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
 
         if (compound.hasKey("PlacerUUID")) {
             try {
-                player = new EntityPlayer(world, new GameProfile(UUID.fromString(compound.getString("PlacerUUID")), "placer")) {
+                EntityPlayer thing = new EntityPlayer(world, new GameProfile(UUID.fromString(compound.getString("PlacerUUID")), "placer")) {
                     @Override
                     public boolean isSpectator() {
                         return false;
@@ -82,6 +84,9 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
                         return false;
                     }
                 };
+
+                player = new DeployerPlayerSim(thing);
+                ((DeployerPlayerSim) player).setData(world.getBlockState(pos).getValue(FACING).toVanillaFacing());
             } catch (NullPointerException nullpointer) {
                 CreateLegacy.logger.error("Could not load placer in deployer at {} {} {}", pos.getX(), pos.getY(), pos.getZ());
             }
@@ -125,11 +130,12 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
         BlockPos actPos = pos.offset(facing, 2);
 
         boolean mayPlace = world.getBlockState(actPos).getMaterial().isReplaceable() && useStack.getItem() instanceof ItemBlock;
+        boolean halted = false;
+        for (EnumFacing facing1 : EnumFacing.VALUES) {
+            if (world.getRedstonePower(pos, facing1) > 0) halted = true;
+        }
 
-        boolean mayUse = !(useStack.getItem() instanceof ItemBlock);
-
-        if (mayPlace || mayUse) {
-
+        if (!halted) {
             if (cooldown > 100) {
                 try {
                     if (mayPlace) {
@@ -148,11 +154,12 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
                                     facing.getOpposite(), 0.5f, 0.5f, 0.5f
                             )) {
                                 pass = true;
-                                useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(),
+                                if (!(useStack.getItem() instanceof ItemBlock))
+                                    useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(),
                                         0.5f, 0.5f, 0.5f);
                             }
                         } catch (NullPointerException e) {
-                            if (!pass) {
+                            if (!pass && !(useStack.getItem() instanceof ItemBlock)) {
                                 useStack.getItem().onItemUse(player, world, actPos, EnumHand.MAIN_HAND, facing.getOpposite(),
                                         0.5f, 0.5f, 0.5f);
                             }
@@ -161,11 +168,49 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
                 } catch (NullPointerException ignored) {
 
                 }
-                cooldown = 0;
-            }
+                IBlockState state = world.getBlockState(pos);
 
-            cooldown += Math.max(context.networkSpeed / 16, 1);
-        } else cooldown = 0;
+                if (!state.getValue(EXTENDED) || !CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
+                    TileEntity entity = world.getTileEntity(pos);
+
+                    world.setBlockState(pos, state.withProperty(EXTENDED, true), 3);
+
+                    if (entity != null) {
+                        entity.validate();
+                        world.setTileEntity(pos, entity);
+                    }
+                }
+                cooldown = 0;
+            } else {
+                IBlockState state = world.getBlockState(pos);
+
+                if (cooldown < 97 && cooldown > 2) {
+                    if (state.getValue(EXTENDED) || !CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
+                        TileEntity entity = world.getTileEntity(pos);
+
+                        world.setBlockState(pos, state.withProperty(EXTENDED, false), 3);
+
+                        if (entity != null) {
+                            entity.validate();
+                            world.setTileEntity(pos, entity);
+                        }
+                    }
+                } else {
+                    if (!state.getValue(EXTENDED) || !CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
+                        TileEntity entity = world.getTileEntity(pos);
+
+                        world.setBlockState(pos, state.withProperty(EXTENDED, true), 3);
+
+                        if (entity != null) {
+                            entity.validate();
+                            world.setTileEntity(pos, entity);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!halted) cooldown += Math.max(context.networkSpeed / 16, 1);
     }
 
     @Override

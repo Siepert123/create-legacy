@@ -3,6 +3,7 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tabs.DeployerPlayerSim;
 import com.siepert.createlegacy.tileentity.TileEntityDeployer;
 import com.siepert.createlegacy.util.EnumHorizontalFacing;
 import com.siepert.createlegacy.util.IHasModel;
@@ -22,9 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -48,6 +47,23 @@ public class BlockDeployer extends Block implements IHasModel, ITileEntityProvid
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+    @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     @Override
@@ -108,7 +124,9 @@ public class BlockDeployer extends Block implements IHasModel, ITileEntityProvid
             TileEntityDeployer deployer = (TileEntityDeployer) worldIn.getTileEntity(pos);
 
             if (deployer != null) {
-                deployer.setPlacer((EntityPlayer) placer);
+                DeployerPlayerSim sim = new DeployerPlayerSim((EntityPlayer) placer);
+                sim.setData(worldIn.getBlockState(pos).getValue(FACING).toVanillaFacing());
+                deployer.setPlacer(sim);
             }
         }
     }

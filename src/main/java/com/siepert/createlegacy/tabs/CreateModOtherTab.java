@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tabs;
 
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -16,7 +17,7 @@ public class CreateModOtherTab extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem() {
         Date date = new Date();
-        if (date.getMonth() == Calendar.APRIL && date.getDate() == 1) {
+        if ((date.getMonth() == Calendar.APRIL && date.getDate() == 1) || CreateLegacyConfigHolder.otherConfig.sillyStuff) {
             return new ItemStack(Item.getItemFromBlock(ModBlocks.STONE_REINFORCED), 69, 10);
         }
         return new ItemStack(Item.getItemFromBlock(ModBlocks.STONE_REINFORCED), 1, 10);
