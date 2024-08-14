@@ -25,15 +25,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siepert.createlegacy.blocks.kinetic.BlockDeployer.FACING;
-
+/**
+ * TileEntity for the encased fan
+ *
+ * @author moddingforreal
+ * */
 public class TileEntityFan extends TileEntity implements IKineticTE {
     @Override
     public double getStressImpact() {
@@ -57,9 +59,9 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
         BlockPos posFront = pos.offset(source.getOpposite());
 
-        double particleVX = source.getOpposite().getFrontOffsetX() * context.networkSpeed / 16.0f;
-        double particleVY = source.getOpposite().getFrontOffsetY() * context.networkSpeed / 16.0f;
-        double particleVZ = source.getOpposite().getFrontOffsetZ() * context.networkSpeed / 16.0f;
+        double particleVX = source.getOpposite().getFrontOffsetX() * 2;
+        double particleVY = source.getOpposite().getFrontOffsetY() * 2;
+        double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
 
         if (isABlower) {
             if (!world.getBlockState(posFront).getMaterial().blocksMovement()
@@ -502,9 +504,8 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
 
         if (source == myState.getValue(BlockFan.FACING).getOpposite()) {
+            //iteratedBlocks.add(pos);
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
         }
     }
-
-
 }
