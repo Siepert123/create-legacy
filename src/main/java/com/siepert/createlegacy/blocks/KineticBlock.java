@@ -7,7 +7,6 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,23 +20,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public abstract class KineticBlock extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
-    public KineticBlock(@Nullable String name, Material material, boolean registerItemBlock) {
+    public KineticBlock(String name, Material material, boolean registerItemBlock) {
         super(material);
-        setUnlocalizedName("create:" + name);
-        if (name != null) {
-            setRegistryName(name);
-        }
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-        setHarvestLevel("pickaxe", 0);
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        if (registerItemBlock)
-            ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-    }
-    public KineticBlock(String name, Material material, MapColor mapColor, boolean registerItemBlock) {
-        super(material, mapColor);
         setUnlocalizedName("create:" + name);
         setRegistryName(name);
         setCreativeTab(CreateLegacy.TAB_CREATE);
@@ -52,14 +36,8 @@ public abstract class KineticBlock extends Block implements IHasModel, IWrenchab
     public KineticBlock(String name, boolean registerItemBlock) {
         this(name, Material.ROCK, registerItemBlock);
     }
-    public KineticBlock(String name, Material material, MapColor mapColor) {
-        this(name, material, mapColor, true);
-    }
-    public KineticBlock(@Nullable String name, Material material) {
-        this(name, material, true);
-    }
     public KineticBlock(String name) {
-        this(name, Material.ROCK);
+        this(name, Material.ROCK, true);
     }
 
     @Override
