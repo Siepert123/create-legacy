@@ -1,21 +1,14 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
-import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
-import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.tileentity.TileEntitySpeedometer;
 import com.siepert.createlegacy.tileentity.TileEntityStressometer;
-import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -39,29 +32,19 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, ITileEntityProvider, IMetaName {
+public class BlockNetworkMeter extends KineticBlock implements IMetaName {
 
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public static final PropertyBool ALT  = PropertyBool.create("alt");
 
     public BlockNetworkMeter(String name) {
-        super(Material.ROCK);
+        super(name, Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-
         setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(ALT, false));
-
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

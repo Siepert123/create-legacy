@@ -5,7 +5,6 @@ import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityHandCrank;
 import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createapi.IKineticActor;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -28,8 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class BlockHandCrank extends Block implements IHasModel, ITileEntityProvider {

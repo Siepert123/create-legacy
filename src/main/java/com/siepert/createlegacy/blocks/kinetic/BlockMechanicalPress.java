@@ -1,19 +1,15 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
-import com.siepert.createlegacy.tileentity.TileEntityPress;
-import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
-import com.siepert.createapi.IWrenchable;
+import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyModData;
+import com.siepert.createlegacy.blocks.KineticBlock;
+import com.siepert.createlegacy.tileentity.TileEntityPress;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.recipes.CompactingRecipes;
 import com.siepert.createlegacy.util.handlers.recipes.PressingRecipes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -23,8 +19,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -41,7 +35,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockMechanicalPress extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public class BlockMechanicalPress extends KineticBlock {
     private static final AxisAlignedBB BB = new AxisAlignedBB(0.0, 2.0 / 16.0, 0.0, 1.0, 1.0, 1.0);
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -50,23 +44,13 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
 
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public BlockMechanicalPress(String name) {
-        super(Material.ROCK);
+        super(name, Material.ROCK);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;
         setLightOpacity(0);
 
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-
         setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
-
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
@@ -100,11 +84,6 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
-    }
-
-    @Override
-    public void registerModels() {
-        CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override

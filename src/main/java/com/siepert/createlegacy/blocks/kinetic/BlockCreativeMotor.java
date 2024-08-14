@@ -1,13 +1,7 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.tileentity.TileEntityCreativeMotor;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createapi.IWrenchable;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,8 +10,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -28,35 +20,19 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityProvider, IWrenchable {
+public class BlockCreativeMotor extends KineticBlock {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
     public BlockCreativeMotor(String name) {
-        super(Material.IRON);
+        super(name, Material.IRON);
         this.translucent = true;
         this.blockSoundType = SoundType.METAL;
         this.fullBlock = false;
         setLightOpacity(0);
-
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-
-
     }
 
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public void registerModels() {
-        CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override
