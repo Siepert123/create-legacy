@@ -259,3 +259,18 @@ tile.create:stone_reinforced_scorchia.name=Reinforced Scorchia
 tile.create:stone_reinforced_scoria.name=Reinforced Scoria
 tile.create:stone_reinforced_tuff.name=Reinforced Tuff
 tile.create:stone_reinforced_veridium.name=Reinforced Veridium
+
+#ADVANCEMENTS!
+advancements.create.example.title=
+advancements.create.example.description=
+
+advancements.create.root.title=Create Legacy
+advancements.create.root.description=Create, now for 1.12.2 (jankyness included)
+advancements.create.collector.title=Collector's Favorite
+advancements.create.collector.description=Collect all stone types added by Create Legacy
+advancements.create.andesite_alloy.title=Alliterations Aplenty
+advancements.create.andesite_alloy.description=Obtain an Andesite Alloy
+advancements.create.age_andesite.title=The Andesite Age
+advancements.create.age_andesite.description=Applicate some Andesite Alloy on a piece of wood, making a good machine casing
+advancements.create.press.title=Press Goes 'Bonk'
+advancements.create.press.description=Craft the Mechanical Press to flatten items

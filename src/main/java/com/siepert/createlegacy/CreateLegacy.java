@@ -9,6 +9,8 @@ import com.siepert.createlegacy.tabs.CreateModOtherTab;
 import com.siepert.createlegacy.tabs.CreateModTab;
 import com.siepert.createlegacy.util.handlers.RegistryHandler;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.advancements.critereon.ItemPredicates;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

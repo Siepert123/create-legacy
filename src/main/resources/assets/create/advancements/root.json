@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:advanced_ingredient",
+      "data": 3
+    },
+    "title": {
+      "translate": "advancements.create.root.title"
+    },
+    "description": {
+      "translate": "advancements.create.root.description"
+    },
+    "background": "create:textures/block/palettes/stone_types/veridium.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "crafting_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:crafting_table"
+          }
+        ]
+      }
+    }
+  }
+}
