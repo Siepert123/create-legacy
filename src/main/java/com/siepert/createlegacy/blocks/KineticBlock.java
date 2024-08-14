@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class KineticBlock extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public abstract class KineticBlock extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
     public KineticBlock(String name, Material material, boolean registerItemBlock) {
         super(material);
         setUnlocalizedName("create:" + name);
@@ -52,7 +52,5 @@ public class KineticBlock extends Block implements IHasModel, IWrenchable, ITile
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null;
-    }
+    public abstract TileEntity createNewTileEntity(World worldIn, int meta);
 }
