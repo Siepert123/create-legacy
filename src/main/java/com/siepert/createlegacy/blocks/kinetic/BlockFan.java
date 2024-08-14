@@ -1,6 +1,7 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityFan;
@@ -42,23 +43,14 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockFan extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public class BlockFan extends KineticBlock implements IHasModel, IWrenchable, ITileEntityProvider {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockFan(String name) {
-        super(Material.ROCK);
+        super(name);
         this.translucent = true;
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;
         setLightOpacity(0);
-
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
@@ -89,11 +81,6 @@ public class BlockFan extends Block implements IHasModel, IWrenchable, ITileEnti
         }
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING,
                 EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z).getOpposite());
-    }
-
-    @Override
-    public void registerModels() {
-        CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override
