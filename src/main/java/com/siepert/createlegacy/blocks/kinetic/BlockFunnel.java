@@ -1,14 +1,20 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createapi.CreateAPI;
+import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.blocks.KineticBlock;
+import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
+import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityFunnel;
 import com.siepert.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.siepert.createlegacy.util.EnumHorizontalFacing;
+import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
+import com.siepert.createlegacy.util.compat.jei.JEICompat;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
@@ -18,6 +24,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -27,23 +34,38 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockFunnel extends KineticBlock implements IMetaName {
+public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEntityProvider, IWrenchable {
     public static final PropertyBool ADVANCED = PropertyBool.create("advanced");
     public static final PropertyBool DISABLED = PropertyBool.create("disabled");
     public static final PropertyBool EXTRACTING = PropertyBool.create("extracting");
     public static final PropertyEnum<EnumHorizontalFacing> FACING = PropertyEnum.create("facing", EnumHorizontalFacing.class);
 
     public BlockFunnel() {
-        super("funnel", Material.IRON);
+        super(Material.IRON);
+
+        setRegistryName("funnel");
+        setUnlocalizedName("create:funnel");
+
+        setCreativeTab(CreateLegacy.TAB_CREATE);
+
+        setHarvestLevel("pickaxe", 1);
+        setHardness(1);
+        setResistance(2);
+
         setDefaultState(this.blockState.getBaseState().withProperty(ADVANCED, false)
                 .withProperty(EXTRACTING, true).withProperty(FACING, EnumHorizontalFacing.NORTH)
                 .withProperty(DISABLED, false));
+
+        ModBlocks.BLOCKS.add(this);
+        ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
