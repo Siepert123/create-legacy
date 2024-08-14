@@ -1,23 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "create:press"
+      "item": "create:casing",
+      "data": 2
     },
     "title": {
-      "translate": "advancements.create.press.title"
+      "translate": "advancements.create.age_brass.title"
     },
     "description": {
-      "translate": "advancements.create.press.description"
+      "translate": "advancements.create.age_brass.description"
     }
   },
-  "parent": "create:water_wheel",
+  "parent": "create:press",
   "criteria": {
     "obsidian": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "create:press"
+            "item": "create:casing",
+            "data": 2
           }
         ]
       }

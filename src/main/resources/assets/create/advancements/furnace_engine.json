@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:furnace"
+    },
+    "title": {
+      "translate": "advancements.create.furnace_engine.title"
+    },
+    "description": {
+      "translate": "advancements.create.furnace_engine.description"
+    }
+  },
+  "parent": "create:milestones/age_brass",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:furnace_engine",
+            "data": 0
+          },
+          {
+            "item": "create:furnace_engine",
+            "data": 1
+          },
+          {
+            "item": "minecraft:furnace"
+          }
+        ]
+      }
+    }
+  }
+}

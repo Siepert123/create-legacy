@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "item": "create:press"
+      "item": "create:water_wheel"
     },
     "title": {
-      "translate": "advancements.create.press.title"
+      "translate": "advancements.create.water_wheel.title"
     },
     "description": {
-      "translate": "advancements.create.press.description"
+      "translate": "advancements.create.water_wheel.description"
     }
   },
-  "parent": "create:water_wheel",
+  "parent": "create:milestones/age_andesite",
   "criteria": {
     "obsidian": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "create:press"
+            "item": "create:water_wheel"
           }
         ]
       }
