@@ -1,8 +1,7 @@
 {
-	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "create:block/gearbox",
-		"1": "create:block/casing/casing_andesite",
+		"1": "create:block/gearbox_top",
 		"2": "create:block/speedometer_overlay",
 		"particle": "create:block/gearbox"
 	},
