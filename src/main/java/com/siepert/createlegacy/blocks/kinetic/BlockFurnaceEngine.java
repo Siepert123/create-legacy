@@ -1,14 +1,10 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
-import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.tileentity.TileEntityFurnaceFlywheel;
-import com.siepert.createlegacy.util.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import com.siepert.createlegacy.util.EnumHorizontalFacing;
+import com.siepert.createlegacy.util.IMetaName;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -22,7 +18,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -30,7 +29,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable {
+public class BlockFurnaceEngine extends KineticBlock implements IMetaName {
     @Override
     public String getSpecialName(ItemStack stack) {
         return Variant.fromMeta(stack.getItemDamage()).getName();
@@ -82,7 +81,7 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
     public static final PropertyEnum<Variant> VARIANT = PropertyEnum.create("variant", Variant.class);
 
     public BlockFurnaceEngine() {
-        super(Material.IRON);
+        super(null, Material.IRON);
         this.translucent = true;
         this.blockSoundType = SoundType.METAL;
         this.fullBlock = false;
@@ -90,16 +89,12 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
 
         setUnlocalizedName("create:" + "furnace_");
         setRegistryName("furnace_engine");
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("pickaxe", 0);
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(VARIANT, Variant.ENGINE)
                 .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH)
                 .withProperty(HAS_SHAFT, false));
         setHardness(2);
         setResistance(3);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
     public static final PropertyEnum<EnumHorizontalFacing> HORIZONTAL_FACING = PropertyEnum.create("facing", EnumHorizontalFacing.class);
     public static final PropertyBool HAS_SHAFT = PropertyBool.create("has_shaft");

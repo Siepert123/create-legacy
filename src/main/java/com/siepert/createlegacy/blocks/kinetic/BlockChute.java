@@ -1,14 +1,9 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
 import com.google.common.collect.Lists;
-import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityChute;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createapi.IWrenchable;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -20,8 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -36,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public class BlockChute extends KineticBlock {
     public static final PropertyBool WINDOW = PropertyBool.create("window");
     private static final double thing0 = 1.0 / 16.0;
     private static final double thing1 = 15.0 / 16.0;
@@ -45,22 +38,13 @@ public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEn
     public static final AxisAlignedBB BB_Z_POS = new AxisAlignedBB(thing0, 0.0, thing0, thing1, 1.0, 2.0 / 16.0);
     public static final AxisAlignedBB BB_Z_NEG = new AxisAlignedBB(thing0, 0.0, 14.0 / 16.0, thing1, 1.0, thing1);
     public BlockChute(String name) {
-        super(Material.IRON, MapColor.BLACK);
+        super(name, Material.IRON, MapColor.BLACK);
         this.translucent = true;
         this.blockSoundType = SoundType.METAL;
         this.fullBlock = false;
         setLightOpacity(0);
 
         setDefaultState(this.blockState.getBaseState().withProperty(WINDOW, false));
-
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("pickaxe", 0);
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
@@ -93,11 +77,6 @@ public class BlockChute extends Block implements IHasModel, IWrenchable, ITileEn
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState();
-    }
-
-    @Override
-    public void registerModels() {
-        CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override

@@ -1,14 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
-import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityBelt;
-import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createapi.IKineticActor;
-import com.siepert.createapi.IWrenchable;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -17,13 +11,9 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -35,29 +25,18 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BlockBelt extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public class BlockBelt extends KineticBlock {
     public static final PropertyBool HAS_AXLE = PropertyBool.create("has_axle");
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public BlockBelt(String name) {
-        super(Material.CLOTH, MapColor.BLACK);
+        super(name, Material.CLOTH, MapColor.BLACK);
         this.translucent = true;
         this.blockSoundType = SoundType.CLOTH;
         this.fullBlock = false;
         setLightOpacity(0);
 
         setDefaultState(this.blockState.getBaseState().withProperty(HAS_AXLE, false).withProperty(AXIS, EnumFacing.Axis.X));
-
-        setUnlocalizedName("create:" + name);
-        setRegistryName(name);
-        setCreativeTab(CreateLegacy.TAB_CREATE);
-        setHarvestLevel("axe", 0);
-        setHardness(1);
-        setResistance(2);
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
@@ -101,11 +80,6 @@ public class BlockBelt extends Block implements IHasModel, IWrenchable, ITileEnt
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
-    }
-
-    @Override
-    public void registerModels() {
-        CreateLegacy.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
 
