@@ -456,7 +456,7 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
 
         if (source.getAxis() == EnumFacing.Axis.Y) return;
 
-        context.blocksToActivate.add(new KineticBlockInstance(pos, !inverted));
+        context.addKineticBlockInstance(new KineticBlockInstance(pos, !inverted));
 
         for (EnumFacing dir : EnumFacing.HORIZONTALS) {
             if (dir != source) {

@@ -40,6 +40,7 @@ public class ModBlocks {
     public static final Block PRESS = new BlockMechanicalPress("press");
     public static final Block DRILL = new BlockDrill("drill");
     public static final Block SAW = new BlockSaw("saw");
+    public static final Block DEPLOYER = new BlockDeployer();
     public static final Block FAN = new BlockFan("fan");
     public static final Block MILLSTONE = new BlockMillStone();
     public static final Block PISTON = new BlockMechanicalPiston("piston");

@@ -145,5 +145,14 @@ public class CreateLegacyConfigHolder {
         @Config.Comment("i forgor :skull:")
         @Config.RequiresMcRestart
         public boolean sillyStuff = false;
+
+        @Config.Comment("Default: true (recommended to not turn off)")
+        public boolean enableBlockstatePerformance = true;
+
+        @Config.RangeInt(min = 5, max = 64)
+        @Config.SlidingOption
+        @Config.Comment({"How long belts can be in each direction.",
+                "Default: 10"})
+        public int maxBeltDeepness = 10;
     }
 }

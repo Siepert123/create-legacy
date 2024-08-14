@@ -29,6 +29,8 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable, IKine
 
             NetworkContext context = new NetworkContext();
 
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, false));
+
             if (axPos instanceof IKineticTE) {
                 ((IKineticTE) axPos).passNetwork(context, facing1.getOpposite(),
                         false, false, false);

@@ -63,6 +63,11 @@ public class TileEntityHandCrank extends TileEntity implements ITickable, IKinet
     }
 
     @Override
+    public boolean isGenerator() {
+        return true;
+    }
+
+    @Override
     public int getProducedSpeed() {
         return cooldownTicks > 0 ? 16 : 0;
     }
