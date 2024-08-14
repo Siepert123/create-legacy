@@ -51,11 +51,11 @@ public class TileEntityAxle extends TileEntity implements IKineticTE {
         IBlockState state = world.getBlockState(pos);
         if (srcIsCog) return;
         if (source.getAxis() == state.getValue(BlockAxle.AXIS)) {
-            context.blocksToActivate.add(new KineticBlockInstance(pos, inverted));
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
 
             TileEntity entity = world.getTileEntity(pos.offset(source.getOpposite()));
             if (entity instanceof IKineticTE) {
-                if (context.getInstanceAtPos(pos.offset(source.getOpposite())) == null) {
+                if (!context.hasBlockBeenChecked(pos.offset(source.getOpposite()))) {
                     ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
                 }
             }

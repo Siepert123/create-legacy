@@ -14,7 +14,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * It's called NetworkContext, but it is also kind of a network controller I guess
@@ -22,6 +24,12 @@ import java.util.List;
  * @author Siepert123
  */
 public class NetworkContext {
+
+    HashMap<BlockPos, Boolean> blockPosBooleanHashMap = new HashMap<>();
+
+    public boolean hasBlockBeenChecked(BlockPos pos) {
+        return blockPosBooleanHashMap.containsKey(pos);
+    }
 
     public void runThroughPhases(World world) {
         try {
@@ -52,22 +60,33 @@ public class NetworkContext {
     public int scheduledConsumedSU = 0;
 
     public void addKineticBlockInstance(KineticBlockInstance instance) {
-        if (!blocksToActivate.contains(instance)) {
-            blocksToActivate.add(instance);
+        if (!blockPosBooleanHashMap.containsKey(instance.pos)) {
+            blockPosBooleanHashMap.put(instance.pos, instance.inverted);
         }
     }
 
     @Nullable
+    @Deprecated
     public KineticBlockInstance getInstanceAtPos(BlockPos pos) {
-        for (KineticBlockInstance instance : blocksToActivate) {
-            if (instance.pos == pos) return instance;
+        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
+            boolean flag1 = pos.getX() == instance.getKey().getX();
+            boolean flag2 = pos.getY() == instance.getKey().getY();
+            boolean flag3 = pos.getZ() == instance.getKey().getZ();
+            if (flag1 && flag2 && flag3) return new KineticBlockInstance(pos, instance.getValue());
         }
         return null;
     }
 
+    public boolean isInvertedAtPos(BlockPos pos) {
+        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
+            if (instance.getKey() == pos) return instance.getValue();
+        }
+        return false;
+    }
+
     public void phase1(World world) {
-        for (KineticBlockInstance instance : blocksToActivate) {
-            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.pos);
+        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
+            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
             if (kineticTE.isGenerator()) {
                 networkSpeed = Math.max(networkSpeed, kineticTE.getProducedSpeed());
@@ -80,8 +99,8 @@ public class NetworkContext {
     }
 
     public void phase2(World world) {
-        for (KineticBlockInstance instance : blocksToActivate) {
-            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.pos);
+        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
+            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
             if (kineticTE.isConsumer() && kineticTE.getMinimalSpeed() < networkSpeed) {
                 scheduledConsumedSU += (int) Math.round(kineticTE.getStressImpact() * networkSpeed);
@@ -95,40 +114,40 @@ public class NetworkContext {
     }
 
     public void phase3(World world) {
-        for (KineticBlockInstance instance : blocksToActivate) {
-            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.pos);
+        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
+            IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
             if (!isNetworkOverstressed()) {
-                if (world.getBlockState(instance.pos).getBlock() instanceof IHasRotation) {
+                if (world.getBlockState(instance.getKey()).getBlock() instanceof IHasRotation) {
 
-                    int rot = CreateAPI.discoverRotation(world, instance.pos,
-                            ((IHasRotation) world.getBlockState(instance.pos).getBlock())
-                                    .rotateAround(world.getBlockState(instance.pos)),
-                            networkSpeed, instance.inverted);
+                    int rot = CreateAPI.discoverRotation(world, instance.getKey(),
+                            ((IHasRotation) world.getBlockState(instance.getKey()).getBlock())
+                                    .rotateAround(world.getBlockState(instance.getKey())),
+                            networkSpeed, instance.getValue());
 
                     if (rot == 4) rot = 0;
 
                     if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
-                        setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        setStateTESafe(world, instance.getKey(), world.getBlockState(instance.getKey()).withProperty(IHasRotation.ROTATION, rot));
                     } else {
-                        if (world.getBlockState(instance.pos).getValue(IHasRotation.ROTATION) != rot) {
-                            setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        if (world.getBlockState(instance.getKey()).getValue(IHasRotation.ROTATION) != rot) {
+                            setStateTESafe(world, instance.getKey(), world.getBlockState(instance.getKey()).withProperty(IHasRotation.ROTATION, rot));
                         }
                     }
                 }
             } else {
-                if (world.getBlockState(instance.pos).getBlock() instanceof IHasRotation) {
+                if (world.getBlockState(instance.getKey()).getBlock() instanceof IHasRotation) {
 
-                    int rot = CreateAPI.discoverRotation(world, instance.pos,
-                            ((IHasRotation) world.getBlockState(instance.pos).getBlock())
-                            .rotateAround(world.getBlockState(instance.pos)),
-                            0, instance.inverted);
+                    int rot = CreateAPI.discoverRotation(world, instance.getKey(),
+                            ((IHasRotation) world.getBlockState(instance.getKey()).getBlock())
+                            .rotateAround(world.getBlockState(instance.getKey())),
+                            0, instance.getValue());
 
                     if (!CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
-                        setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        setStateTESafe(world, instance.getKey(), world.getBlockState(instance.getKey()).withProperty(IHasRotation.ROTATION, rot));
                     } else {
-                        if (world.getBlockState(instance.pos).getValue(IHasRotation.ROTATION) != rot) {
-                            setStateTESafe(world, instance.pos, world.getBlockState(instance.pos).withProperty(IHasRotation.ROTATION, rot));
+                        if (world.getBlockState(instance.getKey()).getValue(IHasRotation.ROTATION) != rot) {
+                            setStateTESafe(world, instance.getKey(), world.getBlockState(instance.getKey()).withProperty(IHasRotation.ROTATION, rot));
                         }
                     }
                 }
@@ -139,9 +158,9 @@ public class NetworkContext {
             else {
                 if (CreateLegacyModData.random.nextInt(200) == 0) {
                     world.spawnParticle(EnumParticleTypes.CLOUD,
-                            instance.pos.getX() + 0.5,
-                            instance.pos.getY() + 0.5,
-                            instance.pos.getZ() + 0.5,
+                            instance.getKey().getX() + 0.5,
+                            instance.getKey().getY() + 0.5,
+                            instance.getKey().getZ() + 0.5,
                             CreateLegacyModData.random.nextFloat() - CreateLegacyModData.random.nextFloat(),
                             CreateLegacyModData.random.nextFloat() - CreateLegacyModData.random.nextFloat(),
                             CreateLegacyModData.random.nextFloat() - CreateLegacyModData.random.nextFloat());

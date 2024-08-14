@@ -45,9 +45,7 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
         IBlockState state = world.getBlockState(pos);
 
-        boolean inv = !context.getInstanceAtPos(pos).inverted;
-
-
+        boolean inv = context.isInvertedAtPos(pos);
 
         dir = EnumFacing.getFacingFromAxis(inv ? EnumFacing.AxisDirection.NEGATIVE : EnumFacing.AxisDirection.POSITIVE,
                 state.getValue(BlockBelt.AXIS));
@@ -59,7 +57,7 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
                 inv ? dir.getFrontOffsetZ() * (context.networkSpeed / 256f) * -1
                         : dir.getFrontOffsetZ() * (context.networkSpeed / 256f);
         AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY() + 0.8, pos.getZ(),
-                                             pos.getX() + 1, pos.getY() + 1.2, pos.getZ() + 1);
+                pos.getX() + 1, pos.getY() + 1.2, pos.getZ() + 1);
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
 
         for (Entity entity : entities) {
@@ -89,7 +87,6 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
         if (source.getAxis() != axleAxis) {
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
 
-
             EnumFacing j = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, axleAxis);
 
             extendBelt(pos.offset(j), j, context, inverted, 0);
@@ -105,7 +102,7 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
     private void extendBelt(BlockPos pos, EnumFacing extendDir, NetworkContext context, boolean inverted, int deepness) {
         if (deepness >= CreateLegacyConfigHolder.otherConfig.maxBeltDeepness) return;
 
-        if (context.getInstanceAtPos(pos) != null) return;
+        if (context.hasBlockBeenChecked(pos)) return;
 
         //CreateLegacy.logger.debug("Extended belt at {} in direction {}", pos, extendDir);
 
@@ -117,7 +114,7 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
             if (state.getValue(BlockBelt.HAS_AXLE)) return;
 
-            context.addKineticBlockInstance(new KineticBlockInstance(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), inverted));
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
 
             extendBelt(pos.offset(extendDir), extendDir, context, inverted, deepness+1);
         }
