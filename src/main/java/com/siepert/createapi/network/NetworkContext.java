@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public class NetworkContext {
 
-    HashMap<BlockPos, Boolean> blockPosBooleanHashMap = new HashMap<>();
+    public HashMap<BlockPos, Boolean> blockPosBooleanHashMap = new HashMap<>();
 
     public boolean hasBlockBeenChecked(BlockPos pos) {
         return blockPosBooleanHashMap.containsKey(pos);
@@ -53,8 +53,6 @@ public class NetworkContext {
     }
 
     public boolean infiniteSU = CreateLegacyConfigHolder.otherConfig.disableSU;
-
-    public final List<KineticBlockInstance> blocksToActivate = new ArrayList<>();
     public int networkSpeed = 0;
     public int totalSU = 0;
     public int scheduledConsumedSU = 0;
@@ -78,10 +76,7 @@ public class NetworkContext {
     }
 
     public boolean isInvertedAtPos(BlockPos pos) {
-        for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
-            if (instance.getKey() == pos) return instance.getValue();
-        }
-        return false;
+        return blockPosBooleanHashMap.get(pos);
     }
 
     public void phase1(World world) {

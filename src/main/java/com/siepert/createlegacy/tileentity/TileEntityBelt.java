@@ -45,24 +45,27 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
         IBlockState state = world.getBlockState(pos);
 
-        boolean inv = context.isInvertedAtPos(pos);
+        boolean inv = context.blockPosBooleanHashMap.get(pos);
 
         dir = EnumFacing.getFacingFromAxis(inv ? EnumFacing.AxisDirection.NEGATIVE : EnumFacing.AxisDirection.POSITIVE,
                 state.getValue(BlockBelt.AXIS));
 
         double velocityX =
-                inv ? dir.getFrontOffsetX() * (context.networkSpeed / 256f) * -1
-                        : dir.getFrontOffsetX() * (context.networkSpeed / 256f);
+                dir.getFrontOffsetX() * (context.networkSpeed / 256f);
         double velocityZ =
-                inv ? dir.getFrontOffsetZ() * (context.networkSpeed / 256f) * -1
-                        : dir.getFrontOffsetZ() * (context.networkSpeed / 256f);
+                dir.getFrontOffsetZ() * (context.networkSpeed / 256f);
         AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY() + 0.8, pos.getZ(),
                 pos.getX() + 1, pos.getY() + 1.2, pos.getZ() + 1);
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
 
         for (Entity entity : entities) {
             if (!entity.isSneaking()) {
-                entity.setVelocity(Math.max(velocityX, entity.motionX), entity.motionY, Math.max(velocityZ, entity.motionZ));
+                boolean h = Math.abs(velocityX) < Math.abs(entity.motionX);
+                boolean j = Math.abs(velocityZ) < Math.abs(entity.motionZ);
+
+                entity.setVelocity(h ? entity.motionX : velocityX,
+                        entity.motionY,
+                        j ? entity.motionZ : velocityZ);
             }
         }
     }
