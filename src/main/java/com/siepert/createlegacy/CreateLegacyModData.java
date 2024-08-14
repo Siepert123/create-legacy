@@ -35,9 +35,11 @@ public final class CreateLegacyModData {
         WRENCHABLES.add(ModBlocks.CASING_BLOCK);
         WRENCHABLES.add(ModBlocks.COGWHEEL);
         WRENCHABLES.add(ModBlocks.SAW);
+        WRENCHABLES.add(ModBlocks.DEPLOYER);
         WRENCHABLES.add(ModBlocks.PRESS);
         WRENCHABLES.add(ModBlocks.DRILL);
         WRENCHABLES.add(ModBlocks.BELT);
+        WRENCHABLES.add(ModBlocks.NETWORK_INSPECTOR);
         WRENCHABLES.add(ModBlocks.CHUTE);
         WRENCHABLES.add(ModBlocks.FURNACE_ENGINE);
         WRENCHABLES.add(ModBlocks.CREATIVE_MOTOR);

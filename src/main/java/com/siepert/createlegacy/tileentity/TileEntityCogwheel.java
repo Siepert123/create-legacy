@@ -45,7 +45,7 @@ public class TileEntityCogwheel extends TileEntity implements IKineticTE {
     public void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted) {
         IBlockState myState = world.getBlockState(pos);
 
-        if (context.getInstanceAtPos(pos) != null) return;
+        if (context.hasBlockBeenChecked(pos)) return;
 
         if (isCognectionValid(myState, source, srcIsCog, srcCogIsHorizontal)) {
             if (!inverted) {
@@ -60,7 +60,7 @@ public class TileEntityCogwheel extends TileEntity implements IKineticTE {
                         ModSoundHandler.BLOCK_COGWHEEL_AMBIENT_2, SoundCategory.BLOCKS,
                         0.1f, 1.0f);
             for (EnumFacing facing : EnumFacing.values()) {
-                if (facing != source && context.getInstanceAtPos(pos.offset(facing)) == null) {
+                if (facing != source && !context.hasBlockBeenChecked(pos.offset(facing))) {
                     boolean srcCog = facing.getAxis() != myState.getValue(AXIS);
                     boolean srcCogH = myState.getValue(AXIS) == EnumFacing.Axis.Y;
                     TileEntity entity = world.getTileEntity(pos.offset(facing));

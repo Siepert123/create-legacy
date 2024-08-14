@@ -59,9 +59,9 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
         BlockPos posFront = pos.offset(source.getOpposite());
 
-        double particleVX = source.getOpposite().getFrontOffsetX() * 2;
-        double particleVY = source.getOpposite().getFrontOffsetY() * 2;
-        double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
+        double particleVX = source.getOpposite().getFrontOffsetX() * context.networkSpeed / 16.0f;
+        double particleVY = source.getOpposite().getFrontOffsetY() * context.networkSpeed / 16.0f;
+        double particleVZ = source.getOpposite().getFrontOffsetZ() * context.networkSpeed / 16.0f;
 
         if (isABlower) {
             if (!world.getBlockState(posFront).getMaterial().blocksMovement()
@@ -504,7 +504,6 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
 
         if (source == myState.getValue(BlockFan.FACING).getOpposite()) {
-            //iteratedBlocks.add(pos);
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
         }
     }
