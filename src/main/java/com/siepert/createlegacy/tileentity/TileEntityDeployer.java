@@ -135,7 +135,7 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
             if (world.getRedstonePower(pos, facing1) > 0) halted = true;
         }
 
-        if (!halted) {
+        if (!halted && !world.isRemote) {
             if (cooldown > 100) {
                 try {
                     if (mayPlace) {
