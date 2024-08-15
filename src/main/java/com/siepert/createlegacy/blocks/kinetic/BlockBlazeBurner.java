@@ -158,7 +158,7 @@ public class BlockBlazeBurner extends Block implements IHasModel, IMetaName, ITi
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(STATE, State.fromMeta(placer.getHeldItem(hand).getItemDamage()));
+        return this.getDefaultState().withProperty(STATE, State.fromMeta(meta));
     }
 
     @Override
