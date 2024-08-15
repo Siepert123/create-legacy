@@ -95,6 +95,8 @@ public class NetworkContext {
 
             if (kineticTE.isConsumer() && kineticTE.getMinimalSpeed() < networkSpeed) {
                 scheduledConsumedSU += (int) Math.round(kineticTE.getStressImpact() * networkSpeed);
+
+                kineticTE.setUpdated();
             }
         }
     }
