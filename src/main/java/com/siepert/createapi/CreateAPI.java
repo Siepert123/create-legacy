@@ -114,12 +114,13 @@ public final class CreateAPI {
         return 0;
     }
 
+    private static final int bluh = 256;
     private static int findRotationModifier(long time, int speed, boolean inverted) {
         if (speed == 0) return 0;
 
-        double oneToTheSpeed = 1.0 / speed;
+        int timeBetween = Math.max(1, bluh / speed);
 
-        long guh = (long) (time * oneToTheSpeed);
+        long guh = time / timeBetween;
 
         int notInv = longToIntSafe(guh % 4);
         int inv = invertRotationInteger(notInv);

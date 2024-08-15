@@ -1,14 +1,24 @@
 {
   "variants": {
-    "axis=x": {
+    "axis=x,extended=false": {
       "model": "create:press/full",
       "y": 90
     },
-    "axis=y": {
+    "axis=y,extended=false": {
       "model": "create:press/full_shifted"
     },
-    "axis=z": {
+    "axis=z,extended=false": {
       "model": "create:press/full"
+    },
+    "axis=x,extended=true": {
+      "model": "create:press/extended",
+      "y": 90
+    },
+    "axis=y,extended=true": {
+      "model": "create:press/full_shifted"
+    },
+    "axis=z,extended=true": {
+      "model": "create:press/extended"
     }
   }
 }
