@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = 'TEST'
+version = '24w33a'
 group = 'com.siepert.createlegacy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'create'
 
