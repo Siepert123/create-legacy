@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:wrench"
+    },
+    "title": {
+      "translate": "advancements.create.wrench.title"
+    },
+    "description": {
+      "translate": "advancements.create.wrench.description"
+    }
+  },
+  "parent": "create:press",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:wrench"
+          }
+        ]
+      }
+    }
+  }
+}

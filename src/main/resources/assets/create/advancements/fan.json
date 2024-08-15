@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:fan"
+    },
+    "title": {
+      "translate": "advancements.create.fan.title"
+    },
+    "description": {
+      "translate": "advancements.create.fan.description"
+    }
+  },
+  "parent": "create:furnace_engine",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:fan"
+          }
+        ]
+      }
+    }
+  }
+}

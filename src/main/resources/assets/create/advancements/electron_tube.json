@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:advanced_ingredient",
+      "data": 2
+    },
+    "title": {
+      "translate": "advancements.create.electron_tube.title"
+    },
+    "description": {
+      "translate": "advancements.create.electron_tube.description"
+    }
+  },
+  "parent": "create:furnace_engine",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:advanced_ingredient",
+            "data": 2
+          }
+        ]
+      }
+    }
+  }
+}

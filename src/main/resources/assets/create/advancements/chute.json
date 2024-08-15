@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:chute"
+    },
+    "title": {
+      "translate": "advancements.create.chute.title"
+    },
+    "description": {
+      "translate": "advancements.create.chute.description"
+    }
+  },
+  "parent": "create:funnel",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:chute"
+          }
+        ]
+      }
+    }
+  }
+}
