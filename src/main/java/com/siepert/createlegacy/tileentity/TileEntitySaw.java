@@ -111,8 +111,7 @@ public class TileEntitySaw extends TileEntity implements IKineticTE {
                             entity.getSoundCategory(), 1.0f, 1.0f);
                 }
             }
-        }
-    }
+        }    }
 
     @Override
     public void setUpdated() {

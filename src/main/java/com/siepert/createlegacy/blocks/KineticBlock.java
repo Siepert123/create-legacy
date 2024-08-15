@@ -1,7 +1,7 @@
 package com.siepert.createlegacy.blocks;
 
-import com.siepert.createapi.util.IWrenchable;
-import com.siepert.createapi.util.IHasModel;
+import com.siepert.createapi.IWrenchable;
+import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
