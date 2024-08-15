@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "M"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:compass"
+    },
+    "M": {
+      "item": "create:casing",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:network_inspector",
+    "data": 0
+  }
+}
