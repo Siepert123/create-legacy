@@ -87,27 +87,29 @@ public class TileEntitySaw extends TileEntity implements IKineticTE {
             }
         }
 
-        AxisAlignedBB axisAlignedBB = new AxisAlignedBB(newPos);
+        if (world.getTotalWorldTime() % 10 == 0 && !world.isRemote) {
+            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(newPos);
 
-        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
+            List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
 
-        for (EntityLivingBase entity : entities) {
-            if (entity instanceof EntityPlayer) {
-                if (!((EntityPlayer) entity).isCreative()) {
+            for (EntityLivingBase entity : entities) {
+                if (entity instanceof EntityPlayer) {
+                    if (!((EntityPlayer) entity).isCreative()) {
+                        entity.setHealth(entity.getHealth() - (float) context.networkSpeed / 32);
+                        entity.performHurtAnimation();
+                        world.playSound(null,
+                                entity.posX, entity.posY, entity.posZ,
+                                SoundEvents.ENTITY_PLAYER_HURT,
+                                entity.getSoundCategory(), 1.0f, 1.0f);
+                    }
+                } else {
                     entity.setHealth(entity.getHealth() - (float) context.networkSpeed / 32);
                     entity.performHurtAnimation();
                     world.playSound(null,
                             entity.posX, entity.posY, entity.posZ,
-                            SoundEvents.ENTITY_PLAYER_HURT,
+                            SoundEvents.ENTITY_GENERIC_HURT,
                             entity.getSoundCategory(), 1.0f, 1.0f);
                 }
-            } else {
-                entity.setHealth(entity.getHealth() - (float) context.networkSpeed / 32);
-                entity.performHurtAnimation();
-                world.playSound(null,
-                        entity.posX, entity.posY, entity.posZ,
-                        SoundEvents.ENTITY_GENERIC_HURT,
-                        entity.getSoundCategory(), 1.0f, 1.0f);
             }
         }
     }

@@ -1,8 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createapi.CreateAPI;
-import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createapi.network.IHasRotation;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;

@@ -3,6 +3,7 @@ package com.siepert.createlegacy.blocks.kinetic;
 import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createapi.network.IHasRotation;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;

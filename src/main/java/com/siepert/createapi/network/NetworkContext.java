@@ -4,18 +4,14 @@ import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.CreateLegacyModData;
-import com.siepert.createlegacy.util.IHasRotation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
