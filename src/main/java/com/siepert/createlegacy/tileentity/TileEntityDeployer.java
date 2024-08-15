@@ -136,7 +136,7 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
         }
 
         if (!halted && !world.isRemote) {
-            if (cooldown > 100) {
+            if (cooldown > 200) {
                 try {
                     if (mayPlace) {
                         IBlockState place = ((ItemBlock) useStack.getItem()).getBlock()
@@ -184,7 +184,7 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
             } else {
                 IBlockState state = world.getBlockState(pos);
 
-                if (cooldown < 97 && cooldown > 2) {
+                if (cooldown < 197 && cooldown > 2) {
                     if (state.getValue(EXTENDED) || !CreateLegacyConfigHolder.otherConfig.enableBlockstatePerformance) {
                         TileEntity entity = world.getTileEntity(pos);
 
