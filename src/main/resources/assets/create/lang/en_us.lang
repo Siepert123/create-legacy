@@ -123,12 +123,18 @@ tile.create:schedule_wash.name=Schedule Fan Washing
 tile.create:schedule_cook.name=Schedule Fan Cooking
 tile.create:network_inspector_speed.name=Speedometer
 tile.create:network_inspector_stress.name=Stressometer
+tile.create:deployer.name=Deployer
 
 item.create:wrench.name=Wrench
 
 item.create:filter_ore_dict.name=OreDict Filter
 message.create:filter.set=Filter set to
 message.create:filter.clear=Filter cleared
+
+tooltip.stressImpact=Kinetic Stress Impact: %d x RS
+tooltip.stressCapacity=Kinetic Stress Capacity: %d x RS
+
+tile.create:chigwanker.name=Mechindustrial Chigwanker
 
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
@@ -259,3 +265,42 @@ tile.create:stone_reinforced_scorchia.name=Reinforced Scorchia
 tile.create:stone_reinforced_scoria.name=Reinforced Scoria
 tile.create:stone_reinforced_tuff.name=Reinforced Tuff
 tile.create:stone_reinforced_veridium.name=Reinforced Veridium
+
+#ADVANCEMENTS!
+advancements.create.example.title=
+advancements.create.example.description=
+
+advancements.create.root.title=Create Legacy
+advancements.create.root.description=Create, now for 1.12.2 (jankyness included)
+advancements.create.collector.title=Collector's Favorite
+advancements.create.collector.description=Collect all stone types added by Create Legacy
+advancements.create.andesite_alloy.title=Alliterations Aplenty
+advancements.create.andesite_alloy.description=Obtain an Andesite Alloy
+advancements.create.age_andesite.title=The Andesite Age
+advancements.create.age_andesite.description=Applicate some Andesite Alloy on a piece of wood, making a good machine casing
+advancements.create.funnel.title=Airport Aesthetics
+advancements.create.funnel.description=Obtain a Funnel, which can extract and insert Items from Inventories
+advancements.create.chute.title=Vertical Logistics
+advancements.create.chute.description=Get your hands on a Chute, which can transport Items and small Entities downwards
+advancements.create.water_wheel.title=Harnessing Fluid Movements
+advancements.create.water_wheel.description=Craft a Water Wheel to exploit the kinetics in Fluids
+advancements.create.press.title=Press Goes 'Bonk'
+advancements.create.press.description=Craft the Mechanical Press to flatten items
+advancements.create.blaze_burner.title=Living Fireplace
+advancements.create.blaze_burner.description=Catch a Blaze in a cage to harness its heat for free
+advancements.create.wrench.title=Mechanic Richard
+advancements.create.wrench.description=Make a Wrench to Rotate and Configure various Components
+advancements.create.network_inspection.title=Network Nerd
+advancements.create.network_inspection.description=Craft both the Speedometer and Stressometer to get as much data as possible out of your kinetic network
+advancements.create.age_brass.title=The Brass Age
+advancements.create.age_brass.description=Applicate some Brass on a piece of wood, making an excellent casing for advanced things
+advancements.create.furnace_engine.title=Furnace Power
+advancements.create.furnace_engine.description=Craft all components required for the Furnace Engine
+advancements.create.electron_tube.title=Tubes of Electricity
+advancements.create.electron_tube.description=Craft the Electron tube, used for very advanced machines (I thought this was a silly cogwheel mod?)
+advancements.create.deployer.title=Prod prod
+advancements.create.deployer.description=Craft a deployer, which should be able to imitate your actions (wip) (handle with care)
+advancements.create.fan.title=Particle Processor
+advancements.create.fan.description=Obtain the Encased Fan which has 101 uses (no refunds)
+advancements.create.saw.title=The Cutter
+advancements.create.saw.description=Get your hands on a Mechanical Saw, which can chop the trees in one go

@@ -44,26 +44,6 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, 
             }
 
             context.runThroughPhases(world);
-            if (world.getTotalWorldTime() % 10 == 0) {
-                BlockPos enginePos = pos.offset(state.getValue(HORIZONTAL_FACING).toVanillaFacing().rotateY(), 2);
-
-                for (int i = 0; i < SMOKE_MIN + CreateLegacyModData.timedLucky.nextInt(SMOKE_DIFF); i++) {
-                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                            enginePos.getX() + CreateLegacyModData.random.nextFloat(),
-                            enginePos.getY() + CreateLegacyModData.random.nextFloat(),
-                            enginePos.getZ() + CreateLegacyModData.random.nextFloat(),
-                            0, 0, 0);
-                }
-            }
-            if (world.getTotalWorldTime() % 70 == 0) {
-                world.playSound(null,
-                        pos.getX() + 0.5,
-                        pos.getY() + 0.5,
-                        pos.getZ() + 0.5,
-                        SoundEvents.BLOCK_FIRE_EXTINGUISH,
-                        SoundCategory.BLOCKS,
-                        0.5f, 0.8f);
-            }
         }
 
         updated = false;
@@ -177,7 +157,30 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, 
 
     @Override
     public void kineticTick(NetworkContext context) {
+        IBlockState state = world.getBlockState(pos);
 
+        if (shouldPower(state)) {
+            if (world.getTotalWorldTime() % 10 == 0) {
+                BlockPos enginePos = pos.offset(state.getValue(HORIZONTAL_FACING).toVanillaFacing().rotateY(), 2);
+
+                for (int i = 0; i < SMOKE_MIN + CreateLegacyModData.timedLucky.nextInt(SMOKE_DIFF); i++) {
+                    world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                            enginePos.getX() + CreateLegacyModData.random.nextFloat(),
+                            enginePos.getY() + CreateLegacyModData.random.nextFloat(),
+                            enginePos.getZ() + CreateLegacyModData.random.nextFloat(),
+                            0, 0, 0);
+                }
+            }
+            if (world.getTotalWorldTime() % 70 == 0) {
+                world.playSound(null,
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        SoundEvents.BLOCK_FIRE_EXTINGUISH,
+                        SoundCategory.BLOCKS,
+                        0.5f, 0.8f);
+            }
+        }
     }
 
     @Override

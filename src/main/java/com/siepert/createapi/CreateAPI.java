@@ -114,12 +114,13 @@ public final class CreateAPI {
         return 0;
     }
 
+    private static final int bluh = 256;
     private static int findRotationModifier(long time, int speed, boolean inverted) {
         if (speed == 0) return 0;
 
-        double oneToTheSpeed = 1.0 / speed;
+        int timeBetween = Math.max(1, bluh / speed);
 
-        long guh = (long) (time * oneToTheSpeed);
+        long guh = time / timeBetween;
 
         int notInv = longToIntSafe(guh % 4);
         int inv = invertRotationInteger(notInv);
@@ -198,5 +199,14 @@ public final class CreateAPI {
     public static int longToIntSafe(long j) {
         if (j > Integer.MAX_VALUE) return Integer.MAX_VALUE;
         return (int) j;
+    }
+
+
+    public static String stressImpactTooltip(double impact) {
+        return CreateAPI.translateToLocalFormatted("tooltip.stressImpact", impact);
+    }
+
+    public static String stressCapacityTooltip(double capacity) {
+        return CreateAPI.translateToLocalFormatted("tooltip.stressCapacity", capacity);
     }
 }

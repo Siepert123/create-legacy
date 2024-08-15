@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "extended=false,facing=north": {
+      "model": "create:deployer/normal",
+      "y": 180
+    },
+    "extended=false,facing=east": {
+      "model": "create:deployer/normal",
+      "y": 270
+    },
+    "extended=false,facing=south": {
+      "model": "create:deployer/normal"
+    },
+    "extended=false,facing=west": {
+      "model": "create:deployer/normal",
+      "y": 90
+    },
+    "extended=true,facing=north": {
+      "model": "create:deployer/extended",
+      "y": 180
+    },
+    "extended=true,facing=east": {
+      "model": "create:deployer/extended",
+      "y": 270
+    },
+    "extended=true,facing=south": {
+      "model": "create:deployer/extended"
+    },
+    "extended=true,facing=west": {
+      "model": "create:deployer/extended",
+      "y": 90
+    }
+  }
+}

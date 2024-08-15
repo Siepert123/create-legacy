@@ -26,7 +26,7 @@ public class TileEntityCreativeMotor extends TileEntity implements ITickable, IK
         TileEntity entity = world.getTileEntity(pos.offset(myState.getValue(FACING)));
 
         if (entity instanceof IKineticTE) {
-            ((IKineticTE) entity).passNetwork(context, myState.getValue(FACING),
+            ((IKineticTE) entity).passNetwork(context, myState.getValue(FACING).getOpposite(),
                     false, false, false);
         }
 

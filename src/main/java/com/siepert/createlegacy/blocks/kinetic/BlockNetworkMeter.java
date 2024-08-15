@@ -100,8 +100,12 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        boolean j = placer.getHeldItem(hand).getMetadata() == 1;
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().rotateAround(EnumFacing.Axis.Y).getAxis()).withProperty(ALT, j);
+        boolean j = meta == 1;
+        if (placer != null) {
+            return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing()
+                    .rotateAround(EnumFacing.Axis.Y).getAxis()).withProperty(ALT, j);
+        }
+        return this.getDefaultState().withProperty(AXIS, facing.rotateY().getAxis()).withProperty(ALT, j);
     }
 
     @Override

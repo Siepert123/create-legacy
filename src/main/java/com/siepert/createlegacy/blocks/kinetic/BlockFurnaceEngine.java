@@ -1,7 +1,10 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createapi.network.IHasRotation;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -11,11 +14,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,8 +32,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable {
+public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable, IHasRotation {
     @Override
     public String getSpecialName(ItemStack stack) {
         return Variant.fromMeta(stack.getItemDamage()).getName();
@@ -53,6 +57,11 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
         rotateBlock(worldIn, pos, side);
 
         return true;
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(HORIZONTAL_FACING).axis();
     }
 
 
@@ -95,7 +104,8 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(VARIANT, Variant.ENGINE)
                 .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH)
-                .withProperty(HAS_SHAFT, false));
+                .withProperty(HAS_SHAFT, false)
+                .withProperty(ROTATION, 0));
         setHardness(2);
         setResistance(3);
         ModBlocks.BLOCKS.add(this);
@@ -116,13 +126,23 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT, HORIZONTAL_FACING, HAS_SHAFT});
+        return new BlockStateContainer(this, VARIANT, HORIZONTAL_FACING, HAS_SHAFT, ROTATION);
+    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressCapacityTooltip(CreateLegacyConfigHolder.kineticConfig.furnaceEngineStressCapacity));
     }
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(placer.getHeldItem(hand).getItemDamage()))
-                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        if (placer != null) {
+            return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta))
+                    .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        }
+        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta))
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(facing));
     }
 
     @Override

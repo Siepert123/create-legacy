@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityPress;
@@ -17,9 +19,11 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,6 +52,7 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
         return BB;
     }
 
+    public static final PropertyBool EXTENDED = PropertyBool.create("extended");
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
     public BlockMechanicalPress(String name) {
         super(Material.ROCK);
@@ -61,12 +66,18 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);
 
-        setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X));
+        setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X)
+                .withProperty(EXTENDED, false));
 
         setHardness(1);
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressImpactTooltip(CreateLegacyConfigHolder.kineticConfig.mechanicalPressStressImpact));
     }
 
     @Override
@@ -94,12 +105,15 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {AXIS});
+        return new BlockStateContainer(this, new IProperty[] {AXIS, EXTENDED });
     }
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        if (placer != null) {
+            return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        }
+        return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 
     @Override
@@ -125,174 +139,11 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
     }
 
 
-    private void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-
-        if (srcIsCog) return; //We don't accept a cog as input, we need a shaft!
-
-        IBlockState myState = worldIn.getBlockState(pos);
-
-
-        if (source.getAxis() == myState.getValue(AXIS)) {
-            iteratedBlocks.add(pos);
-
-            Block aBlock = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
-
-            if (aBlock instanceof IKineticActor) {
-                ((IKineticActor) aBlock).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
-                        false, false, inverseRotation);
-            }
-
-            boolean isCompactor = worldIn.getBlockState(pos.down(2)).getBlock() instanceof BlockItemHolder;
-            if (isCompactor) {
-                isCompactor = worldIn.getBlockState(pos.down(2)).getValue(BlockItemHolder.VARIANT) == BlockItemHolder.Variant.BASIN;
-            }
-
-            BlockBlazeBurner.State heatState;
-            if (isCompactor && worldIn.getBlockState(pos.down(3)).getBlock() instanceof BlockBlazeBurner) {
-                heatState = worldIn.getBlockState(pos.down(3)).getValue(BlockBlazeBurner.STATE);
-            } else heatState = BlockBlazeBurner.State.EMPTY;
-
-
-            if (!worldIn.getBlockState(pos.down()).getMaterial().blocksMovement() && !worldIn.isRemote) {
-                if (!isCompactor) {
-                    AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down());
-                    List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
-
-                    for (EntityItem entityItem : foundItems) {
-                        if (apply(entityItem.getItem()).hasRecipe) {
-                            EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
-                                    apply(entityItem.getItem()).stack);
-                            entityItem.getItem().shrink(1);
-                            resultEntityItem.setVelocity(0, 0, 0);
-                            resultEntityItem.setNoDespawn();
-                            worldIn.spawnEntity(resultEntityItem);
-                            if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
-                                entityItem.setDead();
-                            }
-
-                            float pitch;
-                            if (CreateLegacyModData.random.nextInt(100) == 0) {
-                                pitch = 0.1f;
-                            } else pitch = 0.8f;
-                            worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D,
-                                    ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);
-                            return;
-                        }
-                    }
-                    return;
-                }
-                AxisAlignedBB itemSearchArea = new AxisAlignedBB(pos.down(2));
-                List<EntityItem> foundItems = worldIn.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
-
-                for (EntityItem entityItem : foundItems) {
-                    if (applyCompact(entityItem.getItem(), heatState).hasRecipe) {
-                        EntityItem resultEntityItem = new EntityItem(worldIn, pos.getX() + 0.5, pos.down(2).getY() + 0.2, pos.getZ() + 0.5,
-                                applyCompact(entityItem.getItem(), heatState).getResult());
-                        entityItem.getItem().shrink(applyCompact(entityItem.getItem(), heatState).cost);
-                        resultEntityItem.setVelocity(0, 0, 0);
-                        resultEntityItem.setNoDespawn();
-                        worldIn.spawnEntity(resultEntityItem);
-                        if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
-                            entityItem.setDead();
-                        }
-
-                        float pitch;
-                        if (CreateLegacyModData.random.nextInt(100) == 0) {
-                            pitch = 0.1f;
-                        } else pitch = 0.8f;
-                        worldIn.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, ModSoundHandler.BLOCK_PRESS_ACTIVATION, SoundCategory.BLOCKS, 1.0f, pitch);
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
-    public PressingResultSet apply(ItemStack stack) {
-        if (stack.isEmpty())
-        {
-            return new PressingResultSet(stack, false);
-        }
-        else
-        {
-            ItemStack itemstack = PressingRecipes.instance().getPressingResult(stack);
-
-            if (itemstack.isEmpty())
-            {
-                CreateLegacy.logger.warn("Couldn't press {} because there is no pressing recipe", (Object)stack);
-                return new PressingResultSet(stack, false);
-            }
-            else
-            {
-                ItemStack itemstack1 = itemstack.copy();
-                itemstack1.setCount(itemstack.getCount());
-                return new PressingResultSet(itemstack1, true);
-            }
-        }
-    }
-
-    public CompactingResultSet applyCompact(ItemStack stack, BlockBlazeBurner.State heatState) {
-        if (stack.isEmpty()) {
-            return new CompactingResultSet(stack, 0, false);
-        } else {
-            ItemStack itemstack = CompactingRecipes.instance().getCompactingResult(stack);
-            BlockBlazeBurner.State heatMin = CompactingRecipes.instance().getHeatRequirement(stack);
-            int cost = CompactingRecipes.instance().getCompactingCost(stack);
-
-            if (itemstack.isEmpty()) {
-                return new CompactingResultSet(stack, 0, false);
-            } else {
-                if (BlockBlazeBurner.State.compareStates(heatState, heatMin) && stack.getCount() >= cost) {
-                    ItemStack itemstack1 = itemstack.copy();
-                    itemstack1.setCount(itemstack.getCount());
-                    return new CompactingResultSet(itemstack1, cost, true);
-                }
-            }
-        }
-        return new CompactingResultSet(stack, 0, false);
-    }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityPress();
-    }
-
-    public static class PressingResultSet {
-        ItemStack stack;
-        boolean hasRecipe;
-        private PressingResultSet(ItemStack stack, boolean hasRecipe) {
-            this.stack = stack;
-            this.hasRecipe = hasRecipe;
-        }
-
-        public boolean hasRecipe() {
-            return hasRecipe;
-        }
-
-        public ItemStack getResult() {
-            return stack;
-        }
-    }
-
-    private static class CompactingResultSet {
-        int cost;
-        ItemStack result;
-        boolean hasRecipe;
-        private CompactingResultSet(ItemStack result, int cost, boolean hasRecipe) {
-            this.result = result;
-            this.hasRecipe = hasRecipe;
-            this.cost = cost;
-        }
-
-        public boolean hasRecipe() {
-            return hasRecipe;
-        }
-        public ItemStack getResult() {
-            return result;
-        }
     }
 
     @Override

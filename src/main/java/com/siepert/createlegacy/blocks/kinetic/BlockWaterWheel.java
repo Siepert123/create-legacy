@@ -1,8 +1,10 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
-import com.siepert.createapi.IKineticActor;
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createapi.network.IHasRotation;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityWaterWheel;
@@ -11,14 +13,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, ITileEntityProvider, IWrenchable {
+public class BlockWaterWheel extends Block implements IHasModel, ITileEntityProvider, IWrenchable, IHasRotation {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockWaterWheel(String name) {
@@ -62,6 +65,12 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         return 0;
     }
 
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressCapacityTooltip(CreateLegacyConfigHolder.kineticConfig.waterWheelStressCapacity));
+    }
+
     @Override
     public IBlockState getStateFromMeta(int meta) {
         if (meta == 0) return this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.X);
@@ -72,13 +81,16 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {AXIS});
+        return new BlockStateContainer(this, AXIS, ROTATION);
     }
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        if (placer != null) {
+            return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        }
+        return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 
     @Override
@@ -100,28 +112,6 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
-
-
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-        if (srcIsCog) return;
-
-        IBlockState myState = worldIn.getBlockState(pos);
-
-        if (source.getAxis() != myState.getValue(AXIS)) return;
-
-        iteratedBlocks.add(pos);
-
-        Block block = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
-        if (block instanceof IKineticActor) {
-            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
-                    false, false, inverseRotation);
-        }
-    }
-
-
 
     @Nullable
     @Override
@@ -152,5 +142,10 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         rotateBlock(worldIn, pos, side);
 
         return true;
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(AXIS);
     }
 }

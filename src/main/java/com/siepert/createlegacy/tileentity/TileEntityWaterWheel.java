@@ -12,15 +12,16 @@ import net.minecraft.util.ITickable;
 import static com.siepert.createlegacy.blocks.kinetic.BlockWaterWheel.AXIS;
 
 public class TileEntityWaterWheel extends TileEntity implements ITickable, IKineticTE {
-    boolean updated = true;
+    boolean updated = false;
 
     @Override
     public void update() {
+
         IBlockState myState = world.getBlockState(pos);
 
         boolean liquid = world.getBlockState(pos.down()).getMaterial().isLiquid();
 
-        if (liquid) {
+        if (liquid && !updated) {
             EnumFacing facing1 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, myState.getValue(AXIS));
             EnumFacing facing2 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, myState.getValue(AXIS));
 
@@ -28,6 +29,8 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable, IKine
             TileEntity axNeg = world.getTileEntity(pos.offset(facing2));
 
             NetworkContext context = new NetworkContext();
+
+            context.addKineticBlockInstance(new KineticBlockInstance(pos, false));
 
             if (axPos instanceof IKineticTE) {
                 ((IKineticTE) axPos).passNetwork(context, facing1.getOpposite(),
@@ -40,6 +43,8 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable, IKine
 
             context.runThroughPhases(world);
         }
+
+        updated = false;
     }
 
 
@@ -71,7 +76,7 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable, IKine
 
     @Override
     public void setUpdated() {
-
+        updated = true;
     }
 
     @Override

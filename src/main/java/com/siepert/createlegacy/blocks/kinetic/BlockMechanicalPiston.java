@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -60,6 +62,8 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
     }
 
+
+
     @Override
     public int getMetaFromState(IBlockState state) {
         int flag = 0;
@@ -69,6 +73,7 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressImpactTooltip(CreateLegacyConfigHolder.kineticConfig.mechanicalDrillStressImpact));
         tooltip.add(CreateLegacyModData.WIP_TT);
     }
 
@@ -92,14 +97,19 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        boolean isSticky = placer.getHeldItem(hand).getItemDamage() == 1;
+        boolean isSticky = meta == 1;
 
-        if (placer.isSneaking()) {
-            return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
+        if (placer != null) {
+            if (placer.isSneaking()) {
+                return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
+            }
         }
-        return getDefaultState().withProperty(FACING,
-                EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
-                        .getOpposite()).withProperty(STICKY, isSticky);
+        if (placer != null) {
+            return getDefaultState().withProperty(FACING,
+                    EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
+                            .getOpposite()).withProperty(STICKY, isSticky);
+        }
+        return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
     }
 
     @Override

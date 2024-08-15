@@ -30,17 +30,17 @@ public class CreateLegacyConfigHolder {
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the hand crank",
                 "Default: 4.0"})
-        public double handCrankStressCapacity = 4.0;
+        public double handCrankStressCapacity = 8.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the water wheel",
                 "Default: 8.0"})
-        public double waterWheelStressCapacity = 8.0;
+        public double waterWheelStressCapacity = 16.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the furnace engine",
-                "Default: 16.0"})
-        public double furnaceEngineStressCapacity = 16.0;
+                "Default: 64.0"})
+        public double furnaceEngineStressCapacity = 64.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the creative motor",
@@ -145,5 +145,14 @@ public class CreateLegacyConfigHolder {
         @Config.Comment("i forgor :skull:")
         @Config.RequiresMcRestart
         public boolean sillyStuff = false;
+
+        @Config.Comment("Default: true (recommended to not turn off)")
+        public boolean enableBlockstatePerformance = true;
+
+        @Config.RangeInt(min = 5, max = 64)
+        @Config.SlidingOption
+        @Config.Comment({"How long belts can be in each direction.",
+                "Default: 10"})
+        public int maxBeltDeepness = 10;
     }
 }

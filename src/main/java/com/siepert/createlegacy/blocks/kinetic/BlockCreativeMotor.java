@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityCreativeMotor;
@@ -14,10 +16,12 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -26,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityProvider, IWrenchable {
@@ -97,10 +102,19 @@ public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityP
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
                                             int meta, EntityLivingBase placer, EnumHand hand) {
-        if (placer.isSneaking()) {
-            return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+        if (placer != null) {
+            if (placer.isSneaking()) {
+                return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+            }
+            return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         }
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+        return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressCapacityTooltip(CreateLegacyConfigHolder.kineticConfig.creativeMotorStressCapacity));
     }
 
     @Nullable

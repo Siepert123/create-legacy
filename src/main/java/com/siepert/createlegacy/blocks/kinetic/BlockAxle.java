@@ -2,13 +2,11 @@ package com.siepert.createlegacy.blocks.kinetic;
 
 import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
-import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityAxle;
 import com.siepert.createlegacy.util.IHasModel;
-import com.siepert.createlegacy.util.IHasRotation;
-import com.siepert.createapi.IKineticActor;
+import com.siepert.createapi.network.IHasRotation;
 import com.siepert.createapi.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -22,7 +20,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -32,7 +29,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class BlockAxle extends Block implements IHasModel, IHasRotation, ITileEntityProvider, IWrenchable {
@@ -105,7 +101,7 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, ITileEn
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing.Axis axis = facing.getAxis();
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS, axis)
+        return getDefaultState().withProperty(AXIS, axis)
                 .withProperty(ROTATION, CreateAPI.discoverRotationForPlacement(world, pos, axis));
     }
 

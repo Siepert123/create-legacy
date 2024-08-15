@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.util;
+package com.siepert.createapi.network;
 
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;

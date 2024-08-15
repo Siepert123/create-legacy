@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:deployer"
+    },
+    "title": {
+      "translate": "advancements.create.deployer.title"
+    },
+    "description": {
+      "translate": "advancements.create.deployer.description"
+    }
+  },
+  "parent": "create:electron_tube",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:deployer"
+          }
+        ]
+      }
+    }
+  }
+}

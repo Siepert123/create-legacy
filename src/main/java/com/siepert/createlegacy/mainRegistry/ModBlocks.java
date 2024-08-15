@@ -40,13 +40,16 @@ public class ModBlocks {
     public static final Block PRESS = new BlockMechanicalPress("press");
     public static final Block DRILL = new BlockDrill("drill");
     public static final Block SAW = new BlockSaw("saw");
+    public static final Block DEPLOYER = new BlockDeployer();
     public static final Block FAN = new BlockFan("fan");
     public static final Block MILLSTONE = new BlockMillStone();
     public static final Block PISTON = new BlockMechanicalPiston("piston");
     public static final Block PISTON_ERECTOR = new BlockPistonErector("piston_pole");
 
-    public static final Block SCHEDULE_WASH = new BlockScheduleWash();
-    public static final Block SCHEDULE_COOK = new BlockScheduleCook();
+    public @Deprecated static final Block SCHEDULE_WASH = new BlockScheduleWash();
+    public @Deprecated static final Block SCHEDULE_COOK = new BlockScheduleCook();
+
+    public static final Block CHIGWANKER = new BlockChigwanker();
 
 
     public static final Block STONE = new BlockStone(true);

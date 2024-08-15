@@ -17,7 +17,7 @@ import java.util.Random;
 public final class CreateLegacyModData {
     public static final String MOD_ID = "create"; //Mod ID; will never change
     public static final String NAME = "Create Legacy"; //Mod name; will never change
-    public static final String VERSION = "24w29e"; //The version, based on snapshot naming scheme
+    public static final String VERSION = "24w33a"; //The version, based on snapshot naming scheme
     public static final int VERSION_NUMBER = 7;
     public static final int KINETIC_VERSION = 3;
     public static final String CLIENT_PROXY = "com.siepert.createlegacy.proxy.ClientProxy"; //Client proxy class
@@ -35,9 +35,11 @@ public final class CreateLegacyModData {
         WRENCHABLES.add(ModBlocks.CASING_BLOCK);
         WRENCHABLES.add(ModBlocks.COGWHEEL);
         WRENCHABLES.add(ModBlocks.SAW);
+        WRENCHABLES.add(ModBlocks.DEPLOYER);
         WRENCHABLES.add(ModBlocks.PRESS);
         WRENCHABLES.add(ModBlocks.DRILL);
         WRENCHABLES.add(ModBlocks.BELT);
+        WRENCHABLES.add(ModBlocks.NETWORK_INSPECTOR);
         WRENCHABLES.add(ModBlocks.CHUTE);
         WRENCHABLES.add(ModBlocks.FURNACE_ENGINE);
         WRENCHABLES.add(ModBlocks.CREATIVE_MOTOR);

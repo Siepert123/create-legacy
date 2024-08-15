@@ -23,6 +23,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
 
+import static com.siepert.createlegacy.blocks.kinetic.BlockMechanicalPress.EXTENDED;
+
 public class TileEntityPress extends TileEntity implements IKineticTE {
 
     int pressingProgress = 0;
@@ -75,6 +77,32 @@ public class TileEntityPress extends TileEntity implements IKineticTE {
             heatState = world.getBlockState(pos.down(3)).getValue(BlockBlazeBurner.STATE);
         } else heatState = BlockBlazeBurner.State.EMPTY;
 
+        if (!world.isRemote) {
+            IBlockState state = world.getBlockState(pos);
+            if (pressingProgress > 92) {
+                if (!state.getValue(EXTENDED)) {
+                    TileEntity entity = world.getTileEntity(pos);
+
+                    world.setBlockState(pos, state.withProperty(EXTENDED, true), 3);
+
+                    if (entity != null) {
+                        entity.validate();
+                        world.setTileEntity(pos, entity);
+                    }
+                }
+            } else {
+                if (state.getValue(EXTENDED)) {
+                    TileEntity entity = world.getTileEntity(pos);
+
+                    world.setBlockState(pos, state.withProperty(EXTENDED, false), 3);
+
+                    if (entity != null) {
+                        entity.validate();
+                        world.setTileEntity(pos, entity);
+                    }
+                }
+            }
+        }
 
         if (!world.getBlockState(pos.down()).getMaterial().blocksMovement() && !world.isRemote && pressingProgress == 0) {
             if (!isCompactor) {
