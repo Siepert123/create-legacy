@@ -59,9 +59,9 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
         BlockPos posFront = pos.offset(source.getOpposite());
 
-        double particleVX = source.getOpposite().getFrontOffsetX() * 2;
-        double particleVY = source.getOpposite().getFrontOffsetY() * 2;
-        double particleVZ = source.getOpposite().getFrontOffsetZ() * 2;
+        double particleVX = source.getOpposite().getFrontOffsetX() * context.networkSpeed / 16f;
+        double particleVY = source.getOpposite().getFrontOffsetY() * context.networkSpeed / 16f;
+        double particleVZ = source.getOpposite().getFrontOffsetZ() * context.networkSpeed / 16f;
 
         if (isABlower) {
             if (!world.getBlockState(posFront).getMaterial().blocksMovement()
@@ -74,7 +74,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                         particleVX,
                         particleVY,
                         particleVZ);
-                for (int i = 0; i < CreateLegacyModData.random.nextInt(4) + 4; i++) {
+                for (int i = 0; i < CreateLegacyModData.random.nextInt(4); i++) {
                     world.spawnParticle(EnumParticleTypes.CLOUD,
                             posFront.getX() + CreateLegacyModData.random.nextFloat(),
                             posFront.getY() + CreateLegacyModData.random.nextFloat(),
@@ -215,7 +215,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                 particleVX / 3,
                                 particleVY / 3,
                                 particleVZ / 3);
-                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
+                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4); j++) {
                             world.spawnParticle(EnumParticleTypes.CLOUD,
                                     posFront.getX() + CreateLegacyModData.random.nextFloat(),
                                     posFront.getY() + CreateLegacyModData.random.nextFloat(),
@@ -242,7 +242,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                 particleVX / 3,
                                 particleVY / 3,
                                 particleVZ / 3);
-                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4) + 4; j++) {
+                        for (int j = 0; j < CreateLegacyModData.random.nextInt(4); j++) {
                             world.spawnParticle(EnumParticleTypes.SMOKE_LARGE,
                                     posFront.getX() + CreateLegacyModData.random.nextFloat(),
                                     posFront.getY() + CreateLegacyModData.random.nextFloat(),

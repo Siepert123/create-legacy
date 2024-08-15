@@ -46,8 +46,8 @@ public class ModBlocks {
     public static final Block PISTON = new BlockMechanicalPiston("piston");
     public static final Block PISTON_ERECTOR = new BlockPistonErector("piston_pole");
 
-    public static final Block SCHEDULE_WASH = new BlockScheduleWash();
-    public static final Block SCHEDULE_COOK = new BlockScheduleCook();
+    public @Deprecated static final Block SCHEDULE_WASH = new BlockScheduleWash();
+    public @Deprecated static final Block SCHEDULE_COOK = new BlockScheduleCook();
 
     public static final Block CHIGWANKER = new BlockChigwanker();
 

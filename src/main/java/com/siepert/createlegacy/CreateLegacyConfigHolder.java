@@ -30,12 +30,12 @@ public class CreateLegacyConfigHolder {
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the hand crank",
                 "Default: 4.0"})
-        public double handCrankStressCapacity = 4.0;
+        public double handCrankStressCapacity = 8.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the water wheel",
                 "Default: 8.0"})
-        public double waterWheelStressCapacity = 8.0;
+        public double waterWheelStressCapacity = 16.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the furnace engine",
