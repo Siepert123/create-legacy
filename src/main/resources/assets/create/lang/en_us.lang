@@ -131,6 +131,9 @@ item.create:filter_ore_dict.name=OreDict Filter
 message.create:filter.set=Filter set to
 message.create:filter.clear=Filter cleared
 
+tooltip.stressImpact=Kinetic Stress Impact: %d x RS
+tooltip.stressCapacity=Kinetic Stress Capacity: %d x RS
+
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes

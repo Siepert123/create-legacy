@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityPress;
@@ -20,6 +22,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,6 +70,11 @@ public class BlockMechanicalPress extends Block implements IHasModel, IWrenchabl
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressImpactTooltip(CreateLegacyConfigHolder.kineticConfig.mechanicalPressStressImpact));
     }
 
     @Override

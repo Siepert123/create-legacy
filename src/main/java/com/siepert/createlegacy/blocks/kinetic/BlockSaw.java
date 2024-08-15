@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntitySaw;
@@ -16,6 +18,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -92,6 +95,11 @@ public class BlockSaw extends Block implements IHasModel, IWrenchable, ITileEnti
                             .getOpposite());
         }
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing.getOpposite());
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressImpactTooltip(CreateLegacyConfigHolder.kineticConfig.mechanicalSawStressImpact));
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.TileEntityWaterWheel;
@@ -15,10 +17,12 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -60,6 +64,12 @@ public class BlockWaterWheel extends Block implements IHasModel, ITileEntityProv
     public int getMetaFromState(IBlockState state) {
         if (state.getValue(AXIS) == EnumFacing.Axis.Z) return 1;
         return 0;
+    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressCapacityTooltip(CreateLegacyConfigHolder.kineticConfig.waterWheelStressCapacity));
     }
 
     @Override

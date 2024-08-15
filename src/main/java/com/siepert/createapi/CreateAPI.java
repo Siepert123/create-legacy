@@ -199,4 +199,13 @@ public final class CreateAPI {
         if (j > Integer.MAX_VALUE) return Integer.MAX_VALUE;
         return (int) j;
     }
+
+
+    public static String stressImpactTooltip(double impact) {
+        return CreateAPI.translateToLocalFormatted("tooltip.stressImpact", impact);
+    }
+
+    public static String stressCapacityTooltip(double capacity) {
+        return CreateAPI.translateToLocalFormatted("tooltip.stressCapacity", capacity);
+    }
 }

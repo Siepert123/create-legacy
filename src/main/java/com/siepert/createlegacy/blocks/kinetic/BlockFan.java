@@ -1,6 +1,8 @@
 package com.siepert.createlegacy.blocks.kinetic;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
+import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.blocks.KineticBlock;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -19,6 +21,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -51,6 +54,11 @@ public class BlockFan extends KineticBlock implements IHasModel, IWrenchable, IT
         this.blockSoundType = SoundType.WOOD;
         this.fullBlock = false;
         setLightOpacity(0);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(CreateAPI.stressImpactTooltip(CreateLegacyConfigHolder.kineticConfig.encasedFanStressImpact));
     }
 
     @Override

@@ -39,8 +39,8 @@ public class CreateLegacyConfigHolder {
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the furnace engine",
-                "Default: 16.0"})
-        public double furnaceEngineStressCapacity = 16.0;
+                "Default: 64.0"})
+        public double furnaceEngineStressCapacity = 64.0;
 
         @Config.RangeDouble(min = 0)
         @Config.Comment({"Stress capacity for the creative motor",
