@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, ITileEntityProvider, IWrenchable {
+public class BlockWaterWheel extends Block implements IHasModel, ITileEntityProvider, IWrenchable, IHasRotation {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
 
     public BlockWaterWheel(String name) {
@@ -72,7 +72,7 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {AXIS});
+        return new BlockStateContainer(this, AXIS, ROTATION);
     }
 
     @Override
@@ -104,28 +104,6 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         return false;
     }
 
-
-    @Override
-    public void passRotation(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks,
-                             boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverseRotation) {
-
-        if (srcIsCog) return;
-
-        IBlockState myState = worldIn.getBlockState(pos);
-
-        if (source.getAxis() != myState.getValue(AXIS)) return;
-
-        iteratedBlocks.add(pos);
-
-        Block block = worldIn.getBlockState(pos.offset(source.getOpposite())).getBlock();
-        if (block instanceof IKineticActor) {
-            ((IKineticActor) block).passRotation(worldIn, pos.offset(source.getOpposite()), source, iteratedBlocks,
-                    false, false, inverseRotation);
-        }
-    }
-
-
-
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -155,5 +133,10 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
         rotateBlock(worldIn, pos, side);
 
         return true;
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(AXIS);
     }
 }

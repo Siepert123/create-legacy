@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable {
+public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityProvider, IMetaName, IWrenchable, IHasRotation {
     @Override
     public String getSpecialName(ItemStack stack) {
         return Variant.fromMeta(stack.getItemDamage()).getName();
@@ -53,6 +53,11 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
         rotateBlock(worldIn, pos, side);
 
         return true;
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(HORIZONTAL_FACING).axis();
     }
 
 
@@ -95,7 +100,8 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
         setDefaultState(this.blockState.getBaseState()
                 .withProperty(VARIANT, Variant.ENGINE)
                 .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.NORTH)
-                .withProperty(HAS_SHAFT, false));
+                .withProperty(HAS_SHAFT, false)
+                .withProperty(ROTATION, 0));
         setHardness(2);
         setResistance(3);
         ModBlocks.BLOCKS.add(this);
@@ -116,7 +122,7 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT, HORIZONTAL_FACING, HAS_SHAFT});
+        return new BlockStateContainer(this, VARIANT, HORIZONTAL_FACING, HAS_SHAFT, ROTATION);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.siepert.createlegacy.tileentity.TileEntityDrill;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createapi.IKineticActor;
 import com.siepert.createapi.IWrenchable;
+import com.siepert.createlegacy.util.IHasRotation;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -35,7 +36,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockDrill extends Block implements IHasModel, IWrenchable, ITileEntityProvider {
+public class BlockDrill extends Block implements IHasModel, IWrenchable, ITileEntityProvider, IHasRotation {
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockDrill(String name) {
         super(Material.ROCK);
@@ -50,6 +51,8 @@ public class BlockDrill extends Block implements IHasModel, IWrenchable, ITileEn
         setHarvestLevel("axe", 0);
         setHardness(1);
         setResistance(2);
+
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.UP).withProperty(ROTATION, 0));
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
@@ -66,7 +69,7 @@ public class BlockDrill extends Block implements IHasModel, IWrenchable, ITileEn
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, FACING, ROTATION);
     }
 
     @Override
@@ -123,5 +126,10 @@ public class BlockDrill extends Block implements IHasModel, IWrenchable, ITileEn
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityDrill();
+    }
+
+    @Override
+    public EnumFacing.Axis rotateAround(IBlockState state) {
+        return state.getValue(FACING).getAxis();
     }
 }
