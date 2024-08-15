@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "create:item/my-post-got-gamered-on-v0-fyavcu982ucd1"
+  }
+}

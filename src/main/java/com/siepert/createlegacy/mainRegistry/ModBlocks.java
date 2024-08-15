@@ -49,6 +49,8 @@ public class ModBlocks {
     public static final Block SCHEDULE_WASH = new BlockScheduleWash();
     public static final Block SCHEDULE_COOK = new BlockScheduleCook();
 
+    public static final Block CHIGWANKER = new BlockChigwanker();
+
 
     public static final Block STONE = new BlockStone(true);
     public static final Block STONE_POLISHED = new BlockStonePolished();
