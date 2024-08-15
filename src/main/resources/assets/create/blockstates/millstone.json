@@ -1,5 +1,11 @@
 {
   "variants": {
+    "active=true": {
+      "model": "create:millstone"
+    },
+    "active=false": {
+      "model": "create:millstone"
+    },
     "active=true,rotation=0": {
       "model": "create:millstone"
     },

@@ -9,9 +9,11 @@ import com.siepert.createlegacy.blocks.kinetic.BlockMillStone;
 import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.util.handlers.ModSoundHandler;
 import com.siepert.createlegacy.util.handlers.recipes.MillingRecipes;
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -38,6 +40,7 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
                 pos.getY() + CreateLegacyModData.random.nextFloat(),
                 pos.getZ() + CreateLegacyModData.random.nextFloat(),
                 0, 0, 0);
+
     }
 
     @Override
@@ -434,6 +437,13 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
                         item.setDead();
                     }
                 }
+            }
+        }
+
+
+        if (CreateLegacyModData.random.nextInt(100) < 15) {
+            if (currentlyMilling.getItem() instanceof ItemBlock) {
+                world.playEvent(2001, pos, Block.getIdFromBlock(((ItemBlock)currentlyMilling.getItem()).getBlock()));
             }
         }
 
