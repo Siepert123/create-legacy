@@ -78,7 +78,10 @@ public class BlockWaterWheel extends Block implements IHasModel, IKineticActor, 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        if (placer != null) {
+            return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        }
+        return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 
     @Override

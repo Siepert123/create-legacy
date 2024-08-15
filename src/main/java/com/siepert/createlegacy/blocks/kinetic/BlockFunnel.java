@@ -167,8 +167,13 @@ public class BlockFunnel extends Block implements IHasModel, IMetaName, ITileEnt
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumHorizontalFacing facing1 = EnumHorizontalFacing.fromVanillaFacing(facing);
-        boolean extracting = !placer.isSneaking();
-        boolean advanced = placer.getHeldItem(hand).getMetadata() > 0;
+        boolean extracting;
+        if (placer != null) {
+            extracting = !placer.isSneaking();
+        } else {
+            extracting = false;
+        }
+        boolean advanced = meta > 0;
 
         return this.getDefaultState().withProperty(FACING, facing1).withProperty(EXTRACTING, extracting).withProperty(ADVANCED, advanced);
     }

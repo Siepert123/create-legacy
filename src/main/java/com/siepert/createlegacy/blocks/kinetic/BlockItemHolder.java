@@ -127,7 +127,7 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(placer.getHeldItem(hand).getItemDamage()));
+        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta));
     }
 
     @Override

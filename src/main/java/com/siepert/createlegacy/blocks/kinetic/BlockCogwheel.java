@@ -102,10 +102,12 @@ public class BlockCogwheel extends Block implements IHasModel, IHasRotation, IWr
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing.Axis axis = facing.getAxis();
-        if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockCogwheel && !placer.isSneaking()) {
-            return this.getDefaultState().withProperty(AXIS, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS))
-                    .withProperty(ROTATION,
-                            CreateAPI.discoverRotationForPlacement(world, pos, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS)));
+        if (placer != null) {
+            if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockCogwheel && !placer.isSneaking()) {
+                return this.getDefaultState().withProperty(AXIS, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS))
+                        .withProperty(ROTATION,
+                                CreateAPI.discoverRotationForPlacement(world, pos, world.getBlockState(pos.offset(facing.getOpposite())).getValue(AXIS)));
+            }
         }
         return this.getDefaultState().withProperty(AXIS, axis)
                 .withProperty(ROTATION, CreateAPI.discoverRotationForPlacement(world, pos, axis));

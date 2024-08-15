@@ -121,8 +121,12 @@ public class BlockFurnaceEngine extends Block implements IHasModel, ITileEntityP
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(placer.getHeldItem(hand).getItemDamage()))
-                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        if (placer != null) {
+            return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta))
+                    .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        }
+        return this.getDefaultState().withProperty(VARIANT, Variant.fromMeta(meta))
+                .withProperty(HORIZONTAL_FACING, EnumHorizontalFacing.fromVanillaFacing(facing));
     }
 
     @Override

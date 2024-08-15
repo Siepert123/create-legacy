@@ -97,10 +97,13 @@ public class BlockCreativeMotor extends Block implements IHasModel, ITileEntityP
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
                                             int meta, EntityLivingBase placer, EnumHand hand) {
-        if (placer.isSneaking()) {
-            return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+        if (placer != null) {
+            if (placer.isSneaking()) {
+                return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+            }
+            return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
         }
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+        return this.getDefaultState().withProperty(FACING, facing.getOpposite());
     }
 
     @Nullable

@@ -92,14 +92,19 @@ public class BlockMechanicalPiston extends Block implements IHasModel, IKineticA
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        boolean isSticky = placer.getHeldItem(hand).getItemDamage() == 1;
+        boolean isSticky = meta == 1;
 
-        if (placer.isSneaking()) {
-            return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
+        if (placer != null) {
+            if (placer.isSneaking()) {
+                return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
+            }
         }
-        return getDefaultState().withProperty(FACING,
-                EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
-                        .getOpposite()).withProperty(STICKY, isSticky);
+        if (placer != null) {
+            return getDefaultState().withProperty(FACING,
+                    EnumFacing.getFacingFromVector((float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
+                            .getOpposite()).withProperty(STICKY, isSticky);
+        }
+        return getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(STICKY, isSticky);
     }
 
     @Override

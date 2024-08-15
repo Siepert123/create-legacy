@@ -170,19 +170,26 @@ public class BlockKineticUtility extends Block implements IHasModel, IMetaName, 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState variantState = this.getDefaultState()
-                .withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[placer.getHeldItem(hand).getItemDamage()]);
+                .withProperty(VARIANT, EnumHandler.KineticUtilityEnumType.values()[meta]);
         if (variantState.getValue(VARIANT) == EnumHandler.KineticUtilityEnumType.GEARBOX) {
-            if (placer.isSneaking()) {
-                return variantState.withProperty(AXIS, facing.getAxis());
+            if (placer != null) {
+                if (placer.isSneaking()) {
+                    return variantState.withProperty(AXIS, facing.getAxis());
+                }
             }
             return variantState;
         }
-        if (placer.isSneaking()) {
-            return variantState.withProperty(AXIS, facing.getAxis());
+        if (placer != null) {
+            if (placer.isSneaking()) {
+                return variantState.withProperty(AXIS, facing.getAxis());
+            }
         }
-        return variantState.withProperty(AXIS, EnumFacing.getFacingFromVector(
-                (float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
-                .getAxis());
+        if (placer != null) {
+            return variantState.withProperty(AXIS, EnumFacing.getFacingFromVector(
+                            (float) placer.getLookVec().x, (float) placer.getLookVec().y, (float) placer.getLookVec().z)
+                    .getAxis());
+        }
+        return variantState.withProperty(AXIS, facing.getAxis());
     }
 
     private void actEncasedShaft(World worldIn, BlockPos pos, EnumFacing source, List<BlockPos> iteratedBlocks, boolean inverseRotation) {

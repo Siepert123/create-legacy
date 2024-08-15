@@ -100,7 +100,10 @@ public class BlockBelt extends Block implements IHasModel, IWrenchable, ITileEnt
 
     @Override
     public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        if (placer != null) {
+            return this.getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().getAxis());
+        }
+        return this.getDefaultState().withProperty(AXIS, facing.getAxis());
     }
 
     @Override

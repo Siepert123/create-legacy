@@ -105,7 +105,7 @@ public class BlockAxle extends Block implements IHasModel, IHasRotation, ITileEn
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         EnumFacing.Axis axis = facing.getAxis();
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS, axis)
+        return getDefaultState().withProperty(AXIS, axis)
                 .withProperty(ROTATION, CreateAPI.discoverRotationForPlacement(world, pos, axis));
     }
 

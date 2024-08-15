@@ -79,7 +79,10 @@ public class BlockDeployer extends Block implements IHasModel, ITileEntityProvid
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        if (placer != null) {
+            return getDefaultState().withProperty(FACING, EnumHorizontalFacing.fromVanillaFacing(placer.getHorizontalFacing().getOpposite()));
+        }
+        return getDefaultState().withProperty(FACING, EnumHorizontalFacing.fromVanillaFacing(facing.getOpposite()));
     }
 
     @Override
