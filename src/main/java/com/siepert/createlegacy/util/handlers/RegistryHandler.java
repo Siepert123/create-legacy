@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.util.handlers;
 
+import com.siepert.createlegacy.integration.KineticInfoProvider;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.register.TileEntityRegistry;
@@ -7,10 +8,13 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.util.compat.TinkersCompat;
 import com.siepert.createlegacy.world.gen.WorldGenCustomOres;
+import mcjty.theoneprobe.TheOneProbe;
+import mcjty.theoneprobe.api.ITheOneProbe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -48,6 +52,9 @@ public class RegistryHandler {
     }
 
     public static void otherInitRegistries() {
+        if (Loader.isModLoaded("theoneprobe")) {
+            KineticInfoProvider.registerProbeInfoProvider();
+        }
         OreDictionaryCompat.registerOres();
         OreDictionaryCompat.registerStoneTypes();
         ModSoundHandler.registerSounds();

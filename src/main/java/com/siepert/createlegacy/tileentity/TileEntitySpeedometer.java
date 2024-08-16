@@ -18,6 +18,9 @@ public class TileEntitySpeedometer extends TileEntity implements IKineticTE {
     }
 
     NetworkContext lastContext;
+    public NetworkContext getLastContext() { // Needed for TOP
+        return this.lastContext;
+    }
 
     @Override
     public double getStressImpact() {

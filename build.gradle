@@ -63,7 +63,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
-    // compile against the TOP API
+    // compile against TOP
     compileOnly fg.deobf('curse.maven:top-245211:2667280') // TOP 1.4.28
 }
 
