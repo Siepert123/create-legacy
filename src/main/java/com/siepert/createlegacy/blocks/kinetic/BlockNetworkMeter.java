@@ -180,7 +180,7 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
                 playerIn.sendStatusMessage(new TextComponentString(((TileEntitySpeedometer) entity).getMessage()), true);
             }
         }
-        return true;
+        return !(playerIn.isSneaking() && playerIn.isHandActive()); // If player is sneaking place a block
     }
 
     @Nullable
