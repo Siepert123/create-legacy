@@ -32,5 +32,7 @@ public class TileEntityRegistry {
         GameRegistry.registerTileEntity(TileEntityStressometer.class, "stressometer");
 
         GameRegistry.registerTileEntity(TileEntityChigwanker.class, "chigwanker");
+
+        GameRegistry.registerTileEntity(TileEntityBasin.class, "basin");
     }
 }

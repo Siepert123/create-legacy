@@ -5,10 +5,12 @@ import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.item.ItemBlockVariants;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
+import com.siepert.createlegacy.tileentity.TileEntityBasin;
 import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -22,6 +24,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +37,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class BlockItemHolder extends Block implements IHasModel, IMetaName {
+public class BlockItemHolder extends Block implements IHasModel, IMetaName, ITileEntityProvider {
     public static final AxisAlignedBB HITBOX_DEPOT = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 13.0 / 16.0, 1.0);
 
     public static final AxisAlignedBB HITBOX_BASIN_DOWN = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 2.0 / 16.0, 1.0);
@@ -54,6 +57,13 @@ public class BlockItemHolder extends Block implements IHasModel, IMetaName {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        if (meta == 1) return new TileEntityBasin();
+        return null;
     }
 
     public enum Variant implements IStringSerializable {
