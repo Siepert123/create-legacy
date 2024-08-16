@@ -15,10 +15,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockRedstoneToggleLatch extends BlockRedstoneDiode implements IHasModel {
@@ -35,7 +38,24 @@ public class BlockRedstoneToggleLatch extends BlockRedstoneDiode implements IHas
         setDefaultState(this.blockState.getBaseState().withProperty(TOGGLED, false).withProperty(FACING, EnumFacing.NORTH));
 
         ModBlocks.BLOCKS.add(this);
-        if (!powered) ModItems.ITEMS.add(new ItemBlock(ModBlocks.TOGGLE_LATCH).setRegistryName("toggle_latch"));
+        if (!powered) ModItems.ITEMS.add(new ItemBlock(this).setRegistryName("toggle_latch"));
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+        if (side != null) {
+            return side.getAxis() == state.getValue(FACING).getAxis();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canProvidePower(IBlockState state) {
+        return state.getValue(TOGGLED);
+    }
+
+    public IBlockState withRotation(IBlockState state, Rotation rot) {
+        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
