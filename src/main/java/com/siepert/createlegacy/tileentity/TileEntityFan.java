@@ -301,7 +301,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
 
                         }
-                        if (!world.isRemote) {
+                        if (!world.isRemote && !entityItem.getTags().contains(CreateLegacyModData.ITEM_OUTPUT_TAG)) {
                             if (whatsTheProcess == ProcessingType.SMELT) {
                                 SmeltResultSet resultSet = applicateSmelt(entityItem.getItem(), whatsTheProcess);
                                 if (resultSet.hasRecipe) {
@@ -309,6 +309,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                     EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                                             resultSet.stack);
                                     resultEntityItem.setVelocity(0, 0, 0);
+                                    resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                                     world.spawnEntity(resultEntityItem);
 
                                     world.playSound(null, entityItem.posX, entityItem.posY, entityItem.posZ,
@@ -327,6 +328,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                     EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                                             resultSet.stack);
                                     resultEntityItem.setVelocity(0, 0, 0);
+                                    resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                                     world.spawnEntity(resultEntityItem);
 
                                     if (resultSet.hasOptional()) {
@@ -405,7 +407,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
         return false;
     }
 
-    public @Nullable SmeltResultSet applicateSmelt(@Nonnull ItemStack stack, TileEntityFan.ProcessingType type) {
+    public SmeltResultSet applicateSmelt(@Nonnull ItemStack stack, TileEntityFan.ProcessingType type) {
         if (stack.isEmpty()) {
             return new SmeltResultSet(stack, false);
         }
@@ -421,7 +423,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
             }
         }
     }
-    public @Nullable WashResultSet applicateWash(@Nonnull ItemStack stack, TileEntityFan.ProcessingType type) {
+    public WashResultSet applicateWash(@Nonnull ItemStack stack, TileEntityFan.ProcessingType type) {
         if (stack.isEmpty()) {
             return new WashResultSet(stack, false);
         }

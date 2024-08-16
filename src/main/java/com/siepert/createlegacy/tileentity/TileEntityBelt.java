@@ -5,7 +5,9 @@ import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
+import com.siepert.createlegacy.CreateLegacyModData;
 import com.siepert.createlegacy.blocks.kinetic.BlockBelt;
+import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,6 +62,10 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
         for (Entity entity : entities) {
             if (!entity.isSneaking()) {
+                boolean flag0 = !entity.getTags().contains(CreateLegacyModData.ITEM_OUTPUT_TAG);
+                boolean flag1 = world.getBlockState(pos.up(2)).getBlock() == ModBlocks.PRESS;
+
+
                 boolean h = Math.abs(velocityX) < Math.abs(entity.motionX);
                 boolean j = Math.abs(velocityZ) < Math.abs(entity.motionZ);
 

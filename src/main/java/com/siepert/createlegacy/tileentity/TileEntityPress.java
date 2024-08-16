@@ -110,13 +110,14 @@ public class TileEntityPress extends TileEntity implements IKineticTE {
                 List<EntityItem> foundItems = world.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
 
                 for (EntityItem entityItem : foundItems) {
-                    if (apply(entityItem.getItem()).hasRecipe) {
+                    if (apply(entityItem.getItem()).hasRecipe && !entityItem.getTags().contains(CreateLegacyModData.ITEM_OUTPUT_TAG)) {
                         pressingProgress = 100;
                         EntityItem resultEntityItem = new EntityItem(world, pos.getX() + 0.5, pos.down().getY(), pos.getZ() + 0.5,
                                 apply(entityItem.getItem()).stack);
                         entityItem.getItem().shrink(1);
                         resultEntityItem.setVelocity(0, 0, 0);
                         resultEntityItem.setNoDespawn();
+                        resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                         world.spawnEntity(resultEntityItem);
                         if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                             entityItem.setDead();
@@ -137,13 +138,14 @@ public class TileEntityPress extends TileEntity implements IKineticTE {
             List<EntityItem> foundItems = world.getEntitiesWithinAABB(EntityItem.class, itemSearchArea);
 
             for (EntityItem entityItem : foundItems) {
-                if (applyCompact(entityItem.getItem(), heatState).hasRecipe) {
+                if (applyCompact(entityItem.getItem(), heatState).hasRecipe && !entityItem.getTags().contains(CreateLegacyModData.ITEM_OUTPUT_TAG)) {
                     pressingProgress = 100;
                     EntityItem resultEntityItem = new EntityItem(world, pos.getX() + 0.5, pos.down(2).getY() + 0.2, pos.getZ() + 0.5,
                             applyCompact(entityItem.getItem(), heatState).getResult());
                     entityItem.getItem().shrink(applyCompact(entityItem.getItem(), heatState).cost);
                     resultEntityItem.setVelocity(0, 0, 0);
                     resultEntityItem.setNoDespawn();
+                    resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                     world.spawnEntity(resultEntityItem);
                     if (entityItem.getItem().getCount() == 0 || entityItem.getItem().isEmpty()) {
                         entityItem.setDead();

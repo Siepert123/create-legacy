@@ -25,6 +25,8 @@ public final class CreateLegacyModData {
 
     public static String WIP_TT = "[WIP - DO NOT USE]";
 
+    public static String ITEM_OUTPUT_TAG = "RecipeOutput";
+
     public static Random random = new Random(System.currentTimeMillis());
     public static TimedLucky timedLucky = new TimedLucky();
 
