@@ -58,16 +58,16 @@ public class TileEntityGearbox extends TileEntity implements IKineticTE {
         TileEntity entity2 = world.getTileEntity(pos.offset(facing2));
         TileEntity entity3 = world.getTileEntity(pos.offset(facing3));
 
-        if (entity1 instanceof IKineticTE) {
+        if (entity1 instanceof IKineticTE && !context.hasBlockBeenChecked(pos.offset(facing1))) {
             ((IKineticTE) entity1).passNetwork(context, facing1.getOpposite(),
                     false, false, !inverted);
         }
 
-        if (entity2 instanceof IKineticTE) {
+        if (entity2 instanceof IKineticTE && !context.hasBlockBeenChecked(pos.offset(facing2))) {
             ((IKineticTE) entity2).passNetwork(context, facing2.getOpposite(), false, false, !inverted);
         }
 
-        if (entity3 instanceof IKineticTE) {
+        if (entity3 instanceof IKineticTE && !context.hasBlockBeenChecked(pos.offset(facing3))) {
             ((IKineticTE) entity3).passNetwork(context, facing3.getOpposite(),
                     false, false, inverted);
         }

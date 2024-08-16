@@ -229,7 +229,7 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
 
             TileEntity entity = world.getTileEntity(pos.offset(source.getOpposite()));
 
-            if (entity instanceof IKineticTE) {
+            if (entity instanceof IKineticTE && !context.hasBlockBeenChecked(pos.offset(source.getOpposite()))) {
                 ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
             }
         }

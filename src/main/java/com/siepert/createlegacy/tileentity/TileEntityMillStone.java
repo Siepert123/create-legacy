@@ -472,7 +472,7 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
             if (dir != source) {
                 TileEntity entity = world.getTileEntity(pos.offset(dir));
 
-                if (entity instanceof IKineticTE) {
+                if (entity instanceof IKineticTE && !context.hasBlockBeenChecked(pos.offset(dir))) {
                     ((IKineticTE) entity).passNetwork(context, dir.getOpposite(), true, true, inverted);
                 }
             }
