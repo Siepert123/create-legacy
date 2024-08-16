@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
@@ -14,7 +15,7 @@ public class TileEntitySpeedometer extends TileEntity implements IKineticTE {
         if (lastContext != null) {
             return lastContext.networkSpeed + " RS";
         }
-        return "No data found";
+        return CreateAPI.translateToLocal("networkContext.noData");
     }
 
     NetworkContext lastContext;

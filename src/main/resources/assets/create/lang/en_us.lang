@@ -136,6 +136,9 @@ tooltip.stressCapacity=Kinetic Stress Capacity: %d x RS
 
 tile.create:chigwanker.name=Mechindustrial Chigwanker
 
+networkContext.infiniteSU=No network stress
+networkContext.noData=No data found
+
 #Sounds
 subtitle.block.cogwheel.ambient=Cogwheels rumble
 subtitle.item.sandpaper.used=Sandpaper polishes

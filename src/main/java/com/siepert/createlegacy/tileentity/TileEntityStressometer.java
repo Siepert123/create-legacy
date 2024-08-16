@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.tileentity;
 
+import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
@@ -12,20 +13,20 @@ import static com.siepert.createlegacy.blocks.kinetic.BlockNetworkMeter.AXIS;
 public class TileEntityStressometer extends TileEntity implements IKineticTE {
     public String getMessage() {
         if (lastContext != null) {
-            if (lastContext.infiniteSU) return "No network stress";
+            if (lastContext.infiniteSU) return CreateAPI.translateToLocal("networkContext.noData");
 
             if (lastContext.totalSU == 0) {
                 if (lastContext.scheduledConsumedSU > 0) {
                     return lastContext.scheduledConsumedSU + "/0 SU (>100%)";
                 }
-                return "No network stress";
+                return CreateAPI.translateToLocal("networkContext.infiniteSU");
             }
 
             int percentage = Math.round(((float) lastContext.scheduledConsumedSU) / ((float) lastContext.totalSU) * 100);
 
             return lastContext.scheduledConsumedSU + "/" + lastContext.totalSU + " SU (" + percentage + "%)";
         }
-        return "No data found";
+        return CreateAPI.translateToLocal("networkContext.noData");
     }
 
     NetworkContext lastContext;
