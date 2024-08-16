@@ -4,13 +4,19 @@ import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.Optional;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockNetworkMeter.AXIS;
 
-public class TileEntityStressometer extends TileEntity implements IKineticTE {
+@Optional.InterfaceList({@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")})
+public class TileEntityStressometer extends TileEntity implements IKineticTE, SimpleComponent {
     public String getMessage() {
         if (lastContext != null) {
             if (lastContext.infiniteSU) return CreateAPI.translateToLocal("networkContext.noData");
@@ -79,5 +85,26 @@ public class TileEntityStressometer extends TileEntity implements IKineticTE {
                 ((IKineticTE) entity).passNetwork(context, source, false, false, inverted);
             }
         }
+    }
+
+    // OpenComputers
+    @Override
+    public String getComponentName() {
+        return "stressometer";
+    }
+
+    @Callback(doc = "getNetworkStress(); returns the network's current consumed stress in SU - int")
+    public Object[] getNetworkStress(Context context, Arguments args) {
+        return new Object[]{lastContext.scheduledConsumedSU};
+    }
+
+    @Callback(doc = "isNetworkOverstressed(); returns true if the network is overstressed - boolean")
+    public Object[] isNetworkOverstressed(Context context, Arguments args) {
+        return new Object[]{lastContext.isNetworkOverstressed()};
+    }
+
+    @Callback(doc = "isNetworkInfiniteSU(); returns true if the network has an infinite SU capacity - boolean")
+    public Object[] isNetworkInfiniteSU(Context context, Arguments args) {
+        return new Object[]{lastContext.infiniteSU};
     }
 }
