@@ -1,5 +1,6 @@
 package com.siepert.createlegacy.util.handlers;
 
+import com.siepert.createlegacy.integration.CCTPeripheralProvider;
 import com.siepert.createlegacy.integration.KineticInfoProvider;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
@@ -54,6 +55,9 @@ public class RegistryHandler {
     public static void otherInitRegistries() {
         if (Loader.isModLoaded("theoneprobe")) {
             KineticInfoProvider.registerProbeInfoProvider();
+        }
+        if (Loader.isModLoaded("computercraft")) {
+            CCTPeripheralProvider.register();
         }
         OreDictionaryCompat.registerOres();
         OreDictionaryCompat.registerStoneTypes();

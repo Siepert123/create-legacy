@@ -44,25 +44,39 @@ public class TileEntityBasin extends TileEntity implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return getOutputItems().get(index).getItem();
+        if (!(index > getOutputItems().size() - 1)) {
+            return getOutputItems().get(index).getItem();
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return getOutputItems().get(index).getItem().splitStack(count);
+        if (!(index > getOutputItems().size() - 1)) {
+            return getOutputItems().get(index).getItem().splitStack(count);
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        List<EntityItem> items = getOutputItems();
-        ItemStack stack = items.get(index).getItem().copy();
-        items.get(index).setDead();
-        return stack;
+        if (!(index > getOutputItems().size() - 1)) {
+            List<EntityItem> items = getOutputItems();
+            ItemStack stack = items.get(index).getItem().copy();
+            items.get(index).setDead();
+            return stack;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
-        getOutputItems().get(index).setItem(stack);
+        EntityItem item = new EntityItem(world, pos.getX() + 0.5,
+                pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+        item.setNoDespawn();
+        item.setVelocity(0, 0, 0);
+        item.setPickupDelay(100);
+        world.spawnEntity(item);
     }
 
     @Override

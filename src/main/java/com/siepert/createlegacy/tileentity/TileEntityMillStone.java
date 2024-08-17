@@ -240,7 +240,6 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
     }
 
     private static ItemStack handleIllegalIndex(int index, int max) {
-        CreateLegacy.logger.error("Tried getting stack in slot id {} while max allowed is {}", index, max);
         return ItemStack.EMPTY;
     }
 
