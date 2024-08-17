@@ -60,6 +60,9 @@ repositories {
     maven { // OpenComputers maven
         url = "http://maven.cil.li/"
     }
+    maven { // CC Tweaked maven
+        url = 'https://squiddev.cc/maven/'
+    }
 }
 
 dependencies {
@@ -70,6 +73,8 @@ dependencies {
     compileOnly fg.deobf('curse.maven:top-245211:2667280') // TOP 1.4.28
     // compile against OpenComputers API
     compileOnly "li.cil.oc:OpenComputers:MC1.12.2-1.7.5.221:api" // Newest 1.12.2 OC version I found on the maven
+    // compile against CC: Tweaked
+    compileOnly fg.deobf('org.squiddev:cc-tweaked-1.12.2:1.89.2') // Newest 1.12.2 CCT version I found on the maven
 }
 
 jar {

@@ -4,6 +4,7 @@ import com.siepert.createapi.CreateAPI;
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.KineticBlockInstance;
 import com.siepert.createapi.network.NetworkContext;
+import com.siepert.createlegacy.integration.SpeedometerPeripheral;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -11,12 +12,22 @@ import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 import static com.siepert.createlegacy.blocks.kinetic.BlockNetworkMeter.AXIS;
 
 @Optional.InterfaceList({@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")})
 public class TileEntitySpeedometer extends TileEntity implements IKineticTE, SimpleComponent {
+    public Object speedometerPeripheral;
+
+    public TileEntitySpeedometer() {
+        super();
+        if (Loader.isModLoaded("computercraft")) {
+            this.speedometerPeripheral = new SpeedometerPeripheral(this);
+        }
+    }
+
     public String getMessage() {
         if (lastContext != null) {
             return lastContext.networkSpeed + " RS";
