@@ -8,7 +8,6 @@ import com.siepert.createlegacy.blocks.decoration.*;
 import com.siepert.createlegacy.blocks.kinetic.*;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleCook;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleWash;
-import com.siepert.createlegacy.blocks.redstone.BlockRedstoneToggleLatch;
 import net.minecraft.block.Block;
 
 import java.util.ArrayList;
@@ -51,10 +50,6 @@ public class ModBlocks {
     public @Deprecated static final Block SCHEDULE_COOK = new BlockScheduleCook();
 
     public static final Block CHIGWANKER = new BlockChigwanker();
-
-    //redstone !?!??!?!
-    public static final Block TOGGLE_LATCH = new BlockRedstoneToggleLatch(false);
-    public static final Block TOGGLE_LATCH_POWERED = new BlockRedstoneToggleLatch(true);
 
 
     public static final Block STONE = new BlockStone(true);
