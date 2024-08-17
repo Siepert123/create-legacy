@@ -56,6 +56,8 @@ public class KineticInfoProvider implements IProbeInfoProvider {
             probeInfo.text("\u00a7aNetwork: " + ((TileEntitySpeedometer) networkMeterTile).getMessage() + "\u00a7r");
         } else if (networkMeterTile instanceof TileEntityStressometer) {
             probeInfo.text("\u00a7eNetwork: " + ((TileEntityStressometer) networkMeterTile).getMessage() + "\u00a7r");
+            if (((TileEntityStressometer) networkMeterTile).getLastContext() == null) // Can't get last context if it doesnt exist
+                return;
             if (((TileEntityStressometer) networkMeterTile).getLastContext().infiniteSU) {
                 probeInfo.text("\u00a7bInfinite stress capacity\u00a7r");
             } else if (((TileEntityStressometer) networkMeterTile).getLastContext().isNetworkOverstressed()) {
