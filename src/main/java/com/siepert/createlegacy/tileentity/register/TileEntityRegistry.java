@@ -1,7 +1,6 @@
 package com.siepert.createlegacy.tileentity.register;
 
 import com.siepert.createlegacy.tileentity.*;
-import com.siepert.createlegacy.tileentity.redstone.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntityRegistry {

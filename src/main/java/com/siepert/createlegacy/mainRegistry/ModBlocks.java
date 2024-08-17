@@ -8,6 +8,7 @@ import com.siepert.createlegacy.blocks.decoration.*;
 import com.siepert.createlegacy.blocks.kinetic.*;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleCook;
 import com.siepert.createlegacy.blocks.logic.BlockScheduleWash;
+import com.siepert.createlegacy.blocks.redstone.BlockRedstoneLink;
 import net.minecraft.block.Block;
 
 import java.util.ArrayList;
@@ -50,6 +51,9 @@ public class ModBlocks {
     public @Deprecated static final Block SCHEDULE_COOK = new BlockScheduleCook();
 
     public static final Block CHIGWANKER = new BlockChigwanker();
+
+    //red stone !
+    public static final Block REDSTONE_LINK = new BlockRedstoneLink();
 
 
     public static final Block STONE = new BlockStone(true);
