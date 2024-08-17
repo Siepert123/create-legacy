@@ -47,7 +47,7 @@ public class StressometerPeripheral implements IPeripheral {
 
     @Override
     public boolean equals(@Nullable IPeripheral iPeripheral) {
-        return this.equals(iPeripheral);
+        return ((Object)this).equals(iPeripheral);
     }
 
     @Override

@@ -15,7 +15,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -32,6 +31,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -56,12 +56,16 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
         setCreativeTab(CreateLegacy.TAB_CREATE);
         setHarvestLevel("axe", 0);
 
-        setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(ALT, false));
+        setDefaultState(this.blockState.getBaseState()
+                .withProperty(AXIS, EnumFacing.Axis.X)
+                .withProperty(ALT, false));
 
         setHardness(1);
         setResistance(2);
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(this.getRegistryName()));
+
+
     }
 
     @Override
@@ -143,6 +147,11 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
     }
 
     @Override
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return true; // Needed for computercraft
+    }
+
+    @Override
     public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
         IBlockState state = world.getBlockState(pos);
         TileEntity tileEntity = world.getTileEntity(pos);
@@ -180,7 +189,7 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
                 playerIn.sendStatusMessage(new TextComponentString(((TileEntitySpeedometer) entity).getMessage()), true);
             }
         }
-        return !(playerIn.isSneaking() && playerIn.isHandActive()); // If player is sneaking place a block
+        return true;
     }
 
     @Nullable
