@@ -34,5 +34,7 @@ public class TileEntityRegistry {
         GameRegistry.registerTileEntity(TileEntityChigwanker.class, "chigwanker");
 
         GameRegistry.registerTileEntity(TileEntityBasin.class, "basin");
+
+        GameRegistry.registerTileEntity(TileEntityMultiblockExtension.class, "multiblock_extension");
     }
 }
