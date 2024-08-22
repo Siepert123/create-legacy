@@ -363,7 +363,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
         return true;
     }
 
-    private enum ProcessingType {
+    public enum ProcessingType {
         WASH, SMELT;
 
         public static @Nullable ProcessingType getType(IBlockState blockstateIn) {
@@ -399,7 +399,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
         predef_allowances.add(Blocks.IRON_BARS);
         predef_allowances.add(ModBlocks.BLAZE_BURNER);
 
-        if (predef_allowances.contains(stateOfOhio.getBlock()))return true;
+        if (predef_allowances.contains(stateOfOhio.getBlock())) return true;
 
         if (!stateOfOhio.getMaterial().blocksMovement()) return true;
         if (stateOfOhio.getCollisionBoundingBox(access, pos) == Block.NULL_AABB) return true;
@@ -447,7 +447,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
         }
     }
 
-    private class SmeltResultSet {
+    public static class SmeltResultSet {
         ItemStack stack;
         boolean hasRecipe;
         private SmeltResultSet(ItemStack stack, boolean hasRecipe) {
@@ -463,7 +463,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
             return stack;
         }
     }
-    private class WashResultSet {
+    public static class WashResultSet {
         ItemStack stack, stackOptional;
         boolean hasRecipe, hasOptional;
 
