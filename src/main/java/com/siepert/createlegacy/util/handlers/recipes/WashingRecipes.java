@@ -1,14 +1,17 @@
 package com.siepert.createlegacy.util.handlers.recipes;
 
 import com.google.common.collect.Maps;
+import com.siepert.createlegacy.integration.ModIntegrationMachineRecipeChecker;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class WashingRecipes {
     private static final WashingRecipes WASHING_BASE = new WashingRecipes();
@@ -74,6 +77,7 @@ public class WashingRecipes {
     }
 
     public ItemStack getWashingResult(ItemStack stack) {
+
         for (Map.Entry<ItemStack, ItemStack> entry : this.washingList.entrySet()) {
             if (this.compareItemStacks(stack, entry.getKey())) {
                 return entry.getValue();

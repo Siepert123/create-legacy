@@ -2,6 +2,7 @@ package com.siepert.createlegacy.util.handlers;
 
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.blocks.kinetic.BlockBlazeBurner;
+import com.siepert.createlegacy.integration.ModIntegrationMachineRecipeChecker;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.util.compat.MetalTypes;
@@ -122,6 +123,7 @@ public class RecipeHandler {
             compatWashFound++;
         }
         CreateLegacy.logger.info("Found {} compatible washables total", compatWashFound);
+        ModIntegrationMachineRecipeChecker.addModdedRecipes();
     }
 
     public static void registerCrushedOreCompatSmelting() { //Registers smelting crushed ore if the according ingot is real

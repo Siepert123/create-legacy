@@ -63,6 +63,14 @@ repositories {
     maven { // CC Tweaked maven
         url = 'https://squiddev.cc/maven/'
     }
+    maven { // GregTech maven
+        name 'GTCEu Maven'
+        url 'https://maven.gtceu.com'
+    }
+    maven { // Required for GTCEu
+        name 'Cleanroom Maven'
+        url 'https://maven.cleanroommc.com'
+    }
 }
 
 dependencies {
@@ -70,11 +78,13 @@ dependencies {
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
     // compile against TOP
-    compileOnly fg.deobf('curse.maven:top-245211:2667280') // TOP 1.4.28
+    compileOnly fg.deobf('curse.maven:top-245211:2667280') // TheOneProbe 1.4.28 (newest on CF)
     // compile against OpenComputers API
     compileOnly "li.cil.oc:OpenComputers:MC1.12.2-1.7.5.221:api" // Newest 1.12.2 OC version I found on the maven
     // compile against CC: Tweaked
     compileOnly fg.deobf('org.squiddev:cc-tweaked-1.12.2:1.89.2') // Newest 1.12.2 CCT version I found on the maven
+    // compile against GTCEu
+    compileOnly fg.deobf('gregtech:gregtech:2.8.10-beta:dev') // Newest 1.12.2 GTCEu version
 }
 
 jar {
