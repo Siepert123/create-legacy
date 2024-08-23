@@ -85,6 +85,8 @@ dependencies {
     compileOnly fg.deobf('org.squiddev:cc-tweaked-1.12.2:1.89.2') // Newest 1.12.2 CCT version I found on the maven
     // compile against GTCEu
     compileOnly fg.deobf('gregtech:gregtech:2.8.10-beta:dev') // Newest 1.12.2 GTCEu version
+    // compile against hwyla
+    compileOnly fg.deobf('curse.maven:hwyla-253449:2568751') // Newest 1.12.2 hwyla version I found on CF
 }
 
 jar {
