@@ -12,6 +12,7 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,6 +26,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -215,5 +217,26 @@ public class BlockNetworkMeter extends Block implements IHasModel, IWrenchable, 
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         if (state.getValue(ALT)) return new ItemStack(this, 1, 1);
         return new ItemStack(this, 1, 0);
+    }
+
+    @Override
+    public boolean hasComparatorInputOverride(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorInputOverride(IBlockState blockState, @Nonnull World worldIn, BlockPos pos) {
+        TileEntity te = worldIn.getTileEntity(pos);
+        if (te == null)
+            return 0;
+        if (!(te instanceof TileEntityStressometer))
+            return 0;
+        TileEntityStressometer tes = (TileEntityStressometer) te;
+        if (tes.getLastContext().infiniteSU)
+            return 0;
+        if (tes.getLastContext().isNetworkOverstressed())
+            return 15;
+        return Math.max(Math.min(Math.round(
+                ((float) tes.getLastContext().scheduledConsumedSU / (float) tes.getLastContext().totalSU) * 15), 15), 0);
     }
 }
