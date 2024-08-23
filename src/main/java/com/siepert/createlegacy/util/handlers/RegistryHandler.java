@@ -1,7 +1,7 @@
 package com.siepert.createlegacy.util.handlers;
 
 import com.siepert.createlegacy.integration.CCTPeripheralProvider;
-import com.siepert.createlegacy.integration.KineticInfoProvider;
+import com.siepert.createlegacy.integration.TOPKineticInfoProvider;
 import com.siepert.createlegacy.mainRegistry.ModBlocks;
 import com.siepert.createlegacy.mainRegistry.ModItems;
 import com.siepert.createlegacy.tileentity.register.TileEntityRegistry;
@@ -9,8 +9,6 @@ import com.siepert.createlegacy.util.IHasModel;
 import com.siepert.createlegacy.util.compat.OreDictionaryCompat;
 import com.siepert.createlegacy.util.compat.TinkersCompat;
 import com.siepert.createlegacy.world.gen.WorldGenCustomOres;
-import mcjty.theoneprobe.TheOneProbe;
-import mcjty.theoneprobe.api.ITheOneProbe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -54,7 +52,7 @@ public class RegistryHandler {
 
     public static void otherInitRegistries() {
         if (Loader.isModLoaded("theoneprobe")) {
-            KineticInfoProvider.registerProbeInfoProvider();
+            TOPKineticInfoProvider.registerProbeInfoProvider();
         }
         if (Loader.isModLoaded("computercraft")) {
             CCTPeripheralProvider.register();

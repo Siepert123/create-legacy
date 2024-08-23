@@ -307,3 +307,14 @@ advancements.create.fan.title=Particle Processor
 advancements.create.fan.description=Obtain the Encased Fan which has 101 uses (no refunds)
 advancements.create.saw.title=The Cutter
 advancements.create.saw.description=Get your hands on a Mechanical Saw, which can chop the trees in one go
+
+# UI
+create.kineticinfo.network=Network
+create.kineticinfo.infinitestress=Infinite stress capacity
+create.kineticinfo.overstressed=Network overstressed
+create.kineticinfo.stressimpact=Stress impact
+create.kineticinfo.minimalspeed=Minimal speed
+create.kineticinfo.stresscapacity=Stress capacity
+create.kineticinfo.stresscapacity_atspeed=Stress capacity at current speed
+create.kineticinfo.speedproduced=Speed produced
+option.create.kinetic=Show kinetic info
