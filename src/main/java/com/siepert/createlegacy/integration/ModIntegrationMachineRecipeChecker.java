@@ -25,7 +25,7 @@ import java.util.*;
 public class ModIntegrationMachineRecipeChecker {
     public static void addModdedRecipes() {
         if (Loader.isModLoaded("gregtech")) { // Checks if gregtech is loaded & ore washing is enabled
-            if (CreateLegacyConfigHolder.IntegrationConfig.gregTechConfig.enableFanOreWashing) {
+            if (CreateLegacyConfigHolder.integrationConfig.enableFanOreWashing) {
                 for (Recipe recipe : RecipeMaps.ORE_WASHER_RECIPES.getRecipeList()) {
                     if (!getCanRecipeBePerformedGTVoltage(recipe))
                         continue;
@@ -35,7 +35,7 @@ public class ModIntegrationMachineRecipeChecker {
                     }
                 }
             }
-            if (CreateLegacyConfigHolder.IntegrationConfig.gregTechConfig.enableMillstoneMacerate) {
+            if (CreateLegacyConfigHolder.integrationConfig.enableMillstoneMacerate) {
                 for (Recipe recipe : RecipeMaps.MACERATOR_RECIPES.getRecipeList()) {
                     if (!getCanRecipeBePerformedGTVoltage(recipe))
                         continue;
@@ -49,7 +49,7 @@ public class ModIntegrationMachineRecipeChecker {
     }
 
     private static boolean getCanRecipeBePerformedGTVoltage(Recipe recipe) {
-        return recipe.getEUt() <= CreateLegacyConfigHolder.IntegrationConfig.gregTechConfig.gtVoltage;
+        return recipe.getEUt() <= CreateLegacyConfigHolder.integrationConfig.gtVoltage;
     }
     private static boolean gtWasherRecipeOnlyInputWater(Recipe recipe) {
         boolean containsWater = false;

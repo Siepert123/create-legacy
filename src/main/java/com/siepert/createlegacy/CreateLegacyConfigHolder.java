@@ -132,23 +132,18 @@ public class CreateLegacyConfigHolder {
     @Config.Name("Integration Config")
     public static IntegrationConfig integrationConfig = new IntegrationConfig();
     public static class IntegrationConfig {
-        @Config.Comment("Config options for integration with GregTech Community Edition Unoffical")
-        @Config.Name("GregTech Integration Config")
-        public static GregTechConfig gregTechConfig = new GregTechConfig();
-        public static class GregTechConfig {
-            @Config.Comment({"Equivalent GTCEu voltage tier for Create Legacy machines",
-                    "Values can be found in gregtech.api.GTValues",
-                    "Default: 32 (LV)"})
-            public long gtVoltage = 32L;
+        @Config.Comment({"Equivalent GTCEu voltage tier for Create Legacy machines",
+                "Values can be found in gregtech.api.GTValues",
+                "Default: 32 (LV)"})
+        public long gtVoltage = 32L;
 
-            @Config.Comment({"Whether the encased fan can wash things like GT-Style throwing into a cauldron of water",
-                    "Default: true"})
-            public boolean enableFanOreWashing = true;
+        @Config.Comment({"Whether the encased fan can wash things like GT-Style throwing into a cauldron of water",
+                "Default: true"})
+        public boolean enableFanOreWashing = true;
 
-            @Config.Comment({"Whether the Millstone can macerate things like a Steam macerator",
-                    "Default: true"})
-            public boolean enableMillstoneMacerate = true;
-        }
+        @Config.Comment({"Whether the Millstone can macerate things like a Steam macerator",
+                "Default: true"})
+        public boolean enableMillstoneMacerate = true;
     }
 
     @Config.Comment("Other miscellaneous configurations")
