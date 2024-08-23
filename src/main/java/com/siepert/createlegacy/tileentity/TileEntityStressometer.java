@@ -12,6 +12,7 @@ import li.cil.oc.api.network.SimpleComponent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
@@ -73,6 +74,7 @@ public class TileEntityStressometer extends TileEntity implements IKineticTE, Si
     @Override
     public void kineticTick(NetworkContext context) {
         lastContext = context;
+        markDirty();
     }
 
     @Override

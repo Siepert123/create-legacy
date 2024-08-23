@@ -135,14 +135,16 @@ public class CreateLegacyConfigHolder {
         @Config.Comment({"Equivalent GTCEu voltage tier for Create Legacy machines",
                 "Values can be found in gregtech.api.GTValues",
                 "Default: 32 (LV)"})
-        public long gtVoltage = 32L;
+        public int gtVoltage = 32;
 
         @Config.Comment({"Whether the encased fan can wash things like GT-Style throwing into a cauldron of water",
                 "Default: true"})
+        @Config.RequiresMcRestart
         public boolean enableFanOreWashing = true;
 
         @Config.Comment({"Whether the Millstone can macerate things like a Steam macerator",
                 "Default: true"})
+        @Config.RequiresMcRestart
         public boolean enableMillstoneMacerate = true;
     }
 
