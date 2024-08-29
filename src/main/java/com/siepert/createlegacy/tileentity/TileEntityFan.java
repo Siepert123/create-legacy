@@ -25,6 +25,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -115,8 +117,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                             baseVX -= 1.5;
                             break;
                     }
-
-                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                    entitySetVelocity(entity, baseVX, baseVY, baseVZ);
                 }
             } else return;
 
@@ -154,7 +155,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                             break;
                     }
 
-                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                    entitySetVelocity(entity, baseVX, baseVY, baseVZ);
                 }
             } else return;
 
@@ -192,7 +193,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                             break;
                     }
 
-                    entity.setVelocity(baseVX, baseVY, baseVZ);
+                    entitySetVelocity(entity, baseVX, baseVY, baseVZ);
                 }
             } else return;
         }
@@ -308,7 +309,7 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                     entityItem.getItem().shrink(1);
                                     EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                                             resultSet.stack);
-                                    resultEntityItem.setVelocity(0, 0, 0);
+                                    entitySetVelocity(resultEntityItem, 0, 0, 0);
                                     resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                                     world.spawnEntity(resultEntityItem);
 
@@ -327,14 +328,14 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                                     entityItem.getItem().shrink(1);
                                     EntityItem resultEntityItem = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                                             resultSet.stack);
-                                    resultEntityItem.setVelocity(0, 0, 0);
+                                    entitySetVelocity(resultEntityItem, 0, 0, 0);
                                     resultEntityItem.addTag(CreateLegacyModData.ITEM_OUTPUT_TAG);
                                     world.spawnEntity(resultEntityItem);
 
                                     if (resultSet.hasOptional()) {
                                         EntityItem resultEntityItemOptional = new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                                                 resultSet.stackOptional);
-                                        resultEntityItemOptional.setVelocity(0, 0, 0);
+                                        entitySetVelocity(resultEntityItem, 0, 0, 0);
                                         world.spawnEntity(resultEntityItemOptional);
                                     }
 
@@ -350,6 +351,12 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
                     }
                 } else return;
             }
+        }
+    }
+
+    private void entitySetVelocity(Entity entity, double x, double y, double z) {
+        if (world.isRemote) {
+            entity.setVelocity(x, y, z);
         }
     }
 
