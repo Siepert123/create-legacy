@@ -57,4 +57,7 @@ public interface IKineticTE {
      * @param inverted If the rotation rotates the other way.
      */
     void passNetwork(NetworkContext context, EnumFacing source, boolean srcIsCog, boolean srcCogIsHorizontal, boolean inverted);
+
+
+    int getRS();
 }

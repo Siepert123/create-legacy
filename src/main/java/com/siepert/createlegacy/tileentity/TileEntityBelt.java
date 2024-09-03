@@ -41,6 +41,10 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
+
         if (context.networkSpeed == 0) return;
 
         EnumFacing dir;
@@ -127,5 +131,13 @@ public class TileEntityBelt extends TileEntity implements IKineticTE {
 
             extendBelt(pos.offset(extendDir), extendDir, context, inverted, deepness+1);
         }
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 }

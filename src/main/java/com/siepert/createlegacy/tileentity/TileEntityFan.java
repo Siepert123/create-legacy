@@ -56,6 +56,9 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed  = context.networkSpeed;
+
         EnumFacing source = world.getBlockState(pos).getValue(BlockDrill.FACING).getOpposite();
         boolean isABlower = (!PROCESSORS.contains(world.getBlockState(pos.offset(source.getOpposite())).getBlock()) && !(world.getBlockState(pos.offset(source.getOpposite())).getBlock() instanceof BlockBlazeBurner));
 
@@ -363,6 +366,14 @@ public class TileEntityFan extends TileEntity implements IKineticTE {
     @Override
     public void setUpdated() {
 
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 
     @Override

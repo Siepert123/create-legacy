@@ -71,12 +71,21 @@ public class TileEntityWaterWheel extends TileEntity implements ITickable, IKine
 
     @Override
     public void kineticTick(NetworkContext context) {
-
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
     }
 
     @Override
     public void setUpdated() {
         updated = true;
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 
     @Override

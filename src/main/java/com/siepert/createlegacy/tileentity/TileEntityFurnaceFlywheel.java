@@ -157,6 +157,9 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, 
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
         IBlockState state = world.getBlockState(pos);
 
         if (shouldPower(state)) {
@@ -194,5 +197,13 @@ public class TileEntityFurnaceFlywheel extends TileEntity implements ITickable, 
 
         if (world.getBlockState(pos).getValue(HORIZONTAL_FACING).toVanillaFacing().getOpposite() == source)
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 }

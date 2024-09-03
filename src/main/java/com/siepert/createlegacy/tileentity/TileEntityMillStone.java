@@ -200,6 +200,14 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
         }
     }
 
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
+    }
+
     private static final int SLOT_INPUT = 0;
     private static final int SLOT_OUTPUT = 1;
     private static final int SLOT_OUTPUT_OPTIONAL = 2;
@@ -399,6 +407,8 @@ public class TileEntityMillStone extends TileEntity implements ISidedInventory, 
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
 
         MillingRecipes.ResultSet set = MillingRecipes.apply(currentlyMilling);
         hasRecipe = set.hasRecipe();

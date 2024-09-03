@@ -14,7 +14,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -69,6 +68,9 @@ public class TileEntitySaw extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
         EnumFacing source = world.getBlockState(pos).getValue(BlockSaw.FACING).getOpposite();
         BlockPos newPos = new BlockPos(pos.offset(source.getOpposite()));
 
@@ -111,7 +113,18 @@ public class TileEntitySaw extends TileEntity implements IKineticTE {
                             entity.getSoundCategory(), 1.0f, 1.0f);
                 }
             }
-        }    }
+        }
+    }
+
+
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
+    }
 
     @Override
     public void setUpdated() {

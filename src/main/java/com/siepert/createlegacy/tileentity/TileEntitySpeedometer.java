@@ -63,11 +63,23 @@ public class TileEntitySpeedometer extends TileEntity implements IKineticTE, Sim
     @Override
     public void kineticTick(NetworkContext context) {
         lastContext = context;
+        markDirty();
+
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
     }
 
     @Override
     public void setUpdated() {
 
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 
     @Override

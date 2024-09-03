@@ -1,4 +1,4 @@
-package com.siepert.createlegacy.tileentity;
+package com.siepert.createlegacy.tileentity.converter;
 
 import com.siepert.createapi.network.IKineticTE;
 import com.siepert.createapi.network.NetworkContext;
@@ -48,7 +48,16 @@ public class TileEntityConverter extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+    }
 
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 
     @Override

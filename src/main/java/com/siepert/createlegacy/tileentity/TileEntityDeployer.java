@@ -123,6 +123,9 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
         if (context.networkSpeed == 0) return;
 
         EnumFacing facing = world.getBlockState(pos).getValue(FACING).toVanillaFacing();
@@ -354,5 +357,13 @@ public class TileEntityDeployer extends TileEntity implements IKineticTE, ISided
     @Override
     public boolean hasCustomName() {
         return false;
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 }

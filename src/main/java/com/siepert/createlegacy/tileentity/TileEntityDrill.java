@@ -65,6 +65,9 @@ public class TileEntityDrill extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
         IBlockState state = world.getBlockState(pos);
 
         EnumFacing source = state.getValue(FACING).getOpposite();
@@ -133,5 +136,13 @@ public class TileEntityDrill extends TileEntity implements IKineticTE {
         if (source == state.getValue(FACING).getOpposite()) {
             context.addKineticBlockInstance(new KineticBlockInstance(pos, inverted));
         }
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 }

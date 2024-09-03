@@ -37,7 +37,8 @@ public class TileEntityAxle extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
-
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
     }
 
     @Override
@@ -60,5 +61,13 @@ public class TileEntityAxle extends TileEntity implements IKineticTE {
                 }
             }
         }
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 }

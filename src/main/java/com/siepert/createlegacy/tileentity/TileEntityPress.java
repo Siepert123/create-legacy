@@ -67,6 +67,9 @@ public class TileEntityPress extends TileEntity implements IKineticTE {
 
     @Override
     public void kineticTick(NetworkContext context) {
+        lastKineticTick = world.getTotalWorldTime();
+        lastSpeed = context.networkSpeed;
+
         boolean isCompactor = world.getBlockState(pos.down(2)).getBlock() instanceof BlockItemHolder;
         if (isCompactor) {
             isCompactor = world.getBlockState(pos.down(2)).getValue(BlockItemHolder.VARIANT) == BlockItemHolder.Variant.BASIN;
@@ -167,6 +170,14 @@ public class TileEntityPress extends TileEntity implements IKineticTE {
         if (pressingProgress < 0) {
             pressingProgress = 0;
         }
+    }
+
+    long lastKineticTick = 0;
+    int lastSpeed = 0;
+
+    @Override
+    public int getRS() {
+        return world.getTotalWorldTime() == lastKineticTick + 1 ? lastSpeed : 0;
     }
 
     public PressingResultSet apply(ItemStack stack) {
