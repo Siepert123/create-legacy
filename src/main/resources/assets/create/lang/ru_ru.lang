@@ -106,7 +106,7 @@ tile.create:axle_encased_andesite.name=Вал в андезитовая корп
 tile.create:axle_encased_brass.name=Вал в латунный корпусе
 tile.create:belt.name=Механический Ремень
 tile.create:chute.name=Желоб
-tile.create:millstone.name=Мельничный жерновжелоб
+tile.create:millstone.name=Мельничный жернов
 tile.create:piston.name=Механический поршень
 tile.create:piston_sticky.name=Липкий механический поршень
 tile.create:piston_pole.name=Удлинетель поршня
@@ -122,8 +122,21 @@ item.create:incomplete_precision_mechanism.name=Необработанный т�
 item.create:incomplete_plate_obsidian.name=Необработанная обсидиановая пластина
 tile.create:schedule_wash.name=Расписание вентилятора  Мойка
 tile.create:schedule_cook.name=Расписание вентилятора  Готовка
+tile.create:network_inspector_speed.name=Спидометр
+tile.create:network_inspector_stress.name=Стрессометр
+tile.create:deployer.name=Развертыватель
+
 
 item.create:wrench.name=Гаечный ключ
+
+item.create:filter_ore_dict.name=Фильтр по словарю руд
+message.create:filter.set=Фильтр установлен на
+message.create:filter.clear=Очистить фильтр
+
+tooltip.stressImpact=Воздействие кинетического напряжения: %d x RS
+tooltip.stressCapacity=Способность к кинетическому напряжению: %d x RS
+
+tile.create:chigwanker.name=Механический промышленный пылесос
 
 #Sounds
 subtitle.block.cogwheel.ambient=Грохочут зубчатые колеса
@@ -208,20 +221,20 @@ tile.create:stone_bricks_fancy_tuff.name=Причудливые Туфовые �
 tile.create:stone_bricks_fancy_veridium.name=Причудливые Веридиумовые кирпичи
 
 #Pillars
-tile.create:stone_pillar_andesite.name=Андезитовая ограда
-tile.create:stone_pillar_asurine.name=Азуриновая ограда
-tile.create:stone_pillar_calcite.name=Кальцитовая ограда
-tile.create:stone_pillar_crimsite.name=Кримзитовая ограда
-tile.create:stone_pillar_deepslate.name=Сланецовая ограда
-tile.create:stone_pillar_diorite.name=Диоритовая ограда
-tile.create:stone_pillar_dripstone.name=Капельниковая ограда
-tile.create:stone_pillar_granite.name=Гранитовая ограда
-tile.create:stone_pillar_limestone.name=Известняковая ограда
-tile.create:stone_pillar_ochrum.name=Охровая ограда
-tile.create:stone_pillar_scorchia.name=Скорчивая ограда
-tile.create:stone_pillar_scoria.name=Скоривая ограда
-tile.create:stone_pillar_tuff.name=Туфовая ограда
-tile.create:stone_pillar_veridium.name=Веридиумовая ограда
+tile.create:stone_pillar_andesite.name=Андезитовая колонна
+tile.create:stone_pillar_asurine.name=Азуриновая колонна
+tile.create:stone_pillar_calcite.name=Кальцитовая колонна
+tile.create:stone_pillar_crimsite.name=Кримзитовая колонна
+tile.create:stone_pillar_deepslate.name=Сланецовая колонна
+tile.create:stone_pillar_diorite.name=Диоритовая колонна
+tile.create:stone_pillar_dripstone.name=Капельниковая колонна
+tile.create:stone_pillar_granite.name=Гранитовая колонна
+tile.create:stone_pillar_limestone.name=Известняковая колонна
+tile.create:stone_pillar_ochrum.name=Охровая колонна
+tile.create:stone_pillar_scorchia.name=Скорчивая колонна
+tile.create:stone_pillar_scoria.name=Скоривая колонна
+tile.create:stone_pillar_tuff.name=Туфовая колонна
+tile.create:stone_pillar_veridium.name=Веридиумовая колонна
 
 #Слоёный
 tile.create:stone_layered_andesite.name=Слоёный Андезит
@@ -254,3 +267,59 @@ tile.create:stone_reinforced_scorchia.name=Усиленный Скорчия
 tile.create:stone_reinforced_scoria.name=Усиленный Скория
 tile.create:stone_reinforced_tuff.name=Усиленный Туф
 tile.create:stone_reinforced_veridium.name=Усиленный Веридиум
+
+
+#ADVANCEMENTS!
+advancements.create.example.title=Создавать: Наследие
+advancements.create.example.description=Полностью на русском языке
+
+advancements.create.root.title=Создавать: Наследие
+advancements.create.root.description=Создать, теперь для версии 1.12.2 (включая jankyness)
+
+advancements.create.collector.title=Любимец коллекционера
+advancements.create.collector.description=Соберите все типы камней, добавленные в Создавать: Наследие
+
+advancements.create.andesite_alloy.title=Множество аллитераций
+advancements.create.andesite_alloy.description=Получить андезитовый сплав
+
+advancements.create.age_andesite.title=Андезитовый век
+advancements.create.age_andesite.description=Нанесите немного андезитового сплава на кусок дерева, чтобы получился хороший андезитовый корпус
+
+advancements.create.funnel.title=Эстетика аэропорта
+advancements.create.funnel.description=Получите воронку, которая может извлекать и вставлять предметы из инвентарей
+
+advancements.create.chute.title=Вертикальная логистика
+advancements.create.chute.description=Возьмите в руки желоб, по которому можно транспортировать вниз предметы и мелкие предметы
+
+advancements.create.water_wheel.title=Использование жидкостного движения
+advancements.create.water_wheel.description=Создайте водяное колесо, чтобы использовать кинетику жидкостей
+
+advancements.create.press.title=Press Goes 'Bonk'
+advancements.create.press.description=Изготовьте механический пресс для придания формы предметам
+
+advancements.create.blaze_burner.title=Камин в гостиной
+advancements.create.blaze_burner.description=Разожгите пламя в клетке, чтобы использовать его тепло бесплатно
+
+advancements.create.wrench.title=Механик Ричард
+advancements.create.wrench.description=Сделайте гаечный ключ для вращения и настройки различных компонентов
+
+advancements.create.network_inspection.title=Сетевой ботаник
+advancements.create.network_inspection.description=Создайте спидометр и стрессометр, чтобы получать как можно больше данных из вашей кинетической сети
+
+advancements.create.age_brass.title=Латунный век
+advancements.create.age_brass.description=Нанесите немного латуни на кусок дерева, чтобы получился отличный латунный корпус для современных вещей.
+
+advancements.create.furnace_engine.title=Сила печная
+advancements.create.furnace_engine.description=Изготовьте все компоненты, необходимые для печного двигателя
+
+advancements.create.electron_tube.title=Электрические трубки
+advancements.create.electron_tube.description=Создайте электронную лампу, используемую для очень продвинутых машин (я думал, это глупый мод на шестеренчатое колесо?).
+
+advancements.create.deployer.title=Подталкивать, подталкивать
+advancements.create.deployer.description=Создайте программу развертывания, которая должна имитировать ваши действия (wip) (обращайтесь с ней осторожно)
+
+advancements.create.fan.title=Процессор обработки частиц
+advancements.create.fan.description=Приобретите вентилятор в корпусе, рассчитанный на 101 использование (возврат денег не производится).
+
+advancements.create.saw.title=Резак
+advancements.create.saw.description=Получите в свои руки механическую пилу, которая может рубить деревья за один раз
