@@ -39,6 +39,9 @@ public final class CreateLegacy {
         if (CreateLegacyConfigHolder.otherConfig.sillyStuff) logger.warn("Warning! The silly config option is enabled! I forgot what it does!");
 
         if (!Loader.isModLoaded("ctm")) logger.error("It's recommended to install CTM");
+
+        CreateAPI.discoverAddons(event);
+
         RegistryHandler.otherPreInitRegistries();
     }
 
