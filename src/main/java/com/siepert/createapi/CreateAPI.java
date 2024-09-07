@@ -1,17 +1,18 @@
 package com.siepert.createapi;
 
 import com.siepert.createapi.addons.ICreateAddon;
+import com.siepert.createapi.util.SimpleTuple;
 import com.siepert.createlegacy.CreateLegacyModData;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.IllegalFormatException;
-import java.util.List;
+import java.util.*;
 
 /**
  * The Create Legacy API
@@ -21,9 +22,36 @@ import java.util.List;
  * @author Siepert123
  * */
 public final class CreateAPI {
+    /**
+     * Stores classes annotated with {@link com.siepert.createapi.addons.annotation.CreateAddon @CreateAddon}
+     * along with a boolean determined by
+     * whether the class implements {@link com.siepert.createapi.addons.ICreateAddon ICreateAddon}
+     * */
+    private static final List<SimpleTuple<Class<?>, Boolean>> LIGHT_ADDONS = new ArrayList<>(); // For classes annotated with @CreateAddon
+    private static final List<ICreateAddon> ADDONS = new ArrayList<>(); // For ICreateAddon
 
-
-    private static final List<ICreateAddon> ADDONS = new ArrayList<>();
+    /**
+     * Discovers classes annotated with {@link com.siepert.createapi.addons.annotation.CreateAddon @CreateAddon}
+     *
+     * @author moddingforreal
+     * @param preInitEvent The FMLPreInitializationEvent associated with discovering addons
+     * */
+    @TestCode(explanation="Haven't had enough time to thoroughly test")
+    public static void discoverAddons(FMLPreInitializationEvent preInitEvent) {
+        Set<ASMDataTable.ASMData> classes = preInitEvent.getAsmData().getAll("com.siepert.createapi.addons.annotation.CreateAddon");
+        for (ASMDataTable.ASMData data : classes) {
+            // Yucky!!
+            try {
+                Class<?> clazz = Class.forName(data.getClassName());
+                boolean isICreateAddon = Arrays.asList(clazz.getInterfaces()).contains(ICreateAddon.class);
+                LIGHT_ADDONS.add(new SimpleTuple<>(clazz, isICreateAddon));
+                System.out.println("Discovered a Create addon via annotation; " + clazz.getCanonicalName() + "; isICreateAddon: " + isICreateAddon);
+            } catch (Exception e) {
+                System.out.println("Something went wrong trying to discover an addon!");
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * Registers a Create addon.
