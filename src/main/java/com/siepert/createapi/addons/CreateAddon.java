@@ -42,4 +42,5 @@ public abstract class CreateAddon implements ICreateAddon {
     public String getModId() {
         return modId;
     }
+
 }
