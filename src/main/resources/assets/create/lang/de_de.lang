@@ -122,12 +122,21 @@ item.create:incomplete_plate_obsidian.name=Unbearbeitete Obsidianplatte
 tile.create:schedule_wash.name=Ventilatorbetriebenes Waschen einstellen
 tile.create:schedule_cook.name=Ventilatorbetriebenes Kochen einstellen
 # Einstellen hat 2 bedeutungen: in diesem Fall: eine Einstellung einstellen
+tile.create:network_inspector_speed.name=Geschwindigkeitsmesser
+tile.create:network_inspector_stress.name=Belastungsmesser
 
 item.create:wrench.name=Schraubenschlüssel
 
 item.create:filter_ore_dict.name=OreDict-Filter
 message.create:filter.set=Filter einstellen auf
 message.create:filter.clear=Filter gelöscht
+tooltip.stressImpact=Kinetische Belastung: %d x RS
+tooltip.stressCapacity=Kinetische Belastungskapazität: %d x RS
+
+tile.create:chigwanker.name=Mechindustrialchigwanker
+
+networkContext.infiniteSU=Netzwerk unbelastet
+networkContext.noData=Keine daten gefunden
 
 #Sounds
 subtitle.block.cogwheel.ambient=Zahnräder rumpeln
