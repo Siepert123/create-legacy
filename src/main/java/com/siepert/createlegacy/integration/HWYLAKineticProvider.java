@@ -103,10 +103,10 @@ public class HWYLAKineticProvider implements IWailaDataProvider {
     private void setNetworkMeterBlockNBT(EntityPlayerMP player, IKineticTE te, NBTTagCompound tag, World world, BlockNetworkMeter block) {
         // Have to do strings until we change the network meters to have another method to give me the required info or smth
         if (te instanceof TileEntitySpeedometer) {
-            tag.setString("networkInfo", "\u00a7a" + I18n.format("create.kineticinfo.network") + ": " + ((TileEntitySpeedometer) te).getMessage() + "\u00a7r");
+            tag.setString("networkInfo", "\u00a7aNetwork: " + ((TileEntitySpeedometer) te).getMessageServer() + "\u00a7r");
             tag.setString("networkMeterType", "speedometer");
         } else if (te instanceof TileEntityStressometer) {
-            tag.setString("networkInfo", "\u00a7e" + I18n.format("create.kineticinfo.network") + ": " + ((TileEntityStressometer) te).getMessage() + "\u00a7r");
+            tag.setString("networkInfo", "\u00a7eNetwork: " + ((TileEntityStressometer) te).getMessageServer() + "\u00a7r");
             if (((TileEntityStressometer) te).getLastContext() == null) // Can't get last context if it doesn't exist
                 return;
             tag.setBoolean("infinitestress", ((TileEntityStressometer) te).getLastContext().infiniteSU);

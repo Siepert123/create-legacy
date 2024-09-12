@@ -35,6 +35,13 @@ public class TileEntitySpeedometer extends TileEntity implements IKineticTE, Sim
         return CreateAPI.translateToLocal("networkContext.noData");
     }
 
+    public String getMessageServer() {
+        if (lastContext != null) {
+            return lastContext.networkSpeed + " RS";
+        }
+        return "No data found";
+    }
+
     NetworkContext lastContext;
     public NetworkContext getLastContext() { // Needed for TOP
         return this.lastContext;
