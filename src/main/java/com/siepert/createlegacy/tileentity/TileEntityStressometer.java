@@ -46,6 +46,24 @@ public class TileEntityStressometer extends TileEntity implements IKineticTE, Si
         return CreateAPI.translateToLocal("networkContext.noData");
     }
 
+    public String getMessageServer() {
+        if (lastContext != null) {
+            if (lastContext.infiniteSU) return "No data found";
+
+            if (lastContext.totalSU == 0) {
+                if (lastContext.scheduledConsumedSU > 0) {
+                    return lastContext.scheduledConsumedSU + "/0 SU (>100%)";
+                }
+                return "No network stress";
+            }
+
+            int percentage = Math.round(((float) lastContext.scheduledConsumedSU) / ((float) lastContext.totalSU) * 100);
+
+            return lastContext.scheduledConsumedSU + "/" + lastContext.totalSU + " SU (" + percentage + "%)";
+        }
+        return "No data found";
+    }
+
     NetworkContext lastContext;
     public NetworkContext getLastContext() { // Needed for TOP
         return this.lastContext;

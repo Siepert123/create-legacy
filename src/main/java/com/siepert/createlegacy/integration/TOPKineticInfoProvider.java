@@ -10,7 +10,6 @@ import com.siepert.createlegacy.util.handlers.NeverTouchThisCodeAgain;
 import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -53,35 +52,35 @@ public class TOPKineticInfoProvider implements IProbeInfoProvider {
 
     private void attachNetworkMeterInfo(TileEntity networkMeterTile, IProbeInfo probeInfo) {
         if (networkMeterTile instanceof TileEntitySpeedometer) {
-            probeInfo.text("\u00a7a" + I18n.format("create.kineticinfo.network") + ": " + ((TileEntitySpeedometer) networkMeterTile).getMessage() + "\u00a7r");
+            probeInfo.text("\u00a7aNetwork: " + ((TileEntitySpeedometer) networkMeterTile).getMessage() + "\u00a7r");
         } else if (networkMeterTile instanceof TileEntityStressometer) {
-            probeInfo.text("\u00a7e" + I18n.format("create.kineticinfo.network") + ": " + ((TileEntityStressometer) networkMeterTile).getMessage() + "\u00a7r");
+            probeInfo.text("\u00a7eNetwork: " + ((TileEntityStressometer) networkMeterTile).getMessage() + "\u00a7r");
             if (((TileEntityStressometer) networkMeterTile).getLastContext() == null) // Can't get last context if it doesn't exist
                 return;
             if (((TileEntityStressometer) networkMeterTile).getLastContext().infiniteSU) {
-                probeInfo.text("\u00a7b" + I18n.format("create.kineticinfo.infinitestress") + "\u00a7r");
+                probeInfo.text("\u00a7bInfinite stress capacity\u00a7r");
             } else if (((TileEntityStressometer) networkMeterTile).getLastContext().isNetworkOverstressed()) {
-                probeInfo.text("\u00a7c" + I18n.format("create.kineticinfo.overstressed") + "\u00a7r");
+                probeInfo.text("\u00a7cNetwork overstressed\u00a7r");
             }
         }
     }
 
     private void attachKineticTileInfo(IKineticTE kineticTile, IProbeInfo probeInfo, boolean playerSneaking) {
         if (kineticTile.isConsumer()) {
-            probeInfo.text("\u00a7d" + I18n.format("create.kineticinfo.stressimpact") + ": " + kineticTile.getStressImpact() + " SU/RS\u00a7r");
+            probeInfo.text("\u00a7dStress impact: " + kineticTile.getStressImpact() + " SU/RS\u00a7r");
             if (playerSneaking) {
-                probeInfo.text("\u00a77" + I18n.format("create.kineticinfo.minimalspeed") + ": " + kineticTile.getMinimalSpeed() + " RS\u00a7r");
+                probeInfo.text("\u00a77Minimal speed: " + kineticTile.getMinimalSpeed() + " RS\u00a7r");
             }
         }
         if (kineticTile.isGenerator()) {
             if (!playerSneaking) {
-                probeInfo.text("\u00a7d" + I18n.format("create.kineticinfo.stresscapacity") + ": " +
+                probeInfo.text("\u00a7dStress capacity: " +
                         kineticTile.getStressCapacity() + " SU/RS\u00a7r");
             } else {
-                probeInfo.text("\u00a7d" + I18n.format("create.kineticinfo.stresscapacity_atspeed") + ": " +
+                probeInfo.text("\u00a7dStress capacity at current speed: " +
                         (kineticTile.getStressCapacity() * kineticTile.getProducedSpeed()) + " SU\u00a7r");
             }
-            probeInfo.text("\u00a75" + I18n.format("create.kineticinfo.speedproduced") + ": " + kineticTile.getProducedSpeed() + " RS\u00a7r");
+            probeInfo.text("\u00a75Speed produced: " + kineticTile.getProducedSpeed() + " RS\u00a7r");
         }
     }
 
