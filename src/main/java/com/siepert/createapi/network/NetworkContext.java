@@ -4,11 +4,13 @@ import com.siepert.createapi.CreateAPI;
 import com.siepert.createlegacy.CreateLegacy;
 import com.siepert.createlegacy.CreateLegacyConfigHolder;
 import com.siepert.createlegacy.CreateLegacyModData;
+import com.siepert.createlegacy.event.KineticEvent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ import java.util.Map;
  *
  * @author Siepert123
  */
-public class NetworkContext {
+public final class NetworkContext {
 
     public HashMap<BlockPos, Boolean> blockPosBooleanHashMap = new HashMap<>();
 
@@ -28,6 +30,7 @@ public class NetworkContext {
     }
 
     public void runThroughPhases(World world) {
+        MinecraftForge.EVENT_BUS.post(new KineticEvent.Tick.Pre(this));
         try {
             this.phase1(world);
             try {
@@ -46,6 +49,7 @@ public class NetworkContext {
             CreateLegacy.logger.error("Exception occurred in phase 1 of network");
             phase1.printStackTrace();
         }
+        MinecraftForge.EVENT_BUS.post(new KineticEvent.Tick.Post(this));
     }
 
     public boolean infiniteSU = CreateLegacyConfigHolder.otherConfig.disableSU;
@@ -75,7 +79,7 @@ public class NetworkContext {
         return blockPosBooleanHashMap.get(pos);
     }
 
-    public void phase1(World world) {
+    private void phase1(World world) {
         for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
             IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
@@ -89,7 +93,7 @@ public class NetworkContext {
         }
     }
 
-    public void phase2(World world) {
+    private void phase2(World world) {
         for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
             IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
@@ -106,7 +110,7 @@ public class NetworkContext {
         return scheduledConsumedSU > totalSU;
     }
 
-    public void phase3(World world) {
+    private void phase3(World world) {
         for (Map.Entry<BlockPos, Boolean> instance : blockPosBooleanHashMap.entrySet()) {
             IKineticTE kineticTE = (IKineticTE) world.getTileEntity(instance.getKey());
 
