@@ -41,7 +41,7 @@ _All Java code is written completely from scratch_
 
 
 Simibubi gave permission for the upload:
-![Permission from Simibubi](https://github.com/Siepert123/create-legacy/blob/master/images/simibubi-permission.jpg)
+![Permission from Simibubi](images/simibubi-permission.png)
 
 
 
