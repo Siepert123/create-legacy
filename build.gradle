@@ -13,8 +13,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '24w37a'
-group = 'com.siepert.createlegacy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = {version}
+group = 'com.melonstudios.createlegacy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'create'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
