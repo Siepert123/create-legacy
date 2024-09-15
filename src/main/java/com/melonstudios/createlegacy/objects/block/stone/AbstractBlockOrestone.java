@@ -101,6 +101,11 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(STONE_TYPE).ID();
+    }
+
+    @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.getValue(STONE_TYPE).color();
     }
