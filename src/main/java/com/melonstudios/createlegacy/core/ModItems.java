@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.core;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.objects.item.ItemIngredient;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 public final class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
 
+    public static final Item INGREDIENT = registerItem(new ItemIngredient());
 
     private static Item registerItem(Item item) {
         ITEMS.add(item);
@@ -16,6 +18,7 @@ public final class ModItems {
     }
 
     public static void setItemModels() {
+        ItemIngredient.setItemModels();
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 0, "orestone/stone_asurine");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
