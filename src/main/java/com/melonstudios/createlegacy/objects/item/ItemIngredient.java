@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ItemIngredient extends Item {
     public ItemIngredient() {
@@ -28,12 +29,13 @@ public class ItemIngredient extends Item {
             "crushed_iron", "crushed_gold", "crushed_copper", "crushed_zinc",
             "dust_netherrack", "dust_obsidian", "plate_obsidian",
             "rose_quartz", "rose_quartz_polished",
+            "ingot_radiant", "ingot_shadow",
             "propeller", "whisk",
             "electron_tube", "hand_brass", "precision_mechanism",
             "precision_mechanism_incomplete", "plate_obsidian_incomplete"
     };
-    private static final int[] TAB_EXCLUDED = new int[]{
-        26, 27
+    private static final String[] TAB_EXCLUDED = new String[]{
+        "", "", "", "",
     };
 
     @Override
@@ -47,7 +49,8 @@ public class ItemIngredient extends Item {
         if (isInCreativeTab(tab)) {
             for (int i = 0; i < VARIANTS.length; i++) {
                 final int finalI = i;
-                if (Arrays.stream(TAB_EXCLUDED).anyMatch(value -> value == finalI)) continue;
+                if (Arrays.stream(TAB_EXCLUDED).anyMatch(value -> Objects.equals(value, VARIANTS[finalI]))
+                        && tab != CreativeTabs.SEARCH) continue;
                 items.add(new ItemStack(this, 1, i));
             }
         }

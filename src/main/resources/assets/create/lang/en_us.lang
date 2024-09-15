@@ -1,4 +1,36 @@
 
+#Ingredients
+item.create.andesite_alloy.name=Andesite Alloy
+item.create.plate_iron.name=Iron Sheet
+item.create.plate_gold.name=Gold Sheet
+item.create.ingot_copper.name=Copper Ingot
+item.create.nugget_copper.name=Copper Nugget
+item.create.plate_copper.name=Copper Sheet
+item.create.ingot_zinc.name=Zinc Ingot
+item.create.nugget_zinc.name=Zinc Nugget
+item.create.plate_zinc.name=Zinc Sheet
+item.create.ingot_brass.name=Brass Ingot
+item.create.nugget_brass.name=Brass Nugget
+item.create.plate_brass.name=Brass Sheet
+item.create.crushed_iron.name=Crushed Iron
+item.create.crushed_gold.name=Crushed Gold
+item.create.crushed_copper.name=Crushed Copper
+item.create.crushed_zinc.name=Crushed Zinc
+item.create.dust_netherrack.name=Cinder Flour
+item.create.dust_obsidian.name=Powdered Obsidian
+item.create.plate_obsidian.name=Sturdy Sheet
+item.create.rose_quartz.name=Rose Quartz
+item.create.rose_quartz_polished.name=Polished Rose Quartz
+item.create.ingot_radiant.name=Refined Radiance
+item.create.ingot_shadow.name=Shadow Steel
+item.create.propeller.name=Propeller
+item.create.whisk.name=Whisk
+item.create.electron_tube.name=Electron Tube
+item.create.hand_brass.name=Brass Hand
+item.create.precision_mechanism.name=Precision Mechanism
+item.create.precision_mechanism_incomplete.name=Incomplete Precision Mechanism
+item.create.plate_obsidian_incomplete.name=Unprocessed Sturdy Sheet
+
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
