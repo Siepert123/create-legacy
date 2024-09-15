@@ -70,12 +70,7 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         }
         @Nonnull
         public static StoneType fromID(int ID) {
-            for (StoneType type : values()) {
-                if (type.ID() == ID) {
-                    return type;
-                }
-            }
-            return StoneType.ASURINE;
+            return values()[ID];
         }
         @Nonnull
         public MapColor color() {
@@ -97,7 +92,8 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+        int met = placer.getHeldItem(hand).getMetadata();
+        return getDefaultState().withProperty(STONE_TYPE, StoneType.fromID(met));
     }
 
     @Override
@@ -123,10 +119,5 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
     @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.getValue(STONE_TYPE).color();
-    }
-
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return getDefaultState().withProperty(STONE_TYPE, StoneType.fromID(meta));
     }
 }
