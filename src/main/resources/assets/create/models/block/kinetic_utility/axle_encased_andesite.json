@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "create:block/gearbox",
-    "side": "create:block/casing/casing_andesite"
-  }
-}

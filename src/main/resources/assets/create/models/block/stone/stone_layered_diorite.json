@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "create:block/palettes/stone_types/cap/diorite",
-    "side": "create:block/palettes/stone_types/layered/diorite"
-  }
-}

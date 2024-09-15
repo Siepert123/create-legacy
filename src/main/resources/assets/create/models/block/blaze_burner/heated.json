@@ -1,7 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "particle": "create:block/blaze_burner/heated",
-    "cross": "create:block/blaze_burner/heated"
-  }
-}

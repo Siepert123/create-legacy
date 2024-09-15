@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "create:block/chassis/end_sticky",
-    "side": "create:block/chassis/side"
-  }
-}

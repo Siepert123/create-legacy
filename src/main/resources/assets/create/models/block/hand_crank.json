@@ -1,7 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "particle": "create:block/hand_crank",
-    "cross": "create:block/hand_crank"
-  }
-}

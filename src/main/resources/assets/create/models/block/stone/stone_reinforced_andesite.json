@@ -1,7 +1,0 @@
-{
-  "parent": "create:block/block_reinforced_base",
-  "textures": {
-    "block": "blocks/stone_andesite",
-    "particle": "blocks/stone_andesite"
-  }
-}
