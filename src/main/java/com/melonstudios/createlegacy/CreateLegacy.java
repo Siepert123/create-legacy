@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy;
 
+import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.core.ModBlocks;
 import com.melonstudios.createlegacy.core.proxy.CommonProxy;
 import com.melonstudios.createlegacy.objects.tab.DecorationsTab;
@@ -21,6 +22,9 @@ public class CreateLegacy {
     public static final String MOD_ID = "create";
     public static final String VERSION = "1.0.0";
 
+    public static final int VERSION_NUM = 0;
+    public static final int KINETIC_VERSION_NUM = 0;
+
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
     public static final CreativeTabs TAB_DECORATIONS = new DecorationsTab();
 
@@ -30,7 +34,8 @@ public class CreateLegacy {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
+        CreateAPI.discoverAddons(event);
+        CreateAPI.sortAddons();
     }
 
     @Mod.EventHandler
