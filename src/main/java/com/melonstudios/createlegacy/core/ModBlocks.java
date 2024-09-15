@@ -1,6 +1,6 @@
 package com.melonstudios.createlegacy.core;
 
-import com.melonstudios.createlegacy.objects.block.stone.BlockOreStone;
+import com.melonstudios.createlegacy.objects.block.stone.BlockOrestone;
 import com.melonstudios.createlegacy.objects.item.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -12,7 +12,7 @@ import java.util.List;
 public final class ModBlocks {
     public static final List<Block> BLOCKS = new ArrayList<>();
 
-    public static final Block STONE = registerBlockWithItem(new BlockOreStone("orestone"), true);
+    public static final Block STONE = registerBlockWithItem(new BlockOrestone("orestone"), true);
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);

@@ -4,8 +4,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public final class BlockOreStone extends AbstractBlockOreStone {
-    public BlockOreStone(String registry) {
+public final class BlockOrestone extends AbstractBlockOrestone {
+    public BlockOrestone(String registry) {
         super(registry);
     }
 
