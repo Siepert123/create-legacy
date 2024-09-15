@@ -1,0 +1,13 @@
+
+#Creative tabs
+itemGroup.create.kinetics=Create
+itemGroup.create.decorations=Create Decorations
+
+#Orestones etc
+tile.create.stone_asurine.name=Asurine
+tile.create.stone_crimsite.name=Crimsite
+tile.create.stone_limestone.name=Limestone
+tile.create.stone_ochrum.name=Ochrum
+tile.create.stone_scorchia.name=Scorchia
+tile.create.stone_scoria.name=Scoria
+tile.create.stone_veridium.name=Veridium
