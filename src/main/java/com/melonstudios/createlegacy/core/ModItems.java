@@ -17,18 +17,18 @@ public final class ModItems {
 
     public static void setItemModels() {
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                0, "stone/stone_asurine");
+                0, "orestone/stone_asurine");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                1, "stone/stone_crimsite");
+                1, "orestone/stone_crimsite");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                2, "stone/stone_limestone");
+                2, "orestone/stone_limestone");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                3, "stone/stone_ochrum");
+                3, "orestone/stone_ochrum");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                4, "stone/stone_scorchia");
+                4, "orestone/stone_scorchia");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                5, "stone/stone_scoria");
+                5, "orestone/stone_scoria");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                6, "stone/stone_veridium");
+                6, "orestone/stone_veridium");
     }
 }
