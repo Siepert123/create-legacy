@@ -31,8 +31,7 @@ public class CreateLegacy {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        CreateAPI.discoverAddons(event);
-        CreateAPI.sortAddons();
+        CreateAPI.discoverAndSortAddons(event);
     }
 
     @Mod.EventHandler
