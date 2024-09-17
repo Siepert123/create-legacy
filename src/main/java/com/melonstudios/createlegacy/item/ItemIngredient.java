@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

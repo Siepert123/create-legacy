@@ -1,19 +1,15 @@
 package com.melonstudios.createapi;
 
 import com.melonstudios.createapi.addon.AddonProcessor;
-import com.melonstudios.createapi.addon.CreateAddon;
 import com.melonstudios.createapi.addon.ICreateAddon;
-import com.melonstudios.createapi.annotation.ReflectionConstant;
+import com.melonstudios.createapi.constant.ReflectionConstants;
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
-import java.util.Set;
 
 @SuppressWarnings("deprecation")
 public final class CreateAPI {
@@ -30,10 +26,9 @@ public final class CreateAPI {
      * @param event Forge event to get the ASMDataTable from
      */
     public static void discoverAndSortAddons(FMLPreInitializationEvent event) {
-        @ReflectionConstant String annotationClass = "com.melonstudios.createapi.addon.CreateAddon";
         ADDONS.addAll(AddonProcessor.getAddonInstances(
                     AddonProcessor.getValidAddons(
-                    AddonProcessor.discoverAddons(event, annotationClass))));
+                    AddonProcessor.discoverAddons(event, ReflectionConstants.createAddonClasspath))));
         ADDONS_BY_PRIORITY.addAll(AddonProcessor.sortAddons(ADDONS));
     }
 

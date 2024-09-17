@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author moddingforreal
  * @since 0.1.0
  */
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})
 public @interface ReflectionConstant {
     /**
