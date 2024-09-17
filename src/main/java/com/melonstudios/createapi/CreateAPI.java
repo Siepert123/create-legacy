@@ -13,7 +13,7 @@ import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation, unchecked")
 public final class CreateAPI {
     private static final List<Class<? extends CreateAddon>> ADDONS = new ArrayList<>(); //I see no problem
 
