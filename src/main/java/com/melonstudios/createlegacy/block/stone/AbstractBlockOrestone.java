@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.objects.block.stone;
+package com.melonstudios.createlegacy.block.stone;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.DisplayLink;

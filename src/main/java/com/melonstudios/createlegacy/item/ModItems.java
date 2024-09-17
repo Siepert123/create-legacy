@@ -1,7 +1,7 @@
-package com.melonstudios.createlegacy.core;
+package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.objects.item.ItemIngredient;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;

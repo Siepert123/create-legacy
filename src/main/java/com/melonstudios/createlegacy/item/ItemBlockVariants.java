@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.objects.item;
+package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;

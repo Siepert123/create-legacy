@@ -1,13 +1,10 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
-import com.melonstudios.createlegacy.core.ModBlocks;
-import com.melonstudios.createlegacy.core.proxy.CommonProxy;
-import com.melonstudios.createlegacy.objects.tab.DecorationsTab;
-import com.melonstudios.createlegacy.objects.tab.KineticsTab;
+import com.melonstudios.createlegacy.proxy.CommonProxy;
+import com.melonstudios.createlegacy.tab.DecorationsTab;
+import com.melonstudios.createlegacy.tab.KineticsTab;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,8 +25,8 @@ public class CreateLegacy {
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
     public static final CreativeTabs TAB_DECORATIONS = new DecorationsTab();
 
-    @SidedProxy(serverSide = "com.melonstudios.createlegacy.core.proxy.CommonProxy",
-        clientSide = "com.melonstudios.createlegacy.core.proxy.ClientProxy")
+    @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
+        clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
