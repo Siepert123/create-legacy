@@ -1,9 +1,6 @@
 package com.melonstudios.createapi.annotation;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Annotated fields will generate compile-time warnings about the constants used in reflection
@@ -13,6 +10,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+@Incomplete("The annotation processor for com.melonstudios.createapi.annotation.ReflectionConstant hasn't been implemented yet")
+@Documented
 public @interface ReflectionConstant {
     /**
      * Whether to suppress the warning
