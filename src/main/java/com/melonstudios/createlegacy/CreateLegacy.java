@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.core.ModBlocks;
 import com.melonstudios.createlegacy.core.proxy.CommonProxy;
 import com.melonstudios.createlegacy.objects.tab.DecorationsTab;
 import com.melonstudios.createlegacy.objects.tab.KineticsTab;
+import com.melonstudios.createlegacy.recipe.RecipeInit;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,7 +41,7 @@ public class CreateLegacy {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
+        RecipeInit.init();
     }
 
     @Mod.EventHandler
