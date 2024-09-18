@@ -1,5 +1,7 @@
 package com.melonstudios.createapi.addon;
 
+import com.melonstudios.createapi.annotation.Incomplete;
+
 /**
  * Addons must implement this interface<br>
  * <strong>Classes implementing this interface <em>must</em> have at least one parameterless default constructor</strong><br>
@@ -9,6 +11,7 @@ package com.melonstudios.createapi.addon;
  * @since 0.1.0
  * @see com.melonstudios.createapi.addon.CreateAddon
  * */
+@Incomplete("Implementing this does nothing as of rn")
 public interface ICreateAddon {
 
 }
