@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public class CreateLegacyEventHandler {
+public final class CreateLegacyEventHandler {
 
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {

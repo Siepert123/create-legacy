@@ -3,18 +3,16 @@ package com.melonstudios.createapi;
 import com.melonstudios.createapi.addons.CreateAddon;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("deprecation, unchecked")
+@SuppressWarnings({"deprecation", "unchecked"})
 public final class CreateAPI {
     private static final List<Class<? extends CreateAddon>> ADDONS = new ArrayList<>(); //I see no problem
 

@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class DecorationsTab extends CreativeTabs {
+public final class DecorationsTab extends CreativeTabs {
     public DecorationsTab() {
         super("create.decorations");
     }

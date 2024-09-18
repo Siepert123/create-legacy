@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class KineticsTab extends CreativeTabs {
+public final class KineticsTab extends CreativeTabs {
     public KineticsTab() {
         super("create.kinetics");
     }

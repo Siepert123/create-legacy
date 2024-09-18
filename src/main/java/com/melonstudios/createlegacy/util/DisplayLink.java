@@ -4,7 +4,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DisplayLink {
+/**
+ * Logs something.
+ */
+public final class DisplayLink {
     private static Logger logger;
 
     private static void initialize() {
