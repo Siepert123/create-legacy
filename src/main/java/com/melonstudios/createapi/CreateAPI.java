@@ -104,4 +104,11 @@ public final class CreateAPI {
     public static String stressCapacityTooltip(double capacity) {
         return CreateAPI.translateToLocalFormatted("tooltip.stressCapacity", capacity);
     }
+
+    public static boolean checkThreads(Thread... threads) {
+        for (Thread thread : threads) {
+            if (thread.isAlive()) return false;
+        }
+        return true;
+    }
 }

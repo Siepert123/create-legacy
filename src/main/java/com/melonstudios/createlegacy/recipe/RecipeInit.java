@@ -1,13 +1,15 @@
 package com.melonstudios.createlegacy.recipe;
 
+import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public final class RecipeInit {
+public final class RecipeInit implements Runnable {
     private static boolean initialized = false;
-    public static void init() {
+    private static void init() {
         if (initialized) return;
+        DisplayLink.debug("Initializing recipes");
 
         //Test
         PressingRecipes.addRecipe(new ItemStack(Items.REEDS),
@@ -22,5 +24,10 @@ public final class RecipeInit {
                 });
 
         initialized = true;
+    }
+
+    @Override
+    public void run() {
+        init();
     }
 }

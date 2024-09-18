@@ -41,7 +41,11 @@ public class CreateLegacy {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        RecipeInit.init();
+        Thread recipeThread = new Thread(new RecipeInit(), "Create Recipe Init Thread");
+        recipeThread.start();
+
+
+        while (CreateAPI.checkThreads(recipeThread));
     }
 
     @Mod.EventHandler
