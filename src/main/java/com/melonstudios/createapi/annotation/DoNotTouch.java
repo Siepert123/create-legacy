@@ -3,7 +3,7 @@ package com.melonstudios.createapi.annotation;
 import java.lang.annotation.*;
 
 /**
- *
+ * Code which either significantly impacts performance or is otherwise sensitive can be annotated with this
  *
  * @author Siepert123
  * @author moddingforreal

@@ -1,5 +1,9 @@
 package com.melonstudios.createlegacy.util;
 
+/**
+ * @deprecated Use {@link com.melonstudios.createapi.util.SimpleTuple} instead
+ */
+@Deprecated
 public class SimpleTuple<X, Y> {
     public SimpleTuple(X value1, Y value2) {
         this.value1 = value1;

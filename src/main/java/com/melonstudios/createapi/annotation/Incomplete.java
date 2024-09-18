@@ -11,9 +11,14 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PACKAGE, ElementType.METHOD})
 @Documented
+@Incomplete("The annotation processor for com.melonstudios.createapi.annotation.ReflectionConstant hasn't been implemented yet")
 public @interface Incomplete {
     /**
      * Explanation of what is missing and why
      */
     String value();
+    /**
+     * Whether to halt compilation because of this annotated element; can be useful
+     * */
+    boolean halt() default false;
 }
