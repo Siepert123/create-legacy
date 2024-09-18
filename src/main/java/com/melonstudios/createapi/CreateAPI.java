@@ -105,7 +105,7 @@ public final class CreateAPI {
         return CreateAPI.translateToLocalFormatted("tooltip.stressCapacity", capacity);
     }
 
-    public static boolean checkThreads(Thread... threads) {
+    public static boolean checkThreads(Thread... threads) { //You can never thread too much!
         for (Thread thread : threads) {
             if (thread.isAlive()) return false;
         }

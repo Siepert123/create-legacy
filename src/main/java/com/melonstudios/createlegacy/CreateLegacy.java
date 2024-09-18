@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.core.proxy.CommonProxy;
 import com.melonstudios.createlegacy.objects.tab.DecorationsTab;
 import com.melonstudios.createlegacy.objects.tab.KineticsTab;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
+import com.melonstudios.createlegacy.util.OreDictHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,17 +36,14 @@ public class CreateLegacy {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        OreDictHandler.init();
         CreateAPI.discoverAddons(event);
         CreateAPI.sortAddons();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Thread recipeThread = new Thread(new RecipeInit(), "Create Recipe Init Thread");
-        recipeThread.start();
-
-
-        while (CreateAPI.checkThreads(recipeThread));
+        RecipeInit.init();
     }
 
     @Mod.EventHandler

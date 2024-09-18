@@ -31,4 +31,13 @@ public class CreateLegacyEventHandler {
         ModBlocks.setTileEntities();
     }
 
+    @SubscribeEvent
+    public static void onMetalTypeQuery(MetalTypesQueryEvent event) {
+        event.addTypes("Iron", "Gold", "Copper",
+                "Zinc", "Brass", "Mingrade", "Lead",
+                "Electrum", "Bismuth", "Chrome",
+                "Nickel", "Uranium", "Thorium",
+                "Titanium", "Tin", "Zirconium",
+                "Tungsten", "Californium");
+    }
 }
