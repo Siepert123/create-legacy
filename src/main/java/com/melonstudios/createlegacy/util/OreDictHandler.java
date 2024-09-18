@@ -1,6 +1,6 @@
 package com.melonstudios.createlegacy.util;
 
-import com.melonstudios.createlegacy.core.ModItems;
+import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
