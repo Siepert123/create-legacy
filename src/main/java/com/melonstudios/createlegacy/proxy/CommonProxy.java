@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.core.proxy;
+package com.melonstudios.createlegacy.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;

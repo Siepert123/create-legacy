@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.objects.tab;
+package com.melonstudios.createlegacy.tab;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;

@@ -7,7 +7,9 @@ import com.melonstudios.createlegacy.recipe.WashingRecipes;
  * A simple tuple.
  * @param <X> Type of value 1.
  * @param <Y> Type of value 2.
+ * @deprecated Use {@link com.melonstudios.createapi.util.SimpleTuple} instead
  */
+@Deprecated
 public class SimpleTuple<X, Y> {
     public SimpleTuple(X value1, Y value2) {
         this.value1 = value1;

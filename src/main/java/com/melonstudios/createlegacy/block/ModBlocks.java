@@ -1,7 +1,8 @@
-package com.melonstudios.createlegacy.core;
+package com.melonstudios.createlegacy.block;
 
-import com.melonstudios.createlegacy.objects.block.stone.BlockOrestone;
-import com.melonstudios.createlegacy.objects.item.ItemBlockVariants;
+import com.melonstudios.createlegacy.block.stone.BlockOrestone;
+import com.melonstudios.createlegacy.item.ItemBlockVariants;
+import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

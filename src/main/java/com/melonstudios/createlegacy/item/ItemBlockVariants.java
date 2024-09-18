@@ -1,11 +1,9 @@
-package com.melonstudios.createlegacy.objects.item;
+package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 public class ItemBlockVariants extends ItemBlock {
     public ItemBlockVariants(Block block) {

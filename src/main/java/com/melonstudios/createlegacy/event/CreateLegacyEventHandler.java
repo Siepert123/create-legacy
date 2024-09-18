@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.event;
 
-import com.melonstudios.createlegacy.core.ModBlocks;
-import com.melonstudios.createlegacy.core.ModItems;
+import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

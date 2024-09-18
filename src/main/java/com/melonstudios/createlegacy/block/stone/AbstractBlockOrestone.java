@@ -1,7 +1,6 @@
-package com.melonstudios.createlegacy.objects.block.stone;
+package com.melonstudios.createlegacy.block.stone;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

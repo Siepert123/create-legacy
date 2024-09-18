@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.core.proxy;
+package com.melonstudios.createlegacy.proxy;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
