@@ -12,6 +12,7 @@ public final class OreDictHandler {
     private static boolean initialized = false;
     public static void init() {
         if (initialized) return;
+        long startTime = System.currentTimeMillis();
 
         OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.INGREDIENT, 1, 3));
         OreDictionary.registerOre("ingotZinc", new ItemStack(ModItems.INGREDIENT, 1, 6));
@@ -44,6 +45,7 @@ public final class OreDictHandler {
         OreDictionary.registerOre("electronTube", new ItemStack(ModItems.INGREDIENT, 1, 25));
         OreDictionary.registerOre("handBrass", new ItemStack(ModItems.INGREDIENT, 1, 26));
 
+        DisplayLink.debug("Ore Dictionary init done in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
     }
 }

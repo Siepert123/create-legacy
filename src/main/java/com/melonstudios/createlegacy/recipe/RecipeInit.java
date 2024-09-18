@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createlegacy.util.OreDictHandler;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -45,6 +44,7 @@ public final class RecipeInit {
 
     public static void init() {
         if (initialized) return;
+        long startTime = System.currentTimeMillis();
 
         MinecraftForge.EVENT_BUS.post(new MetalTypesQueryEvent(metals));
 
@@ -140,6 +140,7 @@ public final class RecipeInit {
         PressingRecipes.addRecipe(new ItemStack(Items.REEDS, 1), new ItemStack(Items.PAPER, 1));
         PressingRecipes.addRecipe(new ItemStack(Blocks.GRASS, 1), new ItemStack(Blocks.GRASS_PATH, 1));
 
+        DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
     }
 }
