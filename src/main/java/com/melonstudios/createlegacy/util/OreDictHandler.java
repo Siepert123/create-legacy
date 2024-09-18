@@ -13,6 +13,7 @@ public final class OreDictHandler {
     public static void init() {
         if (initialized) return;
         long startTime = System.currentTimeMillis();
+        DisplayLink.debug("Starting Ore Dictionary init");
 
         OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.INGREDIENT, 1, 3));
         OreDictionary.registerOre("ingotZinc", new ItemStack(ModItems.INGREDIENT, 1, 6));
