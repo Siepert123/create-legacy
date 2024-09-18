@@ -5,6 +5,9 @@ import com.melonstudios.createlegacy.recipe.WashingRecipes;
 
 /**
  * A simple tuple.
+ *
+ * @author moddingforreal
+ *
  * @param <X> Type of value 1.
  * @param <Y> Type of value 2.
  */
