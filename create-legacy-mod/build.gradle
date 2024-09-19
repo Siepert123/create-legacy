@@ -74,8 +74,9 @@ repositories {
 }
 
 dependencies {
+    compileOnly project(':create-annotations')
+    annotationProcessor project(':create-annotations')
     // our very own annotation processor - not in use rn due to bugs
-    // annotationProcessor project(':create-annotation-processor')
     // minecraft
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
     // compile against the JEI API but do not include it at runtime

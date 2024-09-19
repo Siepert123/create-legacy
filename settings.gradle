@@ -7,4 +7,4 @@ pluginManagement {
 
 rootProject.name = "create-legacy"
 
-include 'create-annotation-processor', 'create-legacy-mod'
+include 'create-annotations', 'create-legacy-mod'
