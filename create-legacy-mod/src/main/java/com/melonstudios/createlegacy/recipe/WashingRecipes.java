@@ -2,7 +2,7 @@ package com.melonstudios.createlegacy.recipe;
 
 import com.google.common.collect.Maps;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createlegacy.util.SimpleTuple;
+import com.melonstudios.createapi.util.SimpleTuple;
 import net.minecraft.item.ItemStack;
 
 import java.util.Map;

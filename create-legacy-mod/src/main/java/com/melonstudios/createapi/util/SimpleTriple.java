@@ -35,9 +35,21 @@ public class SimpleTriple<X, Y, Z> {
         this.y = y;
         this.z = z;
     }
+    /**
+     * Creates a new copy of this SimpleTriple
+     *
+     * @author Siepert123
+     * @author moddingforreal
+     * */
     public SimpleTriple<X, Y, Z> copy() {
         return new SimpleTriple<>(x, y, z);
     }
+    /**
+     * Makes a new SimpleTriple from the parameters
+     *
+     * @author Siepert123
+     * @author moddingforreal
+     * */
     public static <X, Y, Z> SimpleTriple<X, Y, Z> from(X x, Y y, Z z) {
         return new SimpleTriple<>(x, y, z);
     }

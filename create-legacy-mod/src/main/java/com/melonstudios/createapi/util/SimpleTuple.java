@@ -1,5 +1,7 @@
 package com.melonstudios.createapi.util;
 
+import net.minecraft.item.ItemStack;
+
 /**
  * Simple implementation of a tuple
  *
@@ -36,5 +38,25 @@ public class SimpleTuple<X, Y> {
     }
     public static <X, Y> SimpleTuple<X, Y> from(X x, Y y) {
         return new SimpleTuple<>(x, y);
+    }
+    /**
+     * Generates a simple tuple accepted by {@link com.melonstudios.createlegacy.recipe.WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
+     * @author Siepert123
+     * @param result The result itemstack.
+     * @param chance The chance of this item appearing (0.01f = 1%)
+     * @return A tuple which can be passed into a new Washing Recipe.
+     */
+    public static SimpleTuple<ItemStack, Float> washingEntry(ItemStack result, float chance) {
+        return new SimpleTuple<>(result, chance);
+    }
+    /**
+     * Generates a simple tuple accepted by {@link com.melonstudios.createlegacy.recipe.WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
+     * The {@code chance} is always 100%.
+     * @author Siepert123
+     * @param result The result itemstack.
+     * @return A tuple which can be passed into a new Washing Recipe.
+     */
+    public static SimpleTuple<ItemStack, Float> washingEntry(ItemStack result) {
+        return washingEntry(result, 1.0f);
     }
 }
