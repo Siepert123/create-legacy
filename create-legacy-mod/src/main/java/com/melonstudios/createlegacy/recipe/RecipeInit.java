@@ -3,7 +3,7 @@ package com.melonstudios.createlegacy.recipe;
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.event.PostRecipeInitEvent;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createlegacy.util.SimpleTuple;
+import com.melonstudios.createapi.util.SimpleTuple;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
