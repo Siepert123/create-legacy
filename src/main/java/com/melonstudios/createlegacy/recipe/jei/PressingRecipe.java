@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public final class PressingRecipe implements IRecipeWrapper {
-    private final ItemStack input;
-    private final ItemStack result;
+    public final ItemStack input;
+    public final ItemStack result;
 
     public PressingRecipe(ItemStack input, ItemStack result) {
         this.input = input;

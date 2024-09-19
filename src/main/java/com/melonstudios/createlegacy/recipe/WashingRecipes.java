@@ -19,9 +19,11 @@ public final class WashingRecipes {
     public static Map<ItemStack, SimpleTuple<ItemStack, Float>[]> getRecipesMap() {
         return getInstance().recipes;
     }
+    @SafeVarargs
     public static void addRecipe(ItemStack input, SimpleTuple<ItemStack, Float>... results) {
         addRecipe(input, false, results);
     }
+    @SafeVarargs
     public static void addRecipe(ItemStack input, boolean overwrite, SimpleTuple<ItemStack, Float>... results) {
 
         if (overwrite) {

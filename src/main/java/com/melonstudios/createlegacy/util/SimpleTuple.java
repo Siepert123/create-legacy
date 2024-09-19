@@ -46,7 +46,7 @@ public class SimpleTuple<X, Y> {
      * @param chance The chance of this item appearing (0.01f = 1%)
      * @return A tuple which can be passed into a new Washing Recipe.
      */
-    public static SimpleTuple<ItemStack, Float> washingEntry(ItemStack result, float chance) {
+    public static SimpleTuple<ItemStack, Float> optionalRecipeEntry(ItemStack result, float chance) {
         return new SimpleTuple<>(result, chance);
     }
     /**
@@ -55,7 +55,7 @@ public class SimpleTuple<X, Y> {
      * @param result The result itemstack.
      * @return A tuple which can be passed into a new Washing Recipe.
      */
-    public static SimpleTuple<ItemStack, Float> washingEntry(ItemStack result) {
-        return washingEntry(result, 1.0f);
+    public static SimpleTuple<ItemStack, Float> optionalRecipeEntry(ItemStack result) {
+        return optionalRecipeEntry(result, 1.0f);
     }
 }

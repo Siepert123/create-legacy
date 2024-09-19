@@ -19,6 +19,7 @@ public final class JEICompat implements IModPlugin {
         final IGuiHelper gui = helpers.getGuiHelper();
 
         registry.addRecipeCategories(new PressingRecipeCategory.Implementation(gui));
+        registry.addRecipeCategories(new WashingRecipeCategory.Implementation(gui));
     }
 
     @Override
@@ -29,7 +30,10 @@ public final class JEICompat implements IModPlugin {
         IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 
 
-        registry.addRecipes(RecipeMaker.getPressingRecipes(jeiHelpers));
+        registry.addRecipes(RecipeMaker.getPressingRecipes(jeiHelpers), "create.pressing");
         registry.addRecipeCatalyst(new ItemStack(Items.ITEM_FRAME), "create.pressing");
+
+        registry.addRecipes(RecipeMaker.getWashingRecipes(jeiHelpers), "create.washing");
+        registry.addRecipeCatalyst(new ItemStack(Items.QUARTZ), "create.washing");
     }
 }
