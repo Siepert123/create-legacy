@@ -16,7 +16,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "createlegacy-annotation-processor",
+            "Specification-Title": "create-annotations",
             "Specification-Vendor": "Melon Studios",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
