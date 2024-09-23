@@ -1,4 +1,4 @@
-package com.melonstudios.createapi.util;
+package com.melonstudios.createlegacy.util;
 
 import net.minecraft.item.ItemStack;
 
@@ -11,30 +11,30 @@ import net.minecraft.item.ItemStack;
  * @param <Y> Second value
  */
 public class SimpleTuple<X, Y> {
-    private X x;
-    private Y y;
-    public X getX() {
-        return x;
+    private X value1;
+    private Y value2;
+    public X getValue1() {
+        return value1;
     }
-    public void setX(X x) {
-        this.x = x;
+    public void setValue1(X value1) {
+        this.value1 = value1;
     }
-    public Y getY() {
-        return y;
+    public Y getValue2() {
+        return value2;
     }
-    public void setY(Y y) {
-        this.y = y;
+    public void setValue2(Y value2) {
+        this.value2 = value2;
     }
-    public SimpleTuple(X x, Y y) {
-        this.x = x;
-        this.y = y;
+    public SimpleTuple(X value1, Y value2) {
+        this.value1 = value1;
+        this.value2 = value2;
     }
 
     /**
      * @author Siepert123
      */
     public SimpleTuple<X, Y> copy() {
-        return new SimpleTuple<>(x, y);
+        return new SimpleTuple<>(value1, value2);
     }
     public static <X, Y> SimpleTuple<X, Y> from(X x, Y y) {
         return new SimpleTuple<>(x, y);
