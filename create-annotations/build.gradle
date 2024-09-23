@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+group = 'com.melonstudios' // Use your group ID
+version = '1.0'
+
+dependencies {
+    // implementation 'com.google.auto.service:auto-service:1.0-rc6' // or the latest version
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "create-annotations",
+            "Specification-Vendor": "Melon Studios",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"Melon Studios",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ]) 
+    }
+}

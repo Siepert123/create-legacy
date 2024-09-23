@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+
+rootProject.name = "create-legacy"
+
+include 'create-annotations', 'create-legacy-mod'

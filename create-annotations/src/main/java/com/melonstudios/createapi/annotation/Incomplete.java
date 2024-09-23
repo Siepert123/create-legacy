@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * @author moddingforreal
  * @since 0.1.0
  */
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME) // Might be useful later on to keep this in runtime
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PACKAGE, ElementType.METHOD})
 @Documented
 @Incomplete("The annotation processor for com.melonstudios.createapi.annotation.ReflectionConstant hasn't been implemented yet")
