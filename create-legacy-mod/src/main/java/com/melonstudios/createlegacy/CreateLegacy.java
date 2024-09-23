@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.proxy.CommonProxy;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
+import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.OreDictHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
@@ -33,8 +34,8 @@ public final class CreateLegacy {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        BitSplitter.runTests(true);
         CreateAPI.discoverAndSortAddons(event);
-        OreDictHandler.init();
     }
 
     @Mod.EventHandler

@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Splits the bits of a number into other numbers or boolean arrays.
@@ -10,28 +11,66 @@ import java.util.Arrays;
  * @since 0.1.0
  */
 public final class BitSplitter {
-    public static void main(String[] args) {
-        System.out.println("Test START");
+    private static final class InconsistentBitConversionException extends RuntimeException {
+        private final int original;
+        private final int result;
 
-        byte test1 = -37;
+        public InconsistentBitConversionException(int original, int result) {
+            this.original = original;
+            this.result = result;
+        }
 
-        System.out.println("test 1 - origin: " + test1);
-        System.out.println("test 1 - boolean array: " + Arrays.toString(byteToBooleans(test1)));
-        System.out.println("test 1 - reconversion: " + booleansToByte(byteToBooleans(test1)));
+        @Override
+        public String getMessage() {
+            return String.format("Bit conversion mismatch! Expected %s, got %s instead", original, result);
+        }
+    }
 
-        int test2 = 12589923;
+    public static void runTests(boolean crash) {
+        final Random random = new Random();
+        byte[] idk = new byte[1];
+        random.nextBytes(idk);
+        byte test1 = idk[0];
+        int test2 = random.nextInt();
+        int test3 = random.nextInt();
 
-        System.out.println("test 2 - origin: "+ test2);
-        System.out.println("test 2 - boolean array: " + Arrays.toString(intToBooleans(test2)));
-        System.out.println("test 2 - reconversion: " + booleansToInt(intToBooleans(test2)));
+        boolean error = false;
 
-        int test3 = -27895252;
+        DisplayLink.info("Starting BitSplitter tests");
+        if (crash) DisplayLink.warn("Warning: inconsistent tests crash the game!!");
 
-        System.out.println("test 3 - origin: "+ test3);
-        System.out.println("test 3 - byte array: " + Arrays.toString(intToBytes(test3)));
-        System.out.println("test 3 - reconversion: " + bytesToInt(intToBytes(test3)));
+        DisplayLink.info("Test 1: origin = " + test1);
+        DisplayLink.info("Test 1: bit conversion = " + Arrays.toString(byteToBooleans(test1)));
+        DisplayLink.info("Test 1: result = " + booleansToByte(byteToBooleans(test1)));
+        if (booleansToByte(byteToBooleans(test1)) != test1) {
+            error = true;
+            if (crash)
+                throw new InconsistentBitConversionException(test1, booleansToByte(byteToBooleans(test1)));
+        }
 
-        System.out.println("Test END");
+        DisplayLink.info("Test 2: origin = " + test2);
+        DisplayLink.info("Test 2: byte conversion = " + Arrays.toString(intToBytes(test2)));
+        DisplayLink.info("Test 2: result = " + bytesToInt(intToBytes(test2)));
+        if (bytesToInt(intToBytes(test2)) != test2) {
+            error = true;
+            if (crash)
+                throw new InconsistentBitConversionException(test2, bytesToInt(intToBytes(test2)));
+        }
+
+        DisplayLink.info("Test 3: origin = " + test3);
+        DisplayLink.info("Test 3: byte conversion = " + Arrays.toString(intToBytes(test3)));
+        DisplayLink.info("Test 3: result = " + bytesToInt(intToBytes(test3)));
+        if (bytesToInt(intToBytes(test3)) != test3) {
+            error = true;
+            if (crash)
+                throw new InconsistentBitConversionException(test3, bytesToInt(intToBytes(test3)));
+        }
+
+        if (error) {
+            DisplayLink.fatal("Bit conversions are inconsistent, proceed with extreme caution!");
+        } else {
+            DisplayLink.info("BitSplitter tests completed without error!");
+        }
     }
 
     private static boolean[] byteSect(boolean[] booleans, final int place) {

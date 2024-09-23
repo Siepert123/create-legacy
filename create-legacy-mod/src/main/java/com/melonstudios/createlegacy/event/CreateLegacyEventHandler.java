@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.event;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
+import com.melonstudios.createlegacy.util.OreDictHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -22,6 +23,7 @@ public final class CreateLegacyEventHandler {
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         DisplayLink.debug("Registering %s items", ModItems.ITEMS.size());
         event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
+        OreDictHandler.init();
     }
 
     @SubscribeEvent
