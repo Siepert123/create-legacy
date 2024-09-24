@@ -31,6 +31,11 @@ item.create.precision_mechanism.name=Precision Mechanism
 item.create.precision_mechanism_incomplete.name=Incomplete Precision Mechanism
 item.create.plate_obsidian_incomplete.name=Unprocessed Sturdy Sheet
 
+#Blocks
+tile.create.block_copper.name=Block of Copper
+tile.create.block_zinc.name=Block of Zinc
+tile.create.block_brass.name=Block of Brass
+
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations

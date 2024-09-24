@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.event.RecipeInitEvent;
+import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.init.Blocks;
@@ -123,6 +124,9 @@ public final class RecipeInit {
             }
         }
 
+        for (ItemStack gem : OreDictionary.getOres("gemRoseQuartzPolished")) {
+            SandingRecipes.addRecipe(gem, new ItemStack(ModItems.INGREDIENT, 1, 20));
+        }
 
         for (int i = 0; i < 16; i++) {
             if (i != 0) {

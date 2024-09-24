@@ -33,5 +33,11 @@ public final class ModItems {
                 5, "orestone/stone_scoria");
         CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 6, "orestone/stone_veridium");
+        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                0, "metal/copper");
+        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                1, "metal/zinc");
+        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                2, "metal/brass");
     }
 }

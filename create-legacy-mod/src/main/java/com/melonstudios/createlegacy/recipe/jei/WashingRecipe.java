@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WashingRecipe implements IRecipeWrapper {
+public final class WashingRecipe implements IRecipeWrapper {
     public final ItemStack input;
     public final SimpleTuple<ItemStack, Float>[] results;
 

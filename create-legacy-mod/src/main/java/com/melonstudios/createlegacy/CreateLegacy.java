@@ -34,7 +34,7 @@ public final class CreateLegacy {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        BitSplitter.runTests(true);
+        BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
     }
 

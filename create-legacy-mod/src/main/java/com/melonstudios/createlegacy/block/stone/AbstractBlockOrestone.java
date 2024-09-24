@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block.stone;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -17,8 +18,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("deprecation")
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public abstract class AbstractBlockOrestone extends Block implements IMetaName {
     protected AbstractBlockOrestone(String registry) {
         super(Material.ROCK);
@@ -27,7 +31,7 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         setUnlocalizedName("create." + registry);
 
         setHardness(5.0f);
-        setResistance(20.0f);
+        setResistance(10.0f);
 
         setDefaultState(this.blockState.getBaseState().withProperty(
                 STONE_TYPE, StoneType.ASURINE
@@ -51,28 +55,15 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
             this.mapColor = color;
         }
 
-        public static final StoneType[] META_LOOKUP = new StoneType[]{
-                ASURINE,
-                CRIMSITE,
-                LIMESTONE,
-                OCHRUM,
-                SCORCHIA,
-                SCORIA,
-                VERIDIUM
-        };
-
-        public int ID() {
+        public int getID() {
             return this.ID;
-        }
-        public static int getID(StoneType type) {
-            return type.ID();
         }
         @Nonnull
         public static StoneType fromID(int ID) {
             return values()[ID];
         }
         @Nonnull
-        public MapColor color() {
+        public MapColor getMapColor() {
             return this.mapColor;
         }
 
@@ -102,7 +93,7 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(STONE_TYPE).ID();
+        return state.getValue(STONE_TYPE).getID();
     }
 
     @Override
@@ -112,11 +103,11 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
 
     @Override
     public int damageDropped(IBlockState state) {
-        return state.getValue(STONE_TYPE).ID();
+        return state.getValue(STONE_TYPE).getID();
     }
 
     @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.getValue(STONE_TYPE).color();
+        return state.getValue(STONE_TYPE).getMapColor();
     }
 }
