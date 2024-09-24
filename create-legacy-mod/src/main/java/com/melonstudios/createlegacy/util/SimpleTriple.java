@@ -7,6 +7,7 @@ package com.melonstudios.createlegacy.util;
  * @since 0.1.0
  * @param <X> First value
  * @param <Y> Second value
+ * @param <Z> Third value
  */
 public class SimpleTriple<X, Y, Z> {
     private X value1;

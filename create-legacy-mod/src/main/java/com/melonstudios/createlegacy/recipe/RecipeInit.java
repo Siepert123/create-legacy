@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
-import com.melonstudios.createlegacy.event.PostRecipeInitEvent;
+import com.melonstudios.createlegacy.event.RecipeInitEvent;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.init.Blocks;
@@ -50,6 +50,8 @@ public final class RecipeInit {
         MinecraftForge.EVENT_BUS.post(new MetalTypesQueryEvent(metals));
 
         DisplayLink.debug("Initializing recipes");
+
+        MinecraftForge.EVENT_BUS.post(new RecipeInitEvent.Pre());
 
         for (ItemStack input : OreDictionary.getOres(crushed("iron"))) {
             WashingRecipes.addRecipe(input, true,
@@ -150,7 +152,7 @@ public final class RecipeInit {
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 1), 0.02f)
         );
 
-        MinecraftForge.EVENT_BUS.post(new PostRecipeInitEvent());
+        MinecraftForge.EVENT_BUS.post(new RecipeInitEvent.Post());
 
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;

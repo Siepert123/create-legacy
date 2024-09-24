@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import net.minecraft.item.ItemStack;
+import com.melonstudios.createlegacy.recipe.WashingRecipes;
 
 /**
  * Simple implementation of a tuple
@@ -40,7 +41,7 @@ public class SimpleTuple<X, Y> {
         return new SimpleTuple<>(x, y);
     }
     /**
-     * Generates a simple tuple accepted by {@link com.melonstudios.createlegacy.recipe.WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
+     * Generates a simple tuple accepted by {@link WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
      * @author Siepert123
      * @param result The result itemstack.
      * @param chance The chance of this item appearing (0.01f = 1%)
@@ -50,7 +51,7 @@ public class SimpleTuple<X, Y> {
         return new SimpleTuple<>(result, chance);
     }
     /**
-     * Generates a simple tuple accepted by {@link com.melonstudios.createlegacy.recipe.WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
+     * Generates a simple tuple accepted by {@link WashingRecipes#addRecipe(ItemStack, SimpleTuple[])}.
      * The {@code chance} is always 100%.
      * @author Siepert123
      * @param result The result itemstack.
