@@ -124,7 +124,7 @@ public final class RecipeInit {
             }
         }
 
-        for (ItemStack gem : OreDictionary.getOres("gemRoseQuartzPolished")) {
+        for (ItemStack gem : OreDictionary.getOres("gemRoseQuartz")) {
             SandingRecipes.addRecipe(gem, new ItemStack(ModItems.INGREDIENT, 1, 20));
         }
 

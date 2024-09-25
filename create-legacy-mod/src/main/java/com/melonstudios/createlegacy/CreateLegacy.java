@@ -7,7 +7,11 @@ import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.OreDictHandler;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,6 +35,15 @@ public final class CreateLegacy {
     @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
         clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
     public static CommonProxy proxy;
+    public static void setItemModel(Item item, int meta, String file) {
+        proxy.setItemModel(item, meta, file);
+    }
+    public static void setItemModel(Item item, String file) {
+        proxy.setItemModel(item, file);
+    }
+    public static void setItemModel(Item item) {
+        proxy.setItemModel(item);
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

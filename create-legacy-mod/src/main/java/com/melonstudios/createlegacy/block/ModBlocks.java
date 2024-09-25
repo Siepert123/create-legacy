@@ -3,8 +3,6 @@ package com.melonstudios.createlegacy.block;
 import com.melonstudios.createlegacy.block.stone.BlockOrestone;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
-import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
-import com.melonstudios.createlegacy.tileentity.render.TileEntityShaftRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.Item;
@@ -40,7 +38,6 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityShaft.class, "create:shaft");
-        TileEntityRendererDispatcher.instance.renderers.put(TileEntityShaft.class, new TileEntityShaftRenderer());
+
     }
 }
