@@ -22,6 +22,7 @@ public final class PressingRecipes {
         addRecipe(input, result, false);
     }
     public static void addRecipe(ItemStack input, ItemStack result, boolean overwrite) {
+        input.setCount(1);
         if (overwrite) {
             removeRecipe(input);
             getRecipesMap().put(input, result);

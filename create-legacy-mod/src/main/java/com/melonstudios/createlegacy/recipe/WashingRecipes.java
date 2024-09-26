@@ -25,6 +25,7 @@ public final class WashingRecipes {
     }
     @SafeVarargs
     public static void addRecipe(ItemStack input, boolean overwrite, SimpleTuple<ItemStack, Float>... results) {
+        input.setCount(1);
         if (overwrite) {
             removeRecipe(input);
             getRecipesMap().put(input, results);

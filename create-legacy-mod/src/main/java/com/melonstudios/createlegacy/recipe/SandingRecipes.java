@@ -19,6 +19,7 @@ public final class SandingRecipes {
     }
 
     public static void addRecipe(ItemStack input, ItemStack result, boolean override) {
+        input.setCount(1);
         if (override) removeRecipe(input);
         getInstance().recipes.put(input, result);
     }
