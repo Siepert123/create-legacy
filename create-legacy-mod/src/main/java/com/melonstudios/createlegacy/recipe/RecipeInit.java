@@ -54,6 +54,28 @@ public final class RecipeInit {
 
         MinecraftForge.EVENT_BUS.post(new RecipeInitEvent.Pre());
 
+        for (String metal : metals) {
+            if (doesOreDictNameExist(ingot(metal))) {
+                if (doesOreDictNameExist(plate(metal))) {
+                    for (ItemStack stack : OreDictionary.getOres(ingot(metal))) {
+                        PressingRecipes.addRecipe(stack, OreDictionary.getOres(plate(metal)).get(0));
+                    }
+                }
+            }
+
+            if (doesOreDictNameExist(crushed(metal))) {
+                if (doesOreDictNameExist(nugget(metal))) {
+                    for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
+                        ItemStack nuggets = OreDictionary.getOres(nugget(metal)).get(0).copy();
+                        nuggets.setCount(9);
+                        WashingRecipes.addRecipe(stack,
+                                SimpleTuple.optionalRecipeEntry(nuggets)
+                        );
+                    }
+                }
+            }
+        }
+
         for (ItemStack input : OreDictionary.getOres(crushed("iron"))) {
             WashingRecipes.addRecipe(input, true,
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.IRON_NUGGET, 9)),
@@ -99,28 +121,6 @@ public final class RecipeInit {
                 WashingRecipes.addRecipe(stack,
                         SimpleTuple.optionalRecipeEntry(new ItemStack(Items.CLAY_BALL, 1), 0.25f)
                 );
-            }
-        }
-
-        for (String metal : metals) {
-            if (doesOreDictNameExist(ingot(metal))) {
-                if (doesOreDictNameExist(plate(metal))) {
-                    for (ItemStack stack : OreDictionary.getOres(ingot(metal))) {
-                        PressingRecipes.addRecipe(stack, OreDictionary.getOres(plate(metal)).get(0));
-                    }
-                }
-            }
-
-            if (doesOreDictNameExist(crushed(metal))) {
-                if (doesOreDictNameExist(nugget(metal))) {
-                    for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
-                        ItemStack nuggets = OreDictionary.getOres(nugget(metal)).get(0).copy();
-                        nuggets.setCount(9);
-                        WashingRecipes.addRecipe(stack,
-                                SimpleTuple.optionalRecipeEntry(nuggets)
-                        );
-                    }
-                }
             }
         }
 

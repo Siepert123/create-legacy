@@ -18,8 +18,15 @@ public final class SandingRecipes {
         return getInstance().recipes;
     }
 
-    public static void addRecipe(ItemStack input, ItemStack result) {
+    public static void addRecipe(ItemStack input, ItemStack result, boolean override) {
+        if (override) removeRecipe(input);
         getInstance().recipes.put(input, result);
+    }
+    public static void removeRecipe(ItemStack input) {
+        getRecipesMap().entrySet().removeIf(entry -> entry.getKey().isItemEqual(input));
+    }
+    public static void addRecipe(ItemStack input, ItemStack result) {
+        addRecipe(input, result, false);
     }
 
     public static boolean hasResult(ItemStack input) {

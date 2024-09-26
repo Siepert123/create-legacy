@@ -25,9 +25,8 @@ public final class WashingRecipes {
     }
     @SafeVarargs
     public static void addRecipe(ItemStack input, boolean overwrite, SimpleTuple<ItemStack, Float>... results) {
-
         if (overwrite) {
-            getRecipesMap().remove(input);
+            removeRecipe(input);
             getRecipesMap().put(input, results);
         } else {
             if (!getRecipesMap().containsKey(input)) {
@@ -38,7 +37,7 @@ public final class WashingRecipes {
         }
     }
     public static void removeRecipe(ItemStack input) {
-        getRecipesMap().remove(input);
+        getRecipesMap().entrySet().removeIf(entry -> entry.getKey().isItemEqual(input));
     }
 
     public static SimpleTuple<ItemStack, Float>[] getResults(ItemStack input) {
