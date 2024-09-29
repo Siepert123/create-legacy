@@ -72,6 +72,9 @@ public class ItemSchematic extends Item {
                     tooltip.add("Current mode: COPY");
                     tooltip.add("File mode is WIP!!");
                 }
+            } else {
+                tooltip.add("Current mode: COPY");
+                tooltip.add("File mode is WIP!!");
             }
         }
         if (stack.getMetadata() == 2) {
