@@ -68,6 +68,9 @@ public class ItemSchematic extends Item {
                             nbt.getInteger("startX"),
                             nbt.getInteger("startY"),
                             nbt.getInteger("startZ")));
+                } else {
+                    tooltip.add("Current mode: COPY");
+                    tooltip.add("File mode is WIP!!");
                 }
             }
         }
