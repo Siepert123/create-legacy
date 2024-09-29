@@ -46,7 +46,7 @@ itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
 
 #Configs
-config.create.allowInstantSchematicPlacement=Allow Creative players to instantly place a Schematic
+config.create.allowInstantSchematicPlacement=Allow players to instantly place a Schematic
 config.create.preventBitSplitterTestCrash.name=Prevent BitSplitter test crashing the game
 
 #Orestones etc

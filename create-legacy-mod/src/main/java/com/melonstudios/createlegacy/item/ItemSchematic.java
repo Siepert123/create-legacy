@@ -1,6 +1,8 @@
 package com.melonstudios.createlegacy.item;
 
+import com.melonstudios.createlegacy.CreateConfig;
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.event.SchematicPlacementEvent;
 import com.melonstudios.createlegacy.schematic.InvalidSchematicSizeException;
 import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
@@ -17,12 +19,12 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -76,7 +78,7 @@ public class ItemSchematic extends Item {
 
     @Override
     @Nonnull
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public final EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (stack.getMetadata() == 0) return EnumActionResult.PASS;
 
@@ -88,7 +90,7 @@ public class ItemSchematic extends Item {
         return EnumActionResult.SUCCESS;
     }
 
-    private void handleWrite(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack) {
+    protected void handleWrite(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack) {
         NBTTagCompound nbt = stack.getTagCompound();
 
         assert nbt != null;
@@ -135,7 +137,7 @@ public class ItemSchematic extends Item {
                     SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.NEUTRAL, 1.0f, 1.0f);
         }
     }
-    private void save(ItemStack stack, World world) {
+    protected void save(ItemStack stack, World world) {
         assert stack.getTagCompound() != null;
         NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("posNBT");
 
@@ -170,11 +172,11 @@ public class ItemSchematic extends Item {
             throw new RuntimeException(e);
         }
     }
-    private void handlePlacement(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack) {
-        if (stack.getTagCompound() == null) return;
+    protected void handlePlacement(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack) {
+        if (stack.getTagCompound() == null || !CreateConfig.allowInstantSchematicPlacement) return;
 
         if (player.isSneaking()) { //File method
-            //h
+
         } else { //Copy method
             if (world.isRemote || !player.isCreative()) return;
             NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("posNBT");
@@ -185,6 +187,11 @@ public class ItemSchematic extends Item {
             int sizeZ = nbt.getInteger("endZ") - nbt.getInteger("startZ") + 1;
 
             IBlockState[][][] structure = new IBlockState[sizeX][sizeY][sizeZ];
+
+            SchematicPlacementEvent event = new SchematicPlacementEvent(world, pos, structure, player);
+            MinecraftForge.EVENT_BUS.post(event);
+
+            if (event.isCanceled()) return;
 
             for (int x = nbt.getInteger("startX"); x <= nbt.getInteger("endX"); x++) {
                 for (int y = nbt.getInteger("startY"); y <= nbt.getInteger("endY"); y++) {
