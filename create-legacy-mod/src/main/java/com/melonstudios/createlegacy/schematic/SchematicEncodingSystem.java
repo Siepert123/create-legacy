@@ -14,6 +14,12 @@ import static com.melonstudios.createlegacy.util.BitSplitter.intToBytes;
  * @since 0.1.0
  */
 public final class SchematicEncodingSystem {
+    /**
+     * Encodes a structure in the Minecraft world to an array of bytes suitable for files
+     * @param structure The structure in IBlockStates
+     * @return A byte array that can be loaded to a file
+     * @throws InvalidSchematicSizeException When the size of the schematic exceeds 255 blocks
+     */
     public static byte[] encode(IBlockState[][][] structure) throws InvalidSchematicSizeException {
         final int x = structure.length;
         final int y = structure[0].length;

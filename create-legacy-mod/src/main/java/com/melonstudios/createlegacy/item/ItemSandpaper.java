@@ -12,8 +12,13 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * @see SchematicEncodingSystem
+ */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemSandpaper extends Item {

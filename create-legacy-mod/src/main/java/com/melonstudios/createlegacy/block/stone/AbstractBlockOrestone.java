@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block.stone;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -9,10 +10,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,6 +25,13 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Mother of all Orestones.
+ * Really just an organization thing, I guess.
+ * @since 0.1.0
+ * @author Siepert123
+ * @see BlockOrestone
+ */
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -109,5 +121,62 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
     @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.getValue(STONE_TYPE).getMapColor();
+    }
+
+    /**
+     * @return The orestone prefix (eg. {@code stone})
+     */
+    protected abstract String getOrestonePrefix();
+
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return "tile.create." + getOrestonePrefix() + "_" + StoneType.fromID(stack.getMetadata()).getName();
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, 0));
+        items.add(new ItemStack(this, 1, 1));
+        items.add(new ItemStack(this, 1, 2));
+        items.add(new ItemStack(this, 1, 3));
+        items.add(new ItemStack(this, 1, 4));
+        items.add(new ItemStack(this, 1, 5));
+        items.add(new ItemStack(this, 1, 6));
+    }
+
+    /**
+     * Sets item models for orestones.
+     * These functions are placed here for organization.
+     */
+    public static void setItemModels() {
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                0, "orestone/stone_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                1, "orestone/stone_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                2, "orestone/stone_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                3, "orestone/stone_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                4, "orestone/stone_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                5, "orestone/stone_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
+                6, "orestone/stone_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                0, "orestone/stone_bricks_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                1, "orestone/stone_bricks_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                2, "orestone/stone_bricks_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                3, "orestone/stone_bricks_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                4, "orestone/stone_bricks_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                5, "orestone/stone_bricks_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
+                6, "orestone/stone_bricks_veridium");
     }
 }

@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * Splits the bits of a number into other numbers or boolean arrays.
  * Works by finding each bit individually.
+ * <p>
  * please never touch this code ever
  * @author siepert123
  * @since 0.1.0
@@ -26,6 +27,10 @@ public final class BitSplitter {
         }
     }
 
+    /**
+     * Run tests to see if everything works accordingly.
+     * @param crash Whether to crash the game when something isn't right.
+     */
     public static void runTests(boolean crash) {
         final Random random = new Random();
         byte[] idk = new byte[1];
@@ -80,6 +85,11 @@ public final class BitSplitter {
         }
     }
 
+    /**
+     * @param booleans An array of booleans
+     * @param place The location of the byte section
+     * @return An array of 8 long (1 byte) taken from the informed location
+     */
     private static boolean[] byteSect(boolean[] booleans, final int place) {
         boolean[] newBooleans = new boolean[8];
 
@@ -88,6 +98,10 @@ public final class BitSplitter {
         return newBooleans;
     }
 
+    /**
+     * @param b A byte to be split
+     * @return A boolean array taken from a byte
+     */
     public static boolean[] byteToBooleans(byte b) {
         boolean[] booleans = new boolean[8];
 
@@ -103,6 +117,10 @@ public final class BitSplitter {
         return booleans;
     }
 
+    /**
+     * @param booleans Booleans to fuse into a byte
+     * @return A byte freshly fused using a boolean array
+     */
     public static byte booleansToByte(boolean[] booleans) {
         if (booleans.length != 8) throw new IllegalArgumentException(String.format("A byte needs 8 booleans, not %s!", booleans.length));
 
@@ -118,6 +136,10 @@ public final class BitSplitter {
         return (byte) i;
     }
 
+    /**
+     * @param i The integer to violently dissect into booleans
+     * @return The recently split integer as a boolean array
+     */
     public static boolean[] intToBooleans(int i) {
         boolean[] booleans = new boolean[32];
 
@@ -157,6 +179,10 @@ public final class BitSplitter {
         return booleans;
     }
 
+    /**
+     * @param booleans The boolean array to fuse together
+     * @return The fused integer made from the booleans in the boolean array
+     */
     public static int booleansToInt(boolean[] booleans) {
         if (booleans.length != 32) throw new IllegalArgumentException(String.format("An int needs 32 booleans, not %s!", booleans.length));
 
@@ -198,6 +224,10 @@ public final class BitSplitter {
         return i;
     }
 
+    /**
+     * @param i The integer to snip into bytes
+     * @return A byte array containing the 4 bytes in the integer
+     */
     public static byte[] intToBytes(int i) {
         boolean[] booleans = intToBooleans(i);
 
@@ -209,6 +239,10 @@ public final class BitSplitter {
         };
     }
 
+    /**
+     * @param bytes Snipped bytes to glue together
+     * @return An integer recently glued together using 4 bytes
+     */
     public static int bytesToInt(byte[] bytes) {
         if (bytes.length != 4) throw new IllegalArgumentException(String.format("An int needs 4 bytes, not %s!", bytes.length));
         boolean[] booleans = new boolean[32];
@@ -221,6 +255,10 @@ public final class BitSplitter {
         return booleansToInt(booleans);
     }
 
+    /**
+     * @param booleans The booleans to visualize pleasingly
+     * @return A string representing booleans as ones and zeroes
+     */
     public static String visualizeBooleans(boolean[] booleans) {
         StringBuilder builder = new StringBuilder();
         for (boolean b : booleans) {

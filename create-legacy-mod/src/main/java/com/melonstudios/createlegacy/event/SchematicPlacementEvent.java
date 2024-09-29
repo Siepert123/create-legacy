@@ -7,6 +7,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
+/**
+ * Fires when a schematic is placed by a player.
+ * @since 0.1.0
+ */
 @Cancelable
 public final class SchematicPlacementEvent extends Event {
     public final IBlockState[][][] structure;

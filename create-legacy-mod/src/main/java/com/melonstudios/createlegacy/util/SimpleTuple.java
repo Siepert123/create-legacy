@@ -32,11 +32,20 @@ public class SimpleTuple<X, Y> {
     }
 
     /**
+     * Creates a new copy of this SimpleTuple
+     *
      * @author Siepert123
-     */
+     * @author moddingforreal
+     * */
     public SimpleTuple<X, Y> copy() {
         return new SimpleTuple<>(value1, value2);
     }
+    /**
+     * Makes a new SimpleTriple from the parameters
+     *
+     * @author Siepert123
+     * @author moddingforreal
+     * */
     public static <X, Y> SimpleTuple<X, Y> from(X x, Y y) {
         return new SimpleTuple<>(x, y);
     }

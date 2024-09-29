@@ -17,6 +17,9 @@ import java.util.List;
 /**
  * Initialized all recipes that aren't data-driven.
  * @since 0.1.0
+ * @see PressingRecipes
+ * @see SandingRecipes
+ * @see WashingRecipes
  */
 public final class RecipeInit {
     private static boolean initialized = false;

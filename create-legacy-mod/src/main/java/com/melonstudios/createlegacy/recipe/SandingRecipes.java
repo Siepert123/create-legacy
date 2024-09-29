@@ -5,6 +5,10 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Map;
 
+/**
+ * A class holding all the SandingRecipes.
+ * @since 0.1.0
+ */
 public final class SandingRecipes {
     private SandingRecipes() {}
 
