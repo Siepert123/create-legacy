@@ -22,8 +22,9 @@ public final class PressingRecipes {
         addRecipe(input, result, false);
     }
     public static void addRecipe(ItemStack input, ItemStack result, boolean overwrite) {
+        input.setCount(1);
         if (overwrite) {
-            getRecipesMap().remove(input);
+            removeRecipe(input);
             getRecipesMap().put(input, result);
         } else {
             if (!getRecipesMap().containsKey(input)) {
@@ -34,7 +35,7 @@ public final class PressingRecipes {
         }
     }
     public static void removeRecipe(ItemStack input) {
-        getRecipesMap().remove(input);
+        getRecipesMap().entrySet().removeIf(entry -> entry.getKey().isItemEqual(input));
     }
 
     public static ItemStack getResult(ItemStack input) {

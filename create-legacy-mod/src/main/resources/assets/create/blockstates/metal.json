@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "metal=copper": {
+      "model": "create:metal/copper"
+    },
+    "metal=zinc": {
+      "model": "create:metal/zinc"
+    },
+    "metal=brass": {
+      "model": "create:metal/brass"
+    }
+  }
+}

@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class ItemIngredient extends Item {
     public ItemIngredient() {
+        super();
+
         setRegistryName("ingredient");
         setUnlocalizedName("create.ingredient");
 

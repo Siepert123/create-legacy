@@ -1,0 +1,4 @@
+Each IBlockState will be converted into 5 bytes -> 4 bytes (1 int) for block, 1 byte for metadata.
+
+The first 3 bytes of the schematic file are used to indicate size.
+It is unsure whether it'll work between reloads!

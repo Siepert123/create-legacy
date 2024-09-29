@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.util;
 
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -30,6 +31,10 @@ public final class OreDictHandler {
         OreDictionary.registerOre("plateBrass", new ItemStack(ModItems.INGREDIENT, 1, 11));
         OreDictionary.registerOre("plateObsidian", new ItemStack(ModItems.INGREDIENT, 1, 18));
 
+        OreDictionary.registerOre("blockCopper", new ItemStack(ModBlocks.METAL, 1, 0));
+        OreDictionary.registerOre("blockZinc", new ItemStack(ModBlocks.METAL, 1, 1));
+        OreDictionary.registerOre("blockBrass", new ItemStack(ModBlocks.METAL, 1, 2));
+
         OreDictionary.registerOre("crushedIron", new ItemStack(ModItems.INGREDIENT, 1, 12));
         OreDictionary.registerOre("crushedGold", new ItemStack(ModItems.INGREDIENT, 1, 13));
         OreDictionary.registerOre("crushedCopper", new ItemStack(ModItems.INGREDIENT, 1, 14));
@@ -45,6 +50,9 @@ public final class OreDictHandler {
         OreDictionary.registerOre("whisk", new ItemStack(ModItems.INGREDIENT, 1, 24));
         OreDictionary.registerOre("electronTube", new ItemStack(ModItems.INGREDIENT, 1, 25));
         OreDictionary.registerOre("handBrass", new ItemStack(ModItems.INGREDIENT, 1, 26));
+
+        OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
+        OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));
 
         DisplayLink.debug("Ore Dictionary init done in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;

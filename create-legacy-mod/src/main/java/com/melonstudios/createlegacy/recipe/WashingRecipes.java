@@ -2,7 +2,7 @@ package com.melonstudios.createlegacy.recipe;
 
 import com.google.common.collect.Maps;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createapi.util.SimpleTuple;
+import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.item.ItemStack;
 
 import java.util.Map;
@@ -19,13 +19,15 @@ public final class WashingRecipes {
     public static Map<ItemStack, SimpleTuple<ItemStack, Float>[]> getRecipesMap() {
         return getInstance().recipes;
     }
+    @SafeVarargs
     public static void addRecipe(ItemStack input, SimpleTuple<ItemStack, Float>... results) {
         addRecipe(input, false, results);
     }
+    @SafeVarargs
     public static void addRecipe(ItemStack input, boolean overwrite, SimpleTuple<ItemStack, Float>... results) {
-
+        input.setCount(1);
         if (overwrite) {
-            getRecipesMap().remove(input);
+            removeRecipe(input);
             getRecipesMap().put(input, results);
         } else {
             if (!getRecipesMap().containsKey(input)) {
@@ -36,7 +38,7 @@ public final class WashingRecipes {
         }
     }
     public static void removeRecipe(ItemStack input) {
-        getRecipesMap().remove(input);
+        getRecipesMap().entrySet().removeIf(entry -> entry.getKey().isItemEqual(input));
     }
 
     public static SimpleTuple<ItemStack, Float>[] getResults(ItemStack input) {

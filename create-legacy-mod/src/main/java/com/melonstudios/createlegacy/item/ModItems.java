@@ -11,6 +11,8 @@ public final class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
 
     public static final Item INGREDIENT = registerItem(new ItemIngredient());
+    public static final Item SANDPAPER = registerItem(new ItemSandpaper());
+    public static final Item SCHEMATIC = registerItem(new ItemSchematic());
 
     private static Item registerItem(Item item) {
         ITEMS.add(item);
@@ -19,19 +21,32 @@ public final class ModItems {
 
     public static void setItemModels() {
         ItemIngredient.setItemModels();
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 0, "orestone/stone_asurine");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 1, "orestone/stone_crimsite");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 2, "orestone/stone_limestone");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 3, "orestone/stone_ochrum");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 4, "orestone/stone_scorchia");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 5, "orestone/stone_scoria");
-        CreateLegacy.proxy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
                 6, "orestone/stone_veridium");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                0, "metal/copper");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                1, "metal/zinc");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                2, "metal/brass");
+        CreateLegacy.setItemModel(SANDPAPER);
+        CreateLegacy.setItemModel(SCHEMATIC, 0,
+                "schematic/empty");
+        CreateLegacy.setItemModel(SCHEMATIC, 1,
+                "schematic/writeable");
+        CreateLegacy.setItemModel(SCHEMATIC, 2,
+                "schematic/written");
     }
 }

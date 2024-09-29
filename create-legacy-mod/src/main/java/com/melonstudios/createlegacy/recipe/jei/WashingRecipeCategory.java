@@ -10,25 +10,30 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class PressingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
+public abstract class WashingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
     protected static final ResourceLocation TEXTURES = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/singleton.png");
 
     protected static final int input = 0;
-    protected static final int output = 1;
+    protected static final int output_1 = 1;
 
-    protected PressingRecipeCategory(IGuiHelper helper) {}
+    protected WashingRecipeCategory(IGuiHelper helper) {}
 
-    public static final class Implementation extends PressingRecipeCategory<PressingRecipe> {
+    public static class Implementation extends WashingRecipeCategory<WashingRecipe> {
         private final IDrawable background;
+
+        protected Implementation(IGuiHelper helper) {
+            super(helper);
+            background = helper.createDrawable(TEXTURES, 0, 0, 64, 32);
+        }
 
         @Override
         public String getUid() {
-            return "create.pressing";
+            return "create.washing";
         }
 
         @Override
         public String getTitle() {
-            return "Pressing";
+            return "Washing by Fan";
         }
 
         @Override
@@ -42,16 +47,15 @@ public abstract class PressingRecipeCategory<T extends IRecipeWrapper> implement
         }
 
         @Override
-        public void setRecipe(IRecipeLayout layout, PressingRecipe recipe, IIngredients ingredients) {
+        public void setRecipe(IRecipeLayout layout, WashingRecipe recipe, IIngredients ingredients) {
             IGuiItemStackGroup stacks = layout.getItemStacks();
             stacks.init(input, true, 1, 7);
-            stacks.init(output, false, 45, 7);
+            int counter = 1;
+            for (int i = 0; i < recipe.results.length; i ++) {
+                stacks.init(counter, false, 45 + i*16, 7);
+                counter++;
+            }
             stacks.set(ingredients);
-        }
-
-        public Implementation(IGuiHelper helper) {
-            super(helper);
-            background = helper.createDrawable(TEXTURES, 0, 0, 64, 32);
         }
     }
 }

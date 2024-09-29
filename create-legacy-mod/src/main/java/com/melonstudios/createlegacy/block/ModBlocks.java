@@ -13,6 +13,8 @@ import java.util.List;
 public final class ModBlocks {
     public static final List<Block> BLOCKS = new ArrayList<>();
 
+    public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
+
     public static final Block STONE = registerBlockWithItem(new BlockOrestone("orestone"), true);
 
     private static Block registerBlock(Block block) {
