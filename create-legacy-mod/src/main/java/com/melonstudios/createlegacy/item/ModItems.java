@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -21,20 +22,7 @@ public final class ModItems {
 
     public static void setItemModels() {
         ItemIngredient.setItemModels();
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                0, "orestone/stone_asurine");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                1, "orestone/stone_crimsite");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                2, "orestone/stone_limestone");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                3, "orestone/stone_ochrum");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                4, "orestone/stone_scorchia");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                5, "orestone/stone_scoria");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.STONE),
-                6, "orestone/stone_veridium");
+        AbstractBlockOrestone.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
                 0, "metal/copper");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),

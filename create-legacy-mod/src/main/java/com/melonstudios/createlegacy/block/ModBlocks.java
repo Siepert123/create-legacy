@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.block.stone.BlockBricksOrestone;
 import com.melonstudios.createlegacy.block.stone.BlockOrestone;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
@@ -15,7 +16,8 @@ public final class ModBlocks {
 
     public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
 
-    public static final Block STONE = registerBlockWithItem(new BlockOrestone("orestone"), true);
+    public static final Block ORESTONE = registerBlockWithItem(new BlockOrestone(), true);
+    public static final Block ORESTONE_BRICKS = registerBlockWithItem(new BlockBricksOrestone(), true);
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);
