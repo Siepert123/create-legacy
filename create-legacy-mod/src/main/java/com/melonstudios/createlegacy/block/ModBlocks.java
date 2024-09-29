@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.block.stone.BlockOrestoneBricks;
 import com.melonstudios.createlegacy.block.stone.BlockOrestone;
 import com.melonstudios.createlegacy.block.stone.BlockOrestonePolished;
@@ -17,9 +18,9 @@ public final class ModBlocks {
 
     public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
 
-    public static final Block ORESTONE = registerBlockWithItem(new BlockOrestone(), true);
-    public static final Block ORESTONE_POLISHED = registerBlockWithItem(new BlockOrestonePolished(), true);
-    public static final Block ORESTONE_BRICKS = registerBlockWithItem(new BlockOrestoneBricks(), true);
+    public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
+    public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
+    public static final AbstractBlockOrestone ORESTONE_BRICKS = registerOrestoneBlock(new BlockOrestoneBricks());
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);
@@ -36,6 +37,9 @@ public final class ModBlocks {
     }
     private static Block registerBlockWithItem(Block block) {
         return registerBlockWithItem(block, false);
+    }
+    private static AbstractBlockOrestone registerOrestoneBlock(AbstractBlockOrestone orestone) {
+        return (AbstractBlockOrestone) registerBlockWithItem(orestone, true);
     }
 
     public static void setTileEntities() {
