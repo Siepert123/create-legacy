@@ -31,6 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @since 0.1.0
  * @author Siepert123
  * @see BlockOrestone
+ * @see BlockOrestoneBricks
  */
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
@@ -178,5 +179,20 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
                 5, "orestone/stone_bricks_scoria");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
                 6, "orestone/stone_bricks_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                0, "orestone/stone_polished_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                1, "orestone/stone_polished_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                2, "orestone/stone_polished_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                3, "orestone/stone_polished_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                4, "orestone/stone_polished_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                5, "orestone/stone_polished_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                6, "orestone/stone_polished_veridium");
     }
 }

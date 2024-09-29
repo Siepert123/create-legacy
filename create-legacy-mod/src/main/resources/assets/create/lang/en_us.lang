@@ -58,6 +58,14 @@ tile.create.orestone_scorchia.name=Scorchia
 tile.create.orestone_scoria.name=Scoria
 tile.create.orestone_veridium.name=Veridium
 
+tile.create.orestone_polished_asurine.name=Polished Asurine
+tile.create.orestone_polished_crimsite.name=Polished Crimsite
+tile.create.orestone_polished_limestone.name=Polished Limestone
+tile.create.orestone_polished_ochrum.name=Polished Ochrum
+tile.create.orestone_polished_scorchia.name=Polished Scorchia
+tile.create.orestone_polished_scoria.name=Polished Scoria
+tile.create.orestone_polished_veridium.name=Polished Veridium
+
 tile.create.orestone_bricks_asurine.name=Asurine Bricks
 tile.create.orestone_bricks_crimsite.name=Crimsite Bricks
 tile.create.orestone_bricks_limestone.name=Limestone Bricks

@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.block.stone;
 
-public class BlockBricksOrestone extends AbstractBlockOrestone {
-    public BlockBricksOrestone() {
+public final class BlockOrestoneBricks extends AbstractBlockOrestone {
+    public BlockOrestoneBricks() {
         super("orestone_bricks");
     }
 
