@@ -20,6 +20,13 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Mother of all Orestones.
+ * Really just an organization thing, I guess.
+ * @since 0.1.0
+ * @author Siepert123
+ * @see BlockOrestone
+ */
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

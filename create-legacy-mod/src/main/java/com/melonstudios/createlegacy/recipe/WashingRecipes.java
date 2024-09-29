@@ -7,6 +7,10 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Map;
 
+/**
+ * A class holding all the WashingRecipes.
+ * @since 0.1.0
+ */
 public final class WashingRecipes {
     private static final WashingRecipes INSTANCE = new WashingRecipes();
     public static WashingRecipes getInstance() {

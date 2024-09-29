@@ -6,6 +6,10 @@ import net.minecraft.item.ItemStack;
 
 import java.util.Map;
 
+/**
+ * A class holding all the PressingRecipes.
+ * @since 0.1.0
+ */
 public final class PressingRecipes {
     private static final PressingRecipes INSTANCE = new PressingRecipes();
     public static PressingRecipes getInstance() {

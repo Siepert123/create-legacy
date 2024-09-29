@@ -2,9 +2,10 @@ package com.melonstudios.createlegacy.event;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
 
+import com.melonstudios.createlegacy.recipe.RecipeInit;
+
 /**
- * Want to change something and make sure it's AFTER or BEFORE the original recipes were implemented?
- * Use this!
+ * Fires before and after {@link RecipeInit} is activated.
  *
  * @since 0.1.0
  */
