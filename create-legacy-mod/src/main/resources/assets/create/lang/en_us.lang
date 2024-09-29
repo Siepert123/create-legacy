@@ -1,5 +1,8 @@
-#Le Items
+#Items
 item.create.sandpaper.name=Sandpaper
+item.create.schematic_empty.name=Empty Schematic
+item.create.schematic_writeable.name=Schematic and Quill
+item.create.schematic.name=Schematic
 
 #Ingredients
 item.create.andesite_alloy.name=Andesite Alloy
@@ -43,6 +46,7 @@ itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
 
 #Configs
+config.create.allowInstantSchematicPlacement=Allow Creative players to instantly place a Schematic
 config.create.preventBitSplitterTestCrash.name=Prevent BitSplitter test crashing the game
 
 #Orestones etc

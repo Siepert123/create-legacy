@@ -12,6 +12,7 @@ public final class ModItems {
 
     public static final Item INGREDIENT = registerItem(new ItemIngredient());
     public static final Item SANDPAPER = registerItem(new ItemSandpaper());
+    public static final Item SCHEMATIC = registerItem(new ItemSchematic());
 
     private static Item registerItem(Item item) {
         ITEMS.add(item);
@@ -41,5 +42,11 @@ public final class ModItems {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
                 2, "metal/brass");
         CreateLegacy.setItemModel(SANDPAPER);
+        CreateLegacy.setItemModel(SCHEMATIC, 0,
+                "schematic/empty");
+        CreateLegacy.setItemModel(SCHEMATIC, 1,
+                "schematic/writeable");
+        CreateLegacy.setItemModel(SCHEMATIC, 2,
+                "schematic/written");
     }
 }

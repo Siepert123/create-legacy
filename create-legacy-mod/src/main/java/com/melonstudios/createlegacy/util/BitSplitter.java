@@ -66,6 +66,13 @@ public final class BitSplitter {
                 throw new InconsistentBitConversionException(test3, bytesToInt(intToBytes(test3)));
         }
 
+        int test4 = 255;
+        DisplayLink.info("Test 4: origin = " + test4);
+        DisplayLink.info("Test 4: byte conversion = " + Arrays.toString(intToBytes(test4)));
+        DisplayLink.info("Test 4: first byte = " + intToBytes(test4)[0]);
+        DisplayLink.info("Test 4: last byte = " + intToBytes(test4)[3]);
+        DisplayLink.info("Test 4: booleans = " + visualizeBooleans(intToBooleans(test4)));
+
         if (error) {
             DisplayLink.fatal("Bit conversions are inconsistent, proceed with extreme caution!");
         } else {
@@ -212,5 +219,13 @@ public final class BitSplitter {
         System.arraycopy(byteToBooleans(bytes[3]), 0, booleans, 24, 8);
 
         return booleansToInt(booleans);
+    }
+
+    public static String visualizeBooleans(boolean[] booleans) {
+        StringBuilder builder = new StringBuilder();
+        for (boolean b : booleans) {
+            builder.append(b ? '1' : '0');
+        }
+        return builder.toString();
     }
 }

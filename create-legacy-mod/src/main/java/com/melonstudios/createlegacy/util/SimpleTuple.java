@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
-import net.minecraft.item.ItemStack;
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
+import net.minecraft.item.ItemStack;
 
 /**
  * Simple implementation of a tuple

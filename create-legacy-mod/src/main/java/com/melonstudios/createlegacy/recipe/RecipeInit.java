@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
-import com.melonstudios.createlegacy.event.RecipeInitEvent;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.SimpleTuple;
@@ -19,7 +18,6 @@ import java.util.List;
  * Initialized all recipes that aren't data-driven.
  * @since 0.1.0
  */
-@SuppressWarnings("unchecked")
 public final class RecipeInit {
     private static boolean initialized = false;
     private static boolean doesOreDictNameExist(String ore) {
@@ -43,7 +41,6 @@ public final class RecipeInit {
         return "nugget" + metal;
     }
 
-
     public static void init() {
         if (initialized) return;
         long startTime = System.currentTimeMillis();
@@ -51,8 +48,6 @@ public final class RecipeInit {
         MinecraftForge.EVENT_BUS.post(new MetalTypesQueryEvent(metals));
 
         DisplayLink.debug("Initializing recipes");
-
-        MinecraftForge.EVENT_BUS.post(new RecipeInitEvent.Pre());
 
         for (String metal : metals) {
             if (doesOreDictNameExist(ingot(metal))) {
@@ -155,8 +150,6 @@ public final class RecipeInit {
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.QUARTZ, 4), 0.12f),
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 1), 0.02f)
         );
-
-        MinecraftForge.EVENT_BUS.post(new RecipeInitEvent.Post());
 
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
