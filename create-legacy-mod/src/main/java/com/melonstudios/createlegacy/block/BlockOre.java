@@ -10,12 +10,14 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -64,6 +66,11 @@ public class BlockOre extends Block implements IMetaName {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).ordinal();
+    }
+
+    @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         int met = placer.getHeldItem(hand).getMetadata() % 2;
         return getStateFromMeta(met);
@@ -71,11 +78,16 @@ public class BlockOre extends Block implements IMetaName {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(VARIANT) == Variant.COPPER ? 0 : 1;
+        return state.getValue(VARIANT).ordinal();
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return meta == 0 ? getDefaultState().withProperty(VARIANT, Variant.COPPER) : getDefaultState().withProperty(VARIANT, Variant.ZINC);
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(VARIANT).ordinal());
     }
 }
