@@ -10,12 +10,15 @@ import java.lang.annotation.*;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})
-@Incomplete("The annotation processor for com.melonstudios.createapi.annotation.ReflectionConstant hasn't been implemented yet")
 @Documented
 public @interface ReflectionConstant {
     /**
+     * The reflection path!!!
+     * */
+    String value();
+    /**
      * Whether to suppress the warning
      */
-    boolean value() default false;
+    boolean suppress() default false;
     String altMsg() default ""; // If non-empty, an alternative message can be printed to the log
 }

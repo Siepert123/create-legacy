@@ -1,1 +1,3 @@
-com.melonstudios.create.annotation.processor.CreateAnnotationProcessor,aggregating
+com.melonstudios.create.annotation.processor.IncompleteProcessor,aggregating
+com.melonstudios.create.annotation.processor.UntestedCodeProcessor,aggregating
+com.melonstudios.create.annotation.processor.ReflectionConstantProcessor,aggregating

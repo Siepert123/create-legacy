@@ -9,5 +9,6 @@ import com.melonstudios.createapi.annotation.ReflectionConstant;
  * @since 0.1.0
  */
 public class ReflectionConstants {
-    public static @ReflectionConstant String createAddonClasspath = "com.melonstudios.createapi.addon.CreateAddon";
+    public static @ReflectionConstant("com.melonstudios.createapi.addon.CreateAddon")
+        String createAddonClasspath = "com.melonstudios.createapi.addon.CreateAddon";
 }
