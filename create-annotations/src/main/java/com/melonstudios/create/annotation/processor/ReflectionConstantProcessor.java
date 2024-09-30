@@ -1,5 +1,7 @@
 package com.melonstudios.create.annotation.processor;
 
+import com.melonstudios.createapi.annotation.ReflectionConstant;
+
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -20,7 +22,10 @@ public class ReflectionConstantProcessor extends BaseProcessor {
                 // Process each element
                 note( "Processing: " + cu.getFullQualifiedName(element, elementUtils()) + " because of: " + annotation.getQualifiedName());
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
-                note("ReflectionConstant processor unfinished!");
+                ReflectionConstant annot = element.getAnnotation(ReflectionConstant.class);
+                if (!cu.classExists(processingEnv, annot.value())) {
+                    error("Class " + annot.value() + " doesn't exist!");
+                }
             }
         }
         return true; // No further processing of this annotation type
