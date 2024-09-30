@@ -165,6 +165,21 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
                 6, "orestone/stone_veridium");
 
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                0, "orestone/stone_polished_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                1, "orestone/stone_polished_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                2, "orestone/stone_polished_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                3, "orestone/stone_polished_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                4, "orestone/stone_polished_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                5, "orestone/stone_polished_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                6, "orestone/stone_polished_veridium");
+
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
                 0, "orestone/stone_bricks_asurine");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
@@ -180,19 +195,19 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
                 6, "orestone/stone_bricks_veridium");
 
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                0, "orestone/stone_polished_asurine");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                1, "orestone/stone_polished_crimsite");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                2, "orestone/stone_polished_limestone");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                3, "orestone/stone_polished_ochrum");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                4, "orestone/stone_polished_scorchia");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                5, "orestone/stone_polished_scoria");
-        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
-                6, "orestone/stone_polished_veridium");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                0, "orestone/stone_bricks_fancy_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                1, "orestone/stone_bricks_fancy_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                2, "orestone/stone_bricks_fancy_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                3, "orestone/stone_bricks_fancy_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                4, "orestone/stone_bricks_fancy_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                5, "orestone/stone_bricks_fancy_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                6, "orestone/stone_bricks_fancy_veridium");
     }
 }
