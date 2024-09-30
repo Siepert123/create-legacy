@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
+import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
@@ -47,6 +49,7 @@ public final class CreateLegacy {
         SchematicSaveHelper.makeSchematicsFolder();
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
+        GameRegistry.registerWorldGenerator(new WorldGeneratorCreateLegacy(), 1);
     }
 
     @Mod.EventHandler

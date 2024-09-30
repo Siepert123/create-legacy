@@ -27,4 +27,19 @@ public class CreateConfig {
      */
     @Config.LangKey("config.create.allowInstantSchematicPlacement")
     public static boolean allowInstantSchematicPlacement = true;
+
+    @Config.Name("World generation config")
+    public static final WorldGenConfig worldGenConfig = new WorldGenConfig();
+    public static class WorldGenConfig {
+        public boolean generateAsurine = true;
+        public boolean generateCrimsite = true;
+        public boolean generateLimestone = true;
+        public boolean generateOchrum = true;
+        public boolean generateScorchia = true;
+        public boolean generateScoria = true;
+        public boolean generateVeridium = true;
+
+        public boolean generateCopper = true;
+        public boolean generateZinc = true;
+    }
 }
