@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=copper": {
+      "model": "create:ore/copper"
+    },
+    "type=zinc": {
+      "model": "create:ore/zinc"
+    }
+  }
+}

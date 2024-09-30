@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.world.gen;
 
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.block.BlockOre;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.Random;
 
 public final class WorldGeneratorCreateLegacy implements IWorldGenerator {
-    private final WorldGenerator asurine, crimsite, limestone, ochrum, scorchia, scoria, veridium;
+    private final WorldGenerator asurine, crimsite, limestone, ochrum, scorchia, scoria, veridium, copper, zinc;
     public WorldGeneratorCreateLegacy() {
         asurine = new WorldGenMinable(ModBlocks.ORESTONE.getDefaultState()
                 .withProperty(AbstractBlockOrestone.STONE_TYPE, AbstractBlockOrestone.StoneType.ASURINE),
@@ -39,6 +40,12 @@ public final class WorldGeneratorCreateLegacy implements IWorldGenerator {
         veridium = new WorldGenMinable(ModBlocks.ORESTONE.getDefaultState()
                 .withProperty(AbstractBlockOrestone.STONE_TYPE, AbstractBlockOrestone.StoneType.VERIDIUM),
                 30, BlockMatcher.forBlock(Blocks.STONE));
+
+        copper = new WorldGenMinable(ModBlocks.ORE.getDefaultState(),
+                6, BlockMatcher.forBlock(Blocks.STONE));
+        zinc = new WorldGenMinable(ModBlocks.ORE.getDefaultState()
+                .withProperty(BlockOre.VARIANT, BlockOre.Variant.ZINC),
+                6, BlockMatcher.forBlock(Blocks.STONE));
     }
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -49,6 +56,10 @@ public final class WorldGeneratorCreateLegacy implements IWorldGenerator {
                 if (CreateConfig.worldGenConfig.generateScoria)
                     runGenerator(scoria, world, random, chunkX, chunkZ, 3, 10, 70);
             case 0:
+                if (CreateConfig.worldGenConfig.generateCopper)
+                    runGenerator(copper, world, random, chunkX, chunkZ, 16, 32, 128, 2);
+                if (CreateConfig.worldGenConfig.generateZinc)
+                    runGenerator(zinc, world, random, chunkX, chunkZ, 8, 16, 64);
                 if (CreateConfig.worldGenConfig.generateAsurine)
                     runGenerator(asurine, world, random, chunkX, chunkZ, 1, 10, 40, 5);
                 if (CreateConfig.worldGenConfig.generateCrimsite)

@@ -23,6 +23,10 @@ public final class ModItems {
     public static void setItemModels() {
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
+                0, "ore/copper");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
+                1, "ore/zinc");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
                 0, "metal/copper");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
