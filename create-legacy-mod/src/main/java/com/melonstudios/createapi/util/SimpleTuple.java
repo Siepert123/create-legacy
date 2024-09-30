@@ -1,6 +1,7 @@
 package com.melonstudios.createapi.util;
 
 import com.melonstudios.createapi.annotation.Incomplete;
+import com.melonstudios.createapi.annotation.ReflectionConstant;
 import net.minecraft.item.ItemStack;
 
 /**

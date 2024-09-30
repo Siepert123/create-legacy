@@ -9,11 +9,14 @@ import java.lang.annotation.*;
  * @since 0.1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE})
+@Target({ElementType.TYPE, ElementType.FIELD, ElementType.LOCAL_VARIABLE})
 @Documented
 public @interface ReflectionConstant {
     /**
      * The reflection path!!!
+     * Options: fully.qualified.path.class          (Class)
+     *          fully.qualified.path.class#method() (Method)
+     *          fully.qualified.path.class#field    (Field)
      * */
     String value();
     /**
