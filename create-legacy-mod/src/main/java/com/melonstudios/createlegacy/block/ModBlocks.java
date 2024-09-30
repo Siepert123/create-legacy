@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,12 @@ public final class ModBlocks {
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
     public static final AbstractBlockOrestone ORESTONE_BRICKS = registerOrestoneBlock(new BlockOrestoneBricks());
     public static final AbstractBlockOrestone ORESTONE_BRICKS_FANCY = registerOrestoneBlock(new BlockOrestoneBricksFancy());
+    public static final AbstractBlockOrestone ORESTONE_PILLAR_Y
+            = registerOrestoneBlock(new BlockOrestonePillar(EnumFacing.Axis.Y));
+    public static final AbstractBlockOrestone ORESTONE_PILLAR_X
+            = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.X));
+    public static final AbstractBlockOrestone ORESTONE_PILLAR_Z
+            = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.Z));
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);
