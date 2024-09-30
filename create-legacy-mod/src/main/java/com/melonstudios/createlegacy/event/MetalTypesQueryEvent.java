@@ -1,8 +1,7 @@
 package com.melonstudios.createlegacy.event;
 
-import net.minecraftforge.fml.common.eventhandler.Event;
-
 import com.melonstudios.createlegacy.recipe.RecipeInit;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 import java.util.List;
 

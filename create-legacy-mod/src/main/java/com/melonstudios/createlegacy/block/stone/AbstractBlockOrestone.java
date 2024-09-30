@@ -12,6 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +20,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -31,6 +33,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @since 0.1.0
  * @author Siepert123
  * @see BlockOrestone
+ * @see BlockOrestoneBricks
  */
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
@@ -123,6 +126,11 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         return state.getValue(STONE_TYPE).getMapColor();
     }
 
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(STONE_TYPE).getID());
+    }
+
     /**
      * @return The orestone prefix (eg. {@code stone})
      */
@@ -164,6 +172,21 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE),
                 6, "orestone/stone_veridium");
 
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                0, "orestone/stone_polished_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                1, "orestone/stone_polished_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                2, "orestone/stone_polished_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                3, "orestone/stone_polished_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                4, "orestone/stone_polished_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                5, "orestone/stone_polished_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_POLISHED),
+                6, "orestone/stone_polished_veridium");
+
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
                 0, "orestone/stone_bricks_asurine");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
@@ -178,5 +201,50 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
                 5, "orestone/stone_bricks_scoria");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS),
                 6, "orestone/stone_bricks_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                0, "orestone/stone_bricks_fancy_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                1, "orestone/stone_bricks_fancy_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                2, "orestone/stone_bricks_fancy_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                3, "orestone/stone_bricks_fancy_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                4, "orestone/stone_bricks_fancy_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                5, "orestone/stone_bricks_fancy_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_BRICKS_FANCY),
+                6, "orestone/stone_bricks_fancy_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                0, "orestone/stone_pillar_y_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                1, "orestone/stone_pillar_y_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                2, "orestone/stone_pillar_y_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                3, "orestone/stone_pillar_y_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                4, "orestone/stone_pillar_y_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                5, "orestone/stone_pillar_y_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
+                6, "orestone/stone_pillar_y_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                0, "orestone/stone_layered_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                1, "orestone/stone_layered_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                2, "orestone/stone_layered_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                3, "orestone/stone_layered_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                4, "orestone/stone_layered_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                5, "orestone/stone_layered_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                6, "orestone/stone_layered_veridium");
     }
 }

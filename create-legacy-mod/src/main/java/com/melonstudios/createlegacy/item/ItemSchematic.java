@@ -6,7 +6,6 @@ import com.melonstudios.createlegacy.event.SchematicPlacementEvent;
 import com.melonstudios.createlegacy.schematic.InvalidSchematicSizeException;
 import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -68,7 +67,13 @@ public class ItemSchematic extends Item {
                             nbt.getInteger("startX"),
                             nbt.getInteger("startY"),
                             nbt.getInteger("startZ")));
+                } else {
+                    tooltip.add("Current mode: COPY");
+                    tooltip.add("File mode is WIP!!");
                 }
+            } else {
+                tooltip.add("Current mode: COPY");
+                tooltip.add("File mode is WIP!!");
             }
         }
         if (stack.getMetadata() == 2) {
@@ -85,7 +90,7 @@ public class ItemSchematic extends Item {
         if (stack.getTagCompound() == null) stack.setTagCompound(new NBTTagCompound()); //prevent error
 
         if (stack.getMetadata() == 1) handleWrite(player, world, pos, hand, stack);
-        if (stack.getMetadata() == 2) handlePlacement(player, world, pos, hand, stack);
+        if (stack.getMetadata() == 2) handlePlacement(player, world, pos, hand, stack, facing);
 
         return EnumActionResult.SUCCESS;
     }
@@ -172,15 +177,44 @@ public class ItemSchematic extends Item {
             throw new RuntimeException(e);
         }
     }
-    protected void handlePlacement(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack) {
+    protected void handlePlacement(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack, EnumFacing facing) {
         if (stack.getTagCompound() == null || !CreateConfig.allowInstantSchematicPlacement) return;
 
-        if (player.isSneaking()) { //File method
+        if (world.isRemote || !player.isCreative()) return;
+        if (!player.isSneaking()) { //Place ON the block
+            pos = pos.offset(facing);
 
-        } else { //Copy method
-            if (world.isRemote || !player.isCreative()) return;
             NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("posNBT");
 
+            int sizeX = nbt.getInteger("endX") - nbt.getInteger("startX") + 1;
+            int sizeY = nbt.getInteger("endY") - nbt.getInteger("startY") + 1;
+            int sizeZ = nbt.getInteger("endZ") - nbt.getInteger("startZ") + 1;
+
+            IBlockState[][][] structure = new IBlockState[sizeX][sizeY][sizeZ];
+
+            SchematicPlacementEvent event = new SchematicPlacementEvent(world, pos, structure, player);
+            MinecraftForge.EVENT_BUS.post(event);
+
+            if (event.isCanceled()) return;
+
+            for (int x = nbt.getInteger("startX"); x <= nbt.getInteger("endX"); x++) {
+                for (int y = nbt.getInteger("startY"); y <= nbt.getInteger("endY"); y++) {
+                    for (int z = nbt.getInteger("startZ"); z <= nbt.getInteger("endZ"); z++) {
+                        structure[x-nbt.getInteger("startX")][y-nbt.getInteger("startY")][z-nbt.getInteger("startZ")]
+                                = world.getBlockState(new BlockPos(x, y, z));
+                    }
+                }
+            }
+
+            for (int x = 0; x < structure.length; x++) {
+                for (int y = 0; y < structure[0].length; y++) {
+                    for (int z = 0; z < structure[0][0].length; z++) {
+                        world.setBlockState(pos.east(x).up(y).south(z), structure[x][y][z], 3);
+                    }
+                }
+            }
+        } else { //Place IN the block
+            NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("posNBT");
 
             int sizeX = nbt.getInteger("endX") - nbt.getInteger("startX") + 1;
             int sizeY = nbt.getInteger("endY") - nbt.getInteger("startY") + 1;

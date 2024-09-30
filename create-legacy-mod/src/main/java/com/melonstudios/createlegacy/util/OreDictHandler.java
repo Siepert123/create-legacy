@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -51,10 +52,27 @@ public final class OreDictHandler {
         OreDictionary.registerOre("electronTube", new ItemStack(ModItems.INGREDIENT, 1, 25));
         OreDictionary.registerOre("handBrass", new ItemStack(ModItems.INGREDIENT, 1, 26));
 
+        addOrestoneTags(ModBlocks.ORESTONE);
+        addOrestoneTags(ModBlocks.ORESTONE_POLISHED);
+        addOrestoneTags(ModBlocks.ORESTONE_BRICKS);
+        addOrestoneTags(ModBlocks.ORESTONE_BRICKS_FANCY);
+        addOrestoneTags(ModBlocks.ORESTONE_PILLAR_Y);
+        addOrestoneTags(ModBlocks.ORESTONE_LAYERED);
+
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));
 
         DisplayLink.debug("Ore Dictionary init done in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
+    }
+
+    private static void addOrestoneTags(AbstractBlockOrestone orestone) {
+        OreDictionary.registerOre("stoneAsurine", new ItemStack(orestone, 1, 0));
+        OreDictionary.registerOre("stoneCrimsite", new ItemStack(orestone, 1, 1));
+        OreDictionary.registerOre("stoneLimestone", new ItemStack(orestone, 1, 2));
+        OreDictionary.registerOre("stoneOchrum", new ItemStack(orestone, 1, 3));
+        OreDictionary.registerOre("stoneScorchia", new ItemStack(orestone, 1, 4));
+        OreDictionary.registerOre("stoneScoria", new ItemStack(orestone, 1, 5));
+        OreDictionary.registerOre("stoneVeridium", new ItemStack(orestone, 1, 6));
     }
 }

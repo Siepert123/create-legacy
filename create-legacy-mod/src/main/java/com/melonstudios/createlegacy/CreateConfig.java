@@ -1,9 +1,8 @@
 package com.melonstudios.createlegacy;
 
-import net.minecraftforge.common.config.Config;
-
-import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.item.ItemSchematic;
+import com.melonstudios.createlegacy.util.BitSplitter;
+import net.minecraftforge.common.config.Config;
 
 /**
  * Create Legacy's configuration class!
@@ -17,7 +16,7 @@ public class CreateConfig {
      * @see BitSplitter
      */
     @Config.RequiresMcRestart
-    @Config.LangKey("config.create.preventBitSplitterTestCrash.name")
+    @Config.Comment("Prevent BitSplitter test crashing the game")
     public static boolean preventBitSplitterTestCrash = false;
 
     /**
@@ -25,6 +24,22 @@ public class CreateConfig {
      * @since 0.1.0
      * @see ItemSchematic
      */
-    @Config.LangKey("config.create.allowInstantSchematicPlacement")
+    @Config.Comment("Prevent BitSplitter test crashing the game")
     public static boolean allowInstantSchematicPlacement = true;
+
+    @Config.Comment("Configure world generation settings")
+    @Config.Name("World generation config")
+    public static final WorldGenConfig worldGenConfig = new WorldGenConfig();
+    public static class WorldGenConfig {
+        public boolean generateAsurine = true;
+        public boolean generateCrimsite = true;
+        public boolean generateLimestone = true;
+        public boolean generateOchrum = true;
+        public boolean generateScorchia = true;
+        public boolean generateScoria = true;
+        public boolean generateVeridium = true;
+
+        public boolean generateCopper = true;
+        public boolean generateZinc = true;
+    }
 }

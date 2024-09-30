@@ -37,6 +37,8 @@ item.create.precision_mechanism_incomplete.name=Incomplete Precision Mechanism
 item.create.plate_obsidian_incomplete.name=Unprocessed Sturdy Sheet
 
 #Blocks
+tile.create.ore_copper.name=Copper Ore
+tile.create.ore_zinc.name=Zinc Ore
 tile.create.block_copper.name=Block of Copper
 tile.create.block_zinc.name=Block of Zinc
 tile.create.block_brass.name=Block of Brass
@@ -44,10 +46,6 @@ tile.create.block_brass.name=Block of Brass
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
-
-#Configs
-config.create.allowInstantSchematicPlacement=Allow players to instantly place a Schematic
-config.create.preventBitSplitterTestCrash.name=Prevent BitSplitter test crashing the game
 
 #Orestones etc
 tile.create.orestone_asurine.name=Asurine
@@ -58,6 +56,14 @@ tile.create.orestone_scorchia.name=Scorchia
 tile.create.orestone_scoria.name=Scoria
 tile.create.orestone_veridium.name=Veridium
 
+tile.create.orestone_polished_asurine.name=Polished Asurine
+tile.create.orestone_polished_crimsite.name=Polished Crimsite
+tile.create.orestone_polished_limestone.name=Polished Limestone
+tile.create.orestone_polished_ochrum.name=Polished Ochrum
+tile.create.orestone_polished_scorchia.name=Polished Scorchia
+tile.create.orestone_polished_scoria.name=Polished Scoria
+tile.create.orestone_polished_veridium.name=Polished Veridium
+
 tile.create.orestone_bricks_asurine.name=Asurine Bricks
 tile.create.orestone_bricks_crimsite.name=Crimsite Bricks
 tile.create.orestone_bricks_limestone.name=Limestone Bricks
@@ -65,3 +71,27 @@ tile.create.orestone_bricks_ochrum.name=Ochrum Bricks
 tile.create.orestone_bricks_scorchia.name=Scorchia Bricks
 tile.create.orestone_bricks_scoria.name=Scoria Bricks
 tile.create.orestone_bricks_veridium.name=Veridium Bricks
+
+tile.create.orestone_bricks_fancy_asurine.name=Fancy Asurine Bricks
+tile.create.orestone_bricks_fancy_crimsite.name=Fancy Crimsite Bricks
+tile.create.orestone_bricks_fancy_limestone.name=Fancy Limestone Bricks
+tile.create.orestone_bricks_fancy_ochrum.name=Fancy Ochrum Bricks
+tile.create.orestone_bricks_fancy_scorchia.name=Fancy Scorchia Bricks
+tile.create.orestone_bricks_fancy_scoria.name=Fancy Scoria Bricks
+tile.create.orestone_bricks_fancy_veridium.name=Fancy Veridium Bricks
+
+tile.create.orestone_pillar_asurine.name=Asurine Pillar
+tile.create.orestone_pillar_crimsite.name=Crimsite Pillar
+tile.create.orestone_pillar_limestone.name=Limestone Pillar
+tile.create.orestone_pillar_ochrum.name=Ochrum Pillar
+tile.create.orestone_pillar_scorchia.name=Scorchia Pillar
+tile.create.orestone_pillar_scoria.name=Scoria Pillar
+tile.create.orestone_pillar_veridium.name=Veridium Pillar
+
+tile.create.orestone_layered_asurine.name=Layered Asurine
+tile.create.orestone_layered_crimsite.name=Layered Crimsite
+tile.create.orestone_layered_limestone.name=Layered Limestone
+tile.create.orestone_layered_ochrum.name=Layered Ochrum
+tile.create.orestone_layered_scorchia.name=Layered Scorchia
+tile.create.orestone_layered_scoria.name=Layered Scoria
+tile.create.orestone_layered_veridium.name=Layered Veridium

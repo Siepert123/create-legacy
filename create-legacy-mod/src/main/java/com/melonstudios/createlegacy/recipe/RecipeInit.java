@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.recipe;
 
+import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
@@ -8,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -71,8 +74,23 @@ public final class RecipeInit {
                         );
                     }
                 }
+                if (doesOreDictNameExist(ingot(metal))) {
+                    for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
+                        ItemStack ingot = OreDictionary.getOres(ingot(metal)).get(0).copy();
+                        FurnaceRecipes.instance().addSmeltingRecipe(stack, ingot, 0.1f);
+                    }
+                }
             }
         }
+
+        FurnaceRecipes.instance().addSmeltingRecipe(
+                new ItemStack(ModBlocks.ORE, 1, 0),
+                new ItemStack(ModItems.INGREDIENT, 1, 3),
+                0.25f);
+        FurnaceRecipes.instance().addSmeltingRecipe(
+                new ItemStack(ModBlocks.ORE, 1, 1),
+                new ItemStack(ModItems.INGREDIENT, 1, 6),
+                0.25f);
 
         for (ItemStack input : OreDictionary.getOres(crushed("iron"))) {
             WashingRecipes.addRecipe(input, true,
@@ -154,7 +172,21 @@ public final class RecipeInit {
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 1), 0.02f)
         );
 
+        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_POLISHED);
+        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_BRICKS);
+        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_BRICKS_FANCY);
+        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_BRICKS);
+        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_BRICKS_FANCY);
+        orestoneSaw(ModBlocks.ORESTONE_BRICKS, ModBlocks.ORESTONE_BRICKS_FANCY);
+        orestoneSaw(ModBlocks.ORESTONE_BRICKS_FANCY, ModBlocks.ORESTONE_BRICKS);
+
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
+    }
+
+    private static void orestoneSaw(AbstractBlockOrestone orestone, AbstractBlockOrestone orestoneOther) {
+        for (int i = 0; i < 7; i++) {
+            SawingRecipes.addRecipe(new ItemStack(orestone, 1, i), new ItemStack(orestone, 1, i));
+        }
     }
 }
