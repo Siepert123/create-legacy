@@ -1,9 +1,8 @@
 package com.melonstudios.createlegacy;
 
-import net.minecraftforge.common.config.Config;
-
-import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.item.ItemSchematic;
+import com.melonstudios.createlegacy.util.BitSplitter;
+import net.minecraftforge.common.config.Config;
 
 /**
  * Create Legacy's configuration class!

@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.recipe.SandingRecipes;
+import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +12,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-
-import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

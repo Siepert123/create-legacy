@@ -50,12 +50,13 @@ public final class WorldGeneratorCreateLegacy implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimension()) {
-            case -1:
+            case -1: {
                 if (CreateConfig.worldGenConfig.generateScorchia)
                     runGenerator(scorchia, world, random, chunkX, chunkZ, 3, 60, 110);
                 if (CreateConfig.worldGenConfig.generateScoria)
                     runGenerator(scoria, world, random, chunkX, chunkZ, 3, 10, 70);
-            case 0:
+            }
+            case 0: {
                 if (CreateConfig.worldGenConfig.generateCopper)
                     runGenerator(copper, world, random, chunkX, chunkZ, 16, 32, 128, 2);
                 if (CreateConfig.worldGenConfig.generateZinc)
@@ -70,6 +71,7 @@ public final class WorldGeneratorCreateLegacy implements IWorldGenerator {
                     runGenerator(ochrum, world, random, chunkX, chunkZ, 1, 10, 40, 5);
                 if (CreateConfig.worldGenConfig.generateVeridium)
                     runGenerator(veridium, world, random, chunkX, chunkZ, 1, 40, 64, 5);
+            }
         }
     }
 

@@ -6,7 +6,6 @@ import com.melonstudios.createlegacy.event.SchematicPlacementEvent;
 import com.melonstudios.createlegacy.schematic.InvalidSchematicSizeException;
 import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
