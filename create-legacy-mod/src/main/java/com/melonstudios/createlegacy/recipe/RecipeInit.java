@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.recipe;
 
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
@@ -8,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -71,8 +73,23 @@ public final class RecipeInit {
                         );
                     }
                 }
+                if (doesOreDictNameExist(ingot(metal))) {
+                    for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
+                        ItemStack ingot = OreDictionary.getOres(ingot(metal)).get(0).copy();
+                        FurnaceRecipes.instance().addSmeltingRecipe(stack, ingot, 0.1f);
+                    }
+                }
             }
         }
+
+        FurnaceRecipes.instance().addSmeltingRecipe(
+                new ItemStack(ModBlocks.ORE, 1, 0),
+                new ItemStack(ModItems.INGREDIENT, 1, 3),
+                0.25f);
+        FurnaceRecipes.instance().addSmeltingRecipe(
+                new ItemStack(ModBlocks.ORE, 1, 1),
+                new ItemStack(ModItems.INGREDIENT, 1, 6),
+                0.25f);
 
         for (ItemStack input : OreDictionary.getOres(crushed("iron"))) {
             WashingRecipes.addRecipe(input, true,
