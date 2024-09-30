@@ -20,7 +20,7 @@ public class ReflectionConstantProcessor extends BaseProcessor {
                 // Process each element
                 note( "Processing: " + cu.getFullQualifiedName(element, elementUtils()) + " because of: " + annotation.getQualifiedName());
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
-                return true;
+                note("ReflectionConstant processor unfinished!");
             }
         }
         return true; // No further processing of this annotation type

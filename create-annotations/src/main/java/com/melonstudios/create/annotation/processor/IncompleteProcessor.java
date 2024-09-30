@@ -1,5 +1,7 @@
 package com.melonstudios.create.annotation.processor;
 
+import com.melonstudios.createapi.annotation.Incomplete;
+
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -20,7 +22,12 @@ public class IncompleteProcessor extends BaseProcessor {
                 // Process each element
                 note( "Processing: " + cu.getFullQualifiedName(element, elementUtils()) + " because of: " + annotation.getQualifiedName());
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
-                return true;
+                Incomplete annot = element.getAnnotation(Incomplete.class);
+                if (annot.halt()) {
+                    error(annot.value());
+                } else {
+                    warn(annot.value());
+                }
             }
         }
         return true; // No further processing of this annotation type

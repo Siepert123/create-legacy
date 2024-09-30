@@ -1,5 +1,7 @@
 package com.melonstudios.create.annotation.processor;
 
+import com.melonstudios.createapi.annotation.UntestedCode;
+
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -20,7 +22,12 @@ public class UntestedCodeProcessor extends BaseProcessor {
                 // Process each element
                 note( "Processing: " + cu.getFullQualifiedName(element, elementUtils()) + " because of: " + annotation.getQualifiedName());
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
-                return true;
+                UntestedCode annot = element.getAnnotation(UntestedCode.class);
+                if (annot.why().isEmpty()) {
+                    warn(annot.value());
+                } else {
+                    warn(annot.value() + "\n\tBecause: " + annot.why());
+                }
             }
         }
         return true; // No further processing of this annotation type
