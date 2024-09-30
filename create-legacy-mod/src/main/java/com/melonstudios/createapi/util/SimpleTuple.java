@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
  * @param <X> First value
  * @param <Y> Second value
  */
-@Incomplete(value = "Test", halt = true)
 public class SimpleTuple<X, Y> {
     private X x;
     private Y y;
