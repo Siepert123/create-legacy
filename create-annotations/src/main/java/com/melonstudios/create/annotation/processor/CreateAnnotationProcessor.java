@@ -22,6 +22,7 @@ public class CreateAnnotationProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment env) {
         // Initialize the processor
         super.init(env);
+        BaseProcessor.init(env);
     }
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -58,6 +59,7 @@ public class CreateAnnotationProcessor extends AbstractProcessor {
                 // Process each element
                 note( "Processing: " + cu.getFullQualifiedName(element, elementUtils()) + " because of: " + annotation.getQualifiedName());
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
+                BaseProcessor.processAllValidAnnotations(annotation);
             }
         }
         return true; // No further processing of this annotation type
