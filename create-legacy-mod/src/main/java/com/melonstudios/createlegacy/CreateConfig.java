@@ -28,6 +28,7 @@ public class CreateConfig {
     @Config.LangKey("config.create.allowInstantSchematicPlacement")
     public static boolean allowInstantSchematicPlacement = true;
 
+    @Config.LangKey("config.create.worldGenConfig")
     @Config.Name("World generation config")
     public static final WorldGenConfig worldGenConfig = new WorldGenConfig();
     public static class WorldGenConfig {
