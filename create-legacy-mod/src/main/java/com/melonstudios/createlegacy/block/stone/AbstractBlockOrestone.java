@@ -231,5 +231,20 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
                 5, "orestone/stone_pillar_y_scoria");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_PILLAR_Y),
                 6, "orestone/stone_pillar_y_veridium");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                0, "orestone/stone_layered_asurine");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                1, "orestone/stone_layered_crimsite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                2, "orestone/stone_layered_limestone");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                3, "orestone/stone_layered_ochrum");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                4, "orestone/stone_layered_scorchia");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                5, "orestone/stone_layered_scoria");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORESTONE_LAYERED),
+                6, "orestone/stone_layered_veridium");
     }
 }

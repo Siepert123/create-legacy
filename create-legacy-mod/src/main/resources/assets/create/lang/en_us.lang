@@ -87,3 +87,11 @@ tile.create.orestone_pillar_ochrum.name=Ochrum Pillar
 tile.create.orestone_pillar_scorchia.name=Scorchia Pillar
 tile.create.orestone_pillar_scoria.name=Scoria Pillar
 tile.create.orestone_pillar_veridium.name=Veridium Pillar
+
+tile.create.orestone_layered_asurine.name=Layered Asurine
+tile.create.orestone_layered_crimsite.name=Layered Crimsite
+tile.create.orestone_layered_limestone.name=Layered Limestone
+tile.create.orestone_layered_ochrum.name=Layered Ochrum
+tile.create.orestone_layered_scorchia.name=Layered Scorchia
+tile.create.orestone_layered_scoria.name=Layered Scoria
+tile.create.orestone_layered_veridium.name=Layered Veridium

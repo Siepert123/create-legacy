@@ -27,6 +27,7 @@ public final class ModBlocks {
             = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.X));
     public static final AbstractBlockOrestone ORESTONE_PILLAR_Z
             = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.Z));
+    public static final AbstractBlockOrestone ORESTONE_LAYERED = registerOrestoneBlock(new BlockOrestoneLayered());
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);
