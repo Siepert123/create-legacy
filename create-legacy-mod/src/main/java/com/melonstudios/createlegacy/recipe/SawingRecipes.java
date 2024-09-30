@@ -21,6 +21,7 @@ public final class SawingRecipes {
     }
 
     public static void addRecipe(ItemStack input, ItemStack result) {
+        if (input.isItemEqual(result)) return;
         boolean appended = false;
         for (Map.Entry<ItemStack, List<ItemStack>> entry : getRecipesMap().entrySet()) {
             if (entry.getKey().isItemEqual(input)) {
