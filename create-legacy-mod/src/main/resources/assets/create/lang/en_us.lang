@@ -45,10 +45,6 @@ tile.create.block_brass.name=Block of Brass
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
 
-#Configs
-config.create.allowInstantSchematicPlacement=Allow players to instantly place a Schematic
-config.create.preventBitSplitterTestCrash.name=Prevent BitSplitter test crashing the game
-config.create.worldGenConfig.name=Configure world generation settings
 #Orestones etc
 tile.create.orestone_asurine.name=Asurine
 tile.create.orestone_crimsite.name=Crimsite

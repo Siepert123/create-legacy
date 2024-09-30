@@ -17,7 +17,7 @@ public class CreateConfig {
      * @see BitSplitter
      */
     @Config.RequiresMcRestart
-    @Config.LangKey("config.create.preventBitSplitterTestCrash.name")
+    @Config.Comment("Prevent BitSplitter test crashing the game")
     public static boolean preventBitSplitterTestCrash = false;
 
     /**
@@ -25,10 +25,10 @@ public class CreateConfig {
      * @since 0.1.0
      * @see ItemSchematic
      */
-    @Config.LangKey("config.create.allowInstantSchematicPlacement")
+    @Config.Comment("Prevent BitSplitter test crashing the game")
     public static boolean allowInstantSchematicPlacement = true;
 
-    @Config.LangKey("config.create.worldGenConfig")
+    @Config.Comment("Configure world generation settings")
     @Config.Name("World generation config")
     public static final WorldGenConfig worldGenConfig = new WorldGenConfig();
     public static class WorldGenConfig {
