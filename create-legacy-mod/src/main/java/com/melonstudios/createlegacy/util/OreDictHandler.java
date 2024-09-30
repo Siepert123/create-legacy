@@ -56,6 +56,7 @@ public final class OreDictHandler {
         addOrestoneTags(ModBlocks.ORESTONE_POLISHED);
         addOrestoneTags(ModBlocks.ORESTONE_BRICKS);
         addOrestoneTags(ModBlocks.ORESTONE_BRICKS_FANCY);
+        addOrestoneTags(ModBlocks.ORESTONE_PILLAR_Y);
 
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));
