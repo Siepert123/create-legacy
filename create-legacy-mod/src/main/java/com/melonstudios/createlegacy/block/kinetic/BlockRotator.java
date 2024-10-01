@@ -1,9 +1,12 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityCog;
 import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyEnum;
@@ -19,13 +22,17 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
     public BlockRotator() {
         super("rotator");
@@ -110,5 +117,32 @@ public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
     @Override
     public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
         return state.getValue(VARIANT) == Variant.SHAFT ? SoundType.STONE : SoundType.WOOD;
+    }
+
+    protected static final AxisAlignedBB SHAFT_X = CreateLegacy.aabb(0, 4, 4, 16, 12, 12);
+    protected static final AxisAlignedBB SHAFT_Y = CreateLegacy.aabb(4, 0, 4, 12, 16, 12);
+    protected static final AxisAlignedBB SHAFT_Z = CreateLegacy.aabb(4, 4, 0, 12, 12, 16);
+
+    protected static final AxisAlignedBB COG_X = CreateLegacy.aabb(0, 2, 2, 16, 14, 14);
+    protected static final AxisAlignedBB COG_Y = CreateLegacy.aabb(2, 0, 2, 14, 16, 14);
+    protected static final AxisAlignedBB COG_Z = CreateLegacy.aabb(2, 2, 0, 14, 14, 16);
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        if (state.getValue(VARIANT) == Variant.SHAFT) {
+            switch (state.getValue(AXIS)) {
+                case X: return SHAFT_X;
+                case Y: return SHAFT_Y;
+                case Z: return SHAFT_Z;
+            }
+        }
+        if (state.getValue(VARIANT) == Variant.COG) {
+            switch (state.getValue(AXIS)) {
+                case X: return COG_X;
+                case Y: return COG_Y;
+                case Z: return COG_Z;
+            }
+        }
+        return Block.FULL_BLOCK_AABB;
     }
 }

@@ -10,6 +10,7 @@ import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -60,5 +61,9 @@ public final class CreateLegacy {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+    public static AxisAlignedBB aabb(int x1, int y1, int z1, int x2, int y2, int z2) {
+        return new AxisAlignedBB(x1 / 16.0, y1 / 16.0, z1 / 16.0, x2 / 16.0, y2 / 16.0, z2 / 16.0);
     }
 }

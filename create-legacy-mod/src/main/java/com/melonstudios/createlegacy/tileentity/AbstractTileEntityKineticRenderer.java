@@ -11,6 +11,13 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
 
+/**
+ * Parent of ALL Kinetic Renderers.
+ * PLEASE call the super!!
+ * @param <T> TileEntity
+ * @since 0.1.0
+ * @author siepert123
+ */
 public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEntityKinetic> extends TileEntitySpecialRenderer<T> {
     protected AbstractTileEntityKineticRenderer() {
         super();
@@ -32,6 +39,16 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
+    /**
+     * Rotates a model along an axis at the TE speed
+     * @param te TileEntity
+     * @param x X-coordinate
+     * @param y Y-coordinate
+     * @param z Z-coordinate
+     * @param partialTicks Partial tick
+     * @param axis Axis to rotate the model on
+     * @param state Blockstate to be rotated
+     */
     protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
         GlStateManager.pushMatrix();
 
@@ -39,9 +56,7 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
 
         GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
 
-        long time = te.getWorld().getTotalWorldTime();
-        float angle = (time % 36000) / 25f * te.speed();
-        GlStateManager.rotate(angle,
+        GlStateManager.rotate(calculateAngle(te, axis, partialTicks),
                 axis == EnumFacing.Axis.X ? 1 : 0,
                 axis == EnumFacing.Axis.Y ? 1 : 0,
                 axis == EnumFacing.Axis.Z ? 1 : 0);
@@ -52,5 +67,12 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModelBrightness(model, state, 1.0f, true);
 
         GlStateManager.popMatrix();
+    }
+
+    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks) {
+        if (te.speed() == 0) return te.shifted(axis) ? 22.5f : 0;
+        long time = te.getWorld().getTotalWorldTime();
+
+        return (((time + partialTicks) % 36000) / 25f * te.speed()) + (te.shifted(axis) ? 22.5f : 0);
     }
 }
