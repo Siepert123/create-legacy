@@ -1,19 +1,16 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityCog;
 import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
 import com.melonstudios.createlegacy.util.IMetaName;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,16 +26,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockRotator extends Block implements ITileEntityProvider, IMetaName {
+public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
     public BlockRotator() {
-        super(Material.ROCK);
-        setRegistryName("rotator");
-        setUnlocalizedName("create.rotator");
-
-        setCreativeTab(CreateLegacy.TAB_KINETICS);
-
-        setHardness(3.0f);
-        setResistance(6.0f);
+        super("rotator");
     }
 
     @Override
@@ -74,8 +64,8 @@ public class BlockRotator extends Block implements ITileEntityProvider, IMetaNam
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         int met = placer.getHeldItem(hand).getMetadata();
 
-        if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == ModBlocks.ROTATOR) {
-            return world.getBlockState(pos.offset(facing)).withProperty(VARIANT, Variant.fromID(met));
+        if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == ModBlocks.ROTATOR && !placer.isSneaking()) {
+            return world.getBlockState(pos.offset(facing.getOpposite())).withProperty(VARIANT, Variant.fromID(met));
         } else {
             return getDefaultState().withProperty(VARIANT, Variant.fromID(met)).withProperty(AXIS, facing.getAxis());
         }
@@ -115,5 +105,10 @@ public class BlockRotator extends Block implements ITileEntityProvider, IMetaNam
     @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.getValue(VARIANT).getID() == 0 ? MapColor.STONE : MapColor.WOOD;
+    }
+
+    @Override
+    public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
+        return state.getValue(VARIANT) == Variant.SHAFT ? SoundType.STONE : SoundType.WOOD;
     }
 }

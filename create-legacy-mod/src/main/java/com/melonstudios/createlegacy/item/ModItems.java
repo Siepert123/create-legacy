@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.kinetic.AbstractBlockKinetic;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import net.minecraft.item.Item;
 
@@ -23,6 +24,7 @@ public final class ModItems {
     public static void setItemModels() {
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
+        AbstractBlockKinetic.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
                 0, "ore/copper");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),

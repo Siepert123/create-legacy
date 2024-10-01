@@ -182,6 +182,8 @@ public final class RecipeInit {
         orestoneSaw(ModBlocks.ORESTONE_BRICKS, ModBlocks.ORESTONE_BRICKS_FANCY);
         orestoneSaw(ModBlocks.ORESTONE_BRICKS_FANCY, ModBlocks.ORESTONE_BRICKS);
 
+        SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
+
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
     }

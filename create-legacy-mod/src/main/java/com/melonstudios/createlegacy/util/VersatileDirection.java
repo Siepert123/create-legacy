@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.util;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 
 import java.util.Objects;
 

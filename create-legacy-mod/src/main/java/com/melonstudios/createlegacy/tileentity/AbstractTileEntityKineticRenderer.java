@@ -4,12 +4,26 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 
 public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEntityKinetic> extends TileEntitySpecialRenderer<T> {
+    protected AbstractTileEntityKineticRenderer() {
+        super();
+        this.rendererDispatcher = TileEntityRendererDispatcher.instance;
+    }
+
+    @Override
+    public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+
+    }
+
     protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
         GlStateManager.pushMatrix();
+
+        GlStateManager.color(1, 1, 1, 1);
 
         GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
 

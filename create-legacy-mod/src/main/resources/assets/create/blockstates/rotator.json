@@ -2,7 +2,6 @@
   "variants": {
     "axis=x,variant=shaft": {
       "model": "create:rotator/shaft",
-      "y": 90,
       "x": 90
     },
     "axis=y,variant=shaft": {
@@ -10,11 +9,11 @@
     },
     "axis=z,variant=shaft": {
       "model": "create:rotator/shaft",
+      "y": 90,
       "x": 90
     },
     "axis=x,variant=cog": {
       "model": "create:rotator/cog",
-      "y": 90,
       "x": 90
     },
     "axis=y,variant=cog": {
@@ -22,6 +21,7 @@
     },
     "axis=z,variant=cog": {
       "model": "create:rotator/cog",
+      "y": 90,
       "x": 90
     }
   }
