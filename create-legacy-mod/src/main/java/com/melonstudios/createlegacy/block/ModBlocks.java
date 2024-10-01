@@ -1,12 +1,18 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.block.kinetic.BlockSaw;
 import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
+import com.melonstudios.createlegacy.tileentity.TileEntitySaw;
+import com.melonstudios.createlegacy.tileentity.TileEntitySawRenderer;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +22,8 @@ public final class ModBlocks {
 
     public static final Block ORE = registerBlockWithItem(new BlockOre(), true);
     public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
+
+    public static final Block SAW = registerBlockWithItem(new BlockSaw());
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
@@ -50,6 +58,10 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
-
+        GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
+        TileEntityRendererDispatcher.instance.renderers.put(TileEntitySaw.class, new TileEntitySawRenderer());
+    }
+    private static ResourceLocation tileEntityResource(String name) {
+        return new ResourceLocation("create", name);
     }
 }
