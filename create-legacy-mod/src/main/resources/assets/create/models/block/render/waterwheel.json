@@ -1,0 +1,49 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "create:block/shaft_end",
+		"shaft_end": "create:block/shaft_end",
+		"shaft_side": "create:block/shaft_side",
+		"temp": "create:block/wheel_temp"
+	},
+	"elements": [
+		{
+			"name": "shaft",
+			"from": [6, 6, 0],
+			"to": [10, 10, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0]},
+			"faces": {
+				"north": {"uv": [6, 6, 10, 10], "texture": "#shaft_end"},
+				"east": {"uv": [6, 0, 10, 16], "rotation": 90, "texture": "#shaft_side"},
+				"south": {"uv": [6, 6, 10, 10], "texture": "#shaft_end"},
+				"west": {"uv": [6, 0, 10, 16], "rotation": 90, "texture": "#shaft_side"},
+				"up": {"uv": [6, 0, 10, 16], "texture": "#shaft_side"},
+				"down": {"uv": [6, 0, 10, 16], "texture": "#shaft_side"}
+			}
+		},
+		{
+			"name": "temp",
+			"from": [-16, -16, 8],
+			"to": [32, 32, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-16, -16, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#temp"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#temp"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#missing"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		0,
+		{
+			"name": "wheel",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [1]
+		}
+	]
+}

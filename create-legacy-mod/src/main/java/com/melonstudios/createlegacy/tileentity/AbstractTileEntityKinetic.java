@@ -1,7 +1,10 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.CreateConfig;
-import com.melonstudios.createlegacy.util.VersatileDirection;
+import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.createlegacy.util.NetworkContext;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -13,11 +16,10 @@ import javax.annotation.Nullable;
 public abstract class AbstractTileEntityKinetic extends TileEntity {
     protected int speed = 0;
     public int speed() {
-        return speed;
+        return this.speed;
     }
-
-    public boolean allowConnection(VersatileDirection src) {
-        return false;
+    public void updateSpeed(int speed) {
+        this.speed = speed;
     }
 
     @Override
@@ -50,4 +52,17 @@ public abstract class AbstractTileEntityKinetic extends TileEntity {
         }
         return false;
     }
+
+    public int consumesSU() {
+        return 0;
+    }
+    public int generatesSU() {
+        return 0;
+    }
+    public int generatesRS() {
+        return 0;
+    }
+
+    public abstract EnumKineticConnectionType getConnectionType(EnumFacing side);
+
 }

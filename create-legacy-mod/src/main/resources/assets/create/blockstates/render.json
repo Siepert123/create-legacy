@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "type=waterwheel_x": {
+      "model": "create:render/waterwheel"
+    },
+    "type=waterwheel_z": {
+      "model": "create:render/waterwheel",
+      "y": 90
+    },
+    "type=sawblade_x": {
+      "model": "create:render/sawblade"
+    },
+    "type=sawblade_z": {
+      "model": "create:render/sawblade",
+      "y": 90
+    }
+  }
+}

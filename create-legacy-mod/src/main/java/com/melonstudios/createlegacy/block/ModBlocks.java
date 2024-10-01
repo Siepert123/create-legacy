@@ -1,15 +1,19 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.block.kinetic.BlockChigwanker;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import com.melonstudios.createlegacy.block.kinetic.BlockSaw;
+import com.melonstudios.createlegacy.block.kinetic.BlockWaterWheel;
 import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -25,6 +29,11 @@ public final class ModBlocks {
 
     public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());
+
+    public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
+
+    public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
+    public static final Block RENDER = registerBlock(new BlockRender());
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
@@ -59,15 +68,23 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
-        GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
-        TileEntityRendererDispatcher.instance.renderers.put(TileEntitySaw.class, new TileEntitySawRenderer());
-
         GameRegistry.registerTileEntity(TileEntityShaft.class, tileEntityResource("shaft"));
-        TileEntityRendererDispatcher.instance.renderers.put(TileEntityShaft.class, new TileEntityShaftRenderer());
+        dispatchTESR(TileEntityShaft.class, new TileEntityShaftRenderer());
         GameRegistry.registerTileEntity(TileEntityCog.class, tileEntityResource("cog"));
-        TileEntityRendererDispatcher.instance.renderers.put(TileEntityCog.class, new TileEntityCogRenderer());
+        dispatchTESR(TileEntityCog.class, new TileEntityCogRenderer());
+
+        GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
+        dispatchTESR(TileEntitySaw.class, new TileEntitySawRenderer());
+
+        GameRegistry.registerTileEntity(TileEntityWaterWheel.class, tileEntityResource("water_wheel"));
+        dispatchTESR(TileEntityWaterWheel.class, new TileEntityWaterWheelRenderer());
+
+        GameRegistry.registerTileEntity(TileEntityChigwanker.class, tileEntityResource("chigwanker"));
     }
     private static ResourceLocation tileEntityResource(String name) {
         return new ResourceLocation("create", name);
+    }
+    private static void dispatchTESR(Class<? extends TileEntity> te, TileEntitySpecialRenderer<?> renderer) {
+        TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
     }
 }
