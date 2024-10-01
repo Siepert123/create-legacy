@@ -6,6 +6,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+
+import javax.annotation.Nullable;
 
 public class TileEntitySaw extends AbstractTileEntityKinetic implements IInventory, ITickable {
     private int index = 0;
@@ -142,5 +146,10 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
         } else if (progress >= maxProgress) {
             processing.shrink(1);
         }
+    }
+
+    @Override
+    protected String namePlate() {
+        return "Saw";
     }
 }

@@ -31,6 +31,9 @@ public class CreateConfig {
     @Config.RangeInt(min = Byte.MAX_VALUE, max = Short.MAX_VALUE)
     public static int kineticBlocksRenderDistanceSquared = Short.MAX_VALUE;
 
+    @Config.Comment("Enable debug stuff?")
+    public static boolean debug = true;
+
     @Config.Comment("Configure world generation settings")
     @Config.Name("World generation config")
     public static final WorldGenConfig worldGenConfig = new WorldGenConfig();

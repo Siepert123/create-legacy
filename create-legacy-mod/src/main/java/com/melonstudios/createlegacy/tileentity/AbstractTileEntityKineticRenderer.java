@@ -1,12 +1,15 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.CreateConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.ITextComponent;
 
 public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEntityKinetic> extends TileEntitySpecialRenderer<T> {
     protected AbstractTileEntityKineticRenderer() {
@@ -16,8 +19,17 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
 
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+        if (CreateConfig.debug) {
+            ITextComponent itextcomponent = te.getDisplayName();
 
+            if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
+                this.setLightmapDisabled(true);
+                this.drawNameplate(te, itextcomponent.getFormattedText(), x, y, z, 12);
+                this.setLightmapDisabled(false);
+            }
+        }
+
+        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
     protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {

@@ -94,7 +94,7 @@ public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nullable World worldIn, int meta) {
-        return meta == 0 ? new TileEntityShaft() : new TileEntityCog();
+        return getStateFromMeta(meta).getValue(VARIANT) == Variant.SHAFT ? new TileEntityShaft() : new TileEntityCog();
     }
 
     @Override
