@@ -55,28 +55,4 @@ public class BlockWaterWheel extends AbstractBlockKinetic {
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
-
-    @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, @Nullable Random rand) {
-        TileEntity entity = worldIn.getTileEntity(pos);
-
-        if (entity instanceof TileEntityWaterWheel) {
-            ((TileEntityWaterWheel) entity).initiate();
-        }
-    }
-
-    @Override
-    public boolean requiresUpdates() {
-        return true;
-    }
-
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        updateTick(worldIn, pos, state, worldIn.rand);
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        updateTick(worldIn, pos, state, worldIn.rand);
-    }
 }

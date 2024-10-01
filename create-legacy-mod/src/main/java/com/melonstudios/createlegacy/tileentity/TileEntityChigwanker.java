@@ -11,11 +11,6 @@ public class TileEntityChigwanker extends AbstractTileEntityKinetic {
     }
 
     @Override
-    public void frontier(EnumFacing src, NetworkContext context, boolean inv, EnumKineticConnectionType connectionType) {
-        context.setInfiniteSU();
-    }
-
-    @Override
     public EnumKineticConnectionType getConnectionType(EnumFacing side) {
         return EnumKineticConnectionType.SHAFT;
     }
