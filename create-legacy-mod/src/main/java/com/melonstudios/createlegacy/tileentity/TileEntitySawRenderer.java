@@ -7,9 +7,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntitySawRenderer extends TileEntitySpecialRenderer<TileEntitySaw> {
+public class TileEntitySawRenderer extends AbstractTileEntityKineticRenderer<TileEntitySaw> {
     public TileEntitySawRenderer() {
         super();
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
@@ -22,20 +23,6 @@ public class TileEntitySawRenderer extends TileEntitySpecialRenderer<TileEntityS
         BlockPos pos = te.getPos();
         IBlockState state = te.getWorld().getBlockState(pos);
 
-        GlStateManager.pushMatrix();
-
-        GlStateManager.translate(x + 0.5, y, z + 0.5);
-
-        long time = te.getWorld().getTotalWorldTime();
-        float angle = (time % 360) * 10f;
-        GlStateManager.rotate(angle, 0, 1, 0);
-
-        GlStateManager.translate(-0.5, 0, 0.5);
-
-        BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        IBakedModel bakedModel = dispatcher.getModelForState(state);
-        dispatcher.getBlockModelRenderer().renderModelBrightness(bakedModel, state, 1.0f, true);
-
-        GlStateManager.popMatrix();
+        spinModel(te, x, y, z, partialTicks, EnumFacing.Axis.X, state);
     }
 }
