@@ -172,25 +172,29 @@ public final class RecipeInit {
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 1), 0.02f)
         );
 
-        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_POLISHED);
-        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_BRICKS);
-        orestoneSaw(ModBlocks.ORESTONE, ModBlocks.ORESTONE_BRICKS_FANCY);
-        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_BRICKS);
-        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_BRICKS_FANCY);
-        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_PILLAR_Y);
-        orestoneSaw(ModBlocks.ORESTONE_POLISHED, ModBlocks.ORESTONE_LAYERED);
-        orestoneSaw(ModBlocks.ORESTONE_BRICKS, ModBlocks.ORESTONE_BRICKS_FANCY);
-        orestoneSaw(ModBlocks.ORESTONE_BRICKS_FANCY, ModBlocks.ORESTONE_BRICKS);
+        {
+            final String[] stones = new String[]{
+                    "stoneAsurine",
+                    "stoneCrimsite",
+                    "stoneLimestone",
+                    "stoneOchrum",
+                    "stoneScorchia",
+                    "stoneScoria",
+                    "stoneVeridium",
+            };
+
+            for (String stone : stones) {
+                for (ItemStack stack : OreDictionary.getOres(stone)) {
+                    for (ItemStack stack1: OreDictionary.getOres(stone)) {
+                        SawingRecipes.addRecipe(stack, stack1);
+                    }
+                }
+            }
+        }
 
         SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
 
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
-    }
-
-    private static void orestoneSaw(AbstractBlockOrestone orestone, AbstractBlockOrestone orestoneOther) {
-        for (int i = 0; i < 7; i++) {
-            SawingRecipes.addRecipe(new ItemStack(orestone, 1, i), new ItemStack(orestoneOther, 1, i));
-        }
     }
 }
