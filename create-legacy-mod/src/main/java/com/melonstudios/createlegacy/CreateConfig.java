@@ -27,6 +27,10 @@ public class CreateConfig {
     @Config.Comment("Prevent BitSplitter test crashing the game")
     public static boolean allowInstantSchematicPlacement = true;
 
+    @Config.Comment("Render distance of kinetic blocks")
+    @Config.RangeInt(min = Byte.MAX_VALUE, max = Short.MAX_VALUE)
+    public static int kineticBlocksRenderDistanceSquared = Short.MAX_VALUE;
+
     @Config.Comment("Configure world generation settings")
     @Config.Name("World generation config")
     public static final WorldGenConfig worldGenConfig = new WorldGenConfig();

@@ -143,9 +143,4 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
             processing.shrink(1);
         }
     }
-
-    @Override
-    public double getMaxRenderDistanceSquared() {
-        return Byte.MAX_VALUE;
-    }
 }

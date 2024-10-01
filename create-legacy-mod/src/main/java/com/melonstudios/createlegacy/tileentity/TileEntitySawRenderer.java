@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.math.BlockPos;
@@ -26,11 +27,14 @@ public class TileEntitySawRenderer extends TileEntitySpecialRenderer<TileEntityS
         GlStateManager.translate(x + 0.5, y, z + 0.5);
 
         long time = te.getWorld().getTotalWorldTime();
-        float angle = (time % 3600) / 10f;
+        float angle = (time % 360) * 10f;
         GlStateManager.rotate(angle, 0, 1, 0);
 
+        GlStateManager.translate(-0.5, 0, 0.5);
+
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        dispatcher.renderBlockBrightness(state, 1.0f);
+        IBakedModel bakedModel = dispatcher.getModelForState(state);
+        dispatcher.getBlockModelRenderer().renderModelBrightness(bakedModel, state, 1.0f, true);
 
         GlStateManager.popMatrix();
     }
