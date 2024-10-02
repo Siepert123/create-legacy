@@ -1,6 +1,7 @@
 package com.melonstudios.createapi.network;
 
 import com.melonstudios.createlegacy.tileentity.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -103,7 +104,7 @@ public final class NetworkContext {
                 entry.getKey().updateSpeed(0.0f);
             }
 
-            entry.getKey().kineticTick(this);
+            entry.getKey().networkFunc(this);
         }
     }
 

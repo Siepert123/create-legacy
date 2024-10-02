@@ -31,4 +31,14 @@ public class TileEntityWaterWheel extends AbstractTileEntityKinetic {
 
         context.start();
     }
+
+    @Override
+    public float generatedRPM() {
+        return world.getBlockState(pos.down()).getMaterial().isLiquid() ? 8.0f : 0.0f;
+    }
+
+    @Override
+    public float generatedSUMarkiplier() {
+        return 8.0f;
+    }
 }

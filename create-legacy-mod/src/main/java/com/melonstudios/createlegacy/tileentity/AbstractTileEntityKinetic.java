@@ -99,12 +99,23 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
      */
     public abstract EnumKineticConnectionType getConnectionType(EnumFacing side);
 
+    private int nextCheck;
+    private long lastUpdate;
+
     @Override
     public final void update() {
+        if (world.getTotalWorldTime() >= lastUpdate + nextCheck) clearInfo();
         if (updated) updated = false;
         if (flickers > 0) flickers--;
 
         tick();
+    }
+
+    public final void networkFunc(NetworkContext context) {
+        nextCheck = Math.round(context.speed() / 10);
+        lastUpdate = world.getTotalWorldTime();
+
+        kineticTick(context);
     }
 
     protected void tick() {
