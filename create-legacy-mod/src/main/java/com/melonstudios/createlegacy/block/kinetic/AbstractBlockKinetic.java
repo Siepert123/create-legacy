@@ -2,20 +2,15 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.tileentity.AbstractTileEntityKinetic;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractBlockKinetic extends Block implements ITileEntityProvider {

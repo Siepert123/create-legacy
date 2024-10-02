@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.NetworkContext;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityChigwanker extends AbstractTileEntityKinetic {

@@ -1,11 +1,16 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.block.kinetic.BlockWaterWheel;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.NetworkContext;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
-public class TileEntityWaterWheel extends AbstractTileEntityKineticGenerator {
+public class TileEntityWaterWheel extends AbstractTileEntityKinetic {
+    public TileEntityWaterWheel() {
+        super();
+    }
     @Override
     protected String namePlate() {
         return "Water wheel";
@@ -18,17 +23,12 @@ public class TileEntityWaterWheel extends AbstractTileEntityKineticGenerator {
     }
 
     @Override
-    public int generatesSU() {
-        return 32;
-    }
+    protected void tick() {
+        if (isUpdated()) return;
+        NetworkContext context = new NetworkContext(world);
 
-    @Override
-    public int generatesRS() {
-        return world.getBlockState(pos.down()).getMaterial().isLiquid() ? 8 : 0;
-    }
+        passNetwork(null, null, context, false);
 
-    @Override
-    protected void start() {
-        NetworkContext context = new NetworkContext();
+        context.start();
     }
 }

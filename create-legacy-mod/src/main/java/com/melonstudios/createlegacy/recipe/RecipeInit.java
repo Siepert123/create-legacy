@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;

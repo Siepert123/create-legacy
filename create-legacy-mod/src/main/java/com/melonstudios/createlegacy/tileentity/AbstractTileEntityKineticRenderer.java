@@ -52,6 +52,7 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
      * @param partialTicks Partial tick
      * @param axis Axis to rotate the model on
      * @param state Blockstate to be rotated
+     * @param markiplier speed multiplier
      */
     protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state, float markiplier) {
         GlStateManager.pushMatrix();

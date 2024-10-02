@@ -3,9 +3,8 @@ package com.melonstudios.createlegacy.tileentity;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.NetworkContext;
+import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 /**
@@ -18,6 +17,9 @@ import net.minecraft.util.EnumFacing;
  * <h2>THE COG IS LYING TO ME</h2>
  */
 public class TileEntityCog extends AbstractTileEntityKinetic {
+    public TileEntityCog() {
+        super();
+    }
     @Override
     protected String namePlate() {
         return "Cog";

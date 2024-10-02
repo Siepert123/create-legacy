@@ -3,12 +3,14 @@ package com.melonstudios.createlegacy.tileentity;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.NetworkContext;
+import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityShaft extends AbstractTileEntityKinetic {
+    public TileEntityShaft() {
+        super();
+    }
     @Override
     protected String namePlate() {
         return "Shaft";
