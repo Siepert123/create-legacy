@@ -37,7 +37,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity {
     @Nullable
     @Override
     public ITextComponent getDisplayName() {
-        return new TextComponentString(String.format("%s (%s RS)", namePlate(), speed()));
+        return new TextComponentString(String.format("%s (%s RPM)", namePlate(), speed()));
     }
 
     public final boolean shifted(@Nullable EnumFacing.Axis axis) {

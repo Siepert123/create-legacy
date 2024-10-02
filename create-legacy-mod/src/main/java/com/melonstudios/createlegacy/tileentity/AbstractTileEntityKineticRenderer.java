@@ -39,6 +39,10 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
+    protected final void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
+        spinModel(te, x, y, z, partialTicks, axis, state, 1.0f);
+    }
+
     /**
      * Rotates a model along an axis at the TE speed
      * @param te TileEntity
@@ -49,14 +53,14 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
      * @param axis Axis to rotate the model on
      * @param state Blockstate to be rotated
      */
-    protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
+    protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state, float markiplier) {
         GlStateManager.pushMatrix();
 
         GlStateManager.color(1, 1, 1, 1);
 
         GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
 
-        GlStateManager.rotate(calculateAngle(te, axis, partialTicks),
+        GlStateManager.rotate(calculateAngle(te, axis, partialTicks, markiplier),
                 axis == EnumFacing.Axis.X ? 1 : 0,
                 axis == EnumFacing.Axis.Y ? 1 : 0,
                 axis == EnumFacing.Axis.Z ? 1 : 0);
@@ -69,10 +73,10 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         GlStateManager.popMatrix();
     }
 
-    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks) {
+    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks, float markiplier) {
         if (te.speed() == 0) return te.shifted(axis) ? 22.5f : 0;
         long time = te.getWorld().getTotalWorldTime();
 
-        return (((time + partialTicks) % 36000) / 25f * te.speed()) + (te.shifted(axis) ? 22.5f : 0);
+        return (((time + partialTicks) % 360) * 0.3f * te.speed() * markiplier) + (te.shifted(axis) ? 22.5f : 0);
     }
 }
