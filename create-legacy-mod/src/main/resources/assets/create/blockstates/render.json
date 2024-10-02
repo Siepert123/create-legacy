@@ -13,6 +13,21 @@
     "type=sawblade_z": {
       "model": "create:render/sawblade",
       "y": 90
+    },
+    "type=gauge_n": {
+      "model": "create:render/gauge"
+    },
+    "type=gauge_e": {
+      "model": "create:render/gauge",
+      "y": 90
+    },
+    "type=gauge_s": {
+      "model": "create:render/gauge",
+      "y": 180
+    },
+    "type=gauge_w": {
+      "model": "create:render/gauge",
+      "y": 270
     }
   }
 }

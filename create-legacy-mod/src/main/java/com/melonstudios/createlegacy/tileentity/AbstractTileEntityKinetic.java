@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.block.Block;
@@ -137,8 +138,13 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         } else {
             context.add(this, inverted);
             for (EnumFacing dir : EnumFacing.VALUES) {
-                if (mayConnect(getTE(pos.offset(dir)), dir, dir.getOpposite())) {
-                    getTE(pos.offset(dir)).passNetwork(this, dir.getOpposite(), context, getConnectionType(dir).inverts() != inverted);
+                AbstractTileEntityKinetic te = getTE(pos.offset(dir));
+                if (mayConnect(te, dir, dir.getOpposite())) {
+                    if (getConnectionType(dir).inverts()) {
+                        te.passNetwork(this, dir.getOpposite(), context, !inverted);
+                    } else {
+                        te.passNetwork(this, dir.getOpposite(), context, inverted);
+                    }
                 }
             }
         }
@@ -165,9 +171,6 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         if (other == null) return false;
         return getConnectionType(mySide) != EnumKineticConnectionType.NONE
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));
-    }
-    protected final AbstractTileEntityKinetic findConnectable(BlockPos pos) {
-        return (AbstractTileEntityKinetic) world.getTileEntity(pos);
     }
 
 

@@ -99,7 +99,7 @@ public final class NetworkContext {
     private void phase3() {
         for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
             if (!overstressed()) {
-                entry.getKey().updateSpeed(speed());
+                entry.getKey().updateSpeed(isInverted(entry.getKey()) ? -speed() : speed());
             } else {
                 entry.getKey().updateSpeed(0.0f);
             }

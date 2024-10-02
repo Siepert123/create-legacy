@@ -24,9 +24,14 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
     }
 
+    private boolean renderDebugText = true;
+    protected void disableDebugText() {
+        renderDebugText = false;
+    }
+
     @Override
     public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (CreateConfig.debug) {
+        if (CreateConfig.debug && renderDebugText) {
             ITextComponent itextcomponent = te.getDisplayName();
 
             if (itextcomponent != null && this.rendererDispatcher.cameraHitResult != null && te.getPos().equals(this.rendererDispatcher.cameraHitResult.getBlockPos())) {
@@ -55,13 +60,15 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
      * @param markiplier speed multiplier
      */
     protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state, float markiplier) {
-        GlStateManager.pushMatrix();
+        rotateModel(calculateAngle(te, axis, partialTicks, markiplier, true), x, y, z, axis, state);
+    }
 
-        GlStateManager.color(1, 1, 1, 1);
+    protected void rotateModel(float angle, double x, double y, double z, EnumFacing.Axis axis, IBlockState state) {
+        GlStateManager.pushMatrix();
 
         GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
 
-        GlStateManager.rotate(calculateAngle(te, axis, partialTicks, markiplier),
+        GlStateManager.rotate(angle,
                 axis == EnumFacing.Axis.X ? 1 : 0,
                 axis == EnumFacing.Axis.Y ? 1 : 0,
                 axis == EnumFacing.Axis.Z ? 1 : 0);
@@ -74,10 +81,10 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         GlStateManager.popMatrix();
     }
 
-    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks, float markiplier) {
-        if (te.speed() == 0) return te.shifted(axis) ? 22.5f : 0;
+    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks, float markiplier, boolean addOffset) {
+        if (te.speed() == 0) return te.shifted(axis) && addOffset ? 22.5f : 0;
         long time = te.getWorld().getTotalWorldTime();
 
-        return (((time + partialTicks) % 360) * 0.3f * te.speed() * markiplier) + (te.shifted(axis) ? 22.5f : 0);
+        return (((time + partialTicks) % 360) * 0.3f * te.speed() * markiplier) + (te.shifted(axis) && addOffset ? 22.5f : 0);
     }
 }

@@ -21,8 +21,14 @@ public class BlockRender extends Block {
     public enum Type implements IStringSerializable {
         WATERWHEEL_X("waterwheel_x"),
         WATERWHEEL_Z("waterwheel_z"),
+
         SAWBLADE_X("sawblade_x"),
-        SAWBLADE_Z("sawblade_z");
+        SAWBLADE_Z("sawblade_z"),
+
+        GAUGE_N("gauge_n"),
+        GAUGE_E("gauge_e"),
+        GAUGE_S("gauge_s"),
+        GAUGE_W("gauge_w");
 
         private final String name;
         private final int id;
