@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextComponentString;
 import javax.annotation.Nullable;
 
 public abstract class AbstractTileEntityKinetic extends TileEntity {
-    protected int speed = 0;
+    protected int speed = 64;
     public int speed() {
         return this.speed;
     }

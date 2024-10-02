@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.block.BlockRender;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -14,8 +16,8 @@ public class TileEntitySawRenderer extends AbstractTileEntityKineticRenderer<Til
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
         BlockPos pos = te.getPos();
-        IBlockState state = te.getWorld().getBlockState(pos);
+        IBlockState state = ModBlocks.RENDER.getDefaultState().withProperty(BlockRender.TYPE, BlockRender.Type.SAWBLADE_Z);
 
-        spinModel(te, x, y, z, partialTicks, EnumFacing.Axis.Y, state);
+        spinModel(te, x, y, z, partialTicks, EnumFacing.Axis.Z, state);
     }
 }
