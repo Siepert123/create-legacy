@@ -147,6 +147,11 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
     }
 
     @Override
+    public float consumedStressMarkiplier() {
+        return 8.0f;
+    }
+
+    @Override
     protected String namePlate() {
         return "Saw";
     }

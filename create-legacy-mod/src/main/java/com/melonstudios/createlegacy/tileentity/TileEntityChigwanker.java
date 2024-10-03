@@ -13,4 +13,9 @@ public class TileEntityChigwanker extends AbstractTileEntityKinetic {
     public EnumKineticConnectionType getConnectionType(EnumFacing side) {
         return EnumKineticConnectionType.SHAFT;
     }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 1.0f;
+    }
 }

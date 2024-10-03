@@ -18,6 +18,6 @@ public class TileEntitySawRenderer extends AbstractTileEntityKineticRenderer<Til
         BlockPos pos = te.getPos();
         IBlockState state = ModBlocks.RENDER.getDefaultState().withProperty(BlockRender.TYPE, BlockRender.Type.SAWBLADE_Z);
 
-        spinModel(te, x, y, z, partialTicks, EnumFacing.Axis.Z, state);
+        spinModel(te, x, y, z, partialTicks, EnumFacing.Axis.Z, state, 4.0f);
     }
 }
