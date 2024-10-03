@@ -28,6 +28,61 @@
     "type=gauge_w": {
       "model": "create:render/gauge",
       "y": 270
+    },
+    "type=shaft_u": {
+      "model": "create:block/render/half_shaft",
+      "x": 0
+    },
+    "type=shaft_d": {
+      "model": "create:block/render/half_shaft",
+      "x": 180
+    },
+    "type=shaft_n": {
+      "model": "create:block/render/half_shaft",
+      "x": 90,
+      "y": 0
+    },
+    "type=shaft_e": {
+      "model": "create:block/render/half_shaft",
+      "x": 90,
+      "y": 90
+    },
+    "type=shaft_s": {
+      "model": "create:block/render/half_shaft",
+      "x": 90,
+      "y": 180
+    },
+    "type=shaft_w": {
+      "model": "create:block/render/half_shaft",
+      "x": 90,
+      "y": 270
+    },
+    "type=bearing_u": {
+      "model": "create:block/render/bearing",
+      "x": 0
+    },
+    "type=bearing_d": {
+      "model": "create:block/render/bearing",
+      "x": 180
+    },
+    "type=bearing_n": {
+      "model": "create:block/render/bearing",
+      "x": 90
+    },
+    "type=bearing_e": {
+      "model": "create:block/render/bearing",
+      "x": 90,
+      "y": 90
+    },
+    "type=bearing_s": {
+      "model": "create:block/render/bearing",
+      "x": 90,
+      "y": 180
+    },
+    "type=bearing_w": {
+      "model": "create:block/render/bearing",
+      "x": 90,
+      "y": 270
     }
   }
 }

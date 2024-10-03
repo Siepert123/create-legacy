@@ -27,6 +27,7 @@ public final class ModBlocks {
     public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
     public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());
+    public static final Block BEARING = registerBlockWithItem(new BlockBearing());
     public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
@@ -74,6 +75,8 @@ public final class ModBlocks {
 
         GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
         dispatchTESR(TileEntitySaw.class, new TileEntitySawRenderer());
+        GameRegistry.registerTileEntity(TileEntityBearing.class, tileEntityResource("bearing"));
+        dispatchTESR(TileEntityBearing.class, new TileEntityBearingRenderer());
 
         GameRegistry.registerTileEntity(TileEntitySpeedometer.class, tileEntityResource("speedometer"));
         dispatchTESR(TileEntitySpeedometer.class, new TileEntitySpeedometerRenderer());

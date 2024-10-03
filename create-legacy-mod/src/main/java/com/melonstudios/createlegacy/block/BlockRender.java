@@ -28,7 +28,21 @@ public class BlockRender extends Block {
         GAUGE_N("gauge_n"),
         GAUGE_E("gauge_e"),
         GAUGE_S("gauge_s"),
-        GAUGE_W("gauge_w");
+        GAUGE_W("gauge_w"),
+
+        SHAFT_U("shaft_u"),
+        SHAFT_D("shaft_d"),
+        SHAFT_N("shaft_n"),
+        SHAFT_E("shaft_e"),
+        SHAFT_S("shaft_s"),
+        SHAFT_W("shaft_w"),
+
+        BEARING_U("bearing_u"),
+        BEARING_D("bearing_d"),
+        BEARING_N("bearing_n"),
+        BEARING_E("bearing_e"),
+        BEARING_S("bearing_s"),
+        BEARING_W("bearing_w"),;
 
         private final String name;
         private final int id;
