@@ -30,11 +30,22 @@ public final class ModItems {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
                 1, "ore/zinc");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
-                0, "metal/copper");
+                0, "metal/andesite_alloy");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
-                1, "metal/zinc");
+                1, "metal/copper");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
-                2, "metal/brass");
+                2, "metal/zinc");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.METAL),
+                3, "metal/brass");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CASING),
+                0, "casing/andesite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CASING),
+                1, "casing/copper");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CASING),
+                2, "casing/brass");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CASING),
+                3, "casing/train");
+
         CreateLegacy.setItemModel(SANDPAPER);
         CreateLegacy.setItemModel(SCHEMATIC, 0,
                 "schematic/empty");

@@ -55,12 +55,14 @@ public final class BlockMetal extends Block implements IMetaName {
         items.add(new ItemStack(this, 1, 0));
         items.add(new ItemStack(this, 1, 1));
         items.add(new ItemStack(this, 1, 2));
+        items.add(new ItemStack(this, 1, 3));
     }
 
     public enum Variant implements IStringSerializable {
-        COPPER("copper", 0, MapColor.getBlockColor(EnumDyeColor.ORANGE)),
-        ZINC("zinc", 1, MapColor.LIGHT_BLUE),
-        BRASS("brass", 2, MapColor.GOLD);
+        ANDESITE_ALLOY("andesite_alloy", 0, MapColor.SILVER),
+        COPPER("copper", 1, MapColor.getBlockColor(EnumDyeColor.ORANGE)),
+        ZINC("zinc", 2, MapColor.LIGHT_BLUE),
+        BRASS("brass", 3, MapColor.GOLD),;
 
         Variant(String name, int ID, MapColor mapColor) {
             this.name = name;

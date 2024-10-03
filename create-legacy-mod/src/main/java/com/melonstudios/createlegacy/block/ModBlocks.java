@@ -24,6 +24,8 @@ public final class ModBlocks {
     public static final Block ORE = registerBlockWithItem(new BlockOre(), true);
     public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
 
+    public static final Block CASING = registerBlockWithItem(new BlockCasing(), true);
+
     public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
     public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());

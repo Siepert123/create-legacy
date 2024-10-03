@@ -32,9 +32,12 @@ public final class OreDictHandler {
         OreDictionary.registerOre("plateBrass", new ItemStack(ModItems.INGREDIENT, 1, 11));
         OreDictionary.registerOre("plateObsidian", new ItemStack(ModItems.INGREDIENT, 1, 18));
 
-        OreDictionary.registerOre("blockCopper", new ItemStack(ModBlocks.METAL, 1, 0));
-        OreDictionary.registerOre("blockZinc", new ItemStack(ModBlocks.METAL, 1, 1));
-        OreDictionary.registerOre("blockBrass", new ItemStack(ModBlocks.METAL, 1, 2));
+        OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.ORE, 1, 0));
+        OreDictionary.registerOre("oreZinc", new ItemStack(ModBlocks.ORE, 1, 1));
+
+        OreDictionary.registerOre("blockCopper", new ItemStack(ModBlocks.METAL, 1, 1));
+        OreDictionary.registerOre("blockZinc", new ItemStack(ModBlocks.METAL, 1, 2));
+        OreDictionary.registerOre("blockBrass", new ItemStack(ModBlocks.METAL, 1, 3));
 
         OreDictionary.registerOre("crushedIron", new ItemStack(ModItems.INGREDIENT, 1, 12));
         OreDictionary.registerOre("crushedGold", new ItemStack(ModItems.INGREDIENT, 1, 13));

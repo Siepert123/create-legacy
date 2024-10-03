@@ -1,5 +1,8 @@
 {
   "variants": {
+    "metal=andesite_alloy": {
+      "model": "create:metal/andesite_alloy"
+    },
     "metal=copper": {
       "model": "create:metal/copper"
     },
