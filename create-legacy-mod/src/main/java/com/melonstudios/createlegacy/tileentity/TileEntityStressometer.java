@@ -4,6 +4,10 @@ import com.melonstudios.createlegacy.block.kinetic.BlockNetworkInspector;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+
+import javax.annotation.Nullable;
 
 public class TileEntityStressometer extends AbstractTileEntityKinetic implements INetworkLogger {
     @Override
@@ -44,6 +48,12 @@ public class TileEntityStressometer extends AbstractTileEntityKinetic implements
     @Override
     public String queryData() {
         return String.format("Stress: %s/%s SU", lastSU, lastMaxSU);
+    }
+
+    @Nullable
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TextComponentString(String.format("%s (%s RPM, %s/%s SU)", namePlate(), speed(), lastSU, lastMaxSU));
     }
 
     public float getDegreesPart(boolean inv) {
