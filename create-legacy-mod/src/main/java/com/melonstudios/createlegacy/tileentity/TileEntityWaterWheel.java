@@ -24,7 +24,7 @@ public class TileEntityWaterWheel extends AbstractTileEntityKinetic {
 
     @Override
     protected void tick() {
-        if (isUpdated()) return;
+        if (isUpdated() || generatedRPM() == 0) return;
         NetworkContext context = new NetworkContext(world);
 
         passNetwork(null, null, context, false);

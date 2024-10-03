@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "active=false,facing=up": {
+      "model": "create:bearing/normal"
+    },
+    "active=false,facing=down": {
+      "model": "create:bearing/normal",
+      "x": 180
+    },
+    "active=false,facing=north": {
+      "model": "create:bearing/normal",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "create:bearing/normal",
+      "x": 90,
+      "y": 90
+    },
+    "active=false,facing=south": {
+      "model": "create:bearing/normal",
+      "x": 90,
+      "y": 180
+    },
+    "active=false,facing=west": {
+      "model": "create:bearing/normal",
+      "x": 90,
+      "y": 270
+    },
+    "active=true,facing=up": {
+      "model": "create:bearing/normal_headless"
+    },
+    "active=true,facing=down": {
+      "model": "create:bearing/normal_headless",
+      "x": 180
+    },
+    "active=true,facing=north": {
+      "model": "create:bearing/normal_headless",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "create:bearing/normal_headless",
+      "x": 90,
+      "y": 90
+    },
+    "active=true,facing=south": {
+      "model": "create:bearing/normal_headless",
+      "x": 90,
+      "y": 180
+    },
+    "active=true,facing=west": {
+      "model": "create:bearing/normal_headless",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

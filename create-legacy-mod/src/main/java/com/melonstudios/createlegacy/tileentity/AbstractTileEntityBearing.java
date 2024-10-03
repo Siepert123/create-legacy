@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
@@ -28,6 +29,7 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     }
     public void assemble() {
         if (structure == null) {
+            if (world.getBlockState(pos.offset(facing())).getBlock() == Blocks.AIR) return;
             structure = world.getBlockState(pos.offset(facing()));
             world.setBlockToAir(pos.offset(facing()));
             toggleActive(true);
@@ -35,10 +37,13 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     }
     public void disassemble() {
         if (structure != null) {
+            if (!world.getBlockState(pos.offset(facing())).getMaterial().isReplaceable()) return;
             world.setBlockState(pos.offset(facing()), structure, 3);
             structure = null;
             toggleActive(false);
         }
+        angle = 0.0f;
+        previousAngle = 0.0f;
     }
     protected void check() {
         if (structure == null) {
@@ -55,6 +60,20 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     @Override
     protected void tick() {
         check();
+        patentedRotationTechnology();
+    }
+
+    protected float previousAngle = 0.0f;
+    protected float angle = 0.0f;
+    protected void patentedRotationTechnology() {
+        previousAngle = angle;
+        angle += speed() * 0.3f;
+    }
+    public float getPreviousAngle() {
+        return previousAngle;
+    }
+    public float getAngle() {
+        return angle;
     }
 
     @Override
@@ -69,6 +88,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             structureTag.setInteger("blockID", i);
             structureTag.setByte("blockMeta", b);
             compound.setTag("structureNBT", structureTag);
+
+            compound.setFloat("angle", angle);
         }
 
         return compound;
@@ -84,6 +105,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             structure = Block.getBlockById(structureTag.getInteger("blockID"))
                     .getStateFromMeta(structureTag.getByte("blockMeta"));
         }
+
+        angle = compound.getFloat("angle");
     }
 
     public boolean shouldRenderSpinning() {
@@ -129,5 +152,12 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     public EnumKineticConnectionType getConnectionType(EnumFacing side) {
         return getState().getValue(AbstractBlockBearing.FACING).getOpposite() == side
                 ? EnumKineticConnectionType.SHAFT : EnumKineticConnectionType.NONE;
+    }
+
+    @Override
+    public void onLoad() {
+        if (structure != null) {
+            toggleActive(true);
+        }
     }
 }

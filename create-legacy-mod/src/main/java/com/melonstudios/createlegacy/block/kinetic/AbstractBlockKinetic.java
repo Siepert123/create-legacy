@@ -79,6 +79,8 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
                 1, "encased_shaft/brass");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SAW));
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.BEARING),
+                "bearing/normal");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.NETWORK_INSPECTOR),
                 0, "network_inspector/speed");
