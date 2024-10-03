@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.createlegacy.util.INetworkLogger;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -78,5 +80,15 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this, 1, state.getValue(ALT) ? 1 : 0);
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TileEntity entity = worldIn.getTileEntity(pos);
+        if (playerIn.getHeldItem(hand).isEmpty() && entity instanceof INetworkLogger) {
+            String msg = ((INetworkLogger) entity).queryData();
+            playerIn.sendStatusMessage(new TextComponentString(msg), true);
+            return true;
+        } else return false;
     }
 }

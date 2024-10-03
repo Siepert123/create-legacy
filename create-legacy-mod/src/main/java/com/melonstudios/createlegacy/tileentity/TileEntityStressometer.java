@@ -41,12 +41,17 @@ public class TileEntityStressometer extends AbstractTileEntityKinetic implements
         lastMaxSU = su;
     }
 
+    @Override
+    public String queryData() {
+        return String.format("Stress: %s/%s SU", lastSU, lastMaxSU);
+    }
+
     public float getDegreesPart(boolean inv) {
         if (inv) {
             float degreesMax = 270.0f;
             float percent = lastSU / lastMaxSU;
             if (lastMaxSU == 0) percent = 0;
-            return degreesMax - degreesMax * percent - 90;
+            return degreesMax - degreesMax * percent + 90;
         }
         float degreesMax = 270.0f;
         float percent = lastSU / lastMaxSU;
