@@ -8,12 +8,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class BlockCasing extends Block implements IMetaName {
@@ -74,6 +78,19 @@ public class BlockCasing extends Block implements IMetaName {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(VARIANT, Variant.fromID(meta));
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(VARIANT).getID());
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, 0));
+        items.add(new ItemStack(this, 1, 1));
+        items.add(new ItemStack(this, 1, 2));
+        items.add(new ItemStack(this, 1, 3));
     }
 
     @Override
