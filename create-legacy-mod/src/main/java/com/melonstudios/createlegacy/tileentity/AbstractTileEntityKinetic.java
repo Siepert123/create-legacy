@@ -151,7 +151,8 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
     }
 
     public final AbstractTileEntityKinetic getTE(BlockPos pos) {
-        return (AbstractTileEntityKinetic) world.getTileEntity(pos);
+        TileEntity entity = world.getTileEntity(pos);
+        return entity instanceof AbstractTileEntityKinetic ? (AbstractTileEntityKinetic) entity : null;
     }
 
     @Override

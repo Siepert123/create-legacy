@@ -61,4 +61,15 @@ public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
 
         return false;
     }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileEntity entity = worldIn.getTileEntity(pos);
+
+        if (entity instanceof AbstractTileEntityBearing) {
+            ((AbstractTileEntityBearing) entity).breakBlock();
+        }
+
+        super.breakBlock(worldIn, pos, state);
+    }
 }

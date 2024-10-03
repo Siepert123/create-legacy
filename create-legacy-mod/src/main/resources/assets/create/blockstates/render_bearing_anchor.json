@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "create:render/bearing",
+      "x": 0
+    },
+    "facing=down": {
+      "model": "create:render/bearing",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "create:render/bearing",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east": {
+      "model": "create:render/bearing",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "create:render/bearing",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west": {
+      "model": "create:render/bearing",
+      "x": 90
+    }
+  }
+}

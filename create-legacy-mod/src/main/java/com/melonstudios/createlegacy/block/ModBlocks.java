@@ -34,6 +34,7 @@ public final class ModBlocks {
 
     public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final Block RENDER = registerBlock(new BlockRender());
+    public static final Block RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());

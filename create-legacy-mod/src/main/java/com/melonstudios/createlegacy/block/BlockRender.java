@@ -35,14 +35,7 @@ public class BlockRender extends Block {
         SHAFT_N("shaft_n"),
         SHAFT_E("shaft_e"),
         SHAFT_S("shaft_s"),
-        SHAFT_W("shaft_w"),
-
-        BEARING_U("bearing_u"),
-        BEARING_D("bearing_d"),
-        BEARING_N("bearing_n"),
-        BEARING_E("bearing_e"),
-        BEARING_S("bearing_s"),
-        BEARING_W("bearing_w"),;
+        SHAFT_W("shaft_w");
 
         private final String name;
         private final int id;

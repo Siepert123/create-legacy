@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.block.BlockRender;
+import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
@@ -8,8 +10,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
-import static com.melonstudios.createlegacy.block.BlockRender.*;
+import static com.melonstudios.createlegacy.block.BlockRenderBearingAnchor.*;
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.ACTIVE;
+import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.FACING;
 
 import javax.annotation.Nullable;
 
@@ -40,6 +43,12 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     protected void check() {
         if (structure == null) {
             toggleActive(false);
+        }
+    }
+
+    public void delete() {
+        if (structure != null) {
+            world.setBlockState(pos.offset(facing()), structure, 3);
         }
     }
 
@@ -84,20 +93,30 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     }
 
     public EnumFacing facing() {
-        return getState().getValue(AbstractBlockBearing.FACING);
+        return world.getBlockState(pos).getValue(FACING);
     }
+
+    public void breakBlock() {
+        if (structure != null) structure.getBlock().dropBlockAsItem(world, pos, structure, 0);
+    }
+
     public IBlockState getAssociatedBearingPart() {
+        final IBlockState render = ModBlocks.RENDER_BEARING_ANCHOR.getDefaultState();
+        return render.withProperty(BlockRenderBearingAnchor.FACING, facing());
+    }
+    public IBlockState getAssociatedShaftPart() {
         final IBlockState render = ModBlocks.RENDER.getDefaultState();
         switch (facing()) {
-            case UP: return render.withProperty(TYPE, Type.BEARING_U);
-            case DOWN: return render.withProperty(TYPE, Type.BEARING_D);
-            case NORTH: return render.withProperty(TYPE, Type.BEARING_N);
-            case EAST: return render.withProperty(TYPE, Type.BEARING_E);
-            case SOUTH: return render.withProperty(TYPE, Type.BEARING_S);
-            case WEST: return render.withProperty(TYPE, Type.BEARING_W);
+            case UP: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_D);
+            case DOWN: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_U);
+            case NORTH: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_S);
+            case EAST: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_W);
+            case SOUTH: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_N);
+            case WEST: return render.withProperty(BlockRender.TYPE, BlockRender.Type.SHAFT_E);
         }
-        return render.withProperty(TYPE, Type.BEARING_U);
+        return render;
     }
+
     protected void toggleActive(boolean active) {
         if (getState().getValue(ACTIVE) != active) {
             world.setBlockState(pos, getState().withProperty(ACTIVE, active));
