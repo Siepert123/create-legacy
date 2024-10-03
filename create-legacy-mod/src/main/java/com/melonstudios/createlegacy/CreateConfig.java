@@ -32,6 +32,7 @@ public class CreateConfig {
     public static int kineticBlocksRenderDistanceSquared = Short.MAX_VALUE;
 
     @Config.Comment("Enable debug stuff?")
+    @Config.RequiresMcRestart
     public static boolean debug = true;
 
     @Config.Comment("Configure world generation settings")

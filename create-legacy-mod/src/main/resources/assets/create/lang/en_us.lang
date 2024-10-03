@@ -43,6 +43,20 @@ tile.create.block_copper.name=Block of Copper
 tile.create.block_zinc.name=Block of Zinc
 tile.create.block_brass.name=Block of Brass
 
+#Kinetics
+tile.create.chigwanker.name=Mechindustrial Chigwanker
+
+tile.create.shaft.name=Shaft
+tile.create.cog.name=Cog
+tile.create.shaft_encased_andesite.name=Brass Encased Shaft
+tile.create.shaft_encased_brass.name=Andesite Encased Shaft
+tile.create.speedometer.name=Speedometer
+tile.create.stressometer.name=Stressometer
+
+tile.create.water_wheel.name=Water Wheel
+
+tile.create.saw.name=Mechanical Saw
+
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
