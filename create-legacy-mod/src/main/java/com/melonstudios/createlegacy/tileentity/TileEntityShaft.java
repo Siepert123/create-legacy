@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.kinetic.BlockEncasedShaft;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.SimpleTuple;
@@ -19,8 +20,11 @@ public class TileEntityShaft extends AbstractTileEntityKinetic {
     @Override
     public EnumKineticConnectionType getConnectionType(EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() != ModBlocks.ROTATOR) return EnumKineticConnectionType.NONE;
-        if (state.getValue(BlockRotator.AXIS) == side.getAxis()) return EnumKineticConnectionType.SHAFT;
+        if (state.getBlock() == ModBlocks.ROTATOR) {
+            if (state.getValue(BlockRotator.AXIS) == side.getAxis()) return EnumKineticConnectionType.SHAFT;
+        } else if (state.getBlock() == ModBlocks.SHAFT_ENCASED) {
+            if (state.getValue(BlockEncasedShaft.AXIS) == side.getAxis()) return EnumKineticConnectionType.SHAFT;
+        }
         return EnumKineticConnectionType.NONE;
     }
 }

@@ -1,9 +1,6 @@
 package com.melonstudios.createlegacy.block;
 
-import com.melonstudios.createlegacy.block.kinetic.BlockChigwanker;
-import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
-import com.melonstudios.createlegacy.block.kinetic.BlockSaw;
-import com.melonstudios.createlegacy.block.kinetic.BlockWaterWheel;
+import com.melonstudios.createlegacy.block.kinetic.*;
 import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
@@ -28,7 +25,9 @@ public final class ModBlocks {
     public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
 
     public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
+    public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());
+    public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
 
@@ -75,6 +74,11 @@ public final class ModBlocks {
 
         GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
         dispatchTESR(TileEntitySaw.class, new TileEntitySawRenderer());
+
+        GameRegistry.registerTileEntity(TileEntitySpeedometer.class, tileEntityResource("speedometer"));
+        dispatchTESR(TileEntitySpeedometer.class, new TileEntitySpeedometerRenderer());
+        GameRegistry.registerTileEntity(TileEntityStressometer.class, tileEntityResource("stressometer"));
+        dispatchTESR(TileEntityStressometer.class, new TileEntityStressometerRenderer());
 
         GameRegistry.registerTileEntity(TileEntityWaterWheel.class, tileEntityResource("water_wheel"));
         dispatchTESR(TileEntityWaterWheel.class, new TileEntityWaterWheelRenderer());

@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/encased_shaft/andesite",
+  "textures": {
+    "casing": "create:block/casing/casing_brass",
+    "gearbox": "create:block/gearbox_brass"
+  }
+}

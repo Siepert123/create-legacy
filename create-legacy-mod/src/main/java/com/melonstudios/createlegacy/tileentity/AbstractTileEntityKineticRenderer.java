@@ -1,6 +1,8 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -48,6 +50,17 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         spinModel(te, x, y, z, partialTicks, axis, state, 1.0f);
     }
 
+    protected final void spinShaftModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
+        spinModel(te, x, y, z, partialTicks, axis, ModBlocks.ROTATOR.getDefaultState()
+                .withProperty(BlockRotator.VARIANT, BlockRotator.Variant.SHAFT)
+                .withProperty(BlockRotator.AXIS, axis));
+    }
+    protected final void spinCogModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
+        spinModel(te, x, y, z, partialTicks, axis, ModBlocks.ROTATOR.getDefaultState()
+                .withProperty(BlockRotator.VARIANT, BlockRotator.Variant.COG)
+                .withProperty(BlockRotator.AXIS, axis));
+    }
+
     /**
      * Rotates a model along an axis at the TE speed
      * @param te TileEntity
@@ -85,6 +98,6 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         if (te.speed() == 0) return te.shifted(axis) && addOffset ? 22.5f : 0;
         long time = te.getWorld().getTotalWorldTime();
 
-        return (((time + partialTicks) % 360) * 0.3f * te.speed() * markiplier) + (te.shifted(axis) && addOffset ? 22.5f : 0);
+        return ((((time + partialTicks) * 0.3f * te.speed() * markiplier) % 360)) + (te.shifted(axis) && addOffset ? 22.5f : 0);
     }
 }

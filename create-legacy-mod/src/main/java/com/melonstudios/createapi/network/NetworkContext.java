@@ -2,6 +2,7 @@ package com.melonstudios.createapi.network;
 
 import com.melonstudios.createlegacy.tileentity.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.DisplayLink;
+import com.melonstudios.createlegacy.util.INetworkLogger;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -100,6 +101,11 @@ public final class NetworkContext {
         for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
             if (!overstressed()) {
                 entry.getKey().updateSpeed(isInverted(entry.getKey()) ? -speed() : speed());
+
+                if (entry.getKey() instanceof INetworkLogger) {
+                    ((INetworkLogger) entry.getKey()).setSU(consumedSU());
+                    ((INetworkLogger) entry.getKey()).setMaxSU(totalSU());
+                }
             } else {
                 entry.getKey().updateSpeed(0.0f);
             }

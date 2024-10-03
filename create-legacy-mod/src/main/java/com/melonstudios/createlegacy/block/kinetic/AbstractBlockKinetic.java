@@ -73,8 +73,17 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
                 0, "rotator/shaft");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ROTATOR),
                 1, "rotator/cog");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SHAFT_ENCASED),
+                0, "encased_shaft/andesite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SHAFT_ENCASED),
+                1, "encased_shaft/brass");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SAW));
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.NETWORK_INSPECTOR),
+                0, "network_inspector/speed");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.NETWORK_INSPECTOR),
+                1, "network_inspector/stress");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.WATER_WHEEL));
 
