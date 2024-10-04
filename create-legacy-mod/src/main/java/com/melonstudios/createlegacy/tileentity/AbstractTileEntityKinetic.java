@@ -2,6 +2,8 @@ package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.block.BlockRender;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.SimpleTuple;
@@ -128,13 +130,16 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
     }
 
     protected void passNetwork(AbstractTileEntityKinetic src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
-        if (context.checked(this)) {
+        if (enforceNonInversion() && inverted) {
+            world.playEvent(2001, pos, Block.getStateId(getState()));
+            getState().getBlock().dropBlockAsItem(world, pos, getState(), 0);
+            world.setBlockToAir(pos);
+        } else if (context.checked(this)) {
             if (context.isInverted(this) != inverted) {
                 world.playEvent(2001, pos, Block.getStateId(getState()));
                 getState().getBlock().dropBlockAsItem(world, pos, getState(), 0);
                 world.setBlockToAir(pos);
             }
-            return;
         } else {
             context.add(this, inverted);
             for (EnumFacing dir : EnumFacing.VALUES) {
@@ -197,5 +202,12 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     protected static EnumKineticConnectionType connection(int id) {
         return EnumKineticConnectionType.values()[id];
+    }
+    protected static IBlockState renderingPart(int id) {
+        return ModBlocks.RENDER.getDefaultState().withProperty(BlockRender.TYPE, BlockRender.Type.fromId(id));
+    }
+
+    protected boolean enforceNonInversion() {
+        return false;
     }
 }

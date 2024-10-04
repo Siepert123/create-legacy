@@ -79,6 +79,11 @@ public class BlockCasing extends Block implements IMetaName {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).getID();
+    }
+
+    @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(VARIANT, Variant.fromID(meta));
     }

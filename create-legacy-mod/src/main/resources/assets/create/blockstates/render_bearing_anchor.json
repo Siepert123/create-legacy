@@ -10,22 +10,22 @@
     },
     "facing=north": {
       "model": "create:render/bearing",
-      "x": 90,
-      "y": 90
+      "x": 90
     },
     "facing=east": {
       "model": "create:render/bearing",
       "x": 90,
-      "y": 180
+      "y": 90
     },
     "facing=south": {
       "model": "create:render/bearing",
       "x": 90,
-      "y": 270
+      "y": 180
     },
     "facing=west": {
       "model": "create:render/bearing",
-      "x": 90
+      "x": 90,
+      "y": 270
     }
   }
 }

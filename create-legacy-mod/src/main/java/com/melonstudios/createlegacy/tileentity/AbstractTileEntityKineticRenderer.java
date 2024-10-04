@@ -92,9 +92,10 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
                 axis == EnumFacing.Axis.Y ? 1 : 0,
                 axis == EnumFacing.Axis.Z ? 1 : 0);
 
-        GlStateManager.translate(-0.5, -0.5, 0.5);
+        GlStateManager.translate(-0.5, -0.5, -0.5);
 
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
+        GlStateManager.rotate(-90, 0, 1, 0);
         Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModelBrightness(model, state, 1.0f, true);
 
         GlStateManager.popMatrix();

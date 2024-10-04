@@ -15,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public final class ModBlocks {
 
     public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
+    public static final Block CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
     public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final Block RENDER = registerBlock(new BlockRender());
@@ -82,17 +84,19 @@ public final class ModBlocks {
         GameRegistry.registerTileEntity(TileEntityBearing.class, tileEntityResource("bearing"));
         dispatchTESR(TileEntityBearing.class, new TileEntityBearingRenderer());
 
-        GameRegistry.registerTileEntity(TileEntitySpeedometer.class, tileEntityResource("speedometer"));
-        dispatchTESR(TileEntitySpeedometer.class, new TileEntitySpeedometerRenderer());
-        GameRegistry.registerTileEntity(TileEntityStressometer.class, tileEntityResource("stressometer"));
-        dispatchTESR(TileEntityStressometer.class, new TileEntityStressometerRenderer());
+        registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
+        registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());
 
-        GameRegistry.registerTileEntity(TileEntityHandCrank.class, tileEntityResource("handcrank"));
-        dispatchTESR(TileEntityHandCrank.class, new TileEntityHandCrankRenderer());
-        GameRegistry.registerTileEntity(TileEntityWaterWheel.class, tileEntityResource("water_wheel"));
-        dispatchTESR(TileEntityWaterWheel.class, new TileEntityWaterWheelRenderer());
+        registerTE(TileEntityHandCrank.class, "handcrank", new TileEntityHandCrankRenderer());
+        registerTE(TileEntityWaterWheel.class, "water_wheel", new TileEntityWaterWheelRenderer());
+        registerTE(TileEntityCreativeMotor.class, "creative_motor", new TileEntityCreativeMotorRenderer());
 
-        GameRegistry.registerTileEntity(TileEntityChigwanker.class, tileEntityResource("chigwanker"));
+
+        registerTE(TileEntityChigwanker.class, "chigwanker", null);
+    }
+    private static void registerTE(Class<? extends TileEntity> te, String registry, @Nullable TileEntitySpecialRenderer<?> renderer) {
+        GameRegistry.registerTileEntity(te, tileEntityResource(registry));
+        if (renderer != null) dispatchTESR(te, renderer);
     }
     private static ResourceLocation tileEntityResource(String name) {
         return new ResourceLocation("create", name);

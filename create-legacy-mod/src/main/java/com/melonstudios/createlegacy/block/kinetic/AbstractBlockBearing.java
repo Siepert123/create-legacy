@@ -12,6 +12,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
@@ -52,11 +53,14 @@ public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
 
         if (entity instanceof AbstractTileEntityBearing && playerIn.getHeldItem(hand).isEmpty()) {
             AbstractTileEntityBearing bearing = (AbstractTileEntityBearing) entity;
-
-            if (bearing.isAssembled()) {
-                bearing.disassemble();
-            } else bearing.assemble();
-
+            if (playerIn.isSneaking()) {
+                if (!worldIn.isRemote) bearing.cycleAssemblyMode();
+                if (!worldIn.isRemote) playerIn.sendStatusMessage(new TextComponentString(bearing.getAssemblyMode().toString()), true);
+            } else {
+                if (bearing.isAssembled()) {
+                    bearing.disassemble();
+                } else bearing.assemble();
+            }
             return true;
         }
 

@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "create:creative_motor/vertical"
+    },
+    "facing=down": {
+      "model": "create:creative_motor/vertical",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "create:creative_motor/horizontal",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "create:creative_motor/horizontal",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "create:creative_motor/horizontal"
+    },
+    "facing=west": {
+      "model": "create:creative_motor/horizontal",
+      "y": 90
+    }
+  }
+}

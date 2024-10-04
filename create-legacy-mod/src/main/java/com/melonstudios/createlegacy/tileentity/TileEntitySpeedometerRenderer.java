@@ -25,7 +25,7 @@ public class TileEntitySpeedometerRenderer extends AbstractTileEntityKineticRend
 
         spinModel(te, x, y, z, partialTicks, axis, shaft);
 
-        rotateModel(te.getDegreesPart(false), x, y, z, axis == EnumFacing.Axis.X ? EnumFacing.Axis.Z : EnumFacing.Axis.X, gauge1);
-        rotateModel(te.getDegreesPart(true), x, y, z, axis == EnumFacing.Axis.X ? EnumFacing.Axis.Z : EnumFacing.Axis.X, gauge2);
+        rotateModel(te.getDegreesPart(true), x, y, z, axis == EnumFacing.Axis.X ? EnumFacing.Axis.Z : EnumFacing.Axis.X, gauge1);
+        rotateModel(te.getDegreesPart(false), x, y, z, axis == EnumFacing.Axis.X ? EnumFacing.Axis.Z : EnumFacing.Axis.X, gauge2);
     }
 }

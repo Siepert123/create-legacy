@@ -9,22 +9,22 @@
     },
     "facing=north": {
       "model": "create:handcrank",
-      "x": 90,
-      "y": 90
+      "x": 90
     },
     "facing=east": {
       "model": "create:handcrank",
       "x": 90,
-      "y": 180
+      "y": 90
     },
     "facing=south": {
       "model": "create:handcrank",
       "x": 90,
-      "y": 270
+      "y": 180
     },
     "facing=west": {
       "model": "create:handcrank",
-      "x": 90
+      "x": 90,
+      "y": 270
     }
   }
 }

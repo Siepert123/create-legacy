@@ -4,12 +4,16 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
+import com.melonstudios.createlegacy.util.EnumContraptionAssemblyMode;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 import static com.melonstudios.createlegacy.block.BlockRenderBearingAnchor.*;
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.ACTIVE;
@@ -30,6 +34,7 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     public void assemble() {
         if (structure == null) {
             if (world.getBlockState(pos.offset(facing())).getBlock() == Blocks.AIR) return;
+            if (world.getBlockState(pos.offset(facing())).getMobilityFlag() == EnumPushReaction.BLOCK) return;
             structure = world.getBlockState(pos.offset(facing()));
             world.setBlockToAir(pos.offset(facing()));
             toggleActive(true);
@@ -40,14 +45,23 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             if (!world.getBlockState(pos.offset(facing())).getMaterial().isReplaceable()) return;
             world.setBlockState(pos.offset(facing()), structure, 3);
             structure = null;
-            toggleActive(false);
         }
+        toggleActive(false);
         angle = 0.0f;
         previousAngle = 0.0f;
     }
     protected void check() {
         if (structure == null) {
             toggleActive(false);
+        } if (structure != null) {
+            toggleActive(true);
+        }
+
+        previousAngle %= 360;
+        angle %= 360;
+
+        if (speed() == 0.0f) {
+            if (getAssemblyMode() == EnumContraptionAssemblyMode.DISASSEMBLE_ALWAYS) disassemble();
         }
     }
 
@@ -92,6 +106,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             compound.setFloat("angle", angle);
         }
 
+        compound.setInteger("assemblyMode", assemblyMode.toId());
+
         return compound;
     }
 
@@ -105,6 +121,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             structure = Block.getBlockById(structureTag.getInteger("blockID"))
                     .getStateFromMeta(structureTag.getByte("blockMeta"));
         }
+
+        assemblyMode = EnumContraptionAssemblyMode.fromId(compound.getInteger("assemblyMode"));
 
         angle = compound.getFloat("angle");
     }
@@ -146,6 +164,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             this.validate();
             world.setTileEntity(pos, this);
         }
+
+        if (!active) angle = 0;
     }
 
     @Override
@@ -159,5 +179,16 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
         if (structure != null) {
             toggleActive(true);
         }
+    }
+
+    protected EnumContraptionAssemblyMode assemblyMode = EnumContraptionAssemblyMode.DISASSEMBLE_ALWAYS;
+    public void setAssemblyMode(EnumContraptionAssemblyMode mode) {
+        assemblyMode = mode;
+    }
+    public EnumContraptionAssemblyMode getAssemblyMode() {
+        return assemblyMode;
+    }
+    public void cycleAssemblyMode() {
+        setAssemblyMode(EnumContraptionAssemblyMode.values()[(getAssemblyMode().ordinal() + 1) % 3]);
     }
 }

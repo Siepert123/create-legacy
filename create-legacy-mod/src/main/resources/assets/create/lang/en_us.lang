@@ -58,7 +58,9 @@ tile.create.shaft_encased_brass.name=Andesite Encased Shaft
 tile.create.speedometer.name=Speedometer
 tile.create.stressometer.name=Stressometer
 
+tile.create.handcrank.name=Handcrank
 tile.create.water_wheel.name=Water Wheel
+tile.create.creative_motor.name=Creative Motor
 
 tile.create.saw.name=Mechanical Saw
 tile.create.bearing.name=Mechanical Bearing

@@ -1,33 +1,33 @@
 {
   "variants": {
     "type=waterwheel_x": {
-      "model": "create:render/waterwheel"
-    },
-    "type=waterwheel_z": {
       "model": "create:render/waterwheel",
       "y": 90
     },
-    "type=sawblade_x": {
-      "model": "create:render/sawblade"
+    "type=waterwheel_z": {
+      "model": "create:render/waterwheel"
     },
-    "type=sawblade_z": {
+    "type=sawblade_x": {
       "model": "create:render/sawblade",
       "y": 90
     },
-    "type=gauge_n": {
-      "model": "create:render/gauge"
+    "type=sawblade_z": {
+      "model": "create:render/sawblade"
     },
-    "type=gauge_e": {
+    "type=gauge_n": {
       "model": "create:render/gauge",
       "y": 90
     },
-    "type=gauge_s": {
+    "type=gauge_e": {
       "model": "create:render/gauge",
       "y": 180
     },
-    "type=gauge_w": {
+    "type=gauge_s": {
       "model": "create:render/gauge",
       "y": 270
+    },
+    "type=gauge_w": {
+      "model": "create:render/gauge"
     },
     "type=shaft_u": {
       "model": "create:render/half_shaft",
@@ -39,22 +39,22 @@
     },
     "type=shaft_n": {
       "model": "create:render/half_shaft",
-      "x": 90,
-      "y": 90
+      "x": 90
     },
     "type=shaft_e": {
       "model": "create:render/half_shaft",
       "x": 90,
-      "y": 180
+      "y": 90
     },
     "type=shaft_s": {
       "model": "create:render/half_shaft",
       "x": 90,
-      "y": 270
+      "y": 180
     },
     "type=shaft_w": {
       "model": "create:render/half_shaft",
-      "x": 90
+      "x": 90,
+      "y": 270
     }
   }
 }
