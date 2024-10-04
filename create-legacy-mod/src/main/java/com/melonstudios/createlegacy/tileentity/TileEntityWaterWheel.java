@@ -39,6 +39,6 @@ public class TileEntityWaterWheel extends AbstractTileEntityKinetic {
 
     @Override
     public float generatedSUMarkiplier() {
-        return 8.0f;
+        return 32.0f;
     }
 }

@@ -174,7 +174,10 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));
     }
 
-
+    @Override
+    public final boolean hasFastRenderer() {
+        return false;
+    }
 
     public float generatedRPM() {
         return 0.0f;
@@ -190,5 +193,9 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
     }
     public final boolean isConsumer() {
         return consumedStressMarkiplier() != 0;
+    }
+
+    protected static EnumKineticConnectionType connection(int id) {
+        return EnumKineticConnectionType.values()[id];
     }
 }

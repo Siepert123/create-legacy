@@ -36,13 +36,13 @@ public class BlockEncasedShaft extends AbstractBlockKinetic implements IMetaName
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return (state.getValue(AXIS) == EnumFacing.Axis.X ? 0 : 1) + (state.getValue(BRASS) ? 2 : 0);
+        return (state.getValue(AXIS).ordinal()) + (state.getValue(BRASS) ? 3 : 0);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(AXIS, meta % 2 == 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z)
-                .withProperty(BRASS, meta / 2 == 1);
+        return getDefaultState().withProperty(AXIS, EnumFacing.Axis.values()[meta % 3])
+                .withProperty(BRASS, meta / 3 == 1);
     }
 
     @Override

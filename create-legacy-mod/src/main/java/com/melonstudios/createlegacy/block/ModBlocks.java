@@ -32,6 +32,7 @@ public final class ModBlocks {
     public static final Block BEARING = registerBlockWithItem(new BlockBearing());
     public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
+    public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
 
     public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
@@ -86,6 +87,8 @@ public final class ModBlocks {
         GameRegistry.registerTileEntity(TileEntityStressometer.class, tileEntityResource("stressometer"));
         dispatchTESR(TileEntityStressometer.class, new TileEntityStressometerRenderer());
 
+        GameRegistry.registerTileEntity(TileEntityHandCrank.class, tileEntityResource("handcrank"));
+        dispatchTESR(TileEntityHandCrank.class, new TileEntityHandCrankRenderer());
         GameRegistry.registerTileEntity(TileEntityWaterWheel.class, tileEntityResource("water_wheel"));
         dispatchTESR(TileEntityWaterWheel.class, new TileEntityWaterWheelRenderer());
 
