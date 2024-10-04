@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.util.EnumFacing;
 

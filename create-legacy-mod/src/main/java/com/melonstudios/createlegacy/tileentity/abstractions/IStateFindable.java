@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.tileentity;
+package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import net.minecraft.block.state.IBlockState;
 

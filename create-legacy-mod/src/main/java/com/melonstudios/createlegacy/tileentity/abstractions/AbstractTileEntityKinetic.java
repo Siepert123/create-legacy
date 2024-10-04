@@ -1,15 +1,12 @@
-package com.melonstudios.createlegacy.tileentity;
+package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateConfig;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;

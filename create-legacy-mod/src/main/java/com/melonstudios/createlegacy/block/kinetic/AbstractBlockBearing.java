@@ -1,6 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
-import com.melonstudios.createlegacy.tileentity.AbstractTileEntityBearing;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityBearing;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;

@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

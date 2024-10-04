@@ -1,9 +1,7 @@
 package com.melonstudios.createapi.network;
 
-import com.melonstudios.createlegacy.tileentity.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.DisplayLink;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.INetworkLogger;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

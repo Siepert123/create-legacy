@@ -19,7 +19,8 @@ public class BlockWaterWheel extends AbstractBlockKinetic {
         super("water_wheel");
     }
 
-    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
+            EnumFacing.Axis.X, EnumFacing.Axis.Z);
 
     @Override
     protected BlockStateContainer createBlockState() {

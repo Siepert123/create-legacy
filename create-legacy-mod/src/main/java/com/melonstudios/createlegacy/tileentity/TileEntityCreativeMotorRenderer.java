@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.block.BlockRender;
-import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import net.minecraft.block.state.IBlockState;
 
 public class TileEntityCreativeMotorRenderer extends AbstractTileEntityKineticRenderer<TileEntityCreativeMotor> {

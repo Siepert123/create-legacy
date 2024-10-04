@@ -55,6 +55,25 @@
       "model": "create:render/half_shaft",
       "x": 90,
       "y": 270
+    },
+    "type=flywheel_n": {
+      "model": "create:render/flywheel",
+      "x": 90
+    },
+    "type=flywheel_e": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 90
+    },
+    "type=flywheel_s": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 180
+    },
+    "type=flywheel_w": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 270
     }
   }
 }

@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.tileentity;
+package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import com.melonstudios.createlegacy.util.AnimationUtils;
 import net.minecraft.block.state.IBlockState;

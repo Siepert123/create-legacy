@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
+
 public class TileEntityHandCrankRenderer extends AbstractTileEntityKineticRenderer<TileEntityHandCrank> {
     @Override
     public void render(TileEntityHandCrank te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

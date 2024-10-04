@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.block.kinetic.BlockNetworkInspector;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import net.minecraft.util.EnumFacing;

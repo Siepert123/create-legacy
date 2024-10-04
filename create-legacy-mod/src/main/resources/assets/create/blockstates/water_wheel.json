@@ -6,9 +6,6 @@
     },
     "axis=z": {
       "model": "create:water_wheel"
-    },
-    "axis=y": {
-      "model": "create:water_wheel"
     }
   }
 }

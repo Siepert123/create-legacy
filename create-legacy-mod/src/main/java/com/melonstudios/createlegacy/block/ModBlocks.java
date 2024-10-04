@@ -35,6 +35,7 @@ public final class ModBlocks {
 
     public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
+    public static final Block FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);
     public static final Block CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
     public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
@@ -74,34 +75,25 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityShaft.class, tileEntityResource("shaft"));
-        dispatchTESR(TileEntityShaft.class, new TileEntityShaftRenderer());
-        GameRegistry.registerTileEntity(TileEntityCog.class, tileEntityResource("cog"));
-        dispatchTESR(TileEntityCog.class, new TileEntityCogRenderer());
+        registerTE(TileEntityShaft.class, "shaft", new TileEntityShaftRenderer());
+        registerTE(TileEntityCog.class, "cog", new TileEntityCogRenderer());
 
-        GameRegistry.registerTileEntity(TileEntitySaw.class, tileEntityResource("saw"));
-        dispatchTESR(TileEntitySaw.class, new TileEntitySawRenderer());
-        GameRegistry.registerTileEntity(TileEntityBearing.class, tileEntityResource("bearing"));
-        dispatchTESR(TileEntityBearing.class, new TileEntityBearingRenderer());
+        registerTE(TileEntitySaw.class, "saw", new TileEntitySawRenderer());
+        registerTE(TileEntityBearing.class, "bearing", new TileEntityBearingRenderer());
 
         registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());
 
         registerTE(TileEntityHandCrank.class, "handcrank", new TileEntityHandCrankRenderer());
         registerTE(TileEntityWaterWheel.class, "water_wheel", new TileEntityWaterWheelRenderer());
+        registerTE(TileEntityFlywheel.class, "flywheel", new TileEntityFlywheelRenderer());
         registerTE(TileEntityCreativeMotor.class, "creative_motor", new TileEntityCreativeMotorRenderer());
 
 
         registerTE(TileEntityChigwanker.class, "chigwanker", null);
     }
     private static void registerTE(Class<? extends TileEntity> te, String registry, @Nullable TileEntitySpecialRenderer<?> renderer) {
-        GameRegistry.registerTileEntity(te, tileEntityResource(registry));
-        if (renderer != null) dispatchTESR(te, renderer);
-    }
-    private static ResourceLocation tileEntityResource(String name) {
-        return new ResourceLocation("create", name);
-    }
-    private static void dispatchTESR(Class<? extends TileEntity> te, TileEntitySpecialRenderer<?> renderer) {
-        TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
+        GameRegistry.registerTileEntity(te, new ResourceLocation("create", registry));
+        if (renderer != null) TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
     }
 }

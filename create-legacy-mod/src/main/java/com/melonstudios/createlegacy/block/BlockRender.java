@@ -35,7 +35,12 @@ public class BlockRender extends Block {
         SHAFT_N("shaft_n"),
         SHAFT_E("shaft_e"),
         SHAFT_S("shaft_s"),
-        SHAFT_W("shaft_w");
+        SHAFT_W("shaft_w"),
+
+        FLYWHEEL_N("flywheel_n"),
+        FLYWHEEL_E("flywheel_e"),
+        FLYWHEEL_S("flywheel_s"),
+        FLYWHEEL_W("flywheel_w");
 
         private final String name;
         private final int id;

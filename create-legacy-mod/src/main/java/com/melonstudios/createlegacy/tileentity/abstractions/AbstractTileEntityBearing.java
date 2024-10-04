@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.tileentity;
+package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
@@ -12,10 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 
-import static com.melonstudios.createlegacy.block.BlockRenderBearingAnchor.*;
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.ACTIVE;
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.FACING;
 
@@ -59,10 +56,6 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
 
         previousAngle %= 360;
         angle %= 360;
-
-        if (speed() == 0.0f) {
-            if (getAssemblyMode() == EnumContraptionAssemblyMode.DISASSEMBLE_ALWAYS) disassemble();
-        }
     }
 
     public void delete() {

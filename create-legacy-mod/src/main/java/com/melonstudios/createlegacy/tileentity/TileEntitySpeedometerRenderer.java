@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockNetworkInspector;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 

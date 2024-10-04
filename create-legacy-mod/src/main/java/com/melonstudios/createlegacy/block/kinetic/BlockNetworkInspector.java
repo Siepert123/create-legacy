@@ -26,7 +26,8 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
         super("network_inspector");
     }
 
-    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,
+            EnumFacing.Axis.X, EnumFacing.Axis.Z);
     public static final PropertyBool ALT = PropertyBool.create("alt");
 
     @Nullable

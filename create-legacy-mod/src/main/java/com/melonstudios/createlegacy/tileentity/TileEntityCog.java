@@ -2,8 +2,8 @@ package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 

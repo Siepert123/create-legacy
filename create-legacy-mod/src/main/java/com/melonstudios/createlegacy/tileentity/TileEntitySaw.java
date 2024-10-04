@@ -1,6 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.recipe.SawingRecipes;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
