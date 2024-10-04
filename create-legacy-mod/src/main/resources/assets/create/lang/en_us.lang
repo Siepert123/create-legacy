@@ -60,6 +60,8 @@ tile.create.stressometer.name=Stressometer
 
 tile.create.handcrank.name=Handcrank
 tile.create.water_wheel.name=Water Wheel
+tile.create.furnace_engine.name=Furnace Engine
+tile.create.flywheel.name=Flywheel
 tile.create.creative_motor.name=Creative Motor
 
 tile.create.saw.name=Mechanical Saw
