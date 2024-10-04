@@ -4,7 +4,7 @@
     "type":"ctm",
     "layer":"SOLID",
     "textures":[
-      "create:block/casing/casing_train_side_ctm"
+      "create:block/casing/casing_train_ctm"
     ]
   }
 }

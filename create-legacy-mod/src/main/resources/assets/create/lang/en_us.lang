@@ -43,10 +43,10 @@ tile.create.block_andesite_alloy.name=Block of Andesite Alloy
 tile.create.block_copper.name=Block of Copper
 tile.create.block_zinc.name=Block of Zinc
 tile.create.block_brass.name=Block of Brass
-tile.create.casing_andesite=Andesite Casing
-tile.create.casing_copper=Copper Casing
-tile.create.casing_brass=Brass Casing
-tile.create.casing_train=Train Casing
+tile.create.casing_andesite.name=Andesite Casing
+tile.create.casing_copper.name=Copper Casing
+tile.create.casing_brass.name=Brass Casing
+tile.create.casing_train.name=Train Casing
 
 #Kinetics
 tile.create.chigwanker.name=Mechindustrial Chigwanker

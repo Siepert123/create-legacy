@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_column",
   "textures": {
-    "all": "create:block/casing/casing_train"
+    "end": "create:block/casing/casing_train",
+    "side": "create:block/casing/casing_train_side"
   }
 }
