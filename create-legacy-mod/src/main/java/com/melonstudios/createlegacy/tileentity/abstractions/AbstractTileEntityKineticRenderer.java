@@ -95,6 +95,10 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         GlStateManager.popMatrix();
     }
 
+    protected void renderModel(double x, double y, double z, IBlockState state) {
+        rotateModel(0.0f, x, y, z, EnumFacing.Axis.Y, state);
+    }
+
     protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks, float markiplier, boolean addOffset) {
         if (te.speed() == 0) return te.shifted(axis) && addOffset ? 22.5f : 0;
         long time = te.getWorld().getTotalWorldTime();

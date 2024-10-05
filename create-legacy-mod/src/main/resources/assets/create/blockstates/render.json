@@ -74,6 +74,13 @@
       "model": "create:render/flywheel",
       "x": 90,
       "y": 270
+    },
+    "type=press_x": {
+      "model": "create:render/press",
+      "y": 90
+    },
+    "type=press_z": {
+      "model": "create:render/press"
     }
   }
 }

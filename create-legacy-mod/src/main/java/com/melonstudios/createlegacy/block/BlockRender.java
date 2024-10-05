@@ -40,7 +40,10 @@ public class BlockRender extends Block {
         FLYWHEEL_N("flywheel_n"),
         FLYWHEEL_E("flywheel_e"),
         FLYWHEEL_S("flywheel_s"),
-        FLYWHEEL_W("flywheel_w");
+        FLYWHEEL_W("flywheel_w"),
+
+        PRESS_X("press_x"),
+        PRESS_Z("press_z");
 
         private final String name;
         private final int id;

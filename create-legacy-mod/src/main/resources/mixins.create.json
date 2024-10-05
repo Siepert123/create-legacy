@@ -8,6 +8,10 @@
   "mixins": [
     "MixinEntityMinecart"
   ],
-  "client": [],
-  "server": []
+  "client": [
+    "MixinEntityMinecart"
+  ],
+  "server": [
+    "MixinEntityMinecart"
+  ]
 }

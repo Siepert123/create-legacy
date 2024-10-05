@@ -31,7 +31,10 @@ public final class ModBlocks {
     public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());
     public static final Block BEARING = registerBlockWithItem(new BlockBearing());
+    public static final Block PRESS = registerBlockWithItem(new BlockPress());
     public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
+
+    public static final Block DEPOT = registerBlockWithItem(new BlockDepot());
 
     public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
@@ -80,6 +83,9 @@ public final class ModBlocks {
 
         registerTE(TileEntitySaw.class, "saw", new TileEntitySawRenderer());
         registerTE(TileEntityBearing.class, "bearing", new TileEntityBearingRenderer());
+        registerTE(TileEntityPress.class, "press", new TileEntityPressRenderer());
+
+        registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
 
         registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());
