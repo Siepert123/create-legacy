@@ -1,0 +1,8 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.melonstudios.createlegacy.mixin",
+  "refmap": "refmap.create.json",
+  "mixins": [],
+  "client": [],
+  "server": []
+}

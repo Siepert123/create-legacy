@@ -1,10 +1,12 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
         mavenCentral()
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
         
@@ -28,6 +30,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             property 'forge.logging.console.level', 'debug'
+            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
 
         server {
@@ -35,11 +38,13 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             property 'forge.logging.console.level', 'debug'
+            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
     }
 }
 
 repositories {
+    maven { url = 'https://repo.spongepowered.org/maven' }
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
@@ -73,6 +78,11 @@ repositories {
     }
 }
 
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
+
 dependencies {
     compileOnly project(':create-annotations')
     annotationProcessor project(':create-annotations')
@@ -91,7 +101,14 @@ dependencies {
     compileOnly fg.deobf('gregtech:gregtech:2.8.10-beta:dev') // Newest 1.12.2 GTCEu version
     // compile against hwyla
     compileOnly fg.deobf('curse.maven:hwyla-253449:2568751') // Newest 1.12.2 hwyla version I found on CF
+    embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
+        exclude module: 'guava'
+        exclude module: 'commons-io'
+        exclude module: 'gson'
+    }
 }
+
+
 
 jar {
     manifest {
