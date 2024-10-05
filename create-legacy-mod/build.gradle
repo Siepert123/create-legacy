@@ -101,14 +101,13 @@ dependencies {
     compileOnly fg.deobf('gregtech:gregtech:2.8.10-beta:dev') // Newest 1.12.2 GTCEu version
     // compile against hwyla
     compileOnly fg.deobf('curse.maven:hwyla-253449:2568751') // Newest 1.12.2 hwyla version I found on CF
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
 }
-
-
 
 jar {
     manifest {
@@ -142,5 +141,6 @@ publishing {
 sourceSets {
     main {
         output.resourcesDir = output.classesDir
+        ext.refMap = "mixins.create.refmap.json"
     }
 }

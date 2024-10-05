@@ -1,8 +1,13 @@
 {
+  "required": true,
+  "minVersion": "0.8.3",
   "compatibilityLevel": "JAVA_8",
   "package": "com.melonstudios.createlegacy.mixin",
-  "refmap": "refmap.create.json",
-  "mixins": [],
+  "refmap": "mixins.create.refmap.json",
+  "target": "@Env(DEFAULT)",
+  "mixins": [
+    "MixinEntityMinecart"
+  ],
   "client": [],
   "server": []
 }
