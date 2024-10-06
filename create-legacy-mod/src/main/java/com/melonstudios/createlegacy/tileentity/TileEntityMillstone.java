@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
 import com.melonstudios.createlegacy.recipe.MillingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.createlegacy.util.ModSoundEvents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ISidedInventory;
@@ -79,7 +80,7 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
             if (renderParticles()) {
                 if (world.getTotalWorldTime() % 10 == 0) {
                     world.playSound(null, pos,
-                            SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS,
+                            ModSoundEvents.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS,
                             1.0f, 1.0f);
                 }
             }

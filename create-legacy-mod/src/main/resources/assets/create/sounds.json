@@ -1,5 +1,5 @@
 {
-  "item.sandpaper.usage": {
+  "item.sandpaper.used": {
     "category": "players",
     "subtitle": "subtitle.item.sandpaper.used",
     "sounds": [
@@ -11,7 +11,7 @@
       }
     ]
   },
-  "block.cogwheel.ambient": {
+  "block.cog.ambient": {
     "category": "blocks",
     "subtitle": "subtitle.block.cogwheel.ambient",
     "sounds": [
@@ -20,7 +20,7 @@
       }
     ]
   },
-  "block.cogwheel.ambient2": {
+  "block.cog.ambient2": {
     "category": "blocks",
     "subtitle": "subtitle.block.cogwheel.ambient",
     "sounds": [
@@ -32,16 +32,16 @@
       }
     ]
   },
-  "block.press.activation": {
+  "block.press.activate": {
     "category": "blocks",
-    "subtitle": "subtitle.block.press.activation",
+    "subtitle": "subtitle.block.press.activate",
     "sounds": [
       {
         "name": "minecraft:random/anvil_land"
       }
     ]
   },
-  "item.wrench.usage.rotate": {
+  "item.wrench.used.rotate": {
     "category": "blocks",
     "subtitle": "subtitle.item.wrench.used",
     "sounds": [
@@ -62,7 +62,7 @@
       }
     ]
   },
-  "item.wrench.usage.dismantle": {
+  "item.wrench.used.dismantle": {
     "category": "blocks",
     "sounds": [
       {
