@@ -53,8 +53,9 @@
 			}
 		},
 		{
-			"from": [2, 1, 2],
+			"from": [2, 2, 2],
 			"to": [14, 6, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1, 0]},
 			"faces": {
 				"up": {"uv": [0, 0, 6, 6], "rotation": 270, "texture": "#5"},
 				"down": {"uv": [2, 2, 14, 14], "texture": "#0"}

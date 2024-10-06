@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.item;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.recipe.SandingRecipes;
 import com.melonstudios.createlegacy.schematic.SchematicEncodingSystem;
+import com.melonstudios.createlegacy.util.ModSoundEvents;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -57,7 +59,10 @@ public class ItemSandpaper extends Item {
 
                 otherStack.shrink(1);
                 stack.damageItem(1, playerIn);
-            }
+
+                playerIn.getCooldownTracker().setCooldown(ModItems.SANDPAPER, 20);
+            } else worldIn.playSound(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ,
+                    ModSoundEvents.ITEM_SANDPAPER_USED, SoundCategory.NEUTRAL, 1.0f, 0.8f + (worldIn.rand.nextFloat() / 2.5f));
 
             return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
         }

@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.block.kinetic.BlockPress;
 import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.ModSoundEvents;
 import com.melonstudios.createlegacy.util.RenderUtils;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
@@ -55,6 +57,13 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
         previousProgress = progress;
         progress += Math.abs(n);
     }
+
+    protected void playPressingSFX() {
+        world.playSound(null, pos,
+                ModSoundEvents.BLOCK_PRESS_ACTIVATE,
+                SoundCategory.BLOCKS, 1.0f, speed() / 64f);
+    }
+
     final static private boolean ENABLE_DEPOT = false;
     @Override
     protected void tick() {
@@ -81,10 +90,12 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                             if (existingResult.getCount() < 64) {
                                 existingResult.setCount(1+existingResult.getCount());
                                 input.shrink(1);
+                                playPressingSFX();
                             }
                         } else if (existingResult.isEmpty()) {
                             depot.setOutput(result);
                             input.shrink(1);
+                            playPressingSFX();
                         }
                     } else {
                         ItemStack input = getItemOnDepotOrGround();
@@ -96,6 +107,8 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
 
                         world.spawnEntity(item);
                         input.shrink(1);
+
+                        playPressingSFX();
                     }
                 }
                 PacketUpdatePress.sendToPlayersNearby(this, 32);
