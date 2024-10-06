@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.tileentity.TileEntityDepot;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -44,5 +45,17 @@ public class BlockDepot extends AbstractBlockKinetic {
         }
 
         return false;
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        TileEntityDepot depot = (TileEntityDepot) worldIn.getTileEntity(pos);
+        if (depot != null) {
+            EntityItem item1 = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), depot.getStack());
+            EntityItem item2 = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), depot.getOutput());
+            worldIn.spawnEntity(item1);
+            worldIn.spawnEntity(item2);
+        }
+        super.breakBlock(worldIn, pos, state);
     }
 }

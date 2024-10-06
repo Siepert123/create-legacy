@@ -1,8 +1,10 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockPress;
+import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.RenderUtils;
@@ -38,44 +40,67 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     public int getProgress() {
         return progress;
     }
+    public void setProgress(int n) {
+        this.progress = n;
+    }
+    public int getPreviousProgress() {
+        return previousProgress;
+    }
+    public void setPreviousProgress(int n) {
+        previousProgress = n;
+    }
 
+    boolean b = false;
+    private void increaseProgress(int n) {
+        previousProgress = progress;
+        progress += Math.abs(n);
+    }
+    final static private boolean ENABLE_DEPOT = false;
     @Override
     protected void tick() {
-        previousProgress = progress;
-        if (hasRecipe()) {
-            if (progress < maxProgress) progress += Math.round(speed());
-            else {
-                progress = 0;
-            }
-            if (progress > maxProgress / 2) {
-                TileEntity entity = world.getTileEntity(pos.down(2));
-                if (entity instanceof TileEntityDepot) {
-                    TileEntityDepot depot = (TileEntityDepot) entity;
-
-                    ItemStack input = depot.getStack();
-                    ItemStack existingResult = depot.getOutput();
-
-                    ItemStack result = PressingRecipes.getResult(input).copy();
-                    if (result.isItemEqual(existingResult)) {
-                        if (result.getCount() + existingResult.getCount() <= 64) {
-                            existingResult.setCount(existingResult.getCount() + result.getCount());
-                        }
-                    } else if (existingResult.isEmpty()) {
-                        depot.setOutput(result);
-                    }
-                } else {
-                    ItemStack input = getItemOnDepotOrGround();
-
-                    EntityItem item = new EntityItem(world,
-                            pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
-                            PressingRecipes.getResult(input).copy());
-                    item.setVelocity(0, 0, 0);
-
-                    world.spawnEntity(item);
-                    input.shrink(1);
+        if (!world.isRemote) {
+            if (hasRecipe() || b) {
+                markDirty();
+                if (progress < maxProgress) increaseProgress(Math.round(speed()));
+                else {
+                    previousProgress = 0;
+                    progress = 0;
+                    b = false;
                 }
-            }
-        } else progress = 0;
+                if (progress > maxProgress / 2 && !b) {
+                    b = true;
+                    TileEntity entity = world.getTileEntity(pos.down(2));
+                    if (entity instanceof TileEntityDepot && ENABLE_DEPOT) {
+                        TileEntityDepot depot = (TileEntityDepot) entity;
+
+                        ItemStack input = depot.getStack();
+                        ItemStack existingResult = depot.getOutput();
+
+                        ItemStack result = PressingRecipes.getResult(input).copy();
+                        if (existingResult.isItemEqual(result)) {
+                            if (existingResult.getCount() < 64) {
+                                existingResult.setCount(1+existingResult.getCount());
+                                input.shrink(1);
+                            }
+                        } else if (existingResult.isEmpty()) {
+                            depot.setOutput(result);
+                            input.shrink(1);
+                        }
+                    } else {
+                        ItemStack input = getItemOnDepotOrGround();
+
+                        EntityItem item = new EntityItem(world,
+                                pos.getX() + 0.5, pos.getY() - 1, pos.getZ() + 0.5,
+                                PressingRecipes.getResult(input).copy());
+                        item.setVelocity(0, 0, 0);
+
+                        world.spawnEntity(item);
+                        input.shrink(1);
+                    }
+                }
+                PacketUpdatePress.sendToPlayersNearby(this, 32);
+            } else previousProgress = progress;
+        }
     }
 
     protected final IBlockState depotBlock = ModBlocks.DEPOT.getDefaultState();

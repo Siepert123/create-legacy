@@ -1,14 +1,23 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.network.PacketRequestUpdateDepot;
+import com.melonstudios.createlegacy.network.PacketUpdateDepot;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class TileEntityDepot extends TileEntity implements ISidedInventory {
+import java.util.List;
+
+public class TileEntityDepot extends TileEntity implements ISidedInventory, ITickable {
     protected ItemStack stack = ItemStack.EMPTY;
     protected ItemStack output = ItemStack.EMPTY;
     public ItemStack getStack() {
@@ -19,9 +28,11 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     }
     public void setStack(ItemStack stack) {
         this.stack = stack;
+        markDirty();
     }
     public void setOutput(ItemStack stack) {
         output = stack;
+        markDirty();
     }
 
     @Override
@@ -66,12 +77,15 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
 
     @Override
     public ItemStack getStackInSlot(int index) {
+        markDirty();
         return index == 0 ? stack : output;
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
+        markDirty();
         return index == 0 ? stack.splitStack(count) : output.splitStack(count);
+
     }
 
     @Override
@@ -79,6 +93,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
         ItemStack stack = index == 0 ? this.stack : output;
         if (index == 0) this.stack = ItemStack.EMPTY;
         else this.output = ItemStack.EMPTY;
+        markDirty();
         return stack;
     }
 
@@ -86,6 +101,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     public void setInventorySlotContents(int index, ItemStack stack) {
         if (index == 0) this.stack = stack;
         else this.output = stack;
+        markDirty();
     }
 
     @Override
@@ -129,9 +145,16 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     }
 
     @Override
+    public void markDirty() {
+        super.markDirty();
+        notify = true;
+    }
+
+    @Override
     public void clear() {
         setStack(ItemStack.EMPTY);
         setOutput(ItemStack.EMPTY);
+        markDirty();
     }
 
     @Override
@@ -157,5 +180,28 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
         return index == 1;
+    }
+    protected boolean notify = false;
+    @Override
+    public void update() {
+        if (!world.isRemote && notify) {
+            notify = false;
+            List<EntityPlayer> players =
+                    FMLCommonHandler.instance().getMinecraftServerInstance()
+                            .getWorld(world.provider.getDimension())
+                            .getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-16, -16, -16),
+                                    pos.add(16, 16, 16)));
+
+            for (EntityPlayer player : players) {
+                if (player instanceof EntityPlayerMP) {
+                    CreateLegacy.networkWrapper.sendTo(new PacketUpdateDepot(this), (EntityPlayerMP) player);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onLoad() {
+        notify = true;
     }
 }

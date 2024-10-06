@@ -1,6 +1,9 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.network.PacketRequestUpdateDepot;
+import com.melonstudios.createlegacy.network.PacketUpdateDepot;
+import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.proxy.CommonProxy;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
@@ -16,7 +19,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
@@ -32,6 +38,8 @@ public final class CreateLegacy {
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
     public static final CreativeTabs TAB_DECORATIONS = new DecorationsTab();
 
+    public static SimpleNetworkWrapper networkWrapper;
+
     @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
         clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
     public static CommonProxy proxy;
@@ -45,8 +53,29 @@ public final class CreateLegacy {
         proxy.setItemModel(item);
     }
 
+    private static int networkId = -1;
+    private static int getNetworkDiscriminator() {
+        networkId++;
+        return networkId;
+    }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create");
+        networkWrapper.registerMessage(
+                new PacketUpdateDepot.Handler(),
+                PacketUpdateDepot.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
+        networkWrapper.registerMessage(
+                new PacketRequestUpdateDepot.Handler(),
+                PacketRequestUpdateDepot.class,
+                getNetworkDiscriminator(), Side.SERVER
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdatePress.Handler(),
+                PacketUpdatePress.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
         SchematicSaveHelper.makeSchematicsFolder();
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);

@@ -7,14 +7,25 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntityDepot> {
+    public TileEntityDepotRenderer() {
+        this.rendererDispatcher = TileEntityRendererDispatcher.instance;
+    }
+
     @Override
     public void render(TileEntityDepot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        String s = String.format("%s & %s", te.getStack(), te.getOutput());
+
+        setLightmapDisabled(true);
+        drawNameplate(te, s, x, y, z, 16);
+        setLightmapDisabled(false);
 
         renderItem(te, x, y, z);
     }
@@ -37,7 +48,22 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
         }
+        GlStateManager.popMatrix();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
 
+
+
+        GlStateManager.pushMatrix();
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
+        GlStateManager.enableBlend();
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x + 0.5, y + (15f / 16f), z + 0.25 + 0.0625f);
+        GlStateManager.rotate(90, 1, 0, 0);
         GlStateManager.translate(0, 0, 0.25);
 
         if (!te.getOutput().isEmpty()) {
