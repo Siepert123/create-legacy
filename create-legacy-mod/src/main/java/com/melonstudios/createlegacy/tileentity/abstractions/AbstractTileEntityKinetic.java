@@ -7,6 +7,8 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -206,5 +208,19 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     protected boolean enforceNonInversion() {
         return false;
+    }
+
+    protected static void saveItemStack(NBTTagCompound father, ItemStack stack, String registry) {
+        if (!stack.isEmpty() && father != null) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            stack.writeToNBT(nbt);
+            father.setTag(registry, nbt);
+        }
+    }
+    protected static ItemStack readItemStack(NBTTagCompound father, String registry) {
+        if (father.hasKey(registry)) {
+            return new ItemStack(father.getCompoundTag(registry));
+        }
+        return ItemStack.EMPTY;
     }
 }

@@ -43,7 +43,9 @@ public class BlockRender extends Block {
         FLYWHEEL_W("flywheel_w"),
 
         PRESS_X("press_x"),
-        PRESS_Z("press_z");
+        PRESS_Z("press_z"),
+
+        MILLSTONE("millstone");
 
         private final String name;
         private final int id;

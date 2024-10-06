@@ -42,7 +42,7 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
 
         if (world.getTotalWorldTime() % 20 == 0) {
             world.playSound(null, pos.offset(facing().rotateY()).getX() + 0.5, pos.offset(facing().rotateY()).getY() + 0.5, pos.offset(facing().rotateY()).getZ() + 0.5,
-                    SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.25f, 1.0f);
+                    SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.01f, 1.0f);
         }
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
                 pos.offset(facing().rotateY()).getX() + world.rand.nextFloat(),

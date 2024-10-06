@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy;
 import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.network.PacketRequestUpdateDepot;
 import com.melonstudios.createlegacy.network.PacketUpdateDepot;
+import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
 import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.proxy.CommonProxy;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
@@ -74,6 +75,11 @@ public final class CreateLegacy {
         networkWrapper.registerMessage(
                 new PacketUpdatePress.Handler(),
                 PacketUpdatePress.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateMillstone.Handler(),
+                PacketUpdateMillstone.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
         SchematicSaveHelper.makeSchematicsFolder();

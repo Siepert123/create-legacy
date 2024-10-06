@@ -81,6 +81,9 @@
     },
     "type=press_z": {
       "model": "create:render/press"
+    },
+    "type=millstone": {
+      "model": "create:render/millstone"
     }
   }
 }
