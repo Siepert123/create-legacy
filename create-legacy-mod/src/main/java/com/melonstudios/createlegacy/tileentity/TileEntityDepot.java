@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +11,18 @@ import net.minecraft.util.EnumFacing;
 public class TileEntityDepot extends TileEntity implements ISidedInventory {
     protected ItemStack stack = ItemStack.EMPTY;
     protected ItemStack output = ItemStack.EMPTY;
-
+    public ItemStack getStack() {
+        return stack;
+    }
+    public ItemStack getOutput() {
+        return output;
+    }
+    public void setStack(ItemStack stack) {
+        this.stack = stack;
+    }
+    public void setOutput(ItemStack stack) {
+        output = stack;
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -43,23 +55,8 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     }
 
     @Override
-    public int[] getSlotsForFace(EnumFacing side) {
-        return new int[]{0, 1};
-    }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-        return index == 0;
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-        return index == 1;
-    }
-
-    @Override
     public int getSizeInventory() {
-        return 2;
+        return 64;
     }
 
     @Override
@@ -79,14 +76,10 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        if (index == 0) {
-            ItemStack toReturn = stack;
-            stack = ItemStack.EMPTY;
-            return toReturn;
-        }
-        ItemStack toReturn = output;
-        output = ItemStack.EMPTY;
-        return toReturn;
+        ItemStack stack = index == 0 ? this.stack : output;
+        if (index == 0) this.stack = ItemStack.EMPTY;
+        else this.output = ItemStack.EMPTY;
+        return stack;
     }
 
     @Override
@@ -137,8 +130,8 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
 
     @Override
     public void clear() {
-        stack = ItemStack.EMPTY;
-        output = ItemStack.EMPTY;
+        setStack(ItemStack.EMPTY);
+        setOutput(ItemStack.EMPTY);
     }
 
     @Override
@@ -149,5 +142,20 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory {
     @Override
     public boolean hasCustomName() {
         return false;
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+        return new int[] {0, 1};
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+        return index == 0;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return index == 1;
     }
 }

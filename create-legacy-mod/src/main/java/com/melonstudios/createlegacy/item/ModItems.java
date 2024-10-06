@@ -53,5 +53,7 @@ public final class ModItems {
                 "schematic/writeable");
         CreateLegacy.setItemModel(SCHEMATIC, 2,
                 "schematic/written");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.DEPOT));
     }
 }

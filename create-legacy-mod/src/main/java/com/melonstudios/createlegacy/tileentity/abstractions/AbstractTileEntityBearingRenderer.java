@@ -1,6 +1,6 @@
 package com.melonstudios.createlegacy.tileentity.abstractions;
 
-import com.melonstudios.createlegacy.util.AnimationUtils;
+import com.melonstudios.createlegacy.util.RenderUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -16,11 +16,11 @@ public abstract class AbstractTileEntityBearingRenderer<T extends AbstractTileEn
         spinModel(te, x, y, z, partialTicks, axis, shaftPart);
         if (te.shouldRenderSpinning()) {
             IBlockState structure = te.getStructure();
-            rotateModel(AnimationUtils.smoothen(te.getPreviousAngle(), te.getAngle(), partialTicks), x, y, z, axis, bearingPart);
+            rotateModel(RenderUtils.smoothen(te.getPreviousAngle(), te.getAngle(), partialTicks), x, y, z, axis, bearingPart);
             if (structure != null) {
                 if (structure.getBlock() != Blocks.AIR) {
                     double[] place = offsetPos(x, y, z, te.facing());
-                    rotateModel(AnimationUtils.smoothen(te.getPreviousAngle(), te.getAngle(), partialTicks), place[0], place[1], place[2], axis, structure);
+                    rotateModel(RenderUtils.smoothen(te.getPreviousAngle(), te.getAngle(), partialTicks), place[0], place[1], place[2], axis, structure);
                 }
             }
         }

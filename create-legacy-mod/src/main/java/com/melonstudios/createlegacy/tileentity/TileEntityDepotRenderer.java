@@ -1,10 +1,55 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.util.RenderUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.ForgeHooksClient;
+import org.lwjgl.opengl.GL11;
 
 public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntityDepot> {
     @Override
     public void render(TileEntityDepot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+
+        renderItem(te, x, y, z);
+    }
+
+    protected void renderItem(TileEntityDepot te, double x, double y, double z) {
+        GlStateManager.pushMatrix();
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
+        GlStateManager.enableBlend();
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x + 0.5, y + (15f / 16f), z + 0.25 + 0.0625f);
+        GlStateManager.rotate(90, 1, 0, 0);
+
+        if (!te.getStack().isEmpty()) {
+            IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
+            model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
+
+            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
+        }
+
+        GlStateManager.translate(0, 0, 0.25);
+
+        if (!te.getOutput().isEmpty()) {
+            IBakedModel model2 = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
+            model2 = ForgeHooksClient.handleCameraTransforms(model2, ItemCameraTransforms.TransformType.GROUND, false);
+
+            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model2);
+        }
+        GlStateManager.popMatrix();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
 }

@@ -5,7 +5,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockPress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AnimationUtils;
+import com.melonstudios.createlegacy.util.RenderUtils;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -46,7 +46,34 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
             if (progress < maxProgress) progress += Math.round(speed());
             else {
                 progress = 0;
+            }
+            if (progress > maxProgress / 2) {
+                TileEntity entity = world.getTileEntity(pos.down(2));
+                if (entity instanceof TileEntityDepot) {
+                    TileEntityDepot depot = (TileEntityDepot) entity;
 
+                    ItemStack input = depot.getStack();
+                    ItemStack existingResult = depot.getOutput();
+
+                    ItemStack result = PressingRecipes.getResult(input).copy();
+                    if (result.isItemEqual(existingResult)) {
+                        if (result.getCount() + existingResult.getCount() <= 64) {
+                            existingResult.setCount(existingResult.getCount() + result.getCount());
+                        }
+                    } else if (existingResult.isEmpty()) {
+                        depot.setOutput(result);
+                    }
+                } else {
+                    ItemStack input = getItemOnDepotOrGround();
+
+                    EntityItem item = new EntityItem(world,
+                            pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                            PressingRecipes.getResult(input).copy());
+                    item.setVelocity(0, 0, 0);
+
+                    world.spawnEntity(item);
+                    input.shrink(1);
+                }
             }
         } else progress = 0;
     }
@@ -101,7 +128,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     }
     protected float convertProgress(int progress) {
         if (progress > maxProgress / 2) {
-            return progress / (maxProgress / 2f) - progress / (maxProgress / 2f) * -1;
+            return progress / (maxProgress / 2f) -2;
         }
         return progress / (maxProgress / 2f) * -1;
     }
@@ -113,7 +140,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     }
 
     public double getPressYOffset(float part) {
-        return AnimationUtils.smoothen(getPreviousYOffset(),
+        return RenderUtils.smoothen(getPreviousYOffset(),
                 getCurrentYOffset(), part);
     }
 
