@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -31,6 +32,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public final class BlockMetal extends Block implements IMetaName {
     public BlockMetal() {
         super(Material.IRON);
+
+        setSoundType(SoundType.METAL);
 
         setRegistryName("metal");
         setUnlocalizedName("create.metal");
