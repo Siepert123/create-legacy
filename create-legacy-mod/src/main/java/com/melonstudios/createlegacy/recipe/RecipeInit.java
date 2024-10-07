@@ -98,6 +98,58 @@ public final class RecipeInit {
                 RecipeEntry.get(new ItemStack(Items.FLINT, 1), .25f));
         MillingRecipes.addRecipe(new ItemStack(Blocks.GRAVEL, 1), 2.5f,
                 RecipeEntry.get(new ItemStack(Items.FLINT, 1)));
+        for (int i = 0; i < 16; i++) {
+            MillingRecipes.addRecipe(new ItemStack(Blocks.WOOL, 1, i), 0.25f,
+                    RecipeEntry.get(new ItemStack(Items.STRING, 2)),
+                    RecipeEntry.get(new ItemStack(Items.STRING), 0.75f),
+                    RecipeEntry.get(new ItemStack(Items.STRING), 0.25f));
+        }
+        MillingRecipes.addRecipe(new ItemStack(Blocks.YELLOW_FLOWER, 1, 0), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 11)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 0), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 1)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 1), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 12)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 2), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 13)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 3), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 7)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 4), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 1)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 5), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 14)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 6), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 7)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 7), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 9)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.RED_FLOWER, 1, 8), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 7)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.DOUBLE_PLANT, 1, 0), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 2, 11)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.DOUBLE_PLANT, 1, 1), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 2, 9)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.DOUBLE_PLANT, 1, 4), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 2, 1)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 10), 0.5f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.DOUBLE_PLANT, 1, 5), 0.5f,
+                RecipeEntry.get(new ItemStack(Items.DYE, 2, 9)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2)),
+                RecipeEntry.get(new ItemStack(Items.DYE, 1, 2), 0.5f));
 
         FurnaceRecipes.instance().addSmeltingRecipe(
                 new ItemStack(ModBlocks.ORE, 1, 0),
