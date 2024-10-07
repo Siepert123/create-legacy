@@ -1,6 +1,6 @@
 package com.melonstudios.createapi.network;
 
-import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createapi.kinetic.IKineticTileEntity;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,22 +17,22 @@ public final class NetworkContext {
         return world;
     }
 
-    private Map<AbstractTileEntityKinetic, Boolean> map = new HashMap<>();
+    private Map<IKineticTileEntity, Boolean> map = new HashMap<>();
 
-    public boolean checked (AbstractTileEntityKinetic te) {
+    public boolean checked (IKineticTileEntity te) {
         return map.containsKey(te);
     }
     public boolean checked(BlockPos pos) {
-        for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
+        for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (entry.getKey().getPos() == pos) return true;
         }
         return false;
     }
-    public boolean isInverted(AbstractTileEntityKinetic te) {
+    public boolean isInverted(IKineticTileEntity te) {
         return map.get(te);
     }
     public boolean isInverted(BlockPos pos) {
-        for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
+        for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (entry.getKey().getPos() == pos) return isInverted(entry.getKey());
         }
         return false;
@@ -67,7 +67,7 @@ public final class NetworkContext {
         consumedSU += su;
     }
 
-    public void add(AbstractTileEntityKinetic te, boolean inverted) {
+    public void add(IKineticTileEntity te, boolean inverted) {
         map.put(te, inverted);
     }
 
@@ -77,7 +77,7 @@ public final class NetworkContext {
     }
 
     private void phase1() {
-        for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
+        for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (entry.getKey().isGenerator()) {
                 addSpeed(entry.getKey().generatedRPM());
                 addSU(entry.getKey().generatedSUMarkiplier() * entry.getKey().generatedRPM());
@@ -87,7 +87,7 @@ public final class NetworkContext {
         }
     }
     private void phase2() {
-        for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
+        for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (entry.getKey().isConsumer()) {
                 consumeSU(entry.getKey().consumedStressMarkiplier() * speed());
 
@@ -96,7 +96,7 @@ public final class NetworkContext {
         }
     }
     private void phase3() {
-        for (Map.Entry<AbstractTileEntityKinetic, Boolean> entry : map.entrySet()) {
+        for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (!overstressed()) {
                 entry.getKey().updateSpeed(isInverted(entry.getKey()) ? -speed() : speed());
 

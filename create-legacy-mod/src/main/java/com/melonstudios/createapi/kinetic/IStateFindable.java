@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.tileentity.abstractions;
+package com.melonstudios.createapi.kinetic;
 
 import net.minecraft.block.state.IBlockState;
 

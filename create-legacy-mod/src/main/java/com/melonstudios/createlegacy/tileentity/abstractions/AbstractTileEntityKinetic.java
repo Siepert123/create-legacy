@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.tileentity.abstractions;
 
+import com.melonstudios.createapi.kinetic.IKineticTileEntity;
+import com.melonstudios.createapi.kinetic.IStateFindable;
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateConfig;
 import com.melonstudios.createlegacy.block.BlockRender;
@@ -21,7 +23,7 @@ import net.minecraft.util.text.TextComponentString;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class AbstractTileEntityKinetic extends TileEntity implements ITickable, IStateFindable {
+public abstract class AbstractTileEntityKinetic extends TileEntity implements ITickable, IStateFindable, IKineticTileEntity {
 
     public @Nullable BlockPos source;
     public @Nullable IBlockState sourceState;
@@ -148,7 +150,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
      * @param context network context
      * @param inverted inverted rotation?
      */
-    protected void passNetwork(AbstractTileEntityKinetic src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
+    public void passNetwork(IKineticTileEntity src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
         if (enforceNonInversion() && inverted) {
             world.playEvent(2001, pos, Block.getStateId(getState()));
             getState().getBlock().dropBlockAsItem(world, pos, getState(), 0);
@@ -162,7 +164,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         } else {
             context.add(this, inverted);
             for (EnumFacing dir : EnumFacing.VALUES) {
-                AbstractTileEntityKinetic te = getTE(pos.offset(dir));
+                IKineticTileEntity te = getTE(pos.offset(dir));
                 if (mayConnect(te, dir, dir.getOpposite())) {
                     if (getConnectionType(dir).inverts()) {
                         te.passNetwork(this, dir.getOpposite(), context, !inverted);
@@ -174,15 +176,16 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         }
     }
 
-    public final AbstractTileEntityKinetic getTE(BlockPos pos) {
+    public final IKineticTileEntity getTE(BlockPos pos) {
         TileEntity entity = world.getTileEntity(pos);
-        return entity instanceof AbstractTileEntityKinetic ? (AbstractTileEntityKinetic) entity : null;
+        return entity instanceof IKineticTileEntity ? (IKineticTileEntity) entity : null;
     }
 
     @Override
     public final IBlockState getState() {
         return world.getBlockState(pos);
     }
+
 
     private boolean updated = false;
     public final void setUpdated() {
@@ -192,7 +195,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         return updated;
     }
 
-    protected boolean mayConnect(AbstractTileEntityKinetic other, EnumFacing mySide, EnumFacing otherSide) {
+    public boolean mayConnect(IKineticTileEntity other, EnumFacing mySide, EnumFacing otherSide) {
         if (other == null) return false;
         return getConnectionType(mySide) != EnumKineticConnectionType.NONE
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));
@@ -226,7 +229,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         return ModBlocks.RENDER.getDefaultState().withProperty(BlockRender.TYPE, BlockRender.Type.fromId(id));
     }
 
-    protected boolean enforceNonInversion() {
+    public boolean enforceNonInversion() {
         return false;
     }
 
