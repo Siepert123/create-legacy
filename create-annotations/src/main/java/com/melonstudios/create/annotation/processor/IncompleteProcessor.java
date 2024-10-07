@@ -24,9 +24,9 @@ public class IncompleteProcessor extends BaseProcessor {
                 note(Arrays.toString(annotation.getEnclosedElements().toArray()));
                 Incomplete annot = element.getAnnotation(Incomplete.class);
                 if (annot.halt()) {
-                    error(annot.value());
+                    error(annot.value() + " :[" + cu.getFullQualifiedName(element, elementUtils()) + "]");
                 } else {
-                    warn(annot.value());
+                    warn(annot.value() + " :[" + cu.getFullQualifiedName(element, elementUtils()) + "]");
                 }
             }
         }
