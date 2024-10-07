@@ -61,7 +61,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     protected void playPressingSFX() {
         world.playSound(null, pos,
                 ModSoundEvents.BLOCK_PRESS_ACTIVATE,
-                SoundCategory.BLOCKS, 1.0f, speed() / 64f);
+                SoundCategory.BLOCKS, 1.0f, Math.abs(speed()) / 64f);
     }
 
     final static private boolean ENABLE_DEPOT = false;
