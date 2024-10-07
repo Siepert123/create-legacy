@@ -182,5 +182,8 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                 getCurrentYOffset(), part);
     }
 
-
+    @Override
+    public float consumedStressMarkiplier() {
+        return 16.0f;
+    }
 }

@@ -331,4 +331,9 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
     public boolean hasCustomName() {
         return false;
     }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 8.0f;
+    }
 }

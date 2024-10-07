@@ -7,4 +7,9 @@ public class TileEntityBearing extends AbstractTileEntityBearing {
     protected String namePlate() {
         return "Bearing";
     }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 4.0f;
+    }
 }
