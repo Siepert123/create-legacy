@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.recipe;
 
+import com.melonstudios.createlegacy.util.RecipeEntry;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.item.ItemStack;
 
@@ -14,40 +15,57 @@ public final class MillingRecipes {
         return INSTANCE;
     }
 
-    private final Map<ItemStack, ItemStack> recipeMap = new HashMap<>();
+    private final Map<ItemStack, RecipeEntry[]> recipesMap = new HashMap<>();
     private final Map<ItemStack, Integer> workMap = new HashMap<>();
-    public static Map<ItemStack, ItemStack> getRecipesMap() {
-        return getInstance().recipeMap;
+    public static Map<ItemStack, RecipeEntry[]> getRecipesMap() {
+        return getInstance().recipesMap;
     }
     public static Map<ItemStack, Integer> getWorkMap() {
         return getInstance().workMap;
     }
 
-    public static void addRecipe(ItemStack input, ItemStack result, float seconds) {
-        addRecipe(input, result, Math.round(seconds * 20 * 64));
+    public static void addRecipe(ItemStack input, float seconds, RecipeEntry... results) {
+        addRecipe(input, Math.round(seconds * 20f * 64f), results);
     }
-    public static void addRecipe(ItemStack input, ItemStack result, int work) {
-        getRecipesMap().put(input, result);
+    public static void addRecipe(ItemStack input, int work, RecipeEntry... results) {
+        if (results.length > 3) return;
+        if (work <= 0) return;
+        if (input.isEmpty()) return;
+        if (results.length == 0) return;
+        if (results.length == 1) {
+            results = new RecipeEntry[] {
+                    results[0], RecipeEntry.EMPTY, RecipeEntry.EMPTY
+            };
+        }
+        if (results.length == 2) {
+            results = new RecipeEntry[] {
+                    results[0], results[1], RecipeEntry.EMPTY
+            };
+        }
+        getRecipesMap().put(input, results);
         getWorkMap().put(input, work);
     }
 
-    public static boolean hasRecipe(ItemStack input) {
-        for (Map.Entry<ItemStack, ItemStack> entry : getRecipesMap().entrySet()) {
+    public static boolean hasResult(ItemStack input) {
+        for (Map.Entry<ItemStack, RecipeEntry[]> entry : getRecipesMap().entrySet()) {
             if (entry.getKey().isItemEqual(input)) return true;
         }
         return false;
     }
-
-    public static SimpleTuple<ItemStack, Integer> getResult(ItemStack input) {
-        ItemStack stack = ItemStack.EMPTY;
-        int work = 0;
-        for (Map.Entry<ItemStack, ItemStack> entry : getRecipesMap().entrySet()) {
-            if (entry.getKey().isItemEqual(input)) stack = entry.getValue().copy();
-        }
+    public static int getWork(ItemStack input) {
         for (Map.Entry<ItemStack, Integer> entry : getWorkMap().entrySet()) {
-            if (entry.getKey().isItemEqual(input)) work = entry.getValue();
+            if (entry.getKey().isItemEqual(input)) return entry.getValue();
         }
-
-        return SimpleTuple.from(stack, work);
+        return 0;
+    }
+    public static RecipeEntry[] getResults(ItemStack input) {
+        for (Map.Entry<ItemStack, RecipeEntry[]> entry : getRecipesMap().entrySet()) {
+            if (entry.getKey().isItemEqual(input)) return entry.getValue();
+        }
+        return new RecipeEntry[]{
+                RecipeEntry.get(ItemStack.EMPTY, 0.0f),
+                RecipeEntry.get(ItemStack.EMPTY, 0.0f),
+                RecipeEntry.get(ItemStack.EMPTY, 0.0f)
+        };
     }
 }

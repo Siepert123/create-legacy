@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -48,6 +49,9 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     public float speed() {
         return this.speed;
+    }
+    public int getWorkTick() {
+        return Math.round(Math.abs(speed()));
     }
     public void updateSpeed(float speed) {
         this.speed = speed;
@@ -222,5 +226,9 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
             return new ItemStack(father.getCompoundTag(registry));
         }
         return ItemStack.EMPTY;
+    }
+
+    protected void spawnItem(ItemStack stack) {
+        if (!stack.isEmpty()) world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
     }
 }

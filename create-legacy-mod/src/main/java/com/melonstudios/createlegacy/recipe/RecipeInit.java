@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.event.MetalTypesQueryEvent;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
+import com.melonstudios.createlegacy.util.RecipeEntry;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -45,7 +46,9 @@ public final class RecipeInit {
     private static String nugget(String metal) {
         return "nugget" + metal;
     }
-
+    private static String ore(String metal) {
+        return "ore" + metal;
+    }
     public static void init() {
         if (initialized) return;
         long startTime = System.currentTimeMillis();
@@ -62,7 +65,14 @@ public final class RecipeInit {
                     }
                 }
             }
-
+            if (doesOreDictNameExist(ore(metal))) {
+                if (doesOreDictNameExist(crushed(metal))) {
+                    for (ItemStack stack : OreDictionary.getOres(ore(metal))) {
+                        ItemStack crushed = OreDictionary.getOres(crushed(metal)).get(0).copy();
+                        //Crushing
+                    }
+                }
+            }
             if (doesOreDictNameExist(crushed(metal))) {
                 if (doesOreDictNameExist(nugget(metal))) {
                     for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
@@ -82,12 +92,18 @@ public final class RecipeInit {
             }
         }
 
+        //MILL!!!!
+        MillingRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1), 2.5f,
+                RecipeEntry.get(new ItemStack(Blocks.GRAVEL, 1)),
+                RecipeEntry.get(new ItemStack(Items.FLINT, 1), .25f));
+        MillingRecipes.addRecipe(new ItemStack(Blocks.GRAVEL, 1), 2.5f,
+                RecipeEntry.get(new ItemStack(Items.FLINT, 1)));
+
         FurnaceRecipes.instance().addSmeltingRecipe(
                 new ItemStack(ModBlocks.ORE, 1, 0),
                 new ItemStack(ModItems.INGREDIENT, 1, 3),
                 0.25f);
-        FurnaceRecipes.instance().addSmeltingRecipe(
-                new ItemStack(ModBlocks.ORE, 1, 1),
+        FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(ModBlocks.ORE, 1, 1),
                 new ItemStack(ModItems.INGREDIENT, 1, 6),
                 0.25f);
 

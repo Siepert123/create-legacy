@@ -5,6 +5,9 @@ import com.melonstudios.createlegacy.recipe.MillingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.ModSoundEvents;
+import com.melonstudios.createlegacy.util.RecipeEntry;
+import com.melonstudios.createlegacy.util.SimpleTuple;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ISidedInventory;
@@ -13,7 +16,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 
+import java.util.List;
 import java.util.Random;
 
 public class TileEntityMillstone extends AbstractTileEntityKinetic implements ISidedInventory {
@@ -23,13 +28,24 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
     ItemStack otherAdditionalOutput = ItemStack.EMPTY;
 
     private static final int[] topFaceSlots = new int[]{0};
-    private static final int[] sideFaceSlots = new int[]{1,2,3};
+    private static final int[] sideFaceSlots = new int[]{0,1,2,3};
 
     public boolean renderParticles() {
-        return !currentlyMilling.isEmpty() && speed() != 0 && MillingRecipes.hasRecipe(currentlyMilling);
+        return !currentlyMilling.isEmpty() && speed() != 0
+                && MillingRecipes.hasResult(currentlyMilling)
+                && (compareStacks(MillingRecipes.getResults(currentlyMilling)[0].getValue1(),
+                MillingRecipes.getResults(currentlyMilling)[1].getValue1(),
+                MillingRecipes.getResults(currentlyMilling)[2].getValue1()) || outputsEmpty());
     }
 
     protected int progress;
+
+    public void drop() {
+        spawnItem(currentlyMilling.copy());
+        spawnItem(outputMain.copy());
+        spawnItem(additionalOutput.copy());
+        spawnItem(otherAdditionalOutput.copy());
+    }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -65,6 +81,17 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
         }
     }
 
+    protected boolean outputsEmpty() {
+        return outputMain.isEmpty() && additionalOutput.isEmpty() && otherAdditionalOutput.isEmpty();
+    }
+    protected boolean compareStacks(ItemStack stack1, ItemStack stack2, ItemStack stack3) {
+        boolean b0 = outputMain.isEmpty() || stack1.isItemEqual(outputMain);
+        boolean b1 = additionalOutput.isEmpty() || stack2.isItemEqual(additionalOutput);
+        boolean b2 = otherAdditionalOutput.isEmpty() || stack3.isItemEqual(otherAdditionalOutput);
+        boolean b3 = outputsEmpty();
+        return b0 && b1 && b2;
+    }
+
     @Override
     protected void tick() {
         if (world.isRemote) {
@@ -78,12 +105,61 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
             }
         } else {
             if (renderParticles()) {
-                if (world.getTotalWorldTime() % 10 == 0) {
+                if (world.getTotalWorldTime() % 5 == 0) {
                     world.playSound(null, pos,
                             ModSoundEvents.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS,
                             1.0f, 1.0f);
                 }
+                if (progress > MillingRecipes.getWork(currentlyMilling)) {
+                    RecipeEntry[] results = MillingRecipes.getResults(currentlyMilling);
+                    Random random = world.rand;
+                    if (outputsEmpty()) {
+                        if (!results[0].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[0].getValue2() || results[0].getValue2() == 1.0f)
+                                outputMain = results[0].getValue1();
+                        if (!results[1].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[1].getValue2() || results[1].getValue2() == 1.0f)
+                                additionalOutput = results[1].getValue1();
+                        if (!results[2].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[2].getValue2() || results[2].getValue2() == 1.0f)
+                                otherAdditionalOutput = results[2].getValue1();
+                    } else {
+                        if (!results[0].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[0].getValue2() || results[0].getValue2() == 1.0f)
+                                outputMain.setCount(outputMain.getCount() + results[0].getValue1().getCount());
+                        if (!results[1].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[1].getValue2() || results[1].getValue2() == 1.0f)
+                                additionalOutput.setCount(additionalOutput.getCount() + results[1].getValue1().getCount());
+                        if (!results[2].getValue1().isEmpty())
+                            if (random.nextFloat() <= results[2].getValue2() || results[2].getValue2() == 1.0f)
+                                otherAdditionalOutput.setCount(otherAdditionalOutput.getCount() + results[2].getValue1().getCount());
+                    }
+                    currentlyMilling.shrink(1);
+                    markDirty();
+                    progress = 0;
+                } else {
+                    progress += getWorkTick();
+                    markDirty();
+                }
             }
+
+            if (currentlyMilling.isEmpty()) {
+                progress = 0;
+
+                List<EntityItem> groundItems = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.up()));
+
+                for (EntityItem groundItem : groundItems) {
+                    ItemStack item = groundItem.getItem();
+
+                    if (MillingRecipes.hasResult(item)) {
+                        currentlyMilling = item;
+                        groundItem.setDead();
+                        markDirty();
+                        break;
+                    }
+                }
+            }
+
             PacketUpdateMillstone.sendToPlayersNearby(this, 32);
         }
     }
@@ -105,7 +181,7 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
 
     @Override
     public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-        return index == 0 && direction != EnumFacing.DOWN && MillingRecipes.hasRecipe(itemStackIn);
+        return index == 0 && direction != EnumFacing.DOWN && MillingRecipes.hasResult(itemStackIn);
     }
 
     @Override
@@ -125,7 +201,13 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return null;
+        switch (index) {
+            case 0: return currentlyMilling;
+            case 1: return outputMain;
+            case 2: return additionalOutput;
+            case 3: return otherAdditionalOutput;
+            default: throw new IllegalArgumentException("Invalid slot index: " + index);
+        }
     }
 
     @Override
@@ -185,7 +267,7 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return index == 0 && MillingRecipes.hasRecipe(stack);
+        return index == 0 && MillingRecipes.hasResult(stack);
     }
 
     @Override
