@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.network;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityMillstone;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -57,7 +58,10 @@ public class PacketUpdateMillstone implements IMessage {
 
         @Override
         public IMessage onMessage(PacketUpdateMillstone message, MessageContext ctx) {
-
+            Minecraft.getMinecraft().addScheduledTask(() -> {
+                TileEntityMillstone te = (TileEntityMillstone) Minecraft.getMinecraft().world.getTileEntity(message.pos);
+                te.active = message.active;
+            });
             return null;
         }
     }

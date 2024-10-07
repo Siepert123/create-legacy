@@ -7,6 +7,11 @@ public class RecipeEntry extends SimpleTuple<ItemStack, Float> {
         super(value1, value2);
     }
 
+    @Override
+    public ItemStack getValue1() {
+        return super.getValue1().copy();
+    }
+
     public static RecipeEntry get(ItemStack stack, float chance) {
         return new RecipeEntry(stack, chance);
     }

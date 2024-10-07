@@ -1,12 +1,10 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
 import com.melonstudios.createlegacy.recipe.MillingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.ModSoundEvents;
-import com.melonstudios.createlegacy.util.RecipeEntry;
-import com.melonstudios.createlegacy.util.SimpleTuple;
+import com.melonstudios.createlegacy.util.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -92,10 +90,15 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
         return b0 && b1 && b2;
     }
 
+    public boolean active = false;
+    protected boolean renderParticlesParticles() {
+        return active;
+    }
+
     @Override
     protected void tick() {
         if (world.isRemote) {
-            if (renderParticles()) {
+            if (renderParticlesParticles()) {
                 Random random = world.rand;
                 world.spawnParticle(EnumParticleTypes.CRIT,
                         pos.getX() + random.nextFloat(),
@@ -113,34 +116,45 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
                 if (progress > MillingRecipes.getWork(currentlyMilling)) {
                     RecipeEntry[] results = MillingRecipes.getResults(currentlyMilling);
                     Random random = world.rand;
-                    if (outputsEmpty()) {
-                        if (!results[0].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[0].getValue2() || results[0].getValue2() == 1.0f)
-                                outputMain = results[0].getValue1();
-                        if (!results[1].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[1].getValue2() || results[1].getValue2() == 1.0f)
-                                additionalOutput = results[1].getValue1();
-                        if (!results[2].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[2].getValue2() || results[2].getValue2() == 1.0f)
-                                otherAdditionalOutput = results[2].getValue1();
-                    } else {
-                        if (!results[0].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[0].getValue2() || results[0].getValue2() == 1.0f)
-                                outputMain.setCount(outputMain.getCount() + results[0].getValue1().getCount());
-                        if (!results[1].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[1].getValue2() || results[1].getValue2() == 1.0f)
-                                additionalOutput.setCount(additionalOutput.getCount() + results[1].getValue1().getCount());
-                        if (!results[2].getValue1().isEmpty())
-                            if (random.nextFloat() <= results[2].getValue2() || results[2].getValue2() == 1.0f)
-                                otherAdditionalOutput.setCount(otherAdditionalOutput.getCount() + results[2].getValue1().getCount());
+
+                    if (!results[0].getValue1().isEmpty()) {
+                        if (results[0].getValue2() >= random.nextFloat()) {
+                            ItemStack stack = results[0].getValue1();
+                            if (outputMain.isEmpty()) outputMain = stack;
+                            else {
+                                outputMain.setCount(outputMain.getCount() + stack.getCount());
+                            }
+                        }
+                    }
+                    if (!results[1].getValue1().isEmpty()) {
+                        if (results[1].getValue2() >= random.nextFloat()) {
+                            ItemStack stack = results[1].getValue1();
+                            if (additionalOutput.isEmpty()) additionalOutput = stack;
+                            else {
+                                additionalOutput.setCount(additionalOutput.getCount() + stack.getCount());
+                            }
+                        }
+                    }
+                    if (!results[2].getValue1().isEmpty()) {
+                        if (results[2].getValue2() >= random.nextFloat()) {
+                            ItemStack stack = results[2].getValue1();
+                            if (otherAdditionalOutput.isEmpty()) otherAdditionalOutput = stack;
+                            else {
+                                otherAdditionalOutput.setCount(otherAdditionalOutput.getCount() + stack.getCount());
+                            }
+                        }
                     }
                     currentlyMilling.shrink(1);
                     markDirty();
                     progress = 0;
+
+
+                    clean();
                 } else {
                     progress += getWorkTick();
                     markDirty();
                 }
+                PacketUpdateMillstone.sendToPlayersNearby(this, 32);
             }
 
             if (currentlyMilling.isEmpty()) {
@@ -162,6 +176,13 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
 
             PacketUpdateMillstone.sendToPlayersNearby(this, 32);
         }
+    }
+
+    protected void clean() {
+        if (currentlyMilling.isEmpty()) currentlyMilling = ItemStack.EMPTY;
+        if (outputMain.isEmpty()) currentlyMilling = ItemStack.EMPTY;
+        if (additionalOutput.isEmpty()) additionalOutput = ItemStack.EMPTY;
+        if (otherAdditionalOutput.isEmpty()) otherAdditionalOutput = ItemStack.EMPTY;
     }
 
     @Override
@@ -196,7 +217,7 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return outputsEmpty();
     }
 
     @Override
