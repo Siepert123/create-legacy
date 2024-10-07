@@ -7,7 +7,6 @@ import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityK
 import com.melonstudios.createlegacy.util.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +18,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * <h1>AHHHHHHHHHHHHH</h1>
+ */
 public class TileEntityMillstone extends AbstractTileEntityKinetic implements ISidedInventory {
     ItemStack currentlyMilling = ItemStack.EMPTY;
     ItemStack outputMain = ItemStack.EMPTY;
@@ -112,6 +114,12 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
                     world.playSound(null, pos,
                             ModSoundEvents.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS,
                             1.0f, 1.0f);
+                    world.playSound(null, pos,
+                            ModSoundEvents.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS,
+                            1.0f, 1.1f);
+                    world.playSound(null, pos,
+                            ModSoundEvents.BLOCK_MILLSTONE_AMBIENT, SoundCategory.BLOCKS,
+                            1.0f, 0.9f);
                 }
                 if (progress > MillingRecipes.getWork(currentlyMilling)) {
                     RecipeEntry[] results = MillingRecipes.getResults(currentlyMilling);

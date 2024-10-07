@@ -12,6 +12,9 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+/**
+ * Base class for kinetic blocks cuz I am lazy :p
+ */
 @SuppressWarnings("deprecation")
 public abstract class AbstractBlockKinetic extends Block implements ITileEntityProvider {
     public AbstractBlockKinetic(String registry) {

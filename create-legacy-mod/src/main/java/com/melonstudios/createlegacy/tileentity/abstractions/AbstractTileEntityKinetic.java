@@ -117,6 +117,10 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         tick();
     }
 
+    /**
+     * Some network functions that are mandatory yes
+     * @param context network context
+     */
     public final void networkFunc(NetworkContext context) {
         nextCheck = Math.round(context.speed() / 10);
         lastUpdate = world.getTotalWorldTime();
@@ -128,10 +132,22 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     }
 
+    /**
+     * no one ever uses this
+     * @param context context
+     */
+    @Deprecated
     public void kineticTick(NetworkContext context) {
 
     }
 
+    /**
+     * Pass the network! Usually no need to @Override :3
+     * @param src source te (unused)
+     * @param srcDir source direction (unused)
+     * @param context network context
+     * @param inverted inverted rotation?
+     */
     protected void passNetwork(AbstractTileEntityKinetic src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
         if (enforceNonInversion() && inverted) {
             world.playEvent(2001, pos, Block.getStateId(getState()));
@@ -228,6 +244,10 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         return ItemStack.EMPTY;
     }
 
+    /**
+     * Spawns a new item at the tile entity
+     * @param stack Itemstack to spawn
+     */
     protected void spawnItem(ItemStack stack) {
         if (!stack.isEmpty()) world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
     }

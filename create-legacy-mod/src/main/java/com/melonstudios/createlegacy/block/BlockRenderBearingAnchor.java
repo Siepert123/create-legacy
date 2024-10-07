@@ -8,6 +8,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
+/**
+ * ??? why did I make this
+ */
 public class BlockRenderBearingAnchor extends Block {
     public BlockRenderBearingAnchor() {
         super(Material.ROCK);

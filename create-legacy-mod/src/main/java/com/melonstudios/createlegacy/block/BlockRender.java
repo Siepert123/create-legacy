@@ -7,6 +7,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 
+/**
+ * A block that should not be treated as a block but more like a model holder.
+ */
 public class BlockRender extends Block {
     public BlockRender() {
         super(Material.ROCK);
