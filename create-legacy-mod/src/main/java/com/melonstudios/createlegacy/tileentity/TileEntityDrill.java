@@ -73,7 +73,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
 
         if (maxDrillingProgress < 0 || !drilling.getMaterial().blocksMovement()) drillingProgress = 0;
 
-        if (drilling.getMaterial().blocksMovement() && world.getTotalWorldTime() % 10 == 0)
+        if (drilling.getMaterial().blocksMovement() && world.getTotalWorldTime() % 10 == 0 && speed() != 0)
             world.playSound(null, pos.offset(facing()),
                 drilling.getBlock().getSoundType(drilling, world, pos.offset(facing()), null).getBreakSound(),
                 SoundCategory.BLOCKS, 1.0f, 1.0f);
@@ -86,7 +86,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
             maxDrillingProgress = 0;
         }
 
-        drillingProgress += Math.abs(speed()) / 64;
+        drillingProgress += Math.abs(speed()) / 256f;
     }
 
     @Override
