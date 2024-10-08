@@ -73,6 +73,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         public final TileEntityFan fan;
         public float strength = 0.0f;
         public int maxDistance = 0;
+        public int actualMaxDistance = 0;
 
         public AirCurrent(TileEntityFan fan) {
             this.world = fan.getWorld();
@@ -85,29 +86,36 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
         public void recalculate() {
             this.strength = fan.speed() / 256f;
-            this.maxDistance = Math.round(Math.abs(fan.speed()) / 16);
+            this.maxDistance = this.actualMaxDistance = Math.round(Math.abs(fan.speed()) / 16);
+            for (int i = 1; i <= maxDistance; i++) {
+                IBlockState state = world.getBlockState(source.offset(facing, i));
+                if (state.getMaterial().blocksMovement() && state.isSideSolid(world, source.offset(facing, i), facing.getOpposite())) {
+                    actualMaxDistance = i;
+                    break;
+                }
+            }
         }
 
         public void tick() {
             if (fan.speed() == 0) return;
             recalculate();
-            final AxisAlignedBB boundingBox = new AxisAlignedBB(source, source.offset(facing, maxDistance + 1).add(1, 1, 1));
+            final AxisAlignedBB boundingBox = new AxisAlignedBB(source, source.offset(facing, actualMaxDistance).add(1, 1, 1));
 
             List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, boundingBox);
 
             for (Entity entity : entities) {
                 if (entity instanceof EntityPlayer) {
                     if (world.isRemote) {
-                        entity.setVelocity(max(entity.motionX / 2, strength * facing.getFrontOffsetX()),
-                                max(entity.motionY / 2, strength * facing.getFrontOffsetY()),
-                                max(entity.motionZ / 2, strength * facing.getFrontOffsetZ()));
+                        entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
+                                max(entity.motionY / 4, strength * facing.getFrontOffsetY()),
+                                max(entity.motionZ / 4, strength * facing.getFrontOffsetZ()));
                         if (strength > 0) entity.fallDistance = 0.0f;
                     }
                 } else {
                     if (!world.isRemote) {
-                        entity.setVelocity(max(entity.motionX / 2, strength * facing.getFrontOffsetX()),
-                                max(entity.motionY / 2, strength * facing.getFrontOffsetY()),
-                                max(entity.motionZ / 2, strength * facing.getFrontOffsetZ()));
+                        entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
+                                max(entity.motionY / 4, strength * facing.getFrontOffsetY()),
+                                max(entity.motionZ / 4, strength * facing.getFrontOffsetZ()));
                         if (strength > 0) entity.fallDistance = 0.0f;
                     }
                 }
