@@ -34,6 +34,7 @@ public final class ModBlocks {
     public static final Block PRESS = registerBlockWithItem(new BlockPress());
     public static final Block MILLSTONE = registerBlockWithItem(new BlockMillstone());
     public static final Block FAN = registerBlockWithItem(new BlockFan());
+    public static final Block DRILL = registerBlockWithItem(new BlockDrill());
     public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
     public static final Block DEPOT = registerBlockWithItem(new BlockDepot());
@@ -88,6 +89,7 @@ public final class ModBlocks {
         registerTE(TileEntityPress.class, "press", new TileEntityPressRenderer());
         registerTE(TileEntityMillstone.class, "millstone", new TileEntityMillstoneRenderer());
         registerTE(TileEntityFan.class, "fan", new TileEntityFanRenderer());
+        registerTE(TileEntityDrill.class, "drill", new TileEntityDrillRenderer());
 
         registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
 

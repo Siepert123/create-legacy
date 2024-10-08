@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "create:drill"
+    },
+    "facing=down": {
+      "model": "create:drill",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "create:drill",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "create:drill",
+      "y": 90,
+      "x": 90
+    },
+    "facing=south": {
+      "model": "create:drill",
+      "y": 180,
+      "x": 90
+    },
+    "facing=west": {
+      "model": "create:drill",
+      "y": 270,
+      "x": 90
+    }
+  }
+}

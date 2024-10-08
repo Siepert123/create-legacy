@@ -55,7 +55,14 @@ public class BlockRender extends Block {
         FAN_N("fan_n"),
         FAN_E("fan_e"),
         FAN_S("fan_s"),
-        FAN_W("fan_w"),;
+        FAN_W("fan_w"),
+
+        DRILL_U("drill_u"),
+        DRILL_D("drill_d"),
+        DRILL_N("drill_n"),
+        DRILL_E("drill_e"),
+        DRILL_S("drill_s"),
+        DRILL_W("drill_w"),;
 
         private final String name;
         private final int id;

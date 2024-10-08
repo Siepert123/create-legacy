@@ -71,6 +71,7 @@ tile.create.bearing.name=Mechanical Bearing
 tile.create.press.name=Mechanical Press
 tile.create.millstone.name=Millstone
 tile.create.fan.name=Encased Fan
+tile.create.drill.name=Mechanical Drill
 
 #Creative tabs
 itemGroup.create.kinetics=Create

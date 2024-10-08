@@ -111,6 +111,33 @@
       "model": "create:render/fan",
       "x": 90,
       "y": 270
+    },
+    "type=drill_u": {
+      "model": "create:render/drill",
+      "x": 0
+    },
+    "type=drill_d": {
+      "model": "create:render/drill",
+      "x": 180
+    },
+    "type=drill_n": {
+      "model": "create:render/drill",
+      "x": 90
+    },
+    "type=drill_e": {
+      "model": "create:render/drill",
+      "x": 90,
+      "y": 90
+    },
+    "type=drill_s": {
+      "model": "create:render/drill",
+      "x": 90,
+      "y": 180
+    },
+    "type=drill_w": {
+      "model": "create:render/drill",
+      "x": 90,
+      "y": 270
     }
   }
 }
