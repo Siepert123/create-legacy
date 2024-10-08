@@ -86,7 +86,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
             maxDrillingProgress = 0;
         }
 
-        drillingProgress += Math.abs(speed()) / 256f;
+        drillingProgress += Math.abs(speed()) / (256f * 20f);
     }
 
     @Override
