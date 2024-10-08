@@ -86,6 +86,7 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
                 "bearing/normal");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.PRESS));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.MILLSTONE));
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FAN));
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.NETWORK_INSPECTOR),
                 0, "network_inspector/speed");
