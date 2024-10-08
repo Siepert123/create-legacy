@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /**
  * Implementing classes must extend {@link net.minecraft.tileentity.TileEntity}<br>
@@ -239,4 +240,6 @@ public interface IKineticTileEntity {
     protected void spawnItem(ItemStack stack) {
         if (!stack.isEmpty()) world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
     }*/
+
+    Random random();
 }

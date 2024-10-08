@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public abstract class AbstractTileEntityKinetic extends TileEntity implements ITickable, IStateFindable, IKineticTileEntity {
 
@@ -253,5 +254,10 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
      */
     protected void spawnItem(ItemStack stack) {
         if (!stack.isEmpty()) world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
+    }
+
+    @Override
+    public Random random() {
+        return world.rand;
     }
 }

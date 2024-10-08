@@ -84,6 +84,33 @@
     },
     "type=millstone": {
       "model": "create:render/millstone"
+    },
+    "type=fan_u": {
+      "model": "create:render/fan",
+      "x": 0
+    },
+    "type=fan_d": {
+      "model": "create:render/fan",
+      "x": 180
+    },
+    "type=fan_n": {
+      "model": "create:render/fan",
+      "x": 90
+    },
+    "type=fan_e": {
+      "model": "create:render/fan",
+      "x": 90,
+      "y": 90
+    },
+    "type=fan_s": {
+      "model": "create:render/fan",
+      "x": 90,
+      "y": 180
+    },
+    "type=fan_w": {
+      "model": "create:render/fan",
+      "x": 90,
+      "y": 270
     }
   }
 }

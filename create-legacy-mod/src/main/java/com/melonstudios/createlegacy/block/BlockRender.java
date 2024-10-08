@@ -48,7 +48,14 @@ public class BlockRender extends Block {
         PRESS_X("press_x"),
         PRESS_Z("press_z"),
 
-        MILLSTONE("millstone");
+        MILLSTONE("millstone"),
+
+        FAN_U("fan_u"),
+        FAN_D("fan_d"),
+        FAN_N("fan_n"),
+        FAN_E("fan_e"),
+        FAN_S("fan_s"),
+        FAN_W("fan_w"),;
 
         private final String name;
         private final int id;

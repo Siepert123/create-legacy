@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "create:fan"
+    },
+    "facing=down": {
+      "model": "create:fan",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "create:fan",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "create:fan",
+      "x": 90,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "create:fan",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "create:fan",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
