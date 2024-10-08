@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -89,7 +90,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
             this.maxDistance = this.actualMaxDistance = Math.round(Math.abs(fan.speed()) / 16);
             for (int i = 1; i <= maxDistance; i++) {
                 IBlockState state = world.getBlockState(source.offset(facing, i));
-                if (state.getMaterial().blocksMovement() && state.isSideSolid(world, source.offset(facing, i), facing.getOpposite())) {
+                if (state.getMaterial().blocksMovement()) {
                     actualMaxDistance = i;
                     break;
                 }
@@ -112,12 +113,10 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                         if (strength > 0) entity.fallDistance = 0.0f;
                     }
                 } else {
-                    if (!world.isRemote) {
-                        entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
+                    entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
                                 max(entity.motionY / 4, strength * facing.getFrontOffsetY()),
                                 max(entity.motionZ / 4, strength * facing.getFrontOffsetZ()));
-                        if (strength > 0) entity.fallDistance = 0.0f;
-                    }
+                    if (strength > 0) entity.fallDistance = 0.0f;
                 }
             }
         }

@@ -7,10 +7,15 @@ import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityK
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+
+import java.util.List;
 
 public class TileEntityDrill extends AbstractTileEntityKinetic {
     @Override
@@ -75,7 +80,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
 
         if (drilling.getMaterial().blocksMovement() && world.getTotalWorldTime() % 10 == 0 && speed() != 0)
             world.playSound(null, pos.offset(facing()),
-                drilling.getBlock().getSoundType(drilling, world, pos.offset(facing()), null).getBreakSound(),
+                drilling.getBlock().getSoundType(drilling, world, pos.offset(facing()), null).getHitSound(),
                 SoundCategory.BLOCKS, 1.0f, 1.0f);
 
         if (drillingProgress > maxDrillingProgress && maxDrillingProgress > 0) {
@@ -86,7 +91,13 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
             maxDrillingProgress = 0;
         }
 
-        drillingProgress += Math.abs(speed()) / (256f * 20f);
+        drillingProgress += Math.abs(speed()) / (64f * 20f);
+
+        List<EntityLivingBase> livingBases = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.offset(facing())));
+
+        for (EntityLivingBase entityLivingBase : livingBases) {
+            if (entityLivingBase.hurtResistantTime <= 0) entityLivingBase.attackEntityFrom(DamageSource.ANVIL, speed() / 16f);
+        }
     }
 
     @Override

@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "type=asurine": {
+      "model": "create:orestone/stone_pillar_z_asurine"
+    },
+    "type=crimsite": {
+      "model": "create:orestone/stone_pillar_z_crimsite"
+    },
+    "type=limestone": {
+      "model": "create:orestone/stone_pillar_z_limestone"
+    },
+    "type=ochrum": {
+      "model": "create:orestone/stone_pillar_z_ochrum"
+    },
+    "type=scorchia": {
+      "model": "create:orestone/stone_pillar_z_scorchia"
+    },
+    "type=scoria": {
+      "model": "create:orestone/stone_pillar_z_scoria"
+    },
+    "type=veridium": {
+      "model": "create:orestone/stone_pillar_z_veridium"
+    }
+  }
+}

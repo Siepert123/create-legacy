@@ -31,7 +31,7 @@ public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         if (placer.isSneaking()) {
-            return getDefaultState().withProperty(FACING, facing);
+            return getDefaultState().withProperty(FACING, facing.getOpposite());
         } else {
             return getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
         }
