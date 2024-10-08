@@ -1,0 +1,6 @@
+{
+    "parent": "create:block/kinetic_utility/clutch",
+    "textures": {
+        "system": "create:block/clutch_on"
+    }
+}

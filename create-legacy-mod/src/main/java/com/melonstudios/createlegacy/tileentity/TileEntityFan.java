@@ -87,7 +87,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
         public void recalculate() {
             this.strength = fan.speed() / 256f;
-            this.maxDistance = this.actualMaxDistance = Math.round(Math.abs(fan.speed()) / 16);
+            this.maxDistance = this.actualMaxDistance = Math.max(Math.round(Math.abs(fan.speed()) / 16), 3);
             for (int i = 1; i <= maxDistance; i++) {
                 IBlockState state = world.getBlockState(source.offset(facing, i));
                 if (state.getMaterial().blocksMovement()) {

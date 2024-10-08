@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "active=false,axis=x,shift=false": {
+      "model": "create:kinetic_utility/clutch",
+      "y": 90,
+      "x": 90
+    },
+    "active=false,axis=y,shift=false": {
+      "model": "create:kinetic_utility/clutch"
+    },
+    "active=false,axis=z,shift=false": {
+      "model": "create:kinetic_utility/clutch",
+      "x": 90
+    },
+    "active=false,axis=x,shift=true": {
+      "model": "create:kinetic_utility/gearshift",
+      "y": 90,
+      "x": 90
+    },
+    "active=false,axis=y,shift=true": {
+      "model": "create:kinetic_utility/gearshift"
+    },
+    "active=false,axis=z,shift=true": {
+      "model": "create:kinetic_utility/gearshift",
+      "x": 90
+    },
+    "active=true,axis=x,shift=false": {
+      "model": "create:kinetic_utility/clutch_active",
+      "x": 90,
+      "y": 90
+    },
+    "active=true,axis=y,shift=false": {
+      "model": "create:kinetic_utility/clutch_active"
+    },
+    "active=true,axis=z,shift=false": {
+      "model": "create:kinetic_utility/clutch_active",
+      "x": 90
+    },
+    "active=true,axis=x,shift=true": {
+      "model": "create:kinetic_utility/gearshift_active",
+      "x": 90,
+      "y": 90
+    },
+    "active=true,axis=y,shift=true": {
+      "model": "create:kinetic_utility/gearshift_active"
+    },
+    "active=true,axis=z,shift=true": {
+      "model": "create:kinetic_utility/gearshift_active",
+      "x": 90
+    }
+  }
+}

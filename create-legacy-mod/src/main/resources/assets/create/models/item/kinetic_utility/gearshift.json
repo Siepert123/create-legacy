@@ -1,0 +1,6 @@
+{
+  "parent": "create:item/kinetic_utility/clutch",
+  "textures": {
+    "system": "create:block/gearshift_off"
+  }
+}

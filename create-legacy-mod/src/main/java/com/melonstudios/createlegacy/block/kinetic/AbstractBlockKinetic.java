@@ -80,6 +80,10 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
                 0, "encased_shaft/andesite");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SHAFT_ENCASED),
                 1, "encased_shaft/brass");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.KINETIC_UTILITY),
+                0, "kinetic_utility/clutch");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.KINETIC_UTILITY),
+                1, "kinetic_utility/gearshift");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.SAW));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.BEARING),
