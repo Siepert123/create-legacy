@@ -136,3 +136,10 @@ death.attack.cutting=%s was cut in half by a Mechanical Saw
 death.attack.cutting.player=%s was in front of the Mechanical Saw by %s
 death.attack.crushing=%s was pulverized by Crushing Wheels
 death.attack.crushing.player=%s was thrown in the Crushing Wheels by %s
+
+#subtitles
+subtitle.item.sandpaper.used=Sandpaper polishes
+subtitle.block.cogwheel.ambient=Cogwheels rumble
+subtitle.block.press.activate=Mechanical Press presses
+subtitle.item.wrench.used=Wrench used
+subtitle.blocks.millstone.ambient=Milling
