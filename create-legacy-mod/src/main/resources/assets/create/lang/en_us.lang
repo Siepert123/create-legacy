@@ -133,7 +133,7 @@ tile.create.orestone_layered_veridium.name=Layered Veridium
 death.attack.drilling=%s was broken by a Mechanical Drill
 death.attack.drilling.player=%s was doomed by a Mechanical Drill trying to escape %s
 death.attack.cutting=%s was cut in half by a Mechanical Saw
-death.attack.cutting.player=%s was in front of the Mechanical Saw by %s
+death.attack.cutting.player=%s was pushed in front of the Mechanical Saw by %s
 death.attack.crushing=%s was pulverized by Crushing Wheels
 death.attack.crushing.player=%s was thrown in the Crushing Wheels by %s
 
