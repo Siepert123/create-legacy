@@ -7,6 +7,10 @@ public class TileEntityClutchRenderer extends AbstractTileEntityKineticRenderer<
     public void render(TileEntityClutch te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 
-        spinShaftModel(te, x, y, z, partialTicks, te.axis());
+        if (!te.active()) spinShaftModel(te, x, y, z, partialTicks, te.axis());
+        else {
+            spinModel(te.getOtherTE(true), x, y, z, partialTicks, te.axis(), te.getAssociatedShaftModel(true));
+            spinModel(te.getOtherTE(false), x, y, z, partialTicks, te.axis(), te.getAssociatedShaftModel(false));
+        }
     }
 }

@@ -46,16 +46,16 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
-    protected final void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
+    protected final void spinModel(AbstractTileEntityKinetic te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
         spinModel(te, x, y, z, partialTicks, axis, state, 1.0f);
     }
 
-    protected final void spinShaftModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
+    protected final void spinShaftModel(AbstractTileEntityKinetic te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
         spinModel(te, x, y, z, partialTicks, axis, ModBlocks.ROTATOR.getDefaultState()
                 .withProperty(BlockRotator.VARIANT, BlockRotator.Variant.SHAFT)
                 .withProperty(BlockRotator.AXIS, axis));
     }
-    protected final void spinCogModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
+    protected final void spinCogModel(AbstractTileEntityKinetic te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis) {
         spinModel(te, x, y, z, partialTicks, axis, ModBlocks.ROTATOR.getDefaultState()
                 .withProperty(BlockRotator.VARIANT, BlockRotator.Variant.COG)
                 .withProperty(BlockRotator.AXIS, axis));
@@ -72,7 +72,7 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
      * @param state Blockstate to be rotated
      * @param markiplier speed multiplier
      */
-    protected void spinModel(T te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state, float markiplier) {
+    protected void spinModel(AbstractTileEntityKinetic te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state, float markiplier) {
         rotateModel(calculateAngle(te, axis, partialTicks, markiplier, true), x, y, z, axis, state);
     }
 
@@ -99,7 +99,7 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         rotateModel(0.0f, x, y, z, EnumFacing.Axis.Y, state);
     }
 
-    protected final float calculateAngle(T te, EnumFacing.Axis axis, float partialTicks, float markiplier, boolean addOffset) {
+    protected final float calculateAngle(AbstractTileEntityKinetic te, EnumFacing.Axis axis, float partialTicks, float markiplier, boolean addOffset) {
         if (te.speed() == 0) return te.shifted(axis) && addOffset ? 22.5f : 0;
         long time = te.getWorld().getTotalWorldTime();
 
