@@ -1,4 +1,4 @@
-package com.melonstudios.createlegacy.util;
+package com.melonstudios.createlegacy.util.registries;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import net.minecraft.util.ResourceLocation;

@@ -1,10 +1,10 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
 import com.melonstudios.createlegacy.recipe.MillingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.*;
+import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;

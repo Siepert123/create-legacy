@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockDrill;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.createlegacy.util.registries.ModDamageSources;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -96,8 +97,12 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
         List<EntityLivingBase> livingBases = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.offset(facing())));
 
         for (EntityLivingBase entityLivingBase : livingBases) {
-            if (entityLivingBase.hurtResistantTime <= 0) entityLivingBase.attackEntityFrom(DamageSource.ANVIL, speed() / 16f);
+            if (entityLivingBase.hurtResistantTime <= 0) entityLivingBase.attackEntityFrom(ModDamageSources.DRILLING, calculateDamage());
         }
+    }
+
+    protected final float calculateDamage() {
+        return Math.abs(speed()) / 16f;
     }
 
     @Override

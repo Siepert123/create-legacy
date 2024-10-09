@@ -11,7 +11,7 @@ import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
-import com.melonstudios.createlegacy.util.ModSoundEvents;
+import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

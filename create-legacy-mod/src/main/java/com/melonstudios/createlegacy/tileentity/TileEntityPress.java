@@ -1,13 +1,12 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockPress;
 import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.ModSoundEvents;
+import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.util.RenderUtils;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
