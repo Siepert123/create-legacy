@@ -1,10 +1,7 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
-import com.melonstudios.createlegacy.network.PacketRequestUpdateDepot;
-import com.melonstudios.createlegacy.network.PacketUpdateDepot;
-import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
-import com.melonstudios.createlegacy.network.PacketUpdatePress;
+import com.melonstudios.createlegacy.network.*;
 import com.melonstudios.createlegacy.proxy.CommonProxy;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;

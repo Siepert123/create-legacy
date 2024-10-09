@@ -28,7 +28,7 @@ public final class DeployingRecipes {
     public static ItemStack getResult(ItemStack baseItem, ItemStack application) {
         SimpleTuple<ItemStack, ItemStack> inputs = SimpleTuple.from(baseItem, application);
         for (Map.Entry<SimpleTuple<ItemStack, ItemStack>, ItemStack> entry : getRecipeMap().entrySet()) {
-            if (entry.getKey() == inputs) return entry.getValue();
+            if (entry.getKey() == inputs) return entry.getValue().copy();
         }
         return ItemStack.EMPTY;
     }
