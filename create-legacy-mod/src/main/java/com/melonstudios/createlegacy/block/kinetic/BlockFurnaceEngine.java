@@ -2,6 +2,8 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.tileentity.TileEntityFlywheel;
 import com.melonstudios.createlegacy.util.IMetaName;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +22,8 @@ import javax.annotation.Nullable;
 public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaName {
     public BlockFurnaceEngine() {
         super("furnace_engine");
+
+        setSoundType(SoundType.METAL);
     }
 
     public enum Variant implements IStringSerializable {
@@ -99,5 +103,10 @@ public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaNam
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         return stack.getMetadata() == 0 ? "tile.create.furnace_engine" : "tile.create.flywheel";
+    }
+
+    @Override
+    public Material getMaterial(IBlockState state) {
+        return Material.IRON;
     }
 }
