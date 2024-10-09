@@ -87,7 +87,7 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return "tile.create." + (stack.getMetadata() == 0 ? "clutch" : "gearshift") + ".name";
+        return "tile.create." + (stack.getMetadata() == 0 ? "clutch" : "gearshift");
     }
 
     @Override

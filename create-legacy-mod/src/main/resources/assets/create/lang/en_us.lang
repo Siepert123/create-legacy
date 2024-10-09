@@ -55,8 +55,8 @@ tile.create.depot.name=Depot
 
 tile.create.shaft.name=Shaft
 tile.create.cog.name=Cog
-tile.create.shaft_encased_andesite.name=Brass Encased Shaft
-tile.create.shaft_encased_brass.name=Andesite Encased Shaft
+tile.create.shaft_encased_andesite.name=Andesite Encased Shaft
+tile.create.shaft_encased_brass.name=Brass Encased Shaft
 tile.create.clutch.name=Clutch
 tile.create.gearshift.name=Gearshift
 tile.create.speedometer.name=Speedometer
