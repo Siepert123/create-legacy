@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
 
@@ -120,7 +121,7 @@ public class BlockCasing extends Block implements IMetaName {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if (worldIn.isRemote && !placer.getName().startsWith("Player")) placer.sendMessage(new TextComponentString("WHERE CTM???"));
+        if (worldIn.isRemote && !placer.getName().startsWith("Player") && !Loader.isModLoaded("ctm")) placer.sendMessage(new TextComponentString("WHERE CTM???"));
         //Inform people of the lack of CTM!
     }
 }
