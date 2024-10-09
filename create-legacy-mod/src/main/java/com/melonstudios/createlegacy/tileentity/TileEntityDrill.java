@@ -110,4 +110,9 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
         drilling = world.getBlockState(pos.offset(facing()));
         maxDrillingProgress = drilling.getBlockHardness(world, pos.offset(facing()));
     }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 6.0f;
+    }
 }
