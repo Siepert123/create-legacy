@@ -19,6 +19,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -115,5 +116,11 @@ public class BlockCasing extends Block implements IMetaName {
     @Override
     public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
         return state.getValue(VARIANT) == Variant.TRAIN ? SoundType.METAL : SoundType.WOOD;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        if (worldIn.isRemote && !placer.getName().startsWith("Player")) placer.sendMessage(new TextComponentString("WHERE CTM???"));
+        //Inform people of the lack of CTM!
     }
 }
