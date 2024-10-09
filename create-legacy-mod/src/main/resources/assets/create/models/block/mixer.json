@@ -1,0 +1,38 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "create:block/casing_andesite_square_hole",
+		"1": "create:block/mixer_side",
+		"particle": "create:block/casing_andesite_square_hole"
+	},
+	"elements": [
+		{
+			"name": "casing_outer",
+			"from": [0, 4, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 4, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 12], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 12], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 12], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 12], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "casing_inner",
+			"from": [16, 8, 0],
+			"to": [0, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 8, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 16, 8], "texture": "#1"},
+				"east": {"uv": [0, 4, 16, 8], "texture": "#1"},
+				"south": {"uv": [0, 4, 16, 8], "texture": "#1"},
+				"west": {"uv": [0, 4, 16, 8], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}
