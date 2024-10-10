@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
+import com.melonstudios.createlegacy.util.BearingStructureHelper;
 import com.melonstudios.createlegacy.util.EnumContraptionAssemblyMode;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
@@ -88,12 +89,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
         super.writeToNBT(compound);
 
         if (structure != null) {
-            int i = Block.getIdFromBlock(structure.getBlock());
-            byte b = (byte) structure.getBlock().getMetaFromState(structure);
-
             NBTTagCompound structureTag = new NBTTagCompound();
-            structureTag.setInteger("blockID", i);
-            structureTag.setByte("blockMeta", b);
+            structureTag.setInteger("stateID", Block.getStateId(structure));
             compound.setTag("structureNBT", structureTag);
 
             compound.setFloat("angle", angle);
@@ -111,13 +108,17 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
         if (compound.hasKey("structureNBT")) {
             NBTTagCompound structureTag = compound.getCompoundTag("structureNBT");
 
-            structure = Block.getBlockById(structureTag.getInteger("blockID"))
-                    .getStateFromMeta(structureTag.getByte("blockMeta"));
+            structure = Block.getStateById(structureTag.getInteger("stateID"));
         }
 
         assemblyMode = EnumContraptionAssemblyMode.fromId(compound.getInteger("assemblyMode"));
 
         angle = compound.getFloat("angle");
+    }
+
+    protected BearingStructureHelper structureHelper = new BearingStructureHelper(this);
+    public BearingStructureHelper getStructureHelper() {
+        return structureHelper;
     }
 
     public boolean shouldRenderSpinning() {
