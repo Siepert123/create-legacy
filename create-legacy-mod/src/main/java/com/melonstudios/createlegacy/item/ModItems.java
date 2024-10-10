@@ -24,6 +24,15 @@ public final class ModItems {
     public static void setItemModels() {
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
+                0, "framed_glass/normal");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
+                1, "framed_glass/horizontal");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
+                2, "framed_glass/vertical");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
+                3, "framed_glass/tiled");
+
         AbstractBlockKinetic.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
                 0, "ore/copper");

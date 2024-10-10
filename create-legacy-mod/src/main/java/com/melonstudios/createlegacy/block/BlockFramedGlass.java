@@ -1,18 +1,25 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -23,6 +30,12 @@ public class BlockFramedGlass extends BlockGlass implements IMetaName {
         super(Material.GLASS, false);
         setRegistryName("framed_glass");
         setUnlocalizedName("create.framed_glass");
+
+        setHardness(5.0f);
+        setResistance(10.0f);
+
+        setSoundType(SoundType.GLASS);
+        setCreativeTab(CreateLegacy.TAB_DECORATIONS);
     }
 
     @Override
@@ -86,8 +99,26 @@ public class BlockFramedGlass extends BlockGlass implements IMetaName {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).getID();
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(VARIANT).getID());
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, 0));
+        items.add(new ItemStack(this, 1, 1));
+        items.add(new ItemStack(this, 1, 2));
+        items.add(new ItemStack(this, 1, 3));
+    }
+
+    @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockFramedGlass;
+        return !(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockFramedGlass);
     }
 
     @Override
