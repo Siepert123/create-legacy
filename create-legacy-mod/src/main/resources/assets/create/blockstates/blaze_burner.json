@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "has_blaze=false": {
+      "model": "create:blaze_burner/empty_cage"
+    },
+    "has_blaze=true": {
+      "model": "create:blaze_burner/empty_cage"
+    }
+  }
+}

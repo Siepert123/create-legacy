@@ -79,6 +79,12 @@ tile.create.drill.name=Mechanical Drill
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
 
+#blocc
+tile.create.framed_glass.name=Framed Glass
+tile.create.framed_glass_horizontal.name=Horizontal Framed Glass
+tile.create.framed_glass_vertical.name=Vertical Framed Glass
+tile.create.framed_glass_tiled.name=Tiled Framed Glass
+
 #Orestones etc
 tile.create.orestone_asurine.name=Asurine
 tile.create.orestone_crimsite.name=Crimsite
@@ -127,7 +133,6 @@ tile.create.orestone_layered_ochrum.name=Layered Ochrum
 tile.create.orestone_layered_scorchia.name=Layered Scorchia
 tile.create.orestone_layered_scoria.name=Layered Scoria
 tile.create.orestone_layered_veridium.name=Layered Veridium
-
 
 #damage sources
 death.attack.drilling=%s was broken by a Mechanical Drill

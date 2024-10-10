@@ -53,8 +53,6 @@ public final class ModBlocks {
     public static final Block RENDER = registerBlock(new BlockRender());
     public static final Block RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
 
-    public static final Block CHOCOLATE_FLUID = registerBlock(new BlockFluidChocolate());
-
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
     public static final AbstractBlockOrestone ORESTONE_BRICKS = registerOrestoneBlock(new BlockOrestoneBricks());
