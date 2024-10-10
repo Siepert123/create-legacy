@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=normal": {
+      "model": "create:framed_glass/normal"
+    },
+    "variant=horizontal": {
+      "model": "create:framed_glass/horizontal"
+    },
+    "variant=vertical": {
+      "model": "create:framed_glass/vertical"
+    },
+    "variant=tiled": {
+      "model": "create:framed_glass/tiled"
+    }
+  }
+}

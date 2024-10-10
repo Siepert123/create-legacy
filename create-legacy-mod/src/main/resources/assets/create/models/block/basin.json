@@ -1,0 +1,68 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"basin": "create:block/basin_map",
+		"particle": "create:block/industrial_iron_block"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#basin"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#basin"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#basin"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#basin"},
+				"up": {"uv": [0, 8, 8, 16], "texture": "#basin"},
+				"down": {"uv": [8, 7.5, 16, 16], "texture": "#basin"}
+			}
+		},
+		{
+			"from": [1, 16, 1],
+			"to": [15, 2, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 18, 1]},
+			"faces": {
+				"north": {"uv": [8.5, 7, 15.5, 0], "texture": "#basin"},
+				"east": {"uv": [8.5, 7, 15.5, 0], "texture": "#basin"},
+				"south": {"uv": [8.5, 7, 15.5, 0], "texture": "#basin"},
+				"west": {"uv": [8.5, 7, 15.5, 0], "texture": "#basin"},
+				"up": {"uv": [8.5, 8.5, 15.5, 15.5], "texture": "#basin"},
+				"down": {"uv": [0.5, 8.5, 7.5, 15.5], "texture": "#basin"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"head": {
+			"rotation": [180, 0, 0]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}
