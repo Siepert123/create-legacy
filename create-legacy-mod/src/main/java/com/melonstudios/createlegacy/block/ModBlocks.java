@@ -1,7 +1,10 @@
 package com.melonstudios.createlegacy.block;
 
+import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.block.fluid.BlockFluidChocolate;
 import com.melonstudios.createlegacy.block.kinetic.*;
 import com.melonstudios.createlegacy.block.stone.*;
+import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.*;
@@ -13,6 +16,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
@@ -48,6 +52,8 @@ public final class ModBlocks {
     public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final Block RENDER = registerBlock(new BlockRender());
     public static final Block RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
+
+    public static final Block CHOCOLATE_FLUID = registerBlock(new BlockFluidChocolate());
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());

@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockFramedGlass extends BlockGlass implements IMetaName {
+
     public BlockFramedGlass() {
         super(Material.GLASS, false);
         setRegistryName("framed_glass");
