@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockDrill;
@@ -18,7 +19,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
 
-public class TileEntityDrill extends AbstractTileEntityKinetic {
+public class TileEntityDrill extends AbstractTileEntityKinetic implements INeedsRecalculating {
     @Override
     protected String namePlate() {
         return "Drill";
@@ -107,12 +108,17 @@ public class TileEntityDrill extends AbstractTileEntityKinetic {
 
     @Override
     public void onLoad() {
-        drilling = world.getBlockState(pos.offset(facing()));
-        maxDrillingProgress = drilling.getBlockHardness(world, pos.offset(facing()));
+        recalculate();
     }
 
     @Override
     public float consumedStressMarkiplier() {
         return 6.0f;
+    }
+
+    @Override
+    public void recalculate() {
+        drilling = world.getBlockState(pos.offset(facing()));
+        maxDrillingProgress = drilling.getBlockHardness(world, pos.offset(facing()));
     }
 }

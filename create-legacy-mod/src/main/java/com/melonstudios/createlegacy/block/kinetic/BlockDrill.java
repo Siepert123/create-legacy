@@ -13,10 +13,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockDrill extends AbstractBlockKinetic {
     public BlockDrill() {
         super("drill");
+
+        needsRandomTick = true;
+    }
+
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(worldIn, pos, state, rand);
+
+        TileEntityDrill drill = (TileEntityDrill) worldIn.getTileEntity(pos);
+
+        if (drill != null) drill.recalculate();
     }
 
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
