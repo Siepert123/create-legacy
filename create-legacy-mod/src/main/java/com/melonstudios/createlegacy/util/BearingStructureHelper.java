@@ -27,6 +27,7 @@ public class BearingStructureHelper implements IBlockAccess {
         this.bearingTE = bearingTE;
     }
 
+    protected BlockPos offset;
     protected IBlockState[][][] structure;
     AbstractTileEntityBearing bearingTE;
 
