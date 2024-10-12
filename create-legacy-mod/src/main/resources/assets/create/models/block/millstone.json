@@ -1,9 +1,8 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "block/block",
 	"textures": {
 		"0": "create:block/gearbox",
-		"5": "create:block/millstone/millstone"
+		"5": "create:block/millstone/millstone",
+		"particle": "minecraft:blocks/stone_andesite_smooth"
 	},
 	"elements": [
 		{
