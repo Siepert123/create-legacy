@@ -33,6 +33,7 @@ public final class ModBlocks {
 
     public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
     public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
+    public static final Block GEARBOX = registerBlockWithItem(new BlockGearbox(), true);
     public static final Block KINETIC_UTILITY = registerBlockWithItem(new BlockKineticUtility(), true);
     public static final Block SAW = registerBlockWithItem(new BlockSaw());
     public static final Block BEARING = registerBlockWithItem(new BlockBearing());
@@ -90,6 +91,7 @@ public final class ModBlocks {
     public static void setTileEntities() {
         registerTE(TileEntityShaft.class, "shaft", new TileEntityShaftRenderer());
         registerTE(TileEntityCog.class, "cog", new TileEntityCogRenderer());
+        registerTE(TileEntityGearbox.class, "gearbox", new TileEntityGearboxRenderer());
         registerTE(TileEntityClutch.class, "clutch", new TileEntityClutchRenderer());
         registerTE(TileEntityGearshift.class, "gearshift", new TileEntityGearshiftRenderer());
 

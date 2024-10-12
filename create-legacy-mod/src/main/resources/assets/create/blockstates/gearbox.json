@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "create:gearbox",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "create:gearbox"
+    },
+    "axis=z": {
+      "model": "create:gearbox",
+      "x": 90
+    }
+  }
+}
