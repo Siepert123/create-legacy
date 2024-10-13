@@ -42,7 +42,8 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         GlStateManager.rotate(90, 1, 0, 0);
 
         if (!te.getStack().isEmpty()) {
-            IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
+            IBakedModel model = Minecraft.getMinecraft().getRenderItem()
+                    .getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
             model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

@@ -25,7 +25,7 @@ public class PacketUpdateMillstone implements IMessage {
 
         for (EntityPlayer player : players) {
             if (player instanceof EntityPlayerMP) {
-                CreateLegacy.networkWrapper.sendTo(new PacketUpdateMillstone(te), (EntityPlayerMP) player);
+                CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdateMillstone(te), (EntityPlayerMP) player);
             }
         }
     }

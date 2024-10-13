@@ -7,6 +7,7 @@
 	},
 	"elements": [
 		{
+			"name": "outer",
 			"from": [0, 0, 0],
 			"to": [16, 16, 16],
 			"faces": {
@@ -17,6 +18,18 @@
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
 			}
+		},
+		{
+			"from": [3, 16, 3],
+			"to": [13, 0, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 48, 3]},
+			"faces": {
+				"north": {"uv": [3, 0, 13, 16], "texture": "#0"},
+				"east": {"uv": [3, 0, 13, 16], "texture": "#0"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#0"},
+				"west": {"uv": [3, 0, 13, 16], "texture": "#0"}
+			}
 		}
-	]
+	],
+	"display": {}
 }

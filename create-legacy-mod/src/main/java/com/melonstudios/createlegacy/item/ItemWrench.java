@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.item;
 
+import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.util.BlockTagHelper;
@@ -10,6 +11,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -53,6 +55,10 @@ public class ItemWrench extends Item {
             if (state.getBlock() instanceof IWrenchable) {
                 if (((IWrenchable) state.getBlock()).onWrenched(worldIn, pos, state, side, player)) {
                     worldIn.playSound(null, pos, ModSoundEvents.ITEM_WRENCH_USED_ROTATE, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                    TileEntity entity = worldIn.getTileEntity(pos);
+                    if (entity instanceof INeedsRecalculating) {
+                        ((INeedsRecalculating) entity).recalculate();
+                    }
                     return EnumActionResult.SUCCESS;
                 }
             }

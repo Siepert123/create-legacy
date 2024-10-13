@@ -37,7 +37,10 @@ public final class CreateLegacy {
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
     public static final CreativeTabs TAB_DECORATIONS = new DecorationsTab();
 
-    public static SimpleNetworkWrapper networkWrapper;
+    private static SimpleNetworkWrapper networkWrapper;
+    public static SimpleNetworkWrapper getNetworkWrapper() {
+        return networkWrapper;
+    }
 
     @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
         clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
@@ -78,6 +81,11 @@ public final class CreateLegacy {
         networkWrapper.registerMessage(
                 new PacketUpdateMillstone.Handler(),
                 PacketUpdateMillstone.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateChute.Handler(),
+                PacketUpdateChute.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
         SchematicSaveHelper.makeSchematicsFolder();

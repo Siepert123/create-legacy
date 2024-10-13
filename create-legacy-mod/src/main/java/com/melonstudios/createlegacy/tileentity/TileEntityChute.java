@@ -1,6 +1,9 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.network.PacketUpdateChute;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -19,13 +22,26 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class TileEntityChute extends TileEntity implements IInventory, ITickable {
     protected ItemStack stack = ItemStack.EMPTY;
-    protected int transportCooldown = 0;
+    protected int transferCooldown = 0;
+
+    public ItemStack getStack() {
+        return stack;
+    }
+    public void setStack(ItemStack stack) {
+        this.stack = stack;
+    }
+    public int getTransferCooldown() {
+        return transferCooldown;
+    }
+    public void setTransferCooldown(int transferCooldown) {
+        this.transferCooldown = transferCooldown;
+    }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
-        compound.setInteger("transportCooldown", transportCooldown);
+        compound.setInteger("transportCooldown", transferCooldown);
 
         if (!stack.isEmpty()) {
             NBTTagCompound nbt = new NBTTagCompound();
@@ -40,7 +56,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        transportCooldown = compound.getInteger("transportCooldown");
+        transferCooldown = compound.getInteger("transportCooldown");
 
         if (compound.hasKey("Stack")) {
             stack = new ItemStack(compound.getCompoundTag("Stack"));
@@ -111,7 +127,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
     @Override
     public int getField(int id) {
         switch (id) {
-            case 0: return transportCooldown;
+            case 0: return transferCooldown;
             default: return 0;
         }
     }
@@ -119,7 +135,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
     @Override
     public void setField(int id, int value) {
         switch (id) {
-            case 0: transportCooldown = value;
+            case 0: transferCooldown = value;
         }
     }
 
@@ -136,7 +152,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
     @Override
     public void update() {
         if (!world.isRemote) {
-            if (transportCooldown > 0) transportCooldown--;
+            if (transferCooldown > 0) transferCooldown--;
             else {
                 if (!stack.isEmpty()) {
                     TileEntity entity = world.getTileEntity(pos.down());
@@ -145,14 +161,15 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
                             ISidedInventory inventory = (ISidedInventory) entity;
                             for (int i : inventory.getSlotsForFace(EnumFacing.UP)) {
                                 if (inventory.canInsertItem(i, stack, EnumFacing.UP) && inventory.isItemValidForSlot(i, stack)
-                                        && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())) {
+                                        && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())
+                                        && inventory.getStackInSlot(i).getCount() <= (inventory.getInventoryStackLimit() + stack.getCount())) {
                                     if (inventory.getStackInSlot(i).isEmpty())
                                         inventory.setInventorySlotContents(i, stack);
                                     else {
                                         inventory.getStackInSlot(i).grow(stack.getCount());
                                     }
                                     stack = ItemStack.EMPTY;
-                                    transportCooldown = 10;
+                                    transferCooldown = 10;
                                     break;
                                 }
                             }
@@ -161,16 +178,29 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
 
                             for (int i = 0; i < inventory.getSizeInventory(); i++) {
                                 if (inventory.isItemValidForSlot(i, stack)
-                                        && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())) {
+                                        && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())
+                                        && inventory.getStackInSlot(i).getCount() < (inventory.getInventoryStackLimit() + stack.getCount())) {
                                     if (inventory.getStackInSlot(i).isEmpty())
                                         inventory.setInventorySlotContents(i, stack);
                                     else {
                                         inventory.getStackInSlot(i).grow(stack.getCount());
                                     }
                                     stack = ItemStack.EMPTY;
-                                    transportCooldown = 10;
+                                    transferCooldown = 10;
                                     break;
                                 }
+                            }
+                        }
+                    } else {
+                        final IBlockState state = world.getBlockState(pos.down());
+                        if (!state.getMaterial().blocksMovement() || state.getCollisionBoundingBox(world, pos.down()) == Block.NULL_AABB) {
+                            if (world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.down())).isEmpty()) {
+                                EntityItem item = new EntityItem(world,
+                                        pos.getX() + 0.5, pos.getY()-0.5, pos.getZ() + 0.5,
+                                        removeStackFromSlot(0));
+                                item.setVelocity(0, -0.25, 0);
+                                world.spawnEntity(item);
+                                transferCooldown = 10;
                             }
                         }
                     }
@@ -183,8 +213,8 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
 
                             for (int i : inventory.getSlotsForFace(EnumFacing.DOWN)) {
                                 if (inventory.canExtractItem(i, inventory.getStackInSlot(i), EnumFacing.DOWN) && !inventory.getStackInSlot(i).isEmpty()) {
-                                    stack = inventory.removeStackFromSlot(i);
-                                    transportCooldown = 10;
+                                    stack = inventory.decrStackSize(i, 16);
+                                    transferCooldown = 10;
                                     break;
                                 }
                             }
@@ -193,8 +223,8 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
 
                             for (int i = 0; i < inventory.getSizeInventory(); i++) {
                                 if (!inventory.getStackInSlot(i).isEmpty()) {
-                                    stack = inventory.removeStackFromSlot(i);
-                                    transportCooldown = 10;
+                                    stack = inventory.decrStackSize(i, 16);
+                                    transferCooldown = 10;
                                     break;
                                 }
                             }
@@ -205,11 +235,12 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
                         if (!droppedItems.isEmpty()) {
                             stack = droppedItems.get(0).getItem().copy();
                             droppedItems.get(0).setDead();
-                            transportCooldown = 10;
+                            transferCooldown = 10;
                         }
                     }
                 }
             }
+            PacketUpdateChute.sendToNearbyPlayers(this, 16);
             markDirty();
         }
     }

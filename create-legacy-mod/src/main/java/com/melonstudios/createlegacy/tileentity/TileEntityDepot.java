@@ -194,7 +194,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
 
             for (EntityPlayer player : players) {
                 if (player instanceof EntityPlayerMP) {
-                    CreateLegacy.networkWrapper.sendTo(new PacketUpdateDepot(this), (EntityPlayerMP) player);
+                    CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdateDepot(this), (EntityPlayerMP) player);
                 }
             }
         }

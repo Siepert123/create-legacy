@@ -4,7 +4,6 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityChute;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -68,8 +67,8 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         }
 
         if (chute != null) {
-            world.setTileEntity(pos, chute);
             chute.validate();
+            world.setTileEntity(pos, chute);
         }
 
         return true;
@@ -77,7 +76,7 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (playerIn.getHeldItem(hand).getItem() == Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON)) {
+        if (playerIn.getHeldItem(hand).getItem() == Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON) && !isEncased(state) && !playerIn.isSneaking()) {
             TileEntityChute chute = (TileEntityChute) worldIn.getTileEntity(pos);
             ItemStack stack;
             if (chute != null) {
@@ -87,13 +86,26 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
             worldIn.setBlockState(pos, state.withProperty(VARIANT, Variant.ENCASED), 3);
 
             if (chute != null) {
-                worldIn.setTileEntity(pos, chute);
                 chute.validate();
+                worldIn.setTileEntity(pos, chute);
                 chute.setInventorySlotContents(0, stack);
             }
 
             return true;
-        } else return false;
+        } else if (playerIn.getHeldItem(hand).isEmpty()) {
+            TileEntityChute chute = (TileEntityChute) worldIn.getTileEntity(pos);
+            if (chute != null && !chute.getStack().isEmpty() && !playerIn.isSneaking()) {
+                if (!worldIn.isRemote) {
+                    EntityItem item = new EntityItem(worldIn,
+                            playerIn.posX, playerIn.posY, playerIn.posZ,
+                            chute.removeStackFromSlot(0));
+                    item.setVelocity(0, 0, 0);
+                    worldIn.spawnEntity(item);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     public enum Variant implements IStringSerializable {
@@ -155,58 +167,58 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
-    protected boolean b(IBlockState state) {
+    protected boolean isEncased(IBlockState state) {
         return state.getValue(VARIANT) == Variant.ENCASED;
     }
     @Override
     public boolean isFullBlock(IBlockState state) {
-        return b(state);
+        return false;
     }
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return b(state);
+        return false;
     }
 
     @Override
     public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return b(state);
+        return false;
     }
 
     @Override
     public boolean isNormalCube(IBlockState state) {
-        return b(state);
+        return false;
     }
 
     @Override
     public boolean isTranslucent(IBlockState state) {
-        return !b(state);
+        return true;
     }
 
     @Override
     public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return b(state) ? 15 : 0;
+        return 0;
     }
 
     @Override
     public int getLightOpacity(IBlockState state) {
-        return b(state) ? 15 : 0;
+        return 0;
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return b(state);
+        return false;
     }
 
     @Override
     public boolean isBlockNormalCube(IBlockState state) {
-        return b(state);
+        return false;
     }
 
     protected static final AxisAlignedBB CHUTE_AABB = CreateLegacy.aabb(1, 0, 1, 15, 16, 15);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return b(state) ? FULL_BLOCK_AABB : CHUTE_AABB;
+        return isEncased(state) ? FULL_BLOCK_AABB : CHUTE_AABB;
     }
 }

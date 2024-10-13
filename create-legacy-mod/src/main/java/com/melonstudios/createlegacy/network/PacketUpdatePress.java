@@ -25,7 +25,7 @@ public class PacketUpdatePress implements IMessage {
 
         for (EntityPlayer player : players) {
             if (player instanceof EntityPlayerMP) {
-                CreateLegacy.networkWrapper.sendTo(new PacketUpdatePress(te), (EntityPlayerMP) player);
+                CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdatePress(te), (EntityPlayerMP) player);
             }
         }
     }
