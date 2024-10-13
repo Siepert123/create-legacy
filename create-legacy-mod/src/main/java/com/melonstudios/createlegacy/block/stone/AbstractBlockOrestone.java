@@ -52,6 +52,8 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
                 STONE_TYPE, StoneType.ASURINE
         ));
 
+        setHarvestLevel("pickaxe", 0);
+
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
     }
 

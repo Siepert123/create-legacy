@@ -32,6 +32,8 @@ public class BlockFramedGlass extends BlockGlass implements IMetaName {
         setRegistryName("framed_glass");
         setUnlocalizedName("create.framed_glass");
 
+        setHarvestLevel("pickaxe", 0);
+
         setHardness(5.0f);
         setResistance(10.0f);
 

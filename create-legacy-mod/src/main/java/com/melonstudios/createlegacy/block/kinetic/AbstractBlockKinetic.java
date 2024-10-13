@@ -23,6 +23,8 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
         setRegistryName(registry);
         setUnlocalizedName("create." + registry);
 
+        setHarvestLevel("pickaxe", 0);
+
         setSoundType(SoundType.WOOD);
 
         setHardness(2.5f);

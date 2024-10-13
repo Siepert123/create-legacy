@@ -33,6 +33,8 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         setRegistryName("blaze_burner");
         setUnlocalizedName("create.blaze_burner");
 
+        setHarvestLevel("pickaxe", 1);
+
         setHardness(5.0f);
         setResistance(10.0f);
 

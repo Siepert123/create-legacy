@@ -35,6 +35,11 @@ public final class BlockMetal extends Block implements IMetaName {
 
         setSoundType(SoundType.METAL);
 
+        setHarvestLevel("pickaxe", 0, getDefaultState().withProperty(METAL_TYPE, Variant.ANDESITE_ALLOY));
+        setHarvestLevel("pickaxe", 1, getDefaultState().withProperty(METAL_TYPE, Variant.COPPER));
+        setHarvestLevel("pickaxe", 2, getDefaultState().withProperty(METAL_TYPE, Variant.ZINC));
+        setHarvestLevel("pickaxe", 2, getDefaultState().withProperty(METAL_TYPE, Variant.BRASS));
+
         setRegistryName("metal");
         setUnlocalizedName("create.metal");
 

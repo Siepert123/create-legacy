@@ -30,6 +30,8 @@ public class BlockCasing extends Block implements IMetaName {
         super(Material.ROCK);
         setSoundType(SoundType.WOOD);
 
+        setHarvestLevel("pickaxe", -1);
+
         setRegistryName("casing");
         setUnlocalizedName("create.casing");
 
