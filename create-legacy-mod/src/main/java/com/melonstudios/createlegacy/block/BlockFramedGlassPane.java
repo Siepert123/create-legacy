@@ -101,7 +101,7 @@ public class BlockFramedGlassPane extends BlockPane implements IMetaName {
 
     @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return !(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockFramedGlass)
+        return !(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockFramedGlassPane)
                 && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
