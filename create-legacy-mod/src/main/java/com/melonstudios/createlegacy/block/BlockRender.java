@@ -62,7 +62,9 @@ public class BlockRender extends Block {
         DRILL_N("drill_n"),
         DRILL_E("drill_e"),
         DRILL_S("drill_s"),
-        DRILL_W("drill_w"),;
+        DRILL_W("drill_w"),
+
+        SAWBLADE_Y("sawblade_y");
 
         private final String name;
         private final int id;

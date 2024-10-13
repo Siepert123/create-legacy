@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "variant=solid": {
+      "model": "create:chute/solid"
+    },
+    "variant=window": {
+      "model": "create:chute/window"
+    },
+    "variant=encased": {
+      "model": "create:chute/encased"
+    }
+  }
+}

@@ -44,6 +44,7 @@ public final class ModBlocks {
     public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
     public static final Block DEPOT = registerBlockWithItem(new BlockDepot());
+    public static final Block CHUTE = registerBlockWithItem(new BlockChute());
 
     public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
@@ -104,6 +105,7 @@ public final class ModBlocks {
         registerTE(TileEntityDrill.class, "drill", new TileEntityDrillRenderer());
 
         registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
+        registerTE(TileEntityChute.class, "chute", new TileEntityChuteRenderer());
 
         registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());

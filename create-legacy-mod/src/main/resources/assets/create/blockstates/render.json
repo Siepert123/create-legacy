@@ -11,6 +11,10 @@
       "model": "create:render/sawblade",
       "y": 90
     },
+    "type=sawblade_y": {
+      "model": "create:render/sawblade",
+      "x": 90
+    },
     "type=sawblade_z": {
       "model": "create:render/sawblade"
     },
