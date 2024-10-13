@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,6 +22,10 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlockFramedGlassPane extends BlockPane implements IMetaName {
     protected BlockFramedGlassPane() {
         super(Material.GLASS, true);
@@ -101,8 +106,36 @@ public class BlockFramedGlassPane extends BlockPane implements IMetaName {
 
     @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return !(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockFramedGlassPane)
-                && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        if (side == EnumFacing.UP) return shouldRenderUp(blockState, blockAccess, pos);
+        if (side == EnumFacing.DOWN) return shouldRenderDown(blockState, blockAccess, pos);
+
+        return blockAccess.getBlockState(pos.offset(side)).isSideSolid(blockAccess, pos.offset(side), side.getOpposite());
+    }
+    private boolean shouldRenderUp(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
+        IBlockState upState = blockAccess.getBlockState(pos.up());
+
+        if (upState.getBlock() instanceof BlockFramedGlassPane) {
+            boolean flag1 = upState.getValue(NORTH) == state.getValue(NORTH);
+            boolean flag2 = upState.getValue(EAST) == state.getValue(EAST);
+            boolean flag3 = upState.getValue(SOUTH) == state.getValue(SOUTH);
+            boolean flag4 = upState.getValue(WEST) == state.getValue(WEST);
+            return flag1 && flag2 && flag3 && flag4;
+        }
+
+        return !upState.isSideSolid(blockAccess, pos.up(), EnumFacing.DOWN);
+    }
+    private boolean shouldRenderDown(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
+        IBlockState downState = blockAccess.getBlockState(pos.down());
+
+        if (downState.getBlock() instanceof BlockFramedGlassPane) {
+            boolean flag1 = downState.getValue(NORTH) == state.getValue(NORTH);
+            boolean flag2 = downState.getValue(EAST) == state.getValue(EAST);
+            boolean flag3 = downState.getValue(SOUTH) == state.getValue(SOUTH);
+            boolean flag4 = downState.getValue(WEST) == state.getValue(WEST);
+            return flag1 && flag2 && flag3 && flag4;
+        }
+
+        return !downState.isSideSolid(blockAccess, pos.down(), EnumFacing.UP);
     }
 
     @Override
