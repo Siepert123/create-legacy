@@ -9,6 +9,7 @@ import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
@@ -66,6 +67,9 @@ public final class ModBlocks {
     public static final AbstractBlockOrestone ORESTONE_PILLAR_Z
             = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.Z));
     public static final AbstractBlockOrestone ORESTONE_LAYERED = registerOrestoneBlock(new BlockOrestoneLayered());
+
+    public static final Block INDUSTRIAL_IRON = registerBlockWithItem(new Block(Material.IRON).setCreativeTab(CreateLegacy.TAB_DECORATIONS)
+            .setRegistryName("industrial_iron").setUnlocalizedName("create.industrial_iron").setHardness(15f).setResistance(50f));
 
     public static final Block FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
     public static final Block FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);

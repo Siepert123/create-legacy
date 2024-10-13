@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -23,7 +24,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockChute extends Block implements ITileEntityProvider {
+public class BlockChute extends Block implements ITileEntityProvider, IWrenchable {
     public BlockChute() {
         super(Material.IRON);
 
@@ -46,6 +47,53 @@ public class BlockChute extends Block implements ITileEntityProvider {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityChute();
+    }
+
+    protected IBlockState solid() {
+        return getDefaultState().withProperty(VARIANT, Variant.SOLID);
+    }
+    protected IBlockState window() {
+        return getDefaultState().withProperty(VARIANT, Variant.WINDOW);
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
+        TileEntityChute chute = (TileEntityChute) world.getTileEntity(pos);
+
+        if (state.getValue(VARIANT) == Variant.ENCASED) {
+            world.setBlockState(pos, solid(), 3);
+        } else {
+            if (state.getValue(VARIANT) == Variant.SOLID) world.setBlockState(pos, window(), 3);
+            else world.setBlockState(pos, solid());
+        }
+
+        if (chute != null) {
+            world.setTileEntity(pos, chute);
+            chute.validate();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (playerIn.getHeldItem(hand).getItem() == Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON)) {
+            TileEntityChute chute = (TileEntityChute) worldIn.getTileEntity(pos);
+            ItemStack stack;
+            if (chute != null) {
+                stack = chute.getStackInSlot(0);
+            } else stack = ItemStack.EMPTY;
+
+            worldIn.setBlockState(pos, state.withProperty(VARIANT, Variant.ENCASED), 3);
+
+            if (chute != null) {
+                worldIn.setTileEntity(pos, chute);
+                chute.validate();
+                chute.setInventorySlotContents(0, stack);
+            }
+
+            return true;
+        } else return false;
     }
 
     public enum Variant implements IStringSerializable {

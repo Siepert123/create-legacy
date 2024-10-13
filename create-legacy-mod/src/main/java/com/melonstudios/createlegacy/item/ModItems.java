@@ -12,6 +12,7 @@ import java.util.List;
 public final class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
 
+    public static final Item WRENCH = registerItem(new ItemWrench());
     public static final Item INGREDIENT = registerItem(new ItemIngredient());
     public static final Item SANDPAPER = registerItem(new ItemSandpaper());
     public static final Item SCHEMATIC = registerItem(new ItemSchematic());
@@ -22,6 +23,8 @@ public final class ModItems {
     }
 
     public static void setItemModels() {
+        CreateLegacy.setItemModel(WRENCH);
+
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
@@ -70,6 +73,8 @@ public final class ModItems {
                 "schematic/writeable");
         CreateLegacy.setItemModel(SCHEMATIC, 2,
                 "schematic/written");
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON));
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.DEPOT));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHUTE));

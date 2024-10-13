@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.util;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -64,6 +65,9 @@ public final class OreDictHandler {
 
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));
+
+
+        BlockTagHelper.addBlockTags();
 
         DisplayLink.debug("Ore Dictionary init done in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;

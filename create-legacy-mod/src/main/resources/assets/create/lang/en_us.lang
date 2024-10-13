@@ -3,6 +3,7 @@ item.create.sandpaper.name=Sandpaper
 item.create.schematic_empty.name=Empty Schematic
 item.create.schematic_writeable.name=Schematic and Quill
 item.create.schematic.name=Schematic
+item.create.wrench.name=Wrench
 
 #Ingredients
 item.create.andesite_alloy.name=Andesite Alloy
@@ -47,6 +48,7 @@ tile.create.casing_andesite.name=Andesite Casing
 tile.create.casing_copper.name=Copper Casing
 tile.create.casing_brass.name=Brass Casing
 tile.create.casing_train.name=Train Casing
+tile.create.chute.name=Chute
 
 tile.create.framed_glass.name=Framed Glass
 tile.create.framed_glass_horizontal.name=Horizontal Framed Glass
@@ -66,6 +68,7 @@ tile.create.shaft.name=Shaft
 tile.create.cog.name=Cog
 tile.create.shaft_encased_andesite.name=Andesite Encased Shaft
 tile.create.shaft_encased_brass.name=Brass Encased Shaft
+tile.create.gearbox.name=Gearbox
 tile.create.clutch.name=Clutch
 tile.create.gearshift.name=Gearshift
 tile.create.speedometer.name=Speedometer
