@@ -115,11 +115,11 @@ public class BlockFramedGlassPane extends BlockPane implements IMetaName {
         IBlockState upState = blockAccess.getBlockState(pos.up());
 
         if (upState.getBlock() instanceof BlockFramedGlassPane) {
-            boolean flag1 = upState.getValue(NORTH) == state.getValue(NORTH);
-            boolean flag2 = upState.getValue(EAST) == state.getValue(EAST);
-            boolean flag3 = upState.getValue(SOUTH) == state.getValue(SOUTH);
-            boolean flag4 = upState.getValue(WEST) == state.getValue(WEST);
-            return flag1 && flag2 && flag3 && flag4;
+            boolean flag1 = upState.getValue(NORTH) != state.getValue(NORTH);
+            boolean flag2 = upState.getValue(EAST) != state.getValue(EAST);
+            boolean flag3 = upState.getValue(SOUTH) != state.getValue(SOUTH);
+            boolean flag4 = upState.getValue(WEST) != state.getValue(WEST);
+            return (flag1 || flag2 || flag3 || flag4);
         }
 
         return !upState.isSideSolid(blockAccess, pos.up(), EnumFacing.DOWN);
@@ -128,11 +128,11 @@ public class BlockFramedGlassPane extends BlockPane implements IMetaName {
         IBlockState downState = blockAccess.getBlockState(pos.down());
 
         if (downState.getBlock() instanceof BlockFramedGlassPane) {
-            boolean flag1 = downState.getValue(NORTH) == state.getValue(NORTH);
-            boolean flag2 = downState.getValue(EAST) == state.getValue(EAST);
-            boolean flag3 = downState.getValue(SOUTH) == state.getValue(SOUTH);
-            boolean flag4 = downState.getValue(WEST) == state.getValue(WEST);
-            return flag1 && flag2 && flag3 && flag4;
+            boolean flag1 = downState.getValue(NORTH) != state.getValue(NORTH);
+            boolean flag2 = downState.getValue(EAST) != state.getValue(EAST);
+            boolean flag3 = downState.getValue(SOUTH) != state.getValue(SOUTH);
+            boolean flag4 = downState.getValue(WEST) != state.getValue(WEST);
+            return (flag1 || flag2 || flag3 || flag4);
         }
 
         return !downState.isSideSolid(blockAccess, pos.down(), EnumFacing.UP);
