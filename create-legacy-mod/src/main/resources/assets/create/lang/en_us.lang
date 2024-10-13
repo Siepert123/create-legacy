@@ -48,6 +48,15 @@ tile.create.casing_copper.name=Copper Casing
 tile.create.casing_brass.name=Brass Casing
 tile.create.casing_train.name=Train Casing
 
+tile.create.framed_glass.name=Framed Glass
+tile.create.framed_glass_horizontal.name=Horizontal Framed Glass
+tile.create.framed_glass_vertical.name=Vertical Framed Glass
+tile.create.framed_glass_tiled.name=Tiled Framed Glass
+tile.create.framed_glass_pane.name=Framed Glass Pane
+tile.create.framed_glass_pane_horizontal.name=Horizontal Framed Glass Pane
+tile.create.framed_glass_pane_vertical.name=Vertical Framed Glass Pane
+tile.create.framed_glass_pane_tiled.name=Tiled Framed Glass Pane
+
 #Kinetics
 tile.create.chigwanker.name=Mechindustrial Chigwanker
 
@@ -78,12 +87,6 @@ tile.create.drill.name=Mechanical Drill
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations
-
-#blocc
-tile.create.framed_glass.name=Framed Glass
-tile.create.framed_glass_horizontal.name=Horizontal Framed Glass
-tile.create.framed_glass_vertical.name=Vertical Framed Glass
-tile.create.framed_glass_tiled.name=Tiled Framed Glass
 
 #Orestones etc
 tile.create.orestone_asurine.name=Asurine

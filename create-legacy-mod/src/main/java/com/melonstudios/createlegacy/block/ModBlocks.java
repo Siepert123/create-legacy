@@ -67,6 +67,7 @@ public final class ModBlocks {
     public static final AbstractBlockOrestone ORESTONE_LAYERED = registerOrestoneBlock(new BlockOrestoneLayered());
 
     public static final Block FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
+    public static final Block FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
 
     private static Block registerBlock(Block block) {
         BLOCKS.add(block);

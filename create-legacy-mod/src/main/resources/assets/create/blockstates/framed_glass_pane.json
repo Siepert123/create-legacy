@@ -1,0 +1,336 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_post"
+      }
+    },
+    {
+      "when": {
+        "north": true,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_side"
+      }
+    },
+    {
+      "when": {
+        "east": true,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": true,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_side_alt"
+      }
+    },
+    {
+      "when": {
+        "west": true,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_side_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": false,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_noside"
+      }
+    },
+    {
+      "when": {
+        "east": false,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_noside_alt"
+      }
+    },
+    {
+      "when": {
+        "south": false,
+        "variant": "normal"
+      },
+      "apply": { "model": "create:framed_glass_pane/normal_noside_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": false,
+        "variant": "normal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/normal_noside",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_post"
+      }
+    },
+    {
+      "when": {
+        "north": true,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_side"
+      }
+    },
+    {
+      "when": {
+        "east": true,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": true,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_side_alt"
+      }
+    },
+    {
+      "when": {
+        "west": true,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_side_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": false,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_noside"
+      }
+    },
+    {
+      "when": {
+        "east": false,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_noside_alt"
+      }
+    },
+    {
+      "when": {
+        "south": false,
+        "variant": "horizontal"
+      },
+      "apply": { "model": "create:framed_glass_pane/horizontal_noside_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": false,
+        "variant": "horizontal"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/horizontal_noside",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_post"
+      }
+    },
+    {
+      "when": {
+        "north": true,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_side"
+      }
+    },
+    {
+      "when": {
+        "east": true,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": true,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_side_alt"
+      }
+    },
+    {
+      "when": {
+        "west": true,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_side_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": false,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_noside"
+      }
+    },
+    {
+      "when": {
+        "east": false,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_noside_alt"
+      }
+    },
+    {
+      "when": {
+        "south": false,
+        "variant": "vertical"
+      },
+      "apply": { "model": "create:framed_glass_pane/vertical_noside_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": false,
+        "variant": "vertical"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/vertical_noside",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_post"
+      }
+    },
+    {
+      "when": {
+        "north": true,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_side"
+      }
+    },
+    {
+      "when": {
+        "east": true,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_side",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": true,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_side_alt"
+      }
+    },
+    {
+      "when": {
+        "west": true,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_side_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "north": false,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_noside"
+      }
+    },
+    {
+      "when": {
+        "east": false,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_noside_alt"
+      }
+    },
+    {
+      "when": {
+        "south": false,
+        "variant": "tiled"
+      },
+      "apply": { "model": "create:framed_glass_pane/tiled_noside_alt",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": false,
+        "variant": "tiled"
+      },
+      "apply": {
+        "model": "create:framed_glass_pane/tiled_noside",
+        "y": 270
+      }
+    }
+  ]
+}

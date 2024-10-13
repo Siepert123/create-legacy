@@ -32,6 +32,14 @@ public final class ModItems {
                 2, "framed_glass/vertical");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
                 3, "framed_glass/tiled");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS_PANE),
+                0, "framed_glass_pane/normal");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS_PANE),
+                1, "framed_glass_pane/horizontal");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS_PANE),
+                2, "framed_glass_pane/vertical");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS_PANE),
+                3, "framed_glass_pane/tiled");
 
         AbstractBlockKinetic.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),
