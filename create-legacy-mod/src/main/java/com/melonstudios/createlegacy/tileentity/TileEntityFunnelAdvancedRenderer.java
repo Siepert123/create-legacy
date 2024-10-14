@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
@@ -31,7 +32,7 @@ public class TileEntityFunnelAdvancedRenderer extends TileEntitySpecialRenderer<
             GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
             GlStateManager.pushMatrix();
             GlStateManager.translate(x + 0.5, y + 0.635, z + 0.5);
-            GlStateManager.rotate(te.facing().getHorizontalAngle(), 0, 1, 0);
+            GlStateManager.rotate(getAngle(te.facing()), 0, 1, 0);
 
             IBakedModel model = ForgeHooksClient.handleCameraTransforms(
                     Minecraft.getMinecraft().getRenderItem()
@@ -46,5 +47,15 @@ public class TileEntityFunnelAdvancedRenderer extends TileEntitySpecialRenderer<
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
+    }
+
+    protected float getAngle(EnumFacing direction) {
+        switch (direction) {
+            case NORTH: return 0.0f;
+            case EAST: return 270.0f;
+            case SOUTH: return 180.0f;
+            case WEST: return 90.0f;
+        }
+        return 0;
     }
 }

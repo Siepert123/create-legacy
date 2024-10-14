@@ -65,6 +65,8 @@ tile.create.framed_glass_pane_tiled.name=Tiled Framed Glass Pane
 tile.create.chigwanker.name=Mechindustrial Chigwanker
 
 tile.create.depot.name=Depot
+tile.create.funnel_andesite.name=Andesite Funnel
+tile.create.funnel_brass.name=Brass Funnel
 
 tile.create.shaft.name=Shaft
 tile.create.cog.name=Cog
