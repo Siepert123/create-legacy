@@ -5,6 +5,7 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -36,6 +37,57 @@ public class BearingStructureHelper implements IBlockAccess {
     }
     public void setStructure(IBlockState[][][] structure) {
         this.structure = structure;
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        NBTTagCompound size = new NBTTagCompound();
+        size.setInteger("x", structure.length);
+        size.setInteger("y", structure[0].length);
+        size.setInteger("z", structure[0][0].length);
+        compound.setTag("Size", size);
+
+        NBTTagCompound offset = new NBTTagCompound();
+        offset.setInteger("x", this.offset.getX());
+        offset.setInteger("y", this.offset.getY());
+        offset.setInteger("z", this.offset.getZ());
+        compound.setTag("Offset", offset);
+
+        NBTTagCompound structureSave = new NBTTagCompound();
+
+        int structureSize = this.structure.length * this.structure[0].length * this.structure[0][0].length;
+
+        int[] save = new int[structureSize];
+
+        for (int x = 0; x < structure.length; x++) {
+            for (int y = 0; y < structure[0].length; y++) {
+                for (int z = 0; z < structure[0][0].length; z++) {
+                    int index = x*structure[0].length+y*structure[0][0].length+z;
+
+                    save[index] = Block.getStateId(structure[x][y][z]);
+                }
+            }
+        }
+
+        structureSave.setIntArray("structure", save);
+
+        compound.setTag("Structure", structureSave);
+
+        return compound;
+    }
+
+    public void placeStructure() {
+        for (int x = 0; x < structure.length; x++) {
+            for (int y = 0; y < structure[0].length; y++) {
+                for (int z = 0; z < structure[0][0].length; z++) {
+                    final BlockPos actualPos = new BlockPos(x, y, z);
+                    final IBlockState previousState = getActualWorld().getBlockState(actualPos);
+
+                    getActualWorld().playEvent(2001, actualPos, Block.getStateId(structure[x][y][z]));
+                    previousState.getBlock().dropBlockAsItem(getActualWorld(), actualPos, previousState, 0);
+                    getActualWorld().setBlockState(actualPos, structure[x][y][z]);
+                }
+            }
+        }
     }
 
     @Nullable
