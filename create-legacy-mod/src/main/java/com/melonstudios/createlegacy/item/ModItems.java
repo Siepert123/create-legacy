@@ -65,6 +65,10 @@ public final class ModItems {
                 2, "casing/brass");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CASING),
                 3, "casing/train");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FUNNEL),
+                0, "funnel/andesite");
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FUNNEL),
+                1, "funnel/brass");
 
         CreateLegacy.setItemModel(SANDPAPER);
         CreateLegacy.setItemModel(SCHEMATIC, 0,

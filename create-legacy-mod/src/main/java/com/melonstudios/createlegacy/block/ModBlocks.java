@@ -28,34 +28,35 @@ import java.util.List;
 public final class ModBlocks {
     public static final List<Block> BLOCKS = new ArrayList<>();
 
-    public static final Block ORE = registerBlockWithItem(new BlockOre(), true);
-    public static final Block METAL = registerBlockWithItem(new BlockMetal(), true);
+    public static final BlockOre ORE = registerBlockWithItem(new BlockOre(), true);
+    public static final BlockMetal METAL = registerBlockWithItem(new BlockMetal(), true);
 
-    public static final Block CASING = registerBlockWithItem(new BlockCasing(), true);
+    public static final BlockCasing CASING = registerBlockWithItem(new BlockCasing(), true);
 
-    public static final Block ROTATOR = registerBlockWithItem(new BlockRotator(), true);
-    public static final Block SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
-    public static final Block GEARBOX = registerBlockWithItem(new BlockGearbox(), true);
-    public static final Block KINETIC_UTILITY = registerBlockWithItem(new BlockKineticUtility(), true);
-    public static final Block SAW = registerBlockWithItem(new BlockSaw());
-    public static final Block BEARING = registerBlockWithItem(new BlockBearing());
-    public static final Block PRESS = registerBlockWithItem(new BlockPress());
-    public static final Block MILLSTONE = registerBlockWithItem(new BlockMillstone());
-    public static final Block FAN = registerBlockWithItem(new BlockFan());
-    public static final Block DRILL = registerBlockWithItem(new BlockDrill());
-    public static final Block NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
+    public static final BlockRotator ROTATOR = registerBlockWithItem(new BlockRotator(), true);
+    public static final BlockEncasedShaft SHAFT_ENCASED = registerBlockWithItem(new BlockEncasedShaft(), true);
+    public static final BlockGearbox GEARBOX = registerBlockWithItem(new BlockGearbox(), true);
+    public static final BlockKineticUtility KINETIC_UTILITY = registerBlockWithItem(new BlockKineticUtility(), true);
+    public static final BlockSaw SAW = registerBlockWithItem(new BlockSaw());
+    public static final BlockBearing BEARING = registerBlockWithItem(new BlockBearing());
+    public static final BlockPress PRESS = registerBlockWithItem(new BlockPress());
+    public static final BlockMillstone MILLSTONE = registerBlockWithItem(new BlockMillstone());
+    public static final BlockFan FAN = registerBlockWithItem(new BlockFan());
+    public static final BlockDrill DRILL = registerBlockWithItem(new BlockDrill());
+    public static final BlockNetworkInspector NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
-    public static final Block DEPOT = registerBlockWithItem(new BlockDepot());
-    public static final Block CHUTE = registerBlockWithItem(new BlockChute());
+    public static final BlockDepot DEPOT = registerBlockWithItem(new BlockDepot());
+    public static final BlockChute CHUTE = registerBlockWithItem(new BlockChute());
+    public static final BlockFunnel FUNNEL = registerBlockWithItem(new BlockFunnel(), true);
 
-    public static final Block HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
-    public static final Block WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
-    public static final Block FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);
-    public static final Block CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
+    public static final BlockHandCrank HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
+    public static final BlockWaterWheel WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
+    public static final BlockFurnaceEngine FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);
+    public static final BlockCreativeMotor CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
-    public static final Block CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
-    public static final Block RENDER = registerBlock(new BlockRender());
-    public static final Block RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
+    public static final BlockChigwanker CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
+    public static final BlockRender RENDER = registerBlock(new BlockRender());
+    public static final BlockRenderBearingAnchor RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
@@ -64,9 +65,9 @@ public final class ModBlocks {
     public static final AbstractBlockOrestone ORESTONE_PILLAR_Y
             = registerOrestoneBlock(new BlockOrestonePillar(EnumFacing.Axis.Y));
     public static final AbstractBlockOrestone ORESTONE_PILLAR_X
-            = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.X));
+            = registerBlock(new BlockOrestonePillar(EnumFacing.Axis.X));
     public static final AbstractBlockOrestone ORESTONE_PILLAR_Z
-            = (AbstractBlockOrestone) registerBlock(new BlockOrestonePillar(EnumFacing.Axis.Z));
+            = registerBlock(new BlockOrestonePillar(EnumFacing.Axis.Z));
     public static final AbstractBlockOrestone ORESTONE_LAYERED = registerOrestoneBlock(new BlockOrestoneLayered());
 
     public static final Block INDUSTRIAL_IRON = registerBlockWithItem(new Block(Material.IRON, MapColor.GRAY).setCreativeTab(CreateLegacy.TAB_DECORATIONS)
@@ -74,25 +75,25 @@ public final class ModBlocks {
     static {
         INDUSTRIAL_IRON.setHarvestLevel("pickaxe", 2);
     }
-    public static final Block INDUSTRIAL_IRON_GLASS = registerBlockWithItem(new BlockIndustrialIronGlass());
+    public static final BlockIndustrialIronGlass INDUSTRIAL_IRON_GLASS = registerBlockWithItem(new BlockIndustrialIronGlass());
 
-    public static final Block FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
-    public static final Block FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
+    public static final BlockFramedGlass FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
+    public static final BlockFramedGlassPane FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
 
-    private static Block registerBlock(Block block) {
+    private static <T extends Block> T registerBlock(T block) {
         BLOCKS.add(block);
         return block;
     }
-    private static Block registerBlockWithItem(Block block, Item ib) {
+    private static <T extends Block> T registerBlockWithItem(T block, Item ib) {
         BLOCKS.add(block);
         ModItems.ITEMS.add(ib);
         return block;
     }
-    private static Block registerBlockWithItem(Block block, boolean variants) {
+    private static <T extends Block> T registerBlockWithItem(T block, boolean variants) {
         if (variants) return registerBlockWithItem(block, new ItemBlockVariants(block).setRegistryName(block.getRegistryName()));
         return registerBlockWithItem(block, new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }
-    private static Block registerBlockWithItem(Block block) {
+    private static <T extends Block> T registerBlockWithItem(T block) {
         return registerBlockWithItem(block, false);
     }
     private static AbstractBlockOrestone registerOrestoneBlock(AbstractBlockOrestone orestone) {
@@ -115,6 +116,8 @@ public final class ModBlocks {
 
         registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
         registerTE(TileEntityChute.class, "chute", new TileEntityChuteRenderer());
+        registerTE(TileEntityFunnel.class, "funnel", null);
+        registerTE(TileEntityFunnelAdvanced.class, "funnel_advanced", null);
 
         registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());

@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import com.melonstudios.createlegacy.block.BlockCasing;
+import com.melonstudios.createlegacy.block.BlockFunnel;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.*;
 import net.minecraft.block.state.IBlockState;
@@ -124,6 +125,10 @@ public final class BlockTagHelper {
         addTag(Blocks.TRIPWIRE_HOOK.getDefaultState(), "create:wrenchPickup");
         addTag(Blocks.DAYLIGHT_DETECTOR_INVERTED.getDefaultState(), "create:wrenchPickup");
         addTag(Blocks.DAYLIGHT_DETECTOR.getDefaultState(), "create:wrenchPickup");
+        addTag(ModBlocks.FUNNEL.getDefaultState()
+                .withProperty(BlockFunnel.BRASS, false), "create:wrenchPickup");
+        addTag(ModBlocks.FUNNEL.getDefaultState()
+                .withProperty(BlockFunnel.BRASS, true), "create:wrenchPickup");
     }
 
     //Overloaded method
