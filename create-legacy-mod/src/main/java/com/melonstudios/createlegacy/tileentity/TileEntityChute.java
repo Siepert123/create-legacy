@@ -162,7 +162,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
                             for (int i : inventory.getSlotsForFace(EnumFacing.UP)) {
                                 if (inventory.canInsertItem(i, stack, EnumFacing.UP) && inventory.isItemValidForSlot(i, stack)
                                         && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())
-                                        && inventory.getStackInSlot(i).getCount() <= (inventory.getInventoryStackLimit() + stack.getCount())) {
+                                        && inventory.getStackInSlot(i).getCount() <= (inventory.getInventoryStackLimit() - stack.getCount())) {
                                     if (inventory.getStackInSlot(i).isEmpty())
                                         inventory.setInventorySlotContents(i, stack);
                                     else {
@@ -179,7 +179,7 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
                             for (int i = 0; i < inventory.getSizeInventory(); i++) {
                                 if (inventory.isItemValidForSlot(i, stack)
                                         && (inventory.getStackInSlot(i).isItemEqual(stack) || inventory.getStackInSlot(i).isEmpty())
-                                        && inventory.getStackInSlot(i).getCount() < (inventory.getInventoryStackLimit() + stack.getCount())) {
+                                        && inventory.getStackInSlot(i).getCount() <= (inventory.getInventoryStackLimit() - stack.getCount())) {
                                     if (inventory.getStackInSlot(i).isEmpty())
                                         inventory.setInventorySlotContents(i, stack);
                                     else {

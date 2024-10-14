@@ -119,6 +119,7 @@ public final class BlockTagHelper {
         addTag(ModBlocks.CHIGWANKER.getDefaultState(), "create:wrenchPickup");
         addTag(ModBlocks.SAW.getDefaultState(), "create:wrenchPickup");
         addTag(ModBlocks.INDUSTRIAL_IRON.getDefaultState(), "create:wrenchPickup");
+        addTag(ModBlocks.INDUSTRIAL_IRON_GLASS.getDefaultState(), "create:wrenchPickup");
         addTag(Blocks.NOTEBLOCK.getDefaultState(), "create:wrenchPickup");
         addTag(Blocks.TRIPWIRE_HOOK.getDefaultState(), "create:wrenchPickup");
         addTag(Blocks.DAYLIGHT_DETECTOR_INVERTED.getDefaultState(), "create:wrenchPickup");
