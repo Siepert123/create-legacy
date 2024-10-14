@@ -75,6 +75,7 @@ public final class ModItems {
                 "schematic/written");
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON));
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.INDUSTRIAL_IRON_GLASS));
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.DEPOT));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHUTE));
