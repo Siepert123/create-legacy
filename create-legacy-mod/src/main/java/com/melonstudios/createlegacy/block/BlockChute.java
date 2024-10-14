@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.melonstudios.createlegacy.CreateLegacy.aabb;
 
 public class BlockChute extends Block implements ITileEntityProvider, IWrenchable {
     public BlockChute() {
@@ -215,10 +221,40 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         return false;
     }
 
-    protected static final AxisAlignedBB CHUTE_AABB = CreateLegacy.aabb(1, 0, 1, 15, 16, 15);
+    public static final AxisAlignedBB CHUTE_AABB = aabb(1, 0, 1, 15, 16, 15);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return isEncased(state) ? FULL_BLOCK_AABB : CHUTE_AABB;
     }
+
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        if (entityIn instanceof EntityItem) {
+            AxisAlignedBB aabb = Block.FULL_BLOCK_AABB.offset(pos);
+            if (entityBox.intersects(aabb)) collidingBoxes.add(aabb);
+        } else {
+            for (AxisAlignedBB aabb : getCollisionBoxList(state)) {
+                if (aabb.offset(pos).intersects(entityBox)) collidingBoxes.add(aabb.offset(pos));
+            }
+        }
+    }
+
+    protected static List<AxisAlignedBB> getCollisionBoxList(IBlockState state) {
+        List<AxisAlignedBB> list = new ArrayList<>();
+        if (((BlockChute)state.getBlock()).isEncased(state)) {
+            list.add(aabb(0, 0, 0, 2, 16, 16));
+            list.add(aabb(14, 0, 0, 16, 16, 16));
+            list.add(aabb(0, 0, 0, 16, 16, 2));
+            list.add(aabb(0, 0, 14, 16, 16, 16));
+        } else {
+            list.add(aabb(1, 0, 1, 2, 16, 15));
+            list.add(aabb(14, 0, 1, 15, 16, 15));
+            list.add(aabb(1, 0, 1, 15, 16, 2));
+            list.add(aabb(1, 0, 14, 15, 16, 15));
+        }
+        return list;
+    }
+
+
 }
