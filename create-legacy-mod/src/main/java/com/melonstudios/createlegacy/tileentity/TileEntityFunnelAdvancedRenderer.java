@@ -8,18 +8,21 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityChuteRenderer extends TileEntitySpecialRenderer<TileEntityChute> {
-    public TileEntityChuteRenderer() {
+public class TileEntityFunnelAdvancedRenderer extends TileEntitySpecialRenderer<TileEntityFunnelAdvanced> {
+    public TileEntityFunnelAdvancedRenderer() {
         super();
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
     }
 
     @Override
-    public void render(TileEntityChute te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (!te.getStack().isEmpty()) {
+    public void render(TileEntityFunnelAdvanced te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+
+        if (!te.getFilter().isEmpty()) {
             GlStateManager.pushMatrix();
             GlStateManager.enableRescaleNormal();
             GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
@@ -27,16 +30,16 @@ public class TileEntityChuteRenderer extends TileEntitySpecialRenderer<TileEntit
             RenderHelper.enableStandardItemLighting();
             GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
             GlStateManager.pushMatrix();
-            GlStateManager.translate(x + 0.5, y + 0.25, z + 0.5);
-            GlStateManager.rotate((te.getWorld().getTotalWorldTime() + partialTicks) % 360, 0, 1, 0);
+            GlStateManager.translate(x + 0.5, y + 0.635, z + 0.5);
+            GlStateManager.rotate(te.facing().getHorizontalAngle(), 0, 1, 0);
 
             IBakedModel model = ForgeHooksClient.handleCameraTransforms(
                     Minecraft.getMinecraft().getRenderItem()
-                    .getItemModelWithOverrides(te.getStack(), te.getWorld(), null),
+                            .getItemModelWithOverrides(te.getFilter(), te.getWorld(), null),
                     ItemCameraTransforms.TransformType.GROUND, false);
 
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
+            Minecraft.getMinecraft().getRenderItem().renderItem(te.getFilter(), model);
 
             GlStateManager.popMatrix();
             GlStateManager.disableRescaleNormal();

@@ -117,7 +117,7 @@ public final class ModBlocks {
         registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
         registerTE(TileEntityChute.class, "chute", new TileEntityChuteRenderer());
         registerTE(TileEntityFunnel.class, "funnel", null);
-        registerTE(TileEntityFunnelAdvanced.class, "funnel_advanced", null);
+        registerTE(TileEntityFunnelAdvanced.class, "funnel_advanced", new TileEntityFunnelAdvancedRenderer());
 
         registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());

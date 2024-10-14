@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -121,10 +122,10 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
         return false;
     }
 
-    protected static final AxisAlignedBB AABB_SOUTH = CreateLegacy.aabb(0, 0, 0, 16, 16, 4);
-    protected static final AxisAlignedBB AABB_NORTH = CreateLegacy.aabb(0, 0, 12, 16, 16, 16);
-    protected static final AxisAlignedBB AABB_WEST = CreateLegacy.aabb(12, 0, 0, 16, 16, 16);
-    protected static final AxisAlignedBB AABB_EAST = CreateLegacy.aabb(0, 0, 0, 4, 16, 16);
+    protected static final AxisAlignedBB AABB_SOUTH = CreateLegacy.aabb(0, 0, 0, 16, 16, 8);
+    protected static final AxisAlignedBB AABB_NORTH = CreateLegacy.aabb(0, 0, 8, 16, 16, 16);
+    protected static final AxisAlignedBB AABB_WEST = CreateLegacy.aabb(8, 0, 0, 16, 16, 16);
+    protected static final AxisAlignedBB AABB_EAST = CreateLegacy.aabb(0, 0, 0, 8, 16, 16);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -134,6 +135,46 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
             case SOUTH: return AABB_SOUTH;
             case WEST: return AABB_WEST;
         }
-        return NULL_AABB;
+        return FULL_BLOCK_AABB;
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return 0;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 }

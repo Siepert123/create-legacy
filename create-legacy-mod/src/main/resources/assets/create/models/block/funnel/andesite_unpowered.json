@@ -1,0 +1,10 @@
+{
+  "parent": "create:block/funnel/brass_unpowered",
+  "textures": {
+    "base": "create:block/funnel/andesite_funnel",
+    "direction": "create:block/funnel/andesite_funnel_neutral",
+    "redstone": "create:block/funnel/andesite_funnel_unpowered",
+    "particle": "create:block/block_andesite_alloy",
+    "block": "create:block/block_andesite_alloy"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "create:block/funnel/andesite_unpowered",
+  "textures": {
+    "redstone": "create:block/funnel/andesite_funnel_powered"
+  }
+}
