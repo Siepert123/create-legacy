@@ -4,6 +4,8 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.fluid.BlockFluidChocolate;
 import com.melonstudios.createlegacy.block.kinetic.*;
 import com.melonstudios.createlegacy.block.stone.*;
+import com.melonstudios.createlegacy.copycat.BlockCopycatPanel;
+import com.melonstudios.createlegacy.copycat.TileEntityCopycat;
 import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
@@ -80,6 +82,8 @@ public final class ModBlocks {
     public static final BlockFramedGlass FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
     public static final BlockFramedGlassPane FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
 
+    public static final BlockCopycatPanel COPYCAT_PANEL = registerBlockWithItem(new BlockCopycatPanel());
+
     private static <T extends Block> T registerBlock(T block) {
         BLOCKS.add(block);
         return block;
@@ -97,7 +101,7 @@ public final class ModBlocks {
         return registerBlockWithItem(block, false);
     }
     private static AbstractBlockOrestone registerOrestoneBlock(AbstractBlockOrestone orestone) {
-        return (AbstractBlockOrestone) registerBlockWithItem(orestone, true);
+        return registerBlockWithItem(orestone, true);
     }
 
     public static void setTileEntities() {
@@ -126,6 +130,8 @@ public final class ModBlocks {
         registerTE(TileEntityWaterWheel.class, "water_wheel", new TileEntityWaterWheelRenderer());
         registerTE(TileEntityFlywheel.class, "flywheel", new TileEntityFlywheelRenderer());
         registerTE(TileEntityCreativeMotor.class, "creative_motor", new TileEntityCreativeMotorRenderer());
+
+        //registerTE(TileEntityCopycat.class, "copycat", null);
 
 
         registerTE(TileEntityChigwanker.class, "chigwanker", null);

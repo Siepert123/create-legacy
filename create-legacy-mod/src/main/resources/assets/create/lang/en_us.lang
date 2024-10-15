@@ -61,6 +61,8 @@ tile.create.framed_glass_pane_horizontal.name=Horizontal Framed Glass Pane
 tile.create.framed_glass_pane_vertical.name=Vertical Framed Glass Pane
 tile.create.framed_glass_pane_tiled.name=Tiled Framed Glass Pane
 
+tile.create.copycat_panel.name=Copycat Panel
+
 #Kinetics
 tile.create.chigwanker.name=Mechindustrial Chigwanker
 
