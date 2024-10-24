@@ -1,6 +1,8 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.network.PacketUpdateHandCrank;
 import com.melonstudios.createlegacy.tileentity.TileEntityHandCrank;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlockHandCrank extends AbstractBlockKinetic {
     public BlockHandCrank() {
         super("handcrank");
@@ -53,6 +58,7 @@ public class BlockHandCrank extends AbstractBlockKinetic {
         TileEntity entity = worldIn.getTileEntity(pos);
         if (entity instanceof TileEntityHandCrank) {
             TileEntityHandCrank crank = (TileEntityHandCrank) entity;
+            PacketUpdateHandCrank.sendToPlayersNearby(crank, 256);
             crank.resetTimer();
         }
         return true;
