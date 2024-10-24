@@ -1,11 +1,9 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.network.PacketRequestUpdateDepot;
 import com.melonstudios.createlegacy.network.PacketUpdateDepot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

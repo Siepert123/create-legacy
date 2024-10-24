@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.mixin;
 
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.util.math.AxisAlignedBB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

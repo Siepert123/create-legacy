@@ -1,12 +1,9 @@
 package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.block.fluid.BlockFluidChocolate;
 import com.melonstudios.createlegacy.block.kinetic.*;
 import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.copycat.BlockCopycatPanel;
-import com.melonstudios.createlegacy.copycat.TileEntityCopycat;
-import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.*;
@@ -20,7 +17,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;

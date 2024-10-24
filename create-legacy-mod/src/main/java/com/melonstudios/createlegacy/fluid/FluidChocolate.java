@@ -2,11 +2,7 @@ package com.melonstudios.createlegacy.fluid;
 
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-
-import java.awt.*;
 
 public class FluidChocolate extends Fluid {
     public FluidChocolate() {

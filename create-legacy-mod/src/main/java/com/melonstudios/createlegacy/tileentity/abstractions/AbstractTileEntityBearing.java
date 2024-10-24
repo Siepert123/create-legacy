@@ -14,10 +14,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
+import javax.annotation.Nullable;
+
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.ACTIVE;
 import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.FACING;
-
-import javax.annotation.Nullable;
 
 public abstract class AbstractTileEntityBearing extends AbstractTileEntityKinetic {
 

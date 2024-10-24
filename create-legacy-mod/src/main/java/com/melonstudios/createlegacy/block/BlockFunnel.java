@@ -6,7 +6,6 @@ import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;

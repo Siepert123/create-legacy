@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.recipe;
 
 import com.melonstudios.createlegacy.util.RecipeEntry;
-import com.melonstudios.createlegacy.util.SimpleTuple;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
