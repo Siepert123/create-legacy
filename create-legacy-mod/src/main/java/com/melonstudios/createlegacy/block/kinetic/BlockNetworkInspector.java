@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.IMetaName;
@@ -17,9 +18,11 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -94,5 +97,11 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
             playerIn.sendStatusMessage(new TextComponentString(msg), true);
             return true;
         } else return false;
+    }
+
+    private static final AxisAlignedBB aabb = CreateLegacy.aabb(1, 0, 1, 15, 13, 15);
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return aabb;
     }
 }
