@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
+import com.melonstudios.createlegacy.network.PacketUpdateBearing;
 import com.melonstudios.createlegacy.util.BearingStructureHelper;
 import com.melonstudios.createlegacy.util.EnumContraptionAssemblyMode;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
@@ -26,6 +27,11 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     public IBlockState getStructure() {
         return structure;
     }
+
+    public void overrideStructure(@Nullable IBlockState structure) {
+        this.structure = structure;
+    }
+
     public boolean isAssembled() {
         return structure != null;
     }
@@ -67,6 +73,7 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
 
     @Override
     protected void tick() {
+        if ((world.getTotalWorldTime() & 0xff) == 0xff) PacketUpdateBearing.sendToPlayersNearby(this, 128);
         check();
         patentedRotationTechnology();
     }
@@ -82,6 +89,13 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     }
     public float getAngle() {
         return angle;
+    }
+
+    public void setPreviousAngle(float angle) {
+        this.previousAngle = angle;
+    }
+    public void setAngle(float angle) {
+        this.angle = angle;
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -62,7 +63,7 @@ public final class CreateLegacy {
     }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create");
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create_legacy");
         networkWrapper.registerMessage(
                 new PacketUpdateDepot.Handler(),
                 PacketUpdateDepot.class,
@@ -88,6 +89,11 @@ public final class CreateLegacy {
                 PacketUpdateChute.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
+        networkWrapper.registerMessage(
+                new PacketUpdateBearing.Handler(),
+                PacketUpdateBearing.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
         SchematicSaveHelper.makeSchematicsFolder();
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
@@ -105,7 +111,20 @@ public final class CreateLegacy {
 
     }
 
+    /**
+     * Creates a new Bounding Box, but uses pixels instead of blocks.
+     */
     public static AxisAlignedBB aabb(int x1, int y1, int z1, int x2, int y2, int z2) {
         return new AxisAlignedBB(x1 / 16.0, y1 / 16.0, z1 / 16.0, x2 / 16.0, y2 / 16.0, z2 / 16.0);
+    }
+
+    /**
+     * Creates a new Bounding Box of a certain size wrapping a block pos.
+     */
+    public static AxisAlignedBB aabb(BlockPos pos, int range) {
+        return new AxisAlignedBB(
+                pos.add(-range, -range, -range),
+                pos.add(range, range, range)
+        );
     }
 }
