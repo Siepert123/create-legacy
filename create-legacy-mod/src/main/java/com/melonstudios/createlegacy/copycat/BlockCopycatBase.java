@@ -5,15 +5,19 @@ import epicsquid.mysticallib.block.BlockTEBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockCopycatBase extends BlockTEBase {
     protected BlockCopycatBase(String registry) {
@@ -23,6 +27,11 @@ public class BlockCopycatBase extends BlockTEBase {
         setResistance(20.0f);
         setUnlocalizedName("create." + registry);
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(I18n.translateToLocal("tooltip.wip"));
     }
 
     @Nullable
