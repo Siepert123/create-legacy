@@ -11,6 +11,6 @@
   "credits": "",
   "logoFile": "create_legacy_logo_32x.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["mysticallib"]
 }
 ]
