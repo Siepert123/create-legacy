@@ -3,7 +3,7 @@ package com.melonstudios.createlegacy.event;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createlegacy.util.OreDictHandler;
+import com.melonstudios.createlegacy.util.registries.OreDictHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;

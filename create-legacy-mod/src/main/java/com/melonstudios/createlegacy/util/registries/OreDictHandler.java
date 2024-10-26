@@ -1,8 +1,10 @@
-package com.melonstudios.createlegacy.util;
+package com.melonstudios.createlegacy.util.registries;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
+import com.melonstudios.createlegacy.util.BlockTagHelper;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -61,6 +63,24 @@ public final class OreDictHandler {
         addOrestoneTags(ModBlocks.ORESTONE_BRICKS_FANCY);
         addOrestoneTags(ModBlocks.ORESTONE_PILLAR_Y);
         addOrestoneTags(ModBlocks.ORESTONE_LAYERED);
+
+        OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.INDUSTRIAL_IRON_GLASS, 1));
+        OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 0));
+        OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 1));
+        OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 2));
+        OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 3));
+        OreDictionary.registerOre("blockGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 0));
+        OreDictionary.registerOre("blockGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 1));
+        OreDictionary.registerOre("blockGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 2));
+        OreDictionary.registerOre("blockGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS, 1, 3));
+        OreDictionary.registerOre("paneGlass", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 0));
+        OreDictionary.registerOre("paneGlass", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 1));
+        OreDictionary.registerOre("paneGlass", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 2));
+        OreDictionary.registerOre("paneGlass", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 3));
+        OreDictionary.registerOre("paneGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 0));
+        OreDictionary.registerOre("paneGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 1));
+        OreDictionary.registerOre("paneGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 2));
+        OreDictionary.registerOre("paneGlassColorless", new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 3));
 
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));

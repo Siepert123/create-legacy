@@ -259,6 +259,19 @@ public final class RecipeInit {
             }
         }
 
+        for (ItemStack colorless : OreDictionary.getOres("blockGlassColorless")) {
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS, 1, 0));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS, 1, 1));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS, 1, 2));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS, 1, 3));
+        }
+        for (ItemStack colorless : OreDictionary.getOres("paneGlassColorless")) {
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 0));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 1));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 2));
+            SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 3));
+        }
+
         SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
 
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
