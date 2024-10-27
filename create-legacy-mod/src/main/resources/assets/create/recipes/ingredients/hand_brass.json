@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "nnn",
+    " n "
+  ],
+  "key": {
+    "#": {
+      "item": "create:ingredient",
+      "data": 0
+    },
+    "n": {
+      "type": "forge:ore_dict",
+      "ore": "plateBrass"
+    }
+  },
+  "result": {
+    "item": "create:ingredient",
+    "data": 26
+  }
+}

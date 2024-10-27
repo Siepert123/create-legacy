@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "gearbox",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "create:gearbox",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:gearbox",
+    "data": 1
+  }
+}

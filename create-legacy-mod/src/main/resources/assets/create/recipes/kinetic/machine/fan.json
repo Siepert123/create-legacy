@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a",
+    "b",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "create:rotator",
+      "data": 0
+    },
+    "b": {
+      "item": "create:casing",
+      "data": 0
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "propeller"
+    }
+  },
+  "result": {
+    "item": "create:fan"
+  }
+}

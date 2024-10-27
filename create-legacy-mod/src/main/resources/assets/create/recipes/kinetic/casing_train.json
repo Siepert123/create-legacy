@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:casing",
+      "data": 2
+    },
+    {
+      "item": "create:ingredient",
+      "data": 18
+    }
+  ],
+  "result": {
+    "item": "create:casing",
+    "data": 3
+  }
+}

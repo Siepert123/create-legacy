@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:casing",
+      "data": 1
+    },
+    {
+      "item": "create:rotator",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "create:encased_shaft",
+    "data": 1
+  }
+}

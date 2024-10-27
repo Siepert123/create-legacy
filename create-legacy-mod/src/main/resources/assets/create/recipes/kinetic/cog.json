@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "b#b",
+    "bbb"
+  ],
+  "key": {
+    "#": {
+      "item": "create:ingredient",
+      "data": 0
+    },
+    "b": {
+      "item": "minecraft:wooden_button"
+    }
+  },
+  "result": {
+    "item": "create:rotator",
+    "data": 1,
+    "count": 8
+  }
+}

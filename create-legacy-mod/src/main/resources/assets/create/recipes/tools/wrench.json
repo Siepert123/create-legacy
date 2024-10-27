@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gg",
+    "gC",
+    " s"
+  ],
+  "key": {
+    "g": {
+      "item": "create:ingredient",
+      "data": 2
+    },
+    "C": {
+      "item": "create:rotator",
+      "data": 1
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "create:wrench"
+  }
+}

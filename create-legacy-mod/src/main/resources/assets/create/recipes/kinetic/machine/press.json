@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a",
+    "b",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "blockIron"
+    },
+    "b": {
+      "item": "create:casing",
+      "data": 0
+    },
+    "a": {
+      "item": "create:rotator",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:press"
+  }
+}

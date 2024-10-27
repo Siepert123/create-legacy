@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    {
+      "item": "create:encased_shaft",
+      "data": 0
+    },
+    {
+      "item": "create:rotator",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "create:kinetic_utility",
+    "data": 0
+  }
+}

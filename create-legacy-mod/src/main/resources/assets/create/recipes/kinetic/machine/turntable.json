@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "b"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "slabWood"
+    },
+    "b": {
+      "item": "create:rotator",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:turntable"
+  }
+}

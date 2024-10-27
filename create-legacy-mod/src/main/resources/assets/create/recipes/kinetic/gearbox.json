@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "gearbox",
+  "pattern": [
+    " b ",
+    "b#b",
+    " b "
+  ],
+  "key": {
+    "#": {
+      "item": "create:casing",
+      "data": 0
+    },
+    "b": {
+      "item": "create:rotator",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "create:gearbox",
+    "data": 0
+  }
+}

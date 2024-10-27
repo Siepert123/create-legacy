@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NNN",
+    "NNN"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": ""
+    },
+    "N": {
+      "item": "create:ingredient",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:metal",
+    "data": 0
+  }
+}

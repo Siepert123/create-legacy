@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ingot_zinc",
+  "pattern": [
+    "###",
+    "#N#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetZinc"
+    },
+    "N": {
+      "item": "create:ingredient",
+      "data": 7
+    }
+  },
+  "result": {
+    "item": "create:ingredient",
+    "data": 6
+  }
+}

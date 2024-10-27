@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "b#b",
+    "bbb"
+  ],
+  "key": {
+    "#": {
+      "item": "create:rotator",
+      "data": 0
+    },
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    }
+  },
+  "result": {
+    "item": "create:water_wheel"
+  }
+}

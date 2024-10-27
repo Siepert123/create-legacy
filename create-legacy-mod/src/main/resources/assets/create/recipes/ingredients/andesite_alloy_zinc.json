@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "andesite_alloy",
+  "pattern": [
+    "#n",
+    "n#"
+  ],
+  "key": {
+    "#": {
+      "item": "create:ingredient",
+      "data": 0
+    },
+    "n": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetZinc"
+    }
+  },
+  "result": {
+    "item": "create:ingredient",
+    "data": 0
+  }
+}

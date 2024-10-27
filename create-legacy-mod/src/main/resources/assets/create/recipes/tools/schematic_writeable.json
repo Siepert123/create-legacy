@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "create:schematic",
+      "data": 0
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlack"
+    }
+  ],
+  "result": {
+    "item": "create:schematic",
+    "data": 1
+  }
+}

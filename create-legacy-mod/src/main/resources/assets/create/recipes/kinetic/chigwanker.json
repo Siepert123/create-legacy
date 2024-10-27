@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " b ",
+    "b#b",
+    " b "
+  ],
+  "key": {
+    "#": {
+      "item": "create:casing",
+      "data": 2
+    },
+    "b": {
+      "item": "create:rotator",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "create:chigwanker"
+  }
+}

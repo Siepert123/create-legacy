@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a",
+    "b",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    },
+    "b": {
+      "item": "create:rotator",
+      "data": 1
+    },
+    "a": {
+      "item": "create:ingredient",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:millstone"
+  }
+}

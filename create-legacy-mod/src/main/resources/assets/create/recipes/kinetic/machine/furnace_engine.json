@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bB#",
+    "bbb"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:piston"
+    },
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "ingotBrass"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "blockBrass"
+    }
+  },
+  "result": {
+    "item": "create:furnace_engine",
+    "data": 0
+  }
+}

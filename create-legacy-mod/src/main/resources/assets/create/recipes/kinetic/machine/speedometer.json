@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "b"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:compass"
+    },
+    "b": {
+      "item": "create:encased_shaft",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "create:network_inspector",
+    "data": 0
+  }
+}
