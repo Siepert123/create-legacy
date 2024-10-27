@@ -30,9 +30,9 @@ import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 @Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION)
 public final class CreateLegacy {
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "0.1.0a";
 
-    public static final int VERSION_NUM = 0;
+    public static final int VERSION_NUM = 1;
     public static final int KINETIC_VERSION_NUM = 0;
 
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
