@@ -54,4 +54,18 @@ public final class SawingRecipes {
         }
         return ItemStack.EMPTY;
     }
+
+    @Nonnull
+    public static ItemStack getResult(ItemStack input, int index, ItemStack filter) {
+        if (filter.isEmpty()) return getResult(input, index);
+
+        for (Map.Entry<ItemStack, List<ItemStack>> entry : getRecipesMap().entrySet()) {
+            if (entry.getKey().isItemEqual(input)) {
+                for (ItemStack stack : entry.getValue()) {
+                    if (stack.isItemEqual(filter)) return stack;
+                }
+            }
+        }
+        return ItemStack.EMPTY;
+    }
 }

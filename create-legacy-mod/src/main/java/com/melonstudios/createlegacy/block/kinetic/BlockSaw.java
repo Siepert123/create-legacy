@@ -12,6 +12,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -32,10 +33,25 @@ public class BlockSaw extends AbstractBlockKinetic {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
 
+        if (hand == EnumHand.OFF_HAND) {
+            if (facing == EnumFacing.UP) {
+                TileEntitySaw saw = (TileEntitySaw) worldIn.getTileEntity(pos);
+
+                saw.setFilter(stack.copy());
+                if (stack.isEmpty()) {
+                    playerIn.sendStatusMessage(new TextComponentString("Filter cleared"), true);
+                } else {
+                    playerIn.sendStatusMessage(new TextComponentString("Filter set to " + stack.getDisplayName()), true);
+                }
+            }
+            return true;
+        }
+
         if (SawingRecipes.hasResult(stack)) {
             if (!worldIn.isRemote) {
                 TileEntitySaw saw = (TileEntitySaw) worldIn.getTileEntity(pos);
-                ItemStack result = SawingRecipes.getResult(stack, saw.getIndex());
+                ItemStack result = SawingRecipes.getResult(stack, saw.getIndex(), saw.getFilter());
+                if (result.isEmpty()) return true;
                 EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ,
                         result.copy());
                 item.setPickupDelay(0);

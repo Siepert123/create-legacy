@@ -19,6 +19,14 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
     private int progress = 0;
     private final int maxProgress = 2560;
 
+    private ItemStack filter = ItemStack.EMPTY;
+    public ItemStack getFilter() {
+        return filter;
+    }
+    public void setFilter(ItemStack stack) {
+        filter = stack;
+    }
+
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
@@ -30,6 +38,9 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
             NBTTagCompound nbt = new NBTTagCompound();
             processing.writeToNBT(nbt);
             compound.setTag("ProcessingStack", nbt);
+        }
+        if (!filter.isEmpty()) {
+            compound.setTag("Filter", processing.writeToNBT(new NBTTagCompound()));
         }
 
         return compound;
@@ -44,6 +55,9 @@ public class TileEntitySaw extends AbstractTileEntityKinetic implements IInvento
 
         if (compound.hasKey("ProcessingStack")) {
             processing = new ItemStack(compound.getCompoundTag("ProcessingStack"));
+        }
+        if (compound.hasKey("Filter")) {
+            filter = new ItemStack(compound.getCompoundTag("Filter"));
         }
     }
 
