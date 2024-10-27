@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MillingRecipes {
-    private MillingRecipes() {}
+public final class CrushingRecipes {
+    private CrushingRecipes() {}
 
-    private static final MillingRecipes INSTANCE = new MillingRecipes();
-    public static MillingRecipes getInstance() {
+    private static final CrushingRecipes INSTANCE = new CrushingRecipes();
+    public static CrushingRecipes getInstance() {
         return INSTANCE;
     }
 
@@ -55,24 +55,12 @@ public final class MillingRecipes {
         for (Map.Entry<ItemStack, Integer> entry : getWorkMap().entrySet()) {
             if (entry.getKey().isItemEqual(input)) return entry.getValue();
         }
-
-        //Remove when crushing wheels are added!
-        if (CrushingRecipes.hasResult(input)) {
-            return CrushingRecipes.getWork(input);
-        }
-
         return 0;
     }
     public static RecipeEntry[] getResults(ItemStack input) {
         for (Map.Entry<ItemStack, RecipeEntry[]> entry : getRecipesMap().entrySet()) {
             if (entry.getKey().isItemEqual(input)) return entry.getValue();
         }
-
-        //Remove when crushing wheels are added!
-        if (CrushingRecipes.hasResult(input)) {
-            return CrushingRecipes.getResults(input);
-        }
-
         return new RecipeEntry[]{
                 RecipeEntry.get(ItemStack.EMPTY, 0.0f),
                 RecipeEntry.get(ItemStack.EMPTY, 0.0f),

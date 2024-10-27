@@ -92,6 +92,21 @@ public final class RecipeInit {
             }
         }
 
+        //CRUSH!!! PREPARE THYSELF!!!
+        CrushingRecipes.addRecipe(new ItemStack(Blocks.OBSIDIAN, 1), 10.0f,
+                RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 17)),
+                RecipeEntry.get(new ItemStack(Blocks.OBSIDIAN, 1), .75f));
+        for (String metal : metals) {
+            for (ItemStack ore : OreDictionary.getOres(ore(metal))) {
+                if (doesOreDictNameExist(crushed(metal))) {
+                    CrushingRecipes.addRecipe(ore, 1.0f,
+                            RecipeEntry.get(OreDictionary.getOres(crushed(metal)).get(0)),
+                            RecipeEntry.get(OreDictionary.getOres(crushed(metal)).get(0), .5f),
+                            RecipeEntry.get(new ItemStack(Blocks.COBBLESTONE), .25f));
+                }
+            }
+        }
+
         //MILL!!!!
         MillingRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1), 2.5f,
                 RecipeEntry.get(new ItemStack(Blocks.GRAVEL, 1)),
