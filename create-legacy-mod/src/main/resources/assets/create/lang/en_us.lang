@@ -93,6 +93,9 @@ tile.create.millstone.name=Millstone
 tile.create.fan.name=Encased Fan
 tile.create.drill.name=Mechanical Drill
 
+tile.create.turntable.name=Turntable
+tile.create.turntable.desc=Side effects may include dizziness and/or motion sickness.
+
 #Creative tabs
 itemGroup.create.kinetics=Create
 itemGroup.create.decorations=Create Decorations

@@ -43,6 +43,8 @@ public final class ModBlocks {
     public static final BlockDrill DRILL = registerBlockWithItem(new BlockDrill());
     public static final BlockNetworkInspector NETWORK_INSPECTOR = registerBlockWithItem(new BlockNetworkInspector(), true);
 
+    public static final BlockTurntable TURNTABLE = registerBlockWithItem(new BlockTurntable());
+
     public static final BlockDepot DEPOT = registerBlockWithItem(new BlockDepot());
     public static final BlockChute CHUTE = registerBlockWithItem(new BlockChute());
     public static final BlockFunnel FUNNEL = registerBlockWithItem(new BlockFunnel(), true);
@@ -113,6 +115,8 @@ public final class ModBlocks {
         registerTE(TileEntityMillstone.class, "millstone", new TileEntityMillstoneRenderer());
         registerTE(TileEntityFan.class, "fan", new TileEntityFanRenderer());
         registerTE(TileEntityDrill.class, "drill", new TileEntityDrillRenderer());
+
+        registerTE(TileEntityTurntable.class, "turntable", new TileEntityTurntableRenderer());
 
         registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
         registerTE(TileEntityChute.class, "chute", new TileEntityChuteRenderer());

@@ -113,5 +113,7 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CREATIVE_MOTOR));
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHIGWANKER));
+
+        CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.TURNTABLE));
     }
 }
