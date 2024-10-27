@@ -15,7 +15,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Initialized all recipes that aren't data-driven.
@@ -293,9 +295,28 @@ public final class RecipeInit {
             SawingRecipes.addRecipe(colorless, new ItemStack(ModBlocks.FRAMED_GLASS_PANE, 1, 3));
         }
 
+        for (Map.Entry<ItemStack, ItemStack> entry : woodMap.entrySet()) {
+            SawingRecipes.addRecipe(entry.getKey().copy(), entry.getValue().copy());
+        }
+
+
+
         SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
 
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
+    }
+
+
+
+    public static final Map<ItemStack, ItemStack> woodMap = new HashMap<>();
+
+    static {
+        woodMap.put(new ItemStack(Blocks.LOG, 1, 0), new ItemStack(Blocks.PLANKS, 6, 0));
+        woodMap.put(new ItemStack(Blocks.LOG, 1, 1), new ItemStack(Blocks.PLANKS, 6, 1));
+        woodMap.put(new ItemStack(Blocks.LOG, 1, 2), new ItemStack(Blocks.PLANKS, 6, 2));
+        woodMap.put(new ItemStack(Blocks.LOG, 1, 3), new ItemStack(Blocks.PLANKS, 6, 3));
+        woodMap.put(new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.PLANKS, 6, 5));
+        woodMap.put(new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Blocks.PLANKS, 6, 6));
     }
 }
