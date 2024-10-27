@@ -92,6 +92,9 @@ public final class RecipeInit {
             }
         }
 
+        PressingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 29),
+                new ItemStack(ModItems.INGREDIENT, 1, 18));
+
         //CRUSH!!! PREPARE THYSELF!!!
         CrushingRecipes.addRecipe(new ItemStack(Blocks.OBSIDIAN, 1), 10.0f,
                 RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 17)),
