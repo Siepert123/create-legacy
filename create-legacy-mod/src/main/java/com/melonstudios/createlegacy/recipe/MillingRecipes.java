@@ -49,7 +49,8 @@ public final class MillingRecipes {
         for (Map.Entry<ItemStack, RecipeEntry[]> entry : getRecipesMap().entrySet()) {
             if (entry.getKey().isItemEqual(input)) return true;
         }
-        return false;
+
+        return CrushingRecipes.hasResult(input);
     }
     public static int getWork(ItemStack input) {
         for (Map.Entry<ItemStack, Integer> entry : getWorkMap().entrySet()) {
