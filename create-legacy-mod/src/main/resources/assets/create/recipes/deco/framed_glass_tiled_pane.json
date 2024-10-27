@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "N": {
+      "item": "create:framed_glass",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "create:framed_glass_pane",
+    "data": 3
+  }
+}

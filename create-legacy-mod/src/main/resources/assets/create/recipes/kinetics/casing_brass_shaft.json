@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "item": "create:casing",
-      "data": 1
+      "data": 2
     },
     {
       "item": "create:rotator",

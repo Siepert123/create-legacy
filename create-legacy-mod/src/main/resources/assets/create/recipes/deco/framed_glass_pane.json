@@ -1,18 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "NNN",
-    "NNN",
-    "NNN"
+    "###",
+    "###"
   ],
   "key": {
     "N": {
-      "item": "create:ingredient",
+      "item": "create:framed_glass",
       "data": 0
     }
   },
   "result": {
-    "item": "create:metal",
+    "item": "create:framed_glass_pane",
     "data": 0
   }
 }

@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
+import com.melonstudios.createlegacy.recipe.SawingRecipes;
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import mezz.jei.api.IJeiHelpers;
@@ -21,6 +22,22 @@ public final class RecipeMaker {
 
         for (Map.Entry<ItemStack, ItemStack> entry : recipeMap.entrySet()) {
             recipeList.add(new PressingRecipe(entry.getKey(), entry.getValue()));
+        }
+
+        return recipeList;
+    }
+
+    public static List<SawingRecipe> getSawingRecipes(IJeiHelpers helpers) {
+        IStackHelper stackHelper = helpers.getStackHelper();
+        SawingRecipes instance = SawingRecipes.instance();
+
+        Map<ItemStack, List<ItemStack>> recipeMap = SawingRecipes.getRecipesMap();
+        List<SawingRecipe> recipeList = new ArrayList<>();
+
+        for (Map.Entry<ItemStack, List<ItemStack>> entry : recipeMap.entrySet()) {
+            for (ItemStack stack : entry.getValue()) {
+                recipeList.add(new SawingRecipe(entry.getKey(), stack));
+            }
         }
 
         return recipeList;
