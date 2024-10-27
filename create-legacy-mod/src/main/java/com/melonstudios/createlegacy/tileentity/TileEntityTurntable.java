@@ -29,4 +29,9 @@ public class TileEntityTurntable extends AbstractTileEntityKinetic {
             entity.rotationYaw -= speed() / 3.0f;
         }
     }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 1.0f;
+    }
 }
