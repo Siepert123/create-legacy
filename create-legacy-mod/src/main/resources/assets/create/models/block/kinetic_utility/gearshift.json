@@ -1,5 +1,5 @@
 {
-    "parent": "create:block/kinetic_utility/clutch",
+    "parent": "create:block/kinetic_utility/base",
     "textures": {
         "system": "create:block/gearshift_off"
     }
