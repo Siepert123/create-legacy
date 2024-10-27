@@ -10,7 +10,7 @@
   "authorList": ["Siepert", "moddingforreal"],
   "credits": "",
   "logoFile": "create_legacy_logo_32x.png",
-  "screenshots": [],
-  "dependencies": ["mysticallib"]
+  "screenshots": ["cog.png", "water_wheel.png", "press.png"],
+  "dependencies": ["mysticallib", "ctm"]
 }
 ]
