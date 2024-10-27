@@ -96,6 +96,9 @@ public final class RecipeInit {
         CrushingRecipes.addRecipe(new ItemStack(Blocks.OBSIDIAN, 1), 10.0f,
                 RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 17)),
                 RecipeEntry.get(new ItemStack(Blocks.OBSIDIAN, 1), .75f));
+        CrushingRecipes.addRecipe(new ItemStack(Blocks.NETHERRACK, 1), 0.5f,
+                RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 16)),
+                RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 16), .5f));
         for (String metal : metals) {
             for (ItemStack ore : OreDictionary.getOres(ore(metal))) {
                 if (doesOreDictNameExist(crushed(metal))) {
