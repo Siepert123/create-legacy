@@ -180,6 +180,8 @@ public class ItemSchematic extends Item {
     protected void handlePlacement(EntityPlayer player, World world, BlockPos pos, EnumHand hand, ItemStack stack, EnumFacing facing) {
         if (stack.getTagCompound() == null || !CreateConfig.allowInstantSchematicPlacement) return;
 
+        if (!player.isCreative()) player.sendStatusMessage(new TextComponentString("Only available in Creative Mode!"), true);
+
         if (world.isRemote || !player.isCreative()) return;
         if (!player.isSneaking()) { //Place ON the block
             pos = pos.offset(facing);
