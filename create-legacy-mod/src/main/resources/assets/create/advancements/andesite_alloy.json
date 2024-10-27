@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:ingredient",
+      "data": 0
+    },
+    "title": {
+      "translate": "advancements.create.andesite_alloy"
+    },
+    "description": {
+      "translate": "advancements.create.andesite_alloy.desc"
+    }
+  },
+  "parent": "create:root",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:ingredient",
+            "data": 0
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "create:kinetics/casing_andesite"
+    ]
+  }
+}

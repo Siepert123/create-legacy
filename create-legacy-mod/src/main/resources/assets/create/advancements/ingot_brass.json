@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:ingredient",
+      "data": 0
+    },
+    "title": {
+      "translate": "advancements.create.ingot_copper"
+    },
+    "description": {
+      "translate": "advancements.create.ingot_copper.desc"
+    }
+  },
+  "parent": "create:ingot_copper",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:ingredient",
+            "data": 3
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "create:kinetics/casing_andesite"
+    ]
+  }
+}

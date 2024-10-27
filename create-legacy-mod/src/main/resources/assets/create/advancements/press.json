@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "create:press"
+    },
+    "title": {
+      "translate": "advancements.create.press"
+    },
+    "description": {
+      "translate": "advancements.create.press.desc"
+    }
+  },
+  "parent": "create:milestones/andesite",
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "create:press"
+          }
+        ]
+      }
+    }
+  }
+}

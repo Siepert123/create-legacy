@@ -165,3 +165,15 @@ subtitle.item.wrench.used=Wrench used
 subtitle.block.millstone.ambient=Milling
 
 tooltip.wip=WIP, refrain from using plz
+
+#advancements
+advancements.create.root=Create Legacy
+advancements.create.root.desc=The Create Mod... for 1.12.2
+advancements.create.andesite_alloy=Alliterations Aplenty
+advancements.create.andesite_alloy.desc=Combine Andesite and Iron Nuggets for a sturdy cube
+
+
+#milestones
+
+
+#logic
