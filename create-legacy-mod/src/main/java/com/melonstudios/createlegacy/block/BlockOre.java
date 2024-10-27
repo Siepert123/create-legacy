@@ -31,6 +31,9 @@ public class BlockOre extends Block implements IMetaName {
         setRegistryName("ore");
         setUnlocalizedName("create.ore");
 
+        setHardness(4.0f);
+        setResistance(8.0f);
+
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Variant.COPPER));
         setHarvestLevel("pickaxe", 1, getDefaultState().withProperty(VARIANT, Variant.COPPER));
         setHarvestLevel("pickaxe", 2, getDefaultState().withProperty(VARIANT, Variant.ZINC));
