@@ -7,8 +7,8 @@
   ],
   "key": {
     "#": {
-      "item": "create:ingredient",
-      "data": 0
+      "item": "minecraft:stone",
+      "data": 5
     },
     "n": {
       "type": "forge:ore_dict",
