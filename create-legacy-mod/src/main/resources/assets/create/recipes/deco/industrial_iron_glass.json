@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "blockGlassClear"
+    },
+    {
+      "item": "create:industrial_iron"
+    }
+  ],
+  "result": {
+    "item": "create:industrial_iron_glass",
+    "count": 2
+  }
+}

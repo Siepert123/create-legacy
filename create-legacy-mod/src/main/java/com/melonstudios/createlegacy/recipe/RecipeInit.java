@@ -254,6 +254,10 @@ public final class RecipeInit {
         PressingRecipes.addRecipe(new ItemStack(Items.REEDS, 1), new ItemStack(Items.PAPER, 1));
         PressingRecipes.addRecipe(new ItemStack(Blocks.GRASS, 1), new ItemStack(Blocks.GRASS_PATH, 1));
 
+        for (ItemStack stack : OreDictionary.getOres(ingot("Iron"))) {
+            SawingRecipes.addRecipe(stack, new ItemStack(ModBlocks.INDUSTRIAL_IRON, 4));
+        }
+
         WashingRecipes.addRecipe(new ItemStack(Blocks.MAGMA, 1),
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Blocks.OBSIDIAN, 1))
         );
