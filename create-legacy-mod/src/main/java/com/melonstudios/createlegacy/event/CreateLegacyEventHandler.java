@@ -40,6 +40,7 @@ public final class CreateLegacyEventHandler {
                 "Electrum", "Bismuth", "Chrome",
                 "Nickel", "Uranium", "Thorium",
                 "Titanium", "Tin", "Zirconium",
-                "Tungsten", "Californium");
+                "Tungsten", "Californium", "Constantan",
+                "Steel");
     }
 }
