@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 
-@Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION)
+@Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before:mysticallib")
 public final class CreateLegacy {
     public static final String MOD_ID = "create";
     public static final String VERSION = "0.1.0a";

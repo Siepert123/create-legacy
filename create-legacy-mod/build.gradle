@@ -15,13 +15,15 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.1.0a'
-group = 'com.melonstudios.createlegacy' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'create'
+version = "${mc_version}-${version}"
+group = "com.melonstudios.createlegacy" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "create"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
+
+
     mappings channel: 'snapshot', version: '20171003-1.12'
     runs {
         client {

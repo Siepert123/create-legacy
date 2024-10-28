@@ -27,8 +27,8 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
 
         setSoundType(SoundType.WOOD);
 
-        setHardness(2.5f);
-        setResistance(5.0f);
+        setHardness(2.0f);
+        setResistance(4.0f);
 
         setCreativeTab(CreateLegacy.TAB_KINETICS);
     }
