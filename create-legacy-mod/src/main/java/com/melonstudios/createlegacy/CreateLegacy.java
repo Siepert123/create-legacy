@@ -10,6 +10,7 @@ import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,6 +24,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.io.File;
 
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
@@ -42,6 +45,8 @@ public final class CreateLegacy {
     public static SimpleNetworkWrapper getNetworkWrapper() {
         return networkWrapper;
     }
+
+    public static boolean porkchopGears = false;
 
     @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
         clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
@@ -63,6 +68,8 @@ public final class CreateLegacy {
     }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        if (new File(Minecraft.getMinecraft().mcDataDir, "porkchop.gears").exists()) porkchopGears = true;
+
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create_legacy");
         networkWrapper.registerMessage(
                 new PacketUpdateDepot.Handler(),

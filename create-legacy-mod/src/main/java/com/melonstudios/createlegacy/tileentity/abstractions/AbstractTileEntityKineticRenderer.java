@@ -1,16 +1,19 @@
 package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 /**
@@ -25,6 +28,8 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         super();
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
     }
+
+    private static final ResourceLocation PIG_TEXTURES = new ResourceLocation("textures/entity/pig/pig.png");
 
     private boolean renderDebugText = true;
     protected void disableDebugText() {
@@ -43,7 +48,8 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
             }
         }
 
-        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        if (CreateLegacy.porkchopGears) bindTexture(PIG_TEXTURES);
+        else bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
     protected final void spinModel(AbstractTileEntityKinetic te, double x, double y, double z, float partialTicks, EnumFacing.Axis axis, IBlockState state) {
