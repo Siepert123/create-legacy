@@ -13,6 +13,7 @@ import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 import javax.annotation.Nullable;
@@ -23,13 +24,21 @@ import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.F
 public abstract class AbstractTileEntityBearing extends AbstractTileEntityKinetic {
 
     protected @Nullable IBlockState structure;
+    protected @Nullable TileEntity structureTE;
     @Nullable
     public IBlockState getStructure() {
         return structure;
     }
+    @Nullable
+    public TileEntity getStructureTE() {
+        return structureTE;
+    }
 
     public void overrideStructure(@Nullable IBlockState structure) {
         this.structure = structure;
+    }
+    public void overrideStructureTE(@Nullable TileEntity te) {
+        this.structureTE = te;
     }
 
     public boolean isAssembled() {
@@ -40,6 +49,7 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             if (world.getBlockState(pos.offset(facing())).getBlock() == Blocks.AIR) return;
             if (world.getBlockState(pos.offset(facing())).getMobilityFlag() == EnumPushReaction.BLOCK) return;
             structure = world.getBlockState(pos.offset(facing()));
+            structureTE = world.getTileEntity(pos.offset(facing()));
             world.setBlockToAir(pos.offset(facing()));
             toggleActive(true);
         }
@@ -49,6 +59,13 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
             if (!world.getBlockState(pos.offset(facing())).getMaterial().isReplaceable()) return;
             world.setBlockState(pos.offset(facing()), structure, 3);
             structure = null;
+        }
+        if (structureTE != null) {
+            structureTE.validate();
+            world.setTileEntity(pos.offset(facing()), structureTE);
+            structureTE.validate();
+
+            structureTE = null;
         }
         toggleActive(false);
         angle = 0.0f;
@@ -69,6 +86,8 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
         if (structure != null) {
             world.setBlockState(pos.offset(facing()), structure, 3);
         }
+        structureTE = null;
+        structure = null;
     }
 
     @Override

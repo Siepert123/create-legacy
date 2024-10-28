@@ -16,6 +16,8 @@ import net.minecraft.world.biome.Biome;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class allowing blocks on a Mechanical Bearing to allow blocks to read other blocks on the bearing.
@@ -30,6 +32,7 @@ public class BearingStructureHelper implements IBlockAccess {
 
     protected BlockPos offset;
     protected IBlockState[][][] structure;
+    protected List<TileEntity> tileEntities = new ArrayList<>();
     AbstractTileEntityBearing bearingTE;
 
     public IBlockState[][][] getStructure() {
