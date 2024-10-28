@@ -70,11 +70,6 @@ public final class CreateLegacy {
                 getNetworkDiscriminator(), Side.CLIENT
         );
         networkWrapper.registerMessage(
-                new PacketRequestUpdateDepot.Handler(),
-                PacketRequestUpdateDepot.class,
-                getNetworkDiscriminator(), Side.SERVER
-        );
-        networkWrapper.registerMessage(
                 new PacketUpdatePress.Handler(),
                 PacketUpdatePress.class,
                 getNetworkDiscriminator(), Side.CLIENT
@@ -92,6 +87,11 @@ public final class CreateLegacy {
         networkWrapper.registerMessage(
                 new PacketUpdateBearing.Handler(),
                 PacketUpdateBearing.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateFunnelAdvanced.Handler(),
+                PacketUpdateFunnelAdvanced.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
         SchematicSaveHelper.makeSchematicsFolder();
