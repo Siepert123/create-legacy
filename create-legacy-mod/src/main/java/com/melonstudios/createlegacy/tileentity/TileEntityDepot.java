@@ -145,7 +145,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
     @Override
     public void markDirty() {
         super.markDirty();
-        notify = true;
+        if (!world.isRemote) PacketUpdateDepot.sendToPlayersNearby(this, 64);
     }
 
     @Override
@@ -183,18 +183,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
     @Override
     public void update() {
         if (!world.isRemote && notify) {
-            notify = false;
-            List<EntityPlayer> players =
-                    FMLCommonHandler.instance().getMinecraftServerInstance()
-                            .getWorld(world.provider.getDimension())
-                            .getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.add(-16, -16, -16),
-                                    pos.add(16, 16, 16)));
-
-            for (EntityPlayer player : players) {
-                if (player instanceof EntityPlayerMP) {
-                    CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdateDepot(this), (EntityPlayerMP) player);
-                }
-            }
+            if ((world.getTotalWorldTime() & 0xf) == 0xf) PacketUpdateDepot.sendToPlayersNearby(this, 32);
         }
     }
 

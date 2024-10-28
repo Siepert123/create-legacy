@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.network;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.tileentity.TileEntityDepot;
+import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.List;
 
-public class PacketUpdateDepot implements IMessage {
-    public static void sendToPlayersNearby(TileEntityDepot te, int range) {
+public class PacketUpdateFunnelAdvanced implements IMessage {
+    public static void sendToPlayersNearby(TileEntityFunnelAdvanced te, int range) {
         List<EntityPlayer> players = te.getWorld().getEntitiesWithinAABB(EntityPlayer.class,
                 new AxisAlignedBB(
                         te.getPos().add(-range, -range, -range),
@@ -26,50 +26,42 @@ public class PacketUpdateDepot implements IMessage {
 
         for (EntityPlayer player : players) {
             if (player instanceof EntityPlayerMP) {
-                CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdateDepot(te), (EntityPlayerMP) player);
+                CreateLegacy.getNetworkWrapper().sendTo(new PacketUpdateFunnelAdvanced(te), (EntityPlayerMP) player);
             }
         }
     }
+
     private BlockPos pos;
-    private ItemStack stack;
-    private ItemStack output;
-
-    public PacketUpdateDepot(BlockPos pos, ItemStack stack, ItemStack output) {
-        this.pos = pos;
-        this.stack = stack;
-        this.output = output;
-    }
-
-    public PacketUpdateDepot(TileEntityDepot te) {
-        this(te.getPos(), te.getStack(), te.getOutput());
-    }
-
-    public PacketUpdateDepot() {
-
-    }
+    private ItemStack filter;
 
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = BlockPos.fromLong(buf.readLong());
-        stack = ByteBufUtils.readItemStack(buf);
-        output = ByteBufUtils.readItemStack(buf);
+        filter = ByteBufUtils.readItemStack(buf);
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
-        ByteBufUtils.writeItemStack(buf, stack);
-        ByteBufUtils.writeItemStack(buf, output);
+        ByteBufUtils.writeItemStack(buf, filter);
     }
 
-    public static class Handler implements IMessageHandler<PacketUpdateDepot, IMessage> {
+    public PacketUpdateFunnelAdvanced(TileEntityFunnelAdvanced te) {
+        pos = te.getPos();
+        filter = te.getFilter();
+    }
+
+    public PacketUpdateFunnelAdvanced() {
+
+    }
+
+    public static class Handler implements IMessageHandler<PacketUpdateFunnelAdvanced, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketUpdateDepot message, MessageContext ctx) {
+        public IMessage onMessage(PacketUpdateFunnelAdvanced message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                TileEntityDepot te = (TileEntityDepot) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.setStack(message.stack);
-                te.setOutput(message.output);
+                TileEntityFunnelAdvanced te = (TileEntityFunnelAdvanced) Minecraft.getMinecraft().world.getTileEntity(message.pos);
+                te.setFilter(message.filter);
             });
             return null;
         }

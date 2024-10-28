@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.kinetic.IStateFindable;
 import com.melonstudios.createlegacy.block.BlockFunnel;
+import com.melonstudios.createlegacy.network.PacketUpdateFunnelAdvanced;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -32,6 +33,7 @@ public class TileEntityFunnelAdvanced extends TileEntity implements ITickable, I
     public void setFilter(ItemStack stack) {
         filter = stack.copy();
         filter.setCount(1);
+        PacketUpdateFunnelAdvanced.sendToPlayersNearby(this, 64);
     }
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -79,6 +81,7 @@ public class TileEntityFunnelAdvanced extends TileEntity implements ITickable, I
 
     @Override
     public void update() {
+        if (!world.isRemote && (world.getTotalWorldTime() & 0xff) == 0xff) PacketUpdateFunnelAdvanced.sendToPlayersNearby(this, 16);
         if (enabled()) {
             if (transferCooldown > 0) transferCooldown--;
             else {
