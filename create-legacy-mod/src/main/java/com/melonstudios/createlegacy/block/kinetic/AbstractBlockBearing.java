@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
     protected AbstractBlockBearing(String registry) {
         super(registry);
@@ -82,4 +84,8 @@ public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
+
+    @Nullable
+    @Override
+    public abstract AbstractTileEntityBearing createNewTileEntity(World worldIn, int meta);
 }

@@ -106,6 +106,27 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         GlStateManager.popMatrix();
     }
 
+    protected void rotateModelOffset(float angle, double x, double y, double z, EnumFacing.Axis axis, IBlockState state, double spinX, double spinY, double spinZ) {
+        GlStateManager.pushMatrix();
+
+        GlStateManager.translate(spinX + 0.5, spinY + 0.5, spinZ + 0.5);
+
+        GlStateManager.rotate(angle,
+                axis == EnumFacing.Axis.X ? 1 : 0,
+                axis == EnumFacing.Axis.Y ? 1 : 0,
+                axis == EnumFacing.Axis.Z ? 1 : 0);
+
+        GlStateManager.translate(-spinX - 0.5, -spinY - 0.5, -spinZ - 0.5);
+
+        GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);
+
+        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
+        GlStateManager.rotate(-90, 0, 1, 0);
+        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModelBrightness(model, state, 1.0f, true);
+
+        GlStateManager.popMatrix();
+    }
+
     protected void renderModel(double x, double y, double z, IBlockState state) {
         rotateModel(0.0f, x, y, z, EnumFacing.Axis.Y, state);
     }

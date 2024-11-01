@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.BlockRenderBearingAnchor;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing;
+import com.melonstudios.createlegacy.contraption.ContraptionBearing;
 import com.melonstudios.createlegacy.network.PacketUpdateBearing;
 import com.melonstudios.createlegacy.util.BearingStructureHelper;
 import com.melonstudios.createlegacy.util.EnumContraptionAssemblyMode;
@@ -23,6 +24,15 @@ import static com.melonstudios.createlegacy.block.kinetic.AbstractBlockBearing.F
 
 public abstract class AbstractTileEntityBearing extends AbstractTileEntityKinetic {
 
+    protected ContraptionBearing contraption;
+
+    public ContraptionBearing getContraption() {
+        return contraption;
+    }
+    public void overrideContraption(ContraptionBearing contraption) {
+        this.contraption = contraption;
+    }
+
     protected @Nullable IBlockState structure;
     protected @Nullable TileEntity structureTE;
     @Nullable
@@ -37,57 +47,28 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
     public void overrideStructure(@Nullable IBlockState structure) {
         this.structure = structure;
     }
-    public void overrideStructureTE(@Nullable TileEntity te) {
-        this.structureTE = te;
-    }
-
     public boolean isAssembled() {
         return structure != null;
     }
     public void assemble() {
-        if (structure == null) {
-            if (world.getBlockState(pos.offset(facing())).getBlock() == Blocks.AIR) return;
-            if (world.getBlockState(pos.offset(facing())).getMobilityFlag() == EnumPushReaction.BLOCK) return;
-            structure = world.getBlockState(pos.offset(facing()));
-            structureTE = world.getTileEntity(pos.offset(facing()));
-            world.setBlockToAir(pos.offset(facing()));
-            toggleActive(true);
-        }
+        toggleActive(true);
+        if (contraption != null) contraption.assemble();
     }
     public void disassemble() {
-        if (structure != null) {
-            if (!world.getBlockState(pos.offset(facing())).getMaterial().isReplaceable()) return;
-            world.setBlockState(pos.offset(facing()), structure, 3);
-            structure = null;
-        }
-        if (structureTE != null) {
-            structureTE.validate();
-            world.setTileEntity(pos.offset(facing()), structureTE);
-            structureTE.validate();
-
-            structureTE = null;
-        }
         toggleActive(false);
+        if (contraption != null) contraption.disassemble();
         angle = 0.0f;
         previousAngle = 0.0f;
     }
     protected void check() {
-        if (structure == null) {
+        if (contraption == null) {
             toggleActive(false);
-        } if (structure != null) {
+        } if (contraption != null) {
             toggleActive(true);
         }
 
         previousAngle %= 360;
         angle %= 360;
-    }
-
-    public void delete() {
-        if (structure != null) {
-            world.setBlockState(pos.offset(facing()), structure, 3);
-        }
-        structureTE = null;
-        structure = null;
     }
 
     @Override
