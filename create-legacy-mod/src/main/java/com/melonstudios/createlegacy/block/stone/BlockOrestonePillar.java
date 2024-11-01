@@ -31,6 +31,9 @@ public final class BlockOrestonePillar extends AbstractBlockOrestone {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         int met = placer.getHeldItem(hand).getMetadata();
+        if (!placer.isSneaking() && world.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockOrestonePillar) {
+            return world.getBlockState(pos.offset(facing.getOpposite())).withProperty(STONE_TYPE, StoneType.fromID(met));
+        }
         switch (facing.getAxis()) {
             case X:
                 return ModBlocks.ORESTONE_PILLAR_X.getDefaultState()
