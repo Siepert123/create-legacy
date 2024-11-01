@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
@@ -30,12 +31,12 @@ import java.io.File;
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 
-@Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before:mysticallib")
+@Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before-client:mysticallib;before:jei")
 public final class CreateLegacy {
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.0a";
+    public static final String VERSION = "0.1.0b";
 
-    public static final int VERSION_NUM = 1;
+    public static final int VERSION_NUM = 2;
     public static final int KINETIC_VERSION_NUM = 0;
 
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
@@ -46,7 +47,6 @@ public final class CreateLegacy {
         return networkWrapper;
     }
 
-    public static boolean porkchopGears = false;
 
     @SidedProxy(serverSide = "com.melonstudios.createlegacy.proxy.CommonProxy",
         clientSide = "com.melonstudios.createlegacy.proxy.ClientProxy")
@@ -68,7 +68,7 @@ public final class CreateLegacy {
     }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if (new File(Minecraft.getMinecraft().mcDataDir, "porkchop.gears").exists()) porkchopGears = true;
+        if (new File(Minecraft.getMinecraft().mcDataDir, "porkchop.gears").exists()) AbstractTileEntityKineticRenderer.pork();
 
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create_legacy");
         networkWrapper.registerMessage(

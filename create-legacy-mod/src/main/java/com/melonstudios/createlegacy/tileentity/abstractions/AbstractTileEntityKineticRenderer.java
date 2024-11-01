@@ -29,6 +29,11 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
     }
 
+    private static boolean porkchopGears = false;
+    public static void pork() {
+        porkchopGears = true;
+    }
+
     private static final ResourceLocation PIG_TEXTURES = new ResourceLocation("textures/entity/pig/pig.png");
 
     private boolean renderDebugText = true;
@@ -48,7 +53,7 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
             }
         }
 
-        if (CreateLegacy.porkchopGears) bindTexture(PIG_TEXTURES);
+        if (porkchopGears) bindTexture(PIG_TEXTURES);
         else bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     }
 
