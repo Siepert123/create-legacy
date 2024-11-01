@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.network.*;
 import com.melonstudios.createlegacy.proxy.CommonProxy;
 import com.melonstudios.createlegacy.recipe.RecipeInit;
@@ -33,6 +34,9 @@ import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 
 @Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before-client:mysticallib;before:jei")
 public final class CreateLegacy {
+    static {
+        ModFluids.setupFluids();
+    }
     public static final String MOD_ID = "create";
     public static final String VERSION = "0.1.1";
 

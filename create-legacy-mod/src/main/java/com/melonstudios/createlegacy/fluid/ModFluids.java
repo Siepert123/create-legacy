@@ -12,10 +12,6 @@ public class ModFluids {
     }
     public static final MaterialLiquid CHOCOLATE = new MaterialLiquid(MapColor.BROWN);
 
-    static {
-        setupFluids();
-    }
-
     public static void setupFluids() {
         FluidRegistry.enableUniversalBucket();
 
