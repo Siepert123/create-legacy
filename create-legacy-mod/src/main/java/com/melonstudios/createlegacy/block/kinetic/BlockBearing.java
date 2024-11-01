@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.tileentity.TileEntityBearing;
+import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityBearing;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -13,7 +14,7 @@ public class BlockBearing extends AbstractBlockBearing {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
+    public AbstractTileEntityBearing createNewTileEntity(World worldIn, int meta) {
         return new TileEntityBearing();
     }
 }
