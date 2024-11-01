@@ -34,9 +34,9 @@ import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 @Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before-client:mysticallib;before:jei")
 public final class CreateLegacy {
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.0b";
+    public static final String VERSION = "0.1.1";
 
-    public static final int VERSION_NUM = 2;
+    public static final int VERSION_NUM = 3;
     public static final int KINETIC_VERSION_NUM = 0;
 
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
