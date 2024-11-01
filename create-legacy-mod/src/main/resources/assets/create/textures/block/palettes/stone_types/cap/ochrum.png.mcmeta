@@ -1,0 +1,10 @@
+{
+  "ctm":{
+    "ctm_version": 1,
+    "type":"CTM",
+    "layer":"SOLID",
+    "textures":[
+      "create:block/palettes/stone_types/cap/ochrum_ctm"
+    ]
+  }
+}
