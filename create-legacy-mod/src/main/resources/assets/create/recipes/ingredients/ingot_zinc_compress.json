@@ -3,17 +3,13 @@
   "group": "ingot_zinc",
   "pattern": [
     "###",
-    "#N#",
+    "###",
     "###"
   ],
   "key": {
     "#": {
       "type": "forge:ore_dict",
       "ore": "nuggetZinc"
-    },
-    "N": {
-      "item": "create:ingredient",
-      "data": 7
     }
   },
   "result": {

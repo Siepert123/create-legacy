@@ -3,17 +3,13 @@
   "group": "ingot_copper",
   "pattern": [
     "###",
-    "#N#",
+    "###",
     "###"
   ],
   "key": {
     "#": {
       "type": "forge:ore_dict",
       "ore": "nuggetCopper"
-    },
-    "N": {
-      "item": "create:ingredient",
-      "data": 4
     }
   },
   "result": {

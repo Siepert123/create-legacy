@@ -3,18 +3,14 @@
   "group": "ingot_brass",
   "pattern": [
     "###",
-    "#N#",
+    "###",
     "###"
   ],
   "key": {
     "#": {
       "type": "forge:ore_dict",
       "ore": "nuggetBrass"
-    },
-    "N": {
-      "item": "create:ingredient",
-      "data": 10
-    }
+
   },
   "result": {
     "item": "create:ingredient",

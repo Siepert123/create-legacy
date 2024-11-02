@@ -275,6 +275,16 @@ public final class RecipeInit {
                     "stoneScorchia",
                     "stoneScoria",
                     "stoneVeridium",
+
+                    "stoneAndesite",
+                    "stoneAndesitePolished",
+                    "stoneGranite",
+                    "stoneGranitePolished",
+                    "stoneDiorite",
+                    "stoneDioritePolished",
+
+                    "stoneBasalt",
+                    "stoneBasaltPolished",
             };
 
             for (String stone : stones) {
@@ -320,7 +330,7 @@ public final class RecipeInit {
         woodMap.put(new ItemStack(Blocks.LOG, 1, 1), new ItemStack(Blocks.PLANKS, 6, 1));
         woodMap.put(new ItemStack(Blocks.LOG, 1, 2), new ItemStack(Blocks.PLANKS, 6, 2));
         woodMap.put(new ItemStack(Blocks.LOG, 1, 3), new ItemStack(Blocks.PLANKS, 6, 3));
-        woodMap.put(new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.PLANKS, 6, 5));
-        woodMap.put(new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Blocks.PLANKS, 6, 6));
+        woodMap.put(new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.PLANKS, 6, 4));
+        woodMap.put(new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Blocks.PLANKS, 6, 5));
     }
 }
