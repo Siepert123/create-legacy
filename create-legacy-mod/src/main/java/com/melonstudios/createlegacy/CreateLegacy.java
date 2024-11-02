@@ -110,6 +110,11 @@ public final class CreateLegacy {
                 PacketUpdateFunnelAdvanced.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
+        networkWrapper.registerMessage(
+                new PacketUpdateHandCrank.Handler(),
+                PacketUpdateHandCrank.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
         SchematicSaveHelper.makeSchematicsFolder();
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
