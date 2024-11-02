@@ -22,6 +22,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -80,6 +81,16 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         }
 
         return true;
+    }
+
+    @Override
+    public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+        return isEncased(blockState) ? 15 : this.blockHardness;
+    }
+
+    @Override
+    public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion) {
+        return isEncased(world.getBlockState(pos)) ? 50 : this.blockResistance;
     }
 
     @Override
