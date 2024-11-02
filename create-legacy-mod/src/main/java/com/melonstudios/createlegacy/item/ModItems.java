@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.item;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockKinetic;
+import com.melonstudios.createlegacy.block.redstone.AbstractBlockRedstoneCircuit;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.copycat.ICopycatBlock;
 import net.minecraft.item.Item;
@@ -28,6 +29,7 @@ public final class ModItems {
 
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
+        AbstractBlockRedstoneCircuit.models();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
                 0, "framed_glass/normal");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),

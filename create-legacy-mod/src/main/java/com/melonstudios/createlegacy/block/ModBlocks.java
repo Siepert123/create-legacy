@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.kinetic.*;
+import com.melonstudios.createlegacy.block.redstone.BlockRedstonePulseExtender;
 import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.copycat.BlockCopycatPanel;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
@@ -57,6 +58,9 @@ public final class ModBlocks {
     public static final BlockChigwanker CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final BlockRender RENDER = registerBlock(new BlockRender());
     public static final BlockRenderBearingAnchor RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
+
+    public static final BlockRedstonePulseExtender PULSE_EXTENDER = registerBlockWithItem(new BlockRedstonePulseExtender(false));
+    public static final BlockRedstonePulseExtender PULSE_EXTENDER_POWERED = registerBlock(new BlockRedstonePulseExtender(false));
 
     public static final AbstractBlockOrestone ORESTONE = registerOrestoneBlock(new BlockOrestone());
     public static final AbstractBlockOrestone ORESTONE_POLISHED = registerOrestoneBlock(new BlockOrestonePolished());
