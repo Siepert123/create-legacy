@@ -1,26 +1,24 @@
 {
   "variants": {
     "axis=x,brass=false": {
-      "model": "create:encased_shaft/andesite",
-      "y": 90
+      "model": "create:encased_shaft/andesite_alt"
     },
     "axis=y,brass=false": {
+      "model": "create:encased_shaft/andesite"
+    },
+    "axis=z,brass=false": {
       "model": "create:encased_shaft/andesite",
       "x": 90
     },
-    "axis=z,brass=false": {
-      "model": "create:encased_shaft/andesite"
-    },
     "axis=x,brass=true": {
-      "model": "create:encased_shaft/brass",
-      "y": 90
+      "model": "create:encased_shaft/brass_alt"
     },
     "axis=y,brass=true": {
-      "model": "create:encased_shaft/brass",
-      "x": 90
+      "model": "create:encased_shaft/brass"
     },
     "axis=z,brass=true": {
-      "model": "create:encased_shaft/brass"
+      "model": "create:encased_shaft/brass",
+      "x": 90
     }
   }
 }
