@@ -5,17 +5,21 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
     protected AbstractBlockBearing(String registry) {
@@ -47,6 +51,16 @@ public abstract class AbstractBlockBearing extends AbstractBlockKinetic {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(FACING, EnumFacing.VALUES[meta % 6]).withProperty(ACTIVE, meta / 6 != 0);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        tooltip.add(I18n.translateToLocal("tooltip.wip"));
+
+        if (advanced.isAdvanced()) {
+            tooltip.add("");
+            tooltip.add("Max structure size is 256x256x256 btw");
+        }
     }
 
     @Override
