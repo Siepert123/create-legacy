@@ -41,6 +41,8 @@ public final class CreateLegacyEventHandler {
                 "Nickel", "Uranium", "Thorium",
                 "Titanium", "Tin", "Zirconium",
                 "Tungsten", "Californium", "Constantan",
-                "Steel");
+                "Steel", "Mingrade", "Saturnite", "Cadmium",
+                "Silver", "Aluminum", "Chinesium",
+                "Cobalt", "Ardite", "Manyullyn");
     }
 }
