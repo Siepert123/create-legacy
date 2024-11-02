@@ -32,7 +32,12 @@ import java.io.File;
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
 
-@Mod(modid = MOD_ID, name = "Create Legacy", version = VERSION, dependencies = "required-before:ctm;required-before-client:mysticallib;before:jei")
+@Mod(
+        modid = MOD_ID,
+        name = "Create Legacy",
+        version = VERSION,
+        dependencies = "required-before-client:ctm;required-before:mysticallib;before:jei"
+)
 public final class CreateLegacy {
     static {
         ModFluids.setupFluids();
