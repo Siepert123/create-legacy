@@ -166,10 +166,13 @@ subtitle.block.millstone.ambient=Milling
 
 tooltip.wip=WIP, refrain from using plz
 
+#fluid
+fluid.create.chocolate=Chocolate
+
 #advancements
 
 
-#milestones
+#advancements: milestones
 
 
-#logic
+#advancements: logic
