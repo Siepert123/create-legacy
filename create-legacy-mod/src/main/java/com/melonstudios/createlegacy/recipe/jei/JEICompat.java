@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.item.ModItems;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
@@ -40,5 +41,9 @@ public final class JEICompat implements IModPlugin {
 
         registry.addRecipes(RecipeMaker.getWashingRecipes(jeiHelpers), "create.washing");
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.FAN), "create.washing");
+        registry.addRecipeCatalyst(new ItemStack(Items.WATER_BUCKET), "create.washing");
+
+        registry.addRecipes(RecipeMaker.getSandingRecipes(jeiHelpers), "create.sanding");
+        registry.addRecipeCatalyst(new ItemStack(ModItems.SANDPAPER), "create.sanding");
     }
 }
