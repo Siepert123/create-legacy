@@ -23,6 +23,7 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCategories(new PressingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new SawingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new WashingRecipeCategory.Implementation(gui));
+        registry.addRecipeCategories(new SandingRecipeCategory.Implementation(gui));
     }
 
     @Override
