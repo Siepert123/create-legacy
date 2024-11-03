@@ -5,6 +5,16 @@ item.create.schematic_writeable.name=Schematic and Quill
 item.create.schematic.name=Schematic
 item.create.wrench.name=Wrench
 
+item.create.food.apple_honey.name=Honey Apple
+item.create.food.blazecake.name=Blazecake
+item.create.food.blazecake_base.name=Empty Blazecake
+item.create.food.blazecake_creative.name=Creative Blazecake
+item.create.food.chocolate_berries.name=Chocolate Glazed Berries
+item.create.food.chocolate_ingot.name=Chocolate Bar
+item.create.food.dough.name=Dough
+item.create.food.sweet_roll.name=Sweet Roll
+item.create.food.wheat_flour.name=Flour
+
 #Ingredients
 item.create.andesite_alloy.name=Andesite Alloy
 item.create.plate_iron.name=Iron Sheet

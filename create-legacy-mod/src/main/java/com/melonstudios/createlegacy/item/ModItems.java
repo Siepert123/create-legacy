@@ -13,12 +13,13 @@ import java.util.List;
 public final class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
 
-    public static final Item WRENCH = registerItem(new ItemWrench());
-    public static final Item INGREDIENT = registerItem(new ItemIngredient());
-    public static final Item SANDPAPER = registerItem(new ItemSandpaper());
-    public static final Item SCHEMATIC = registerItem(new ItemSchematic());
+    public static final ItemWrench WRENCH = registerItem(new ItemWrench());
+    public static final ItemIngredient INGREDIENT = registerItem(new ItemIngredient());
+    public static final ItemSandpaper SANDPAPER = registerItem(new ItemSandpaper());
+    public static final ItemSchematic SCHEMATIC = registerItem(new ItemSchematic());
+    public static final ItemScrumptious FOOD = registerItem(new ItemScrumptious());
 
-    private static Item registerItem(Item item) {
+    private static <T extends Item> T registerItem(T item) {
         ITEMS.add(item);
         return item;
     }
@@ -28,6 +29,7 @@ public final class ModItems {
 
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
+        ItemScrumptious.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
                 0, "framed_glass/normal");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS),
