@@ -5,10 +5,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 
 public class FluidChocolate extends Fluid {
+    public static final int color = 8606770;
     public FluidChocolate() {
         super("chocolate", new ResourceLocation("create", "textures/fluid/chocolate"),
                 new ResourceLocation("create", "textures/fluid/chocolate_flowing"),
-                EnumDyeColor.BROWN.getColorValue());
+                color);
 
         setViscosity(500);
         setDensity(2000);
