@@ -117,7 +117,8 @@ public final class CreateLegacy {
                 PacketUpdateHandCrank.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
-        SchematicSaveHelper.makeSchematicsFolder();
+        try {SchematicSaveHelper.makeSchematicsFolder();}
+        catch (Exception ignored) {}
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
         GameRegistry.registerWorldGenerator(new WorldGeneratorCreateLegacy(), 1);

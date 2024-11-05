@@ -103,6 +103,7 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
+
         registerTE(TileEntityShaft.class, "shaft", new TileEntityShaftRenderer());
         registerTE(TileEntityCog.class, "cog", new TileEntityCogRenderer());
         registerTE(TileEntityGearbox.class, "gearbox", new TileEntityGearboxRenderer());
@@ -138,6 +139,10 @@ public final class ModBlocks {
     }
     private static void registerTE(Class<? extends TileEntity> te, String registry, @Nullable TileEntitySpecialRenderer<?> renderer) {
         GameRegistry.registerTileEntity(te, new ResourceLocation("create", registry));
-        if (renderer != null) TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
+        try {
+            if (renderer != null) TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
+        } catch (RuntimeException ignored) {
+
+        }
     }
 }

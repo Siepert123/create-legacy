@@ -23,7 +23,11 @@ public final class SchematicSaveHelper {
         return SCHEMATIC_DIR;
     }
     public static void makeSchematicsFolder() {
-        SCHEMATIC_DIR = new File(Minecraft.getMinecraft().mcDataDir, "create_schematics");
-        if (SCHEMATIC_DIR.mkdir()) DisplayLink.info("Successfully created schematics directory!");
+        try {
+            SCHEMATIC_DIR = new File(Minecraft.getMinecraft().mcDataDir, "create_schematics");
+            if (SCHEMATIC_DIR.mkdir()) DisplayLink.info("Successfully created schematics directory!");
+        } catch (Throwable ignored) {
+
+        }
     }
 }
