@@ -103,46 +103,7 @@ public final class ModBlocks {
     }
 
     public static void setTileEntities() {
-
-        registerTE(TileEntityShaft.class, "shaft", new TileEntityShaftRenderer());
-        registerTE(TileEntityCog.class, "cog", new TileEntityCogRenderer());
-        registerTE(TileEntityGearbox.class, "gearbox", new TileEntityGearboxRenderer());
-        registerTE(TileEntityClutch.class, "clutch", new TileEntityClutchRenderer());
-        registerTE(TileEntityGearshift.class, "gearshift", new TileEntityGearshiftRenderer());
-
-        registerTE(TileEntitySaw.class, "saw", new TileEntitySawRenderer());
-        registerTE(TileEntityBearing.class, "bearing", new TileEntityBearingRenderer());
-        registerTE(TileEntityPress.class, "press", new TileEntityPressRenderer());
-        registerTE(TileEntityMillstone.class, "millstone", new TileEntityMillstoneRenderer());
-        registerTE(TileEntityFan.class, "fan", new TileEntityFanRenderer());
-        registerTE(TileEntityDrill.class, "drill", new TileEntityDrillRenderer());
-
-        registerTE(TileEntityTurntable.class, "turntable", new TileEntityTurntableRenderer());
-
-        registerTE(TileEntityDepot.class, "depot", new TileEntityDepotRenderer());
-        registerTE(TileEntityChute.class, "chute", new TileEntityChuteRenderer());
-        registerTE(TileEntityFunnel.class, "funnel", null);
-        registerTE(TileEntityFunnelAdvanced.class, "funnel_advanced", new TileEntityFunnelAdvancedRenderer());
-
-        registerTE(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
-        registerTE(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());
-
-        registerTE(TileEntityHandCrank.class, "handcrank", new TileEntityHandCrankRenderer());
-        registerTE(TileEntityWaterWheel.class, "water_wheel", new TileEntityWaterWheelRenderer());
-        registerTE(TileEntityFlywheel.class, "flywheel", new TileEntityFlywheelRenderer());
-        registerTE(TileEntityCreativeMotor.class, "creative_motor", new TileEntityCreativeMotorRenderer());
-
-        //registerTE(TileEntityCopycat.class, "copycat", null);
-
-
-        registerTE(TileEntityChigwanker.class, "chigwanker", null);
-    }
-    private static void registerTE(Class<? extends TileEntity> te, String registry, @Nullable TileEntitySpecialRenderer<?> renderer) {
-        GameRegistry.registerTileEntity(te, new ResourceLocation("create", registry));
-        try {
-            if (renderer != null) TileEntityRendererDispatcher.instance.renderers.put(te, renderer);
-        } catch (RuntimeException ignored) {
-
-        }
+        CreateLegacy.proxy.setTileEntities(); // CommonProxy
+        CreateLegacy.proxy.setTERenderers(); // ClientProxy
     }
 }

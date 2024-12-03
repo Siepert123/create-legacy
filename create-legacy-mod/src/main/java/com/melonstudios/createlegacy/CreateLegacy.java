@@ -77,11 +77,9 @@ public final class CreateLegacy {
     }
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        try {
-            if (new File(Minecraft.getMinecraft().mcDataDir, "porkchop.gears").exists())
-                AbstractTileEntityKineticRenderer.pork();
-        } catch (Throwable ignored) {}
-        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("create_legacy");
+        proxy.preInitClientSetup(event);
+
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
         networkWrapper.registerMessage(
                 new PacketUpdateDepot.Handler(),
                 PacketUpdateDepot.class,
