@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import epicsquid.mysticallib.item.ItemFoodBase;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumAction;

@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.tileentity.TileEntityBearing;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityBearing;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;

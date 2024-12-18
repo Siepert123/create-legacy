@@ -8,11 +8,9 @@ import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
-import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,8 +24,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-
-import java.io.File;
 
 import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
 import static com.melonstudios.createlegacy.CreateLegacy.VERSION;

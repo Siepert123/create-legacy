@@ -1,12 +1,10 @@
 package com.melonstudios.createlegacy.tileentity.abstractions;
 
 import com.melonstudios.createlegacy.CreateConfig;
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockRotator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
