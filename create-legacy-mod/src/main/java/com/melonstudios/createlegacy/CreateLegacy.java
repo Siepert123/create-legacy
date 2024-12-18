@@ -40,7 +40,7 @@ public final class CreateLegacy {
     }
 
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.1b";
+    public static final String VERSION = "0.1.1c";
 
     public static final int VERSION_NUM = 5;
     public static final int KINETIC_VERSION_NUM = 0;
