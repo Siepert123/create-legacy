@@ -58,19 +58,6 @@ public class TileEntityClutch extends AbstractTileEntityKinetic {
         return connection(1);
     }
 
-    @Override
-    protected void tick() {
-        boolean red = false;
-        for (EnumFacing dir : EnumFacing.VALUES) {
-            if (world.getRedstonePower(pos, dir) > 0) red = true;
-        }
-        if (active() != red) {
-            world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockKineticUtility.ACTIVE, red), 3);
-            validate();
-            world.setTileEntity(pos, this);
-        }
-    }
-
     public float getSpeed(boolean b) {
         EnumFacing dir1 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, axis());
         EnumFacing dir2 = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, axis());

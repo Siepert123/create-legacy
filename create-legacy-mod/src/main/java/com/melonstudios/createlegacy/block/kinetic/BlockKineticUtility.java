@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.tileentity.TileEntityClutch;
 import com.melonstudios.createlegacy.tileentity.TileEntityGearshift;
 import com.melonstudios.createlegacy.util.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -77,6 +78,24 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this, 1, 0));
         items.add(new ItemStack(this, 1, 1));
+    }
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(worldIn, pos, state);
+        checkRedstone(worldIn, pos, state);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        checkRedstone(worldIn, pos, state);
+    }
+
+    private void checkRedstone(World world, BlockPos pos, IBlockState state) {
+        boolean powered = world.isBlockPowered(pos) || world.isBlockIndirectlyGettingPowered(pos) > 0;
+        System.out.println(pos + " has " + powered);
+        world.setBlockState(pos, state.withProperty(ACTIVE, powered));
     }
 
     @Nullable

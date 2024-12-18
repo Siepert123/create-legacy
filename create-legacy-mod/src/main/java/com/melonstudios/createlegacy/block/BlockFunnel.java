@@ -1,9 +1,11 @@
 package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.network.PacketUpdateFunnelAdvanced;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnel;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -28,7 +30,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName {
     public BlockFunnel() {
         super(Material.IRON);
@@ -119,6 +124,32 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(worldIn, pos, state);
+        checkRedstone(worldIn, pos, state);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        checkRedstone(worldIn, pos, state);
+    }
+
+    private void checkRedstone(World world, BlockPos pos, IBlockState state) {
+        boolean powered = world.isBlockPowered(pos)  || world.isBlockIndirectlyGettingPowered(pos) > 0;
+        System.out.println(pos + " has " + powered);
+        TileEntity te = world.getTileEntity(pos);
+        world.setBlockState(pos, state.withProperty(DISABLED, powered));
+        if (te != null) {
+            te.validate();
+            world.setTileEntity(pos, te);
+            if (te instanceof TileEntityFunnelAdvanced && !world.isRemote) {
+                PacketUpdateFunnelAdvanced.sendToPlayersNearby((TileEntityFunnelAdvanced) te, 32);
+            }
+        }
     }
 
     protected static final AxisAlignedBB AABB_SOUTH = CreateLegacy.aabb(0, 0, 0, 16, 16, 8);

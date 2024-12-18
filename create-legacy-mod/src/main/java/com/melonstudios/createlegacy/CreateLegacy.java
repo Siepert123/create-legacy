@@ -42,6 +42,7 @@ public final class CreateLegacy {
     static {
         ModFluids.setupFluids();
     }
+
     public static final String MOD_ID = "create";
     public static final String VERSION = "0.1.1b";
 

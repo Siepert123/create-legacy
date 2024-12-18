@@ -54,19 +54,6 @@ public class TileEntityGearshift extends AbstractTileEntityKinetic {
     }
 
     @Override
-    protected void tick() {
-        boolean red = false;
-        for (EnumFacing dir : EnumFacing.VALUES) {
-            if (world.isSidePowered(pos, dir)) red = true;
-        }
-        if (active() != red) {
-            world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockKineticUtility.ACTIVE, red), 3);
-            validate();
-            world.setTileEntity(pos, this);
-        }
-    }
-
-    @Override
     public void passNetwork(IKineticTileEntity src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
         if (!active()) super.passNetwork(src, srcDir, context, inverted);
         else {
