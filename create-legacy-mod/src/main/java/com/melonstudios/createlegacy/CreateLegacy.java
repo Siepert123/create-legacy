@@ -40,9 +40,9 @@ public final class CreateLegacy {
     }
 
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.1c";
+    public static final String VERSION = "0.1.2";
 
-    public static final int VERSION_NUM = 5;
+    public static final int VERSION_NUM = 6;
     public static final int KINETIC_VERSION_NUM = 0;
 
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
