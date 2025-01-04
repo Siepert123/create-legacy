@@ -43,6 +43,8 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
 
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
 
+        setHarvestLevel("pickaxe", 2);
+
         setDefaultState(this.blockState.getBaseState().withProperty(COPYCATTING, false));
     }
 
