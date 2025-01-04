@@ -313,7 +313,10 @@ public final class RecipeInit {
             SawingRecipes.addRecipe(entry.getKey().copy(), entry.getValue().copy());
         }
 
-
+        for (ItemStack zincIngot : OreDictionary.getOres("ingotZinc")) {
+            SawingRecipes.addRecipe(zincIngot, new ItemStack(ModBlocks.COPYCAT_PANEL, 4));
+            SawingRecipes.addRecipe(zincIngot, new ItemStack(ModBlocks.COPYCAT_STEP, 4));
+        }
 
         SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
 
