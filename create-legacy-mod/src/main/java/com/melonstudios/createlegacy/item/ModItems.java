@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockKinetic;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
+import com.melonstudios.createlegacy.copycat.BlockCopycat;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -85,5 +86,7 @@ public final class ModItems {
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.DEPOT));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHUTE));
+
+        BlockCopycat.setItemModels();
     }
 }

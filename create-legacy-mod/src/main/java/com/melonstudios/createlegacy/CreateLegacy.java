@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.copycat.PacketUpdateCopycat;
 import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.network.*;
 import com.melonstudios.createlegacy.proxy.CommonProxy;
@@ -25,22 +26,24 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import static com.melonstudios.createlegacy.CreateLegacy.MOD_ID;
-import static com.melonstudios.createlegacy.CreateLegacy.VERSION;
+import static com.melonstudios.createlegacy.CreateLegacy.*;
 
 @Mod(
         modid = MOD_ID,
         name = "Create Legacy",
         version = VERSION,
-        dependencies = "required-before-client:ctm;required-before:mysticallib;before:jei"
+        dependencies = DEPENDENCIES
 )
 public final class CreateLegacy {
     static {
         ModFluids.setupFluids();
     }
 
+    public static final boolean test = true;
     public static final String MOD_ID = "create";
     public static final String VERSION = "0.1.2";
+    public static final String DEPENDENCIES =
+            test ? "required-before:mysticallib;before:jei" : "required-before-client:ctm;required-before:mysticallib;before:jei";
 
     public static final int VERSION_NUM = 6;
     public static final int KINETIC_VERSION_NUM = 0;
@@ -110,6 +113,16 @@ public final class CreateLegacy {
         networkWrapper.registerMessage(
                 new PacketUpdateHandCrank.Handler(),
                 PacketUpdateHandCrank.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateCopycat.Handler(),
+                PacketUpdateCopycat.class,
+                getNetworkDiscriminator(), Side.SERVER
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateCopycat.Handler(),
+                PacketUpdateCopycat.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
         try {SchematicSaveHelper.makeSchematicsFolder();}

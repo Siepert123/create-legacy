@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.proxy;
 
+import com.melonstudios.createlegacy.copycat.TileEntityCopycat;
 import com.melonstudios.createlegacy.tileentity.*;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
@@ -43,7 +44,7 @@ public class CommonProxy {
         registerTE(TileEntityFlywheel.class, "flywheel");
         registerTE(TileEntityCreativeMotor.class, "creative_motor");
 
-        //registerTE(TileEntityCopycat.class, "copycat", null);
+        registerTE(TileEntityCopycat.class, "copycat");
 
 
         registerTE(TileEntityChigwanker.class, "chigwanker");

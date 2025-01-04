@@ -3,6 +3,8 @@ package com.melonstudios.createlegacy.block;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.kinetic.*;
 import com.melonstudios.createlegacy.block.stone.*;
+import com.melonstudios.createlegacy.copycat.BlockCopycat;
+import com.melonstudios.createlegacy.copycat.BlockCopycatPanel;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.block.Block;
@@ -71,6 +73,8 @@ public final class ModBlocks {
 
     public static final BlockFramedGlass FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
     public static final BlockFramedGlassPane FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
+
+    public static final BlockCopycat COPYCAT_PANEL = registerBlockWithItem(new BlockCopycatPanel());
 
     private static <T extends Block> T registerBlock(T block) {
         BLOCKS.add(block);

@@ -1,6 +1,8 @@
 package com.melonstudios.createlegacy.proxy;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.copycat.TileEntityCopycat;
+import com.melonstudios.createlegacy.copycat.TileEntityCopycatRenderer;
 import com.melonstudios.createlegacy.tileentity.*;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import net.minecraft.client.Minecraft;
@@ -62,7 +64,7 @@ public class ClientProxy extends CommonProxy {
         registerTER(TileEntityFlywheel.class, "flywheel", new TileEntityFlywheelRenderer());
         registerTER(TileEntityCreativeMotor.class, "creative_motor", new TileEntityCreativeMotorRenderer());
 
-        //registerTER(TileEntityCopycat.class, "copycat", null);
+        registerTER(TileEntityCopycat.class, "copycat", new TileEntityCopycatRenderer());
 
 
         registerTER(TileEntityChigwanker.class, "chigwanker", null);
