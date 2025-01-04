@@ -41,6 +41,8 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
         setHardness(2.0f);
         setResistance(4.0f);
 
+        setCreativeTab(CreateLegacy.TAB_DECORATIONS);
+
         setDefaultState(this.blockState.getBaseState().withProperty(COPYCATTING, false));
     }
 
