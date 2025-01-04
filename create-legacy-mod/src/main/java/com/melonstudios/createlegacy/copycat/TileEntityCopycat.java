@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCopycat extends TileEntity {
     public IBlockState copyState = null;
+    public boolean requestUpdate = true;
 
     public boolean mustRender() {
         return world.getBlockState(pos).getValue(BlockCopycat.COPYCATTING) && copyState != null;
@@ -21,7 +22,7 @@ public class TileEntityCopycat extends TileEntity {
 
     @Override
     public void onLoad() {
-        if (world.isRemote && world.getBlockState(pos).getValue(BlockCopycat.COPYCATTING)) {
+        if (requestUpdate && world.isRemote && world.getBlockState(pos).getValue(BlockCopycat.COPYCATTING)) {
             CreateLegacy.getNetworkWrapper().sendToServer(new PacketUpdateCopycat(this));
         }
     }

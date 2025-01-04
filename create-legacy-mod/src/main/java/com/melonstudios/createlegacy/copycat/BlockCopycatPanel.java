@@ -8,15 +8,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class BlockCopycatPanel extends BlockCopycat {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
@@ -50,7 +47,7 @@ public class BlockCopycatPanel extends BlockCopycat {
             return getDefaultState().withProperty(FACING, facing);
         }
         if (world.getBlockState(pos.offset(facing.getOpposite())).getBlock() instanceof BlockCopycatPanel) {
-            return world.getBlockState(pos.offset(facing.getOpposite()));
+            return world.getBlockState(pos.offset(facing.getOpposite())).withProperty(COPYCATTING, false);
         }
         return getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
     }

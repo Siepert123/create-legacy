@@ -1,25 +1,48 @@
 {
   "variants": {
-    "facing=north": {
+    "copycatting=false,facing=north": {
       "model": "create:copycat/panel"
     },
-    "facing=east": {
+    "copycatting=false,facing=east": {
       "model": "create:copycat/panel",
       "y": 90
     },
-    "facing=south": {
+    "copycatting=false,facing=south": {
       "model": "create:copycat/panel",
       "y": 180
     },
-    "facing=west": {
+    "copycatting=false,facing=west": {
       "model": "create:copycat/panel",
       "y": 270
     },
-    "facing=up": {
+    "copycatting=false,facing=up": {
       "model": "create:copycat/panel",
       "x": 270
     },
-    "facing=down": {
+    "copycatting=false,facing=down": {
+      "model": "create:copycat/panel",
+      "x": 90
+    },
+    "copycatting=true,facing=north": {
+      "model": "create:copycat/panel"
+    },
+    "copycatting=true,facing=east": {
+      "model": "create:copycat/panel",
+      "y": 90
+    },
+    "copycatting=true,facing=south": {
+      "model": "create:copycat/panel",
+      "y": 180
+    },
+    "copycatting=true,facing=west": {
+      "model": "create:copycat/panel",
+      "y": 270
+    },
+    "copycatting=true,facing=up": {
+      "model": "create:copycat/panel",
+      "x": 270
+    },
+    "copycatting=true,facing=down": {
       "model": "create:copycat/panel",
       "x": 90
     }

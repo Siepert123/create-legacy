@@ -19,6 +19,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -68,6 +69,18 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
     }
 
     @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityCopycat) {
+            TileEntityCopycat copycat = (TileEntityCopycat) te;
+            if (!player.isSneaking() && copycat.copyState != null) {
+                return copycat.copyState.getBlock().getPickBlock(copycat.copyState, target, world, pos, player);
+            }
+        }
+        return getItem(world, pos, state);
+    }
+
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TileEntity te = worldIn.getTileEntity(pos);
         if (te instanceof TileEntityCopycat) {
@@ -89,21 +102,26 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
                 if (copycat.copyState == null) {
                     Block block = item.getBlock();
                     if (block instanceof BlockCopycat) return false;
-                    copycat.copyState = block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, handItem.getMetadata(), playerIn, EnumHand.MAIN_HAND);
+                    IBlockState copyState = block.getStateForPlacement(worldIn, pos, facing,
+                            hitX, hitY, hitZ, handItem.getMetadata(), playerIn, EnumHand.MAIN_HAND);
+                    copycat.copyState = copyState;
                     worldIn.setBlockState(pos, originState.withProperty(COPYCATTING, true), 3);
                     copycat.validate();
                     worldIn.setTileEntity(pos, copycat);
                     copycat.validate();
+                    copycat.copyState = copyState;
+                    copycat.updateClients();
                     return true;
                 }
             }
             if (handItem.isEmpty() && te instanceof TileEntityCopycat) {
                 TileEntityCopycat copycat = (TileEntityCopycat) te;
-                copycat.copyState = null;
                 worldIn.setBlockState(pos, originState.withProperty(COPYCATTING, false), 3);
                 copycat.validate();
                 worldIn.setTileEntity(pos, copycat);
                 copycat.validate();
+                copycat.copyState = null;
+                copycat.updateClients();
                 return true;
             }
             if (te instanceof TileEntityCopycat) {
