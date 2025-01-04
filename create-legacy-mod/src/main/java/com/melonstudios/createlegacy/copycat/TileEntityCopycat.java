@@ -6,7 +6,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCopycat extends TileEntity {
+/**
+ * The TileEntity every copycat block uses.
+ * @see BlockCopycat
+ * @see TileEntityCopycatRenderer
+ * @since 0.1.2
+ * @author Siepert
+ */
+public final class TileEntityCopycat extends TileEntity {
     public IBlockState copyState = null;
     public boolean requestUpdate = true;
 

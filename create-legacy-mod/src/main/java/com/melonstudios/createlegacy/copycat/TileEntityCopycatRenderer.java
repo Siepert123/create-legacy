@@ -8,7 +8,10 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
-public class TileEntityCopycatRenderer extends TileEntitySpecialRenderer<TileEntityCopycat> {
+/**
+ * The renderer for every copycat block. The actual rendering is done in the subclasses of {@link BlockCopycat}!
+ */
+public final class TileEntityCopycatRenderer extends TileEntitySpecialRenderer<TileEntityCopycat> {
     public TileEntityCopycatRenderer() {
         this.rendererDispatcher = TileEntityRendererDispatcher.instance;
     }

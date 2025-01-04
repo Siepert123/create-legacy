@@ -27,6 +27,14 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+/**
+ * Parent class of all copycat blocks.
+ * Addon creators can extend this; all that needs to be implemented is the bounding box and meta save.
+ * @see BlockCopycatPanel
+ * @see BlockCopycatStep
+ * @since 0.1.2
+ * @author Siepert
+ */
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

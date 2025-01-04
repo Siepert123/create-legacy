@@ -19,7 +19,13 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
 
-public class PacketUpdateCopycat implements IMessage {
+/**
+ * Packet that handles both server update and client request message.
+ * Every copycat block utilizes this; no need to make one yourself!
+ * @since 0.1.2
+ * @author Siepert
+ */
+public final class PacketUpdateCopycat implements IMessage {
     public static void sendToNearbyPlayers(TileEntityCopycat te, int range) {
         List<EntityPlayer> players = FMLCommonHandler.instance().getMinecraftServerInstance()
                 .getWorld(te.getWorld().provider.getDimension())
