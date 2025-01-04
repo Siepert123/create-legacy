@@ -50,6 +50,13 @@ public class BlockSaw extends AbstractBlockKinetic {
         if (SawingRecipes.hasResult(stack)) {
             if (!worldIn.isRemote) {
                 TileEntitySaw saw = (TileEntitySaw) worldIn.getTileEntity(pos);
+                if (saw == null) throw new NullPointerException(
+                        String.format("Mechanical saw at [%s,%s,%s] is null!", pos.getX(), pos.getY(), pos.getZ())
+                );
+                if (saw.speed() < 64) {
+                    playerIn.sendStatusMessage(new TextComponentString("Needs 64 RPM to work (until later notice)"), true);
+                    return false;
+                }
                 ItemStack result = SawingRecipes.getResult(stack, saw.getIndex(), saw.getFilter());
                 if (result.isEmpty()) return true;
                 EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ,
