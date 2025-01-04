@@ -50,6 +50,13 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         return flickers;
     }
 
+    private boolean updateLoad = true;
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+    }
+
     public float speed() {
         return this.speed;
     }
@@ -117,6 +124,11 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         if (updated) updated = false;
         if (flickers > 0) flickers--;
 
+        if (updateLoad) {
+            updateLoad = false;
+            world.getBlockState(pos).getBlock().onBlockAdded(world, pos, world.getBlockState(pos));
+        }
+
         tick();
     }
 
@@ -125,7 +137,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
      * @param context network context
      */
     public final void networkFunc(NetworkContext context) {
-        nextCheck = Math.round(context.speed() / 10);
+        nextCheck = 2;
         lastUpdate = world.getTotalWorldTime();
 
         kineticTick(context);

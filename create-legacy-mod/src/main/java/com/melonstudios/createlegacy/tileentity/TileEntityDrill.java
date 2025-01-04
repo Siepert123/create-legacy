@@ -107,6 +107,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic implements INeeds
 
     @Override
     public void onLoad() {
+        super.onLoad();
         recalculate();
     }
 

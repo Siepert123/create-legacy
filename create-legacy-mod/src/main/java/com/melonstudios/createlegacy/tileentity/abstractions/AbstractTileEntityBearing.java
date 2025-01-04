@@ -182,6 +182,7 @@ public abstract class AbstractTileEntityBearing extends AbstractTileEntityKineti
 
     @Override
     public void onLoad() {
+        super.onLoad();
         if (structure != null) {
             toggleActive(true);
         }

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "copycatting=false,facing=north": {
+      "model": "create:copycat/step"
+    },
+    "copycatting=false,facing=east": {
+      "model": "create:copycat/step",
+      "y": 90
+    },
+    "copycatting=false,facing=south": {
+      "model": "create:copycat/step",
+      "y": 180
+    },
+    "copycatting=false,facing=west": {
+      "model": "create:copycat/step",
+      "y": 270
+    },
+    "copycatting=true,facing=north": {
+      "model": "create:copycat/step"
+    },
+    "copycatting=true,facing=east": {
+      "model": "create:copycat/step",
+      "y": 90
+    },
+    "copycatting=true,facing=south": {
+      "model": "create:copycat/step",
+      "y": 180
+    },
+    "copycatting=true,facing=west": {
+      "model": "create:copycat/step",
+      "y": 270
+    }
+  }
+}
