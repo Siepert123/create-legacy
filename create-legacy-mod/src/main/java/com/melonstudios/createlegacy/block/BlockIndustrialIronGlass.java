@@ -34,6 +34,8 @@ public class BlockIndustrialIronGlass extends Block {
         return !(state.getBlock() instanceof BlockIndustrialIronGlass);
     }
 
+
+
     @Override
     public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
         return 0;
@@ -51,6 +53,11 @@ public class BlockIndustrialIronGlass extends Block {
 
     @Override
     public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 }
