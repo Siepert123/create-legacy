@@ -58,7 +58,7 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
-        return state.getValue(COPYCATTING) ? EnumBlockRenderType.INVISIBLE : EnumBlockRenderType.MODEL;
+        return state.getValue(COPYCATTING) ? EnumBlockRenderType.ENTITYBLOCK_ANIMATED : EnumBlockRenderType.MODEL;
     }
 
     @Override
@@ -81,6 +81,18 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
             }
         }
         return getSoundType();
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityCopycat) {
+            IBlockState copyState = ((TileEntityCopycat)te).copyState;
+            if (copyState != null) {
+                return copyState.getBlock().getLightValue(copyState);
+            }
+        }
+        return 0;
     }
 
     @Override
