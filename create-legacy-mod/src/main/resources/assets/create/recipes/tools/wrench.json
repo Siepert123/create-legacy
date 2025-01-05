@@ -7,8 +7,8 @@
   ],
   "key": {
     "g": {
-      "item": "create:ingredient",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "plateGold"
     },
     "C": {
       "item": "create:rotator",
