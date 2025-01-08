@@ -12,7 +12,9 @@ import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -68,6 +70,24 @@ public final class CreateLegacy {
     }
     public static void setItemModel(Item item) {
         proxy.setItemModel(item);
+    }
+    public static void setItemModel(Block block, int meta, String file) {
+        Item item = Item.getItemFromBlock(block);
+        if (item != Items.AIR) {
+            setItemModel(item, meta, file);
+        }
+    }
+    public static void setItemModel(Block block, String file) {
+        Item item = Item.getItemFromBlock(block);
+        if (item != Items.AIR) {
+            setItemModel(item, file);
+        }
+    }
+    public static void setItemModel(Block block) {
+        Item item = Item.getItemFromBlock(block);
+        if (item != Items.AIR) {
+            setItemModel(item);
+        }
     }
 
     private static int networkId = -1;
