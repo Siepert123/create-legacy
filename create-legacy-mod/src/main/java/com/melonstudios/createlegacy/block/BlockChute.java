@@ -118,7 +118,7 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
                     EntityItem item = new EntityItem(worldIn,
                             playerIn.posX, playerIn.posY, playerIn.posZ,
                             chute.removeStackFromSlot(0));
-                    item.setVelocity(0, 0, 0);
+                    item.motionX = item.motionY = item.motionZ = 0;
                     worldIn.spawnEntity(item);
                 }
                 return true;

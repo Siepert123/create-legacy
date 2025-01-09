@@ -62,7 +62,7 @@ public class BlockSaw extends AbstractBlockKinetic {
                 EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ,
                         result.copy());
                 item.setPickupDelay(0);
-                item.setVelocity(0, 0, 0);
+                item.motionX = item.motionY = item.motionZ = 0;
                 worldIn.spawnEntity(item);
                 stack.shrink(1);
                 saw.increaseIndex();

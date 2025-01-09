@@ -198,7 +198,9 @@ public class TileEntityChute extends TileEntity implements IInventory, ITickable
                                 EntityItem item = new EntityItem(world,
                                         pos.getX() + 0.5, pos.getY()-0.5, pos.getZ() + 0.5,
                                         removeStackFromSlot(0));
-                                item.setVelocity(0, -0.25, 0);
+                                item.motionX = 0;
+                                item.motionY = -0.25;
+                                item.motionZ = 0;
                                 world.spawnEntity(item);
                                 transferCooldown = 10;
                             }

@@ -41,7 +41,7 @@ public class ItemWrench extends Item {
                     ItemStack dropped = new ItemStack(state.getBlock().getItemDropped(state, worldIn.rand, 0),
                             1, state.getBlock().damageDropped(state));
                     EntityItem item = new EntityItem(worldIn, player.posX, player.posY, player.posZ, dropped);
-                    item.setVelocity(0, 0, 0);
+                    item.motionX = item.motionY = item.motionZ = 0;
                     item.setNoPickupDelay();
                     worldIn.spawnEntity(item);
                     worldIn.setBlockToAir(pos);

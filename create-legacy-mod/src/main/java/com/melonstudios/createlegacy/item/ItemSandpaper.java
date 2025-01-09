@@ -53,7 +53,7 @@ public class ItemSandpaper extends Item {
                         playerIn.posZ,
                         result);
 
-                item.setVelocity(0, 0, 0);
+                item.motionX = item.motionY = item.motionZ = 0;
 
                 worldIn.spawnEntity(item);
 

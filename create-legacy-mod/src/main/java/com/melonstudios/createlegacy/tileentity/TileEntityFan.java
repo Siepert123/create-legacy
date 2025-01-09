@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -98,19 +99,10 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
             List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, boundingBox);
 
             for (Entity entity : entities) {
-                if (entity instanceof EntityPlayer) {
-                    if (world.isRemote) {
-                        entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
-                                max(entity.motionY / 4, strength * facing.getFrontOffsetY()),
-                                max(entity.motionZ / 4, strength * facing.getFrontOffsetZ()));
-                        if (strength > 0) entity.fallDistance = 0.0f;
-                    }
-                } else {
-                    entity.setVelocity(max(entity.motionX / 4, strength * facing.getFrontOffsetX()),
-                                max(entity.motionY / 4, strength * facing.getFrontOffsetY()),
-                                max(entity.motionZ / 4, strength * facing.getFrontOffsetZ()));
-                    if (strength > 0) entity.fallDistance = 0.0f;
-                }
+                entity.motionX = max(entity.motionX / 4, strength * facing.getFrontOffsetX());
+                entity.motionY = max(entity.motionY / 4, strength * facing.getFrontOffsetY());
+                entity.motionZ = max(entity.motionZ / 4, strength * facing.getFrontOffsetZ());
+                if (strength > 0) entity.fallDistance = 0.0f;
             }
         }
     }

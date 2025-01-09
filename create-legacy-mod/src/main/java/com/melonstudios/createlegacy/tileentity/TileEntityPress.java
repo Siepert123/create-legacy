@@ -102,7 +102,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                         EntityItem item = new EntityItem(world,
                                 pos.getX() + 0.5, pos.getY() - 1, pos.getZ() + 0.5,
                                 PressingRecipes.getResult(input).copy());
-                        item.setVelocity(0, 0, 0);
+                        item.motionX = item.motionY = item.motionZ = 0;
 
                         world.spawnEntity(item);
                         input.shrink(1);
