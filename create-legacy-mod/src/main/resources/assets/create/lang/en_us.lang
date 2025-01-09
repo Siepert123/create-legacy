@@ -81,10 +81,10 @@ tile.create.depot.name=Depot
 tile.create.funnel_andesite.name=Andesite Funnel
 tile.create.funnel_brass.name=Brass Funnel
 
-tile.create.shaft.name=Shaft
+tile.create.shaft.name=Axle
 tile.create.cog.name=Cog
-tile.create.shaft_encased_andesite.name=Andesite Encased Shaft
-tile.create.shaft_encased_brass.name=Brass Encased Shaft
+tile.create.shaft_encased_andesite.name=Andesite Encased Axle
+tile.create.shaft_encased_brass.name=Brass Encased Axle
 tile.create.gearbox.name=Gearbox
 tile.create.clutch.name=Clutch
 tile.create.gearshift.name=Gearshift
