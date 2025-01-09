@@ -33,6 +33,7 @@ public final class CreateLegacyEventHandler {
         ModBlocks.setTileEntities();
     }
 
+
     @SubscribeEvent
     public static void onMetalTypeQuery(MetalTypesQueryEvent event) {
         event.addTypes("Iron", "Gold", "Copper",
