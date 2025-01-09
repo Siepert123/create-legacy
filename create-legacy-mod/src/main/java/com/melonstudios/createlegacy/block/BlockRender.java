@@ -64,7 +64,11 @@ public class BlockRender extends Block {
         DRILL_S("drill_s"),
         DRILL_W("drill_w"),
 
-        SAWBLADE_Y("sawblade_y");
+        SAWBLADE_Y("sawblade_y"),
+
+        BLAZEHEAD_PASSIVE("blazehead_passive"),
+        BLAZEHEAD_HEATED("blazehead_heated"),
+        BLAZEHEAD_SUPERHEATED("blazehead_heated"),;
 
         private final String name;
         private final int id;
@@ -100,5 +104,12 @@ public class BlockRender extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState();
+    }
+
+    public static IBlockState getRenderPart(int id) {
+        return ModBlocks.RENDER.getDefaultState().withProperty(TYPE, Type.values()[id]);
+    }
+    public static IBlockState getRenderPart(Type type) {
+        return ModBlocks.RENDER.getDefaultState().withProperty(TYPE, type);
     }
 }

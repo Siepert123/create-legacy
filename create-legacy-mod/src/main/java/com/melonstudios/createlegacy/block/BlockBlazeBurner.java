@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName {
+public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName, IHeatProvider {
     public BlockBlazeBurner() {
         super(Material.IRON);
 
@@ -90,12 +90,15 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         return meta == 1 ? new TileEntityBlazeBurner() : null;
     }
 
-    public EnumBlazeLevel getBlazeLevel(World world, BlockPos pos, IBlockState state) {
+    @Override
+    public int getHeatLevel(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
         if (state.getValue(HAS_BLAZE)) {
-            TileEntityBlazeBurner blazeBurner = (TileEntityBlazeBurner) world.getTileEntity(pos);
-            if (blazeBurner != null) {
-                return blazeBurner.getBlazeLevel();
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof TileEntityBlazeBurner) {
+                return ((TileEntityBlazeBurner)te).getBlazeLevel().ordinal();
             }
-        } return EnumBlazeLevel.NONE;
+        }
+        return -1;
     }
 }

@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.EnumBlazeLevel;
 import mcp.MethodsReturnNonnullByDefault;
@@ -45,8 +46,18 @@ public class TileEntityBlazeBurner extends TileEntity implements ITickable {
         }
     }
     public IBlockState getAssociatedBlazePart() {
-        final IBlockState render = ModBlocks.RENDER.getDefaultState();
-        return render;
+        switch (blazeLevel) {
+            case PASSIVE: {
+                return BlockRender.getRenderPart(BlockRender.Type.BLAZEHEAD_PASSIVE);
+            }
+            case HEATED: {
+                return BlockRender.getRenderPart(BlockRender.Type.BLAZEHEAD_HEATED);
+            }
+            case SUPERHEATED: {
+                return BlockRender.getRenderPart(BlockRender.Type.BLAZEHEAD_SUPERHEATED);
+            }
+            default: return BlockRender.getRenderPart(BlockRender.Type.SAWBLADE_Y);
+        }
     }
     @SideOnly(Side.CLIENT)
     public float lookAtNearestPlayer() {
