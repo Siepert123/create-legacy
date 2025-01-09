@@ -23,10 +23,12 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
 
         setLightmapDisabled(true);
         RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
-                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0, te.getWorld().getTotalWorldTime(),
+                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
+                te.getWorld().getTotalWorldTime() + partialTicks,
                 0, true, true);
         RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
-                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0, te.getWorld().getTotalWorldTime() + 180,
+                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
+                te.getWorld().getTotalWorldTime() + 180 + partialTicks,
                 0, true, true);
         setLightmapDisabled(false);
 
