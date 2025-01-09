@@ -1,5 +1,8 @@
 package com.melonstudios.createlegacy.util;
 
+import com.melonstudios.createlegacy.block.BlockRender;
+import com.melonstudios.createlegacy.block.ModBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +17,7 @@ public class RenderUtil {
         GlStateManager.glNormal3f(0, 1, 0);
         GlStateManager.rotate(yaw, 0, 1, 0);
         GlStateManager.rotate(pitch, 1, 0, 0);
-        GlStateManager.scale(0.25, 0.25, 0.25);
+        GlStateManager.scale(-0.025, -0.025, 0.025);
         if (disableLight) GlStateManager.disableLighting();
         GlStateManager.depthMask(false);
         if (!occlude) GlStateManager.disableDepth();
@@ -33,15 +36,19 @@ public class RenderUtil {
         GlStateManager.enableTexture2D();
 
         if (!occlude) {
-            fontRenderer.drawString(text, -width, verticalShift, 553648127);
+            fontRenderer.drawString(text, -fontRenderer.getStringWidth(text) / 2, verticalShift, 553648127);
             GlStateManager.enableDepth();
         }
 
         GlStateManager.depthMask(true);
-        fontRenderer.drawString(text, -width, verticalShift, occlude ? 553648127 : -1);
+        fontRenderer.drawString(text, -fontRenderer.getStringWidth(text) / 2, verticalShift, -1);
         GlStateManager.enableLighting();
         GlStateManager.disableBlend();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.popMatrix();
+    }
+
+    public static IBlockState getRenderPart(BlockRender.Type type) {
+        return ModBlocks.RENDER.getDefaultState().withProperty(BlockRender.TYPE, type);
     }
 }

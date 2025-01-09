@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.util.RenderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -21,7 +22,12 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         String s = String.format("%s & %s", te.getStack(), te.getOutput());
 
         setLightmapDisabled(true);
-        drawNameplate(te, s, x, y, z, 16);
+        RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
+                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0, te.getWorld().getTotalWorldTime(),
+                0, true, true);
+        RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
+                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0, te.getWorld().getTotalWorldTime() + 180,
+                0, true, true);
         setLightmapDisabled(false);
 
         renderItem(te, x, y, z);
