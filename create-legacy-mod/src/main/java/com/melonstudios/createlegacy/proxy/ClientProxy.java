@@ -66,6 +66,8 @@ public class ClientProxy extends CommonProxy {
 
         registerTER(TileEntityCopycat.class, "copycat", new TileEntityCopycatRenderer());
 
+        registerTER(TileEntityBlazeBurner.class, "blazeburner", new TileEntityBlazeBurnerRenderer());
+
 
         registerTER(TileEntityChigwanker.class, "chigwanker", null);
     }

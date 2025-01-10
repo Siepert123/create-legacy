@@ -16,11 +16,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -38,7 +40,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         setResistance(10.0f);
 
         setSoundType(SoundType.METAL);
-        setCreativeTab(CreateLegacy.TAB_DECORATIONS);
+        setCreativeTab(CreateLegacy.TAB_KINETICS);
     }
 
     public static final PropertyBool HAS_BLAZE = PropertyBool.create("has_blaze");
@@ -79,6 +81,11 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         return state.getValue(HAS_BLAZE) ? 1 : 0;
     }
 
+    public static void items() {
+        CreateLegacy.setItemModel(ModBlocks.BLAZE_BURNER, 0, "blaze_burner/empty");
+        CreateLegacy.setItemModel(ModBlocks.BLAZE_BURNER, 0, "blaze_burner/filled");
+    }
+
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         return stack.getMetadata() == 0 ? "tile.create.blaze_burner_empty" : "tile.create.blaze_burner";
@@ -101,4 +108,46 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         }
         return -1;
     }
+
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    //region ?
+    @Override
+    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return 0;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+    //endregion
 }

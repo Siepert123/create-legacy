@@ -46,6 +46,8 @@ public class CommonProxy {
 
         registerTE(TileEntityCopycat.class, "copycat");
 
+        registerTE(TileEntityBlazeBurner.class, "blazeburner");
+
 
         registerTE(TileEntityChigwanker.class, "chigwanker");
     }

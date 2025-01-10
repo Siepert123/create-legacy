@@ -49,6 +49,8 @@ public final class ModBlocks {
     public static final BlockFurnaceEngine FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);
     public static final BlockCreativeMotor CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
+    public static final BlockBlazeBurner BLAZE_BURNER = registerBlockWithItem(new BlockBlazeBurner(), true);
+
     public static final BlockChigwanker CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final BlockRender RENDER = registerBlock(new BlockRender());
     public static final BlockRenderBearingAnchor RENDER_BEARING_ANCHOR = registerBlock(new BlockRenderBearingAnchor());
