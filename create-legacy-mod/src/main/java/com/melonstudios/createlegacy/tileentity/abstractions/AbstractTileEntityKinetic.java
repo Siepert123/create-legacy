@@ -164,7 +164,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
      * @param inverted inverted rotation?
      */
     public void passNetwork(IKineticTileEntity src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
-        if (enforceNonInversion() && inverted) {
+        if (enforceNoInversion && isInverted(context.speed() * (inverted ? -1 : 1))) {
             world.playEvent(2001, pos, Block.getStateId(getState()));
             getState().getBlock().dropBlockAsItem(world, pos, getState(), 0);
             world.setBlockToAir(pos);
@@ -216,6 +216,12 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     @Override
     public final boolean hasFastRenderer() {
+        return false;
+    }
+
+    protected boolean isInverted(float speedIn) {
+        if (generatedRPM() > 0 && speedIn < 0) return true;
+        if (generatedRPM() < 0 && speedIn > 0) return true;
         return false;
     }
 
@@ -272,4 +278,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
     public Random random() {
         return world.rand;
     }
+
+
+    public boolean enforceNoInversion = false;
 }

@@ -79,8 +79,8 @@ public final class NetworkContext {
     private void phase1() {
         for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (entry.getKey().isGenerator()) {
-                addSpeed(entry.getKey().generatedRPM());
-                addSU(entry.getKey().generatedSUMarkiplier() * entry.getKey().generatedRPM());
+                addSpeed(Math.abs(entry.getKey().generatedRPM()));
+                addSU(entry.getKey().generatedSUMarkiplier() * Math.abs(entry.getKey().generatedRPM()));
 
                 entry.getKey().setUpdated();
             }

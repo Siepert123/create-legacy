@@ -5,6 +5,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -53,5 +54,24 @@ public class BlockCreativeMotor extends AbstractBlockKinetic {
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (facing == state.getValue(FACING).getOpposite()) {
+            TileEntity te = worldIn.getTileEntity(pos);
+            if (te instanceof TileEntityCreativeMotor) {
+                TileEntityCreativeMotor motor = (TileEntityCreativeMotor) te;
+                boolean flag;
+                if (playerIn.isSneaking()) {
+                    flag = motor.decreaseRequestedSpeed();
+                } else {
+                    flag = motor.increaseRequestedSpeed();
+                }
+                motor.updateClients();
+                return flag;
+            }
+        }
+        return false;
     }
 }

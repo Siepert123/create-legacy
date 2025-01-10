@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.kinetic.BlockCreativeMotor;
+import com.melonstudios.createlegacy.network.PacketUpdateCreativeMotor;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +13,12 @@ public class TileEntityCreativeMotor extends AbstractTileEntityKinetic {
     @Override
     protected String namePlate() {
         return "Creative motor";
+    }
+
+    public void updateClients() {
+        if (!world.isRemote) {
+            PacketUpdateCreativeMotor.sendToNearbyPlayers(this, 1024);
+        }
     }
 
     public EnumFacing facing() {
@@ -24,15 +32,40 @@ public class TileEntityCreativeMotor extends AbstractTileEntityKinetic {
 
     @Override
     protected void tick() {
+        if ((world.getTotalWorldTime() & 255) == 255) {
+            updateClients();
+        }
+
         if (isUpdated() || generatedRPM() == 0) return;
         NetworkContext context = new NetworkContext(world);
-        passNetwork(null, null, context, false);
+        passNetwork(null, null, context, generatedRPM() < 0);
         context.start();
     }
 
     @Override
+    public void onLoad() {
+        super.onLoad();
+        enforceNoInversion = true;
+        if (world.isRemote) {
+            CreateLegacy.getNetworkWrapper().sendToServer(new PacketUpdateCreativeMotor(this));
+        }
+    }
+
+    @Override
     public float generatedRPM() {
-        return 256.0f;
+        return requestedSpeed;
+    }
+
+    public int requestedSpeed = 256;
+    public boolean increaseRequestedSpeed() {
+        if (requestedSpeed >= 256) return false;
+        requestedSpeed = Math.min(256, requestedSpeed + 16);
+        return true;
+    }
+    public boolean decreaseRequestedSpeed() {
+        if (requestedSpeed <= -256) return false;
+        requestedSpeed = Math.max(-256, requestedSpeed - 16);
+        return true;
     }
 
     @Override

@@ -145,6 +145,16 @@ public final class CreateLegacy {
                 PacketUpdateCopycat.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
+        networkWrapper.registerMessage(
+                new PacketUpdateCreativeMotor.Handler(),
+                PacketUpdateCreativeMotor.class,
+                getNetworkDiscriminator(), Side.SERVER
+        );
+        networkWrapper.registerMessage(
+                new PacketUpdateCreativeMotor.Handler(),
+                PacketUpdateCreativeMotor.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
         try {SchematicSaveHelper.makeSchematicsFolder();}
         catch (Exception ignored) {}
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
