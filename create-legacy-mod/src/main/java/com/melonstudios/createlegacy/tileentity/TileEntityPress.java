@@ -63,7 +63,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                 SoundCategory.BLOCKS, 1.0f, Math.abs(speed()) / 64f);
     }
 
-    final static private boolean ENABLE_DEPOT = false;
+    final static private boolean ENABLE_DEPOT = true;
     @Override
     protected void tick() {
         if (!world.isRemote) {
@@ -87,7 +87,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                         ItemStack result = PressingRecipes.getResult(input).copy();
                         if (existingResult.isItemEqual(result)) {
                             if (existingResult.getCount() < 64) {
-                                existingResult.setCount(1+existingResult.getCount());
+                                existingResult.grow(1);
                                 input.shrink(1);
                                 playPressingSFX();
                             }
@@ -122,7 +122,10 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
             if (entity instanceof TileEntityDepot) {
                 TileEntityDepot depot = (TileEntityDepot) entity;
 
-                return depot.output.isEmpty() && PressingRecipes.hasResult(depot.stack) ? depot.stack : ItemStack.EMPTY;
+                boolean flag = depot.output.isEmpty() || PressingRecipes.getResult(depot.stack).isItemEqual(depot.output);
+                if (flag) return depot.stack;
+
+                return ItemStack.EMPTY;
             }
         } else {
             List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.down()));

@@ -37,10 +37,34 @@ public class BlockDepot extends AbstractBlockKinetic {
         if (entity instanceof TileEntityDepot) {
             TileEntityDepot depot = (TileEntityDepot) entity;
 
-            if (depot.getStack().isEmpty()) {
-                depot.setStack(playerIn.getHeldItem(hand));
-                playerIn.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
+            if (!playerIn.getHeldItem(hand).isEmpty()) {
+                if (depot.getStack().isEmpty()) {
+                    depot.setStack(playerIn.getHeldItem(hand));
+                    playerIn.setHeldItem(hand, ItemStack.EMPTY);
+                    return true;
+                }
+            } else {
+                if (!depot.getOutput().isEmpty()) {
+                    ItemStack stack = depot.getOutput().copy();
+                    depot.setOutput(ItemStack.EMPTY);
+                    if (!worldIn.isRemote) {
+                        EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack);
+                        item.motionX = item.motionY = item.motionZ = 0;
+                        item.setNoPickupDelay();
+                        worldIn.spawnEntity(item);
+                    }
+                    return true;
+                } else if (!depot.getStack().isEmpty()) {
+                    ItemStack stack = depot.getStack().copy();
+                    depot.setStack(ItemStack.EMPTY);
+                    if (!worldIn.isRemote) {
+                        EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack);
+                        item.motionX = item.motionY = item.motionZ = 0;
+                        item.setNoPickupDelay();
+                        worldIn.spawnEntity(item);
+                    }
+                    return true;
+                } else return false;
             }
         }
 

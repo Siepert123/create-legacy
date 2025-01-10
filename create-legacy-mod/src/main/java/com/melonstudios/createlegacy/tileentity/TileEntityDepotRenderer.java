@@ -47,12 +47,18 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         GlStateManager.rotate(90, 1, 0, 0);
 
         if (!te.getStack().isEmpty()) {
-            IBakedModel model = Minecraft.getMinecraft().getRenderItem()
-                    .getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
-            model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
+            for (int i = 0; i < getStackSize(te.getStack().getCount()); i++) {
+                GlStateManager.pushMatrix();
+                GlStateManager.rotate(i, 0, 0, 1);
+                GlStateManager.translate(0, 0, -i / 32.0);
+                IBakedModel model = Minecraft.getMinecraft().getRenderItem()
+                        .getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
+                model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
-            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
+                GlStateManager.popMatrix();
+            }
         }
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
@@ -68,20 +74,29 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         RenderHelper.enableStandardItemLighting();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5, y + (15f / 16f), z + 0.25 + 0.0625f);
+        GlStateManager.translate(x + 0.25, y + (15f / 16f) - 0.05, z + 0.25 + 0.0625f + 0.5);
         GlStateManager.rotate(90, 1, 0, 0);
-        GlStateManager.translate(0, 0, 0.25);
 
         if (!te.getOutput().isEmpty()) {
-            IBakedModel model2 = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
-            model2 = ForgeHooksClient.handleCameraTransforms(model2, ItemCameraTransforms.TransformType.GROUND, false);
+            for (int i = 0; i < getStackSize(te.getOutput().getCount()); i++) {
+                GlStateManager.pushMatrix();
+                GlStateManager.rotate(i, 0, 0, 1);
+                GlStateManager.translate(0, 0, -i / 32.0);
+                IBakedModel model2 = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
+                model2 = ForgeHooksClient.handleCameraTransforms(model2, ItemCameraTransforms.TransformType.GROUND, false);
 
-            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model2);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                Minecraft.getMinecraft().getRenderItem().renderItem(te.getOutput(), model2);
+                GlStateManager.popMatrix();
+            }
         }
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
+    }
+
+    protected int getStackSize(int items) {
+        return Math.max(items / 8, 1);
     }
 }
