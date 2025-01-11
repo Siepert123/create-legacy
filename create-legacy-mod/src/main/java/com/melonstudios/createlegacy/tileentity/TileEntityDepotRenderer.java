@@ -45,7 +45,8 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         RenderHelper.enableStandardItemLighting();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5, y + (15f / 16f), z + 0.25 + 0.0625f);
+        GlStateManager.translate(x + 0.5, y + (14.5f / 16f), z + 0.5);
+        GlStateManager.scale(0.5, 0.5, 0.5);
         GlStateManager.rotate(90, 1, 0, 0);
 
         if (!te.getStack().isEmpty()) {
@@ -55,7 +56,7 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
                 GlStateManager.translate(0, 0, -i / 32.0);
                 IBakedModel model = Minecraft.getMinecraft().getRenderItem()
                         .getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
-                model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
+                model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.NONE, false);
 
                 Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
                 Minecraft.getMinecraft().getRenderItem().renderItem(te.getStack(), model);
@@ -76,7 +77,9 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         RenderHelper.enableStandardItemLighting();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.25, y + (15f / 16f) - 0.05, z + 0.25 + 0.0625f + 0.5);
+        GlStateManager.translate(x + 0.1, y + (14.5f / 16f) - 0.05, z + 0.1);
+        GlStateManager.scale(0.5, 0.5, 0.5);
+        GlStateManager.rotate(35, 0, 1, 0);
         GlStateManager.rotate(90, 1, 0, 0);
 
         if (!te.getOutput().isEmpty()) {
@@ -84,11 +87,11 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
                 GlStateManager.pushMatrix();
                 GlStateManager.rotate(i, 0, 0, 1);
                 GlStateManager.translate(0, 0, -i / 32.0);
-                IBakedModel model2 = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
-                model2 = ForgeHooksClient.handleCameraTransforms(model2, ItemCameraTransforms.TransformType.GROUND, false);
+                IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
+                model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.NONE, false);
 
                 Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                Minecraft.getMinecraft().getRenderItem().renderItem(te.getOutput(), model2);
+                Minecraft.getMinecraft().getRenderItem().renderItem(te.getOutput(), model);
                 GlStateManager.popMatrix();
             }
         }
