@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.block.stone.*;
 import com.melonstudios.createlegacy.copycat.BlockCopycat;
 import com.melonstudios.createlegacy.copycat.BlockCopycatPanel;
 import com.melonstudios.createlegacy.copycat.BlockCopycatStep;
+import com.melonstudios.createlegacy.item.ItemBlockBlazeBurner;
 import com.melonstudios.createlegacy.item.ItemBlockVariants;
 import com.melonstudios.createlegacy.item.ModItems;
 import net.minecraft.block.Block;
@@ -49,7 +50,7 @@ public final class ModBlocks {
     public static final BlockFurnaceEngine FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);
     public static final BlockCreativeMotor CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
-    public static final BlockBlazeBurner BLAZE_BURNER = registerBlockWithItem(new BlockBlazeBurner(), true);
+    public static final BlockBlazeBurner BLAZE_BURNER = registerBlazeBurner();
 
     public static final BlockChigwanker CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final BlockRender RENDER = registerBlock(new BlockRender());
@@ -88,6 +89,14 @@ public final class ModBlocks {
         BLOCKS.add(block);
         ModItems.ITEMS.add(ib);
         return block;
+    }
+    private static BlockBlazeBurner registerBlazeBurner() {
+        BlockBlazeBurner burner = new BlockBlazeBurner();
+        ItemBlockBlazeBurner burnerItem = new ItemBlockBlazeBurner(burner);
+        burnerItem.setRegistryName(burner.getRegistryName());
+        BLOCKS.add(burner);
+        ModItems.ITEMS.add(burnerItem);
+        return burner;
     }
     private static <T extends Block> T registerBlockWithItem(T block, boolean variants) {
         if (variants) return registerBlockWithItem(block, new ItemBlockVariants(block).setRegistryName(block.getRegistryName()));
