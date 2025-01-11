@@ -20,6 +20,8 @@ public class BlockTurntable extends AbstractBlockKinetic {
         super("turntable");
     }
 
+
+
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -35,6 +37,9 @@ public class BlockTurntable extends AbstractBlockKinetic {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(CreateAPI.stressImpactTooltip(1));
+        tooltip.add("");
         tooltip.add(CreateAPI.translateToLocal("tile.create.turntable.desc"));
     }
 }

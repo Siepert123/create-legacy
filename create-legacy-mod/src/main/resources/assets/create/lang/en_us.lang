@@ -180,6 +180,9 @@ subtitle.block.millstone.ambient=Milling
 
 tooltip.wip=WIP, refrain from using plz
 
+tooltip.stressImpact=Kinetic Stress Impact: %s×RPM
+tooltip.stressCapacity=Kinetic Stress Capacity: %s×RPM
+
 #fluid
 fluid.create.chocolate=Chocolate
 

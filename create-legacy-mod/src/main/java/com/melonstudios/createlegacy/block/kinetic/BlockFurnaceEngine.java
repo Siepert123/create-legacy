@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.tileentity.TileEntityFlywheel;
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.SoundType;
@@ -7,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,12 +20,19 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaName {
     public BlockFurnaceEngine() {
         super("furnace_engine");
 
         setSoundType(SoundType.METAL);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(CreateAPI.stressCapacityTooltip(256));
     }
 
     public enum Variant implements IStringSerializable {

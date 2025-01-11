@@ -7,9 +7,11 @@ import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.createlegacy.util.HeatHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +23,28 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
     @Override
     protected String namePlate() {
         return "Fan";
+    }
+
+    @Override
+    public float consumedStressMarkiplier() {
+        return 6;
+    }
+
+    @Override
+    public float generatedSUMarkiplier() {
+        return 2;
+    }
+
+    @Override
+    public float generatedRPM() {
+        if (facing() == EnumFacing.DOWN) {
+            if (world.isBlockIndirectlyGettingPowered(pos) > 0 || world.isBlockPowered(pos)) {
+                if (HeatHelper.doesHeatingFulfillNeedsAt(world, pos.down(), 0)) {
+                    return 8;
+                }
+            }
+        }
+        return 0;
     }
 
     @Override
