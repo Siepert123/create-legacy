@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
@@ -111,7 +112,9 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                     }
                 }
                 PacketUpdatePress.sendToPlayersNearby(this, 32);
-            } else previousProgress = progress;
+            } else {
+                previousProgress = progress;
+            }
         }
     }
 
@@ -168,7 +171,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     }
     protected float convertProgress(int progress) {
         if (progress > maxProgress / 2) {
-            return progress / (maxProgress / 2f) -2;
+            return (progress / (maxProgress / 2f) -2);
         }
         return progress / (maxProgress / 2f) * -1;
     }
@@ -180,7 +183,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
     }
 
     public double getPressYOffset(float part) {
-        return RenderUtils.smoothen(getPreviousYOffset(),
+        return MathHelper.clampedLerp(getPreviousYOffset(),
                 getCurrentYOffset(), part);
     }
 

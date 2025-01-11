@@ -19,18 +19,22 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
 
     @Override
     public void render(TileEntityDepot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        String s = String.format("%s & %s", te.getStack(), te.getOutput());
-
         if (RenderUtil.enableDebug()) {
             setLightmapDisabled(true);
-            RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer, s,
-                    (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
-                    te.getWorld().getTotalWorldTime() + partialTicks,
-                    0, true, true);
-            RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer, s,
-                    (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
-                    te.getWorld().getTotalWorldTime() + 180 + partialTicks,
-                    0, true, true);
+            if (!te.getStack().isEmpty()) {
+                RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer,
+                        te.getStack().getCount() + " " + te.getStack().getDisplayName(),
+                        (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, te.getOutput().isEmpty() ? 4 : 8,
+                        -rendererDispatcher.entityYaw,
+                        0, true, true);
+            }
+            if (!te.getOutput().isEmpty()) {
+                RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer,
+                        te.getOutput().getCount() + " " + te.getOutput().getDisplayName(),
+                        (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, -1,
+                        -rendererDispatcher.entityYaw,
+                        0, true, true);
+            }
             setLightmapDisabled(false);
         }
 
@@ -53,7 +57,7 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
             for (int i = 0; i < getStackSize(te.getStack().getCount()); i++) {
                 GlStateManager.pushMatrix();
                 GlStateManager.rotate(i, 0, 0, 1);
-                GlStateManager.translate(0, 0, -i / 32.0);
+                GlStateManager.translate(0, 0, -i / 16.0);
                 IBakedModel model = Minecraft.getMinecraft().getRenderItem()
                         .getItemModelWithOverrides(te.getStack(), te.getWorld(), null);
                 model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.NONE, false);
@@ -77,7 +81,7 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         RenderHelper.enableStandardItemLighting();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.1, y + (14.5f / 16f) - 0.05, z + 0.1);
+        GlStateManager.translate(x + 0.1, y + (14.5f / 16f), z + 0.1);
         GlStateManager.scale(0.5, 0.5, 0.5);
         GlStateManager.rotate(35, 0, 1, 0);
         GlStateManager.rotate(90, 1, 0, 0);
@@ -86,7 +90,7 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
             for (int i = 0; i < getStackSize(te.getOutput().getCount()); i++) {
                 GlStateManager.pushMatrix();
                 GlStateManager.rotate(i, 0, 0, 1);
-                GlStateManager.translate(0, 0, -i / 32.0);
+                GlStateManager.translate(0, 0, -i / 16.0);
                 IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(te.getOutput(), te.getWorld(), null);
                 model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.NONE, false);
 

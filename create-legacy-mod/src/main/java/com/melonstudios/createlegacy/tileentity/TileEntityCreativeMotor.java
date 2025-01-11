@@ -7,12 +7,29 @@ import com.melonstudios.createlegacy.network.PacketUpdateCreativeMotor;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityCreativeMotor extends AbstractTileEntityKinetic {
     @Override
     protected String namePlate() {
         return "Creative motor";
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+
+        compound.setInteger("requestedRPM", requestedSpeed);
+
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+
+        requestedSpeed = compound.getInteger("requestedRPM");
     }
 
     public void updateClients() {
