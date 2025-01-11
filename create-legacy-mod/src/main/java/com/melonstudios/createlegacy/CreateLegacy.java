@@ -43,11 +43,11 @@ public final class CreateLegacy {
 
     public static final boolean test = true;
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.1.2a";
+    public static final String VERSION = "0.1.3";
     public static final String DEPENDENCIES =
             test ? "required-before:mysticallib;before:jei" : "required-before-client:ctm;required-before:mysticallib;before:jei";
 
-    public static final int VERSION_NUM = 6;
+    public static final int VERSION_NUM = 7;
     public static final int KINETIC_VERSION_NUM = 0;
 
     public static final CreativeTabs TAB_KINETICS = new KineticsTab();
