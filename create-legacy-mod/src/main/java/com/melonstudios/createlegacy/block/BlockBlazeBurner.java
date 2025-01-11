@@ -100,7 +100,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
                 if (!worldIn.isRemote) {
                     stack.shrink(1);
                     worldIn.playSound(null, pos,
-                            SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
+                            SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS,
                             1, 1);
                 }
                 return true;
