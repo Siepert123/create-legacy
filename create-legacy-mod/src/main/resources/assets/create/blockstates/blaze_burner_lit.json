@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "create:blaze_burner/lit"
+    }
+  }
+}

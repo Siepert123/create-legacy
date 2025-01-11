@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.TileEntityBlazeBurner;
 import com.melonstudios.createlegacy.util.EnumBlazeLevel;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -15,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -29,8 +31,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName, IHeatProvider {
     public BlockBlazeBurner() {
         super(Material.IRON);
@@ -42,6 +48,8 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
 
         setHardness(5.0f);
         setResistance(10.0f);
+
+        setTickRandomly(true);
 
         setSoundType(SoundType.METAL);
         setCreativeTab(CreateLegacy.TAB_KINETICS);
@@ -77,8 +85,27 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
-
-        if (!stack.isEmpty()) {
+        if (!worldIn.getBlockState(pos).getValue(HAS_BLAZE)) {
+            if (stack.getItem() == Items.FLINT_AND_STEEL) {
+                worldIn.setBlockState(pos, ModBlocks.BLAZE_BURNER_LIT.getDefaultState(), 3);
+                if (!worldIn.isRemote) {
+                    stack.damageItem(1, playerIn);
+                    worldIn.playSound(null, pos,
+                            SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
+                            1, 1);
+                }
+                return true;
+            } else if (stack.getItem() == Items.FIRE_CHARGE) {
+                worldIn.setBlockState(pos, ModBlocks.BLAZE_BURNER_LIT.getDefaultState(), 3);
+                if (!worldIn.isRemote) {
+                    stack.shrink(1);
+                    worldIn.playSound(null, pos,
+                            SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS,
+                            1, 1);
+                }
+                return true;
+            }
+        } else if (!stack.isEmpty()) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof TileEntityBlazeBurner) {
                 TileEntityBlazeBurner burner = (TileEntityBlazeBurner) te;
@@ -214,6 +241,26 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public int getLightValue(IBlockState state) {
+        return state.getValue(HAS_BLAZE) ? 15 : 0;
+    }
+
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityBlazeBurner) {
+            if (((TileEntityBlazeBurner)te).getBlazeLevel().ordinal() > 1) return 15;
+            if (((TileEntityBlazeBurner)te).getBlazeLevel() == EnumBlazeLevel.PASSIVE) return 7;
+        }
+        return 0;
+    }
+
+    @Override
+    public float getAmbientOcclusionLightValue(IBlockState state) {
+        return 1;
     }
 
     //region ?

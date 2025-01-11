@@ -51,6 +51,7 @@ public final class ModBlocks {
     public static final BlockCreativeMotor CREATIVE_MOTOR = registerBlockWithItem(new BlockCreativeMotor());
 
     public static final BlockBlazeBurner BLAZE_BURNER = registerBlazeBurner();
+    public static final BlockBlazeBurnerDeco BLAZE_BURNER_LIT = registerBlock(new BlockBlazeBurnerDeco());
 
     public static final BlockChigwanker CHIGWANKER = registerBlockWithItem(new BlockChigwanker());
     public static final BlockRender RENDER = registerBlock(new BlockRender());

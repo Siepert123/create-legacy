@@ -81,7 +81,7 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
         RenderHelper.enableStandardItemLighting();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.1, y + (14.5f / 16f), z + 0.1);
+        GlStateManager.translate(x + 0.2, y + (14.5f / 16f), z + 0.2);
         GlStateManager.scale(0.5, 0.5, 0.5);
         GlStateManager.rotate(35, 0, 1, 0);
         GlStateManager.rotate(90, 1, 0, 0);
