@@ -85,6 +85,8 @@ public final class OreDictHandler {
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 28));
         OreDictionary.registerOre("create:unprocessedItem", new ItemStack(ModItems.INGREDIENT, 1, 29));
 
+        OreDictionary.registerOre("create:blazeBurnerSuperheat", new ItemStack(ModItems.FOOD, 1, 1));
+
 
         BlockTagHelper.addBlockTags();
 

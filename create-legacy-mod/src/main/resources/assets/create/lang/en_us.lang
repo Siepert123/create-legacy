@@ -60,6 +60,9 @@ tile.create.casing_brass.name=Brass Casing
 tile.create.casing_train.name=Train Casing
 tile.create.chute.name=Chute
 
+tile.create.blaze_burner_empty.name=Empty Blazeburner
+tile.create.blaze_burner.name=Blazeburner
+
 tile.create.industrial_iron.name=Block of Industrial Iron
 tile.create.industrial_iron_glass.name=Block of Industrial Iron Glass
 tile.create.framed_glass.name=Framed Glass

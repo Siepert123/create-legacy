@@ -21,16 +21,18 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
     public void render(TileEntityDepot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         String s = String.format("%s & %s", te.getStack(), te.getOutput());
 
-        setLightmapDisabled(true);
-        RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
-                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
-                te.getWorld().getTotalWorldTime() + partialTicks,
-                0, true, true);
-        RenderUtil.renderText(rendererDispatcher.fontRenderer, s,
-                (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
-                te.getWorld().getTotalWorldTime() + 180 + partialTicks,
-                0, true, true);
-        setLightmapDisabled(false);
+        if (RenderUtil.enableDebug()) {
+            setLightmapDisabled(true);
+            RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer, s,
+                    (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
+                    te.getWorld().getTotalWorldTime() + partialTicks,
+                    0, true, true);
+            RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer, s,
+                    (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, 0,
+                    te.getWorld().getTotalWorldTime() + 180 + partialTicks,
+                    0, true, true);
+            setLightmapDisabled(false);
+        }
 
         renderItem(te, x, y, z);
     }

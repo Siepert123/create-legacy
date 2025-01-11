@@ -142,6 +142,15 @@
       "model": "create:render/drill",
       "x": 90,
       "y": 270
+    },
+    "type=blazehead_passive": {
+      "model": "create:render/blazehead_passive"
+    },
+    "type=blazehead_heated": {
+      "model": "create:render/blazehead_heated"
+    },
+    "type=blazehead_superheated": {
+      "model": "create:render/blazehead_superheated"
     }
   }
 }

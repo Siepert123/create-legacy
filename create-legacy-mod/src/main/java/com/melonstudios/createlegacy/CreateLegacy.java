@@ -155,6 +155,11 @@ public final class CreateLegacy {
                 PacketUpdateCreativeMotor.class,
                 getNetworkDiscriminator(), Side.CLIENT
         );
+        networkWrapper.registerMessage(
+                new PacketUpdateBlazeBurner.Handler(),
+                PacketUpdateBlazeBurner.class,
+                getNetworkDiscriminator(), Side.CLIENT
+        );
         try {SchematicSaveHelper.makeSchematicsFolder();}
         catch (Exception ignored) {}
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);

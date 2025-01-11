@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.TileEntityBlazeBurner;
 import com.melonstudios.createlegacy.util.EnumBlazeLevel;
 import com.melonstudios.createlegacy.util.IMetaName;
@@ -14,18 +15,21 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName, IHeatProvider {
     public BlockBlazeBurner() {
@@ -71,6 +75,104 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
     }
 
     @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack stack = playerIn.getHeldItem(hand);
+
+        if (!stack.isEmpty()) {
+            TileEntity te = worldIn.getTileEntity(pos);
+            if (te instanceof TileEntityBlazeBurner) {
+                TileEntityBlazeBurner burner = (TileEntityBlazeBurner) te;
+                if (stack.getItem() == ModItems.FOOD && stack.getMetadata() == 3) {
+                    burner.creativeCake();
+                    if (!worldIn.isRemote) {
+                        worldIn.playSound(null, pos,
+                                SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.BLOCKS,
+                                1, 0.9f + worldIn.rand.nextFloat() * 0.2f);
+                    } else {
+                        for (int i = 0; i < 20; i++) {
+                            worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                                    pos.getX() + worldIn.rand.nextDouble(),
+                                    pos.getY() + worldIn.rand.nextDouble(),
+                                    pos.getZ() + worldIn.rand.nextDouble(),
+                                    0, worldIn.rand.nextDouble() * 0.01, 0);
+                        }
+                    }
+                    return true;
+                } else {
+                    for (int id : OreDictionary.getOreIDs(stack)) {
+                        if (OreDictionary.getOreID("create:blazeBurnerSuperheat") == id) {
+                            boolean flag = burner.superheat();
+                            if (flag) {
+                                if (!worldIn.isRemote) {
+                                    stack.shrink(1);
+                                    worldIn.playSound(null, pos,
+                                            SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.BLOCKS,
+                                            1, 0.9f + worldIn.rand.nextFloat() * 0.2f);
+                                } else {
+                                    for (int i = 0; i < 20; i++) {
+                                        worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                                                pos.getX() + worldIn.rand.nextDouble(),
+                                                pos.getY() + worldIn.rand.nextDouble(),
+                                                pos.getZ() + worldIn.rand.nextDouble(),
+                                                0, worldIn.rand.nextDouble() * 0.01, 0);
+                                    }
+                                }
+                                return true;
+                            }
+                        }
+                    }
+                    int cookTime = TileEntityFurnace.getItemBurnTime(stack);
+                    if (cookTime > 0) {
+                        burner.addTicks(cookTime);
+                        if (!worldIn.isRemote) {
+                            stack.shrink(1);
+                            worldIn.playSound(null, pos,
+                                    SoundEvents.ENTITY_BLAZE_AMBIENT, SoundCategory.BLOCKS,
+                                    1, 0.9f + worldIn.rand.nextFloat() * 0.2f);
+                        } else {
+                            for (int i = 0; i < 20; i++) {
+                                worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                                        pos.getX() + worldIn.rand.nextDouble(),
+                                        pos.getY() + worldIn.rand.nextDouble(),
+                                        pos.getZ() + worldIn.rand.nextDouble(),
+                                        0, worldIn.rand.nextDouble() * 0.01, 0);
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        if (!stateIn.getValue(HAS_BLAZE)) return;
+        TileEntity te = worldIn.getTileEntity(pos);
+        if (te instanceof TileEntityBlazeBurner) {
+            TileEntityBlazeBurner burner = (TileEntityBlazeBurner) te;
+            if (burner.getBlazeLevel().ordinal() > 1) {
+                for (int i = 0; i < rand.nextInt(10); i++) {
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME,
+                            pos.getX() + rand.nextDouble(),
+                            pos.getY() + rand.nextDouble(),
+                            pos.getZ() + rand.nextDouble(),
+                            0, rand.nextDouble() * 0.01, 0);
+                }
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                    pos.getX() + rand.nextDouble(),
+                    pos.getY() + 0.2 + rand.nextDouble() * 0.4,
+                    pos.getZ() + rand.nextDouble(),
+                    0, rand.nextDouble() * 0.01, 0);
+        }
+    }
+
+    @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this, 1, 0));
         items.add(new ItemStack(this, 1, 1));
@@ -83,7 +185,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
 
     public static void items() {
         CreateLegacy.setItemModel(ModBlocks.BLAZE_BURNER, 0, "blaze_burner/empty");
-        CreateLegacy.setItemModel(ModBlocks.BLAZE_BURNER, 0, "blaze_burner/filled");
+        CreateLegacy.setItemModel(ModBlocks.BLAZE_BURNER, 1, "blaze_burner/filled");
     }
 
     @Override
