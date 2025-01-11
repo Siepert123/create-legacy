@@ -116,6 +116,7 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                 previousProgress = progress;
             }
         }
+        previousProgress = progress;
     }
 
     protected final IBlockState depotBlock = ModBlocks.DEPOT.getDefaultState();

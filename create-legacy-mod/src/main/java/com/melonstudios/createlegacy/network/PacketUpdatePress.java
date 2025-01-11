@@ -63,7 +63,6 @@ public class PacketUpdatePress implements IMessage {
         public IMessage onMessage(PacketUpdatePress message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityPress te = (TileEntityPress) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.setPreviousProgress(message.previousProgress);
                 te.setProgress(message.progress);
             });
             return null;
