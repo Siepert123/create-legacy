@@ -13,6 +13,7 @@ public class HeatHelper {
     private static final Map<Block, Integer> customHeatings = new HashMap<>();
     static {
         customHeatings.put(Blocks.FIRE, 0);
+        customHeatings.put(Blocks.MAGMA, 0);
     }
     public static boolean canBlockProvideHeatAt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();

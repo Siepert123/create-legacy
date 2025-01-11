@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
+import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockFan;
@@ -39,7 +40,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
     public float generatedRPM() {
         if (facing() == EnumFacing.DOWN) {
             if (world.isBlockIndirectlyGettingPowered(pos) > 0 || world.isBlockPowered(pos)) {
-                if (HeatHelper.doesHeatingFulfillNeedsAt(world, pos.down(), 0)) {
+                if (HeatHelper.isBlockPassivelyHeated(world, pos.down())) {
                     return 8;
                 }
             }
@@ -71,8 +72,16 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
     @Override
     protected void tick() {
-        if (current == null) current = new AirCurrent(this);
-        else current.tick();
+        if (generatedRPM() > 0) {
+            if (!isUpdated()) {
+                NetworkContext context = new NetworkContext(world);
+                passNetwork(null, null, context, false);
+                context.start();
+            }
+        } else {
+            if (current == null) current = new AirCurrent(this);
+            else current.tick();
+        }
     }
 
     protected static double max(double d0, double d1) {
