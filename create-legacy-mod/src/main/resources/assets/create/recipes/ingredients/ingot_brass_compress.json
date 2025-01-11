@@ -10,7 +10,7 @@
     "#": {
       "type": "forge:ore_dict",
       "ore": "nuggetBrass"
-
+    }
   },
   "result": {
     "item": "create:ingredient",
