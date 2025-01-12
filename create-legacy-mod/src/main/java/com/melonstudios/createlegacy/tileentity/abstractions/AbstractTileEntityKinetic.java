@@ -64,7 +64,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         return this.speed;
     }
     public int getWorkTick() {
-        return Math.round(Math.abs(speed()));
+        return Math.max(Math.round(Math.abs(speed())), 1);
     }
     public void updateSpeed(float speed) {
         this.speed = speed;
