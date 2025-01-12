@@ -22,7 +22,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -160,12 +159,14 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                 double dist = Math.sqrt(entity.getDistanceSq(source));
                 double part = dist / actualMaxDistance;
                 double str = Math.sqrt(1 - part * part) * strength;
-                entity.motionX = max(entity.motionX / 1.2, str * facing.getFrontOffsetX());
-                entity.motionY = max(entity.motionY / 1.2, str * facing.getFrontOffsetY());
-                entity.motionZ = max(entity.motionZ / 1.2, str * facing.getFrontOffsetZ());
-                if (str > 0.1) entity.fallDistance = 0.0f;
-                if (catalyst == 0) entity.extinguish();
-                if (catalyst == 1) entity.setFire(5);
+                if (!Double.isNaN(str) && !Double.isInfinite(str)) {
+                    entity.motionX = max(entity.motionX / 1.2, str * facing.getFrontOffsetX());
+                    entity.motionY = max(entity.motionY / 1.2, str * facing.getFrontOffsetY());
+                    entity.motionZ = max(entity.motionZ / 1.2, str * facing.getFrontOffsetZ());
+                    if (str > 0.1) entity.fallDistance = 0.0f;
+                    if (catalyst == 0) entity.extinguish();
+                    if (catalyst == 1) entity.setFire(5);
+                }
             }
 
             if (world.isRemote) createWindParticles();
