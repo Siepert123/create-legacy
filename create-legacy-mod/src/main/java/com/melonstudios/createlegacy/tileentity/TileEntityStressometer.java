@@ -58,16 +58,14 @@ public class TileEntityStressometer extends AbstractTileEntityKinetic implements
     }
 
     public float getDegreesPart(boolean inv) {
+        float percent = lastMaxSU > 0 ? lastSU / lastMaxSU : 0;
+        float inaccuracy = percent >= 1 ? random().nextFloat() * 2 - 1 : 0;
         if (inv) {
             float degreesMax = 270.0f;
-            float percent = lastSU / lastMaxSU;
-            if (lastMaxSU == 0) percent = 0;
-            return degreesMax - degreesMax * percent + 90;
+            return degreesMax - degreesMax * percent + 90 + inaccuracy;
         }
         float degreesMax = 270.0f;
-        float percent = lastSU / lastMaxSU;
-        if (lastMaxSU == 0) percent = 0;
-        return degreesMax * percent;
+        return degreesMax * percent + inaccuracy;
     }
 
 

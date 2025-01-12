@@ -30,7 +30,6 @@ public class PacketUpdatePress implements IMessage {
         }
     }
 
-    private int previousProgress;
     private int progress;
     private BlockPos pos;
 
@@ -38,7 +37,6 @@ public class PacketUpdatePress implements IMessage {
     }
 
     public PacketUpdatePress(TileEntityPress te) {
-        this.previousProgress = te.getPreviousProgress();
         this.progress = te.getProgress();
         this.pos = te.getPos();
     }
@@ -46,14 +44,12 @@ public class PacketUpdatePress implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
         pos = BlockPos.fromLong(buf.readLong());
-        previousProgress = buf.readInt();
         progress = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
-        buf.writeInt(previousProgress);
         buf.writeInt(progress);
     }
 
@@ -63,7 +59,7 @@ public class PacketUpdatePress implements IMessage {
         public IMessage onMessage(PacketUpdatePress message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityPress te = (TileEntityPress) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.setProgress(message.progress);
+                if (te != null) te.setProgress(message.progress);
             });
             return null;
         }

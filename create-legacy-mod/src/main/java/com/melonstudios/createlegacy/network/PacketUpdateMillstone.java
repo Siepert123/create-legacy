@@ -60,7 +60,7 @@ public class PacketUpdateMillstone implements IMessage {
         public IMessage onMessage(PacketUpdateMillstone message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityMillstone te = (TileEntityMillstone) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.active = message.active;
+                if (te != null) te.active = message.active;
             });
             return null;
         }

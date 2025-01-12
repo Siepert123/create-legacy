@@ -33,8 +33,10 @@ public class PacketUpdateDepot implements IMessage {
     private BlockPos pos;
     private ItemStack stack;
     private ItemStack output;
+    private ItemStack output2;
+    private int process;
 
-    public PacketUpdateDepot(BlockPos pos, ItemStack stack, ItemStack output) {
+    private PacketUpdateDepot(BlockPos pos, ItemStack stack, ItemStack output) {
         this.pos = pos;
         this.stack = stack;
         this.output = output;
@@ -42,6 +44,8 @@ public class PacketUpdateDepot implements IMessage {
 
     public PacketUpdateDepot(TileEntityDepot te) {
         this(te.getPos(), te.getStack(), te.getOutput());
+        this.process = te.processingProgress;
+        this.output2 = te.getOutput2();
     }
 
     public PacketUpdateDepot() {
@@ -53,6 +57,10 @@ public class PacketUpdateDepot implements IMessage {
         pos = BlockPos.fromLong(buf.readLong());
         stack = ByteBufUtils.readItemStack(buf);
         output = ByteBufUtils.readItemStack(buf);
+        output2 = ByteBufUtils.readItemStack(buf);
+        process = buf.readInt();
+        output.setCount(buf.readInt());
+        output2.setCount(buf.readInt());
     }
 
     @Override
@@ -60,6 +68,10 @@ public class PacketUpdateDepot implements IMessage {
         buf.writeLong(pos.toLong());
         ByteBufUtils.writeItemStack(buf, stack);
         ByteBufUtils.writeItemStack(buf, output);
+        ByteBufUtils.writeItemStack(buf, output2);
+        buf.writeInt(process);
+        buf.writeInt(output.getCount());
+        buf.writeInt(output2.getCount());
     }
 
     public static class Handler implements IMessageHandler<PacketUpdateDepot, IMessage> {
@@ -68,8 +80,12 @@ public class PacketUpdateDepot implements IMessage {
         public IMessage onMessage(PacketUpdateDepot message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityDepot te = (TileEntityDepot) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.setStack(message.stack);
-                te.setOutput(message.output);
+                if (te != null) {
+                    te.setStack(message.stack);
+                    te.setOutput(message.output);
+                    te.setOutput2(message.output2);
+                    te.processingProgress = message.process;
+                }
             });
             return null;
         }

@@ -63,14 +63,22 @@ public final class PacketUpdateBlazeBurner implements IMessage {
         public PacketUpdateCreativeMotor onMessage(PacketUpdateBlazeBurner message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityBlazeBurner te = (TileEntityBlazeBurner) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                if (message.fuel < 0) {
-                    switch (message.fuel) {
-                        case -1: te.enforceState(EnumBlazeLevel.PASSIVE); break;
-                        case -2: te.enforceState(EnumBlazeLevel.HEATED); break;
-                        case -3: te.enforceState(EnumBlazeLevel.SUPERHEATED); break;
+                if (te != null) {
+                    if (message.fuel < 0) {
+                        switch (message.fuel) {
+                            case -1:
+                                te.enforceState(EnumBlazeLevel.PASSIVE);
+                                break;
+                            case -2:
+                                te.enforceState(EnumBlazeLevel.HEATED);
+                                break;
+                            case -3:
+                                te.enforceState(EnumBlazeLevel.SUPERHEATED);
+                                break;
+                        }
+                    } else {
+                        te.setTicksRemaining(message.fuel);
                     }
-                } else {
-                    te.setTicksRemaining(message.fuel);
                 }
             });
             return null;

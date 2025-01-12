@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityDepot;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -9,7 +10,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -44,14 +47,30 @@ public class BlockDepot extends AbstractBlockKinetic {
                     return true;
                 }
             } else {
-                if (!depot.getOutput().isEmpty()) {
-                    ItemStack stack = depot.getOutput().copy();
-                    depot.setOutput(ItemStack.EMPTY);
-                    if (!worldIn.isRemote) {
-                        EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack);
-                        item.motionX = item.motionY = item.motionZ = 0;
-                        item.setNoPickupDelay();
-                        worldIn.spawnEntity(item);
+                if (!depot.getOutput().isEmpty() || !depot.getOutput2().isEmpty()) {
+                    {
+                        ItemStack stack = depot.getOutput().copy();
+                        if (!stack.isEmpty()) {
+                            depot.setOutput(ItemStack.EMPTY);
+                            if (!worldIn.isRemote) {
+                                EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack);
+                                item.motionX = item.motionY = item.motionZ = 0;
+                                item.setNoPickupDelay();
+                                worldIn.spawnEntity(item);
+                            }
+                        }
+                    }
+                    {
+                        ItemStack stack = depot.getOutput2().copy();
+                        if (!stack.isEmpty()) {
+                            depot.setOutput2(ItemStack.EMPTY);
+                            if (!worldIn.isRemote) {
+                                EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, stack);
+                                item.motionX = item.motionY = item.motionZ = 0;
+                                item.setNoPickupDelay();
+                                worldIn.spawnEntity(item);
+                            }
+                        }
                     }
                     return true;
                 } else if (!depot.getStack().isEmpty()) {
@@ -77,9 +96,17 @@ public class BlockDepot extends AbstractBlockKinetic {
         if (depot != null) {
             EntityItem item1 = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), depot.getStack());
             EntityItem item2 = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), depot.getOutput());
+            EntityItem item3 = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), depot.getOutput2());
             worldIn.spawnEntity(item1);
             worldIn.spawnEntity(item2);
+            worldIn.spawnEntity(item3);
         }
         super.breakBlock(worldIn, pos, state);
+    }
+
+    private static final AxisAlignedBB aabb = CreateLegacy.aabb(0, 0, 0, 16, 14, 16);
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return aabb;
     }
 }

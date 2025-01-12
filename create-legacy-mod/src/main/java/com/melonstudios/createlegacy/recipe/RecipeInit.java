@@ -14,10 +14,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Initialized all recipes that aren't data-driven.
@@ -78,6 +75,7 @@ public final class RecipeInit {
             if (doesOreDictNameExist(crushed(metal))) {
                 if (doesOreDictNameExist(nugget(metal))) {
                     for (ItemStack stack : OreDictionary.getOres(crushed(metal))) {
+                        //if (aaa.contains(metal)) break;
                         ItemStack nuggets = OreDictionary.getOres(nugget(metal)).get(0).copy();
                         nuggets.setCount(9);
                         WashingRecipes.addRecipe(stack,
@@ -182,28 +180,28 @@ public final class RecipeInit {
                 new ItemStack(ModItems.INGREDIENT, 1, 6),
                 0.25f);
 
-        for (ItemStack input : OreDictionary.getOres(crushed("iron"))) {
+        for (ItemStack input : OreDictionary.getOres(crushed("Iron"))) {
             WashingRecipes.addRecipe(input, true,
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.IRON_NUGGET, 9)),
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.REDSTONE), 0.12f)
             );
         }
-        for (ItemStack input : OreDictionary.getOres(crushed("gold"))) {
+        for (ItemStack input : OreDictionary.getOres(crushed("Gold"))) {
             WashingRecipes.addRecipe(input, true,
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 9)),
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.QUARTZ), 0.50f)
             );
         }
-        for (ItemStack input : OreDictionary.getOres(crushed("copper"))) {
-            ItemStack nuggets = OreDictionary.getOres(nugget("copper")).get(0).copy();
+        for (ItemStack input : OreDictionary.getOres(crushed("Copper"))) {
+            ItemStack nuggets = OreDictionary.getOres(nugget("Copper")).get(0).copy();
             nuggets.setCount(9);
             WashingRecipes.addRecipe(input, true,
                     SimpleTuple.optionalRecipeEntry(nuggets),
                     SimpleTuple.optionalRecipeEntry(new ItemStack(Items.CLAY_BALL), 0.50f)
             );
         }
-        for (ItemStack input : OreDictionary.getOres(crushed("zinc"))) {
-            ItemStack nuggets = OreDictionary.getOres(nugget("zinc")).get(0).copy();
+        for (ItemStack input : OreDictionary.getOres(crushed("Zinc"))) {
+            ItemStack nuggets = OreDictionary.getOres(nugget("Zinc")).get(0).copy();
             nuggets.setCount(9);
             WashingRecipes.addRecipe(input, true,
                     SimpleTuple.optionalRecipeEntry(nuggets),
@@ -265,6 +263,15 @@ public final class RecipeInit {
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.QUARTZ, 4), 0.12f),
                 SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 1), 0.02f)
         );
+
+        MillingRecipes.addRecipe(new ItemStack(Items.WHEAT, 1), 1,
+                RecipeEntry.get(new ItemStack(ModItems.FOOD, 1, 8)),
+                RecipeEntry.get(new ItemStack(ModItems.FOOD, 1, 8), 0.5f),
+                RecipeEntry.get(new ItemStack(Items.WHEAT_SEEDS, 2), 0.5f));
+        WashingRecipes.addRecipe(new ItemStack(ModItems.FOOD, 1, 8),
+                SimpleTuple.optionalRecipeEntry(new ItemStack(ModItems.FOOD, 1, 6)));
+        FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(ModItems.FOOD, 1, 6),
+                new ItemStack(Items.BREAD, 1), 0.001f);
 
         {
             final String[] stones = new String[]{
@@ -335,5 +342,13 @@ public final class RecipeInit {
         woodMap.put(new ItemStack(Blocks.LOG, 1, 3), new ItemStack(Blocks.PLANKS, 6, 3));
         woodMap.put(new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.PLANKS, 6, 4));
         woodMap.put(new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Blocks.PLANKS, 6, 5));
+    }
+
+    private static final List<String> aaa = new ArrayList<>();
+    static {
+        aaa.add("Iron");
+        aaa.add("Gold");
+        aaa.add("Zinc");
+        aaa.add("Copper");
     }
 }

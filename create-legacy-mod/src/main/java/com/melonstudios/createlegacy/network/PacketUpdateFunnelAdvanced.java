@@ -61,7 +61,7 @@ public class PacketUpdateFunnelAdvanced implements IMessage {
         public IMessage onMessage(PacketUpdateFunnelAdvanced message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityFunnelAdvanced te = (TileEntityFunnelAdvanced) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.setFilter(message.filter);
+                if (te != null) te.setFilter(message.filter);
             });
             return null;
         }

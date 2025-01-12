@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.network;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityBearing;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -70,9 +71,11 @@ public class PacketUpdateBearing implements IMessage {
         public IMessage onMessage(PacketUpdateBearing message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 AbstractTileEntityBearing te = (AbstractTileEntityBearing) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.overrideStructure(message.stateID == 0 ? null : Block.getStateById(message.stateID));
-                te.setPreviousAngle(message.previousAngle);
-                te.setAngle(message.angle);
+                if (te != null) {
+                    te.overrideStructure(message.stateID == 0 ? null : Block.getStateById(message.stateID));
+                    te.setPreviousAngle(message.previousAngle);
+                    te.setAngle(message.angle);
+                }
             });
             return null;
         }

@@ -2,11 +2,14 @@ package com.melonstudios.createapi.network;
 
 import com.melonstudios.createapi.kinetic.IKineticTileEntity;
 import com.melonstudios.createlegacy.util.INetworkLogger;
+import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public final class NetworkContext {
     private final World world;
@@ -17,7 +20,7 @@ public final class NetworkContext {
         return world;
     }
 
-    private Map<IKineticTileEntity, Boolean> map = new HashMap<>();
+    private final Map<IKineticTileEntity, Boolean> map = new HashMap<>();
 
     public boolean checked (IKineticTileEntity te) {
         return map.containsKey(te);
@@ -96,6 +99,7 @@ public final class NetworkContext {
         }
     }
     private void phase3() {
+        int soundCD = 0;
         for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (!overstressed()) {
                 entry.getKey().updateSpeed(isInverted(entry.getKey()) ? -speed() : speed());
@@ -104,6 +108,17 @@ public final class NetworkContext {
                     ((INetworkLogger) entry.getKey()).setSU(consumedSU());
                     ((INetworkLogger) entry.getKey()).setMaxSU(totalSU());
                 }
+
+                if (soundCD == 0) {
+                    if (networkSpeed != 0 && !world.isRemote) {
+                        if (world.getTotalWorldTime() % (20 * 6) == 0) {
+                            world.playSound(null, entry.getKey().getPos(),
+                                    ModSoundEvents.BLOCK_COG_AMBIENT, SoundCategory.BLOCKS,
+                                    Math.min(1, Math.abs(networkSpeed) / 128), 1);
+                        }
+                    }
+                    soundCD = 64;
+                } else soundCD--;
             } else {
                 entry.getKey().updateSpeed(0.0f);
             }

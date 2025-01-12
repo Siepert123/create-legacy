@@ -73,7 +73,7 @@ public class TileEntityCreativeMotor extends AbstractTileEntityKinetic {
         return requestedSpeed;
     }
 
-    public int requestedSpeed = 256;
+    public int requestedSpeed = 64;
     public boolean increaseRequestedSpeed() {
         if (requestedSpeed >= 256) return false;
         requestedSpeed = Math.min(256, requestedSpeed + 16);

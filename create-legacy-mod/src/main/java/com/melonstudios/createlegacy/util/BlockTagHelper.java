@@ -129,6 +129,8 @@ public final class BlockTagHelper {
                 .withProperty(BlockFunnel.BRASS, false), "create:wrenchPickup");
         addTag(ModBlocks.FUNNEL.getDefaultState()
                 .withProperty(BlockFunnel.BRASS, true), "create:wrenchPickup");
+
+        addTag(Blocks.IRON_BARS.getDefaultState(), "create:fanPass");
     }
 
     //Overloaded method

@@ -5,20 +5,29 @@ import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockFan;
+import com.melonstudios.createlegacy.recipe.WashingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.DisplayLink;
-import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.HeatHelper;
+import com.melonstudios.createlegacy.util.*;
+import com.melonstudios.createlegacy.util.predicates.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRecalculating {
     @Override
@@ -102,6 +111,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         public float strength = 0.0f;
         public int maxDistance = 0;
         public int actualMaxDistance = 0;
+        public int catalyst = -1;
 
         public AirCurrent(TileEntityFan fan) {
             this.world = fan.getWorld();
@@ -114,10 +124,25 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
         public void recalculate() {
             this.strength = fan.speed() / 256f;
-            this.maxDistance = this.actualMaxDistance = Math.max(Math.round(Math.abs(fan.speed()) / 16), 3);
+            this.maxDistance = this.actualMaxDistance = Math.min(Math.max(Math.round(Math.abs(fan.speed()) / 8), 4), 16);
+            IBlockState possibleCatalyst = world.getBlockState(source.offset(facing, 1));
+            if (strength > 0) {
+                if (StatePredicate.matchInList(WASHING_CATALYSTS, possibleCatalyst)) {
+                    catalyst = 0;
+                } else if (StatePredicate.matchInList(COOKING_CATALYSTS, possibleCatalyst)) {
+                    catalyst = 1;
+                } else if (StatePredicate.matchInList(HAUNTING_CATALYSTS, possibleCatalyst)) {
+                    catalyst = 2;
+                } else catalyst = -1;
+            } else catalyst = -1;
+
             for (int i = 1; i <= maxDistance; i++) {
                 IBlockState state = world.getBlockState(source.offset(facing, i));
-                if (state.getMaterial().blocksMovement()) {
+                if (state.getMaterial().blocksMovement()
+                        && state.getBlock().canCollideCheck(state, false)
+                        && state.getCollisionBoundingBox(world, source.offset(facing, i)) != Block.NULL_AABB
+                        && !BlockTagHelper.hasTag(state, "create:fanPass")
+                        && !StatePredicate.matchInList(FAN_PASSES, state)) {
                     actualMaxDistance = i;
                     break;
                 }
@@ -132,11 +157,160 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
             List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, boundingBox);
 
             for (Entity entity : entities) {
-                entity.motionX = max(entity.motionX / 4, strength * facing.getFrontOffsetX());
-                entity.motionY = max(entity.motionY / 4, strength * facing.getFrontOffsetY());
-                entity.motionZ = max(entity.motionZ / 4, strength * facing.getFrontOffsetZ());
-                if (strength > 0) entity.fallDistance = 0.0f;
+                double dist = Math.sqrt(entity.getDistanceSq(source));
+                double part = dist / actualMaxDistance;
+                double str = Math.sqrt(1 - part * part) * strength;
+                entity.motionX = max(entity.motionX / 2, str * facing.getFrontOffsetX());
+                entity.motionY = max(entity.motionY / 2, str * facing.getFrontOffsetY());
+                entity.motionZ = max(entity.motionZ / 2, str * facing.getFrontOffsetZ());
+                if (str > 0.1) entity.fallDistance = 0.0f;
+                if (catalyst == 0) entity.extinguish();
+                if (catalyst == 1) entity.setFire(5);
+            }
+
+            if (world.isRemote) createWindParticles();
+
+            if (catalyst != -1) {
+                for (int i = 1; i < actualMaxDistance; i++) {
+                    TileEntity te = world.getTileEntity(source.offset(facing, i).down());
+                    if (te instanceof TileEntityDepot) {
+                        TileEntityDepot depot = (TileEntityDepot) te;
+                        if (depot.getOutput().isEmpty() && depot.getOutput2().isEmpty() && hasRecipe(depot.getStack())) {
+                            if (catalyst == 1) {
+                                world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
+                                        depot.getPos().getX() + 0.5,
+                                        depot.getPos().getY() + 0.9,
+                                        depot.getPos().getZ() + 0.5,
+                                        0, 0, 0);
+                            } else if (catalyst == 0) {
+                                world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+                                        depot.getPos().getX() + 0.5,
+                                        depot.getPos().getY() + 0.9,
+                                        depot.getPos().getZ() + 0.5,
+                                        0, 0, 0);
+                            }
+                            if (depot.processingProgress > 2000 * (Math.max(depot.getStack().getCount() / 8, 1)) / (fan.getWorkTick() / 16)) {
+                                depotFunc(depot);
+                                depot.processingProgress = 0;
+                            } else depot.processingProgress += Math.max(fan.getWorkTick() / 16, 1);
+                        }
+                    }
+                    if (world.isRemote) createCatalystParticles(i);
+                }
             }
         }
+
+        private void createWindParticles() {
+            for (int i = 1; i < actualMaxDistance; i++) {
+                if (world.rand.nextFloat() < 0.2f) {
+                    BlockPos pos = source.offset(facing, i);
+                    EnumParticleTypes particle = EnumParticleTypes.FALLING_DUST;
+                    for (int j = 0; j < world.rand.nextInt(2) + 1; j++) {
+                        world.spawnParticle(particle,
+                                pos.getX() + world.rand.nextDouble(),
+                                pos.getY() + world.rand.nextDouble(),
+                                pos.getZ() + world.rand.nextDouble(),
+                                facing.getFrontOffsetX() * 0.1f,
+                                facing.getFrontOffsetY() * 0.1f,
+                                facing.getFrontOffsetZ() * 0.1f,
+                                Block.getStateId(Blocks.WOOL.getDefaultState()));
+                    }
+                }
+            }
+        }
+        private void createCatalystParticles(int i) {
+            if (world.rand.nextFloat() < 0.1f) {
+                BlockPos pos = source.offset(facing, i);
+                EnumParticleTypes particle = catalyst == 0 ? EnumParticleTypes.DRIP_WATER : (catalyst == 1 ? EnumParticleTypes.FLAME : EnumParticleTypes.NOTE);
+                for (int j = 0; j < world.rand.nextInt(2) + 1; j++) {
+                    world.spawnParticle(particle,
+                            pos.getX() + world.rand.nextDouble(),
+                            pos.getY() + world.rand.nextDouble(),
+                            pos.getZ() + world.rand.nextDouble(),
+                            0, 0, 0);
+                }
+            }
+        }
+        private boolean hasRecipe(ItemStack stack) {
+            if (catalyst == 0) {
+                return WashingRecipes.hasResult(stack);
+            } else if (catalyst == 1) {
+                return !FurnaceRecipes.instance().getSmeltingResult(stack).isEmpty();
+            } else if (catalyst == 2) {
+                return false; //No haunting (yet)
+            }
+            return false;
+        }
+
+        private int computateStack(int perStack, int stacks, float chance) {
+            int result = 0;
+            Random random = world.rand;
+            for (int i = 0; i < stacks; i++) {
+                if (random.nextFloat() < chance) result += perStack;
+            }
+            return result;
+        }
+
+        private void depotFunc(TileEntityDepot te) {
+            if (catalyst == 0) {
+                world.playSound(null, te.getPos(),
+                        SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS,
+                        0.5f, 0.9f + world.rand.nextFloat() * 0.2f);
+                SimpleTuple<ItemStack, Float>[] results = WashingRecipes.getResults(te.getStack());
+                if (results.length >= 1) {
+                    ItemStack result = results[0].getValue1().copy();
+                    result.setCount(computateStack(result.getCount(), te.getStack().getCount(), results[0].getValue2()));
+                    te.setOutput(result);
+                    if (results.length >= 2) {
+                        ItemStack result2 = results[1].getValue1().copy();
+                        result2.setCount(computateStack(result2.getCount(), te.getStack().getCount(), results[1].getValue2()));
+                        te.setOutput2(result2);
+                    }
+                }
+                te.setStack(ItemStack.EMPTY);
+            } else if (catalyst == 1) {
+                world.playSound(null, te.getPos(),
+                        SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
+                        0.5f, 0.9f + world.rand.nextFloat() * 0.2f);
+                ItemStack result = FurnaceRecipes.instance().getSmeltingResult(te.getStack()).copy();
+                result.setCount(result.getCount() * te.getStack().getCount());
+                te.setOutput(result);
+                te.setStack(ItemStack.EMPTY);
+            } else if (catalyst == 2) {
+                //TODO: haunting
+            }
+        }
+    }
+
+    protected static final List<StatePredicate> WASHING_CATALYSTS = new ArrayList<>();
+    protected static final List<StatePredicate> COOKING_CATALYSTS = new ArrayList<>();
+    protected static final List<StatePredicate> HAUNTING_CATALYSTS = new ArrayList<>();
+    protected static final List<StatePredicate> FAN_PASSES = new ArrayList<>();
+
+    public static void addWashingCatalyst(StatePredicate predicate) {
+        WASHING_CATALYSTS.add(predicate);
+    }
+    public static void addCookingCatalyst(StatePredicate predicate) {
+        COOKING_CATALYSTS.add(predicate);
+    }
+    public static void addHauntingCatalyst(StatePredicate predicate) {
+        HAUNTING_CATALYSTS.add(predicate);
+    }
+    public static void addFanPass(StatePredicate predicate) {
+        FAN_PASSES.add(predicate);
+    }
+
+    static {
+        addWashingCatalyst(StatePredicateWater.instance);
+
+        addCookingCatalyst(StatePredicateLava.instance);
+        addCookingCatalyst(StatePredicateFire.instance);
+        addCookingCatalyst(new StatePredicateMetaBlock(new MetaBlock(ModBlocks.BLAZE_BURNER, 1)));
+        addCookingCatalyst(new StatePredicateBlock(ModBlocks.BLAZE_BURNER_LIT));
+
+        addFanPass(StatePredicateFence.instance);
+        addFanPass(StatePredicateFenceGate.instance);
+        addFanPass(new StatePredicateBlock(Blocks.IRON_BARS));
+        addFanPass(StatePredicateBlazeBurnerAny.instance);
     }
 }

@@ -54,7 +54,7 @@ public class    PacketUpdateHandCrank implements IMessage {
         public IMessage onMessage(PacketUpdateHandCrank message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityHandCrank te = (TileEntityHandCrank) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                te.resetTimer();
+                if (te != null) te.resetTimer();
             });
             return null;
         }

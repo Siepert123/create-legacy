@@ -70,7 +70,7 @@ public final class PacketUpdateCreativeMotor implements IMessage {
             if (ctx.side == Side.CLIENT && message != null) {
                 Minecraft.getMinecraft().addScheduledTask(() -> {
                     TileEntityCreativeMotor te = (TileEntityCreativeMotor) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                    te.requestedSpeed = message.requestedSpeed;
+                    if (te != null) te.requestedSpeed = message.requestedSpeed;
                 });
             }
             return null;

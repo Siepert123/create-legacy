@@ -14,7 +14,7 @@ public class TileEntityShaft extends AbstractTileEntityKinetic {
     }
     @Override
     protected String namePlate() {
-        return "Shaft";
+        return "Axle";
     }
 
     @Override

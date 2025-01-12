@@ -34,8 +34,8 @@ public abstract class AbstractTileEntityKineticRenderer<T extends AbstractTileEn
 
     private static final ResourceLocation PIG_TEXTURES = new ResourceLocation("textures/entity/pig/pig.png");
 
-    private boolean renderDebugText = true;
-    protected void disableDebugText() {
+    private static boolean renderDebugText = true;
+    public static void disableDebugText() {
         renderDebugText = false;
     }
 

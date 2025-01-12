@@ -18,14 +18,15 @@ public class TileEntitySpeedometer extends AbstractTileEntityKinetic implements 
     }
 
     public float getDegreesPart(boolean inv) {
+        float inaccuracy = speed() == 256 ? random().nextFloat() * 2 - 1 : 0;
         if (inv) {
             float degreesMax = 270.0f;
             float percent = Math.abs(speed()) / 256.0f;
-            return degreesMax - degreesMax * percent + 90;
+            return degreesMax - degreesMax * percent + 90 + inaccuracy;
         }
         float degreesMax = 270.0f;
         float percent = Math.abs(speed()) / 256.0f;
-        return degreesMax * percent;
+        return degreesMax * percent + inaccuracy;
     }
 
     @Override

@@ -62,9 +62,11 @@ public class PacketUpdateChute implements IMessage {
         @Override
         public IMessage onMessage(PacketUpdateChute message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                TileEntityChute chute = (TileEntityChute) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                chute.setStack(message.stack);
-                chute.setTransferCooldown(message.transferCooldown);
+                TileEntityChute te = (TileEntityChute) Minecraft.getMinecraft().world.getTileEntity(message.pos);
+                if (te != null) {
+                    te.setStack(message.stack);
+                    te.setTransferCooldown(message.transferCooldown);
+                }
             });
             return null;
         }

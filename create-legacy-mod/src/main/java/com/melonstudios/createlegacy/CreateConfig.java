@@ -24,7 +24,7 @@ public class CreateConfig {
      * @since 0.1.0
      * @see ItemSchematic
      */
-    @Config.Comment("Prevent BitSplitter test crashing the game")
+    @Config.Comment("Allow instant schematic placement in Creative Mode")
     public static boolean allowInstantSchematicPlacement = true;
 
     @Config.Comment("Render distance of kinetic blocks")
