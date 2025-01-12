@@ -123,7 +123,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         }
 
         public void recalculate() {
-            this.strength = fan.speed() / 256f;
+            this.strength = fan.speed() / 1024f;
             this.maxDistance = this.actualMaxDistance = Math.min(Math.max(Math.round(Math.abs(fan.speed()) / 8), 4), 16);
             IBlockState possibleCatalyst = world.getBlockState(source.offset(facing, 1));
             if (strength > 0) {
@@ -160,9 +160,9 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                 double dist = Math.sqrt(entity.getDistanceSq(source));
                 double part = dist / actualMaxDistance;
                 double str = Math.sqrt(1 - part * part) * strength;
-                entity.motionX = max(entity.motionX / 2, str * facing.getFrontOffsetX());
-                entity.motionY = max(entity.motionY / 2, str * facing.getFrontOffsetY());
-                entity.motionZ = max(entity.motionZ / 2, str * facing.getFrontOffsetZ());
+                entity.motionX = max(entity.motionX / 1.2, str * facing.getFrontOffsetX());
+                entity.motionY = max(entity.motionY / 1.2, str * facing.getFrontOffsetY());
+                entity.motionZ = max(entity.motionZ / 1.2, str * facing.getFrontOffsetZ());
                 if (str > 0.1) entity.fallDistance = 0.0f;
                 if (catalyst == 0) entity.extinguish();
                 if (catalyst == 1) entity.setFire(5);
