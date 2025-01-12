@@ -1,8 +1,10 @@
 package com.melonstudios.createapi.network;
 
 import com.melonstudios.createapi.kinetic.IKineticTileEntity;
+import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -110,12 +112,18 @@ public final class NetworkContext {
                 }
 
                 if (soundCD == 0) {
-                    if (networkSpeed != 0 && !world.isRemote) {
-                        if (world.getTotalWorldTime() % (20 * 6) == 0) {
-                            world.playSound(null, entry.getKey().getPos(),
-                                    ModSoundEvents.BLOCK_COG_AMBIENT, SoundCategory.BLOCKS,
-                                    Math.min(1, Math.abs(networkSpeed) / 128), 1);
+                    try {
+                        if (networkSpeed != 0 && !world.isRemote) {
+                            if (world.getTotalWorldTime() % (20 * 6) == 0) {
+                                if (entry.getKey() instanceof TileEntity) {
+                                    world.playSound(null, ((TileEntity) entry.getKey()).getPos(),
+                                            ModSoundEvents.BLOCK_COG_AMBIENT, SoundCategory.BLOCKS,
+                                            Math.min(1, Math.abs(networkSpeed) / 128), 1);
+                                }
+                            }
                         }
+                    } catch (LinkageError error) {
+                        error.printStackTrace();
                     }
                     soundCD = 64;
                 } else soundCD--;
