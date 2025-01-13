@@ -31,7 +31,9 @@ public abstract class WashingRecipeCategory<T extends IRecipeWrapper> implements
         protected Implementation(IGuiHelper helper) {
             super(helper);
             background = helper.createDrawable(TEXTURES, 0, 0, 124, 32);
-            icon = helper.drawableBuilder(ICON, 0, 0, 32, 32).setTextureSize(32, 32).build();
+            icon = helper.drawableBuilder(ICON, 0, 0, 16, 16)
+                    .setTextureSize(16, 16)
+                    .build();
         }
 
         @Override
