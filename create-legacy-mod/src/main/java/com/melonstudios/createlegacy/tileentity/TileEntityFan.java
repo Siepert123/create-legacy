@@ -207,7 +207,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
             int stateId = catalyst == 0 ?
                     Block.getStateId(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE)) :
                     (catalyst == 1 ?
-                            Block.getStateId(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.GRAY)) :
+                            Block.getStateId(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLACK)) :
                             Block.getStateId(Blocks.WOOL.getDefaultState()));
             for (int i = 1; i < actualMaxDistance; i++) {
                 if (world.rand.nextFloat() < 0.2f) {
