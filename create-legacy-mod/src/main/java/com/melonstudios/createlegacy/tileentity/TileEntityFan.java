@@ -10,10 +10,12 @@ import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityK
 import com.melonstudios.createlegacy.util.*;
 import com.melonstudios.createlegacy.util.predicates.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
@@ -202,6 +204,11 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         }
 
         private void createWindParticles() {
+            int stateId = catalyst == 0 ?
+                    Block.getStateId(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BLUE)) :
+                    (catalyst == 1 ?
+                            Block.getStateId(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.GRAY)) :
+                            Block.getStateId(Blocks.WOOL.getDefaultState()));
             for (int i = 1; i < actualMaxDistance; i++) {
                 if (world.rand.nextFloat() < 0.2f) {
                     BlockPos pos = source.offset(facing, i);
@@ -214,7 +221,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                                 facing.getFrontOffsetX() * 0.1f,
                                 facing.getFrontOffsetY() * 0.1f,
                                 facing.getFrontOffsetZ() * 0.1f,
-                                Block.getStateId(Blocks.WOOL.getDefaultState()));
+                                stateId);
                     }
                 }
             }
