@@ -154,7 +154,7 @@ public class BlockWindow extends Block implements IMetaName {
     @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         IBlockState state = blockAccess.getBlockState(pos.offset(side));
-        if (state != blockState) return true;
+        if (state == blockState) return false;
         else return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 }

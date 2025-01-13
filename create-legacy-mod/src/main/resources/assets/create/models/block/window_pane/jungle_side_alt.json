@@ -1,0 +1,7 @@
+{
+    "parent": "block/pane_side_alt",
+    "textures": {
+        "edge": "blocks/planks_jungle",
+        "pane": "create:block/palettes/window_jungle"
+    }
+}

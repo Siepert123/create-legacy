@@ -1,0 +1,10 @@
+{
+  "ctm":{
+    "ctm_version": 1,
+    "type":"CTM",
+    "layer":"CUTOUT",
+    "textures":[
+      "create:block/palettes/window_jungle_ctm"
+    ]
+  }
+}

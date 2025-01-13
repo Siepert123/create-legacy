@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.item;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockBlazeBurner;
 import com.melonstudios.createlegacy.block.BlockWindow;
+import com.melonstudios.createlegacy.block.BlockWindowPane;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockKinetic;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
@@ -48,6 +49,7 @@ public final class ModItems {
                 2, "framed_glass_pane/vertical");
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FRAMED_GLASS_PANE),
                 3, "framed_glass_pane/tiled");
+        BlockWindowPane.createItemModels();
 
         AbstractBlockKinetic.setItemModels();
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.ORE),

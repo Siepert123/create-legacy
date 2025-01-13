@@ -20,6 +20,8 @@ public class ItemScrumptious extends ItemFood {
         setRegistryName("food");
         setUnlocalizedName("create.food");
 
+        setHasSubtypes(true);
+
         setCreativeTab(CreateLegacy.TAB_KINETICS);
     }
 

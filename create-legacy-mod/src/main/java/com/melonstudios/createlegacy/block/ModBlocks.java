@@ -82,6 +82,8 @@ public final class ModBlocks {
     public static final BlockWindow WINDOW_WOOD = registerBlockWithItem(new BlockWindow(false), true);
     public static final BlockWindow WINDOW_IRON = registerBlockWithItem(new BlockWindow(true), false);
 
+    public static final BlockWindowPane WINDOW_WOOD_PANE = registerBlockWithItem(new BlockWindowPane(), true);
+
     public static final BlockCopycat COPYCAT_PANEL = registerBlockWithItem(new BlockCopycatPanel());
     public static final BlockCopycat COPYCAT_STEP = registerBlockWithItem(new BlockCopycatStep());
 

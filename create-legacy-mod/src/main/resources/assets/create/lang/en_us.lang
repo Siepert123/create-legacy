@@ -74,6 +74,21 @@ tile.create.framed_glass_pane_horizontal.name=Horizontal Framed Glass Pane
 tile.create.framed_glass_pane_vertical.name=Vertical Framed Glass Pane
 tile.create.framed_glass_pane_tiled.name=Tiled Framed Glass Pane
 
+tile.create.window_oak.name=Oak Window
+tile.create.window_spruce.name=Spruce Window
+tile.create.window_birch.name=Birch Window
+tile.create.window_jungle.name=Jungle Window
+tile.create.window_acacia.name=Acacia Window
+tile.create.window_big_oak.name=Dark Oak Window
+tile.create.window_iron.name=Ornate Iron Window
+tile.create.window_oak_pane.name=Oak Window Pane
+tile.create.window_spruce_pane.name=Spruce Window Pane
+tile.create.window_birch_pane.name=Birch Window Pane
+tile.create.window_jungle_pane.name=Jungle Window Pane
+tile.create.window_acacia_pane.name=Acacia Window Pane
+tile.create.window_big_oak_pane.name=Dark Oak Window Pane
+tile.create.window_iron_pane.name=Ornate Iron Window Pane
+
 tile.create.copycat_panel.name=Copycat Panel
 tile.create.copycat_step.name=Copycat Step
 
