@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "create:window_wood",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "create:window_wood_pane",
+    "data": 2,
+    "count": 16
+  }
+}
