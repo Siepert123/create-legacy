@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockBlazeBurner;
+import com.melonstudios.createlegacy.block.BlockWindow;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.AbstractBlockKinetic;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
@@ -87,6 +88,8 @@ public final class ModItems {
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.DEPOT));
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHUTE));
+
+        BlockWindow.createItemModels();
 
         BlockCopycat.setItemModels();
 

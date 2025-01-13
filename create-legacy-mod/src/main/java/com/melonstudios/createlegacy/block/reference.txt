@@ -1,0 +1,2 @@
+Block resistance values: https://mcreator.net/wiki/list-block-resistance-levels
+Block hardness values: https://mcreator.net/wiki/list-hardness-values-blocks

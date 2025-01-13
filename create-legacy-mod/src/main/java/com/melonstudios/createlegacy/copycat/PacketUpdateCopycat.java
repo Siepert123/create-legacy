@@ -76,7 +76,7 @@ public final class PacketUpdateCopycat implements IMessage {
             if (ctx.side == Side.CLIENT && message != null) {
                 Minecraft.getMinecraft().addScheduledTask(() -> {
                     TileEntityCopycat te = (TileEntityCopycat) Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                    te.copyState = message.copyState;
+                    if (te != null) te.copyState = message.copyState;
                 });
             }
             return null;

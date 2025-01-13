@@ -79,6 +79,9 @@ public final class ModBlocks {
     public static final BlockFramedGlass FRAMED_GLASS = registerBlockWithItem(new BlockFramedGlass(), true);
     public static final BlockFramedGlassPane FRAMED_GLASS_PANE = registerBlockWithItem(new BlockFramedGlassPane(), true);
 
+    public static final BlockWindow WINDOW_WOOD = registerBlockWithItem(new BlockWindow(false), true);
+    public static final BlockWindow WINDOW_IRON = registerBlockWithItem(new BlockWindow(true), false);
+
     public static final BlockCopycat COPYCAT_PANEL = registerBlockWithItem(new BlockCopycatPanel());
     public static final BlockCopycat COPYCAT_STEP = registerBlockWithItem(new BlockCopycatStep());
 
