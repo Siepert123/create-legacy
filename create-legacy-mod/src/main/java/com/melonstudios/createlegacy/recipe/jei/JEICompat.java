@@ -23,6 +23,7 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCategories(new PressingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new SawingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new WashingRecipeCategory.Implementation(gui));
+        registry.addRecipeCategories(new SmeltingFanRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new SandingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new MysteriousRecipeCategory.Implementation(gui));
     }
@@ -45,10 +46,15 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.FAN), "create.washing");
         registry.addRecipeCatalyst(new ItemStack(Items.WATER_BUCKET), "create.washing");
 
+        registry.addRecipes(RecipeMaker.getSmeltingRecipes(jeiHelpers), "create.fan_smelting");
+        registry.addRecipeCatalyst(new ItemStack(ModBlocks.FAN), "create.fan_smelting");
+        registry.addRecipeCatalyst(new ItemStack(Items.LAVA_BUCKET), "create.fan_smelting");
+        registry.addRecipeCatalyst(new ItemStack(Items.FLINT_AND_STEEL), "create.fan_smelting");
+
         registry.addRecipes(RecipeMaker.getSandingRecipes(jeiHelpers), "create.sanding");
         registry.addRecipeCatalyst(new ItemStack(ModItems.SANDPAPER), "create.sanding");
 
         registry.addRecipes(RecipeMaker.getMysteriousRecipes(jeiHelpers), "create.mystery");
-        registry.addRecipeCatalyst(new ItemStack(ModItems.FOOD, 1, 3));
+        registry.addRecipeCatalyst(new ItemStack(ModItems.FOOD, 1, 3), "create.mystery");
     }
 }

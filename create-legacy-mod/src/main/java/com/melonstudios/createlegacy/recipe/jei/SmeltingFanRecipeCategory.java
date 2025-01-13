@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
-import com.google.common.collect.Lists;
 import com.melonstudios.createlegacy.CreateLegacy;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -9,39 +8,31 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
-public abstract class WashingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
-    protected static final ResourceLocation TEXTURES = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/bulk.png");
+public abstract class SmeltingFanRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
+    protected static final ResourceLocation TEXTURES = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/bulk_no.png");
     protected static final ResourceLocation ICON = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/bulk_washing_icon.png");
 
     protected static final int input = 0;
-    protected static final int output_1 = 1;
+    protected static final int output = 1;
 
-    protected WashingRecipeCategory(IGuiHelper helper) {}
+    protected SmeltingFanRecipeCategory(IGuiHelper helper) {}
 
-    public static class Implementation extends WashingRecipeCategory<WashingRecipe> {
+    public static final class Implementation extends SmeltingFanRecipeCategory<SmeltingFanRecipe> {
         private final IDrawable background;
         private final IDrawable icon;
 
-        protected Implementation(IGuiHelper helper) {
-            super(helper);
-            background = helper.createDrawable(TEXTURES, 0, 0, 124, 32);
-            icon = helper.drawableBuilder(ICON, 0, 0, 32, 32).setTextureSize(32, 32).build();
-        }
-
         @Override
         public String getUid() {
-            return "create.washing";
+            return "create.fan_smelting";
         }
 
         @Override
         public String getTitle() {
-            return "Washing by Fan";
+            return "Smelting by Fan";
         }
 
         @Override
@@ -61,15 +52,17 @@ public abstract class WashingRecipeCategory<T extends IRecipeWrapper> implements
         }
 
         @Override
-        public void setRecipe(IRecipeLayout layout, WashingRecipe recipe, IIngredients ingredients) {
+        public void setRecipe(IRecipeLayout layout, SmeltingFanRecipe recipe, IIngredients ingredients) {
             IGuiItemStackGroup stacks = layout.getItemStacks();
             stacks.init(input, true, 1, 7);
-            int counter = 1;
-            for (int i = 0; i < recipe.results.length; i ++) {
-                stacks.init(counter, false, 45 + i * 20, 7);
-                counter++;
-            }
+            stacks.init(output, false, 45, 7);
             stacks.set(ingredients);
+        }
+
+        public Implementation(IGuiHelper helper) {
+            super(helper);
+            background = helper.createDrawable(TEXTURES, 0, 0, 64, 32);
+            icon = helper.drawableBuilder(ICON, 0, 0, 32, 32).setTextureSize(32, 32).build();
         }
     }
 }

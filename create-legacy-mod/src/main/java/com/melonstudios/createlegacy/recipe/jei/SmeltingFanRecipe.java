@@ -7,11 +7,11 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public final class SawingRecipe implements IRecipeWrapper {
+public final class SmeltingFanRecipe implements IRecipeWrapper {
     public final ItemStack input;
     public final ItemStack result;
 
-    public SawingRecipe(ItemStack input, ItemStack result) {
+    public SmeltingFanRecipe(ItemStack input, ItemStack result) {
         this.input = input;
         this.result = result;
     }

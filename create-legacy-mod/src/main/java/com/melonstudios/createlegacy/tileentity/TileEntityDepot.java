@@ -99,7 +99,10 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
     @Override
     public ItemStack getStackInSlot(int index) {
         markDirty();
-        return index == 0 ? stack : output;
+        if (index == 0) return stack;
+        if (index == 1) return output;
+        if (index == 2) return output2;
+        return ItemStack.EMPTY;
     }
 
     @Override

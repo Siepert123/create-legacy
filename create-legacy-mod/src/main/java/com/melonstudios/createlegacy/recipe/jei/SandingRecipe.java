@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
 
@@ -17,7 +18,7 @@ public final class SandingRecipe implements IRecipeWrapper {
 
     @Override
     public void getIngredients(@Nonnull IIngredients ingredients) {
-        ingredients.setInput(ItemStack.class, input);
-        ingredients.setOutput(ItemStack.class, result);
+        ingredients.setInput(VanillaTypes.ITEM, input);
+        ingredients.setOutput(VanillaTypes.ITEM, result);
     }
 }

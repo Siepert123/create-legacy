@@ -9,6 +9,7 @@ import com.melonstudios.createlegacy.util.SimpleTuple;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,16 @@ public final class RecipeMaker {
 
         for (Map.Entry<ItemStack, SimpleTuple<ItemStack, Float>[]> entry : recipeMap.entrySet()) {
             recipeList.add(new WashingRecipe(entry.getKey(), entry.getValue()));
+        }
+
+        return recipeList;
+    }
+    public static List<SmeltingFanRecipe> getSmeltingRecipes(IJeiHelpers helpers) {
+        Map<ItemStack, ItemStack> recipeMap = FurnaceRecipes.instance().getSmeltingList();
+        List<SmeltingFanRecipe> recipeList = new ArrayList<>();
+
+        for (Map.Entry<ItemStack, ItemStack> entry : recipeMap.entrySet()) {
+            recipeList.add(new SmeltingFanRecipe(entry.getKey(), entry.getValue()));
         }
 
         return recipeList;

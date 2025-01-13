@@ -216,17 +216,18 @@ public final class RecipeInit {
             );
         }
         for (ItemStack stack : OreDictionary.getOres("sand")) {
-            if (stack.getItem() == Item.getItemFromBlock(Blocks.SAND) && stack.getMetadata() == 1) {
-                WashingRecipes.addRecipe(stack,
-                        SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 3), 0.12f),
-                        SimpleTuple.optionalRecipeEntry(new ItemStack(Blocks.DEADBUSH, 1), 0.05f)
-                );
-            } else {
+            if (stack.getItem() != Item.getItemFromBlock(Blocks.SAND)) {
                 WashingRecipes.addRecipe(stack,
                         SimpleTuple.optionalRecipeEntry(new ItemStack(Items.CLAY_BALL, 1), 0.25f)
                 );
             }
         }
+        WashingRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0),
+                SimpleTuple.optionalRecipeEntry(new ItemStack(Items.CLAY_BALL, 1), 0.25f));
+        WashingRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 1),
+                SimpleTuple.optionalRecipeEntry(new ItemStack(Items.GOLD_NUGGET, 3), 0.12f),
+                SimpleTuple.optionalRecipeEntry(new ItemStack(Blocks.DEADBUSH, 1), 0.05f)
+        );
 
         for (ItemStack gem : OreDictionary.getOres("gemRoseQuartz")) {
             SandingRecipes.addRecipe(gem, new ItemStack(ModItems.INGREDIENT, 1, 20));
