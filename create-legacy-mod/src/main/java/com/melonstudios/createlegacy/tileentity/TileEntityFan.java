@@ -190,10 +190,10 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                                         depot.getPos().getZ() + 0.5,
                                         0, 0, 0);
                             }
-                            if (depot.processingProgress > 2000 * (Math.max(depot.getStack().getCount() / 8, 1)) / Math.max(1, fan.getWorkTick() / 16)) {
+                            if (depot.processingProgress > 50 * ((int)Math.ceil(depot.getStack().getCount() / 8f))) {
                                 depotFunc(depot);
                                 depot.processingProgress = 0;
-                            } else depot.processingProgress += Math.max(fan.getWorkTick() / 16, 1);
+                            } else depot.processingProgress ++;
                         }
                     }
                     if (world.isRemote) createCatalystParticles(i);
