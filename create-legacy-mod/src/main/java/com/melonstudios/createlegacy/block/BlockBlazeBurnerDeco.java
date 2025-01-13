@@ -33,8 +33,8 @@ public class BlockBlazeBurnerDeco extends Block {
 
         setHarvestLevel("pickaxe", 1);
 
-        setHardness(5.0f);
-        setResistance(10.0f);
+        setHardness(2.0f);
+        setResistance(6.0f);
 
         setTickRandomly(true);
 

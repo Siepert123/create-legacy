@@ -46,8 +46,8 @@ public abstract class BlockCopycat extends Block implements ITileEntityProvider 
         setRegistryName(registry);
         setUnlocalizedName("create." + registry);
 
-        setHardness(2.0f);
-        setResistance(4.0f);
+        setHardness(5.0f);
+        setResistance(6.0f);
 
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
 

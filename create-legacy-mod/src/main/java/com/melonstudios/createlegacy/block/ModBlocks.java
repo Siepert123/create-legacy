@@ -70,9 +70,9 @@ public final class ModBlocks {
     public static final AbstractBlockOrestone ORESTONE_LAYERED = registerOrestoneBlock(new BlockOrestoneLayered());
 
     public static final Block INDUSTRIAL_IRON = registerBlockWithItem(new Block(Material.IRON, MapColor.GRAY).setCreativeTab(CreateLegacy.TAB_DECORATIONS)
-            .setRegistryName("industrial_iron").setUnlocalizedName("create.industrial_iron").setHardness(15f).setResistance(50f));
+            .setRegistryName("industrial_iron").setUnlocalizedName("create.industrial_iron").setHardness(5.f).setResistance(6.0f));
     static {
-        INDUSTRIAL_IRON.setHarvestLevel("pickaxe", 2);
+        INDUSTRIAL_IRON.setHarvestLevel("pickaxe", 1);
     }
     public static final BlockIndustrialIronGlass INDUSTRIAL_IRON_GLASS = registerBlockWithItem(new BlockIndustrialIronGlass());
 

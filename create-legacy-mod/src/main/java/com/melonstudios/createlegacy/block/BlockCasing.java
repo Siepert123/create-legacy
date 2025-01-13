@@ -38,7 +38,7 @@ public class BlockCasing extends Block implements IMetaName {
         setCreativeTab(CreateLegacy.TAB_KINETICS);
 
         setHardness(2.5f);
-        setResistance(5.0f);
+        setResistance(5.5f);
     }
 
     public enum Variant implements IStringSerializable {

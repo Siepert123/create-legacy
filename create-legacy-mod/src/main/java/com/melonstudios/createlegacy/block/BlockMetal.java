@@ -43,8 +43,8 @@ public final class BlockMetal extends Block implements IMetaName {
         setRegistryName("metal");
         setUnlocalizedName("create.metal");
 
-        setHardness(10.0f);
-        setResistance(20.0f);
+        setHardness(5.0f);
+        setResistance(6.0f);
 
         setDefaultState(this.blockState.getBaseState().withProperty(
                 METAL_TYPE, Variant.COPPER

@@ -45,8 +45,8 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
         setRegistryName(registry);
         setUnlocalizedName("create." + registry);
 
-        setHardness(5.0f);
-        setResistance(10.0f);
+        setHardness(1.5f);
+        setResistance(6.0f);
 
         setDefaultState(this.blockState.getBaseState().withProperty(
                 STONE_TYPE, StoneType.ASURINE

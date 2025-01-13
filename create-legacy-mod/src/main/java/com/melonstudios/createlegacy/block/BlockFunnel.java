@@ -46,8 +46,8 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
         setCreativeTab(CreateLegacy.TAB_KINETICS);
         setHarvestLevel("pickaxe", 0);
 
-        setHardness(10.0f);
-        setResistance(20.0f);
+        setHardness(2.0f);
+        setResistance(3.0f);
     }
 
     @Nullable

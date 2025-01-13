@@ -16,10 +16,10 @@ public class BlockIndustrialIronGlass extends Block {
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
         setRegistryName("industrial_iron_glass");
         setUnlocalizedName("create.industrial_iron_glass");
-        setHardness(15f);
-        setResistance(50f);
+        setHardness(5.0f);
+        setResistance(6.0f);
 
-        setHarvestLevel("pickaxe", 2);
+        setHarvestLevel("pickaxe", 1);
     }
 
     @Override

@@ -41,8 +41,8 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
 
         setHarvestLevel("pickaxe", 1);
 
-        setHardness(10.0f);
-        setResistance(20.0f);
+        setHardness(5.0f);
+        setResistance(6.0f);
 
         setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, Variant.SOLID));
 

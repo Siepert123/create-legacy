@@ -32,8 +32,8 @@ public class BlockFramedGlass extends BlockGlass implements IMetaName {
 
         setHarvestLevel("pickaxe", 0);
 
-        setHardness(2.0f);
-        setResistance(4.0f);
+        setHardness(0.3f);
+        setResistance(0.3f);
 
         setSoundType(SoundType.GLASS);
         setCreativeTab(CreateLegacy.TAB_DECORATIONS);
