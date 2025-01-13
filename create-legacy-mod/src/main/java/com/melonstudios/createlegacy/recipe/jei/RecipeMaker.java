@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.recipe.SandingRecipes;
 import com.melonstudios.createlegacy.recipe.SawingRecipes;
@@ -38,6 +39,17 @@ public final class RecipeMaker {
         for (Map.Entry<ItemStack, ItemStack> entry : recipeMap.entrySet()) {
             recipeList.add(new SandingRecipe(entry.getKey(), entry.getValue()));
         }
+
+        return recipeList;
+    }
+
+    public static List<MysteriousRecipe> getMysteriousRecipes(IJeiHelpers helpers) {
+        List<MysteriousRecipe> recipeList = new ArrayList<>();
+
+        recipeList.add(new MysteriousRecipe(
+                new ItemStack(ModBlocks.BLAZE_BURNER, 1, 0),
+                new ItemStack(ModBlocks.BLAZE_BURNER, 1, 1)
+        ));
 
         return recipeList;
     }

@@ -24,6 +24,7 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCategories(new SawingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new WashingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new SandingRecipeCategory.Implementation(gui));
+        registry.addRecipeCategories(new MysteriousRecipeCategory.Implementation(gui));
     }
 
     @Override
@@ -46,5 +47,8 @@ public final class JEICompat implements IModPlugin {
 
         registry.addRecipes(RecipeMaker.getSandingRecipes(jeiHelpers), "create.sanding");
         registry.addRecipeCatalyst(new ItemStack(ModItems.SANDPAPER), "create.sanding");
+
+        registry.addRecipes(RecipeMaker.getMysteriousRecipes(jeiHelpers), "create.mystery");
+        registry.addRecipeCatalyst(new ItemStack(ModItems.FOOD, 1, 3));
     }
 }
