@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.item.ModItems;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IIngredientRegistry;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.init.Items;
@@ -26,6 +27,7 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCategories(new SmeltingFanRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new SandingRecipeCategory.Implementation(gui));
         registry.addRecipeCategories(new MysteriousRecipeCategory.Implementation(gui));
+        registry.addRecipeCategories(new MillingRecipeCategory.Implementation(gui));
     }
 
     @Override
@@ -42,6 +44,9 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipes(RecipeMaker.getSawingRecipes(jeiHelpers), "create.sawing");
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.SAW), "create.sawing");
 
+        registry.addRecipes(RecipeMaker.getMillingRecipes(jeiHelpers), "create.milling");
+        registry.addRecipeCatalyst(new ItemStack(ModBlocks.MILLSTONE), "create.milling");
+
         registry.addRecipes(RecipeMaker.getWashingRecipes(jeiHelpers), "create.washing");
         registry.addRecipeCatalyst(new ItemStack(ModBlocks.FAN), "create.washing");
         registry.addRecipeCatalyst(new ItemStack(Items.WATER_BUCKET), "create.washing");
@@ -55,6 +60,10 @@ public final class JEICompat implements IModPlugin {
         registry.addRecipeCatalyst(new ItemStack(ModItems.SANDPAPER), "create.sanding");
 
         registry.addRecipes(RecipeMaker.getMysteriousRecipes(jeiHelpers), "create.mystery");
-        registry.addRecipeCatalyst(new ItemStack(ModItems.FOOD, 1, 3), "create.mystery");
+
+        registry.addIngredientInfo(new ItemStack(ModItems.FOOD, 1, 1),
+                VanillaTypes.ITEM,
+                "desc.create.blazecake.1", "desc.create.blazecake.2"
+        );
     }
 }

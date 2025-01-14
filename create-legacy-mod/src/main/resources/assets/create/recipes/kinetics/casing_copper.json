@@ -6,8 +6,8 @@
       "ore": "logWood"
     },
     {
-      "item": "create:ingredient",
-      "data": 5
+      "type": "forge:ore_dict",
+      "ore": "plateCopper"
     }
   ],
   "result": {

@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.util;
 
+import com.melonstudios.createlegacy.block.BlockBlazeBurner;
 import com.melonstudios.createlegacy.block.BlockCasing;
 import com.melonstudios.createlegacy.block.BlockFunnel;
 import com.melonstudios.createlegacy.block.ModBlocks;
@@ -100,6 +101,11 @@ public final class BlockTagHelper {
                 .withProperty(BlockCasing.VARIANT, BlockCasing.Variant.BRASS), "create:wrenchPickup");
         addTag(ModBlocks.CASING.getDefaultState()
                 .withProperty(BlockCasing.VARIANT, BlockCasing.Variant.TRAIN), "create:wrenchPickup");
+        addTag(ModBlocks.BLAZE_BURNER.getDefaultState()
+                .withProperty(BlockBlazeBurner.HAS_BLAZE, false), "create:wrenchPickup");
+        addTag(ModBlocks.BLAZE_BURNER.getDefaultState()
+                .withProperty(BlockBlazeBurner.HAS_BLAZE, true), "create:wrenchPickup");
+        addTag(ModBlocks.TURNTABLE.getDefaultState(), "create:wrenchPickup");
         addTag(ModBlocks.HAND_CRANK.getDefaultState(), "create:wrenchPickup");
         addTag(ModBlocks.CREATIVE_MOTOR.getDefaultState(), "create:wrenchPickup");
         addTag(ModBlocks.FURNACE_ENGINE.getDefaultState()

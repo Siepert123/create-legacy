@@ -269,8 +269,10 @@ public final class RecipeInit {
                 RecipeEntry.get(new ItemStack(ModItems.FOOD, 1, 8)),
                 RecipeEntry.get(new ItemStack(ModItems.FOOD, 1, 8), 0.5f),
                 RecipeEntry.get(new ItemStack(Items.WHEAT_SEEDS, 2), 0.5f));
-        WashingRecipes.addRecipe(new ItemStack(ModItems.FOOD, 1, 8),
-                SimpleTuple.optionalRecipeEntry(new ItemStack(ModItems.FOOD, 1, 6)));
+        for (ItemStack stack : OreDictionary.getOres("dustWheat")) {
+            WashingRecipes.addRecipe(stack.copy(),
+                    SimpleTuple.optionalRecipeEntry(new ItemStack(ModItems.FOOD, 1, 6)));
+        }
         FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(ModItems.FOOD, 1, 6),
                 new ItemStack(Items.BREAD, 1), 0.001f);
 
@@ -328,6 +330,31 @@ public final class RecipeInit {
 
         SawingRecipes.addRecipe(new ItemStack(ModItems.INGREDIENT, 1, 0), new ItemStack(ModBlocks.ROTATOR, 6, 0));
 
+        //Orestone crushing recipes
+        for (ItemStack stack : OreDictionary.getOres("stoneAsurine")) {
+            CrushingRecipes.addRecipe(stack.copy(), 1f,
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 15), 0.4f),
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 3, 7), 0.8f));
+        }
+        for (ItemStack stack : OreDictionary.getOres("stoneCrimsite")) {
+            CrushingRecipes.addRecipe(stack.copy(), 1f,
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 12), 0.4f),
+                    RecipeEntry.get(new ItemStack(Items.IRON_NUGGET, 3), 0.8f));
+        }
+        for (ItemStack stack : OreDictionary.getOres("stoneOchrum")) {
+            CrushingRecipes.addRecipe(stack.copy(), 1f,
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 13), 0.4f),
+                    RecipeEntry.get(new ItemStack(Items.GOLD_NUGGET, 3), 0.8f));
+        }
+        for (ItemStack stack : OreDictionary.getOres("stoneVeridium")) {
+            CrushingRecipes.addRecipe(stack.copy(), 1f,
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 1, 14), 0.4f),
+                    RecipeEntry.get(new ItemStack(ModItems.INGREDIENT, 3, 4), 0.8f));
+        }
+
+        WashingRecipes.addRecipe(new ItemStack(Blocks.SPONGE, 1, 0),
+                SimpleTuple.optionalRecipeEntry(new ItemStack(Blocks.SPONGE, 1, 1)));
+
         DisplayLink.debug("Recipe init complete in %s ms!", System.currentTimeMillis() - startTime);
         initialized = true;
     }
@@ -343,13 +370,5 @@ public final class RecipeInit {
         woodMap.put(new ItemStack(Blocks.LOG, 1, 3), new ItemStack(Blocks.PLANKS, 6, 3));
         woodMap.put(new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.PLANKS, 6, 4));
         woodMap.put(new ItemStack(Blocks.LOG2, 1, 1), new ItemStack(Blocks.PLANKS, 6, 5));
-    }
-
-    private static final List<String> aaa = new ArrayList<>();
-    static {
-        aaa.add("Iron");
-        aaa.add("Gold");
-        aaa.add("Zinc");
-        aaa.add("Copper");
     }
 }

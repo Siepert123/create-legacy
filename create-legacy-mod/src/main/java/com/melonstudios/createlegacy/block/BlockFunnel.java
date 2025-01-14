@@ -34,7 +34,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName {
+public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName, IWrenchable {
     public BlockFunnel() {
         super(Material.IRON);
         setRegistryName("funnel");
@@ -205,6 +205,11 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
         return false;
     }
 }

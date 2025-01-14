@@ -1,10 +1,8 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.recipe.PressingRecipes;
-import com.melonstudios.createlegacy.recipe.SandingRecipes;
-import com.melonstudios.createlegacy.recipe.SawingRecipes;
-import com.melonstudios.createlegacy.recipe.WashingRecipes;
+import com.melonstudios.createlegacy.recipe.*;
+import com.melonstudios.createlegacy.util.RecipeEntry;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.recipe.IStackHelper;
@@ -87,6 +85,20 @@ public final class RecipeMaker {
 
         for (Map.Entry<ItemStack, ItemStack> entry : recipeMap.entrySet()) {
             recipeList.add(new SmeltingFanRecipe(entry.getKey(), entry.getValue()));
+        }
+
+        return recipeList;
+    }
+
+    public static List<MillingRecipe> getMillingRecipes(IJeiHelpers helpers) {
+        Map<ItemStack, RecipeEntry[]> recipeMap = MillingRecipes.getRecipesMap();
+        List<MillingRecipe> recipeList = new ArrayList<>();
+
+        for (Map.Entry<ItemStack, RecipeEntry[]> entry : recipeMap.entrySet()) {
+            recipeList.add(new MillingRecipe(entry.getKey(), entry.getValue()));
+        }
+        for (Map.Entry<ItemStack, RecipeEntry[]> entry : CrushingRecipes.getRecipesMap().entrySet()) {
+            recipeList.add(MillingRecipe.test(entry.getKey(), entry.getValue()));
         }
 
         return recipeList;

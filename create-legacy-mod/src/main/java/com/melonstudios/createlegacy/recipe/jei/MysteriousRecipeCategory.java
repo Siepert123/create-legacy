@@ -8,10 +8,14 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nullable;
 
 public abstract class MysteriousRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
     protected static final ResourceLocation TEXTURES = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/mysterious_jei.png");
+    protected static final ResourceLocation ICON = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/mysterious_icon.png");
 
     protected static final int input = 0;
     protected static final int output = 1;
@@ -20,6 +24,7 @@ public abstract class MysteriousRecipeCategory<T extends IRecipeWrapper> impleme
 
     public static final class Implementation extends MysteriousRecipeCategory<MysteriousRecipe> {
         private final IDrawable background;
+        private final IDrawable icon;
 
         @Override
         public String getUid() {
@@ -41,6 +46,12 @@ public abstract class MysteriousRecipeCategory<T extends IRecipeWrapper> impleme
             return background;
         }
 
+        @Nullable
+        @Override
+        public IDrawable getIcon() {
+            return icon;
+        }
+
         @Override
         public void setRecipe(IRecipeLayout layout, MysteriousRecipe recipe, IIngredients ingredients) {
             IGuiItemStackGroup stacks = layout.getItemStacks();
@@ -52,6 +63,9 @@ public abstract class MysteriousRecipeCategory<T extends IRecipeWrapper> impleme
         public Implementation(IGuiHelper helper) {
             super(helper);
             background = helper.createDrawable(TEXTURES, 0, 0, 64, 32);
+            icon = helper.drawableBuilder(ICON, 0, 0, 16,16)
+                    .setTextureSize(16, 16)
+                    .build();
         }
     }
 }

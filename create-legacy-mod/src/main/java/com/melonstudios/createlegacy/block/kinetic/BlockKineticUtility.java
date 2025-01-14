@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityClutch;
 import com.melonstudios.createlegacy.tileentity.TileEntityGearshift;
 import com.melonstudios.createlegacy.util.IMetaName;
@@ -28,7 +29,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaName {
+public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaName, IWrenchable {
     public BlockKineticUtility() {
         super("kinetic_utility");
 
@@ -36,7 +37,7 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
                 .withProperty(SHIFT, false).withProperty(ACTIVE, false));
     }
 
-    public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class);
+    public static final PropertyEnum<EnumFacing.Axis> AXIS = BlockRotator.AXIS;
     public static final PropertyBool SHIFT = PropertyBool.create("shift");
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
@@ -122,5 +123,14 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
+        EnumFacing.Axis axis = state.getValue(AXIS);
+        if (axis.apply(side)) return false;
+        EnumFacing.Axis axisNew = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, axis).rotateAround(side.getAxis()).getAxis();
+        world.setBlockState(pos, state.withProperty(AXIS, axisNew));
+        return true;
     }
 }

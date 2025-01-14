@@ -3,15 +3,16 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "logWood"
+      "ore": "ingotZinc"
     },
     {
       "type": "forge:ore_dict",
-      "ore": "ingotBrass"
+      "ore": "ingotCopper"
     }
   ],
   "result": {
-    "item": "create:casing",
-    "data": 2
+    "item": "create:ingredient",
+    "data": 9,
+    "count": 2
   }
 }

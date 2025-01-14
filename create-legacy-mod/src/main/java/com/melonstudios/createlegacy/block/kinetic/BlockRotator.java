@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityCog;
 import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
@@ -33,7 +34,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
+public class BlockRotator extends AbstractBlockKinetic implements IMetaName, IWrenchable {
     public BlockRotator() {
         super("rotator");
     }
@@ -42,6 +43,15 @@ public class BlockRotator extends AbstractBlockKinetic implements IMetaName {
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
         items.add(new ItemStack(this, 1, 0));
         items.add(new ItemStack(this, 1, 1));
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
+        EnumFacing.Axis axis = state.getValue(AXIS);
+        if (axis.apply(side)) return false;
+        EnumFacing.Axis axisNew = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.POSITIVE, axis).rotateAround(side.getAxis()).getAxis();
+        world.setBlockState(pos, state.withProperty(AXIS, axisNew));
+        return true;
     }
 
     public enum Variant implements IStringSerializable {
