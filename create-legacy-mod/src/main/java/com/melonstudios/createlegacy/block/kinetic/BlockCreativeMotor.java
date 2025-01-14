@@ -84,4 +84,16 @@ public class BlockCreativeMotor extends AbstractBlockKinetic {
         }
         return false;
     }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
+        if (state.getValue(FACING).getAxis().apply(side)) return false;
+        TileEntity te = world.getTileEntity(pos);
+        world.setBlockState(pos, state.withProperty(FACING, state.getValue(FACING).rotateAround(side.getAxis())));
+        if (te != null) {
+            te.validate();
+            world.setTileEntity(pos, te);
+        }
+        return true;
+    }
 }

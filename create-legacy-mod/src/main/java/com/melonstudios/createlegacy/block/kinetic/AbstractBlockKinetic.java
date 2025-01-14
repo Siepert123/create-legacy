@@ -1,22 +1,26 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * Base class for kinetic blocks cuz I am lazy :p
  */
 @SuppressWarnings("deprecation")
-public abstract class AbstractBlockKinetic extends Block implements ITileEntityProvider {
+public abstract class AbstractBlockKinetic extends Block implements ITileEntityProvider, IWrenchable {
     public AbstractBlockKinetic(String registry) {
         super(Material.ROCK);
 
@@ -115,5 +119,10 @@ public abstract class AbstractBlockKinetic extends Block implements ITileEntityP
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.CHIGWANKER));
 
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.TURNTABLE));
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
+        return false;
     }
 }

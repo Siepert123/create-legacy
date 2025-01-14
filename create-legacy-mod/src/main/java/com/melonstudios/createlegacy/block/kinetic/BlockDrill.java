@@ -80,6 +80,7 @@ public class BlockDrill extends AbstractBlockKinetic implements IWrenchable {
     @Override
     public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, EntityPlayer wrenchHolder) {
         EnumFacing facing = state.getValue(FACING);
+        if (facing.getAxis().apply(side)) return false;
         world.setBlockState(pos, state.withProperty(FACING, facing.rotateAround(side.getAxis())));
         return true;
     }

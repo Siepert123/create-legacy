@@ -97,11 +97,12 @@ public class BlockEncasedShaft extends AbstractBlockKinetic implements IMetaName
         world.setBlockState(pos, ModBlocks.ROTATOR.getDefaultState()
                 .withProperty(BlockRotator.VARIANT, BlockRotator.Variant.SHAFT)
                 .withProperty(BlockRotator.AXIS, axis));
-
-        EntityItem item = new EntityItem(world, wrenchHolder.posX, wrenchHolder.posY, wrenchHolder.posZ,
-                new ItemStack(ModBlocks.CASING, 1, brass ? 2 : 0));
-        item.motionX = item.motionY = item.motionZ = 0;
-        world.spawnEntity(item);
+        if(!world.isRemote) {
+            EntityItem item = new EntityItem(world, wrenchHolder.posX, wrenchHolder.posY, wrenchHolder.posZ,
+                    new ItemStack(ModBlocks.CASING, 1, brass ? 2 : 0));
+            item.motionX = item.motionY = item.motionZ = 0;
+            world.spawnEntity(item);
+        }
 
         return true;
     }
