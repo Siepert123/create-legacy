@@ -3,8 +3,8 @@ package com.melonstudios.createlegacy.item;
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.IWrenchable;
-import com.melonstudios.createlegacy.util.BlockTagHelper;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import com.melonstudios.melonlib.blockdict.BlockDictionary;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -35,7 +35,7 @@ public class ItemWrench extends Item {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (player.isSneaking()) {
             IBlockState state = worldIn.getBlockState(pos);
-            if (BlockTagHelper.hasTag(state, "create:wrenchPickup")) {
+            if (BlockDictionary.isBlockTagged(state, "create:wrenchPickup")) {
                 if (!worldIn.isRemote) {
                     worldIn.playEvent(2001, pos, Block.getStateId(state));
                     ItemStack dropped = new ItemStack(state.getBlock().getItemDropped(state, worldIn.rand, 0),

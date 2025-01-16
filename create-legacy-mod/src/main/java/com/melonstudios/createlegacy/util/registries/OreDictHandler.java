@@ -3,8 +3,9 @@ package com.melonstudios.createlegacy.util.registries;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
-import com.melonstudios.createlegacy.util.BlockTagHelper;
 import com.melonstudios.createlegacy.util.DisplayLink;
+import com.melonstudios.melonlib.blockdict.BlockDictionary;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -89,10 +90,63 @@ public final class OreDictHandler {
 
         OreDictionary.registerOre("create:blazeBurnerSuperheat", new ItemStack(ModItems.FOOD, 1, 1));
 
-
-        BlockTagHelper.addBlockTags();
-
         DisplayLink.debug("Ore Dictionary init done in %s ms!", System.currentTimeMillis() - startTime);
+
+        long startTime2 = System.currentTimeMillis();
+
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.PISTON, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.STICKY_PISTON, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.LEVER, 12);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.OBSERVER, 12);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.DISPENSER, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.DROPPER, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.WOODEN_BUTTON, 12);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.STONE_BUTTON, 12);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.WOODEN_PRESSURE_PLATE, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.STONE_PRESSURE_PLATE, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.REDSTONE_TORCH, 10);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.REDSTONE_LAMP, false);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.HOPPER, 10);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.UNPOWERED_REPEATER, true);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.POWERED_REPEATER, true);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.UNPOWERED_COMPARATOR, 8);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.POWERED_COMPARATOR, 8);
+
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.BEARING, 12);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.ROTATOR, 9);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.WATER_WHEEL, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.NETWORK_INSPECTOR, 4);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.SHAFT_ENCASED, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.CASING, 4);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.BLAZE_BURNER, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.BLAZE_BURNER_LIT, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.TURNTABLE, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.HAND_CRANK, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.CREATIVE_MOTOR, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.FURNACE_ENGINE, 8);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.PRESS, 2);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.DEPOT, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.MILLSTONE, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.FAN, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.DRILL, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.KINETIC_UTILITY, 6);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.GEARBOX, 3);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.CHUTE, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.CHIGWANKER, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.SAW, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.INDUSTRIAL_IRON, false);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.INDUSTRIAL_IRON_GLASS, false);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.NOTEBLOCK, false);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.TRIPWIRE_HOOK, true);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.DAYLIGHT_DETECTOR_INVERTED, true);
+        BlockDictionary.registerOre("create:wrenchPickup", Blocks.DAYLIGHT_DETECTOR, true);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.FUNNEL, 8);
+
+        BlockDictionary.registerOre("create:fanPass", Blocks.IRON_BARS, false);
+
+        DisplayLink.debug("Block Dictionary init done in %s ms!", System.currentTimeMillis() - startTime2);
         initialized = true;
     }
 
