@@ -5,8 +5,10 @@ import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
+import net.minecraft.block.BlockHopper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -108,7 +110,13 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.STONE_PRESSURE_PLATE, 2);
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.REDSTONE_TORCH, 10);
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.REDSTONE_LAMP, false);
-        BlockDictionary.registerOre("create:wrenchPickup", Blocks.HOPPER, 10);
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            if (facing == EnumFacing.UP) continue;
+            BlockDictionary.registerOre("create:wrenchPickup", Blocks.HOPPER.getDefaultState()
+                    .withProperty(BlockHopper.FACING, facing).withProperty(BlockHopper.ENABLED, false));
+            BlockDictionary.registerOre("create:wrenchPickup", Blocks.HOPPER.getDefaultState()
+                    .withProperty(BlockHopper.FACING, facing).withProperty(BlockHopper.ENABLED, true));
+        }
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.UNPOWERED_REPEATER, true);
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.POWERED_REPEATER, true);
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.UNPOWERED_COMPARATOR, 8);
@@ -145,6 +153,8 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.FUNNEL, 8);
 
         BlockDictionary.registerOre("create:fanPass", Blocks.IRON_BARS, false);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.BLAZE_BURNER, 2);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.BLAZE_BURNER_LIT, false);
 
         DisplayLink.debug("Block Dictionary init done in %s ms!", System.currentTimeMillis() - startTime2);
         initialized = true;
