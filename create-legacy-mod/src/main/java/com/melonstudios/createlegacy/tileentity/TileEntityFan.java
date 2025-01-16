@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.google.common.base.Predicate;
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.block.BlockRender;
@@ -8,7 +9,8 @@ import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.*;
-import com.melonstudios.createlegacy.util.predicates.*;
+import com.melonstudios.melonlib.misc.MetaBlock;
+import com.melonstudios.melonlib.predicates.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
@@ -128,11 +130,11 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
             this.maxDistance = this.actualMaxDistance = Math.min(Math.max(Math.round(Math.abs(fan.speed()) / 8), 4), 16);
             IBlockState possibleCatalyst = world.getBlockState(source.offset(facing, 1));
             if (strength > 0) {
-                if (StatePredicate.matchInList(WASHING_CATALYSTS, possibleCatalyst)) {
+                if (anyMatch(WASHING_CATALYSTS, possibleCatalyst)) {
                     catalyst = 0;
-                } else if (StatePredicate.matchInList(COOKING_CATALYSTS, possibleCatalyst)) {
+                } else if (anyMatch(COOKING_CATALYSTS, possibleCatalyst)) {
                     catalyst = 1;
-                } else if (StatePredicate.matchInList(HAUNTING_CATALYSTS, possibleCatalyst)) {
+                } else if (anyMatch(HAUNTING_CATALYSTS, possibleCatalyst)) {
                     catalyst = 2;
                 } else catalyst = -1;
             } else catalyst = -1;
@@ -142,8 +144,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                 if (state.getMaterial().blocksMovement()
                         && state.getBlock().canCollideCheck(state, false)
                         && state.getCollisionBoundingBox(world, source.offset(facing, i)) != Block.NULL_AABB
-                        && !BlockTagHelper.hasTag(state, "create:fanPass")
-                        && !StatePredicate.matchInList(FAN_PASSES, state)) {
+                        && !anyMatch(FAN_PASSES, state)) {
                     actualMaxDistance = i;
                     break;
                 }
@@ -290,22 +291,29 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         }
     }
 
-    protected static final List<StatePredicate> WASHING_CATALYSTS = new ArrayList<>();
-    protected static final List<StatePredicate> COOKING_CATALYSTS = new ArrayList<>();
-    protected static final List<StatePredicate> HAUNTING_CATALYSTS = new ArrayList<>();
-    protected static final List<StatePredicate> FAN_PASSES = new ArrayList<>();
+    protected static final List<Predicate<IBlockState>> WASHING_CATALYSTS = new ArrayList<>();
+    protected static final List<Predicate<IBlockState>> COOKING_CATALYSTS = new ArrayList<>();
+    protected static final List<Predicate<IBlockState>> HAUNTING_CATALYSTS = new ArrayList<>();
+    protected static final List<Predicate<IBlockState>> FAN_PASSES = new ArrayList<>();
 
-    public static void addWashingCatalyst(StatePredicate predicate) {
+    public static void addWashingCatalyst(Predicate<IBlockState> predicate) {
         WASHING_CATALYSTS.add(predicate);
     }
-    public static void addCookingCatalyst(StatePredicate predicate) {
+    public static void addCookingCatalyst(Predicate<IBlockState> predicate) {
         COOKING_CATALYSTS.add(predicate);
     }
-    public static void addHauntingCatalyst(StatePredicate predicate) {
+    public static void addHauntingCatalyst(Predicate<IBlockState> predicate) {
         HAUNTING_CATALYSTS.add(predicate);
     }
-    public static void addFanPass(StatePredicate predicate) {
+    public static void addFanPass(Predicate<IBlockState> predicate) {
         FAN_PASSES.add(predicate);
+    }
+
+    private static boolean anyMatch(Iterable<Predicate<IBlockState>> predicates, IBlockState state) {
+        for (Predicate<IBlockState> predicate : predicates) {
+            if (predicate.test(state)) return true;
+        }
+        return false;
     }
 
     static {
@@ -313,12 +321,11 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
         addCookingCatalyst(StatePredicateLava.instance);
         addCookingCatalyst(StatePredicateFire.instance);
-        addCookingCatalyst(new StatePredicateMetaBlock(new MetaBlock(ModBlocks.BLAZE_BURNER, 1)));
+        addCookingCatalyst(new StatePredicateMetaBlock(MetaBlock.of(ModBlocks.BLAZE_BURNER, 1)));
         addCookingCatalyst(new StatePredicateBlock(ModBlocks.BLAZE_BURNER_LIT));
 
         addFanPass(StatePredicateFence.instance);
         addFanPass(StatePredicateFenceGate.instance);
-        addFanPass(new StatePredicateBlock(Blocks.IRON_BARS));
-        addFanPass(StatePredicateBlazeBurnerAny.instance);
+        addFanPass(new StatePredicateBlockDict("create:fanPass"));
     }
 }
