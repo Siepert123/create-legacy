@@ -3,7 +3,7 @@
   "modid": "create",
   "name": "Create Legacy",
   "description": "Create for 1.12.2",
-  "version": "0.2",
+  "version": "0.2.0",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
