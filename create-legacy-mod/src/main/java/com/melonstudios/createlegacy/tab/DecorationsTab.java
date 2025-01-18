@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tab;
 
+import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,6 @@ public final class DecorationsTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(Items.COAL);
+        return new ItemStack(ModBlocks.WINDOW_IRON);
     }
 }
