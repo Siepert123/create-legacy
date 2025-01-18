@@ -65,13 +65,11 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
     }
 
     protected boolean validGenerator() {
-        IBlockState state = world.getBlockState(pos.offset(facing().rotateY()));
+        IBlockState state = world.getBlockState(pos.offset(facing().rotateY(), 2));
         if (state.getBlock() instanceof BlockFurnaceEngine) {
             if (state.getValue(BlockFurnaceEngine.VARIANT) == BlockFurnaceEngine.Variant.ENGINE) {
                 if (state.getValue(BlockFurnaceEngine.FACING) == facing().rotateYCCW()) {
-                    if (world.getBlockState(pos.offset(facing().rotateY(), 2)).getBlock() == Blocks.LIT_FURNACE) {
-                        return true;
-                    }
+                    return world.getBlockState(pos.offset(facing().rotateY(), 3)).getBlock() == Blocks.LIT_FURNACE;
                 }
             }
         }
