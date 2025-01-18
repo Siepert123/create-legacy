@@ -52,7 +52,7 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
 
     @Override
     public float generatedSUMarkiplier() {
-        return 256.0f;
+        return 64.0f;
     }
 
     protected EnumFacing facing() {

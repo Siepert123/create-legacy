@@ -33,7 +33,7 @@ public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaNam
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(CreateAPI.stressCapacityTooltip(256));
+        tooltip.add(CreateAPI.stressCapacityTooltip(64));
     }
 
     @Override
