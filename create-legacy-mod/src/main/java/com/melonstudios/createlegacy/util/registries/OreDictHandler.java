@@ -7,6 +7,7 @@ import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.oredict.OreDictionary;
@@ -155,6 +156,11 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:fanPass", Blocks.IRON_BARS, false);
         BlockDictionary.registerOre("create:fanPass", ModBlocks.BLAZE_BURNER, 2);
         BlockDictionary.registerOre("create:fanPass", ModBlocks.BLAZE_BURNER_LIT, false);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.FUNNEL, 8);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.ROTATOR, 3);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.TURNTABLE, false);
+        BlockDictionary.registerOre("create:fanPass", Blocks.END_ROD, 6);
+        BlockDictionary.registerOre("create:fanPass", ModBlocks.HAND_CRANK, 6);
 
         DisplayLink.debug("Block Dictionary init done in %s ms!", System.currentTimeMillis() - startTime2);
         initialized = true;

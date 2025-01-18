@@ -46,8 +46,8 @@ public final class CreateLegacy {
     public static final String VERSION = "0.2.0";
     public static final String DEPENDENCIES =
             test ?
-                    "required-before:mysticallib;required-after:melonlib@[1.0,);before:jei" :
-                    "required-before-client:ctm;required-before:mysticallib;required-after:melonlib@[1.0,);before:jei";
+                    "required-before:mysticallib;required-after:melonlib@[1.1,);before:jei" :
+                    "required-before-client:ctm;required-before:mysticallib;required-after:melonlib@[1.1,);before:jei";
 
     public static final int VERSION_NUM = 9;
     public static final int KINETIC_VERSION_NUM = 0;
