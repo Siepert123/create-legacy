@@ -217,7 +217,7 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
         if (!world.isRemote && notify) {
             if ((world.getTotalWorldTime() & 0xf) == 0xf) PacketUpdateDepot.sendToPlayersNearby(this, 32);
         }
-        if (!world.isRemote && stack.isEmpty()) {
+        if (!world.isRemote && getStack().getCount() < getStack().getMaxStackSize()) {
             if (world.getBlockState(pos.up()).getBlock().isAir(world.getBlockState(pos.up()), world, pos.up())) {
                 List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
                         new AxisAlignedBB(
@@ -226,9 +226,17 @@ public class TileEntityDepot extends TileEntity implements ISidedInventory, ITic
                         )
                 );
                 if (!items.isEmpty()) {
-                    EntityItem item = items.get(0);
-                    setStack(item.getItem().copy());
-                    item.setDead();
+                    if (stack.isEmpty()) {
+                        EntityItem item = items.get(0);
+                        setStack(item.getItem().copy());
+                        item.setDead();
+                    } else {
+                        for (EntityItem item : items) {
+                            if (item.getItem().isItemEqual(getStack())) {
+                                getStack().grow(item.getItem().splitStack(stack.getMaxStackSize() - getStack().getCount()).getCount());
+                            }
+                        }
+                    }
                 }
             }
         }
