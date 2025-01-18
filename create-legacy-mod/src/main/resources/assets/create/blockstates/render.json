@@ -151,6 +151,18 @@
     },
     "type=blazehead_superheated": {
       "model": "create:render/blazehead_superheated"
+    },
+    "type=lower_rotating_connector": {
+      "model": "create:render/fureng_lower_rotating_connector"
+    },
+    "type=lower_sliding_connector": {
+      "model": "create:render/fureng_lower_sliding_connector"
+    },
+    "type=upper_rotating_connector": {
+      "model": "create:render/fureng_upper_rotating_connector"
+    },
+    "type=upper_sliding_connector": {
+      "model": "create:render/fureng_upper_sliding_connector"
     }
   }
 }

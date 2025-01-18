@@ -68,7 +68,13 @@ public class BlockRender extends Block {
 
         BLAZEHEAD_PASSIVE("blazehead_passive"),
         BLAZEHEAD_HEATED("blazehead_heated"),
-        BLAZEHEAD_SUPERHEATED("blazehead_superheated"),;
+        BLAZEHEAD_SUPERHEATED("blazehead_superheated"),
+
+        LOWER_ROTATING_CONNECTOR("lower_rotating_connector"),
+        LOWER_SLIDING_CONNECTOR("lower_sliding_connector"),
+        UPPER_ROTATING_CONNECTOR("upper_rotating_connector"),
+        UPPER_SLIDING_CONNECTOR("upper_sliding_connector"),
+        ;
 
         private final String name;
         private final int id;

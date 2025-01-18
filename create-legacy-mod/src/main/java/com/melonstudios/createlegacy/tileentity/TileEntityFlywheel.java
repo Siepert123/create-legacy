@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
+import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.kinetic.BlockFurnaceEngine;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
@@ -34,6 +35,7 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
 
     @Override
     protected void tick() {
+        if ((world.getTotalWorldTime() & 1) == 0) updateConnection();
         if (generatedRPM() == 0 || isUpdated()) return;
         NetworkContext context = new NetworkContext(world);
         passNetwork(null, null, context, false);
@@ -44,15 +46,15 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
                     SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.01f, 1.0f);
         }
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                pos.offset(facing().rotateY()).getX() + world.rand.nextFloat(),
-                pos.offset(facing().rotateY()).getY() + world.rand.nextFloat(),
-                pos.offset(facing().rotateY()).getZ() + world.rand.nextFloat(),
+                pos.offset(facing().rotateY(), 2).getX() + world.rand.nextFloat(),
+                pos.offset(facing().rotateY(), 2).getY() + world.rand.nextFloat(),
+                pos.offset(facing().rotateY(), 2).getZ() + world.rand.nextFloat(),
                 0, 0.1f, 0);
     }
 
     @Override
     public float generatedSUMarkiplier() {
-        return 64.0f;
+        return 256.0f;
     }
 
     protected EnumFacing facing() {
@@ -74,5 +76,40 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
             }
         }
         return false;
+    }
+    private boolean connection = false;
+    public boolean connects() {
+        return connection;
+    }
+    private void updateConnection() {
+        IBlockState state = world.getBlockState(pos.offset(facing().rotateY(), 2));
+        if (state.getBlock() instanceof BlockFurnaceEngine) {
+            if (state.getValue(BlockFurnaceEngine.VARIANT) == BlockFurnaceEngine.Variant.ENGINE) {
+                connection = state.getValue(BlockFurnaceEngine.FACING) == facing().rotateYCCW();
+            }
+        }
+    }
+
+    private final IBlockState[] renderParts = new IBlockState[4];
+    public IBlockState renderPart(int id) {
+        if (renderParts[id] == null) {
+            switch (id) {
+                case 0: renderParts[id] = BlockRender.getRenderPart(BlockRender.Type.LOWER_ROTATING_CONNECTOR); break;
+                case 1: renderParts[id] = BlockRender.getRenderPart(BlockRender.Type.LOWER_SLIDING_CONNECTOR); break;
+                case 2: renderParts[id] = BlockRender.getRenderPart(BlockRender.Type.UPPER_ROTATING_CONNECTOR); break;
+                case 3: renderParts[id] = BlockRender.getRenderPart(BlockRender.Type.UPPER_SLIDING_CONNECTOR); break;
+            }
+        }
+        return renderParts[id];
+    }
+
+    public int getRotationDeg() {
+        switch (facing()) {
+            case NORTH: return 90;
+            case EAST: return 0;
+            case SOUTH: return -90;
+            case WEST: return 180;
+        }
+        return 0;
     }
 }
