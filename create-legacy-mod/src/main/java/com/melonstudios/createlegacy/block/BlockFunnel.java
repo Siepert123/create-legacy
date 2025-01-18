@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.network.PacketUpdateFunnelAdvanced;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnel;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.misc.AABB;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -152,10 +153,10 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
         }
     }
 
-    protected static final AxisAlignedBB AABB_SOUTH = CreateLegacy.aabb(0, 0, 0, 16, 16, 8);
-    protected static final AxisAlignedBB AABB_NORTH = CreateLegacy.aabb(0, 0, 8, 16, 16, 16);
-    protected static final AxisAlignedBB AABB_WEST = CreateLegacy.aabb(8, 0, 0, 16, 16, 16);
-    protected static final AxisAlignedBB AABB_EAST = CreateLegacy.aabb(0, 0, 0, 8, 16, 16);
+    protected static final AxisAlignedBB AABB_SOUTH = AABB.create(0, 0, 0, 16, 16, 8);
+    protected static final AxisAlignedBB AABB_NORTH = AABB.create(0, 0, 8, 16, 16, 16);
+    protected static final AxisAlignedBB AABB_WEST = AABB.create(8, 0, 0, 16, 16, 16);
+    protected static final AxisAlignedBB AABB_EAST = AABB.create(0, 0, 0, 8, 16, 16);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

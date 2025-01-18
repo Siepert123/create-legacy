@@ -12,6 +12,7 @@ import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -182,18 +183,19 @@ public final class CreateLegacy {
 
     /**
      * Creates a new Bounding Box, but uses pixels instead of blocks.
+     * @deprecated Use {@link com.melonstudios.melonlib.misc.AABB#create(double, double, double, double, double, double) AABB.create()} instead
      */
+    @Deprecated
     public static AxisAlignedBB aabb(int x1, int y1, int z1, int x2, int y2, int z2) {
-        return new AxisAlignedBB(x1 / 16.0, y1 / 16.0, z1 / 16.0, x2 / 16.0, y2 / 16.0, z2 / 16.0);
+        return AABB.create(x1, y1, z1, x2, y2, z2);
     }
 
     /**
      * Creates a new Bounding Box of a certain size wrapping a block pos.
+     * @deprecated Use {@link com.melonstudios.melonlib.misc.AABB#wrap(BlockPos, int) AABB.wrap()} instead
      */
+    @Deprecated
     public static AxisAlignedBB aabb(BlockPos pos, int range) {
-        return new AxisAlignedBB(
-                pos.add(-range, -range, -range),
-                pos.add(range, range, range)
-        );
+        return AABB.wrap(pos, range);
     }
 }

@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityCog;
 import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
 import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.misc.AABB;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -129,13 +130,13 @@ public class BlockRotator extends AbstractBlockKinetic implements IMetaName, IWr
         return state.getValue(VARIANT) == Variant.SHAFT ? SoundType.STONE : SoundType.WOOD;
     }
 
-    protected static final AxisAlignedBB SHAFT_X = CreateLegacy.aabb(0, 5, 5, 16, 11, 11);
-    protected static final AxisAlignedBB SHAFT_Y = CreateLegacy.aabb(5, 0, 5, 11, 16, 11);
-    protected static final AxisAlignedBB SHAFT_Z = CreateLegacy.aabb(5, 5, 0, 11, 11, 16);
+    protected static final AxisAlignedBB SHAFT_X = AABB.create(0, 5, 5, 16, 11, 11);
+    protected static final AxisAlignedBB SHAFT_Y = AABB.create(5, 0, 5, 11, 16, 11);
+    protected static final AxisAlignedBB SHAFT_Z = AABB.create(5, 5, 0, 11, 11, 16);
 
-    protected static final AxisAlignedBB COG_X = CreateLegacy.aabb(0, 2, 2, 16, 14, 14);
-    protected static final AxisAlignedBB COG_Y = CreateLegacy.aabb(2, 0, 2, 14, 16, 14);
-    protected static final AxisAlignedBB COG_Z = CreateLegacy.aabb(2, 2, 0, 14, 14, 16);
+    protected static final AxisAlignedBB COG_X = AABB.create(0, 2, 2, 16, 14, 14);
+    protected static final AxisAlignedBB COG_Y = AABB.create(2, 0, 2, 14, 16, 14);
+    protected static final AxisAlignedBB COG_Z = AABB.create(2, 2, 0, 14, 14, 16);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

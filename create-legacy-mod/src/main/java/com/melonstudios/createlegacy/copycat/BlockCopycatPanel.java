@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.copycat;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,12 +20,12 @@ public class BlockCopycatPanel extends BlockCopycat {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
     private static final AxisAlignedBB[] boundingBoxes = {
-            CreateLegacy.aabb(0, 13, 0, 16, 16, 16),
-            CreateLegacy.aabb(0, 0, 0, 16, 3, 16),
-            CreateLegacy.aabb(0, 0, 13, 16, 16, 16),
-            CreateLegacy.aabb(0, 0, 0, 16, 16, 3),
-            CreateLegacy.aabb(13, 0, 0, 16, 16, 16),
-            CreateLegacy.aabb(0, 0, 0, 3, 16, 16),
+            AABB.create(0, 13, 0, 16, 16, 16),
+            AABB.create(0, 0, 0, 16, 3, 16),
+            AABB.create(0, 0, 13, 16, 16, 16),
+            AABB.create(0, 0, 0, 16, 16, 3),
+            AABB.create(13, 0, 0, 16, 16, 16),
+            AABB.create(0, 0, 0, 3, 16, 16),
     };
 
     public BlockCopycatPanel() {

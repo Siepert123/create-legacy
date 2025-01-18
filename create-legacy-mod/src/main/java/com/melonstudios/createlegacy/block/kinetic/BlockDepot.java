@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityDepot;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -104,7 +105,7 @@ public class BlockDepot extends AbstractBlockKinetic {
         super.breakBlock(worldIn, pos, state);
     }
 
-    private static final AxisAlignedBB aabb = CreateLegacy.aabb(0, 0, 0, 16, 14, 16);
+    private static final AxisAlignedBB aabb = AABB.create(0, 0, 0, 16, 14, 16);
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return aabb;

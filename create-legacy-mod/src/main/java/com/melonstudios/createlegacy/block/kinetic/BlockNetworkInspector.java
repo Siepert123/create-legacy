@@ -1,10 +1,10 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.IMetaName;
 import com.melonstudios.createlegacy.util.INetworkLogger;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -99,7 +99,7 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
         } else return false;
     }
 
-    private static final AxisAlignedBB aabb = CreateLegacy.aabb(1, 0, 1, 15, 13, 15);
+    private static final AxisAlignedBB aabb = AABB.create(1, 0, 1, 15, 13, 15);
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return aabb;

@@ -2,6 +2,8 @@ package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityChute;
+import com.melonstudios.melonlib.misc.AABB;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,11 +29,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.melonstudios.createlegacy.CreateLegacy.aabb;
-
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockChute extends Block implements ITileEntityProvider, IWrenchable {
     public BlockChute() {
         super(Material.IRON);
@@ -234,7 +238,7 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         return false;
     }
 
-    public static final AxisAlignedBB CHUTE_AABB = aabb(1, 0, 1, 15, 16, 15);
+    public static final AxisAlignedBB CHUTE_AABB = AABB.create(1, 0, 1, 15, 16, 15);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -253,20 +257,27 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         }
     }
 
+    private static final List<AxisAlignedBB> encasedAABBList = new ArrayList<>();
+    private static final List<AxisAlignedBB> AABBList = new ArrayList<>();
+
+    static {
+        encasedAABBList.add(AABB.create(0, 0, 0, 2, 16, 16));
+        encasedAABBList.add(AABB.create(14, 0, 0, 16, 16, 16));
+        encasedAABBList.add(AABB.create(0, 0, 0, 16, 16, 2));
+        encasedAABBList.add(AABB.create(0, 0, 14, 16, 16, 16));
+
+        AABBList.add(AABB.create(1, 0, 1, 2, 16, 15));
+        AABBList.add(AABB.create(14, 0, 1, 15, 16, 15));
+        AABBList.add(AABB.create(1, 0, 1, 15, 16, 2));
+        AABBList.add(AABB.create(1, 0, 14, 15, 16, 15));
+    }
+
     protected static List<AxisAlignedBB> getCollisionBoxList(IBlockState state) {
-        List<AxisAlignedBB> list = new ArrayList<>();
         if (((BlockChute)state.getBlock()).isEncased(state)) {
-            list.add(aabb(0, 0, 0, 2, 16, 16));
-            list.add(aabb(14, 0, 0, 16, 16, 16));
-            list.add(aabb(0, 0, 0, 16, 16, 2));
-            list.add(aabb(0, 0, 14, 16, 16, 16));
+            return encasedAABBList;
         } else {
-            list.add(aabb(1, 0, 1, 2, 16, 15));
-            list.add(aabb(14, 0, 1, 15, 16, 15));
-            list.add(aabb(1, 0, 1, 15, 16, 2));
-            list.add(aabb(1, 0, 14, 15, 16, 15));
+            return AABBList;
         }
-        return list;
     }
 
 

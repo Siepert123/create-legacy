@@ -3,6 +3,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityTurntable;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public class BlockTurntable extends AbstractBlockKinetic {
         return new TileEntityTurntable();
     }
 
-    private static final AxisAlignedBB aabb = CreateLegacy.aabb(0, 0, 0, 16, 8 ,16);
+    private static final AxisAlignedBB aabb = AABB.create(0, 0, 0, 16, 8 ,16);
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.copycat;
 
 import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,10 +22,10 @@ public class BlockCopycatStep extends BlockCopycat {
     );
 
     private static final AxisAlignedBB[] boundingBoxes = {
-            CreateLegacy.aabb(0, 0, 0, 16, 8, 8),
-            CreateLegacy.aabb(8, 0, 0, 16, 8, 16),
-            CreateLegacy.aabb(0, 0, 8, 16, 8, 16),
-            CreateLegacy.aabb(0, 0, 0, 8, 8, 16),
+            AABB.create(0, 0, 0, 16, 8, 8),
+            AABB.create(8, 0, 0, 16, 8, 16),
+            AABB.create(0, 0, 8, 16, 8, 16),
+            AABB.create(0, 0, 0, 8, 8, 16),
     };
 
     public BlockCopycatStep() {
