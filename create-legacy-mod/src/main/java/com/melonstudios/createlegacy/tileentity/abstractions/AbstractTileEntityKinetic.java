@@ -7,7 +7,6 @@ import com.melonstudios.createlegacy.CreateConfig;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -24,7 +22,6 @@ import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Random;
 
 public abstract class AbstractTileEntityKinetic extends TileEntity implements ITickable, IStateFindable, IKineticTileEntity {

@@ -1,7 +1,5 @@
 package com.melonstudios.createlegacy.copycat;
 
-import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureMap;

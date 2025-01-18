@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.melonlib.misc.AABB;

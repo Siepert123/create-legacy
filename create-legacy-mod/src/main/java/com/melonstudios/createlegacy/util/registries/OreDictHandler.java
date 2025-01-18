@@ -7,7 +7,6 @@ import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.oredict.OreDictionary;

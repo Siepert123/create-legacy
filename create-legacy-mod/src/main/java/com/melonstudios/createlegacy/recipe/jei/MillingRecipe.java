@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.recipe.jei;
 
 import com.melonstudios.createlegacy.util.RecipeEntry;
-import com.melonstudios.createlegacy.util.SimpleTuple;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;

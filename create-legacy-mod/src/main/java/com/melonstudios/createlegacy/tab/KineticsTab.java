@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.tab;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public final class KineticsTab extends CreativeTabs {

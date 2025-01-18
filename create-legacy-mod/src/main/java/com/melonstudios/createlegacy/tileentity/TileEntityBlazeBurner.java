@@ -1,7 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createlegacy.block.BlockRender;
-import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.network.PacketUpdateBlazeBurner;
 import com.melonstudios.createlegacy.util.EnumBlazeLevel;
 import mcp.MethodsReturnNonnullByDefault;

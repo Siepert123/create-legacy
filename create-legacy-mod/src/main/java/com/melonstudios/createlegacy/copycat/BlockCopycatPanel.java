@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.copycat;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;

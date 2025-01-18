@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.network;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityBearing;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

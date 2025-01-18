@@ -10,8 +10,6 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nullable;
-
 public abstract class MillingRecipeCategory<T extends IRecipeWrapper> implements IRecipeCategory<T> {
     protected static final ResourceLocation TEXTURES = new ResourceLocation(CreateLegacy.MOD_ID + ":textures/gui/bulk_boring.png");
 

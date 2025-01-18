@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityCog;

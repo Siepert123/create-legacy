@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntityDepot;
 import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.state.IBlockState;

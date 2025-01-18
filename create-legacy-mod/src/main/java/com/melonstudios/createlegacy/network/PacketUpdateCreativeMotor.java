@@ -1,11 +1,8 @@
 package com.melonstudios.createlegacy.network;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.copycat.TileEntityCopycat;
 import com.melonstudios.createlegacy.tileentity.TileEntityCreativeMotor;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

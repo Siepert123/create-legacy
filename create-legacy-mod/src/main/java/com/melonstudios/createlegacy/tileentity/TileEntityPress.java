@@ -7,7 +7,6 @@ import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
-import com.melonstudios.createlegacy.util.RenderUtils;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
