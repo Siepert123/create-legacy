@@ -35,6 +35,7 @@ public class CommonProxy {
         registerTE(TileEntityChute.class, "chute");
         registerTE(TileEntityFunnel.class, "funnel");
         registerTE(TileEntityFunnelAdvanced.class, "funnel_advanced");
+        registerTE(TileEntityBeltLegacy.class, "belt_legacy");
 
         registerTE(TileEntitySpeedometer.class, "speedometer");
         registerTE(TileEntityStressometer.class, "stressometer");

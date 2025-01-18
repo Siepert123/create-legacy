@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "axis=x,has_shaft=false": {
+      "model": "create:belt_legacy",
+      "y": 90
+    },
+    "axis=z,has_shaft=false": {
+      "model": "create:belt_legacy"
+    },
+    "axis=x,has_shaft=true": {
+      "model": "create:belt_legacy_shaft",
+      "y": 90
+    },
+    "axis=z,has_shaft=true": {
+      "model": "create:belt_legacy_shaft"
+    }
+  }
+}

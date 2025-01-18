@@ -77,6 +77,8 @@ public final class ModItems {
         CreateLegacy.setItemModel(Item.getItemFromBlock(ModBlocks.FUNNEL),
                 1, "funnel/brass");
 
+        CreateLegacy.setItemModel(ModBlocks.BELT_LEGACY);
+
         CreateLegacy.setItemModel(SANDPAPER);
         CreateLegacy.setItemModel(SCHEMATIC, 0,
                 "schematic/empty");

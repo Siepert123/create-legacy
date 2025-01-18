@@ -45,6 +45,8 @@ public final class ModBlocks {
     public static final BlockChute CHUTE = registerBlockWithItem(new BlockChute());
     public static final BlockFunnel FUNNEL = registerBlockWithItem(new BlockFunnel(), true);
 
+    public static final BlockBeltLegacy BELT_LEGACY = registerBlockWithItem(new BlockBeltLegacy());
+
     public static final BlockHandCrank HAND_CRANK = registerBlockWithItem(new BlockHandCrank());
     public static final BlockWaterWheel WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel());
     public static final BlockFurnaceEngine FURNACE_ENGINE = registerBlockWithItem(new BlockFurnaceEngine(), true);

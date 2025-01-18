@@ -55,6 +55,7 @@ public class ClientProxy extends CommonProxy {
         registerTER(TileEntityChute.class, "chute", new TileEntityChuteRenderer());
         registerTER(TileEntityFunnel.class, "funnel", null);
         registerTER(TileEntityFunnelAdvanced.class, "funnel_advanced", new TileEntityFunnelAdvancedRenderer());
+        registerTER(TileEntityBeltLegacy.class, "belt_legacy", new TileEntityBeltLegacyRenderer());
 
         registerTER(TileEntitySpeedometer.class, "speedometer", new TileEntitySpeedometerRenderer());
         registerTER(TileEntityStressometer.class, "stressometer", new TileEntityStressometerRenderer());

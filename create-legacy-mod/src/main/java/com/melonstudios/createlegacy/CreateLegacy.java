@@ -183,7 +183,7 @@ public final class CreateLegacy {
 
     /**
      * Creates a new Bounding Box, but uses pixels instead of blocks.
-     * @deprecated Use {@link com.melonstudios.melonlib.misc.AABB#create(double, double, double, double, double, double) AABB.create()} instead
+     * @deprecated since 0.2.0: use {@link com.melonstudios.melonlib.misc.AABB#create(double, double, double, double, double, double) AABB.create()} instead
      */
     @Deprecated
     public static AxisAlignedBB aabb(int x1, int y1, int z1, int x2, int y2, int z2) {
@@ -192,7 +192,7 @@ public final class CreateLegacy {
 
     /**
      * Creates a new Bounding Box of a certain size wrapping a block pos.
-     * @deprecated Use {@link com.melonstudios.melonlib.misc.AABB#wrap(BlockPos, int) AABB.wrap()} instead
+     * @deprecated since 0.2.0: use {@link com.melonstudios.melonlib.misc.AABB#wrap(BlockPos, int) AABB.wrap()} instead
      */
     @Deprecated
     public static AxisAlignedBB aabb(BlockPos pos, int range) {

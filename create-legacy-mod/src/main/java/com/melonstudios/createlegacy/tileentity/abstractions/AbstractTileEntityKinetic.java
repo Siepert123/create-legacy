@@ -10,6 +10,7 @@ import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -210,6 +211,8 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     public boolean mayConnect(IKineticTileEntity other, EnumFacing mySide, EnumFacing otherSide) {
         if (other == null) return false;
+        if (world.getBlockState(other.getPos()).getBlock() == Blocks.AIR) return false;
+        if (world.getBlockState(pos).getBlock() == Blocks.AIR) return false;
         return getConnectionType(mySide) != EnumKineticConnectionType.NONE
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));
     }

@@ -6,8 +6,10 @@ import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -130,6 +132,8 @@ public interface IKineticTileEntity {
 
     default boolean mayConnect(IKineticTileEntity other, EnumFacing mySide, EnumFacing otherSide) {
         if (other == null) return false;
+        if (((TileEntity)this).getWorld().getBlockState(((TileEntity)other).getPos()).getBlock() == Blocks.AIR) return false;
+        if (((TileEntity)this).getWorld().getBlockState(((TileEntity)this).getPos()).getBlock() == Blocks.AIR) return false;
         return getConnectionType(mySide) != EnumKineticConnectionType.NONE
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));
     }
