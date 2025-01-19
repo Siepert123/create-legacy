@@ -3,7 +3,6 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.recipe.SawingRecipes;
-import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntitySaw;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;

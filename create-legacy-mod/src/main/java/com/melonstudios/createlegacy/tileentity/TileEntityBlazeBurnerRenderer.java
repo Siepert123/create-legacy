@@ -1,6 +1,5 @@
 package com.melonstudios.createlegacy.tileentity;
 
-import com.melonstudios.createlegacy.util.RenderUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

@@ -3,7 +3,6 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.network.PacketUpdateHandCrank;
-import com.melonstudios.createlegacy.tileentity.TileEntityCreativeMotor;
 import com.melonstudios.createlegacy.tileentity.TileEntityHandCrank;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyEnum;

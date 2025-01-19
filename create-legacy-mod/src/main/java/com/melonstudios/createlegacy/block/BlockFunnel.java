@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.network.PacketUpdateFunnelAdvanced;
-import com.melonstudios.createlegacy.tileentity.TileEntityChute;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnel;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
 import com.melonstudios.createlegacy.util.IMetaName;

@@ -1,9 +1,7 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.block.IGoggleInfo;
-import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.TileEntityBeltLegacy;
 import com.melonstudios.melonlib.misc.AABB;
 import mcp.MethodsReturnNonnullByDefault;

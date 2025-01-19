@@ -2,7 +2,6 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
 import com.melonstudios.createlegacy.block.IGoggleInfo;
-import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntityTurntable;
 import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.state.IBlockState;
