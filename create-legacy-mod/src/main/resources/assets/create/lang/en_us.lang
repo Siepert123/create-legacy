@@ -46,6 +46,7 @@ item.create.hand_brass.name=Brass Hand
 item.create.precision_mechanism.name=Precision Mechanism
 item.create.precision_mechanism_incomplete.name=Incomplete Precision Mechanism
 item.create.plate_obsidian_incomplete.name=Unprocessed Sturdy Sheet
+item.create.goggles.name=Engineer's Goggles
 
 #Blocks
 tile.create.ore_copper.name=Copper Ore
@@ -124,6 +125,8 @@ tile.create.drill.name=Mechanical Drill
 
 tile.create.turntable.name=Turntable
 tile.create.turntable.desc=Side effects may include dizziness and/or motion sickness.
+
+tile.create.belt.name=Mechanical Belt
 
 #Creative tabs
 itemGroup.create.kinetics=Create
