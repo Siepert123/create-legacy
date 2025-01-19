@@ -19,25 +19,6 @@ public class TileEntityDepotRenderer extends TileEntitySpecialRenderer<TileEntit
 
     @Override
     public void render(TileEntityDepot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (RenderUtil.enableDebug()) {
-            setLightmapDisabled(true);
-            if (!te.getStack().isEmpty()) {
-                RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer,
-                        te.getStack().getCount() + " " + te.getStack().getDisplayName(),
-                        (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, te.getOutput().isEmpty() ? 4 : 8,
-                        -rendererDispatcher.entityYaw,
-                        0, true, true);
-            }
-            if (!te.getOutput().isEmpty()) {
-                RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer,
-                        te.getOutput().getCount() + " " + te.getOutput().getDisplayName(),
-                        (float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f, -1,
-                        -rendererDispatcher.entityYaw,
-                        0, true, true);
-            }
-            setLightmapDisabled(false);
-        }
-
         renderItem(te, x, y, z);
     }
 

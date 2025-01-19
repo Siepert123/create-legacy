@@ -283,7 +283,7 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         if (te instanceof TileEntityChute) {
             TileEntityChute chute = (TileEntityChute) te;
             if (chute.getStack().isEmpty()) return IGoggleInfo.EMPTY;
-            return NonNullList.from("", chute.getStack().getCount() + "\u00D7" + chute.getStack().getDisplayName());
+            return NonNullList.from("", chute.getStack().getCount() + "\u00D7 " + chute.getStack().getDisplayName());
         }
         return IGoggleInfo.EMPTY;
     }

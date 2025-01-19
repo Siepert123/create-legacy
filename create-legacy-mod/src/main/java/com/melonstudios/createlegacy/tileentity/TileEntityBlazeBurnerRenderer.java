@@ -22,12 +22,6 @@ public class TileEntityBlazeBurnerRenderer extends TileEntitySpecialRenderer<Til
         rotateModel(-rendererDispatcher.entityYaw,
                 x, y + (Math.sin(Math.toRadians(te.getWorld().getTotalWorldTime() + partialTicks)) / 16.0), z,
                 te.getAssociatedBlazePart());
-
-        if (RenderUtil.enableDebug()) {
-            RenderUtil.renderTextWithBackdrop(rendererDispatcher.fontRenderer, "ticks: " + te.ticksRemaining,
-                    (float) x + 0.5f, (float) y + 1, (float) z + 0.5f,
-                    0, -rendererDispatcher.entityYaw, 0, true, true);
-        }
     }
 
     private void rotateModel(float angle, double x, double y, double z, IBlockState state) {
