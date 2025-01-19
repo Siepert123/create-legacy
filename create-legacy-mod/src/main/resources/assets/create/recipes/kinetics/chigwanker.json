@@ -7,8 +7,8 @@
   ],
   "key": {
     "#": {
-      "item": "create:casing",
-      "data": 2
+      "item": "create:ingredient",
+      "data": 0
     },
     "b": {
       "item": "create:rotator",
