@@ -6,7 +6,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IGoggleInfo {
+    NonNullList<String> EMPTY = NonNullList.create();
     default NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
-        return NonNullList.create();
+        return EMPTY;
     }
 }

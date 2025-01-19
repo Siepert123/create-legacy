@@ -17,10 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -36,7 +33,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class BlockChute extends Block implements ITileEntityProvider, IWrenchable {
+public class BlockChute extends Block implements ITileEntityProvider, IWrenchable, IGoggleInfo {
     public BlockChute() {
         super(Material.IRON);
 
@@ -280,5 +277,14 @@ public class BlockChute extends Block implements ITileEntityProvider, IWrenchabl
         }
     }
 
-
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityChute) {
+            TileEntityChute chute = (TileEntityChute) te;
+            if (chute.getStack().isEmpty()) return IGoggleInfo.EMPTY;
+            return NonNullList.from("", chute.getStack().getCount() + "\u00D7" + chute.getStack().getDisplayName());
+        }
+        return IGoggleInfo.EMPTY;
+    }
 }

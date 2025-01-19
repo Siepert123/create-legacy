@@ -34,6 +34,7 @@ public class ClientProxy extends CommonProxy {
             if (new File(Minecraft.getMinecraft().mcDataDir, "porkchop.gears").exists())
                 AbstractTileEntityKineticRenderer.pork();
         } catch (Throwable ignored) {}
+        AbstractTileEntityKineticRenderer.disableDebugText();
     }
     public void setTERenderers() {
         registerTER(TileEntityShaft.class, "shaft", new TileEntityShaftRenderer());

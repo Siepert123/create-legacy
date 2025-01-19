@@ -37,7 +37,7 @@ import java.util.Random;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName, IHeatProvider {
+public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMetaName, IHeatProvider, IGoggleInfo {
     public BlockBlazeBurner() {
         super(Material.IRON);
 
@@ -149,7 +149,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
                         }
                     }
                     int cookTime = TileEntityFurnace.getItemBurnTime(stack);
-                    if (cookTime > 0) {
+                    if (cookTime > 0 && burner.getBlazeLevel() != EnumBlazeLevel.SUPERHEATED) {
                         burner.addTicks(cookTime);
                         if (!worldIn.isRemote) {
                             stack.shrink(1);
@@ -261,6 +261,19 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
     @Override
     public float getAmbientOcclusionLightValue(IBlockState state) {
         return 1;
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityBlazeBurner) {
+            TileEntityBlazeBurner burner = (TileEntityBlazeBurner) te;
+            if (!burner.isLockedState()) {
+                if (burner.getTicksRemaining() > 0) return NonNullList.from("",
+                        "Fuel: " + burner.getTicksRemaining() / 20 + "s");
+            }
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     //region ?

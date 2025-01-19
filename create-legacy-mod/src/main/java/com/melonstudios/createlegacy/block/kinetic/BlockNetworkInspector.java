@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.IMetaName;
@@ -27,7 +28,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockNetworkInspector extends AbstractBlockKinetic implements IMetaName {
+public class BlockNetworkInspector extends AbstractBlockKinetic implements IMetaName, IGoggleInfo {
     public BlockNetworkInspector() {
         super("network_inspector");
     }
@@ -89,19 +90,21 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
         return new ItemStack(this, 1, state.getValue(ALT) ? 1 : 0);
     }
 
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntity entity = worldIn.getTileEntity(pos);
-        if (playerIn.getHeldItem(hand).isEmpty() && entity instanceof INetworkLogger) {
-            String msg = ((INetworkLogger) entity).queryData();
-            playerIn.sendStatusMessage(new TextComponentString(msg), true);
-            return true;
-        } else return false;
-    }
-
     private static final AxisAlignedBB aabb = AABB.create(1, 0, 1, 15, 13, 15);
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return aabb;
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntitySpeedometer) {
+            return NonNullList.from("", ((TileEntitySpeedometer)te).queryData());
+        }
+        if (te instanceof TileEntityStressometer) {
+            return NonNullList.from("", ((TileEntityStressometer)te).queryData());
+        }
+        return IGoggleInfo.EMPTY;
     }
 }

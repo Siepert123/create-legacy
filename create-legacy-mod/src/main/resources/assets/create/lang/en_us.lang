@@ -198,6 +198,8 @@ tooltip.wip=WIP, refrain from using plz
 tooltip.stressImpact=Kinetic Stress Impact: %s×RPM
 tooltip.stressCapacity=Kinetic Stress Capacity: %s×RPM
 
+goggles.header=Block Information
+
 #fluid
 fluid.create.chocolate=Chocolate
 

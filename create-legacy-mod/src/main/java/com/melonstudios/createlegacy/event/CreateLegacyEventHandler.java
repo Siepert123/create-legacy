@@ -61,6 +61,7 @@ public final class CreateLegacyEventHandler {
                 "Cobalt", "Ardite", "Manyullyn");
     }
 
+    private static final ItemStack goggles = new ItemStack(ModItems.GOGGLES);
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void overlayRender(RenderGameOverlayEvent.Post event) {
@@ -69,7 +70,7 @@ public final class CreateLegacyEventHandler {
             EntityPlayer player = mc.player;
             ItemStack helmet = player.inventory.armorInventory.get(3);
             if (helmet.getItem() instanceof ItemGoggles) {
-                RayTraceResult result = mc.player.rayTrace(3, event.getPartialTicks());
+                RayTraceResult result = mc.player.rayTrace(4, event.getPartialTicks());
                 if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
                     BlockPos pos = result.getBlockPos();
                     World world = mc.world;
@@ -77,13 +78,14 @@ public final class CreateLegacyEventHandler {
                     if (state.getBlock() instanceof IGoggleInfo) {
                         NonNullList<String> info = ((IGoggleInfo)state.getBlock()).getGoggleInformation(world, pos, state);
                         if (!info.isEmpty()) {
-                            mc.fontRenderer.drawStringWithShadow(Localizer.translate("goggles.header"),
-                                    event.getResolution().getScaledWidth() / 2f,
-                                    event.getResolution().getScaledHeight() / 2f - 10, -1);
+                            float x = event.getResolution().getScaledWidth() / 2f + 4;
+                            float y = event.getResolution().getScaledHeight() / 2f;
+                            mc.getRenderItem().renderItemIntoGUI(goggles, (int)x - 16, (int) y - 10);
+                            mc.fontRenderer.drawStringWithShadow(Localizer.translate("goggles.header") + ':',
+                                    x, y - 10, -1);
                             for (int i = 0; i < info.size(); i++) {
                                 mc.fontRenderer.drawStringWithShadow(info.get(i),
-                                        event.getResolution().getScaledWidth() / 2f,
-                                        event.getResolution().getScaledHeight() / 2f + i * 8, -1);
+                                        x, y + i * 8, 0xffcccccc);
                             }
                         }
                     }
