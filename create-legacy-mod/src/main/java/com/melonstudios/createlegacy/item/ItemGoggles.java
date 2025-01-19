@@ -34,4 +34,9 @@ public class ItemGoggles extends ItemArmor {
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         return "create:textures/armor/goggles.png";
     }
+
+    @Override
+    public int getItemEnchantability() {
+        return 0;
+    }
 }
