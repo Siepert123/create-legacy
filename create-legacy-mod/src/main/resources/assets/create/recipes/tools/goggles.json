@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s ",
+    "gCg"
+  ],
+  "key": {
+    "g": {
+      "type": "forge:ore_dict",
+      "ore": "paneGlassColorless"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "plateGold"
+    },
+    "s": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    }
+  },
+  "result": {
+    "item": "create:goggles"
+  }
+}
