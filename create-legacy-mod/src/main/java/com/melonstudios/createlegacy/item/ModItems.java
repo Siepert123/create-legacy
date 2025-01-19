@@ -30,7 +30,7 @@ public final class ModItems {
 
     public static void setItemModels() {
         CreateLegacy.setItemModel(WRENCH);
-        CreateLegacy.setItemModel(GOGGLES);
+        CreateLegacy.setItemModel(GOGGLES, "goggles_3d");
 
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();

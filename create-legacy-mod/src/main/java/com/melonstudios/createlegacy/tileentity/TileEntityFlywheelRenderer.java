@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.tileentity;
 
+import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKineticRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -15,6 +16,16 @@ public class TileEntityFlywheelRenderer extends AbstractTileEntityKineticRendere
         spinModel(te, x, y, z, partialTicks, te.facing().getAxis(), te.getAssociatedFlywheelPart());
 
         if (te.connects()) {
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(x, y, z);
+            switch (te.facing().rotateY()) {
+                case NORTH: GlStateManager.translate(0, 0, -3); break;
+                case EAST: GlStateManager.translate(3, 0, 0); break;
+                case SOUTH: GlStateManager.translate(0, 0, 3); break;
+                case WEST: GlStateManager.translate(-3, 0, 0); break;
+            }
+            modelRender(BlockRender.getRenderPart(BlockRender.Type.FURNACE_HAT));
+            GlStateManager.popMatrix();
             GlStateManager.pushMatrix();
             float angle = calculateAngle(te, te.facing().getAxis(), partialTicks, 1, false);
             GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5);

@@ -74,6 +74,8 @@ public class BlockRender extends Block {
         LOWER_SLIDING_CONNECTOR("lower_sliding_connector"),
         UPPER_ROTATING_CONNECTOR("upper_rotating_connector"),
         UPPER_SLIDING_CONNECTOR("upper_sliding_connector"),
+
+        FURNACE_HAT("furnace_hat"),
         ;
 
         private final String name;

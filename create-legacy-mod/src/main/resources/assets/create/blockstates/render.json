@@ -163,6 +163,9 @@
     },
     "type=upper_sliding_connector": {
       "model": "create:render/fureng_upper_sliding_connector"
+    },
+    "type=furnace_hat": {
+      "model": "create:render/furnace_hat"
     }
   }
 }
