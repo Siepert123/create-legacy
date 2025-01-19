@@ -151,6 +151,7 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.DAYLIGHT_DETECTOR_INVERTED, true);
         BlockDictionary.registerOre("create:wrenchPickup", Blocks.DAYLIGHT_DETECTOR, true);
         BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.FUNNEL, 8);
+        BlockDictionary.registerOre("create:wrenchPickup", ModBlocks.BELT_LEGACY, 4);
 
         BlockDictionary.registerOre("create:fanPass", Blocks.IRON_BARS, false);
         BlockDictionary.registerOre("create:fanPass", ModBlocks.BLAZE_BURNER, 2);
