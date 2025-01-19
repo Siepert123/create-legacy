@@ -1,0 +1,195 @@
+#Items
+item.create.sandpaper.name=Наждачная бумага
+item.create.schematic_empty.name=Пустая схематика
+item.create.schematic_writeable.name=Схематика и перо
+item.create.schematic.name=Схематика
+item.create.wrench.name=Гаечный ключ
+
+item.create.food.apple_honey.name=Яблоко в меду
+item.create.food.blazecake.name=Торт всполоха
+item.create.food.blazecake_base.name=Основа торта всполоха
+item.create.food.blazecake_creative.name=Творческий торт всполоха
+item.create.food.chocolate_berries.name=Ягоды в шоколадной глазури
+item.create.food.chocolate_ingot.name=Шоколадный слиток
+item.create.food.dough.name=Тесто
+item.create.food.sweet_roll.name=Сладкий рулет
+item.create.food.wheat_flour.name=Пшеничная мука
+
+#Ingredients
+item.create.andesite_alloy.name=Андезитовый сплав
+item.create.plate_iron.name=Железный лист
+item.create.plate_gold.name=Золотой лист
+item.create.ingot_copper.name=Медный слиток
+item.create.nugget_copper.name=Кусочек меди
+item.create.plate_copper.name=Медный лист
+item.create.ingot_zinc.name=Цинковый слиток
+item.create.nugget_zinc.name=Кусочек цинка
+item.create.plate_zinc.name=Цинковый лист
+item.create.ingot_brass.name=Латунный слиток
+item.create.nugget_brass.name=Латунный кусочек
+item.create.plate_brass.name=Латунный лист
+item.create.crushed_iron.name=Дроблёное железо
+item.create.crushed_gold.name=Дроблёное золото
+item.create.crushed_copper.name=Дроблёная медь
+item.create.crushed_zinc.name=Дроблёный цинк
+item.create.dust_netherrack.name=Незераковая мука
+item.create.dust_obsidian.name=Обсидиановый порошок
+item.create.plate_obsidian.name=Прочный лист
+item.create.rose_quartz.name=Розовый кварц
+item.create.rose_quartz_polished.name=Полированный розовый кварц
+item.create.ingot_radiant.name=Изысканное сияние
+item.create.ingot_shadow.name=Теневая сталь
+item.create.propeller.name=Пропеллер
+item.create.whisk.name=Венчик
+item.create.electron_tube.name=Электронная лампа
+item.create.hand_brass.name=Латунная рука
+item.create.precision_mechanism.name=Механизм точности
+item.create.precision_mechanism_incomplete.name=Незаконченный механизм точности
+item.create.plate_obsidian_incomplete.name=Незаконченный прочный лист
+
+#Blocks
+tile.create.ore_copper.name=Медная руда
+tile.create.ore_zinc.name=Цинковая руда
+tile.create.block_andesite_alloy.name=Блок андезитового сплава
+tile.create.block_copper.name=Медный блок
+tile.create.block_zinc.name=Цинковый блок
+tile.create.block_brass.name=Латунный блок
+tile.create.casing_andesite.name=Андезитовый корпус
+tile.create.casing_copper.name=Медный корпус
+tile.create.casing_brass.name=Латунный корпус
+tile.create.casing_train.name=Железнодорожный корпус
+tile.create.chute.name=Жёлоб
+
+tile.create.blaze_burner_empty.name=Пустая горелка всполоха
+tile.create.blaze_burner.name=Горелка всполоха
+
+tile.create.industrial_iron.name=Блок промышленного железа
+tile.create.industrial_iron_glass.name=Промышленное стекло
+tile.create.framed_glass.name=Обрамлённое стекло
+tile.create.framed_glass_horizontal.name=Горизонтальное обрамлённое стекло
+tile.create.framed_glass_vertical.name=Вертикальное обрамлённое стекло
+tile.create.framed_glass_tiled.name=Плиточное стекло
+tile.create.framed_glass_pane.name=Обрамлённая стеклянная панель
+tile.create.framed_glass_pane_horizontal.name=Горизонтальная обрамлённая стеклянная панель
+tile.create.framed_glass_pane_vertical.name=Вертикальная обрамлённая стеклянная панель
+tile.create.framed_glass_pane_tiled.name=Плиточная стеклянная панель
+
+tile.create.copycat_panel.name=Заполняемая панель
+tile.create.copycat_step.name=Заполняемая ступенька
+
+#Kinetics
+tile.create.chigwanker.name=Механический сборщик
+
+tile.create.depot.name=Депо
+tile.create.funnel_andesite.name=Андезитовый шлюз
+tile.create.funnel_brass.name=Латунный шлюз
+
+tile.create.shaft.name=Вал
+tile.create.cog.name=Шестерня
+tile.create.shaft_encased_andesite.name=Вал в андезитовом корпусе
+tile.create.shaft_encased_brass.name=Вал в латунном корпусе
+tile.create.gearbox.name=Коробка передач
+tile.create.clutch.name=Сцепление
+tile.create.gearshift.name=Реверсивная передача
+tile.create.speedometer.name=Спидометр
+tile.create.stressometer.name=Стрессометр
+
+tile.create.handcrank.name=Рукоятка
+tile.create.water_wheel.name=Водяное колесо
+tile.create.furnace_engine.name=Печной двигатель
+tile.create.flywheel.name=Маховик
+tile.create.creative_motor.name=Творческий двигатель
+
+tile.create.saw.name=Механическая пила
+tile.create.bearing.name=Механический вращатель
+tile.create.press.name=Механический пресс
+tile.create.millstone.name=Жёрнов
+tile.create.fan.name=Вентилятор в корпусе
+tile.create.drill.name=Механическая дрель
+
+tile.create.turntable.name=Вращающийся стол
+tile.create.turntable.desc=Преобразует _силу вращения_ прямиком в морскую болезнь.
+
+#Creative tabs
+itemGroup.create.kinetics=Create
+itemGroup.create.decorations=Create Decorations
+
+#Orestones etc
+tile.create.orestone_asurine.name=Азурин
+tile.create.orestone_crimsite.name=Кримзит
+tile.create.orestone_limestone.name=Известняк
+tile.create.orestone_ochrum.name=Охрум
+tile.create.orestone_scorchia.name=Тёмный пепел
+tile.create.orestone_scoria.name=Пепел
+tile.create.orestone_veridium.name=Веридий
+
+tile.create.orestone_polished_asurine.name=Полированный азурин
+tile.create.orestone_polished_crimsite.name=Полированный кримзит
+tile.create.orestone_polished_limestone.name=Полированный известняк
+tile.create.orestone_polished_ochrum.name=Полированный охрум
+tile.create.orestone_polished_scorchia.name=Полированный тёмный пепел
+tile.create.orestone_polished_scoria.name=Полированный пепел
+tile.create.orestone_polished_veridium.name=Полированный веридиум
+
+tile.create.orestone_bricks_asurine.name=Азуриновые кирпичи
+tile.create.orestone_bricks_crimsite.name=Кримзитовые кирпичи
+tile.create.orestone_bricks_limestone.name=Известняковые кирпичи
+tile.create.orestone_bricks_ochrum.name=Охрумовые кирпичи
+tile.create.orestone_bricks_scorchia.name=Тёмнопепловые кирпичи
+tile.create.orestone_bricks_scoria.name=Пепловые кирпичи
+tile.create.orestone_bricks_veridium.name=Веридиевые кирпичи
+
+tile.create.orestone_bricks_fancy_asurine.name=Мелкие азуриновые кирпичи
+tile.create.orestone_bricks_fancy_crimsite.name=Мелкие кримзитовые кирпичи
+tile.create.orestone_bricks_fancy_limestone.name=Мелкие известняковые кирпичи
+tile.create.orestone_bricks_fancy_ochrum.name=Мелкие охрумовые кирпичи
+tile.create.orestone_bricks_fancy_scorchia.name=Мелкие тёмнопепловые кирпичи
+tile.create.orestone_bricks_fancy_scoria.name=Мелкие пепловые кирпичи
+tile.create.orestone_bricks_fancy_veridium.name=Мелкие веридиевые кирпичи
+
+tile.create.orestone_pillar_asurine.name=Азуриновая колонна
+tile.create.orestone_pillar_crimsite.name=Кримзитовая колонна
+tile.create.orestone_pillar_limestone.name=Известняковая колонна
+tile.create.orestone_pillar_ochrum.name=Охрумовая колонна
+tile.create.orestone_pillar_scorchia.name=Тёмнопепловая колонна
+tile.create.orestone_pillar_scoria.name=Пепловая колонна
+tile.create.orestone_pillar_veridium.name=Виридиевая колонна
+
+tile.create.orestone_layered_asurine.name=Слоистый азурин
+tile.create.orestone_layered_crimsite.name=Слоистый кримзит
+tile.create.orestone_layered_limestone.name=Слоистый известняк
+tile.create.orestone_layered_ochrum.name=Слоистый охрум
+tile.create.orestone_layered_scorchia.name=Слоистый тёмный пепел
+tile.create.orestone_layered_scoria.name=Слоистый пепел
+tile.create.orestone_layered_veridium.name=Слоистый веридий
+
+#damage sources
+death.attack.drilling=%s понял, почему техника безопасности при работе с механической дрелью написана кровью
+death.attack.drilling.player=%s был пронзён механической дрелью благодаря %s
+death.attack.cutting=%s не соблюдал технику безопасности при работе с механической пилой
+death.attack.cutting.player=%s был распилен пополам механической пилой благодаря %s
+death.attack.crushing=%s был передроблен
+death.attack.crushing.player=%s свалился в дробильные колёса благодаря %s
+
+#subtitles
+subtitle.item.sandpaper.used=Звук полировки
+subtitle.block.cogwheel.ambient=Шестерни грохочут
+subtitle.block.press.activate=Механический пресс работает
+subtitle.item.wrench.used=Использован гаечный ключ
+subtitle.block.millstone.ambient=Перемалывание
+
+tooltip.wip=WIP, воздержитесь, пожалуйста, от использования
+
+tooltip.stressImpact=Создаваемая нагрузка: %s
+tooltip.stressCapacity=Допустимая нагрузка: %s
+
+#fluid
+fluid.create.chocolate=Шоколад
+
+#advancements
+
+
+#advancements: Основы
+
+
+#advancements: Логика
