@@ -78,7 +78,7 @@ public final class CreateLegacyEventHandler {
                     if (state.getBlock() instanceof IGoggleInfo) {
                         NonNullList<String> info = ((IGoggleInfo)state.getBlock()).getGoggleInformation(world, pos, state);
                         if (!info.isEmpty()) {
-                            float x = event.getResolution().getScaledWidth() / 2f + 4;
+                            float x = event.getResolution().getScaledWidth() / 2f + 20;
                             float y = event.getResolution().getScaledHeight() / 2f;
                             mc.getRenderItem().renderItemIntoGUI(goggles, (int)x - 16, (int) y - 10);
                             mc.fontRenderer.drawStringWithShadow(Localizer.translate("goggles.header") + ':',
