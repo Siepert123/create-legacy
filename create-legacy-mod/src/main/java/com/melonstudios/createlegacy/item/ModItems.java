@@ -17,6 +17,7 @@ public final class ModItems {
     public static final List<Item> ITEMS = new ArrayList<>();
 
     public static final ItemWrench WRENCH = registerItem(new ItemWrench());
+    public static final ItemGoggles GOGGLES = registerItem(new ItemGoggles());
     public static final ItemIngredient INGREDIENT = registerItem(new ItemIngredient());
     public static final ItemSandpaper SANDPAPER = registerItem(new ItemSandpaper());
     public static final ItemSchematic SCHEMATIC = registerItem(new ItemSchematic());
@@ -29,6 +30,7 @@ public final class ModItems {
 
     public static void setItemModels() {
         CreateLegacy.setItemModel(WRENCH);
+        CreateLegacy.setItemModel(GOGGLES);
 
         ItemIngredient.setItemModels();
         AbstractBlockOrestone.setItemModels();
