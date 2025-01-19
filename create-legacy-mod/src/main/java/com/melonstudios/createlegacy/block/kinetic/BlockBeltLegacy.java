@@ -1,5 +1,6 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.item.ModItems;
@@ -18,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -25,11 +27,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class BlockBeltLegacy extends AbstractBlockKinetic {
+public class BlockBeltLegacy extends AbstractBlockKinetic implements IGoggleInfo {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create(
             "axis", EnumFacing.Axis.class, EnumFacing.Axis.X, EnumFacing.Axis.Z
     );
@@ -43,6 +46,21 @@ public class BlockBeltLegacy extends AbstractBlockKinetic {
                 .withProperty(HAS_SHAFT, false));
 
         setUnlocalizedName("create.belt");
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityBeltLegacy) {
+            TileEntityBeltLegacy belt = (TileEntityBeltLegacy) te;
+            List<ItemStack> stacks = belt.getItemCacheStacks();
+            NonNullList<String> stuff = NonNullList.create();
+            for (ItemStack stack : stacks) {
+                stuff.add(stack.getCount() + "\u00D7 " + stack.getDisplayName());
+            }
+            return stuff;
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -79,6 +80,21 @@ public class TileEntityBeltLegacy extends AbstractTileEntityKinetic implements I
         return world.getEntitiesWithinAABB(EntityItem.class, aabb.offset(pos));
     }
     protected List<EntityItem> itemCache = Collections.emptyList();
+    public List<ItemStack> getItemCacheStacks() {
+        List<ItemStack> stacks = new ArrayList<>();
+        for (EntityItem item : itemCache) {
+            if (item.getItem().isEmpty()) continue;
+            boolean flag = false;
+            for (ItemStack stack : stacks) {
+                if (stack.isItemEqual(item.getItem())) {
+                    stack.grow(item.getItem().getCount());
+                    flag = true;
+                }
+            }
+            if (!flag) stacks.add(item.getItem().copy());
+        }
+        return stacks;
+    }
 
     @Override
     public int getSizeInventory() {
