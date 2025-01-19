@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.block.stone.AbstractBlockOrestone;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
+import com.melonstudios.melonlib.misc.MetaBlock;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -161,6 +162,15 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:fanPass", ModBlocks.TURNTABLE, false);
         BlockDictionary.registerOre("create:fanPass", Blocks.END_ROD, 6);
         BlockDictionary.registerOre("create:fanPass", ModBlocks.HAND_CRANK, 6);
+
+        BlockDictionary.registerOre("create:furnaceEnginePowering", Blocks.LIT_FURNACE, 4);
+
+        BlockDictionary.registerOre("oreCopper", MetaBlock.of(ModBlocks.ORE, 0));
+        BlockDictionary.registerOre("oreZinc", MetaBlock.of(ModBlocks.ORE, 1));
+
+        BlockDictionary.registerOre("blockCopper", MetaBlock.of(ModBlocks.METAL, 1));
+        BlockDictionary.registerOre("blockZinc", MetaBlock.of(ModBlocks.METAL, 2));
+        BlockDictionary.registerOre("blockBrass", MetaBlock.of(ModBlocks.METAL, 3));
 
         DisplayLink.debug("Block Dictionary init done in %s ms!", System.currentTimeMillis() - startTime2);
         initialized = true;

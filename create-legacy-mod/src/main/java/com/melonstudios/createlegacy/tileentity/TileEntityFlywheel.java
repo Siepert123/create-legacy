@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.kinetic.BlockFurnaceEngine;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.melonlib.blockdict.BlockDictionary;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -71,7 +72,7 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
         if (state.getBlock() instanceof BlockFurnaceEngine) {
             if (state.getValue(BlockFurnaceEngine.VARIANT) == BlockFurnaceEngine.Variant.ENGINE) {
                 if (state.getValue(BlockFurnaceEngine.FACING) == facing().rotateYCCW()) {
-                    return world.getBlockState(pos.offset(facing().rotateY(), 3)).getBlock() == Blocks.LIT_FURNACE;
+                    return BlockDictionary.isBlockTagged(world.getBlockState(pos.offset(facing().rotateY(), 3)), "create:furnaceEnginePowering");
                 }
             }
         }
