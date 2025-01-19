@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.recipe.SawingRecipes;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntitySaw;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
@@ -21,7 +24,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockSaw extends AbstractBlockKinetic {
+public class BlockSaw extends AbstractBlockKinetic implements IGoggleInfo {
     public BlockSaw() {
         super("saw");
     }
@@ -30,6 +33,16 @@ public class BlockSaw extends AbstractBlockKinetic {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressImpactTooltip(8));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntitySaw) {
+            TileEntitySaw saw = (TileEntitySaw) te;
+            if (saw.speed() != 0) return NonNullList.from("", saw.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Nullable

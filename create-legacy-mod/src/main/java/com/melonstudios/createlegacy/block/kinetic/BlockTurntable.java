@@ -1,12 +1,15 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntityTurntable;
 import com.melonstudios.melonlib.misc.AABB;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -15,12 +18,20 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockTurntable extends AbstractBlockKinetic {
+public class BlockTurntable extends AbstractBlockKinetic implements IGoggleInfo {
     public BlockTurntable() {
         super("turntable");
     }
 
-
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityTurntable) {
+            TileEntityTurntable turntable = (TileEntityTurntable) te;
+            if (turntable.speed() != 0) return NonNullList.from("", turntable.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
+    }
 
     @Nullable
     @Override

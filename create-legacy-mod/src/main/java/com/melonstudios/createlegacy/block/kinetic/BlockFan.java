@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import net.minecraft.block.properties.PropertyEnum;
@@ -11,17 +12,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockFan extends AbstractBlockKinetic implements IWrenchable {
+public class BlockFan extends AbstractBlockKinetic implements IWrenchable, IGoggleInfo {
     public BlockFan() {
         super("fan");
     }
@@ -33,6 +31,16 @@ public class BlockFan extends AbstractBlockKinetic implements IWrenchable {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressImpactTooltip(6));
         tooltip.add(CreateAPI.stressCapacityTooltip(2));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityFan) {
+            TileEntityFan fan = (TileEntityFan) te;
+            if (fan.speed() != 0) return NonNullList.from("", fan.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Override

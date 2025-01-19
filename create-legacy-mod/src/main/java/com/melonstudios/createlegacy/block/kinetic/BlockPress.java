@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntityPress;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,13 +16,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockPress extends AbstractBlockKinetic implements IWrenchable {
+public class BlockPress extends AbstractBlockKinetic implements IWrenchable, IGoggleInfo {
     public BlockPress() {
         super("press");
     }
@@ -29,6 +32,16 @@ public class BlockPress extends AbstractBlockKinetic implements IWrenchable {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressImpactTooltip(16));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityPress) {
+            TileEntityPress press = (TileEntityPress) te;
+            if (press.speed() != 0) return NonNullList.from("", press.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.create("axis", EnumFacing.Axis.class,

@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.tileentity.TileEntityCreativeMotor;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,13 +15,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockCreativeMotor extends AbstractBlockKinetic {
+public class BlockCreativeMotor extends AbstractBlockKinetic implements IGoggleInfo {
     public BlockCreativeMotor() {
         super("creative_motor");
     }
@@ -29,6 +32,16 @@ public class BlockCreativeMotor extends AbstractBlockKinetic {
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityCreativeMotor) {
+            TileEntityCreativeMotor motor = (TileEntityCreativeMotor) te;
+            if (motor.generatedRPM() != 0) return NonNullList.from("", motor.capacityGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Override

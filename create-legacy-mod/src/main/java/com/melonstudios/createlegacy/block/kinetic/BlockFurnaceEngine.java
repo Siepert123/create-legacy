@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
+import com.melonstudios.createlegacy.tileentity.TileEntityCreativeMotor;
 import com.melonstudios.createlegacy.tileentity.TileEntityFlywheel;
 import com.melonstudios.createlegacy.util.IMetaName;
 import net.minecraft.block.SoundType;
@@ -23,7 +25,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaName, IWrenchable {
+public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaName, IWrenchable, IGoggleInfo {
     public BlockFurnaceEngine() {
         super("furnace_engine");
 
@@ -34,6 +36,17 @@ public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaNam
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressCapacityTooltip(64));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        if (state.getValue(VARIANT) == Variant.ENGINE) return IGoggleInfo.EMPTY;
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityFlywheel) {
+            TileEntityFlywheel flywheel = (TileEntityFlywheel) te;
+            if (flywheel.generatedRPM() != 0) return NonNullList.from("", flywheel.capacityGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Override

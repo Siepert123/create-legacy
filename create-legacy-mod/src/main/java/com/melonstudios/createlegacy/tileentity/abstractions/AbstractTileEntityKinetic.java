@@ -47,6 +47,13 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         speed = flickers = 0;
     }
 
+    public final String stressGoggleInfo() {
+        return "Stress impact: " + consumedStressMarkiplier() * Math.abs(speed()) + " SU";
+    }
+    public final String capacityGoggleInfo() {
+        return "Stress capacity: " + generatedSUMarkiplier() * Math.abs(generatedRPM()) + " SU";
+    }
+
     public int getFlickers() {
         return flickers;
     }

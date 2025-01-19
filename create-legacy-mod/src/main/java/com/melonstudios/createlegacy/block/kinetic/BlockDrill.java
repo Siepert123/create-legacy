@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityDrill;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -21,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockDrill extends AbstractBlockKinetic implements IWrenchable {
+public class BlockDrill extends AbstractBlockKinetic implements IWrenchable, IGoggleInfo {
     public BlockDrill() {
         super("drill");
 
@@ -32,6 +34,16 @@ public class BlockDrill extends AbstractBlockKinetic implements IWrenchable {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressImpactTooltip(6));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityDrill) {
+            TileEntityDrill drill = (TileEntityDrill) te;
+            if (drill.speed() != 0) return NonNullList.from("", drill.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Override

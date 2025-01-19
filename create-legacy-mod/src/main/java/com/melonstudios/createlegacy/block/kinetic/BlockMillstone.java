@@ -1,6 +1,8 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.tileentity.TileEntityMillstone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -11,13 +13,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockMillstone extends AbstractBlockKinetic {
+public class BlockMillstone extends AbstractBlockKinetic implements IGoggleInfo {
     public BlockMillstone() {
         super("millstone");
     }
@@ -26,6 +29,16 @@ public class BlockMillstone extends AbstractBlockKinetic {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressImpactTooltip(8));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityMillstone) {
+            TileEntityMillstone millstone = (TileEntityMillstone) te;
+            if (millstone.speed() != 0) return NonNullList.from("", millstone.stressGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     @Nullable

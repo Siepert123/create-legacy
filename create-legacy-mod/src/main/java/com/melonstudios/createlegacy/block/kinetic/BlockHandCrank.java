@@ -1,7 +1,9 @@
 package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.network.PacketUpdateHandCrank;
+import com.melonstudios.createlegacy.tileentity.TileEntityCreativeMotor;
 import com.melonstudios.createlegacy.tileentity.TileEntityHandCrank;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,7 +26,7 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockHandCrank extends AbstractBlockKinetic {
+public class BlockHandCrank extends AbstractBlockKinetic implements IGoggleInfo {
     public BlockHandCrank() {
         super("handcrank");
     }
@@ -32,6 +35,16 @@ public class BlockHandCrank extends AbstractBlockKinetic {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(CreateAPI.stressCapacityTooltip(16));
+    }
+
+    @Override
+    public NonNullList<String> getGoggleInformation(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof TileEntityHandCrank) {
+            TileEntityHandCrank crank = (TileEntityHandCrank) te;
+            if (crank.generatedRPM() != 0) return NonNullList.from("", crank.capacityGoggleInfo());
+        }
+        return IGoggleInfo.EMPTY;
     }
 
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
