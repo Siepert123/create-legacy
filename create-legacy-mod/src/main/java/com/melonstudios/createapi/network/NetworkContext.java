@@ -29,7 +29,7 @@ public final class NetworkContext {
     }
     public boolean checked(BlockPos pos) {
         for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
-            if (entry.getKey().getPos() == pos) return true;
+            if (((TileEntity)entry.getKey()).getPos() == pos) return true;
         }
         return false;
     }
@@ -38,7 +38,7 @@ public final class NetworkContext {
     }
     public boolean isInverted(BlockPos pos) {
         for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
-            if (entry.getKey().getPos() == pos) return isInverted(entry.getKey());
+            if (((TileEntity)entry.getKey()).getPos() == pos) return isInverted(entry.getKey());
         }
         return false;
     }

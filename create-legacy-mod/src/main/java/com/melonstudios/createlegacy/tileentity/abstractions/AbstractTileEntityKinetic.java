@@ -211,7 +211,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
     public boolean mayConnect(IKineticTileEntity other, EnumFacing mySide, EnumFacing otherSide) {
         if (other == null) return false;
-        if (world.getBlockState(other.getPos()).getBlock() == Blocks.AIR) return false;
+        if (world.getBlockState(((TileEntity)other).getPos()).getBlock() == Blocks.AIR) return false;
         if (world.getBlockState(pos).getBlock() == Blocks.AIR) return false;
         return getConnectionType(mySide) != EnumKineticConnectionType.NONE
                 && getConnectionType(mySide).compare(other.getConnectionType(otherSide));

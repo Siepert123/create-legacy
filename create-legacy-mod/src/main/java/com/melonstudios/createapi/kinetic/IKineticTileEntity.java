@@ -24,7 +24,7 @@ import java.util.Random;
  * @since 0.1.0
  * @author Siepert123, moddingforreal
  * */
-public interface IKineticTileEntity {
+public interface IKineticTileEntity extends IStateFindable {
     /**
      * Clears all information stored in the TileEntity
      * @since 0.1.0
@@ -106,19 +106,19 @@ public interface IKineticTileEntity {
      */
     default void passNetwork(IKineticTileEntity src, EnumFacing srcDir, NetworkContext context, boolean inverted) {
         if (enforceNonInversion() && inverted) {
-            getWorld().playEvent(2001, getPos(), Block.getStateId(getState()));
-            getState().getBlock().dropBlockAsItem(getWorld(), getPos(), getState(), 0);
-            getWorld().setBlockToAir(getPos());
+            ((TileEntity)this).getWorld().playEvent(2001, ((TileEntity)this).getPos(), Block.getStateId(getState()));
+            getState().getBlock().dropBlockAsItem(((TileEntity)this).getWorld(), ((TileEntity)this).getPos(), getState(), 0);
+            ((TileEntity)this).getWorld().setBlockToAir(((TileEntity)this).getPos());
         } else if (context.checked(this)) {
             if (context.isInverted(this) != inverted) {
-                getWorld().playEvent(2001, getPos(), Block.getStateId(getState()));
-                getState().getBlock().dropBlockAsItem(getWorld(), getPos(), getState(), 0);
-                getWorld().setBlockToAir(getPos());
+                ((TileEntity)this).getWorld().playEvent(2001, ((TileEntity)this).getPos(), Block.getStateId(getState()));
+                getState().getBlock().dropBlockAsItem(((TileEntity)this).getWorld(), ((TileEntity)this).getPos(), getState(), 0);
+                ((TileEntity)this).getWorld().setBlockToAir(((TileEntity)this).getPos());
             }
         } else {
             context.add(this, inverted);
             for (EnumFacing dir : EnumFacing.VALUES) {
-                IKineticTileEntity te = getTE(getPos().offset(dir));
+                IKineticTileEntity te = getTE(((TileEntity)this).getPos().offset(dir));
                 if (mayConnect(te, dir, dir.getOpposite())) {
                     if (getConnectionType(dir).inverts()) {
                         te.passNetwork(this, dir.getOpposite(), context, !inverted);
@@ -212,21 +212,6 @@ public interface IKineticTileEntity {
         }
         return ItemStack.EMPTY;
     }
-
-    /**
-     * @return the position of this TE's block
-     * */
-    BlockPos getPos();
-
-    /**
-     * @return the BlockState of this TE's block
-     * */
-    IBlockState getState();
-
-    /**
-     * @return the World of this TE's block
-     * */
-    World getWorld();
 
     /**
      * @return the IBlockState
