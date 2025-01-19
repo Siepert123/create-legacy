@@ -1,10 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "create:block/casing/casing_andesite",
-		"1": "create:block/gearbox",
-		"2": "create:block/belt_still",
-		"particle": "create:block/casing/casing_andesite"
+		"particle": "create:block/casing/casing_andesite",
+		"casing": "create:block/casing/casing_andesite",
+		"gearbox": "create:block/gearbox",
+		"belt": "create:block/belt_still",
+		"rail": "create:block/belt_rail"
 	},
 	"elements": [
 		{
@@ -12,10 +13,10 @@
 			"from": [0, 0, 0],
 			"to": [2, 12, 2],
 			"faces": {
-				"north": {"uv": [14, 2, 16, 14], "texture": "#0"},
-				"south": {"uv": [0, 2, 2, 14], "texture": "#0"},
-				"west": {"uv": [0, 2, 2, 14], "texture": "#0"},
-				"down": {"uv": [0, 14, 2, 16], "texture": "#0"}
+				"north": {"uv": [14, 2, 16, 14], "texture": "#rail"},
+				"south": {"uv": [0, 2, 2, 14], "texture": "#casing"},
+				"west": {"uv": [0, 2, 2, 14], "texture": "#gearbox"},
+				"down": {"uv": [0, 14, 2, 16], "texture": "#casing"}
 			}
 		},
 		{
@@ -23,10 +24,10 @@
 			"from": [0, 0, 14],
 			"to": [2, 12, 16],
 			"faces": {
-				"north": {"uv": [14, 2, 16, 14], "texture": "#0"},
-				"south": {"uv": [0, 2, 2, 14], "texture": "#0"},
-				"west": {"uv": [14, 2, 16, 14], "texture": "#0"},
-				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+				"north": {"uv": [14, 2, 16, 14], "texture": "#casing"},
+				"south": {"uv": [0, 2, 2, 14], "texture": "#rail"},
+				"west": {"uv": [14, 2, 16, 14], "texture": "#gearbox"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#casing"}
 			}
 		},
 		{
@@ -34,12 +35,12 @@
 			"from": [0, 12, 0],
 			"to": [2, 14, 16],
 			"faces": {
-				"north": {"uv": [14, 0, 16, 2], "texture": "#0"},
-				"east": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"south": {"uv": [0, 0, 2, 2], "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"up": {"uv": [0, 0, 2, 16], "texture": "#0"},
-				"down": {"uv": [0, 0, 2, 16], "texture": "#0"}
+				"north": {"uv": [14, 0, 16, 2], "texture": "#rail"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#casing"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#rail"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#gearbox"},
+				"up": {"uv": [0, 0, 2, 16], "texture": "#rail"},
+				"down": {"uv": [0, 0, 2, 16], "texture": "#casing"}
 			}
 		},
 		{
@@ -48,10 +49,10 @@
 			"to": [16, 12, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 2, 2, 14], "texture": "#0"},
-				"east": {"uv": [14, 2, 16, 14], "texture": "#1"},
-				"south": {"uv": [14, 2, 16, 14], "texture": "#0"},
-				"down": {"uv": [14, 14, 16, 16], "texture": "#0"}
+				"north": {"uv": [0, 2, 2, 14], "texture": "#rail"},
+				"east": {"uv": [14, 2, 16, 14], "texture": "#gearbox"},
+				"south": {"uv": [14, 2, 16, 14], "texture": "#casing"},
+				"down": {"uv": [14, 14, 16, 16], "texture": "#casing"}
 			}
 		},
 		{
@@ -60,10 +61,10 @@
 			"to": [16, 12, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 2, 2, 14], "texture": "#0"},
-				"east": {"uv": [0, 2, 2, 14], "texture": "#1"},
-				"south": {"uv": [14, 2, 16, 14], "texture": "#0"},
-				"down": {"uv": [14, 0, 16, 2], "texture": "#0"}
+				"north": {"uv": [0, 2, 2, 14], "texture": "#casing"},
+				"east": {"uv": [0, 2, 2, 14], "texture": "#gearbox"},
+				"south": {"uv": [14, 2, 16, 14], "texture": "#rail"},
+				"down": {"uv": [14, 0, 16, 2], "texture": "#casing"}
 			}
 		},
 		{
@@ -72,12 +73,12 @@
 			"to": [16, 14, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
 			"faces": {
-				"north": {"uv": [0, 0, 2, 2], "texture": "#0"},
-				"east": {"uv": [0, 0, 16, 2], "texture": "#1"},
-				"south": {"uv": [14, 0, 16, 2], "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"up": {"uv": [14, 0, 16, 16], "texture": "#0"},
-				"down": {"uv": [14, 0, 16, 16], "texture": "#0"}
+				"north": {"uv": [0, 0, 2, 2], "texture": "#rail"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#gearbox"},
+				"south": {"uv": [14, 0, 16, 2], "texture": "#rail"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#casing"},
+				"up": {"uv": [14, 0, 16, 16], "texture": "#rail"},
+				"down": {"uv": [14, 0, 16, 16], "texture": "#casing"}
 			}
 		},
 		{
@@ -86,12 +87,12 @@
 			"to": [14, 12, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 0]},
 			"faces": {
-				"north": {"uv": [2, 2, 14, 14], "texture": "#2", "cullface": "south"},
-				"east": {"uv": [0, 4, 16, 16], "texture": "#1"},
-				"south": {"uv": [2, 2, 14, 14], "texture": "#2", "cullface": "south"},
-				"west": {"uv": [16, 12, 0, 0], "texture": "#1"},
-				"up": {"uv": [2, 0, 14, 16], "texture": "#2"},
-				"down": {"uv": [2, 0, 14, 16], "texture": "#2", "cullface": "down"}
+				"north": {"uv": [2, 2, 14, 14], "texture": "#belt", "cullface": "south"},
+				"east": {"uv": [0, 4, 16, 16], "texture": "#gearbox"},
+				"south": {"uv": [2, 2, 14, 14], "texture": "#belt", "cullface": "south"},
+				"west": {"uv": [16, 12, 0, 0], "texture": "#gearbox"},
+				"up": {"uv": [2, 0, 14, 16], "texture": "#belt"},
+				"down": {"uv": [2, 0, 14, 16], "texture": "#belt", "cullface": "down"}
 			}
 		}
 	],
