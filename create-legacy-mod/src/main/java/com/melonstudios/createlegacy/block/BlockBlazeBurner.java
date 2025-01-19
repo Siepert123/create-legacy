@@ -232,7 +232,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
         if (state.getValue(HAS_BLAZE)) {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityBlazeBurner) {
-                return ((TileEntityBlazeBurner)te).getBlazeLevel().ordinal();
+                return ((TileEntityBlazeBurner)te).getBlazeLevel().ordinal()-1;
             }
         }
         return -1;

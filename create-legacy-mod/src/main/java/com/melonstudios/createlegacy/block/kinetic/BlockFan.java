@@ -38,7 +38,8 @@ public class BlockFan extends AbstractBlockKinetic implements IWrenchable, IGogg
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof TileEntityFan) {
             TileEntityFan fan = (TileEntityFan) te;
-            if (fan.speed() != 0) return NonNullList.from("", fan.stressGoggleInfo());
+            if (fan.generatedRPM() != 0) return NonNullList.from("", fan.capacityGoggleInfo());
+            else if (fan.speed() != 0) return NonNullList.from("", fan.stressGoggleInfo());
         }
         return IGoggleInfo.EMPTY;
     }

@@ -42,6 +42,7 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
 
     @Override
     public float consumedStressMarkiplier() {
+        if (generatedRPM() != 0) return 0;
         return 6;
     }
 

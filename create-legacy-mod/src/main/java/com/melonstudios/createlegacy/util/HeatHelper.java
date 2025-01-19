@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import com.melonstudios.createlegacy.block.IHeatProvider;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +15,7 @@ public class HeatHelper {
     static {
         customHeatings.put(Blocks.FIRE, 0);
         customHeatings.put(Blocks.MAGMA, 0);
+        customHeatings.put(ModBlocks.BLAZE_BURNER_LIT, 0);
     }
     public static boolean canBlockProvideHeatAt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
