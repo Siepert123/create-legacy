@@ -233,6 +233,8 @@ advancements.create.electron_tube=Beep Boop
 advancements.create.electron_tube.desc=Make some Electron Tubes, useful in crafting less primitive machinery.
 advancements.create.drill=Stationary Breakers
 advancements.create.drill.desc=Place and power a Mechanical Drill.
+advancements.create.millstone=Grinding Operation
+advancements.create.millstone.desc=Place and power a Millstone.
 advancements.create.press=Press Goes 'Bonk'!
 advancements.create.press.desc=Power a Mechanical Press and use it to create some Sheets.
 
