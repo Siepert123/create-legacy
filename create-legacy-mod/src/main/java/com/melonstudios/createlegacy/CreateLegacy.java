@@ -10,6 +10,7 @@ import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
 import com.melonstudios.createlegacy.util.BitSplitter;
+import com.melonstudios.createlegacy.util.CreateCaches;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
 import com.melonstudios.melonlib.misc.AABB;
@@ -189,6 +190,7 @@ public final class CreateLegacy {
     @Mod.EventHandler
     public void serverStopping(FMLServerStoppingEvent event) {
         serverHack = null;
+        CreateCaches.clear();
     }
 
     /**
