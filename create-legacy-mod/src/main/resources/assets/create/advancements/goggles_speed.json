@@ -8,7 +8,7 @@
             "translate": "advancements.create.goggles_speed"
         },
         "description": {
-            "translate": "advancements.create.goggles_speed.description"
+            "translate": "advancements.create.goggles_speed.desc"
         }
     },
     "parent": "create:goggles",

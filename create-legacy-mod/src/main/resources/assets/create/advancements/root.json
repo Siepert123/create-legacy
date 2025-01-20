@@ -8,7 +8,7 @@
             "translate": "advancements.create.root"
         },
         "description": {
-            "translate": "advancements.create.root.description"
+            "translate": "advancements.create.root.desc"
         },
         "background": "create:textures/block/palettes/stone_types/bricks/limestone.png",
         "show_toast": false,

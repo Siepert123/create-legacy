@@ -8,7 +8,7 @@
             "translate": "advancements.create.electron_tube"
         },
         "description": {
-            "translate": "advancements.create.electron_tube.description"
+            "translate": "advancements.create.electron_tube.desc"
         }
     },
     "parent": "create:polished_rose_quartz",

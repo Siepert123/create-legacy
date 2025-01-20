@@ -7,7 +7,7 @@
             "translate": "advancements.create.millstone"
         },
         "description": {
-            "translate": "advancements.create.millstone.description"
+            "translate": "advancements.create.millstone.desc"
         }
     },
     "parent": "create:andesite_alloy",

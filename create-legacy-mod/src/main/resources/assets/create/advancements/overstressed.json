@@ -7,8 +7,9 @@
             "translate": "advancements.create.overstressed"
         },
         "description": {
-            "translate": "advancements.create.overstressed.description"
-        }
+            "translate": "advancements.create.overstressed.desc"
+        },
+        "frame": "goal"
     },
     "parent": "create:first_kinetics",
     "criteria": {

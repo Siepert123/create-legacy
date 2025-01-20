@@ -7,7 +7,7 @@
             "translate": "advancements.create.fan_water"
         },
         "description": {
-            "translate": "advancements.create.fan_water.description"
+            "translate": "advancements.create.fan_water.desc"
         }
     },
     "parent": "create:machines/fan",

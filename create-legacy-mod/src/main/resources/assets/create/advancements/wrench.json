@@ -7,7 +7,7 @@
             "translate": "advancements.create.wrench"
         },
         "description": {
-            "translate": "advancements.create.wrench.description"
+            "translate": "advancements.create.wrench.desc"
         }
     },
     "parent": "create:first_kinetics",

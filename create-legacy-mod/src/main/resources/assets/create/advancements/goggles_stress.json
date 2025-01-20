@@ -8,7 +8,7 @@
             "translate": "advancements.create.goggles_stress"
         },
         "description": {
-            "translate": "advancements.create.goggles_stress.description"
+            "translate": "advancements.create.goggles_stress.desc"
         }
     },
     "parent": "create:goggles",

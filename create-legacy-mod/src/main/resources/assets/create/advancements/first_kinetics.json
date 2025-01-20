@@ -8,7 +8,7 @@
             "translate": "advancements.create.first_kinetics"
         },
         "description": {
-            "translate": "advancements.create.first_kinetics.description"
+            "translate": "advancements.create.first_kinetics.desc"
         }
     },
     "parent": "create:andesite_alloy",

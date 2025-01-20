@@ -8,7 +8,7 @@
             "translate": "advancements.create.ingot_brass"
         },
         "description": {
-            "translate": "advancements.create.ingot_brass.description"
+            "translate": "advancements.create.ingot_brass.desc"
         }
     },
     "parent": "create:blaze_burner",

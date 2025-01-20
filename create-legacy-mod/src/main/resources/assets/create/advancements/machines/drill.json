@@ -7,7 +7,7 @@
             "translate": "advancements.create.drill"
         },
         "description": {
-            "translate": "advancements.create.drill.description"
+            "translate": "advancements.create.drill.desc"
         }
     },
     "parent": "create:ages/andesite",

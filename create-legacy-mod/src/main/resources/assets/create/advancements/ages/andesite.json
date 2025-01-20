@@ -8,7 +8,7 @@
             "translate": "advancements.create.andesite_age"
         },
         "description": {
-            "translate": "advancements.create.andesite_age.description"
+            "translate": "advancements.create.andesite_age.desc"
         },
         "frame": "goal"
     },

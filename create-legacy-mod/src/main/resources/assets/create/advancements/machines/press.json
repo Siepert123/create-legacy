@@ -7,7 +7,7 @@
             "translate": "advancements.create.press"
         },
         "description": {
-            "translate": "advancements.create.press.description"
+            "translate": "advancements.create.press.desc"
         }
     },
     "parent": "create:ages/andesite",

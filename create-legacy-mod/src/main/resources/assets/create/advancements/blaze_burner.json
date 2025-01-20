@@ -8,7 +8,7 @@
             "translate": "advancements.create.blaze_burner"
         },
         "description": {
-            "translate": "advancements.create.blaze_burner.description"
+            "translate": "advancements.create.blaze_burner.desc"
         }
     },
     "parent": "create:machines/press",

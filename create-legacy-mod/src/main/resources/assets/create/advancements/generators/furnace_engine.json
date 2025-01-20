@@ -8,7 +8,7 @@
             "translate": "advancements.create.furnace_engine"
         },
         "description": {
-            "translate": "advancements.create.furnace_engine.description"
+            "translate": "advancements.create.furnace_engine.desc"
         }
     },
     "parent": "create:ages/brass",

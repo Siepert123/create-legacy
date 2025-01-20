@@ -207,10 +207,55 @@ goggles.header=Block Information
 fluid.create.chocolate=Chocolate
 
 #advancements
+advancements.create.root=Welcome to Create Legacy
+advancements.create.root.desc=The Create Mod for 1.12.2, because why not?
+advancements.create.andesite_alloy=Alliterations Aplenty
+advancements.create.andesite_alloy.desc=Create's Materials have weird names. Andesite Alloy is one of them.
+advancements.create.first_kinetics=It's Alive!
+advancements.create.first_kinetics.desc=Watch your first kinetic component spin.
+advancements.create.water_wheel=Harnessing Hydraulics
+advancements.create.water_wheel.desc=Place a Water Wheel and try getting it to spin!
+advancements.create.overstressed=Overstressed
+advancements.create.overstressed.desc=Experience the limits of stress firsthand.
 
+advancements.create.wrench=Configure Conveniently
+advancements.create.wrench.desc=Create a Wrench to aid you in building your contraptions.
+advancements.create.goggles=Stress-O-Vision
+advancements.create.goggles.desc=Create some Engineer's Goggles to aid you in getting more kinetic information from components.
+advancements.create.goggles_speed=But How Fast Exactly?
+advancements.create.goggles_speed.desc=Place and power a Speedometer. Look at it through your goggles to read its exact value.
+advancements.create.goggles_stress=But How Stressed Exactly?
+advancements.create.goggles_stress.desc=Place and power a Stressometer. Look at it through your goggles to read its exact value.
 
+advancements.create.polished_rose_quartz=Pink Diamonds
+advancements.create.polished_rose_quartz.desc=Use a piece of Sand Paper to polish Rose Quartz until it becomes shiny.
+advancements.create.electron_tube=Beep Boop
+advancements.create.electron_tube.desc=Make some Electron Tubes, useful in crafting less primitive machinery.
+advancements.create.drill=Stationary Breakers
+advancements.create.drill.desc=Place and power a Mechanical Drill.
+advancements.create.press=Press Goes 'Bonk'!
+advancements.create.press.desc=Power a Mechanical Press and use it to create some Sheets.
+
+advancements.create.fan=Mechanical Airbender
+advancements.create.fan.desc=Ride the stream of air provided by an Encased Fan.
+advancements.create.fan_water=Wacky Washing
+advancements.create.fan_water.desc=Get caught in a stream of air that washes things.
+advancements.create.fan_lava=Geothermal Space Heater
+advancements.create.fan_lava.desc=Get caught in a stream of air that smelts things.
+
+advancements.create.blaze_burner=A Living Fireplace
+advancements.create.blaze_burner.desc=Obtain a Blazeburner.
+advancements.create.ingot_brass=Actual Alloys
+advancements.create.ingot_brass.desc=Use Copper Ingots and Zinc Ingots to create some Brass.
+advancements.create.furnace_engine=Heart of the Factory
+advancements.create.furnace_engine.desc=Successfully connect an engine to the Flywheel.
 #advancements: milestones
-
+advancements.create.andesite_age=The Andesite Age
+advancements.create.andesite_age.desc=Use some Andesite Alloy and Wood to create a basic Casing
+advancements.create.copper_age=The Copper Age
+advancements.create.copper_age.desc=[Fluid handling will be added in a later update!]
+advancements.create.brass_age=The Brass Age
+advancements.create.brass_age.desc=Use newly obtained Brass and some Wood to create more advanced Casing.
 
 #advancements: logic
 

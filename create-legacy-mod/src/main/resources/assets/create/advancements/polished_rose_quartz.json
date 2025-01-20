@@ -8,7 +8,7 @@
             "translate": "advancements.create.polished_rose_quartz"
         },
         "description": {
-            "translate": "advancements.create.polished_rose_quartz.description"
+            "translate": "advancements.create.polished_rose_quartz.desc"
         }
     },
     "parent": "create:ages/andesite",

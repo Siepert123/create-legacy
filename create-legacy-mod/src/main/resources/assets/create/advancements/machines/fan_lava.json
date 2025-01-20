@@ -7,7 +7,7 @@
             "translate": "advancements.create.fan_lava"
         },
         "description": {
-            "translate": "advancements.create.fan_lava.description"
+            "translate": "advancements.create.fan_lava.desc"
         }
     },
     "parent": "create:machines/fan",

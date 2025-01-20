@@ -8,7 +8,7 @@
             "translate": "advancements.create.andesite_alloy"
         },
         "description": {
-            "translate": "advancements.create.andesite_alloy.description"
+            "translate": "advancements.create.andesite_alloy.desc"
         }
     },
     "parent": "create:root",

@@ -7,7 +7,7 @@
             "translate": "advancements.create.water_wheel"
         },
         "description": {
-            "translate": "advancements.create.water_wheel.description"
+            "translate": "advancements.create.water_wheel.desc"
         }
     },
     "parent": "create:andesite_alloy",
