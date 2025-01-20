@@ -95,7 +95,6 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
 
     private void checkRedstone(World world, BlockPos pos, IBlockState state) {
         boolean powered = world.isBlockPowered(pos) || world.isBlockIndirectlyGettingPowered(pos) > 0;
-        System.out.println(pos + " has " + powered);
         world.setBlockState(pos, state.withProperty(ACTIVE, powered));
     }
 

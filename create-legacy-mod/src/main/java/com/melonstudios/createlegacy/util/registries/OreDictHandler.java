@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
 import com.melonstudios.melonlib.misc.MetaBlock;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -163,7 +164,10 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("create:fanPass", Blocks.END_ROD, 6);
         BlockDictionary.registerOre("create:fanPass", ModBlocks.HAND_CRANK, 6);
 
-        BlockDictionary.registerOre("create:furnaceEnginePowering", Blocks.LIT_FURNACE, 4);
+        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+            BlockDictionary.registerOre("create:furnaceEnginePowering", Blocks.LIT_FURNACE.getDefaultState()
+                    .withProperty(BlockFurnace.FACING, facing));
+        }
 
         BlockDictionary.registerOre("oreCopper", MetaBlock.of(ModBlocks.ORE, 0));
         BlockDictionary.registerOre("oreZinc", MetaBlock.of(ModBlocks.ORE, 1));
