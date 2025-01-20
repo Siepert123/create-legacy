@@ -103,8 +103,7 @@ public final class BlockMetal extends Block implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        int met = placer.getHeldItem(hand).getMetadata();
-        return getDefaultState().withProperty(METAL_TYPE, Variant.fromID(met));
+        return getDefaultState().withProperty(METAL_TYPE, Variant.fromID(meta));
     }
 
     @Override

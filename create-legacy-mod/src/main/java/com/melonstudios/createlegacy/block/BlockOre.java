@@ -75,8 +75,7 @@ public class BlockOre extends Block implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        int met = placer.getHeldItem(hand).getMetadata() % 2;
-        return getStateFromMeta(met);
+        return getStateFromMeta(meta);
     }
 
     @Override

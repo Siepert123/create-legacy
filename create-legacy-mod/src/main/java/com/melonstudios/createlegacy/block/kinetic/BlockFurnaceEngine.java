@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityFlywheel;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -22,8 +23,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaName, IWrenchable, IGoggleInfo {
     public BlockFurnaceEngine() {
         super("furnace_engine");
@@ -94,7 +99,7 @@ public class BlockFurnaceEngine extends AbstractBlockKinetic implements IMetaNam
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return getDefaultState()
                 .withProperty(FACING, placer.getHorizontalFacing().getOpposite())
-                .withProperty(VARIANT, Variant.fromId(placer.getHeldItem(hand).getMetadata()));
+                .withProperty(VARIANT, Variant.fromId(meta));
     }
 
     @Override

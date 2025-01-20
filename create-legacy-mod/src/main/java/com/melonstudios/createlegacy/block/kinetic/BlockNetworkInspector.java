@@ -5,6 +5,7 @@ import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.IMetaName;
 import com.melonstudios.melonlib.misc.AABB;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,7 +26,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockNetworkInspector extends AbstractBlockKinetic implements IMetaName, IGoggleInfo {
     public BlockNetworkInspector() {
         super("network_inspector");
@@ -75,7 +80,7 @@ public class BlockNetworkInspector extends AbstractBlockKinetic implements IMeta
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().rotateY().getAxis()).withProperty(ALT, placer.getHeldItem(hand).getMetadata() != 0);
+        return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().rotateY().getAxis()).withProperty(ALT, meta != 0);
     }
 
     @Override

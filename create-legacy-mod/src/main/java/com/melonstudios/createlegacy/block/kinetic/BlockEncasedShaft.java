@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.tileentity.TileEntityShaft;
 import com.melonstudios.createlegacy.util.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -23,7 +24,11 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockEncasedShaft extends AbstractBlockKinetic implements IMetaName, IWrenchable {
     public BlockEncasedShaft() {
         super("encased_shaft");
@@ -63,7 +68,7 @@ public class BlockEncasedShaft extends AbstractBlockKinetic implements IMetaName
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta,
                                             EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(BRASS, placer.getHeldItem(hand).getMetadata() != 0)
+        return getDefaultState().withProperty(BRASS, meta != 0)
                 .withProperty(AXIS, facing.getAxis());
     }
 

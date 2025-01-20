@@ -30,13 +30,14 @@ public class TileEntityFunnelAdvancedRenderer extends TileEntitySpecialRenderer<
             RenderHelper.enableStandardItemLighting();
             GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
             GlStateManager.pushMatrix();
-            GlStateManager.translate(x + 0.5, y + 0.63, z + 0.5);
-            GlStateManager.rotate(getAngle(te.facing()), 0, 1, 0);
 
             IBakedModel model = ForgeHooksClient.handleCameraTransforms(
                     Minecraft.getMinecraft().getRenderItem()
                             .getItemModelWithOverrides(te.getFilter(), te.getWorld(), null),
-                    ItemCameraTransforms.TransformType.GROUND, false);
+                    ItemCameraTransforms.TransformType.NONE, false);
+            GlStateManager.translate(x + 0.5, y + 0.8125, z + 0.5);
+            GlStateManager.rotate(getAngle(te.facing()), 0, 1, 0);
+            GlStateManager.scale(0.25f, 0.25f, 0.25f);
 
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             Minecraft.getMinecraft().getRenderItem().renderItem(te.getFilter(), model);

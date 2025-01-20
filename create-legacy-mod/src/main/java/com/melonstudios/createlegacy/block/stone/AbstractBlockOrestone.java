@@ -99,8 +99,7 @@ public abstract class AbstractBlockOrestone extends Block implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        int met = placer.getHeldItem(hand).getMetadata();
-        return getDefaultState().withProperty(STONE_TYPE, StoneType.fromID(met));
+        return getDefaultState().withProperty(STONE_TYPE, StoneType.fromID(meta));
     }
 
     @Override

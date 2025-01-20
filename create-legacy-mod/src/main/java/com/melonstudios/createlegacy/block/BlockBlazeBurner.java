@@ -74,7 +74,7 @@ public class BlockBlazeBurner extends Block implements ITileEntityProvider, IMet
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(HAS_BLAZE, placer.getHeldItem(hand).getMetadata() == 1);
+        return getDefaultState().withProperty(HAS_BLAZE, meta == 1);
     }
 
     @Override

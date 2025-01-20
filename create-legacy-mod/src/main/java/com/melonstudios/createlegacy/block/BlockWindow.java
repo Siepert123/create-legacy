@@ -144,11 +144,8 @@ public class BlockWindow extends Block implements IMetaName {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return metal ?
-                getDefaultState() :
-                getDefaultState()
-                        .withProperty(WOOD_TYPE, BlockPlanks.EnumType
-                                .byMetadata(placer.getHeldItem(hand).getMetadata()));
+        return metal ? getDefaultState() :
+                getDefaultState().withProperty(WOOD_TYPE, BlockPlanks.EnumType.byMetadata(meta));
     }
 
     @Override

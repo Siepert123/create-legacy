@@ -83,7 +83,7 @@ public class BlockFramedGlassPane extends BlockPane implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(VARIANT, BlockFramedGlass.Variant.fromID(placer.getHeldItem(hand).getMetadata()));
+        return getDefaultState().withProperty(VARIANT, BlockFramedGlass.Variant.fromID(meta));
     }
 
     @Override

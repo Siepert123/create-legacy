@@ -2,6 +2,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityGearbox;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,8 +21,12 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockGearbox extends AbstractBlockKinetic implements IWrenchable {
     public BlockGearbox() {
         super("gearbox");
@@ -41,8 +46,7 @@ public class BlockGearbox extends AbstractBlockKinetic implements IWrenchable {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        int met = placer.getHeldItem(hand).getMetadata();
-        if (met == 1) {
+        if (meta == 1) {
             return getDefaultState().withProperty(AXIS, placer.getHorizontalFacing().rotateY().getAxis());
         }
         return getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y);

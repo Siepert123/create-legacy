@@ -23,4 +23,9 @@ public class ItemBlockVariants extends ItemBlock {
             return getUnlocalizedName();
         }
     }
+
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
 }

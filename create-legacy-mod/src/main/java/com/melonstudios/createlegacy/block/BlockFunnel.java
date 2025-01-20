@@ -70,7 +70,7 @@ public class BlockFunnel extends Block implements ITileEntityProvider, IMetaName
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         if (facing.getAxis().isVertical()) return getStateForPlacement(world, pos, placer.getHorizontalFacing().getOpposite(), hitX, hitY, hitZ, meta, placer, hand);
-        return getDefaultState().withProperty(FACING, facing).withProperty(BRASS, placer.getHeldItem(hand).getMetadata() == 1)
+        return getDefaultState().withProperty(FACING, facing).withProperty(BRASS, meta == 1)
                 .withProperty(DISABLED, false);
     }
 

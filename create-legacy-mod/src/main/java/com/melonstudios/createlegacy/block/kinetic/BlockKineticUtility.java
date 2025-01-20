@@ -29,6 +29,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaName, IWrenchable {
     public BlockKineticUtility() {
         super("kinetic_utility");
@@ -48,7 +49,7 @@ public class BlockKineticUtility extends AbstractBlockKinetic implements IMetaNa
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        boolean shift = placer.getHeldItem(hand).getMetadata() != 0;
+        boolean shift = meta != 0;
         if (placer.isSneaking()) {
             return getDefaultState().withProperty(AXIS, facing.getAxis()).withProperty(SHIFT, shift);
         }

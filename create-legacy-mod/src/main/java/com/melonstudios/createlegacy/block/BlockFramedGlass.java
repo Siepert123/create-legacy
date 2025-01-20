@@ -96,7 +96,7 @@ public class BlockFramedGlass extends BlockGlass implements IMetaName {
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(VARIANT, Variant.fromID(placer.getHeldItem(hand).getMetadata()));
+        return getDefaultState().withProperty(VARIANT, Variant.fromID(meta));
     }
 
     @Override
