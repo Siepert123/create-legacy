@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:network_inspector",
+            "data": 1
+        },
+        "title": {
+            "translate": "advancements.create.goggles_stress"
+        },
+        "description": {
+            "translate": "advancements.create.goggles_stress.description"
+        }
+    },
+    "parent": "create:goggles",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

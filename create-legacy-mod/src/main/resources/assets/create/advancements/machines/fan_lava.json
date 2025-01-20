@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:lava_bucket"
+        },
+        "title": {
+            "translate": "advancements.create.fan_lava"
+        },
+        "description": {
+            "translate": "advancements.create.fan_lava.description"
+        }
+    },
+    "parent": "create:machines/fan",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

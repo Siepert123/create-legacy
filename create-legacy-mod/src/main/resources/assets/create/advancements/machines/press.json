@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:press"
+        },
+        "title": {
+            "translate": "advancements.create.press"
+        },
+        "description": {
+            "translate": "advancements.create.press.description"
+        }
+    },
+    "parent": "create:ages/andesite",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

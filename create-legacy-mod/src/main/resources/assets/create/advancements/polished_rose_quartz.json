@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:ingredient",
+            "data": 20
+        },
+        "title": {
+            "translate": "advancements.create.polished_rose_quartz"
+        },
+        "description": {
+            "translate": "advancements.create.polished_rose_quartz.description"
+        }
+    },
+    "parent": "create:ages/andesite",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:ingredient",
+                        "data": 20
+                    }
+                ]
+            }
+        }
+    }
+}

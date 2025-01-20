@@ -1,11 +1,15 @@
 package com.melonstudios.createapi.network;
 
 import com.melonstudios.createapi.kinetic.IKineticTileEntity;
+import com.melonstudios.createlegacy.CreateLegacy;
+import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -133,9 +137,13 @@ public final class NetworkContext {
             } else {
                 entry.getKey().updateSpeed(0.0f);
                 if (advancementCD <= 0) {
-                    List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(((TileEntity) entry.getKey()).getPos()) < 256);
-                    for (EntityPlayerMP player : players) {
-                        // Advancement code here!
+                    if (!world.isRemote) {
+                        Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                                .getAdvancement(new ResourceLocation("create", "overstressed"));
+                        List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(((TileEntity) entry.getKey()).getPos()) < 256);
+                        for (EntityPlayerMP player : players) {
+                            AdvancementUtil.grantAchievement(player, advancement);
+                        }
                     }
                     advancementCD = 16;
                 } else advancementCD--;

@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:casing",
+            "data": 0
+        },
+        "title": {
+            "translate": "advancements.create.andesite_age"
+        },
+        "description": {
+            "translate": "advancements.create.andesite_age.description"
+        },
+        "frame": "goal"
+    },
+    "parent": "create:andesite_alloy",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:casing",
+                        "data": 0
+                    }
+                ]
+            }
+        }
+    }
+}

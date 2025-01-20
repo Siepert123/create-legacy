@@ -61,10 +61,10 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
     }
 
     @Override
-    protected void onFirstActivation() {
+    protected void onFirstGeneration() {
         if (!world.isRemote) {
             Advancement advancement = CreateLegacy.serverHack.getAdvancementManager() //Replace with actual advancement
-                    .getAdvancement(new ResourceLocation("minecraft", "adventure/kill_a_mob"));
+                    .getAdvancement(new ResourceLocation("create", "generators/furnace_engine"));
             if (advancement != null) {
                 List<EntityPlayer> players = world.getEntities(EntityPlayer.class, (player) -> player.getDistanceSq(pos) < 256);
                 for (EntityPlayer player : players) {

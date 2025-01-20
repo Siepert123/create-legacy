@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:millstone"
+        },
+        "title": {
+            "translate": "advancements.create.millstone"
+        },
+        "description": {
+            "translate": "advancements.create.millstone.description"
+        }
+    },
+    "parent": "create:andesite_alloy",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

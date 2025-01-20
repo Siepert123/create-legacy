@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:water_bucket"
+        },
+        "title": {
+            "translate": "advancements.create.fan_water"
+        },
+        "description": {
+            "translate": "advancements.create.fan_water.description"
+        }
+    },
+    "parent": "create:machines/fan",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

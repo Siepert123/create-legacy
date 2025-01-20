@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:ingredient",
+            "data": 26
+        },
+        "title": {
+            "translate": "advancements.create.root"
+        },
+        "description": {
+            "translate": "advancements.create.root.description"
+        },
+        "background": "create:textures/block/palettes/stone_types/bricks/limestone.png",
+        "show_toast": false,
+        "announce_to_chat": false
+    },
+    "criteria": {
+        "crafting_table": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:crafting_table"
+                    }
+                ]
+            }
+        }
+    }
+}

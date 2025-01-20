@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:casing",
+            "data": 1
+        },
+        "title": {
+            "translate": "advancements.create.copper_age"
+        },
+        "description": {
+            "translate": "advancements.create.copper_age.description"
+        },
+        "frame": "goal"
+    },
+    "parent": "create:machines/press",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:casing",
+                        "data": 1
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:wrench"
+        },
+        "title": {
+            "translate": "advancements.create.wrench"
+        },
+        "description": {
+            "translate": "advancements.create.wrench.description"
+        }
+    },
+    "parent": "create:first_kinetics",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:wrench"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,18 +1,23 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockDrill;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.registries.ModDamageSources;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -49,6 +54,18 @@ public class TileEntityDrill extends AbstractTileEntityKinetic implements INeeds
 
         drillingProgress = compound.getFloat("progress");
         maxDrillingProgress = compound.getFloat("maxProgress");
+    }
+
+    @Override
+    protected void onFirstActivation() {
+        if (!world.isRemote) {
+            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                    .getAdvancement(new ResourceLocation("create", "machines/drill"));
+            List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
+            for (EntityPlayerMP player : players) {
+                AdvancementUtil.grantAchievement(player, advancement);
+            }
+        }
     }
 
     public IBlockState getAssociatedDrillPart() {

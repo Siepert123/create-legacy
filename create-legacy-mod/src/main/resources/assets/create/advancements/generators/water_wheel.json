@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:water_wheel"
+        },
+        "title": {
+            "translate": "advancements.create.water_wheel"
+        },
+        "description": {
+            "translate": "advancements.create.water_wheel.description"
+        }
+    },
+    "parent": "create:andesite_alloy",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

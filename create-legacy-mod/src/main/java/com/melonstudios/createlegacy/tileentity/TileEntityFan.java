@@ -3,20 +3,24 @@ package com.melonstudios.createlegacy.tileentity;
 import com.google.common.base.Predicate;
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createapi.network.NetworkContext;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.HeatHelper;
 import com.melonstudios.createlegacy.util.SimpleTuple;
 import com.melonstudios.melonlib.misc.MetaBlock;
 import com.melonstudios.melonlib.predicates.*;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
@@ -25,6 +29,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -172,6 +177,21 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                     if (str > 0.1) entity.fallDistance = 0.0f;
                     if (catalyst == 0) entity.extinguish();
                     if (catalyst == 1) entity.setFire(5);
+                }
+
+                if (!world.isRemote && entity instanceof EntityPlayerMP) {
+                    Advancement default_ = CreateLegacy.serverHack.getAdvancementManager()
+                            .getAdvancement(new ResourceLocation("create", "machines/fan"));
+                    AdvancementUtil.grantAchievement((EntityPlayerMP) entity, default_);
+                    if (catalyst == 0) {
+                        Advancement special = CreateLegacy.serverHack.getAdvancementManager()
+                                .getAdvancement(new ResourceLocation("create", "machines/fan_water"));
+                        AdvancementUtil.grantAchievement((EntityPlayerMP) entity, special);
+                    } else if (catalyst == 1) {
+                        Advancement special = CreateLegacy.serverHack.getAdvancementManager()
+                                .getAdvancement(new ResourceLocation("create", "machines/fan_lava"));
+                        AdvancementUtil.grantAchievement((EntityPlayerMP) entity, special);
+                    }
                 }
             }
 

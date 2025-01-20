@@ -4,18 +4,23 @@ import com.melonstudios.createapi.kinetic.IKineticTileEntity;
 import com.melonstudios.createapi.kinetic.IStateFindable;
 import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateConfig;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -23,6 +28,7 @@ import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public abstract class AbstractTileEntityKinetic extends TileEntity implements ITickable, IStateFindable, IKineticTileEntity {
@@ -40,6 +46,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         super.writeToNBT(compound);
 
         compound.setBoolean("activatedOnce", firstActivation);
+        compound.setBoolean("generatedOnce", firstGeneration);
 
         return compound;
     }
@@ -49,6 +56,7 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         super.readFromNBT(compound);
 
         firstActivation = compound.getBoolean("activatedOnce");
+        firstGeneration = compound.getBoolean("generatedOnce");
     }
 
     protected int flickers = 0;
@@ -157,13 +165,29 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
 
         tick();
 
-        if (speed() != 0 && firstActivation) {
+        if (firstActivation && speed() != 0) {
             firstActivation = false;
             onFirstActivation();
-            //It's Alive! advancement trigger goes here
+            if (!world.isRemote) {
+                Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                        .getAdvancement(new ResourceLocation("create", "first_kinetics"));
+                List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
+                for (EntityPlayerMP player : players) {
+                    AdvancementUtil.grantAchievement(player, advancement);
+                }
+            }
+        }
+        if (firstGeneration && generatedRPM() != 0) {
+            firstGeneration = false;
+            onFirstGeneration();
         }
     }
 
+    private boolean firstGeneration = true;
+
+    protected void onFirstGeneration() {
+        // NOOP
+    }
     protected void onFirstActivation() {
         // NOOP
     }

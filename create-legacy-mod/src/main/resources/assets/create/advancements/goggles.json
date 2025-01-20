@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:goggles"
+        },
+        "title": {
+            "translate": "advancements.create.goggles"
+        },
+        "description": {
+            "translate": "advancements.create.goggles.description"
+        }
+    },
+    "parent": "create:first_kinetics",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:goggles"
+                    }
+                ]
+            }
+        }
+    }
+}

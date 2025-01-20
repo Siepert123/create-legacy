@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:drill"
+        },
+        "title": {
+            "translate": "advancements.create.drill"
+        },
+        "description": {
+            "translate": "advancements.create.drill.description"
+        }
+    },
+    "parent": "create:ages/andesite",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

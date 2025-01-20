@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:barrier"
+        },
+        "title": {
+            "translate": "advancements.create.overstressed"
+        },
+        "description": {
+            "translate": "advancements.create.overstressed.description"
+        }
+    },
+    "parent": "create:first_kinetics",
+    "criteria": {
+        "custom": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

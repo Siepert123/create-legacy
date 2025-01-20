@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "create:casing",
+            "data": 2
+        },
+        "title": {
+            "translate": "advancements.create.brass_age"
+        },
+        "description": {
+            "translate": "advancements.create.brass_age.description"
+        },
+        "frame": "goal"
+    },
+    "parent": "create:ingot_brass",
+    "criteria": {
+        "andesite_alloy": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "create:casing",
+                        "data": 2
+                    }
+                ]
+            }
+        }
+    }
+}
