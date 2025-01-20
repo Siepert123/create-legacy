@@ -180,6 +180,7 @@ public final class CreateLegacy {
 
     }
 
+    //It SEEMS that you can use the proxy for this but like that's too bad this is funnier
     public static MinecraftServer serverHack = null;
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
@@ -192,7 +193,7 @@ public final class CreateLegacy {
 
     /**
      * Creates a new Bounding Box, but uses pixels instead of blocks.
-     * @deprecated since 0.2.0: use {@link com.melonstudios.melonlib.misc.AABB#create(double, double, double, double, double, double) AABB.create()} instead
+     * @deprecated since 0.2.0: use {@link AABB#create(double, double, double, double, double, double) AABB.create()} instead
      */
     @Deprecated
     public static AxisAlignedBB aabb(int x1, int y1, int z1, int x2, int y2, int z2) {
@@ -201,7 +202,7 @@ public final class CreateLegacy {
 
     /**
      * Creates a new Bounding Box of a certain size wrapping a block pos.
-     * @deprecated since 0.2.0: use {@link com.melonstudios.melonlib.misc.AABB#wrap(BlockPos, int) AABB.wrap()} instead
+     * @deprecated since 0.2.0: use {@link AABB#wrap(BlockPos, int) AABB.wrap()} instead
      */
     @Deprecated
     public static AxisAlignedBB aabb(BlockPos pos, int range) {
