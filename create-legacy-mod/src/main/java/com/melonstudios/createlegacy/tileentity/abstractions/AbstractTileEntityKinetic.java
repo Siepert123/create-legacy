@@ -33,6 +33,24 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
     protected float speed = 0;
     protected float newSpeed = 0;
 
+    private boolean firstActivation = true;
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+
+        compound.setBoolean("activatedOnce", firstActivation);
+
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+
+        firstActivation = compound.getBoolean("activatedOnce");
+    }
+
     protected int flickers = 0;
 
     protected AbstractTileEntityKinetic() {
@@ -138,6 +156,16 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
         }
 
         tick();
+
+        if (speed() != 0 && firstActivation) {
+            firstActivation = false;
+            onFirstActivation();
+            //It's Alive! advancement trigger goes here
+        }
+    }
+
+    protected void onFirstActivation() {
+        // NOOP
     }
 
     /**

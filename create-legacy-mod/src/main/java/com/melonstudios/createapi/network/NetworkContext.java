@@ -4,12 +4,14 @@ import com.melonstudios.createapi.kinetic.IKineticTileEntity;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -102,6 +104,7 @@ public final class NetworkContext {
     }
     private void phase3() {
         int soundCD = 0;
+        int advancementCD = 0;
         for (Map.Entry<IKineticTileEntity, Boolean> entry : map.entrySet()) {
             if (!overstressed()) {
                 entry.getKey().updateSpeed(isInverted(entry.getKey()) ? -speed() : speed());
@@ -129,6 +132,13 @@ public final class NetworkContext {
                 } else soundCD--;
             } else {
                 entry.getKey().updateSpeed(0.0f);
+                if (advancementCD <= 0) {
+                    List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(((TileEntity) entry.getKey()).getPos()) < 256);
+                    for (EntityPlayerMP player : players) {
+                        // Advancement code here!
+                    }
+                    advancementCD = 16;
+                } else advancementCD--;
             }
 
             entry.getKey().networkFunc(this);

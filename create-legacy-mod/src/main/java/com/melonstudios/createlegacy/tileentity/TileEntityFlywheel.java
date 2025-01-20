@@ -1,17 +1,31 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
+import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.kinetic.BlockFurnaceEngine;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
+import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
+import com.melonstudios.melonlib.misc.AABB;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.command.AdvancementCommand;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+
+import java.util.List;
 
 public class TileEntityFlywheel extends AbstractTileEntityKinetic {
     @Override
@@ -30,8 +44,36 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
     }
 
     @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+    }
+
+    @Override
     public EnumKineticConnectionType getConnectionType(EnumFacing side) {
         return getState().getValue(BlockFurnaceEngine.FACING).getOpposite() == side ? connection(1) : connection(0);
+    }
+
+    @Override
+    protected void onFirstActivation() {
+        if (!world.isRemote) {
+            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager() //Replace with actual advancement
+                    .getAdvancement(new ResourceLocation("minecraft", "adventure/kill_a_mob"));
+            if (advancement != null) {
+                List<EntityPlayer> players = world.getEntities(EntityPlayer.class, (player) -> player.getDistanceSq(pos) < 256);
+                for (EntityPlayer player : players) {
+                    if (player instanceof EntityPlayerMP) {
+                        AdvancementUtil.grantAchievement((EntityPlayerMP) player, advancement);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -87,8 +129,10 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
         if (state.getBlock() instanceof BlockFurnaceEngine) {
             if (state.getValue(BlockFurnaceEngine.VARIANT) == BlockFurnaceEngine.Variant.ENGINE) {
                 connection = state.getValue(BlockFurnaceEngine.FACING) == facing().rotateYCCW();
+                return;
             }
         }
+        connection = false;
     }
 
     private final IBlockState[] renderParts = new IBlockState[4];
