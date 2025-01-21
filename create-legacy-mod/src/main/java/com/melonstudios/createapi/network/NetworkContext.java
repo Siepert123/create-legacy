@@ -6,6 +6,7 @@ import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import com.melonstudios.melonlib.misc.ServerHack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -138,7 +139,7 @@ public final class NetworkContext {
                 entry.getKey().updateSpeed(0.0f);
                 if (advancementCD <= 0) {
                     if (!world.isRemote) {
-                        Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                        Advancement advancement = ServerHack.getServer().getAdvancementManager()
                                 .getAdvancement(new ResourceLocation("create", "overstressed"));
                         List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(((TileEntity) entry.getKey()).getPos()) < 256);
                         for (EntityPlayerMP player : players) {

@@ -4,8 +4,8 @@ import com.melonstudios.createapi.network.NetworkContext;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.kinetic.BlockWaterWheel;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
@@ -31,11 +31,10 @@ public class TileEntityWaterWheel extends AbstractTileEntityKinetic {
     @Override
     protected void onFirstGeneration() {
         if (!world.isRemote) {
-            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
-                    .getAdvancement(new ResourceLocation("create", "generators/water_wheel"));
+            Advancement advancement = AdvancementUtil.getAdvancement(new ResourceLocation("create", "generators/water_wheel"));
             List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
             for (EntityPlayerMP player : players) {
-                AdvancementUtil.grantAchievement(player, advancement);
+                AdvancementUtil.grantAdvancement(player, advancement);
             }
         }
     }

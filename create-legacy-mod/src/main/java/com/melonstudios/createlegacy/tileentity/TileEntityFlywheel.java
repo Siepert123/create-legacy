@@ -1,13 +1,12 @@
 package com.melonstudios.createlegacy.tileentity;
 
 import com.melonstudios.createapi.network.NetworkContext;
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.kinetic.BlockFurnaceEngine;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.melonlib.blockdict.BlockDictionary;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -57,13 +56,12 @@ public class TileEntityFlywheel extends AbstractTileEntityKinetic {
     @Override
     protected void onFirstGeneration() {
         if (!world.isRemote) {
-            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager() //Replace with actual advancement
-                    .getAdvancement(new ResourceLocation("create", "generators/furnace_engine"));
+            Advancement advancement = AdvancementUtil.getAdvancement(new ResourceLocation("create", "generators/furnace_engine"));
             if (advancement != null) {
                 List<EntityPlayer> players = world.getEntities(EntityPlayer.class, (player) -> player.getDistanceSq(pos) < 256);
                 for (EntityPlayer player : players) {
                     if (player instanceof EntityPlayerMP) {
-                        AdvancementUtil.grantAchievement((EntityPlayerMP) player, advancement);
+                        AdvancementUtil.grantAdvancement((EntityPlayerMP) player, advancement);
                     }
                 }
             }

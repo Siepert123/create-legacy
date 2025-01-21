@@ -4,10 +4,10 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.network.PacketUpdateMillstone;
 import com.melonstudios.createlegacy.recipe.MillingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.RecipeEntry;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,11 +56,10 @@ public class TileEntityMillstone extends AbstractTileEntityKinetic implements IS
     @Override
     protected void onFirstActivation() {
         if (!world.isRemote) {
-            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
-                    .getAdvancement(new ResourceLocation("create", "machines/millstone"));
+            Advancement advancement = AdvancementUtil.getAdvancement(new ResourceLocation("create", "machines/millstone"));
             List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
             for (EntityPlayerMP player : players) {
-                AdvancementUtil.grantAchievement(player, advancement);
+                AdvancementUtil.grantAdvancement(player, advancement);
             }
         }
     }

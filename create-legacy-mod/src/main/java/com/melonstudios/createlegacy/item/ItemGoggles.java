@@ -4,6 +4,7 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
 import com.melonstudios.createlegacy.util.AdvancementUtil;
+import com.melonstudios.melonlib.misc.ServerHack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,11 +60,11 @@ public class ItemGoggles extends ItemArmor {
                 BlockPos pos = result.getBlockPos();
                 TileEntity te = world.getTileEntity(pos);
                 if (te instanceof TileEntitySpeedometer) {
-                    Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                    Advancement advancement = ServerHack.getServer().getAdvancementManager()
                             .getAdvancement(new ResourceLocation("create", "goggles_speed"));
                     AdvancementUtil.grantAchievement((EntityPlayerMP) player, advancement);
                 } else if (te instanceof TileEntityStressometer) {
-                    Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+                    Advancement advancement = ServerHack.getServer().getAdvancementManager()
                             .getAdvancement(new ResourceLocation("create", "goggles_stress"));
                     AdvancementUtil.grantAchievement((EntityPlayerMP) player, advancement);
                 }

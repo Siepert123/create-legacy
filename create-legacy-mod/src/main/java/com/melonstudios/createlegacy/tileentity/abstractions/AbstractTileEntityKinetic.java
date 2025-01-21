@@ -7,8 +7,8 @@ import com.melonstudios.createlegacy.CreateConfig;
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -169,11 +169,10 @@ public abstract class AbstractTileEntityKinetic extends TileEntity implements IT
             firstActivation = false;
             onFirstActivation();
             if (!world.isRemote) {
-                Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
-                        .getAdvancement(new ResourceLocation("create", "first_kinetics"));
+                Advancement advancement = AdvancementUtil.getAdvancement(new ResourceLocation("create", "first_kinetics"));
                 List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
                 for (EntityPlayerMP player : players) {
-                    AdvancementUtil.grantAchievement(player, advancement);
+                    AdvancementUtil.grantAdvancement(player, advancement);
                 }
             }
         }

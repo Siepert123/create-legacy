@@ -9,6 +9,7 @@ import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityK
 import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.registries.ModDamageSources;
+import com.melonstudios.melonlib.misc.ServerHack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -59,7 +60,7 @@ public class TileEntityDrill extends AbstractTileEntityKinetic implements INeeds
     @Override
     protected void onFirstActivation() {
         if (!world.isRemote) {
-            Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
+            Advancement advancement = ServerHack.getServer().getAdvancementManager()
                     .getAdvancement(new ResourceLocation("create", "machines/drill"));
             List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
             for (EntityPlayerMP player : players) {

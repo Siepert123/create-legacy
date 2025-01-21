@@ -3,17 +3,18 @@ package com.melonstudios.createlegacy.tileentity;
 import com.google.common.base.Predicate;
 import com.melonstudios.createapi.kinetic.INeedsRecalculating;
 import com.melonstudios.createapi.network.NetworkContext;
-import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.BlockRender;
 import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.block.kinetic.BlockFan;
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.HeatHelper;
 import com.melonstudios.createlegacy.util.SimpleTuple;
+import com.melonstudios.melonlib.api.create.APICreate;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import com.melonstudios.melonlib.misc.MetaBlock;
+import com.melonstudios.melonlib.misc.ServerHack;
 import com.melonstudios.melonlib.predicates.*;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
@@ -180,17 +181,14 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
                 }
 
                 if (!world.isRemote && entity instanceof EntityPlayerMP) {
-                    Advancement default_ = CreateLegacy.serverHack.getAdvancementManager()
-                            .getAdvancement(new ResourceLocation("create", "machines/fan"));
-                    AdvancementUtil.grantAchievement((EntityPlayerMP) entity, default_);
+                    Advancement default_ = AdvancementUtil.getAdvancement(new ResourceLocation("create", "machines/fan"));
+                    AdvancementUtil.grantAdvancement((EntityPlayerMP) entity, default_);
                     if (catalyst == 0) {
-                        Advancement special = CreateLegacy.serverHack.getAdvancementManager()
-                                .getAdvancement(new ResourceLocation("create", "machines/fan_water"));
-                        AdvancementUtil.grantAchievement((EntityPlayerMP) entity, special);
+                        Advancement special = AdvancementUtil.getAdvancement(new ResourceLocation("create", "machines/fan_water"));
+                        AdvancementUtil.grantAdvancement((EntityPlayerMP) entity, special);
                     } else if (catalyst == 1) {
-                        Advancement special = CreateLegacy.serverHack.getAdvancementManager()
-                                .getAdvancement(new ResourceLocation("create", "machines/fan_lava"));
-                        AdvancementUtil.grantAchievement((EntityPlayerMP) entity, special);
+                        Advancement special = AdvancementUtil.getAdvancement(new ResourceLocation("create", "machines/fan_lava"));
+                        AdvancementUtil.grantAdvancement((EntityPlayerMP) entity, special);
                     }
                 }
             }
@@ -350,5 +348,12 @@ public class TileEntityFan extends AbstractTileEntityKinetic implements INeedsRe
         addFanPass(StatePredicateFence.instance);
         addFanPass(StatePredicateFenceGate.instance);
         addFanPass(new StatePredicateBlockDict("create:fanPass"));
+    }
+
+    public static void initAPITransfer() {
+        APICreate.copyFanContents(0, FAN_PASSES);
+        APICreate.copyFanContents(1, WASHING_CATALYSTS);
+        APICreate.copyFanContents(2, COOKING_CATALYSTS);
+        APICreate.copyFanContents(3, HAUNTING_CATALYSTS);
     }
 }

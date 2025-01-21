@@ -5,6 +5,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.player.EntityPlayerMP;
 
+@Deprecated
 public class AdvancementUtil {
     public static void grantAchievement(EntityPlayerMP player, Advancement advancement) {
         if (advancement == null || player == null) return;

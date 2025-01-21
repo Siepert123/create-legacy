@@ -9,6 +9,7 @@ import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
+import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.CreateCaches;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
@@ -178,19 +179,7 @@ public final class CreateLegacy {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
-    }
-
-    //It SEEMS that you can use the proxy for this but like that's too bad this is funnier
-    public static MinecraftServer serverHack = null;
-    @Mod.EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
-        serverHack = event.getServer();
-    }
-    @Mod.EventHandler
-    public void serverStopping(FMLServerStoppingEvent event) {
-        serverHack = null;
-        CreateCaches.clear();
+        TileEntityFan.initAPITransfer();
     }
 
     /**

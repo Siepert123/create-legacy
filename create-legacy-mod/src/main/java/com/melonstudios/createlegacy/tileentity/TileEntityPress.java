@@ -7,9 +7,9 @@ import com.melonstudios.createlegacy.block.kinetic.BlockPress;
 import com.melonstudios.createlegacy.network.PacketUpdatePress;
 import com.melonstudios.createlegacy.recipe.PressingRecipes;
 import com.melonstudios.createlegacy.tileentity.abstractions.AbstractTileEntityKinetic;
-import com.melonstudios.createlegacy.util.AdvancementUtil;
 import com.melonstudios.createlegacy.util.EnumKineticConnectionType;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
+import com.melonstudios.melonlib.misc.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -115,11 +115,10 @@ public class TileEntityPress extends AbstractTileEntityKinetic {
                         playPressingSFX();
                     }
                     {
-                        Advancement advancement = CreateLegacy.serverHack.getAdvancementManager()
-                                .getAdvancement(new ResourceLocation("create", "machines/press"));
+                        Advancement advancement = AdvancementUtil.getAdvancement(new ResourceLocation("create", "machines/press"));
                         List<EntityPlayerMP> players = world.getEntities(EntityPlayerMP.class, (player) -> player.getDistanceSq(pos) < 256);
                         for (EntityPlayerMP player : players) {
-                            AdvancementUtil.grantAchievement(player, advancement);
+                            AdvancementUtil.grantAdvancement(player, advancement);
                         }
                     }
                 }
