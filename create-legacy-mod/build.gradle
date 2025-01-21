@@ -106,8 +106,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:mysticallib-277064:3483816");
     compileOnly fg.deobf("curse.maven:mysticallib-277064:3483816");
-    runtimeOnly fg.deobf("curse.maven:melonlib-1027035:6099182");
-    compileOnly fg.deobf("curse.maven:melonlib-1027035:6099182");
+    implementation fg.deobf("curse.maven:melonlib-1027035:6110523")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     embed('org.spongepowered:mixin:0.8.3-SNAPSHOT') {
         exclude module: 'guava'
