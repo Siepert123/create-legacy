@@ -2,7 +2,7 @@ package com.melonstudios.createlegacy.block.stone;
 
 import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.block.ModBlocks;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;

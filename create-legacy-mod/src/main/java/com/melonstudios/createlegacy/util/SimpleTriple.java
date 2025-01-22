@@ -1,5 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
+import com.melonstudios.melonlib.math.ITriple;
+
 /**
  * Simple implementation of a triple
  *
@@ -9,7 +11,7 @@ package com.melonstudios.createlegacy.util;
  * @param <Y> Second value
  * @param <Z> Third value
  */
-public class SimpleTriple<X, Y, Z> {
+public class SimpleTriple<X, Y, Z> implements ITriple<X, Y, Z> {
     private X value1;
     private Y value2;
     private Z value3;

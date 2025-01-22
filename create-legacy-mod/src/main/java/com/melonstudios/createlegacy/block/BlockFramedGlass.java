@@ -1,7 +1,7 @@
 package com.melonstudios.createlegacy.block;
 
 import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

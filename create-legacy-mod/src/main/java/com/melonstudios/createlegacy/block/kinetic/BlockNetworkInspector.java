@@ -3,7 +3,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createlegacy.block.IGoggleInfo;
 import com.melonstudios.createlegacy.tileentity.TileEntitySpeedometer;
 import com.melonstudios.createlegacy.tileentity.TileEntityStressometer;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import com.melonstudios.melonlib.misc.AABB;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.properties.PropertyBool;

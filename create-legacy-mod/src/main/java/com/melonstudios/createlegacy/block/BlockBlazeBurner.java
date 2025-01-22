@@ -4,7 +4,7 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.item.ModItems;
 import com.melonstudios.createlegacy.tileentity.TileEntityBlazeBurner;
 import com.melonstudios.createlegacy.util.EnumBlazeLevel;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

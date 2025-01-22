@@ -3,7 +3,7 @@ package com.melonstudios.createlegacy.block.kinetic;
 import com.melonstudios.createlegacy.block.IWrenchable;
 import com.melonstudios.createlegacy.tileentity.TileEntityClutch;
 import com.melonstudios.createlegacy.tileentity.TileEntityGearshift;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;

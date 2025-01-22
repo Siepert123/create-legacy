@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.util;
 
 import com.melonstudios.createlegacy.recipe.WashingRecipes;
+import com.melonstudios.melonlib.math.ITuple;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
  * @param <X> First value
  * @param <Y> Second value
  */
-public class SimpleTuple<X, Y> {
+public class SimpleTuple<X, Y> implements ITuple<X, Y> {
     private X value1;
     private Y value2;
     public X getValue1() {

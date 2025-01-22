@@ -4,7 +4,7 @@ import com.melonstudios.createlegacy.CreateLegacy;
 import com.melonstudios.createlegacy.network.PacketUpdateFunnelAdvanced;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnel;
 import com.melonstudios.createlegacy.tileentity.TileEntityFunnelAdvanced;
-import com.melonstudios.createlegacy.util.IMetaName;
+import com.melonstudios.melonlib.item.IMetaName;
 import com.melonstudios.melonlib.misc.AABB;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;

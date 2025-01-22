@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy.item;
 
 import com.melonstudios.createlegacy.block.ModBlocks;
+import com.melonstudios.melonlib.item.ItemBlockVariants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

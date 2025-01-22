@@ -1,6 +1,7 @@
 package com.melonstudios.createlegacy;
 
 import com.melonstudios.createapi.CreateAPI;
+import com.melonstudios.createlegacy.block.ModBlocks;
 import com.melonstudios.createlegacy.copycat.PacketUpdateCopycat;
 import com.melonstudios.createlegacy.fluid.ModFluids;
 import com.melonstudios.createlegacy.network.*;
@@ -9,17 +10,23 @@ import com.melonstudios.createlegacy.recipe.RecipeInit;
 import com.melonstudios.createlegacy.schematic.SchematicSaveHelper;
 import com.melonstudios.createlegacy.tab.DecorationsTab;
 import com.melonstudios.createlegacy.tab.KineticsTab;
+import com.melonstudios.createlegacy.tileentity.TileEntityBlazeBurner;
 import com.melonstudios.createlegacy.tileentity.TileEntityFan;
 import com.melonstudios.createlegacy.util.BitSplitter;
 import com.melonstudios.createlegacy.util.CreateCaches;
+import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.createlegacy.world.gen.WorldGeneratorCreateLegacy;
+import com.melonstudios.melonlib.api.blockdisplay.APIBlockDisplay;
+import com.melonstudios.melonlib.api.blockdisplay.IAdditionalBlockInfo;
 import com.melonstudios.melonlib.misc.AABB;
+import com.melonstudios.melonlib.misc.MetaBlock;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +36,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.melonstudios.createlegacy.CreateLegacy.*;
 
@@ -169,6 +180,30 @@ public final class CreateLegacy {
         BitSplitter.runTests(!CreateConfig.preventBitSplitterTestCrash);
         CreateAPI.discoverAndSortAddons(event);
         GameRegistry.registerWorldGenerator(new WorldGeneratorCreateLegacy(), 1);
+
+        APIBlockDisplay.addCustomBlockInfoHandler(ModBlocks.BLAZE_BURNER, ((world, pos, state) -> {
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof TileEntityBlazeBurner) {
+                TileEntityBlazeBurner burner = (TileEntityBlazeBurner) te;
+                List<String> stuff = new ArrayList<>();
+                if (burner.getBlazeLevel().ordinal() > 0) {
+                    stuff.add("Blaze level: " + burner.getBlazeLevel());
+                }
+                if (!burner.isLockedState() && burner.getTicksRemaining() > 0) {
+                    stuff.add("Fuel ticks: " + burner.getTicksRemaining());
+                }
+                return stuff;
+            }
+            return Collections.emptyList();
+        }));
+        APIBlockDisplay.addCustomBlockInfoHandler(ModBlocks.NETWORK_INSPECTOR, (world, pos, state) -> {
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof INetworkLogger) {
+                return Collections.singletonList(((INetworkLogger) te).queryData());
+            }
+            return Collections.emptyList();
+        });
+        APIBlockDisplay.addCustomMetaBlockName(MetaBlock.of(ModBlocks.BLAZE_BURNER_LIT, 0), "tile.create.blaze_burner_deco.name");
     }
 
     @Mod.EventHandler
