@@ -176,6 +176,12 @@ public final class OreDictHandler {
         BlockDictionary.registerOre("blockZinc", MetaBlock.of(ModBlocks.METAL, 2));
         BlockDictionary.registerOre("blockBrass", MetaBlock.of(ModBlocks.METAL, 3));
 
+        BlockDictionary.registerOre("paneGlass", ModBlocks.FRAMED_GLASS_PANE, 4);
+        BlockDictionary.registerOre("paneGlassColorless", ModBlocks.FRAMED_GLASS_PANE, 4);
+
+        BlockDictionary.registerOre("blockGlass", ModBlocks.FRAMED_GLASS, 4);
+        BlockDictionary.registerOre("blockGlassColorless", ModBlocks.FRAMED_GLASS, 4);
+
         DisplayLink.debug("Block Dictionary init done in %s ms!", System.currentTimeMillis() - startTime2);
         initialized = true;
     }

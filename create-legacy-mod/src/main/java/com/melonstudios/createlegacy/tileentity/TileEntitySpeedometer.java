@@ -41,6 +41,6 @@ public class TileEntitySpeedometer extends AbstractTileEntityKinetic implements 
 
     @Override
     public String queryData() {
-        return String.format("Speed: %s RPM", speed());
+        return String.format("Speed: %s RPM", Math.abs(speed()));
     }
 }
