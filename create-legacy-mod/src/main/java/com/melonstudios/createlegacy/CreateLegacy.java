@@ -56,7 +56,7 @@ public final class CreateLegacy {
 
     public static final boolean test = true;
     public static final String MOD_ID = "create";
-    public static final String VERSION = "0.2.0";
+    public static final String VERSION = "0.2.0a";
     public static final String DEPENDENCIES =
             test ?
                     "required-before:mysticallib;required-after:melonlib@[1.2,);before:jei" :

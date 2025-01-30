@@ -1,12 +1,9 @@
 package com.melonstudios.createapi.network;
 
 import com.melonstudios.createapi.kinetic.IKineticTileEntity;
-import com.melonstudios.createlegacy.CreateLegacy;
-import com.melonstudios.createlegacy.util.DisplayLink;
 import com.melonstudios.createlegacy.util.INetworkLogger;
 import com.melonstudios.createlegacy.util.registries.ModSoundEvents;
 import com.melonstudios.melonlib.misc.AdvancementUtil;
-import com.melonstudios.melonlib.misc.ServerHack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
@@ -14,16 +11,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public final class NetworkContext {
-    private static final Logger log = LoggerFactory.getLogger(NetworkContext.class);
     private final World world;
     public NetworkContext(World world) {
         this.world = world;
