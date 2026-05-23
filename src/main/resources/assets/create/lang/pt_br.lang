@@ -1,0 +1,322 @@
+# Translation by Apostrcfo
+
+#basic copper items
+item.create:ingot_copper.name=Barra de Cobre
+item.create:nugget_copper.name=Pepita de Cobre
+item.create:plate_copper.name=Placa de Cobre
+
+#basic zinc items
+item.create:ingot_zinc.name=Barra de Zinco
+item.create:nugget_zinc.name=Pepita de Zinco
+item.create:plate_zinc.name=Placa de Zinco
+
+#basic brass items
+item.create:ingot_brass.name=Barra de Latão
+item.create:nugget_brass.name=Pepita de Latão
+item.create:plate_brass.name=Placa de Latão
+
+#other basic items
+item.create:andesite_alloy.name=Liga de Andesito
+item.create:plate_gold.name=Placa de Ouro
+item.create:plate_iron.name=Placa de Ferro
+item.create:plate_obsidian.name=Placa de Obsidiana Reforçada
+item.create:rose_quartz.name=Quartzo Rosa
+item.create:rose_quartz_polished.name=Quartzo Rosa Polido
+
+#dust items
+item.create:dust_netherrack.name=Pó de Netherrack
+item.create:dust_obsidian.name=Pó de Obsidiana
+
+#crushed items
+item.create:crushed_iron.name=Ferro Triturado
+item.create:crushed_gold.name=Ouro Triturado
+item.create:crushed_copper.name=Cobre Triturado
+item.create:crushed_zinc.name=Zinco Triturado
+
+#crushed items (compat)
+item.create:crushed_aluminium.name=Alumínio Triturado
+item.create:crushed_lead.name=Chumbo Triturado
+item.create:crushed_nickel.name=Níquel Triturado
+item.create:crushed_osmium.name=Ósmio Triturado
+item.create:crushed_platinum.name=Platina Triturada
+item.create:crushed_quicksilver.name=Mercúrio Triturado
+item.create:crushed_silver.name=Prata Triturada
+item.create:crushed_tin.name=Estanho Triturado
+item.create:crushed_uranium.name=Urânio Triturado
+
+#Food n stuff
+item.create:wheat_flour.name=Farinha de Trigo
+item.create:dough.name=Massa
+item.create:chocolate_ingot.name=Barra de Chocolate
+item.create:apple_honey.name=Maçã com Mel
+item.create:sweet_roll.name=Pão Doce
+item.create:chocolate_berries.name=Frutas com Chocolate
+item.create:blazecake_base.name=Base de Blazecake
+item.create:blazecake.name=Blazecake
+item.create:blazecake_creative.name=Blazecake (Criativo)
+
+#material storage blocks & ores
+tile.create:ore_copper.name=Minério de Cobre
+tile.create:ore_zinc.name=Minério de Zinco
+tile.create:storage_block_copper.name=Bloco de Cobre
+tile.create:storage_block_zinc.name=Bloco de Zinco
+tile.create:storage_block_brass.name=Bloco de Latão
+tile.create:storage_block_andesite_alloy.name=Bloco de Liga de Andesito
+
+#Advanced ingredients
+item.create:whisk.name=Batedor
+item.create:propeller.name=Hélice
+item.create:electron_tube.name=Tubo Eletrônico
+item.create:brass_hand.name=Mão de Latão
+item.create:integrated_circuit.name=Circuito Integrado
+item.create:precision_mechanism.name=Mecanismo de Precisão
+item.create:shadow_steel.name=Aço Sombrio
+item.create:refined_radiance.name=Radiância Refinada
+
+#casings
+tile.create:casing_andesite.name=Revestimento de Andesito
+tile.create:casing_copper.name=Revestimento de Cobre
+tile.create:casing_brass.name=Revestimento de Latão
+tile.create:casing_train.name=Revestimento de Trem
+
+#Kinetic Appliances
+tile.create:axle.name=Eixo
+tile.create:cogwheel.name=Engrenagem
+tile.create:hand_crank.name=Manivela
+tile.create:depot.name=Depósito
+tile.create:basin.name=Bacia
+tile.create:blaze_burner_empty.name=Queimador de Blaze (Vazio)
+tile.create:blaze_burner_passive.name=Queimador de Blaze
+tile.create:blaze_burner_heated.name=Queimador de Blaze Aquecido
+tile.create:blaze_burner_superheated.name=Queimador de Blaze Superaquecido
+tile.create:creative_motor.name=Motor Criativo
+tile.create:water_wheel.name=Roda d'Água
+tile.create:furnace_engine.name=Motor de Fornalha
+tile.create:furnace_flywheel.name=Volante de Fornalha
+tile.create:drill.name=Broca Mecânica
+tile.create:saw.name=Serra Mecânica
+tile.create:press.name=Prensa Mecânica
+tile.create:mixer.name=Misturador Mecânico
+tile.create:fan.name=Ventilador com Revestimento
+tile.create:chassis.name=Chassi
+tile.create:gearbox.name=Caixa de Engrenagens
+tile.create:clutch.name=Embreagem
+tile.create:gearshift.name=Seletor de Marcha
+tile.create:axle_encased_andesite.name=Eixo com Revestimento de Andesito
+tile.create:axle_encased_brass.name=Eixo com Revestimento de Latão
+tile.create:belt.name=Correia Mecânica
+tile.create:chute.name=Calha
+tile.create:funnel.name=Funil de Andesito
+tile.create:funnel_advanced.name=Funil de Latão
+tile.create:millstone.name=Moinho
+tile.create:piston.name=Pistão Mecânico
+tile.create:piston_sticky.name=Pistão Mecânico Grudento
+tile.create:piston_pole.name=Extensão de Pistão
+
+#Overige
+itemGroup.tab_create=Create
+itemGroup.tab_create_decorations=Decorações do Create
+itemGroup.tab_create_other=Outros Blocos do Create
+item.create:evil_item.create:name=Item Maligno!
+item.create:sandpaper.name=Lixa
+item.create:incomplete_precision_mechanism.name=Mecanismo de Precisão Incompleto
+item.create:incomplete_plate_obsidian.name=Placa de Obsidiana Não Processada
+tile.create:schedule_wash.name=Agendar Lavagem com Ventilador
+tile.create:schedule_cook.name=Agendar Cozimento com Ventilador
+tile.create:network_inspector_speed.name=Velocímetro
+tile.create:network_inspector_stress.name=Medidor de Estresse
+tile.create:deployer.name=Implantador
+
+item.create:wrench.name=Chave Inglesa
+
+item.create:filter_ore_dict.name=Filtro de Minérios
+message.create:filter.set=Filtro definido para
+message.create:filter.clear=Filtro limpo
+
+tooltip.stressImpact=Impacto de Estresse Cinético: %d x RS
+tooltip.stressCapacity=Capacidade de Estresse Cinético: %d x RS
+
+tile.create:chigwanker.name=Chigwanker Mecindustrial
+
+networkContext.infiniteSU=Sem estresse na rede
+networkContext.noData=Nenhum dado encontrado
+
+#Sounds
+subtitle.block.cogwheel.ambient=Engrenagens girando
+subtitle.item.sandpaper.used=Lixa sendo usada
+subtitle.block.press.activation=Prensa achatando algo
+subtitle.block.millstone.ambient=Moendo
+subtitle.item.wrench.used=Chave usada
+
+#Custom stones
+tile.create:stone_calcite.name=Calcita
+tile.create:stone_tuff.name=Tufo
+tile.create:stone_asurine.name=Asurine
+tile.create:stone_crimsite.name=Crimsite
+tile.create:stone_limestone.name=Calcário
+tile.create:stone_ochrum.name=Ochrum
+tile.create:stone_scorchia.name=Scorchia
+tile.create:stone_scoria.name=Escória
+tile.create:stone_veridium.name=Veridium
+
+#Polished
+tile.create:stone_polished_andesite.name=Andesito Polido
+tile.create:stone_polished_asurine.name=Asurine Polido
+tile.create:stone_polished_calcite.name=Calcita Polida
+tile.create:stone_polished_crimsite.name=Crimsite Polido
+tile.create:stone_polished_deepslate.name=Ardósia Profunda Polida
+tile.create:stone_polished_diorite.name=Diorito Polido
+tile.create:stone_polished_dripstone.name=Gotejante Polido
+tile.create:stone_polished_granite.name=Granito Polido
+tile.create:stone_polished_limestone.name=Calcário Polido
+tile.create:stone_polished_ochrum.name=Ochrum Polido
+tile.create:stone_polished_scorchia.name=Scorchia Polido
+tile.create:stone_polished_scoria.name=Escória Polida
+tile.create:stone_polished_tuff.name=Tufo Polido
+tile.create:stone_polished_veridium.name=Veridium Polido
+
+#Cut
+tile.create:stone_cut_andesite.name=Andesito Cortado
+tile.create:stone_cut_asurine.name=Asurine Cortado
+tile.create:stone_cut_calcite.name=Calcita Cortada
+tile.create:stone_cut_crimsite.name=Crimsite Cortado
+tile.create:stone_cut_deepslate.name=Ardósia Profunda Cortada
+tile.create:stone_cut_diorite.name=Diorito Cortado
+tile.create:stone_cut_dripstone.name=Gotejante Cortado
+tile.create:stone_cut_granite.name=Granito Cortado
+tile.create:stone_cut_limestone.name=Calcário Cortado
+tile.create:stone_cut_ochrum.name=Ochrum Cortado
+tile.create:stone_cut_scorchia.name=Scorchia Cortado
+tile.create:stone_cut_scoria.name=Escória Cortada
+tile.create:stone_cut_tuff.name=Tufo Cortado
+tile.create:stone_cut_veridium.name=Veridium Cortado
+
+#Bricks
+tile.create:stone_bricks_andesite.name=Tijolos de Andesito
+tile.create:stone_bricks_asurine.name=Tijolos de Asurine
+tile.create:stone_bricks_calcite.name=Tijolos de Calcita
+tile.create:stone_bricks_crimsite.name=Tijolos de Crimsite
+tile.create:stone_bricks_deepslate.name=Tijolos de Ardósia Profunda
+tile.create:stone_bricks_diorite.name=Tijolos de Diorito
+tile.create:stone_bricks_dripstone.name=Tijolos de Gotejante
+tile.create:stone_bricks_granite.name=Tijolos de Granito
+tile.create:stone_bricks_limestone.name=Tijolos de Calcário
+tile.create:stone_bricks_ochrum.name=Tijolos de Ochrum
+tile.create:stone_bricks_scorchia.name=Tijolos de Scorchia
+tile.create:stone_bricks_scoria.name=Tijolos de Escória
+tile.create:stone_bricks_tuff.name=Tijolos de Tufo
+tile.create:stone_bricks_veridium.name=Tijolos de Veridium
+
+#Fancy bricks
+tile.create:stone_bricks_fancy_andesite.name=Tijolos Decorativos de Andesito
+tile.create:stone_bricks_fancy_asurine.name=Tijolos Decorativos de Asurine
+tile.create:stone_bricks_fancy_calcite.name=Tijolos Decorativos de Calcita
+tile.create:stone_bricks_fancy_crimsite.name=Tijolos Decorativos de Crimsite
+tile.create:stone_bricks_fancy_deepslate.name=Tijolos Decorativos de Ardósia Profunda
+tile.create:stone_bricks_fancy_diorite.name=Tijolos Decorativos de Diorito
+tile.create:stone_bricks_fancy_dripstone.name=Tijolos Decorativos de Gotejante
+tile.create:stone_bricks_fancy_granite.name=Tijolos Decorativos de Granito
+tile.create:stone_bricks_fancy_limestone.name=Tijolos Decorativos de Calcário
+tile.create:stone_bricks_fancy_ochrum.name=Tijolos Decorativos de Ochrum
+tile.create:stone_bricks_fancy_scorchia.name=Tijolos Decorativos de Scorchia
+tile.create:stone_bricks_fancy_scoria.name=Tijolos Decorativos de Escória
+tile.create:stone_bricks_fancy_tuff.name=Tijolos Decorativos de Tufo
+tile.create:stone_bricks_fancy_veridium.name=Tijolos Decorativos de Veridium
+
+#Pillars
+tile.create:stone_pillar_andesite.name=Pilar de Andesito
+tile.create:stone_pillar_asurine.name=Pilar de Asurine
+tile.create:stone_pillar_calcite.name=Pilar de Calcita
+tile.create:stone_pillar_crimsite.name=Pilar de Crimsite
+tile.create:stone_pillar_deepslate.name=Pilar de Ardósia Profunda
+tile.create:stone_pillar_diorite.name=Pilar de Diorito
+tile.create:stone_pillar_dripstone.name=Pilar de Gotejante
+tile.create:stone_pillar_granite.name=Pilar de Granito
+tile.create:stone_pillar_limestone.name=Pilar de Calcário
+tile.create:stone_pillar_ochrum.name=Pilar de Ochrum
+tile.create:stone_pillar_scorchia.name=Pilar de Scorchia
+tile.create:stone_pillar_scoria.name=Pilar de Escória
+tile.create:stone_pillar_tuff.name=Pilar de Tufo
+tile.create:stone_pillar_veridium.name=Pilar de Veridium
+
+#Layered
+tile.create:stone_layered_andesite.name=Andesito em Camadas
+tile.create:stone_layered_asurine.name=Asurine em Camadas
+tile.create:stone_layered_calcite.name=Calcita em Camadas
+tile.create:stone_layered_crimsite.name=Crimsite em Camadas
+tile.create:stone_layered_deepslate.name=Ardósia Profunda em Camadas
+tile.create:stone_layered_diorite.name=Diorito em Camadas
+tile.create:stone_layered_dripstone.name=Gotejante em Camadas
+tile.create:stone_layered_granite.name=Granito em Camadas
+tile.create:stone_layered_limestone.name=Calcário em Camadas
+tile.create:stone_layered_ochrum.name=Ochrum em Camadas
+tile.create:stone_layered_scorchia.name=Scorchia em Camadas
+tile.create:stone_layered_scoria.name=Escória em Camadas
+tile.create:stone_layered_tuff.name=Tufo em Camadas
+tile.create:stone_layered_veridium.name=Veridium em Camadas
+
+#Reinforced
+tile.create:stone_reinforced_andesite.name=Andesito Reforçado
+tile.create:stone_reinforced_asurine.name=Asurine Reforçado
+tile.create:stone_reinforced_calcite.name=Calcita Reforçada
+tile.create:stone_reinforced_crimsite.name=Crimsite Reforçado
+tile.create:stone_reinforced_deepslate.name=Ardósia Profunda Reforçada
+tile.create:stone_reinforced_diorite.name=Diorito Reforçado
+tile.create:stone_reinforced_dripstone.name=Gotejante Reforçado
+tile.create:stone_reinforced_granite.name=Granito Reforçado
+tile.create:stone_reinforced_limestone.name=Calcário Reforçado
+tile.create:stone_reinforced_ochrum.name=Ochrum Reforçado
+tile.create:stone_reinforced_scorchia.name=Scorchia Reforçado
+tile.create:stone_reinforced_scoria.name=Escória Reforçada
+tile.create:stone_reinforced_tuff.name=Tufo Reforçado
+tile.create:stone_reinforced_veridium.name=Veridium Reforçado
+
+#ADVANCEMENTS!
+advancements.create.example.title=
+advancements.create.example.description=
+
+advancements.create.root.title=Create Legacy
+advancements.create.root.description=Create, agora para 1.12.2 (com suas peculiaridades)
+advancements.create.collector.title=Favorito do Colecionador
+advancements.create.collector.description=Colete todos os tipos de pedra adicionados pelo Create Legacy
+advancements.create.andesite_alloy.title=Muita Aliteração
+advancements.create.andesite_alloy.description=Obtenha uma Liga de Andesito
+advancements.create.age_andesite.title=Era do Andesito
+advancements.create.age_andesite.description=Aplique Liga de Andesito em madeira para criar um bom revestimento
+advancements.create.funnel.title=Estilo de Aeroporto
+advancements.create.funnel.description=Obtenha um Funil para inserir e extrair itens
+advancements.create.chute.title=Logística Vertical
+advancements.create.chute.description=Use uma Calha para transportar itens para baixo
+advancements.create.water_wheel.title=Energia aquática!
+advancements.create.water_wheel.description=Crie uma Roda d'Água para gerar energia
+advancements.create.press.title=Prensa Faz "Bonk"
+advancements.create.press.description=Crie uma Prensa Mecânica
+advancements.create.blaze_burner.title=Lareira Viva
+advancements.create.blaze_burner.description=Capture um Blaze para usar seu calor
+advancements.create.wrench.title=Mecânico
+advancements.create.wrench.description=Isso é uma chave ou uma fenda?
+advancements.create.network_inspection.title=Especialista em Redes
+advancements.create.network_inspection.description=Use medidores para analisar sua rede
+advancements.create.age_brass.title=Era do Latão
+advancements.create.age_brass.description=Use latão para criar máquinas avançadas
+advancements.create.furnace_engine.title=Energia da Fornalha
+advancements.create.furnace_engine.description=Monte um motor de fornalha
+advancements.create.electron_tube.title=Tubo Eletrônico
+advancements.create.electron_tube.description=Crie componentes avançados
+advancements.create.deployer.title=Automação
+advancements.create.deployer.description=Crie um Implantador
+advancements.create.fan.title=Processador de Partículas
+advancements.create.fan.description=Use o Ventilador Mecânico
+advancements.create.saw.title=O Cortador
+advancements.create.saw.description=Use uma Serra Mecânica
+
+# UI
+create.kineticinfo.network=Rede
+create.kineticinfo.infinitestress=Capacidade infinita
+create.kineticinfo.overstressed=Rede sobrecarregada
+create.kineticinfo.stressimpact=Impacto
+create.kineticinfo.minimalspeed=Velocidade mínima
+create.kineticinfo.stresscapacity=Capacidade
+create.kineticinfo.stresscapacity_atspeed=Capacidade na velocidade atual
+create.kineticinfo.speedproduced=Velocidade gerada
+option.create.kinetic=Mostrar informações cinéticas
