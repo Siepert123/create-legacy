@@ -256,26 +256,31 @@ public class TileEntityDepot extends TileEntityOptimizedBase implements ITopOpen
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         if (stack.isEmpty()) return ItemStack.EMPTY;
         if (slot != 0) return stack;
-        ItemStack copy = stack.copy();
-        if (simulate) {
-            if (this.mainItem.isEmpty()) return ItemStack.EMPTY;
-            if (ItemHandlerHelper.canItemStacksStack(this.mainItem, stack)) {
-                int space = Math.min(this.getSlotLimit(slot), this.mainItem.getMaxStackSize()) - this.mainItem.getCount();
-                copy.splitStack(space);
-                return copy;
-            } else return stack;
+
+        int space = mainItem.isEmpty() ? getSlotLimit(slot) : mainItem.getMaxStackSize() - mainItem.getCount();
+        if (space == 0) return stack;
+
+        int tryInputCount = stack.getCount();
+        int inputCount = Math.min(space, tryInputCount);
+
+        if (!simulate) {
+            if (mainItem.isEmpty()) {
+                ItemStack inputStack = stack.copy();
+                inputStack.setCount(inputCount);
+                mainItem = inputStack;
+            } else {
+                mainItem.grow(inputCount);
+            }
+            sync();
         }
-        this.sync();
-        if (this.mainItem.isEmpty()) {
-            this.mainItem = stack.copy();
+
+        if (inputCount == stack.getCount()) {
             return ItemStack.EMPTY;
+        } else {
+            ItemStack outputStack = stack.copy();
+            outputStack.shrink(inputCount);
+            return outputStack;
         }
-        if (ItemHandlerHelper.canItemStacksStack(this.mainItem, stack)) {
-            int space = Math.min(this.getSlotLimit(slot), this.mainItem.getMaxStackSize()) - this.mainItem.getCount();
-            copy.splitStack(space);
-            this.mainItem.grow(copy.getCount());
-            return copy;
-        } else return stack;
     }
 
     @Override
