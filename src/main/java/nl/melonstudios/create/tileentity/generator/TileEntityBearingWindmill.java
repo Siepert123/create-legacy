@@ -265,4 +265,9 @@ public class TileEntityBearingWindmill extends TileEntityBearingBase implements 
         super.initializeClient();
         addSubInteractionBoxes(this.getState().getValue(BlockBearingBase.FACING).getAxis(), this);
     }
+
+    @Override
+    public BearingType getBearingType() {
+        return BearingType.WINDMILL;
+    }
 }

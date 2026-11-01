@@ -162,7 +162,7 @@ public abstract class TileEntityBearingBase extends TileEntityKinetic implements
         this.angleOld = this.angle;
         super.tick();
 
-        if (this.mightAssemble && this.getSpeed() != 0.0F && !this.isAssembled()) {
+        if (this.mightAssemble && (this.getSpeed() != 0.0F || this.getBearingType() == BearingType.WINDMILL) && !this.isAssembled()) {
             this.assemble();
         }
         if (this.mightDisassemble && this.isAssembled()) {
@@ -290,5 +290,12 @@ public abstract class TileEntityBearingBase extends TileEntityKinetic implements
 
     public void pauseContraption() {
         this.isPausedThisTick = true;
+    }
+
+    public BearingType getBearingType() {
+        return BearingType.BEARING;
+    }
+    public enum BearingType {
+        BEARING, WINDMILL,
     }
 }
