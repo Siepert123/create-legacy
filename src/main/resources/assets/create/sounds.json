@@ -92,7 +92,7 @@
         "name": "minecraft:block.wooden_trapdoor.open"
       }
     ],
-    "subtitle": "create.subtitle.contraption_assemble"
+    "subtitle": "subtitle.contraption.assemble"
   },
   "contraption.assemble.compound": {
     "sounds": [
@@ -109,6 +109,6 @@
         "name": "minecraft:block.iron_trapdoor.close"
       }
     ],
-    "subtitle": "create.subtitle.contraption_disassemble"
+    "subtitle": "subtitle.contraption.disassemble"
   }
 }

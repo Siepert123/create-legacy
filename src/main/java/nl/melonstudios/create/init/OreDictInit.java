@@ -150,6 +150,8 @@ public final class OreDictInit {
 
         for (int i = 0; i < 16; i++) registerOreBlockItem("create:pouf", BlockInit.POUF, i);
 
+        BlockDictionary.registerOre("create:powersFurnaceEngine", Blocks.LIT_FURNACE, true);
+
         registerOreBlockItem("oreCopper", BlockInit.ORE, 0);
         registerOreBlockItem("oreZinc", BlockInit.ORE, 1);
 

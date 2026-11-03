@@ -227,6 +227,41 @@
     },
     "render_part=millstone": {
       "model": "create:render/millstone"
+    },
+    "render_part=flywheel_n": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 90
+    },
+    "render_part=flywheel_e": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 180
+    },
+    "render_part=flywheel_s": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 270
+    },
+    "render_part=flywheel_w": {
+      "model": "create:render/flywheel",
+      "x": 90,
+      "y": 0
+    },
+    "render_part=lower_rotating_connector": {
+      "model": "create:render/fureng_lower_rotating_connector"
+    },
+    "render_part=lower_sliding_connector": {
+      "model": "create:render/fureng_lower_sliding_connector"
+    },
+    "render_part=upper_rotating_connector": {
+      "model": "create:render/fureng_upper_rotating_connector"
+    },
+    "render_part=upper_sliding_connector": {
+      "model": "create:render/fureng_upper_sliding_connector"
+    },
+    "render_part=furnace_hat": {
+      "model": "create:render/furnace_hat"
     }
   }
 }

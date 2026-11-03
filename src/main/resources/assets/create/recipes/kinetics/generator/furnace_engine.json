@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS#",
+    "SCP",
+    "SS#"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "ingotBrass"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "plateBrass"
+    },
+    "C": {
+      "item": "create:casing",
+      "data": 2
+    },
+    "P": [
+      {
+        "item": "minecraft:piston"
+      },
+      {
+        "item": "minecraft:sticky_piston"
+      }
+    ]
+  },
+  "result": {
+    "item": "create:furnace_engine",
+    "data": 0
+  }
+}

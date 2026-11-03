@@ -107,6 +107,8 @@ public final class ItemInit {
         CreateLegacy.proxy.setItemModel(BlockInit.CLUTCH);
         CreateLegacy.proxy.setItemModel(BlockInit.HAND_CRANK);
         CreateLegacy.proxy.setItemModel(BlockInit.WATER_WHEEL);
+        CreateLegacy.proxy.setItemModel(BlockInit.FURNACE_ENGINE, 0, "furnace_engine");
+        CreateLegacy.proxy.setItemModel(BlockInit.FURNACE_ENGINE, 1, "furnace_flywheel");
         CreateLegacy.proxy.setItemModel(BlockInit.CREATIVE_MOTOR);
         CreateLegacy.proxy.setItemModel(BlockInit.TURNTABLE);
         CreateLegacy.proxy.setItemModel(BlockInit.BEARING);

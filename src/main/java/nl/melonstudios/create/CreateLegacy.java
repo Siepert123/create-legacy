@@ -27,7 +27,7 @@ public class CreateLegacy {
     private static final boolean inIDE = true;
     public static final String MODID = "create";
     public static final String NAME = "Create Legacy";
-    public static final String VERSION = "26w19b";
+    public static final String VERSION = "26w44a";
     static final String DEPENDENCIES = "required-after:melonlib@[1.11.3,);required-after:mixinbooter" + (inIDE ? "" : ";required-after-client:ctm");
 
     @SidedProxy(

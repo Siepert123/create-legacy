@@ -83,6 +83,16 @@ public enum EnumRenderPart implements IStringSerializable {
     CRAFTER_COVER_WEST,
 
     MILLSTONE,
+
+    FLYWHEEL_N,
+    FLYWHEEL_E,
+    FLYWHEEL_S,
+    FLYWHEEL_W,
+    LOWER_ROTATING_CONNECTOR,
+    LOWER_SLIDING_CONNECTOR,
+    UPPER_ROTATING_CONNECTOR,
+    UPPER_SLIDING_CONNECTOR,
+    FURNACE_HAT,
     ;
 
     private final int id = this.ordinal();
@@ -212,5 +222,19 @@ public enum EnumRenderPart implements IStringSerializable {
     }
     public static EnumRenderPart getCraftingCover(EnumFacing facing) {
         return CRAFTER_COVERS[facing.getHorizontalIndex()];
+    }
+    public static EnumRenderPart getFurnaceFlywheel(EnumFacing outputFacing) {
+        switch (outputFacing) {
+            case NORTH:
+                return FLYWHEEL_N;
+            case EAST:
+                return FLYWHEEL_E;
+            case SOUTH:
+                return FLYWHEEL_S;
+            case WEST:
+                return FLYWHEEL_W;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + outputFacing);
+        }
     }
 }

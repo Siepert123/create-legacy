@@ -160,10 +160,15 @@ public class CreateLegacyEventHandler {
     public static void registerStressValues(RegisterStressValuesEvent event) {
         event.registerCapacity(BlockInit.HAND_CRANK, 8.0F);
         event.registerCapacity(BlockInit.WATER_WHEEL, 16.0F);
+        event.registerCapacity(BlockInit.FURNACE_ENGINE, 64.0F);
         event.registerCapacity(BlockInit.CREATIVE_MOTOR, 65536.0F);
         event.registerCapacity(BlockInit.BEARING_WINDMILL, 512.0F);
         event.registerStress(BlockInit.TURNTABLE, 4.0F);
         event.registerStress(BlockInit.BEARING, 4.0F);
+        event.registerStress(BlockInit.MECHANICAL_PISTON, 4.0F);
+        event.registerStress(BlockInit.MECHANICAL_PISTON_EXTENDED, 4.0F);
+        event.registerStress(BlockInit.MECHANICAL_PISTON_STICKY, 4.0F);
+        event.registerStress(BlockInit.MECHANICAL_PISTON_STICKY_EXTENDED, 4.0F);
         event.registerStress(BlockInit.PRESS, 8.0F);
         event.registerStress(BlockInit.MIXER, 4.0F);
         event.registerStress(BlockInit.DRILL, 4.0F);

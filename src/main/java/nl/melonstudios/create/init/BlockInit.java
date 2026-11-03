@@ -54,6 +54,9 @@ public final class BlockInit {
 
     public static final BlockHandCrank HAND_CRANK = registerBlockWithItem(new BlockHandCrank(MapColor.WOOD, SoundType.WOOD));
     public static final BlockWaterWheel WATER_WHEEL = registerBlockWithItem(new BlockWaterWheel(MapColor.WOOD, SoundType.WOOD));
+    public static final BlockFurnaceEngine FURNACE_ENGINE = (BlockFurnaceEngine)
+            registerBlockWithItem(new BlockFurnaceEngine()
+            .setRegistryName("furnace_engine").setUnlocalizedName("create.furnace_engine"), true);
     public static final BlockCreativeMotor CREATIVE_MOTOR = (BlockCreativeMotor)
             registerBlockWithItem(new BlockCreativeMotor()
             .setRegistryName("creative_motor").setUnlocalizedName("create.creative_motor"));

@@ -26,6 +26,8 @@ tile.create.clutch.name=Clutch
 
 tile.create.hand_crank.name=Hand Crank
 tile.create.water_wheel.name=Water Wheel
+tile.create.furnace_engine.name=Furnace Engine
+tile.create.flywheel.name=Flywheel
 
 tile.create.turntable.name=Turntable
 tile.create.turntable.desc=Side effects may include motion sickness and/or dizziness.
@@ -230,6 +232,15 @@ goggles.fluid_contents=Fluid Contents
 ## TABS ##
 itemGroup.create=Create
 itemGroup.create.decorations=Create's Decorations
+
+## SUBTITLES ##
+subtitle.item.sandpaper.used=Sandpaper grinds
+subtitle.block.cogwheel.ambient=Cogs rumble
+subtitle.block.press.activate=Press bonks
+subtitle.item.wrench.used=Wrench configures
+subtitle.block.millstone.ambient=Millstone grinds
+subtitle.contraption.assemble=Contraption assembles
+subtitle.contraption.disassemble=Contraption disassembles
 
 ## JUST ENOUGH ITEMS ##
 create.pressing=Pressing
