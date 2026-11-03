@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "W"
+  ],
+  "key": {
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "slabWood"
+    },
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "woolGreen"
+    }
+  },
+  "result": {
+    "item": "create:pouf",
+    "data": 13
+  }
+}
