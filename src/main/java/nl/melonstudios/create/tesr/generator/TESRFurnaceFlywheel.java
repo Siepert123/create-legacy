@@ -39,7 +39,7 @@ public class TESRFurnaceFlywheel extends TESRKineticBase<TileEntityFurnaceFlywhe
 		GL11.glPopMatrix();
 	}
 	private void renderPokeyArms(TileEntityFurnaceFlywheel te, EnumFacing facing, float pt) {
-		float angle = this.calculateAngle(te, te.getOutputFacing().getAxis(), pt, -1.0F, false);
+		float angle = this.calculateAngle(te, te.getOutputFacing().getAxis(), pt, facing.getAxisDirection().getOffset(), false);
 
 		GlStateManager.pushMatrix();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
