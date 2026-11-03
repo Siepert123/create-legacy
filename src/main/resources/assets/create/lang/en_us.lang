@@ -243,9 +243,9 @@ subtitle.contraption.assemble=Contraption assembles
 subtitle.contraption.disassemble=Contraption disassembles
 
 ## JUST ENOUGH ITEMS ##
-create.pressing=Pressing
-create.cutting=Saw Cutting
-create.sanding=Sandpaper Polishing
+recipe.create.pressing=Pressing
+recipe.create.cutting=Saw Cutting
+recipe.create.sanding=Sandpaper Polishing
 
 ## CONFIG ##
 Create Common Config.tooltip=Create's common configurations
