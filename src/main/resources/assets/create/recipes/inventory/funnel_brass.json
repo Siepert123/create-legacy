@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O",
+    "#",
+    "I"
+  ],
+  "key": {
+    "O": {
+      "type": "forge:ore_dict",
+      "ore": "electronTube"
+    },
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "ingotBrass"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "wool"
+    }
+  },
+  "result": {
+    "item": "create:belt_connector"
+  }
+}

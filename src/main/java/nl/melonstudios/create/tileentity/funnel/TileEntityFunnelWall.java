@@ -1,5 +1,7 @@
 package nl.melonstudios.create.tileentity.funnel;
 
+import com.melonstudios.melonlib.network.TrackedByteBuf;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +17,7 @@ import nl.melonstudios.create.tileentity.marker.ITopOpenInventory;
 import nl.melonstudios.create.util.filter.IItemFilter;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
 import java.util.List;
 
 public class TileEntityFunnelWall extends TileEntityFunnelBase implements ITickable {
@@ -64,7 +67,7 @@ public class TileEntityFunnelWall extends TileEntityFunnelBase implements ITicka
     }
 
     @Override
-    public void update() {
+    public void tick() {
         if (!this.world.isRemote) {
             if (this.isPowered()) {
                 if (this.cooldown != 0) {
@@ -178,5 +181,15 @@ public class TileEntityFunnelWall extends TileEntityFunnelBase implements ITicka
                 }
             }
         }
+    }
+
+    @Override
+    public void writePacket(TrackedByteBuf buf) throws IOException {
+
+    }
+
+    @Override
+    public void readPacket(ByteBuf buf) throws IOException {
+
     }
 }
