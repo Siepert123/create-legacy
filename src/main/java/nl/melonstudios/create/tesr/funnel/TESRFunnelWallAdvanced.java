@@ -37,6 +37,7 @@ public class TESRFunnelWallAdvanced extends TESRBase<TileEntityFunnelWallAdvance
                         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
                         break;
                 }
+                GlStateManager.translate(0.0F, 0.0F, 0.075F);
                 GlStateManager.rotate(22.5F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.scale(0.25F, 0.25F, 0.25F);
                 this.mc.getRenderItem().renderItem(stack, model);

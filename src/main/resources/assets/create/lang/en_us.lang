@@ -214,6 +214,9 @@ item.create.boots_cardboard.name=Cardboard Boots
 item.create.assembly_precision_mechanism.name=Incomplete Precision Mechanism
 item.create.assembly_plate_obsidian.name=Unprocessed Sturdy Sheet
 
+item.create.funnel_andesite.name=Andesite Funnel
+item.create.funnel_brass.name=Brass Funnel
+
 ## FLUIDS ##
 fluid.create.milk=Milk
 fluid.create.chocolate=Chocolate

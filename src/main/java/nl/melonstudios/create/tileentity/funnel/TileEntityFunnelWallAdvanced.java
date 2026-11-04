@@ -4,8 +4,10 @@ import com.melonstudios.melonlib.network.TrackedByteBuf;
 import com.melonstudios.melonlib.tileentity.ISyncedTE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import nl.melonstudios.create.init.ItemInit;
 import nl.melonstudios.create.tileentity.marker.ITileEntityWithSubInteractions;
@@ -112,13 +114,19 @@ public class TileEntityFunnelWallAdvanced extends TileEntityFunnelWall implement
         public boolean interact(@Nullable EntityPlayer player, boolean sneaking, ItemStack held) {
             if (sneaking) return false;
             if (held.isEmpty()) {
+                this.te.world.playSound(null, this.te.pos, SoundEvents.ENTITY_ITEMFRAME_REMOVE_ITEM,
+                        SoundCategory.BLOCKS, 1.0F, 1.0F);
                 this.te.filter = null;
                 this.te.sync();
             } else {
                 if (held.getItem() == ItemInit.WRENCH) {
+                    this.te.world.playSound(null, this.te.pos, SoundEvents.ENTITY_ITEMFRAME_ROTATE_ITEM,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
                     this.te.extractionAmountExact = !this.te.extractionAmountExact;
                     this.te.sync();
                 } else {
+                    this.te.world.playSound(null, this.te.pos, SoundEvents.ENTITY_ITEMFRAME_ADD_ITEM,
+                            SoundCategory.BLOCKS, 1.0F, 1.0F);
                     this.te.filter = new ItemFilterExact(held);
                     this.te.sync();
                 }
