@@ -14,6 +14,9 @@ public interface IDepot {
     double getItemHeight();
     boolean isWool();
     ItemStack takePresented(int count);
+    default boolean allowTaking() {
+        return true;
+    }
 
     @Nullable
     static IDepot get(World world, BlockPos pos) {

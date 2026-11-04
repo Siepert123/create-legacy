@@ -3,12 +3,16 @@ package nl.melonstudios.create.tileentity.funnel;
 import com.melonstudios.melonlib.network.TrackedByteBuf;
 import com.melonstudios.melonlib.tileentity.ISyncedTE;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
 import nl.melonstudios.create.init.ItemInit;
 import nl.melonstudios.create.tileentity.marker.ITileEntityWithSubInteractions;
 import nl.melonstudios.create.util.SubInteractionBox;
@@ -91,6 +95,20 @@ public class TileEntityFunnelWallAdvanced extends TileEntityFunnelWall implement
         } else this.filter = null;
         this.extractionAmount = buf.readUnsignedByte();
         this.extractionAmountExact = buf.readBoolean();
+    }
+
+    @Override
+    public ItemStack insertIntoFunnel(ItemStack stack, boolean limit) {
+        if (stack.isEmpty()) return ItemStack.EMPTY;
+        if (this.extractionAmountExact && limit && this.extractionAmount != stack.getCount()) return stack;
+        if (this.filter != null && !this.filter.matches(stack)) return stack;
+        IItemHandler inv = this.getInventory(this.getFacing(this.getBlockMetadata()).getOpposite());
+        if (inv != null && inv.getSlots() > 0) {
+            for (int i = 0; i < inv.getSlots() && !stack.isEmpty(); i++) {
+                stack = inv.insertItem(i, stack, false);
+            }
+        }
+        return stack.isEmpty() ? ItemStack.EMPTY : stack;
     }
 
     private void createSubInteractions() {

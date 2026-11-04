@@ -143,4 +143,9 @@ public class TileEntityBeltStraight extends TileEntityBeltBase implements IDepot
         this.sync();
         return this.getFlag() ? this.left.splitStack(count) : this.right.splitStack(count);
     }
+
+    @Override
+    public boolean allowTaking() {
+        return false;
+    }
 }

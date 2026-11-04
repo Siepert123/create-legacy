@@ -2,6 +2,7 @@ package nl.melonstudios.create.tileentity.funnel;
 
 import com.melonstudios.melonlib.network.TrackedByteBuf;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,6 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import nl.melonstudios.create.block.state.EnumFunnelState;
 import nl.melonstudios.create.tileentity.marker.IDepot;
@@ -181,6 +183,30 @@ public class TileEntityFunnelWall extends TileEntityFunnelBase implements ITicka
                 }
             }
         }
+    }
+
+    @Override
+    public ItemStack insertIntoFunnel(ItemStack stack, boolean limit) {
+        if (stack.isEmpty()) return ItemStack.EMPTY;
+        IItemHandler inv = this.getInventory(this.getFacing(this.getBlockMetadata()).getOpposite());
+        if (inv != null && inv.getSlots() > 0) {
+            if (limit) {
+                ItemStack insert = stack.splitStack(1);
+                for (int i = 0; i < inv.getSlots() && !insert.isEmpty(); i++) {
+                    insert = inv.insertItem(i, insert, false);
+                }
+                stack.grow(insert.getCount());
+            } else {
+                for (int i = 0; i < inv.getSlots() && !stack.isEmpty(); i++) {
+                    stack = inv.insertItem(i, stack, false);
+                }
+            }
+        }
+        return stack.isEmpty() ? ItemStack.EMPTY : stack;
+    }
+    @Override
+    public boolean allowsInsertionFromBelt() {
+        return this.getFunnelState(this.getBlockMetadata()) == EnumFunnelState.INSERTING;
     }
 
     @Override

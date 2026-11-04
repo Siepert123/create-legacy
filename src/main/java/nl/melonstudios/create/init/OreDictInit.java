@@ -25,8 +25,15 @@ public final class OreDictInit {
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.CLUTCH, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.HAND_CRANK, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.WATER_WHEEL, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.FURNACE_ENGINE, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.CREATIVE_MOTOR, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.TURNTABLE, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.MECHANICAL_PISTON, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.MECHANICAL_PISTON_EXTENDED, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.MECHANICAL_PISTON_STICKY, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.MECHANICAL_PISTON_STICKY_EXTENDED, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.PISTON_POLE, true);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.PISTON_HEAD, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.BEARING, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.BEARING_WINDMILL, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.CHASSIS_LINEAR, true);
@@ -52,6 +59,8 @@ public final class OreDictInit {
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.DEPOT, false);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.BASIN, false);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.CHUTE, 3);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.FUNNEL_ANDESITE_WALL, 3);
+        BlockDictionary.registerOre("create:wrenchPickup", BlockInit.FUNNEL_BRASS_WALL, 3);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.BELT_STRAIGHT, true);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.ITEM_DRAIN, false);
         BlockDictionary.registerOre("create:wrenchPickup", BlockInit.LATCH, true);

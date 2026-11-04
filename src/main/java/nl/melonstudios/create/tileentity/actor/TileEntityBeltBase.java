@@ -17,8 +17,11 @@ import net.minecraftforge.items.IItemHandler;
 import nl.melonstudios.create.block.actor.BlockBeltBase;
 import nl.melonstudios.create.block.actor.BlockBeltStraight;
 import nl.melonstudios.create.block.state.EnumBeltPart;
+import nl.melonstudios.create.block.state.EnumFunnelState;
 import nl.melonstudios.create.init.BlockInit;
 import nl.melonstudios.create.tileentity.TileEntityKinetic;
+import nl.melonstudios.create.tileentity.funnel.TileEntityFunnelBase;
+import nl.melonstudios.create.tileentity.funnel.TileEntityFunnelWall;
 import nl.melonstudios.create.tileentity.marker.ITopOpenInventory;
 
 import javax.annotation.Nullable;
@@ -117,9 +120,25 @@ public abstract class TileEntityBeltBase extends TileEntityKinetic implements IT
             EnumFacing negative = EnumFacing.getFacingFromAxis(EnumFacing.AxisDirection.NEGATIVE, transportAxis);
 
             if (speed > 0.0) { //update positive first
+                update:
                 if (!this.right.isEmpty()) {
                     if (this.rightPos < 1.0) this.rightPos += speed;
                     if (this.rightPos >= 1.0) {
+                        {
+                            TileEntity funnel = this.world.getTileEntity(this.pos.up());
+                            if (funnel instanceof TileEntityFunnelBase) {
+                                TileEntityFunnelBase te = (TileEntityFunnelBase) funnel;
+                                if (te.allowsInsertionFromBelt()) {
+                                    this.right = te.insertIntoFunnel(this.right, false);
+                                    this.sync();
+                                    if (this.right.isEmpty()) {
+                                        this.right = ItemStack.EMPTY;
+                                        break update;
+                                    }
+                                }
+                            }
+                        }
+
                         BlockPos pos = this.getOffsetPosition(this.pos, positive);
                         TileEntity te = this.world.getTileEntity(pos);
                         if (te instanceof TileEntityBeltBase && this.getState().getValue(BlockBeltBase.PART) != EnumBeltPart.END) {
@@ -178,9 +197,25 @@ public abstract class TileEntityBeltBase extends TileEntityKinetic implements IT
                     }
                 }
             } else { //update negative first
+                update:
                 if (!this.left.isEmpty()) {
                     if (this.leftPos > 0.0) this.leftPos += speed;
                     if (this.leftPos <= 0.0) {
+                        {
+                            TileEntity funnel = this.world.getTileEntity(this.pos.up());
+                            if (funnel instanceof TileEntityFunnelBase) {
+                                TileEntityFunnelBase te = (TileEntityFunnelBase) funnel;
+                                if (te.allowsInsertionFromBelt()) {
+                                    this.left = te.insertIntoFunnel(this.left, false);
+                                    this.sync();
+                                    if (this.left.isEmpty()) {
+                                        this.left = ItemStack.EMPTY;
+                                        break update;
+                                    }
+                                }
+                            }
+                        }
+
                         BlockPos pos = this.getOffsetPosition(this.pos, negative);
                         TileEntity te = this.world.getTileEntity(pos);
                         if (te instanceof TileEntityBeltBase && this.getState().getValue(BlockBeltBase.PART) != EnumBeltPart.START) {

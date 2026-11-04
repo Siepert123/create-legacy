@@ -32,6 +32,7 @@ public class TESRBeltStraight extends TESRBeltBase<TileEntityBeltStraight> {
 
         GlStateManager.disableBlend();
         GlStateManager.disableAlpha();
+        GlStateManager.enableTexture2D();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder renderer = tessellator.getBuffer();
         renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);

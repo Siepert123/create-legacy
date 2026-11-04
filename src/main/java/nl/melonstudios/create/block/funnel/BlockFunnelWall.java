@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import nl.melonstudios.create.block.state.EnumFunnelState;
+import nl.melonstudios.create.kinetics.contraption.IWrenchable;
 import nl.melonstudios.create.tileentity.funnel.TileEntityFunnelBase;
 import nl.melonstudios.create.tileentity.funnel.TileEntityFunnelWall;
 import nl.melonstudios.create.tileentity.funnel.TileEntityFunnelWallAdvanced;
@@ -25,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockFunnelWall extends BlockFunnelBase {
+public class BlockFunnelWall extends BlockFunnelBase implements IWrenchable {
     public static final PropertyDirection FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final PropertyEnum<EnumFunnelState> FUNNEL_STATE = EnumFunnelState.STATE_PROPERTY;
     public static final PropertyBool TALL = PropertyBool.create("tall");
@@ -78,5 +79,11 @@ public class BlockFunnelWall extends BlockFunnelBase {
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TileEntity below = worldIn.getTileEntity(pos.down());
         return state.withProperty(TALL, below instanceof ITopOpenInventory || below instanceof IDepot);
+    }
+
+    @Override
+    public boolean onWrenched(World world, BlockPos pos, IBlockState state, EnumFacing side, float hitX, float hitY, float hitZ) {
+        world.setBlockState(pos, state.cycleProperty(FUNNEL_STATE));
+        return true;
     }
 }
