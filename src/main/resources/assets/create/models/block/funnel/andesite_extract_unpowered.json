@@ -1,0 +1,6 @@
+{
+  "parent": "create:block/funnel/andesite_insert_unpowered",
+  "textures": {
+    "direction": "create:block/funnel_andesite_push"
+  }
+}
