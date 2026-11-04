@@ -1,0 +1,6 @@
+{
+  "parent": "create:block/funnel/brass_extract_unpowered",
+  "textures": {
+    "redstone": "create:block/funnel_brass_powered"
+  }
+}
