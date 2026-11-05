@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.oredict.OreDictionary;
+import nl.melonstudios.create.block.state.EnumOrestoneVariant;
 import nl.melonstudios.create.recipe.CuttingRecipe;
 import nl.melonstudios.create.recipe.DeployerRecipe;
 import nl.melonstudios.create.recipe.MixingRecipe;
@@ -145,6 +146,46 @@ public final class RecipeInit {
             recipes.addRecipe("create:auto/stoneGranitePolished" + tracker++,
                     Ingredient.of("stoneGranite"),
                     stack.copy(),
+                    300
+            );
+        }
+
+        for (EnumOrestoneVariant variant : EnumOrestoneVariant.values()) {
+            String name = variant.getName();
+            String ore = "stone" + name.substring(0, 1).toUpperCase() + name.substring(1);
+            recipes.addRecipe("create:" + name,
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_cut",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_CUT, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_polished",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_POLISHED, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_bricks",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_BRICKS, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_bricks_fancy",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_BRICKS_FANCY, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_layered",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_LAYERED, 1, variant.getId()),
+                    300
+            );
+            recipes.addRecipe("create:" + name + "_pillar",
+                    Ingredient.of(ore),
+                    new ItemStack(BlockInit.ORESTONE_PILLAR_Y, 1, variant.getId()),
                     300
             );
         }

@@ -10,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import nl.melonstudios.create.CreateLegacy;
+import nl.melonstudios.create.block.state.EnumOrestoneVariant;
+import stanhebben.zenscript.util.StringUtil;
 
 import java.util.HashSet;
 
@@ -172,6 +175,18 @@ public final class OreDictInit {
             registerOreBlockItem("blockGlass", BlockInit.FRAMED_GLASS, i);
             registerOreBlockItem("blockGlassColorless", BlockInit.FRAMED_GLASS, i);
         }
+        for (EnumOrestoneVariant variant : EnumOrestoneVariant.values()) {
+            String name = "stone" + variant.getName().substring(0, 1).toUpperCase() + variant.getName().substring(1);
+            registerOreBlockItem(name, BlockInit.ORESTONE, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_CUT, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_POLISHED, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_BRICKS, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_BRICKS_FANCY, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_LAYERED, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_PILLAR_X, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_PILLAR_Y, variant.getId());
+            registerOreBlockItem(name, BlockInit.ORESTONE_PILLAR_Z, variant.getId());
+        }
 
         registerOre("terracotta", Item.getItemFromBlock(Blocks.HARDENED_CLAY), 0);
         registerOre("terracotta", Item.getItemFromBlock(Blocks.STAINED_HARDENED_CLAY), OreDictionary.WILDCARD_VALUE);
@@ -205,6 +220,10 @@ public final class OreDictInit {
     }
 
     private static void registerOre(String ore, Item item, int meta) {
+        if (item == null) {
+			CreateLegacy.logger.warn("Tried to register null item ore {}", ore);
+            return;
+        }
         OreDictionary.registerOre(ore, new ItemStack(item, 1, meta));
     }
     private static void registerOre(String ore, Block block, int meta) {
