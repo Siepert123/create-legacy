@@ -9,6 +9,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import nl.melonstudios.create.CreateLegacy;
 import nl.melonstudios.create.block.BlockOre;
 import nl.melonstudios.create.init.BlockInit;
 
@@ -19,6 +20,7 @@ public class CreateWorldGen implements IWorldGenerator {
     private static boolean generateOres = true;
     private static boolean generateStones = true;
     public static void setGenerationFlags(boolean ores, boolean stones) {
+        CreateLegacy.logger.debug("Generation flags set to ores:{} stones:{}", ores, stones);
         generateOres = ores;
         generateStones = stones;
     }

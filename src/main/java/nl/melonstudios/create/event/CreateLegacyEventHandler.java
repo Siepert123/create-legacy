@@ -23,12 +23,15 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.GetCollisionBoxesEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -39,6 +42,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import nl.melonstudios.create.CreateLegacy;
 import nl.melonstudios.create.cfg.ClientConfig;
+import nl.melonstudios.create.cfg.CommonConfig;
 import nl.melonstudios.create.entity.*;
 import nl.melonstudios.create.extensions.IExtensionWorld;
 import nl.melonstudios.create.init.BlockInit;
@@ -57,6 +61,7 @@ import nl.melonstudios.create.util.PerFrameDebugInfo;
 import nl.melonstudios.create.util.TextBuilder;
 import nl.melonstudios.create.util.interfaces.IBypassBlockUse;
 import nl.melonstudios.create.util.interfaces.IGoggleInfo;
+import nl.melonstudios.create.worldgen.CreateWorldGen;
 import nl.melonstudios.ponder.event.RegisterPondersEvent;
 
 import java.util.List;
@@ -120,6 +125,15 @@ public class CreateLegacyEventHandler {
             for (EnumDyeColor color : EnumDyeColor.values()) {
                 map.registerSprite(new ResourceLocation("create:block/belt_scroll_" + color.getDyeColorName()));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void reloadConfig(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(CreateLegacy.MODID)) {
+            ConfigManager.sync(CreateLegacy.MODID, Config.Type.INSTANCE);
+            CreateWorldGen.setGenerationFlags(CommonConfig.generateOres, CommonConfig.generateStones);
+            event.setResult(Event.Result.ALLOW);
         }
     }
 
