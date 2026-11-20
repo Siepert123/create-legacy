@@ -3,6 +3,7 @@ package nl.melonstudios.create.tileentity;
 import com.melonstudios.melonlib.tileentity.ISyncedTE;
 import com.melonstudios.melonlib.tileentity.TileEntityCachedRenderBB;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import nl.melonstudios.create.util.interfaces.IStateFindable;
 import nl.melonstudios.ponder.IVirtualizable;
@@ -152,5 +153,10 @@ public abstract class TileEntityOptimizedBase extends TileEntityCachedRenderBB i
     @Override
     public boolean isVirtual() {
         return this.virtualized;
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
     }
 }
